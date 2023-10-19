@@ -15,7 +15,7 @@ namespace PetsOverhaul.Systems
         /// <summary>
         /// Includes tiles that are choppable by using an Axe or Chainsaws.
         /// </summary>
-        public static bool[] choppableTiles = TileID.Sets.Factory.CreateBoolSet(false, TileID.Trees, TileID.Cactus, TileID.MushroomTrees, TileID.PalmTree, TileID.TreeAsh, TileID.VanityTreeSakura, TileID.VanityTreeYellowWillow, TileID.Bamboo);
+        public static bool[] choppableTiles = TileID.Sets.Factory.CreateBoolSet(false, TileID.Trees, TileID.Cactus, TileID.MushroomTrees, TileID.PalmTree, TileID.TreeAsh, TileID.VanityTreeSakura, TileID.VanityTreeYellowWillow, TileID.Bamboo, TileID.TreeAmber,TileID.TreeAmethyst,TileID.TreeDiamond,TileID.TreeEmerald,TileID.TreeRuby,TileID.TreeTopaz);
         /// <summary>
         /// Includes Gem tiles.
         /// </summary>

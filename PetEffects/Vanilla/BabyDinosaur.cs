@@ -43,7 +43,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 if (GlobalPet.pool.Count > 0)
                     for (int i = 0; i < ItemPet.Randomizer(chance * item.stack, 1000); i++)
                     {
-                        Player.QuickSpawnItem(Player.GetSource_Misc("BabyDinosaur"), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
+                        Player.QuickSpawnItem(Player.GetSource_Misc("MiningItem"), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
                     }
                 GlobalPet.pool.Clear();
 

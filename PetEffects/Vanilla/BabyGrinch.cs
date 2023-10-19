@@ -45,6 +45,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     if (npc.active && Player.Distance(npc.Center) < grinchRange)
                     {
                         npc.GetGlobalNPC<NpcPet>().AddSlow(NpcPet.SlowId.Grinch, grinchSlow, 1);
+                        
                     }
                 }
             }

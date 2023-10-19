@@ -61,7 +61,6 @@ namespace PetsOverhaul.ModSupport
         public List<(int, int[])> FishingXpPerModdedFish;
         public List<(int, int[])> FishingXpPerModdedKill;
         public List<(int, int[])> HarvestingXpPerModdedPlant;
-        public List<(int, int[])> HarvestingXpPerModdedRarePlant;
         public Mod ModInstance;
         public Dictionary<string, int> InternalNameToModdedItemId = new Dictionary<string, int> { };
         public Dictionary<string, ModItem> InternalNameToModdedItemInstance = new Dictionary<string, ModItem> { };
@@ -90,8 +89,7 @@ namespace PetsOverhaul.ModSupport
         {
             if (MiningXpPerModdedBlock != null) Main.LocalPlayer.GetModPlayer<Junimo>().MiningXpPerBlock.AddRange(MiningXpPerModdedBlock);
             if (HarvestingXpPerModdedPlant != null) Main.LocalPlayer.GetModPlayer<Junimo>().HarvestingXpPerGathered.AddRange(HarvestingXpPerModdedPlant);
-            if (HarvestingXpPerModdedRarePlant != null) Main.LocalPlayer.GetModPlayer<Junimo>().HarvestingXpPerRare.AddRange(HarvestingXpPerModdedRarePlant);
-            if (FishingXpPerModdedFish != null) Main.LocalPlayer.GetModPlayer<Junimo>().FishingXpPerFish.AddRange(FishingXpPerModdedFish);
+            if (FishingXpPerModdedFish != null) Main.LocalPlayer.GetModPlayer<Junimo>().FishingXpPerCaught.AddRange(FishingXpPerModdedFish);
             if (FishingXpPerModdedKill != null) Main.LocalPlayer.GetModPlayer<Junimo>().FishingXpPerKill.AddRange(FishingXpPerModdedKill);
         }
 

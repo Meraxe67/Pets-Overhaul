@@ -15,6 +15,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using Terraria.ObjectData;
 
 namespace PetsOverhaul.Systems
 {
@@ -23,6 +24,30 @@ namespace PetsOverhaul.Systems
     /// </summary>
     sealed public class GlobalPet : ModPlayer
     {
+        /// <summary>
+        /// Influences the chance to increase stack of the item that your Harvesting Pet gave.
+        /// </summary>
+        public int harvestingFortune = 0;
+        /// <summary>
+        /// Influences the chance to increase stack of the item that your Mining Pet gave.
+        /// </summary>
+        public int miningFortune = 0;
+        /// <summary>
+        /// Influences the chance to increase stack of the item that your Fishing Pet gave.
+        /// </summary>
+        public int fishingFortune = 0;
+        /// <summary>
+        /// Influences the multiplier of the exp you gain for your Junimo Pet's Harvesting Skill.
+        /// </summary>
+        public float harvestingExpBoost = 1f;
+        /// <summary>
+        /// Influences the multiplier of the exp you gain for your Junimo Pet's Mining Skill.
+        /// </summary>
+        public float miningExpBoost = 1f;
+        /// <summary>
+        /// Influences the multiplier of the exp you gain for your Junimo Pet's Fishing Skill.
+        /// </summary>
+        public float fishingExpBoost = 1f;
 
         public bool[] burnDebuffs = BuffID.Sets.Factory.CreateBoolSet(false, BuffID.Burning, BuffID.OnFire, BuffID.OnFire3, BuffID.Frostburn, BuffID.CursedInferno, BuffID.ShadowFlame, BuffID.Frostburn2);
         public Color skin;
@@ -66,6 +91,25 @@ namespace PetsOverhaul.Systems
                 return true;
             else
                 return false;
+        }
+        public override bool OnPickup(Item item)
+        {
+            //if (item.TryGetGlobalItem(out ItemPet fortune))
+            //{
+            //    if (fortune.harvestingDrop)
+            //    {
+            //        Player.QuickSpawnItem(Player.GetSource_Misc("FortuneBonus"), ItemID.SolarBathtub, ItemPet.Randomizer(20));
+            //    }
+            //    if (fortune.miningDrop)
+            //    {
+
+            //    }
+            //    if (fortune.fishingDrop)
+            //    {
+
+            //    }
+            //}
+            return true;
         }
         /// <summary>
         /// Checks if the given Pet Item is in use and checks if pet has been lately swapped or not.
@@ -264,6 +308,13 @@ namespace PetsOverhaul.Systems
         }
         public override void PreUpdate()
         {
+            fishingFortune = 0;
+            harvestingFortune = 0;
+            miningFortune = 0;
+            fishingExpBoost = 1f;
+            harvestingExpBoost = 1f;
+            miningExpBoost = 1f;
+
             if (Player.jump == 0)
             {
                 jumpRegistered = false;
@@ -387,6 +438,9 @@ namespace PetsOverhaul.Systems
         public bool pickedUpBefore = false;
         public bool itemFromBag = false;
         public bool itemFromBoss = false;
+        public bool harvestingDrop = false;
+        public bool miningDrop = false;
+        public bool fishingDrop = false;
         /// <summary>
         /// Randomizes the given number. numToBeRandomized / randomizeTo returns how many times its 100% chance and rolls if the leftover, non-100% amount is true. item.stack += Randomizer(250) returns +2 and +1 more with 50% chance.
         /// </summary>
@@ -437,7 +491,7 @@ namespace PetsOverhaul.Systems
             {
                 itemFromBag = false;
             }
-            if (source is EntitySource_TileBreak herb && TileChecks.commonPlantTile[Main.tile[herb.TileCoords].TileType] || (source is EntitySource_TileBreak herbWithSprite && TileChecks.plantTilesWithFrames.Exists(x => x.tileType == Main.tile[herbWithSprite.TileCoords].TileType && x.spriteFrame == Main.tile[herbWithSprite.TileCoords].TileFrameX)))
+            if (source is EntitySource_TileBreak herb && TileChecks.commonPlantTile[Main.tile[herb.TileCoords].TileType] || (source is EntitySource_TileBreak herbWithSprite && TileChecks.plantTilesWithFrames.Exists(x => x.tileType == Main.tile[herbWithSprite.TileCoords].TileType && x.spriteFrame * 18 == Main.tile[herbWithSprite.TileCoords].TileFrameX)))
             {
                 herbBoost = true;
             }
@@ -509,6 +563,30 @@ namespace PetsOverhaul.Systems
             {
                 gemTree = false;
             }
+            if (source is EntitySource_Misc { Context: "HarvestingItem" } )
+            {
+                harvestingDrop = true;
+            }
+            else
+            {
+                harvestingDrop = false;
+            }
+            if (source is EntitySource_Misc { Context: "MiningItem" })
+            {
+                miningDrop = true;
+            }
+            else
+            {
+                miningDrop = false;
+            }
+            if (source is EntitySource_Misc { Context: "FishingItem" })
+            {
+                fishingDrop = true;
+            }
+            else
+            {
+                fishingDrop = false;
+            }
             if (source is EntitySource_TileBreak playerPlacedCheck)
             {
                 PlayerPlacedBlockList.placedBlocksByPlayer.Remove(playerPlacedCheck.TileCoords.ToVector2());
@@ -541,13 +619,13 @@ namespace PetsOverhaul.Systems
     {
         public enum SlowId
         {
-            Grinch = 0, Snowman = 1, QueenSlime = 2, Deerclops = 3, IceQueen = 4
+            Grinch = 0, Snowman = 1, QueenSlime = 2, Deerclops = 3, IceQueen = 4, Misc = 5
         }
         public List<(SlowId, float slowAmount, int slowTime)> SlowList = new(100);
         /// <summary>
-        /// Increase this to slow down an enemy.
+        /// If you need to find out how much current cumulative slow amount is, use this.
         /// </summary>
-        public float slowAmount = 0f;
+        public float slowAmount { get; internal set; }
         public bool seaCreature;
         public int maulCounter;
         public int curseCounter;
@@ -628,6 +706,7 @@ namespace PetsOverhaul.Systems
         {
             if (npc.active && (npc.townNPC == false || npc.isLikeATownNPC == false || npc.friendly == false) && (npc.boss == false || nonBossTrueBosses[npc.type] == false))
             {
+                slowAmount = 0;
                 if (SlowList.Count > 0)
                 {
                     SlowList.ForEach(x => slowAmount += x.slowAmount);
@@ -643,10 +722,8 @@ namespace PetsOverhaul.Systems
                         SlowList.RemoveAt(indexToRemove);
                     }
                 }
-
                 if (slowAmount != 0)
                     Slow(npc, slowAmount);
-                slowAmount = 0;
             }
         }
         public override void OnSpawn(NPC npc, IEntitySource source)
@@ -681,6 +758,9 @@ namespace PetsOverhaul.Systems
                 VeloChangedFlying = false;
 
         }
+        /// <summary>
+        /// Use this to add Slow to the NPC.
+        /// </summary>
         public void AddSlow(SlowId slowType, float slowValue, int slowTimer)
         {
             int indexToReplace;

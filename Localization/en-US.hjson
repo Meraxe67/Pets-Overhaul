@@ -302,7 +302,7 @@ Mods: {
 				Effects are active while the Pet Item is in Inventory or an Open Void Bag
 				Both the effects and experience gain are doubled when Junimo Pet is primary Pet in use
 				Levels are currently maxed at <maxLvl>, greater tasks may reward u with superior exp gain.
-				[c/CDFF00:Harvesting]: Plants and choppables gives you <harvestingProfit> copper, +<harvestingRare> for rare plants, +<bonusHealth>% (minimum +<flatHealth>) maximum health
+				[c/CDFF00:Harvesting]: All plants and choppables gives you <harvestingProfit> times their exp as copper coins, +<bonusHealth>% (minimum +<flatHealth>) maximum health
 				Current level: [c/CDFF00:<harvestLevel>] Experience needed for next level: [c/CDFF00:<harvestNext>] Current total experience: [c/CDFF00:<harvestCurrent>]
 				[c/96A8B0:Mining]: Ores, gems and extractables can drop +1 more with <miningBonusDrop>% chance, +<bonusReduction>% damage reduction
 				Current level: [c/96A8B0:<miningLevel>] Experience needed for next level: [c/96A8B0:<miningNext>] Current total experience: [c/96A8B0:<miningCurrent>]
