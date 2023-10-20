@@ -87,10 +87,10 @@ namespace PetsOverhaul.ModSupport
 
         public void MergeJunimoExp()
         {
-            if (MiningXpPerModdedBlock != null) Main.LocalPlayer.GetModPlayer<Junimo>().MiningXpPerBlock.AddRange(MiningXpPerModdedBlock);
-            if (HarvestingXpPerModdedPlant != null) Main.LocalPlayer.GetModPlayer<Junimo>().HarvestingXpPerGathered.AddRange(HarvestingXpPerModdedPlant);
-            if (FishingXpPerModdedFish != null) Main.LocalPlayer.GetModPlayer<Junimo>().FishingXpPerCaught.AddRange(FishingXpPerModdedFish);
-            if (FishingXpPerModdedKill != null) Main.LocalPlayer.GetModPlayer<Junimo>().FishingXpPerKill.AddRange(FishingXpPerModdedKill);
+            if (MiningXpPerModdedBlock != null) Junimo.MiningXpPerBlock.AddRange(MiningXpPerModdedBlock);
+            if (HarvestingXpPerModdedPlant != null) Junimo.HarvestingXpPerGathered.AddRange(HarvestingXpPerModdedPlant);
+            if (FishingXpPerModdedFish != null) Junimo.FishingXpPerCaught.AddRange(FishingXpPerModdedFish);
+            if (FishingXpPerModdedKill != null)Junimo.FishingXpPerKill.AddRange(FishingXpPerModdedKill);
         }
 
         public bool IsModLoaded()
