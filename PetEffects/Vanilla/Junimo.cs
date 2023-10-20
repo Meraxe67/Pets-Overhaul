@@ -124,7 +124,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         /// <summary>
         /// Remember to insert the expAmount as *100 from intended amount, eg. 2.5 exp should be written as 250.
         /// </summary>
-        public List<(int expAmount, int[] oreList)> MiningXpPerBlock = new List<(int, int[])>
+        public static List<(int expAmount, int[] oreList)> MiningXpPerBlock = new List<(int, int[])>
         {
             {(90, new int[]{ ItemID.Obsidian, ItemID.SiltBlock, ItemID.SlushBlock, ItemID.DesertFossil } )},
             {(200, new int[]{ ItemID.CopperOre, ItemID.TinOre } )},
@@ -141,7 +141,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         /// <summary>
         /// Remember to insert the expAmount as *100 from intended amount, eg. 2.5 exp should be written as 250.
         /// </summary>
-        public List<(int expAmount, int[] enemyList)> FishingXpPerKill = new List<(int, int[])>
+        public static List<(int expAmount, int[] enemyList)> FishingXpPerKill = new List<(int, int[])>
         {
             {(1500, new int[]{ NPCID.EyeballFlyingFish, NPCID.ZombieMerman }) },
             {(3000, new int[]{ NPCID.GoblinShark, NPCID.BloodEelBody, NPCID.BloodEelTail, NPCID.BloodEelHead }) },
@@ -151,7 +151,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         /// <summary>
         /// Remember to insert the expAmount as *100 from intended amount, eg. 2.5 exp should be written as 250.
         /// </summary>
-        public List<(int expAmount, int[] fishList)> FishingXpPerCaught = new List<(int, int[])>
+        public static List<(int expAmount, int[] fishList)> FishingXpPerCaught = new List<(int, int[])>
         {
             {(0, new int[]{ ItemID.FishingSeaweed, ItemID.OldShoe, ItemID.TinCan }) },
             {(200, new int[]{ ItemID.BlueJellyfish, ItemID.GreenJellyfish, ItemID.PinkJellyfish, ItemID.Obsidifish, ItemID.Prismite, ItemID.Stinkfish, ItemID.ArmoredCavefish, ItemID.Damselfish, ItemID.DoubleCod, ItemID.Ebonkoi, ItemID.FrostMinnow, ItemID.Hemopiranha, ItemID.Honeyfin, ItemID.PrincessFish, ItemID.Shrimp, ItemID.VariegatedLardfish } )},
@@ -162,7 +162,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         /// <summary>
         /// Remember to insert the expAmount as *100 from intended amount, eg. 2.5 exp should be written as 250.
         /// </summary>
-        public List<(int expAmount, int[] plantList)> HarvestingXpPerGathered = new List<(int, int[])>
+        public static List<(int expAmount, int[] plantList)> HarvestingXpPerGathered = new List<(int, int[])>
         {
             {(80, new int[]{ ItemID.Acorn}) },
             {(125, new int[]{ ItemID.AshGrassSeeds,ItemID.BlinkrootSeeds,ItemID.CorruptSeeds,ItemID.CrimsonSeeds,ItemID.DaybloomSeeds,ItemID.DeathweedSeeds,ItemID.FireblossomSeeds,ItemID.GrassSeeds,ItemID.HallowedSeeds,ItemID.JungleGrassSeeds,ItemID.MoonglowSeeds,ItemID.MushroomGrassSeeds,ItemID.ShiverthornSeeds,ItemID.WaterleafSeeds }) },
