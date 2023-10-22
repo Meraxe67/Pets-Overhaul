@@ -8,10 +8,7 @@ using PetsOverhaul.Items;
 using System.Collections.Generic;
 using Terraria.Localization;
 using Terraria.GameInput;
-using Terraria.GameInput;
-using Terraria.GameInput;
-using Terraria.GameInput;
-using Terraria.GameInput;
+using System.Linq;
 
 using PetsOverhaul.Config;
 using Terraria.GameInput;
@@ -117,34 +114,33 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             if (item.TryGetGlobalItem(out ItemPet itemChck) && Pet.PickupChecks(item, ItemID.BlueEgg, itemChck))
             {
-                if (itemChck.herbBoost == true)
-                {
-
-                    PoolPlant();
-                    if (GlobalPet.pool.Count > 0)
-                        for (int i = 0; i < ItemPet.Randomizer(plantChance * item.stack); i++)
-                        {
-                            Player.QuickSpawnItem(Player.GetSource_Misc("BlueChicken"), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
-                        }
-                    GlobalPet.pool.Clear();
-                }
-                if (itemChck.rareHerbBoost == true)
-                {
-                    PoolRarePlant();
-                    if (GlobalPet.pool.Count > 0)
-                        for (int i = 0; i < ItemPet.Randomizer(rarePlantChance * item.stack); i++)
-                        {
-                            Player.QuickSpawnItem(Player.GetSource_Misc("BlueChicken"), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
-                        }
-                    GlobalPet.pool.Clear();
-                }
-                if (itemChck.tree == true)
+                if (itemChck.tree)
                 {
                     PoolTree();
                     if (GlobalPet.pool.Count > 0)
                         for (int i = 0; i < ItemPet.Randomizer(treeChance * item.stack); i++)
                         {
-                            Player.QuickSpawnItem(Player.GetSource_Misc("BlueChicken"), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
+                            Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
+                        }
+                    GlobalPet.pool.Clear();
+                }
+                else if (itemChck.rareHerbBoost)
+                {
+                    PoolRarePlant();
+                    if (GlobalPet.pool.Count > 0)
+                        for (int i = 0; i < ItemPet.Randomizer(rarePlantChance * item.stack); i++)
+                        {
+                            Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
+                        }
+                    GlobalPet.pool.Clear();
+                }
+                else if (itemChck.herbBoost)
+                {
+                    PoolPlant();
+                    if (GlobalPet.pool.Count > 0)
+                        for (int i = 0; i < ItemPet.Randomizer(plantChance * item.stack); i++)
+                        {
+                            Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
                         }
                     GlobalPet.pool.Clear();
                 }

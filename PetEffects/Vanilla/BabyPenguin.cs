@@ -20,6 +20,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int oceanFish = 15;
         public int regularFish = 5;
         public float chillingMultiplier = 0.45f;
+        public int snowFishChance = 100;
         public override void PostUpdateEquips()
         {
             if (Pet.PetInUse(ItemID.Fish))
@@ -55,7 +56,10 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             if (Pet.PetInUse(ItemID.Fish) && (fish.type == ItemID.FrostMinnow || fish.type == ItemID.AtlanticCod))
             {
-                fish.stack *= 2;
+                for (int i = 0; i < ItemPet.Randomizer(snowFishChance* fish.stack); i++)
+                {
+                    Player.QuickSpawnItem(Player.GetSource_Misc("FishingItem"), fish, 1);
+                }
             }
         }
     }
@@ -71,6 +75,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 .Replace("<fp>", babyPenguin.regularFish.ToString())
                 .Replace("<oceanFp>", babyPenguin.oceanFish.ToString())
                 .Replace("<snowFp>", babyPenguin.snowFish.ToString())
+                .Replace("<catchChancce>", babyPenguin.snowFishChance.ToString())
                 .Replace("<chilledMult>", babyPenguin.chillingMultiplier.ToString())
             ));
         }

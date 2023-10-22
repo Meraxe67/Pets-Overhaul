@@ -94,21 +94,24 @@ namespace PetsOverhaul.Systems
         }
         public override bool OnPickup(Item item)
         {
-            //if (item.TryGetGlobalItem(out ItemPet fortune))
-            //{
-            //    if (fortune.harvestingDrop)
-            //    {
-            //        Player.QuickSpawnItem(Player.GetSource_Misc("FortuneBonus"), ItemID.SolarBathtub, ItemPet.Randomizer(20));
-            //    }
-            //    if (fortune.miningDrop)
-            //    {
-
-            //    }
-            //    if (fortune.fishingDrop)
-            //    {
-
-            //    }
-            //}
+            if (item.TryGetGlobalItem(out ItemPet fortune) && fortune.pickedUpBefore == false && Player.CanPullItem(item, Player.ItemSpace(item)) && item.maxStack != 1)
+            {
+                if (fortune.harvestingDrop)
+                    for (int i = 0; i < ItemPet.Randomizer(harvestingFortune*item.stack); i++)
+                    {
+                        Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingFortuneItem"), item, 1);
+                    }
+                if (fortune.miningDrop)
+                    for (int i = 0; i < ItemPet.Randomizer(miningFortune*item.stack); i++)
+                    {
+                        Player.QuickSpawnItem(Player.GetSource_Misc("MiningFortuneItem"), item, 1);
+                    }
+                if (fortune.fishingDrop)
+                    for (int i = 0; i < ItemPet.Randomizer(fishingFortune*item.stack); i++)
+                    {
+                        Player.QuickSpawnItem(Player.GetSource_Misc("FishingFortuneItem"), item, 1);
+                    }
+            }
             return true;
         }
         /// <summary>
@@ -432,8 +435,8 @@ namespace PetsOverhaul.Systems
         public bool fishron = false;
         public bool dirt = false;
         public bool commonBlock = false;
-        public bool blockNotByPlayer = false;
         public bool tree = false;
+        public bool blockNotByPlayer = false;
         public bool gemTree = false;
         public bool pickedUpBefore = false;
         public bool itemFromBag = false;
@@ -441,6 +444,9 @@ namespace PetsOverhaul.Systems
         public bool harvestingDrop = false;
         public bool miningDrop = false;
         public bool fishingDrop = false;
+        public bool fortuneHarvestingDrop = false;
+        public bool fortuneMiningDrop = false;
+        public bool fortuneFishingDrop = false;
         /// <summary>
         /// Randomizes the given number. numToBeRandomized / randomizeTo returns how many times its 100% chance and rolls if the leftover, non-100% amount is true. item.stack += Randomizer(250) returns +2 and +1 more with 50% chance.
         /// </summary>
@@ -499,7 +505,7 @@ namespace PetsOverhaul.Systems
             {
                 herbBoost = false;
             }
-            if (source is EntitySource_TileBreak && Junimo.HarvestingXpPerGathered.Exists(x => x.plantList.Contains(item.type)&&x.expAmount>2500))
+            if (source is EntitySource_TileBreak && Junimo.HarvestingXpPerGathered.Exists(x => x.plantList.Contains(item.type) && x.expAmount > 2500))
             {
                 rareHerbBoost = true;
             }
@@ -539,6 +545,14 @@ namespace PetsOverhaul.Systems
             {
                 commonBlock = false;
             }
+            if (source is EntitySource_TileBreak tileTree && TileChecks.treeTile[Main.tile[tileTree.TileCoords].TileType])
+            {
+                tree = true;
+            }
+            else
+            {
+                tree = false;
+            }
             if (source is EntitySource_TileBreak brokenTile && PlayerPlacedBlockList.placedBlocksByPlayer.Contains(brokenTile.TileCoords.ToVector2()) == false)
             {
                 blockNotByPlayer = true;
@@ -555,7 +569,7 @@ namespace PetsOverhaul.Systems
             {
                 gemTree = false;
             }
-            if (source is EntitySource_Misc { Context: "HarvestingItem" } )
+            if (source is EntitySource_Misc { Context: "HarvestingItem" })
             {
                 harvestingDrop = true;
             }
@@ -579,6 +593,30 @@ namespace PetsOverhaul.Systems
             {
                 fishingDrop = false;
             }
+            if (source is EntitySource_Misc { Context: "HarvestingFortuneItem" })
+            {
+                fortuneHarvestingDrop = true;
+            }
+            else
+            {
+                fortuneHarvestingDrop = false;
+            }
+            if (source is EntitySource_Misc { Context: "MiningFortuneItem" })
+            {
+                fortuneMiningDrop = true;
+            }
+            else
+            {
+                fortuneMiningDrop = false;
+            }
+            if (source is EntitySource_Misc { Context: "FishingFortuneItem" })
+            {
+                fortuneFishingDrop = true;
+            }
+            else
+            {
+                fortuneFishingDrop = false;
+            }
             if (source is EntitySource_TileBreak playerPlacedCheck)
             {
                 PlayerPlacedBlockList.placedBlocksByPlayer.Remove(playerPlacedCheck.TileCoords.ToVector2());
@@ -590,17 +628,21 @@ namespace PetsOverhaul.Systems
         }
         public override void NetSend(Item item, BinaryWriter writer)
         {
-            BitsByte sources1 = new(itemFromNpc, herbBoost, rareHerbBoost, tree, oreBoost, bambooBoost, dirt, commonBlock);
-            BitsByte sources2 = new(blockNotByPlayer, gemTree, pickedUpBefore, itemFromBoss, itemFromBag);
+            BitsByte sources1 = new(itemFromNpc, herbBoost, rareHerbBoost, oreBoost, bambooBoost, dirt, commonBlock, tree);
+            BitsByte sources2 = new(blockNotByPlayer, gemTree, pickedUpBefore, itemFromBoss, itemFromBag,harvestingDrop,miningDrop,fishingDrop);
+            BitsByte sources3 = new(fortuneHarvestingDrop, fortuneMiningDrop, fortuneFishingDrop);
             writer.Write(sources1);
             writer.Write(sources2);
+            writer.Write(sources3);
         }
         public override void NetReceive(Item item, BinaryReader reader)
         {
             BitsByte sources1 = reader.ReadByte();
-            sources1.Retrieve(ref itemFromNpc, ref herbBoost, ref rareHerbBoost, ref tree, ref oreBoost, ref bambooBoost, ref dirt, ref commonBlock);
+            sources1.Retrieve(ref itemFromNpc, ref herbBoost, ref rareHerbBoost, ref oreBoost, ref bambooBoost, ref dirt, ref commonBlock, ref tree);
             BitsByte sources2 = reader.ReadByte();
-            sources2.Retrieve(ref blockNotByPlayer, ref gemTree, ref pickedUpBefore, ref itemFromBoss, ref itemFromBag);
+            sources2.Retrieve(ref blockNotByPlayer, ref gemTree, ref pickedUpBefore, ref itemFromBoss, ref itemFromBag, ref harvestingDrop, ref miningDrop, ref fishingDrop);
+            BitsByte sources3 = reader.ReadByte();
+            sources3.Retrieve(ref fortuneHarvestingDrop, ref fortuneMiningDrop, ref fortuneFishingDrop);
         }
 
     }

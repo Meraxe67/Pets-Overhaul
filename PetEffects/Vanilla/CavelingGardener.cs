@@ -22,12 +22,16 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             if (item.TryGetGlobalItem(out ItemPet itemChck) && Pet.PickupChecks(item, ItemID.GlowTulip, itemChck))
             {
-                if (itemChck.gemTree)
-                    item.stack += ItemPet.Randomizer(cavelingGemTreeChance * item.stack);
-                if ((itemChck.tree || itemChck.gemTree || itemChck.herbBoost) && (Player.ZoneDirtLayerHeight || Player.ZoneRockLayerHeight || Player.ZoneUnderworldHeight))
-                    item.stack += ItemPet.Randomizer(cavelingRegularPlantChance * item.stack);
+                if ((itemChck.gemTree || itemChck.herbBoost) && (Player.ZoneDirtLayerHeight || Player.ZoneRockLayerHeight || Player.ZoneUnderworldHeight))
+                        for (int i = 0; i < ItemPet.Randomizer((cavelingRegularPlantChance+(itemChck.gemTree ? cavelingGemTreeChance : 0)) * item.stack); i++)
+                        {
+                            Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), item, 1);
+                        }
                 if (itemChck.rareHerbBoost && (Player.ZoneDirtLayerHeight || Player.ZoneRockLayerHeight || Player.ZoneUnderworldHeight))
-                    item.stack += ItemPet.Randomizer(cavelingRarePlantChance * item.stack);
+                    for (int i = 0; i < ItemPet.Randomizer(cavelingRarePlantChance * item.stack); i++)
+                    {
+                        Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), item, 1);
+                    }
             }
 
             return true;

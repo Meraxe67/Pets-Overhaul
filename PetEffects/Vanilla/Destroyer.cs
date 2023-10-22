@@ -33,9 +33,10 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public override bool OnPickup(Item item)
         {
             if (item.TryGetGlobalItem(out ItemPet itemPet) && Pet.PickupChecks(item, ItemID.DestroyerPetItem, itemPet) && itemPet.oreBoost)
-            {
-                item.stack += ItemPet.Randomizer(Player.statDefense * defItemMult * item.stack + flatAmount);
-            }
+                for (int i = 0; i < ItemPet.Randomizer((Player.statDefense * defItemMult + flatAmount) * item.stack); i++)
+                {
+                    Player.QuickSpawnItem(Player.GetSource_Misc("MiningItem"), item, 1);
+                }
             return true;
         }
     }

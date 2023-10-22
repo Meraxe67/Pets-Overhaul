@@ -44,7 +44,10 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             if (Pet.PetInUse(ItemID.DukeFishronPetItem) && fish.maxStack != 1)
             {
-                fish.stack += ItemPet.Randomizer((stackChance + (int)(Player.fishingSkill * multiplier)) * fish.stack);
+                for (int i = 0; i < ItemPet.Randomizer(stackChance + (int)(Player.fishingSkill * multiplier)*fish.stack); i++)
+                {
+                    Player.QuickSpawnItem(Player.GetSource_Misc("FishingItem"), fish, 1);
+                }
             }
         }
         public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

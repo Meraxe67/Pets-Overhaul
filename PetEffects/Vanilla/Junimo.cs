@@ -167,7 +167,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {(80, new int[]{ ItemID.Acorn}) },
             {(125, new int[]{ ItemID.AshGrassSeeds,ItemID.BlinkrootSeeds,ItemID.CorruptSeeds,ItemID.CrimsonSeeds,ItemID.DaybloomSeeds,ItemID.DeathweedSeeds,ItemID.FireblossomSeeds,ItemID.GrassSeeds,ItemID.HallowedSeeds,ItemID.JungleGrassSeeds,ItemID.MoonglowSeeds,ItemID.MushroomGrassSeeds,ItemID.ShiverthornSeeds,ItemID.WaterleafSeeds }) },
             {(150, new int[]{ ItemID.Wood,ItemID.AshWood,ItemID.BorealWood,ItemID.PalmWood,ItemID.Ebonwood,ItemID.Shadewood,ItemID.StoneBlock}) },
-            {(220, new int[]{ ItemID.Daybloom,ItemID.Blinkroot,ItemID.Deathweed,ItemID.Fireblossom,ItemID.Moonglow,ItemID.Shiverthorn,ItemID.Waterleaf,ItemID.Mushroom,ItemID.GlowingMushroom,ItemID.VileMushroom,ItemID.ViciousMushroom,ItemID.Pumpkin }) },
+            {(220, new int[]{ ItemID.Daybloom,ItemID.Blinkroot,ItemID.Deathweed,ItemID.Fireblossom,ItemID.Moonglow,ItemID.Shiverthorn,ItemID.Waterleaf,ItemID.Mushroom,ItemID.GlowingMushroom,ItemID.VileMushroom,ItemID.ViciousMushroom,ItemID.Pumpkin,ItemID.Cactus,ItemID.BambooBlock }) },
             {(250, new int[]{ ItemID.GemTreeAmberSeed,ItemID.GemTreeAmethystSeed,ItemID.GemTreeDiamondSeed,ItemID.GemTreeEmeraldSeed,ItemID.GemTreeRubySeed,ItemID.GemTreeSapphireSeed,ItemID.GemTreeTopazSeed,ItemID.Amethyst,ItemID.Topaz,ItemID.Sapphire,ItemID.Emerald,ItemID.Ruby,ItemID.Amber,ItemID.Diamond }) },
             {(300, new int[]{ ItemID.Pearlwood,ItemID.SpookyWood}) },
             {(350, new int[]{ ItemID.JungleSpores}) },
@@ -203,7 +203,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
                 if (item.maxStack != 1 && Player.CanPullItem(item, Player.ItemSpace(item)) && itemChck.pickedUpBefore == false)
                 {
-                    if (itemChck.rareHerbBoost || itemChck.herbBoost || itemChck.tree)
+                    if (itemChck.rareHerbBoost || itemChck.herbBoost)
                     {
                         int value;
                         int index = HarvestingXpPerGathered.IndexOf(HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)));
@@ -220,20 +220,20 @@ namespace PetsOverhaul.PetEffects.Vanilla
                             int junimoCash = ItemPet.Randomizer((int)(harvestingExpToCoinMult * junimoHarvestingLevel * value * junimoInUseMultiplier * item.stack), 100);
                             if (junimoCash > 1000000)
                             {
-                                Player.QuickSpawnItem(Player.GetSource_Misc("Junimo"), ItemID.PlatinumCoin, junimoCash / 1000000);
+                                Player.QuickSpawnItem(Player.GetSource_Misc("JunimoItem"), ItemID.PlatinumCoin, junimoCash / 1000000);
                                 junimoCash %= 1000000;
                             }
                             if (junimoCash > 10000)
                             {
-                                Player.QuickSpawnItem(Player.GetSource_Misc("Junimo"), ItemID.GoldCoin, junimoCash / 10000);
+                                Player.QuickSpawnItem(Player.GetSource_Misc("JunimoItem"), ItemID.GoldCoin, junimoCash / 10000);
                                 junimoCash %= 10000;
                             }
                             if (junimoCash > 100)
                             {
-                                Player.QuickSpawnItem(Player.GetSource_Misc("Junimo"), ItemID.SilverCoin, junimoCash / 100);
+                                Player.QuickSpawnItem(Player.GetSource_Misc("JunimoItem"), ItemID.SilverCoin, junimoCash / 100);
                                 junimoCash %= 100;
                             }
-                            Player.QuickSpawnItem(Player.GetSource_Misc("Junimo"), ItemID.CopperCoin, junimoCash);
+                            Player.QuickSpawnItem(Player.GetSource_Misc("JunimoItem"), ItemID.CopperCoin, junimoCash);
                         }
                     }
                     else if (itemChck.oreBoost)
@@ -247,37 +247,42 @@ namespace PetsOverhaul.PetEffects.Vanilla
                                 junimoMiningExp += ItemPet.Randomizer((int)(MiningXpPerBlock[index].expAmount * junimoInUseMultiplier * item.stack * Pet.miningExpBoost));
                         }
                         if (Player.HasItemInInventoryOrOpenVoidBag(ItemID.JunimoPetItem) || Pet.PetInUse(ItemID.JunimoPetItem))
-                            Player.QuickSpawnItem(item.GetSource_Misc("Junimo"), item, ItemPet.Randomizer(junimoMiningLevel * junimoInUseMultiplier * item.stack));
+                            Player.QuickSpawnItem(item.GetSource_Misc("JunimoItem"), item, ItemPet.Randomizer(junimoMiningLevel * junimoInUseMultiplier * item.stack));
                     }
 
-                    //if (junimoExpCheck())
-                    //{
-                    //    if (itemChck.harvestingDrop)
-                    //    {
-                    //        int index = HarvestingXpPerGathered.IndexOf(HarvestingXpPerGathered.Find(x => x.Item2.Contains(item.type)));
-                    //        if (index == -1)
-                    //            junimoHarvestingExp += ItemPet.Randomizer((int)(Pet.harvestingExpBoost * 50 * item.stack * junimoInUseMultiplier));
-                    //        else
-                    //            junimoHarvestingExp += ItemPet.Randomizer((int)(HarvestingXpPerGathered[index].expAmount * junimoInUseMultiplier * item.stack * Pet.harvestingExpBoost));
-                    //    }
-                    //    if (itemChck.miningDrop)
-                    //    {
+                    if (junimoExpCheck())
+                    {
+                        if (itemChck.harvestingDrop || itemChck.fortuneHarvestingDrop)
+                        {
+                            int index = HarvestingXpPerGathered.IndexOf(HarvestingXpPerGathered.Find(x => x.Item2.Contains(item.type)));
+                            if (index == -1)
+                            {
 
-                    //        int index = MiningXpPerBlock.IndexOf(MiningXpPerBlock.Find(x => x.Item2.Contains(item.type)));
-                    //        if (index == -1)
-                    //            junimoMiningExp += ItemPet.Randomizer((int)(Pet.miningExpBoost * 50 * item.stack * junimoInUseMultiplier));
-                    //        else
-                    //            junimoMiningExp += ItemPet.Randomizer((int)(MiningXpPerBlock[index].expAmount * junimoInUseMultiplier * item.stack * Pet.miningExpBoost));
-                    //    }
-                    //    if (itemChck.fishingDrop)
-                    //    {
-                    //        int index = FishingXpPerCaught.IndexOf(FishingXpPerCaught.Find(x => x.Item2.Contains(item.type)));
-                    //        if (index == -1)
-                    //            junimoFishingExp += ItemPet.Randomizer((int)(Pet.fishingExpBoost * 50 * junimoInUseMultiplier * item.stack));
-                    //        else
-                    //            junimoFishingExp += ItemPet.Randomizer((int)(Pet.fishingExpBoost * FishingXpPerCaught[index].expAmount * junimoInUseMultiplier * item.stack));
-                    //    }
-                    //}
+                            }
+                            else
+                                junimoHarvestingExp += ItemPet.Randomizer((int)(HarvestingXpPerGathered[index].expAmount * junimoInUseMultiplier * item.stack * Pet.harvestingExpBoost));
+                        }
+                        if (itemChck.miningDrop || itemChck.fortuneMiningDrop)
+                        {
+                            int index = MiningXpPerBlock.IndexOf(MiningXpPerBlock.Find(x => x.Item2.Contains(item.type)));
+                            if (index == -1)
+                            {
+
+                            }
+                            else
+                                junimoMiningExp += ItemPet.Randomizer((int)(MiningXpPerBlock[index].expAmount * junimoInUseMultiplier * item.stack * Pet.miningExpBoost));
+                        }
+                        if (itemChck.fishingDrop || itemChck.fortuneFishingDrop)
+                        {
+                            int index = FishingXpPerCaught.IndexOf(FishingXpPerCaught.Find(x => x.Item2.Contains(item.type)));
+                            if (index == -1)
+                            {
+
+                            }
+                            else
+                                junimoFishingExp += ItemPet.Randomizer((int)(Pet.fishingExpBoost * FishingXpPerCaught[index].expAmount * junimoInUseMultiplier * item.stack));
+                        }
+                    }
                 }
             }
             return true;

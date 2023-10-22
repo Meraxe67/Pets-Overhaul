@@ -132,7 +132,7 @@ Mods: {
 				'''
 				[c/10B4F5:Fishing and Utility Pet]
 				Grants <fp> fishing power, <oceanFp> in the ocean and <snowFp> in the snow biome
-				Double all caught Frost Minnows and Atlantic Cods
+				Increase all caught Frost Minnows and Atlantic Cods by <catchChance>%
 				Grants Flipper effect while in snow and ocean biome
 				Multiplies Chilled debuff's duration by <chilledMult>x
 				'''
@@ -341,7 +341,7 @@ Mods: {
 			ParrotCracker:
 				'''
 				[c/f6546a:Offensive Pet]
-				Your all attacks have a <chance>% chance of hitting a second time
+				All of your attacks have a <chance>% chance of hitting a second time
 				'''
 			PigPetItem:
 				'''
@@ -372,6 +372,7 @@ Mods: {
 				for rare critters. Grants <rareCritterCoin> times the rarity
 				value of caught critter silver coins, <rareEnemyCoin> times
 				the rarity value of a killed enemy silver coins
+				Coins are benefited by Harvesting Fortune stat.
 				'''
 			Seedling:
 				'''

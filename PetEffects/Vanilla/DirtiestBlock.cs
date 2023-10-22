@@ -15,24 +15,24 @@ namespace PetsOverhaul.PetEffects.Vanilla
     sealed public class DirtiestBlock : ModPlayer
     {
         GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
-        public int dirtCoin = 3;
-        public int soilCoin = 2;
-        public int everythingCoin = 1;
+        public int dirtCoin = 300;
+        public int soilCoin = 200;
+        public int everythingCoin = 100;
         public override bool OnPickup(Item item)
         {
             if (item.TryGetGlobalItem(out ItemPet itemChck) && Pet.PickupChecks(item, ItemID.DirtiestBlock, itemChck))
             {
                 if (itemChck.dirt == true)
                 {
-                    Player.QuickSpawnItem(Player.GetSource_Misc("DirtiestBlock"), ItemID.CopperCoin, item.stack * dirtCoin);
+                    Player.QuickSpawnItem(Player.GetSource_Misc("MiningItem"), ItemID.CopperCoin, ItemPet.Randomizer(item.stack * dirtCoin));
                 }
                 else if (itemChck.commonBlock == true)
                 {
-                    Player.QuickSpawnItem(Player.GetSource_Misc("DirtiestBlock"), ItemID.CopperCoin, item.stack * soilCoin);
+                    Player.QuickSpawnItem(Player.GetSource_Misc("MiningItem"), ItemID.CopperCoin, ItemPet.Randomizer(item.stack * soilCoin));
                 }
                 else if (itemChck.blockNotByPlayer == true)
                 {
-                    Player.QuickSpawnItem(Player.GetSource_Misc("DirtiestBlock"), ItemID.CopperCoin, item.stack * everythingCoin);
+                    Player.QuickSpawnItem(Player.GetSource_Misc("MiningItem"), ItemID.CopperCoin, ItemPet.Randomizer(item.stack * everythingCoin));
                 }
             }
             return true;
@@ -48,9 +48,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
             if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
             DirtiestBlock dirtiestBlock = Main.LocalPlayer.GetModPlayer<DirtiestBlock>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DirtiestBlock")
-                        .Replace("<any>", dirtiestBlock.everythingCoin.ToString())
-                        .Replace("<soil>", dirtiestBlock.soilCoin.ToString())
-                        .Replace("<dirt>", dirtiestBlock.dirtCoin.ToString())
+                        .Replace("<any>", (dirtiestBlock.everythingCoin / 100).ToString())
+                        .Replace("<soil>", (dirtiestBlock.soilCoin / 100).ToString())
+                        .Replace("<dirt>", (dirtiestBlock.dirtCoin / 100).ToString())
                         ));
         }
     }

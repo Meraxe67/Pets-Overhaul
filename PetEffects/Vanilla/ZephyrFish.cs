@@ -71,9 +71,15 @@ namespace PetsOverhaul.PetEffects.Vanilla
             if (Pet.PetInUse(ItemID.ZephyrFish) && fish.maxStack != 1)
             {
                 if (amplifiedFishingChance)
-                    fish.stack += ItemPet.Randomizer(fish.stack * windChance);
+                    for (int i = 0; i < ItemPet.Randomizer(windChance * fish.stack); i++)
+                    {
+                        Player.QuickSpawnItem(Player.GetSource_Misc("FishingItem"), fish, 1);
+                    }
                 else
-                    fish.stack += ItemPet.Randomizer(fish.stack * baseChance);
+                    for (int i = 0; i < ItemPet.Randomizer(baseChance * fish.stack); i++)
+                    {
+                        Player.QuickSpawnItem(Player.GetSource_Misc("FishingItem"), fish, 1);
+                    }
             }
         }
     }

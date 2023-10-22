@@ -27,7 +27,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Pet.PetInUse(ItemID.DogWhistle) && target.active == false && target.rarity > 0 && target.CountsAsACritter == false && target.SpawnedFromStatue == false)
-                Player.QuickSpawnItem(Player.GetSource_Misc("Puppy"), ItemID.SilverCoin, ItemPet.Randomizer(rareEnemyCoin * target.rarity));
+                Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), ItemID.SilverCoin, ItemPet.Randomizer(rareEnemyCoin * target.rarity));
         }
         public override void OnCatchNPC(NPC npc, Item item, bool failed)
         {
@@ -36,7 +36,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
                 if (npc.rarity > 0)
                 {
-                    Player.QuickSpawnItem(Player.GetSource_Misc("Puppy"), ItemID.SilverCoin, ItemPet.Randomizer(rareCritterCoin * npc.rarity));
+                    Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), ItemID.SilverCoin, ItemPet.Randomizer(rareCritterCoin * npc.rarity));
                     Player.QuickSpawnItem(Player.GetSource_CatchEntity(npc), npc.catchItem, ItemPet.Randomizer(rareCatchChance));
                 }
                 else

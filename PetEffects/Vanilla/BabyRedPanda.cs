@@ -32,9 +32,10 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public override bool OnPickup(Item item)
         {
             if (item.TryGetGlobalItem(out ItemPet itemPet) && Pet.PickupChecks(item, ItemID.BambooLeaf, itemPet) && itemPet.bambooBoost)
-            {
-                item.stack += ItemPet.Randomizer(bambooChance * item.stack);
-            }
+                for (int i = 0; i < ItemPet.Randomizer(bambooChance * item.stack); i++)
+                {
+                    Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), item, 1);
+                }
             return true;
         }
     }

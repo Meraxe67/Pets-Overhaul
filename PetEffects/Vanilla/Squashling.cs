@@ -22,9 +22,15 @@ namespace PetsOverhaul.PetEffects.Vanilla
             if (item.TryGetGlobalItem(out ItemPet itemChck) && Pet.PickupChecks(item, ItemID.MagicalPumpkinSeed, itemChck))
             {
                 if (itemChck.herbBoost == true)
-                    Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), item, ItemPet.Randomizer(squashlingCommonChance * item.stack));
+                    for (int i = 0; i < ItemPet.Randomizer(squashlingCommonChance * item.stack); i++)
+                    {
+                        Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), item, 1);
+                    }
                 if (itemChck.rareHerbBoost == true)
-                    Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), item, ItemPet.Randomizer(squashlingRareChance * item.stack));
+                    for (int i = 0; i < ItemPet.Randomizer(squashlingRareChance * item.stack); i++)
+                    {
+                        Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), item, 1);
+                    }
             }
             return true;
         }
