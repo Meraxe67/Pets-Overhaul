@@ -25,18 +25,17 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 {
                     Vector2 location = new(target.position.X + Main.rand.NextFloat(-2f, 2f), target.position.Y + Main.rand.NextFloat(-2f, 2f));
                     Vector2 velocity = new(Main.rand.NextFloat(-1.5f, 1.5f), Main.rand.NextFloat(-1.5f, 1.5f));
+                    int projId = ProjectileID.SporeGas;
                     switch (Main.rand.Next(3))
                     {
-                        case 0:
-                            Projectile.NewProjectile(Player.GetSource_Misc("Plantero"), location, velocity, ProjectileID.SporeGas, (int)(damageDone * damageMult) + flatDmg, knockBack, Main.myPlayer);
-                            break;
                         case 1:
-                            Projectile.NewProjectile(Player.GetSource_Misc("Plantero"), location, velocity, ProjectileID.SporeGas2, (int)(damageDone * damageMult) + flatDmg, knockBack, Main.myPlayer);
+                            projId = ProjectileID.SporeGas2;
                             break;
                         case 2:
-                            Projectile.NewProjectile(Player.GetSource_Misc("Plantero"), location, velocity, ProjectileID.SporeGas3, (int)(damageDone * damageMult) + flatDmg, knockBack, Main.myPlayer);
+                            projId = ProjectileID.SporeGas3;
                             break;
                     }
+                    Projectile.NewProjectile(Player.GetSource_Misc("PetProjectile"), location, velocity, projId, (int)(damageDone * damageMult) + flatDmg, knockBack, Main.myPlayer);
                 }
         }
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
@@ -46,18 +45,17 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 {
                     Vector2 location = new(target.position.X + Main.rand.NextFloat(-2f, 2f), target.position.Y + Main.rand.NextFloat(-2f, 2f));
                     Vector2 velocity = new(Main.rand.NextFloat(-1.5f, 1.5f), Main.rand.NextFloat(-1.5f, 1.5f));
+                    int projId = ProjectileID.SporeGas;
                     switch (Main.rand.Next(3))
                     {
-                        case 0:
-                            Projectile.NewProjectile(Player.GetSource_Misc("Plantero"), location, velocity, ProjectileID.SporeGas, (int)(damageDone * damageMult) + flatDmg, knockBack, Main.myPlayer);
-                            break;
                         case 1:
-                            Projectile.NewProjectile(Player.GetSource_Misc("Plantero"), location, velocity, ProjectileID.SporeGas2, (int)(damageDone * damageMult) + flatDmg, knockBack, Main.myPlayer);
+                            projId = ProjectileID.SporeGas2;
                             break;
                         case 2:
-                            Projectile.NewProjectile(Player.GetSource_Misc("Plantero"), location, velocity, ProjectileID.SporeGas3, (int)(damageDone * damageMult) + flatDmg, knockBack, Main.myPlayer);
+                            projId = ProjectileID.SporeGas3;
                             break;
                     }
+                    Projectile.NewProjectile(Player.GetSource_Misc("PetProjectile"), location, velocity, projId, (int)(damageDone * damageMult) + flatDmg, knockBack, Main.myPlayer);
                 }
         }
     }

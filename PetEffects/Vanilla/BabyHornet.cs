@@ -74,9 +74,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 for (int i = 0; i < ItemPet.Randomizer(beeChance * summonMult); i++)
                 {
                     if (Player.strongBees == true && Main.rand.NextBool(1, 3))
-                        Projectile.NewProjectileDirect(Player.GetSource_Misc("BabyHornet"), target.Center, Main.rand.NextVector2Circular(10f, 10f), ProjectileID.GiantBee, beeDmg * 2, beeKb * 2, Player.whoAmI);
+                        Projectile.NewProjectileDirect(Player.GetSource_Misc("PetProjectile"), target.Center, Main.rand.NextVector2Circular(10f, 10f), ProjectileID.GiantBee, beeDmg * 2, beeKb * 2, Player.whoAmI);
                     else
-                        Projectile.NewProjectileDirect(Player.GetSource_Misc("BabyHornet"), target.Center, Main.rand.NextVector2Circular(10f, 10f), ProjectileID.Bee, beeDmg, beeKb, Player.whoAmI);
+                        Projectile.NewProjectileDirect(Player.GetSource_Misc("PetProjectile"), target.Center, Main.rand.NextVector2Circular(10f, 10f), ProjectileID.Bee, beeDmg, beeKb, Player.whoAmI);
                 }
             }
         }
@@ -90,9 +90,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 for (int i = 0; i < ItemPet.Randomizer(beeChance * summonMult); i++)
                 {
                     if (Player.strongBees == true && Main.rand.NextBool(1, 3))
-                        Projectile.NewProjectileDirect(Player.GetSource_Misc("BabyHornet"), target.Center, Main.rand.NextVector2Circular(10f, 10f), ProjectileID.GiantBee, beeDmg * 2, beeKb * 2, Player.whoAmI);
+                        Projectile.NewProjectileDirect(Player.GetSource_Misc("PetProjectile"), target.Center, Main.rand.NextVector2Circular(10f, 10f), ProjectileID.GiantBee, beeDmg * 2, beeKb * 2, Player.whoAmI);
                     else
-                        Projectile.NewProjectileDirect(Player.GetSource_Misc("BabyHornet"), target.Center, Main.rand.NextVector2Circular(10f, 10f), ProjectileID.Bee, beeDmg, beeKb, Player.whoAmI);
+                        Projectile.NewProjectileDirect(Player.GetSource_Misc("PetProjectile"), target.Center, Main.rand.NextVector2Circular(10f, 10f), ProjectileID.Bee, beeDmg, beeKb, Player.whoAmI);
                 }
             }
         }

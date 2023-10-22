@@ -28,7 +28,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             if (Pet.PetInUseWithSwapCd(ItemID.BallOfFuseWire) && Pet.timer <= 0)
             {
-                int boom = Projectile.NewProjectile(Player.GetSource_Misc("DynamiteKitten"), target.position, Vector2.Zero, ModContent.ProjectileType<DynamiteKittyBoom>(), (int)(damageDone * damageMult), hit.Knockback * kbMult, Main.myPlayer);
+                int boom = Projectile.NewProjectile(Player.GetSource_Misc("PetProjectile"), target.position, Vector2.Zero, ModContent.ProjectileType<DynamiteKittyBoom>(), (int)(damageDone * damageMult), hit.Knockback * kbMult, Main.myPlayer);
                 Main.projectile[boom].ArmorPenetration = armorPen;
                 Pet.timer = Pet.timerMax;
             }
