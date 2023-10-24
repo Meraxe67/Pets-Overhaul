@@ -140,10 +140,13 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {(470, new int[]{ ItemID.GoldOre, ItemID.PlatinumOre, ItemID.Emerald, ItemID.Ruby, ItemID.Hellstone } )},
             {(550, new int[]{ ItemID.CrimtaneOre, ItemID.DemoniteOre, ItemID.Diamond, ItemID.Amber } )},
             {(750, new int[]{ ItemID.CobaltOre, ItemID.PalladiumOre } )},
+            {(850, new int[]{ ItemID.CrystalShard } )},
             {(900, new int[]{ ItemID.MythrilOre, ItemID.OrichalcumOre } )},
             {(1050, new int[]{ ItemID.AdamantiteOre, ItemID.TitaniumOre }) },
             {(1200, new int[]{ ItemID.ChlorophyteOre } )},
             {(1300, new int[]{ ItemID.LunarOre } )},
+            {(2500, new int[]{ ItemID.LifeCrystal } )},
+            {(12500, new int[]{ ItemID.QueenSlimeCrystal } )},
             {(100000,new int[]{ItemID.DirtiestBlock}) }
         };
         public int defaultSeaCreatureExp = 2000;
@@ -156,26 +159,40 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {(3000, new int[]{ NPCID.GoblinShark, NPCID.BloodEelBody, NPCID.BloodEelTail, NPCID.BloodEelHead }) },
             {(5000, new int[]{ NPCID.BloodNautilus } )}
         };
-        public int anglerQuestExp = 3500;
+        public int anglerQuestExp = 4000;
         /// <summary>
         /// Remember to insert the expAmount as *100 from intended amount, eg. 2.5 exp should be written as 250.
         /// </summary>
         public static List<(int expAmount, int[] fishList)> FishingXpPerCaught = new List<(int, int[])>
         {
-            {(0, new int[]{ ItemID.FishingSeaweed, ItemID.OldShoe, ItemID.TinCan }) },
-            //{(0, new int[]{ ItemID.FishingSeaweed, ItemID.OldShoe, ItemID.TinCan }) },
-            //{(0, new int[]{ ItemID.FishingSeaweed, ItemID.OldShoe, ItemID.TinCan }) },
-            //{(0, new int[]{ ItemID.FishingSeaweed, ItemID.OldShoe, ItemID.TinCan }) },
-            {(200, new int[]{ ItemID.BlueJellyfish, ItemID.GreenJellyfish, ItemID.PinkJellyfish, ItemID.Obsidifish, ItemID.Prismite, ItemID.Stinkfish, ItemID.ArmoredCavefish, ItemID.Damselfish, ItemID.DoubleCod, ItemID.Ebonkoi, ItemID.FrostMinnow, ItemID.Hemopiranha, ItemID.Honeyfin, ItemID.PrincessFish, ItemID.Shrimp, ItemID.VariegatedLardfish } )},
-            {(400, new int[]{ ItemID.ChaosFish, ItemID.FlarefinKoi } )},
-            {(500, new int[]{ 2334, 2335, 2336, 3203, 3204, 3205, 3206, 3207, 3208, 4405, 4407, 4877, 5002, 3979, 3980, 3981, 3982, 3983, 3984, 3985, 3986, 3987, 4406, 4408, 4878, 5003 } )},
-            {(600, new int[]{ ItemID.GoldenCarp }) }
+            {(10, new int[]{ ItemID.FishingSeaweed, ItemID.OldShoe, ItemID.TinCan }) },
+            {(25, new int[]{ ItemID.FrostDaggerfish,ItemID.BombFish }) },
+            {(35, new int[]{ ItemID.BombFish }) },
+            {(100, new int[]{ ItemID.Flounder,ItemID.Bass,ItemID.RockLobster,ItemID.Trout,ItemID.JojaCola }) },
+            {(175, new int[]{ ItemID.AtlanticCod, ItemID.CrimsonTigerfish, ItemID.SpecularFish, ItemID.Tuna }) },
+            {(200, new int[]{ ItemID.Salmon, ItemID.NeonTetra}) },
+            {(250, new int[]{ ItemID.ArmoredCavefish,ItemID.Damselfish,ItemID.DoubleCod,ItemID.Ebonkoi,ItemID.FrostMinnow,ItemID.Hemopiranha,ItemID.Shrimp,ItemID.VariegatedLardfish }) },
+            {(275, new int[]{ ItemID.Honeyfin,ItemID.PrincessFish,ItemID.Oyster }) },
+            {(350, new int[]{ ItemID.WoodenCrate,ItemID.WoodenCrateHard }) },
+            {(375, new int[]{ ItemID.Stinkfish, ItemID.BlueJellyfish,ItemID.GreenJellyfish,ItemID.PinkJellyfish,ItemID.Obsidifish,ItemID.Prismite}) },
+            {(400, new int[]{ ItemID.PurpleClubberfish,ItemID.Swordfish }) },
+            {(475, new int[]{ ItemID.ChaosFish,ItemID.FlarefinKoi,ItemID.IronCrate, ItemID.IronCrateHard }) },
+            {(500, new int[]{ ItemID.SawtoothShark,ItemID.Rockfish,ItemID.ReaverShark,ItemID.AlchemyTable }) },
+            {(550, new int[]{ ItemID.JungleFishingCrate,ItemID.JungleFishingCrateHard,ItemID.CorruptFishingCrate,ItemID.CorruptFishingCrateHard,ItemID.CrimsonFishingCrate,ItemID.CrimsonFishingCrateHard,ItemID.DungeonFishingCrate,ItemID.DungeonFishingCrateHard,ItemID.FloatingIslandFishingCrate,ItemID.FloatingIslandFishingCrateHard,ItemID.FrozenCrate,ItemID.FrozenCrateHard,ItemID.OasisCrate,ItemID.OasisCrateHard,ItemID.OceanCrate,ItemID.OceanCrateHard }) },
+            {(600, new int[]{ ItemID.HallowedFishingCrate,ItemID.HallowedFishingCrateHard, ItemID.GoldenCarp }) },
+            {(750, new int[]{ ItemID.GoldenCrate,ItemID.GoldenCrateHard,ItemID.LavaCrate,ItemID.LavaCrateHard }) },
+            {(1000, new int[]{ ItemID.BalloonPufferfish,ItemID.FrogLeg}) },
+            {(1250, new int[]{ ItemID.DreadoftheRedSea, ItemID.CombatBook,ItemID.ZephyrFish }) },
+            {(1500, new int[]{ ItemID.BottomlessLavaBucket,ItemID.LavaAbsorbantSponge,ItemID.DemonConch }) },
+            {(2000, new int[]{ ItemID.LadyOfTheLake,ItemID.Toxikarp,ItemID.Bladetongue,ItemID.CrystalSerpent }) },
+            {(2500, new int[]{ ItemID.ObsidianSwordfish,ItemID.ScalyTruffle }) },
         };
         /// <summary>
         /// Remember to insert the expAmount as *100 from intended amount, eg. 2.5 exp should be written as 250.
         /// </summary>
         public static List<(int expAmount, int[] plantList)> HarvestingXpPerGathered = new List<(int, int[])>
         {
+            {(69, new int[]{ ItemID.RottenEgg} )},
             {(80, new int[]{ ItemID.Acorn}) },
             {(125, new int[]{ ItemID.AshGrassSeeds,ItemID.BlinkrootSeeds,ItemID.CorruptSeeds,ItemID.CrimsonSeeds,ItemID.DaybloomSeeds,ItemID.DeathweedSeeds,ItemID.FireblossomSeeds,ItemID.GrassSeeds,ItemID.HallowedSeeds,ItemID.JungleGrassSeeds,ItemID.MoonglowSeeds,ItemID.MushroomGrassSeeds,ItemID.ShiverthornSeeds,ItemID.WaterleafSeeds }) },
             {(150, new int[]{ ItemID.Wood,ItemID.AshWood,ItemID.BorealWood,ItemID.PalmWood,ItemID.Ebonwood,ItemID.Shadewood,ItemID.StoneBlock,ItemID.RichMahogany}) },
@@ -183,11 +200,13 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {(250, new int[]{ ItemID.GemTreeAmberSeed,ItemID.GemTreeAmethystSeed,ItemID.GemTreeDiamondSeed,ItemID.GemTreeEmeraldSeed,ItemID.GemTreeRubySeed,ItemID.GemTreeSapphireSeed,ItemID.GemTreeTopazSeed,ItemID.Amethyst,ItemID.Topaz,ItemID.Sapphire,ItemID.Emerald,ItemID.Ruby,ItemID.Amber,ItemID.Diamond }) },
             {(300, new int[]{ ItemID.Pearlwood,ItemID.SpookyWood}) },
             {(350, new int[]{ ItemID.JungleSpores}) },
+            {(500, new int[]{ ItemID.Coral,ItemID.Seashell,ItemID.Starfish}) },
             {(1250, new int[]{ ItemID.SpicyPepper,ItemID.Pomegranate,ItemID.Elderberry,ItemID.BlackCurrant,ItemID.Apple,ItemID.Apricot,ItemID.Banana,ItemID.BloodOrange,ItemID.Cherry,ItemID.Coconut,ItemID.Grapefruit,ItemID.Lemon,ItemID.Mango,ItemID.Peach,ItemID.Pineapple,ItemID.Plum }) },
             {(1500, new int[]{ ModContent.ItemType<Egg>()}) },
             {(2500, new int[]{ ItemID.Dragonfruit,ItemID.Starfruit,ItemID.Grapes}) },
             {(3500, new int[] { ItemID.GreenMushroom,ItemID.TealMushroom,ItemID.SkyBlueFlower,ItemID.YellowMarigold,ItemID.BlueBerries,ItemID.LimeKelp,ItemID.PinkPricklyPear,ItemID.OrangeBloodroot,ItemID.StrangePlant1,ItemID.StrangePlant2,ItemID.StrangePlant3,ItemID.StrangePlant4})},
-            {(10000, new int[]{ ItemID.LifeFruit}) },
+            {(4000, new int[]{ ItemID.JungleRose,ItemID.ManaFlower }) },
+            {(10000, new int[]{ ItemID.LifeFruit,ItemID.LeafWand,ItemID.LivingWoodWand,ItemID.LivingMahoganyWand,ItemID.LivingMahoganyLeafWand}) },
             {(25000, new int[] {ItemID.EucaluptusSap,ItemID.MagicalPumpkinSeed}) }
         };
         /// <summary>
@@ -231,12 +250,12 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 int value;
                 int index = FishingXpPerKill.IndexOf(FishingXpPerKill.Find(x => x.Item2.Contains(target.type)));
                 if (index == -1)
-                    value = ItemPet.Randomizer((int)(defaultSeaCreatureExp * junimoInUseMultiplier*Pet.fishingExpBoost));
+                    value = ItemPet.Randomizer((int)(defaultSeaCreatureExp * junimoInUseMultiplier * Pet.fishingExpBoost));
                 else
-                    value = ItemPet.Randomizer((int)(FishingXpPerKill[index].expAmount * junimoInUseMultiplier*Pet.fishingExpBoost));
+                    value = ItemPet.Randomizer((int)(FishingXpPerKill[index].expAmount * junimoInUseMultiplier * Pet.fishingExpBoost));
                 junimoFishingExp += value;
                 popupExpFish += value;
-                    popupIndexFish = PopupExp(popupIndexFish, popupExpFish, Color.LightSkyBlue);
+                popupIndexFish = PopupExp(popupIndexFish, popupExpFish, Color.LightSkyBlue);
             }
 
         }
@@ -382,7 +401,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 junimoFishingExp += value;
                 popupExpFish += value;
                 anglerQuestDayCheck = true;
-                    popupIndexFish = PopupExp(popupIndexFish, popupExpFish, Color.LightSkyBlue);
+                popupIndexFish = PopupExp(popupIndexFish, popupExpFish, Color.LightSkyBlue);
             }
         }
         public override void ModifyCaughtFish(Item fish)
@@ -397,7 +416,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     value = ItemPet.Randomizer((int)(Pet.fishingExpBoost * FishingXpPerCaught[index].expAmount * junimoInUseMultiplier * fish.stack));
                 junimoFishingExp += value;
                 popupExpFish += value;
-                    popupIndexFish = PopupExp(popupIndexFish, popupExpFish, Color.LightSkyBlue);
+                popupIndexFish = PopupExp(popupIndexFish, popupExpFish, Color.LightSkyBlue);
             }
         }
         public override void GetFishingLevel(Item fishingRod, Item bait, ref float fishingLevel)

@@ -375,7 +375,7 @@ namespace PetsOverhaul.Systems
         {
             previousPetItem = Player.miscEquips[0].type;
             if (ModContent.GetInstance<Personalization>().DisableNotice == false)
-                Main.NewText("[c/90C2AA:Pets Overhaul 2.2.2 latest changes: Junimo Exp Popup texts!]\n[c/90C2AA:Major bug fixes regarding Harvesting etc. and table improvements]\nIf you happen to come across any bugs, our would like to be\nup to date with our constantly updating Mod and growing community,\nwe encourage you to join our community and our Discord server!");
+                Main.NewText("[c/90C2AA:Pets Overhaul 2.2.2 latest changes: Junimo Exp Popup texts!]\n[c/90C2AA:Immense Junimo exp table improvements, check Changelog for full list]\nIf you happen to come across any bugs, our would like to be\nup to date with our constantly updating Mod and growing community,\nwe encourage you to join our community and our Discord server!");
         }
         public override void OnHurt(Player.HurtInfo info)
         {
@@ -534,7 +534,7 @@ namespace PetsOverhaul.Systems
                 herbBoost = false;
                 rareHerbBoost = false;
             }
-            if (source is EntitySource_TileBreak brokenOre && PlayerPlacedBlockList.placedBlocksByPlayer.Contains(brokenOre.TileCoords.ToVector2()) == false && (TileID.Sets.Ore[Main.tile[brokenOre.TileCoords].TileType] || TileChecks.gemTile[Main.tile[brokenOre.TileCoords].TileType] || TileChecks.extractableAndOthers[Main.tile[brokenOre.TileCoords].TileType]))
+            if (source is EntitySource_TileBreak brokenOre && PlayerPlacedBlockList.placedBlocksByPlayer.Contains(brokenOre.TileCoords.ToVector2()) == false && (TileID.Sets.Ore[Main.tile[brokenOre.TileCoords].TileType] || TileChecks.gemTile[Main.tile[brokenOre.TileCoords].TileType] || TileChecks.extractableAndOthers[Main.tile[brokenOre.TileCoords].TileType] || item.type == ItemID.LifeCrystal)) //Due to Life Crystals being a multitile, its so hard to track the broken tile, so they will be exception for Mining.
             {
                 oreBoost = true;
             }
