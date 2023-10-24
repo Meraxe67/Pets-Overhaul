@@ -14,6 +14,12 @@ Mods: {
 				Disables Junimo Pet's all Experience gains if you don't have Stardrop
 				in any of your Inventories or it's not in your Pet Item slot.
 				''' */
+			// JunimoExpGainMessageLabel: Disable Junimo Exp pop-up messages
+			/* JunimoExpGainMessageTooltip:
+				'''
+				Disables all pop-up texts that appears upon gaining exp,
+				Does not disable Exp gain or anything else but the message.
+				''' */
 			// NoticeLabel: Disable Pets Overhaul's notice
 			/* NoticeTooltip:
 				'''

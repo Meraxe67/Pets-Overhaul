@@ -25,7 +25,7 @@ namespace PetsOverhaul.Items
         }
         public override void PostUpdate()
         {
-            Lighting.AddLight(Item.Center, new Vector3(2.55f,1.10f,1f) * 0.8f* Main.essScale);
+            Lighting.AddLight(Item.Center, new Color(255, (byte)(Main.masterColor * 200f), 0, Main.mouseTextColor).ToVector3() * 0.8f* Main.essScale);
         }
     }
 }

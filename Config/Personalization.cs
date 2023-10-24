@@ -15,6 +15,10 @@ namespace PetsOverhaul.Config
         [TooltipKey("$Mods.PetsOverhaul.Config.JunimoExpTooltip")]
         [DefaultValue(false)]
         public bool JunimoExpWhileNotInInv;
+        [LabelKey("$Mods.PetsOverhaul.Config.JunimoExpGainMessageLabel")]
+        [TooltipKey("$Mods.PetsOverhaul.Config.JunimoExpGainMessageTooltip")]
+        [DefaultValue(false)]
+        public bool JunimoExpGainMessage;
         [LabelKey("$Mods.PetsOverhaul.Config.NoticeLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.NoticeTooltip")]
         [DefaultValue(false)]

@@ -31,7 +31,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 if (lightningRodTime > 0)
                 {
                     lightningRodTime--;
-                    Player.GetDamage<GenericDamageClass>() += lightningRod;
+                    Player.GetDamage<GenericDamageClass>() += lightningRod; //Ability'i Lightning Rod' dan Static'e çevir
                 }
                 if (Player.HasBuff(BuffID.Electrified))
                 {

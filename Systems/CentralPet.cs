@@ -375,7 +375,7 @@ namespace PetsOverhaul.Systems
         {
             previousPetItem = Player.miscEquips[0].type;
             if (ModContent.GetInstance<Personalization>().DisableNotice == false)
-                Main.NewText("[c/90C2AA:Pets Overhaul 2.2 latest changes: System improvements/bug fixes.]\nIf you happen to come across any bugs, our would like to be\nup to date with our constantly updating Mod and growing community,\nwe encourage you to join our community and our Discord server!");
+                Main.NewText("[c/90C2AA:Pets Overhaul 2.2.2 latest changes: Junimo Exp Popup texts!]\n[c/90C2AA:Major bug fixes regarding Harvesting etc. and table improvements]\nIf you happen to come across any bugs, our would like to be\nup to date with our constantly updating Mod and growing community,\nwe encourage you to join our community and our Discord server!");
         }
         public override void OnHurt(Player.HurtInfo info)
         {
@@ -497,20 +497,41 @@ namespace PetsOverhaul.Systems
             {
                 itemFromBag = false;
             }
-            if (source is EntitySource_TileBreak && Junimo.HarvestingXpPerGathered.Exists(x => x.plantList.Contains(item.type)))
+            if (source is EntitySource_TileBreak gemstoneTree && TileID.Sets.CountsAsGemTree[Main.tile[gemstoneTree.TileCoords].TileType])
+            {
+                gemTree = true;
+            }
+            else
+            {
+                gemTree = false;
+            }
+            if (source is EntitySource_TileBreak bamboo && Main.tile[bamboo.TileCoords].TileType == TileID.Bamboo)
+            {
+                bambooBoost = true;
+            }
+            else
+            {
+                bambooBoost = false;
+            }
+            if ((source is EntitySource_TileBreak || source is EntitySource_ShakeTree) && Junimo.HarvestingXpPerGathered.Exists(x => x.plantList.Contains(item.type) && x.expAmount > 1000))
+            {
+                rareHerbBoost = true;
+                if ((new int[] { ItemID.GemTreeAmberSeed, ItemID.GemTreeAmethystSeed, ItemID.GemTreeDiamondSeed, ItemID.GemTreeEmeraldSeed, ItemID.GemTreeRubySeed, ItemID.GemTreeSapphireSeed, ItemID.GemTreeTopazSeed, ItemID.Amethyst, ItemID.Topaz, ItemID.Sapphire, ItemID.Emerald, ItemID.Ruby, ItemID.Amber, ItemID.Diamond, ItemID.StoneBlock }.Contains(item.type) && gemTree == false) || (item.type == ItemID.BambooBlock && bambooBoost == false))
+                {
+                    rareHerbBoost = false;
+                }
+            }
+            else if ((source is EntitySource_TileBreak || source is EntitySource_ShakeTree) && Junimo.HarvestingXpPerGathered.Exists(x => x.plantList.Contains(item.type)))
             {
                 herbBoost = true;
+                if ((new int[] { ItemID.GemTreeAmberSeed, ItemID.GemTreeAmethystSeed, ItemID.GemTreeDiamondSeed, ItemID.GemTreeEmeraldSeed, ItemID.GemTreeRubySeed, ItemID.GemTreeSapphireSeed, ItemID.GemTreeTopazSeed, ItemID.Amethyst, ItemID.Topaz, ItemID.Sapphire, ItemID.Emerald, ItemID.Ruby, ItemID.Amber, ItemID.Diamond,ItemID.StoneBlock }.Contains(item.type) && gemTree == false)||(item.type == ItemID.BambooBlock && bambooBoost == false))
+                {
+                    herbBoost = false;
+                }
             }
             else
             {
                 herbBoost = false;
-            }
-            if (source is EntitySource_TileBreak && Junimo.HarvestingXpPerGathered.Exists(x => x.plantList.Contains(item.type) && x.expAmount > 2500))
-            {
-                rareHerbBoost = true;
-            }
-            else
-            {
                 rareHerbBoost = false;
             }
             if (source is EntitySource_TileBreak brokenOre && PlayerPlacedBlockList.placedBlocksByPlayer.Contains(brokenOre.TileCoords.ToVector2()) == false && (TileID.Sets.Ore[Main.tile[brokenOre.TileCoords].TileType] || TileChecks.gemTile[Main.tile[brokenOre.TileCoords].TileType] || TileChecks.extractableAndOthers[Main.tile[brokenOre.TileCoords].TileType]))
@@ -520,14 +541,6 @@ namespace PetsOverhaul.Systems
             else
             {
                 oreBoost = false;
-            }
-            if (source is EntitySource_TileBreak bamboo && Main.tile[bamboo.TileCoords].TileType == TileID.Bamboo)
-            {
-                bambooBoost = true;
-            }
-            else
-            {
-                bambooBoost = false;
             }
             if (source is EntitySource_TileBreak brokenDirt && TileID.Sets.Dirt[Main.tile[brokenDirt.TileCoords].TileType] && PlayerPlacedBlockList.placedBlocksByPlayer.Contains(brokenDirt.TileCoords.ToVector2()))
             {
@@ -560,14 +573,6 @@ namespace PetsOverhaul.Systems
             else
             {
                 blockNotByPlayer = false;
-            }
-            if (source is EntitySource_TileBreak gemstoneTree && TileID.Sets.CountsAsGemTree[Main.tile[gemstoneTree.TileCoords].TileType])
-            {
-                gemTree = true;
-            }
-            else
-            {
-                gemTree = false;
             }
             if (source is EntitySource_Misc { Context: "HarvestingItem" })
             {
