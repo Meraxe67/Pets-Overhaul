@@ -1,27 +1,29 @@
-﻿using Terraria;
-using Terraria.ID;
-using PetsOverhaul.Systems;
-using Terraria.ModLoader;
-using Terraria.Audio;
-using Microsoft.Xna.Framework;
-using System.Collections.Generic;
-using Terraria.Localization;
-
+﻿using Microsoft.Xna.Framework;
 using PetsOverhaul.Config;
+using PetsOverhaul.Systems;
+using System;
+using System.Collections.Generic;
+using Terraria;
 using Terraria.GameInput;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class LilHarpy : ModPlayer
+    public sealed class LilHarpy : ModPlayer
     {
         public int harpyCd = 780;
         public int fuelMax = 180;
         public int harpyFlight = 180;
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.BirdieRattle))
+            {
                 Pet.timerMax = harpyCd;
+            }
         }
         public override void PostUpdateEquips()
         {
@@ -60,17 +62,24 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    sealed public class BirdieRattle : GlobalItem
+    public sealed class BirdieRattle : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.BirdieRattle;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.BirdieRattle;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             LilHarpy lilHarpy = Main.LocalPlayer.GetModPlayer<LilHarpy>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BirdieRattle")
-                        .Replace("<flightTime>", (lilHarpy.fuelMax / 60f).ToString())
-                        .Replace("<cooldown>", (lilHarpy.harpyCd / 60f).ToString())
+                        .Replace("<flightTime>", Math.Round(lilHarpy.fuelMax / 60f, 5).ToString())
+                        .Replace("<cooldown>", Math.Round(lilHarpy.harpyCd / 60f, 5).ToString())
                         ));
         }
     }

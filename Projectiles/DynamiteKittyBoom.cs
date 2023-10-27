@@ -1,9 +1,8 @@
 ﻿using Terraria;
+using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.DataStructures;
-using Terraria.Audio;
-using PetsOverhaul.Systems;
 
 namespace PetsOverhaul.Projectiles
 {
@@ -29,7 +28,7 @@ namespace PetsOverhaul.Projectiles
             for (int i = 0; i < 15; i++)
             {
                 Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Smoke, 0f, 0f, 20, default, Main.rand.NextFloat(1.7f, 2f));
-                dust.velocity *= Main.rand.NextFloat(1f,1.3f);
+                dust.velocity *= Main.rand.NextFloat(1f, 1.3f);
             }
             for (int i = 0; i < 30; i++)
             {

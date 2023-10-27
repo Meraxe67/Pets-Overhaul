@@ -1,17 +1,17 @@
-﻿using Terraria;
-using Terraria.ID;
-using PetsOverhaul.Systems;
-using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using System.Collections.Generic;
-using Terraria.Localization;
-
+﻿using Microsoft.Xna.Framework;
 using PetsOverhaul.Config;
+using PetsOverhaul.Systems;
+using System;
+using System.Collections.Generic;
+using Terraria;
 using Terraria.GameInput;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class Lizard : ModPlayer
+    public sealed class Lizard : ModPlayer
     {
         public bool onLizardSteroidsOrNah = false;
         public int transformCd = 3600;
@@ -23,7 +23,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float lizardLifestealHealth = 0.01f;
         public float dmgMultIncrease = 1.1f;
         public int dmgFlatIncrease = 10;
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PreUpdate()
         {
             if (Pet.skinColorChanged == false)
@@ -47,7 +48,10 @@ namespace PetsOverhaul.PetEffects.Vanilla
             if (Pet.PetInUseWithSwapCd(ItemID.LizardEgg))
             {
                 if (transformTimer <= 0)
+                {
                     onLizardSteroidsOrNah = false;
+                }
+
                 if (onLizardSteroidsOrNah == true)
                 {
                     transformTimer--;
@@ -112,22 +116,29 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    sealed public class LizardEgg : GlobalItem
+    public sealed class LizardEgg : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.LizardEgg;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.LizardEgg;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             Lizard lizard = Main.LocalPlayer.GetModPlayer<Lizard>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.LizardEgg")
-                        .Replace("<transformTime>", (lizard.transformTime / 60f).ToString())
+                        .Replace("<transformTime>", Math.Round(lizard.transformTime / 60f, 5).ToString())
                         .Replace("<hitCount>", lizard.maxSteroidCount.ToString())
                         .Replace("<hitDmg>", lizard.dmgMultIncrease.ToString())
                         .Replace("<hitFlat>", lizard.dmgFlatIncrease.ToString())
-                        .Replace("<lifesteal>", (lizard.lizardLifesteal * 100).ToString())
-                        .Replace("<maxHpRecovery>", (lizard.lizardLifestealHealth * 100).ToString())
-                        .Replace("<transformCooldown>", (lizard.transformCd / 60f).ToString())
+                        .Replace("<lifesteal>", Math.Round(lizard.lizardLifesteal * 100, 5).ToString())
+                        .Replace("<maxHpRecovery>", Math.Round(lizard.lizardLifestealHealth * 100, 5).ToString())
+                        .Replace("<transformCooldown>", Math.Round(lizard.transformCd / 60f, 5).ToString())
                         ));
         }
     }

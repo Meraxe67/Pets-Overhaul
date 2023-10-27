@@ -1,9 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ModLoader;
+﻿using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
-using System.Collections.Generic;
-using Terraria.DataStructures;
 
 namespace PetsOverhaul.Systems
 {
@@ -20,9 +16,9 @@ namespace PetsOverhaul.Systems
         }
         public override void SaveWorldData(TagCompound tag)
         {
-            tag.Add("masteryshard1",masteryShardObtained1);
-            tag.Add("masteryshard2",masteryShardObtained2);
-            tag.Add("masteryshard3",masteryShardObtained3);
+            tag.Add("masteryshard1", masteryShardObtained1);
+            tag.Add("masteryshard2", masteryShardObtained2);
+            tag.Add("masteryshard3", masteryShardObtained3);
         }
         public override void LoadWorldData(TagCompound tag)
         {

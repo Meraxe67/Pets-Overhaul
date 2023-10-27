@@ -1,18 +1,16 @@
-﻿using Terraria;
-using Terraria.ID;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using Terraria.ModLoader;
+using System;
 using System.Collections.Generic;
+using Terraria;
+using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.Localization;
-using Terraria.GameInput;
-using PetsOverhaul.Config;
-
-using PetsOverhaul.Config;
-using Terraria.GameInput;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class EverscreamSapling : ModPlayer
+    public sealed class EverscreamSapling : ModPlayer
     {
         public int cooldown = 240;
         public float critMult = 0.6f;
@@ -21,11 +19,14 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float missingManaPercent = 0.12f;
         public int flatRecovery = 5;
         public int manaIncrease = 100;
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.EverscreamPetItem))
+            {
                 Pet.timerMax = cooldown;
+            }
         }
         public override void PostUpdateEquips()
         {
@@ -49,21 +50,28 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    sealed public class EverscreamPetItem : GlobalItem
+    public sealed class EverscreamPetItem : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.EverscreamPetItem;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.EverscreamPetItem;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             EverscreamSapling everscreamSapling = Main.LocalPlayer.GetModPlayer<EverscreamSapling>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EverscreamPetItem")
                         .Replace("<magicCritNerf>", everscreamSapling.critMult.ToString())
                         .Replace("<maxMana>", everscreamSapling.manaIncrease.ToString())
-                        .Replace("<missingMana>", (everscreamSapling.missingManaPercent * 100).ToString())
+                        .Replace("<missingMana>", Math.Round(everscreamSapling.missingManaPercent * 100, 5).ToString())
                         .Replace("<flatMana>", everscreamSapling.flatRecovery.ToString())
                         .Replace("<manaRecoveryCd>", (everscreamSapling.cooldown / 60f).ToString())
-                        .Replace("<dmg>", (everscreamSapling.dmgIncr * 100).ToString())
+                        .Replace("<dmg>", Math.Round(everscreamSapling.dmgIncr * 100, 5).ToString())
                         .Replace("<crit>", everscreamSapling.howMuchCrit.ToString())
                         ));
         }

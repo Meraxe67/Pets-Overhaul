@@ -1,17 +1,17 @@
-﻿using Terraria;
-using Terraria.ID;
-using PetsOverhaul.Systems;
-using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using System.Collections.Generic;
-using Terraria.Localization;
-
+﻿using Microsoft.Xna.Framework;
 using PetsOverhaul.Config;
+using PetsOverhaul.Systems;
+using System;
+using System.Collections.Generic;
+using Terraria;
 using Terraria.GameInput;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class VoltBunny : ModPlayer
+    public sealed class VoltBunny : ModPlayer
     {
         public float movespdFlat = 0.05f;
         public float movespdMult = 1.1f;
@@ -19,7 +19,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float lightningRod = 0.1f;
         private int lightningRodTime = 0;
         public int lightningRodMax = 300;
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.LightningCarrot))
@@ -47,20 +48,27 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    sealed public class LightningCarrot : GlobalItem
+    public sealed class LightningCarrot : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.LightningCarrot;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.LightningCarrot;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             VoltBunny voltBunny = Main.LocalPlayer.GetModPlayer<VoltBunny>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.LightningCarrot")
-                       .Replace("<flatSpd>", (voltBunny.movespdFlat * 100).ToString())
+                       .Replace("<flatSpd>", Math.Round(voltBunny.movespdFlat * 100, 5).ToString())
                        .Replace("<multSpd>", voltBunny.movespdMult.ToString())
-                       .Replace("<spdToDmg>", (voltBunny.movespdToDmg * 100).ToString())
-                       .Replace("<electricRod>", (voltBunny.lightningRod * 100).ToString())
-                       .Replace("<electricRodDuration>", (voltBunny.lightningRodMax / 60f).ToString())
+                       .Replace("<spdToDmg>", Math.Round(voltBunny.movespdToDmg * 100, 5).ToString())
+                       .Replace("<electricRod>", Math.Round(voltBunny.lightningRod * 100, 5).ToString())
+                       .Replace("<electricRodDuration>", Math.Round(voltBunny.lightningRodMax / 60f, 5).ToString())
                        ));
         }
     }

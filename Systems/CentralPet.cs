@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
-using Microsoft.Xna.Framework;
-
+﻿using Microsoft.Xna.Framework;
 using PetsOverhaul.Buffs;
 using PetsOverhaul.Config;
 using PetsOverhaul.Items;
 using PetsOverhaul.PetEffects.Vanilla;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -15,14 +13,13 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
-using Terraria.ObjectData;
 
 namespace PetsOverhaul.Systems
 {
     /// <summary>
     /// ModPlayer class that contains useful Methods and fields for Pet implementation.
     /// </summary>
-    sealed public class GlobalPet : ModPlayer
+    public sealed class GlobalPet : ModPlayer
     {
         /// <summary>
         /// Influences the chance to increase stack of the item that your Harvesting Pet gave.
@@ -88,29 +85,41 @@ namespace PetsOverhaul.Systems
         public bool PickupChecks(Item item, int petitemid, ItemPet itemPet)
         {
             if (itemPet.pickedUpBefore == false && Player.CanPullItem(item, Player.ItemSpace(item)) && PetInUse(petitemid) && item.maxStack != 1)
+            {
                 return true;
+            }
             else
+            {
                 return false;
+            }
         }
         public override bool OnPickup(Item item)
         {
             if (item.TryGetGlobalItem(out ItemPet fortune) && fortune.pickedUpBefore == false && Player.CanPullItem(item, Player.ItemSpace(item)) && item.maxStack != 1)
             {
                 if (fortune.harvestingDrop)
-                    for (int i = 0; i < ItemPet.Randomizer(harvestingFortune*item.stack); i++)
+                {
+                    for (int i = 0; i < ItemPet.Randomizer(harvestingFortune * item.stack); i++)
                     {
                         Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingFortuneItem"), item, 1);
                     }
+                }
+
                 if (fortune.miningDrop)
-                    for (int i = 0; i < ItemPet.Randomizer(miningFortune*item.stack); i++)
+                {
+                    for (int i = 0; i < ItemPet.Randomizer(miningFortune * item.stack); i++)
                     {
                         Player.QuickSpawnItem(Player.GetSource_Misc("MiningFortuneItem"), item, 1);
                     }
+                }
+
                 if (fortune.fishingDrop)
-                    for (int i = 0; i < ItemPet.Randomizer(fishingFortune*item.stack); i++)
+                {
+                    for (int i = 0; i < ItemPet.Randomizer(fishingFortune * item.stack); i++)
                     {
                         Player.QuickSpawnItem(Player.GetSource_Misc("FishingFortuneItem"), item, 1);
                     }
+                }
             }
             return true;
         }
@@ -121,9 +130,13 @@ namespace PetsOverhaul.Systems
         {
 
             if (Player.miscEquips[0].type == petItemID && Player.HasBuff(ModContent.BuffType<ObliviousPet>()) == false)
+            {
                 return true;
+            }
             else
+            {
                 return false;
+            }
         }
         /// <summary>
         /// Checks if the given Pet Item is in use without being affected by swapping cooldown.
@@ -131,9 +144,13 @@ namespace PetsOverhaul.Systems
         public bool PetInUse(int petItemID)
         {
             if (Player.miscEquips[0].type == petItemID)
+            {
                 return true;
+            }
             else
+            {
                 return false;
+            }
         }
         public override void SaveData(TagCompound tag)
         {
@@ -148,9 +165,13 @@ namespace PetsOverhaul.Systems
         public bool LifestealCheck(NPC npc)
         {
             if (npc.friendly || npc.SpawnedFromStatue || npc.type == NPCID.TargetDummy)
+            {
                 return false;
+            }
             else
+            {
                 return true;
+            }
         }
         /// <summary>
         /// percentageAmount% of baseAmount is converted to healing, non converted amount can still grant +1, depending on a roll. If manaSteal is set to true, 
@@ -165,7 +186,10 @@ namespace PetsOverhaul.Systems
             float num = baseAmount * percentageAmount;
             int calculatedAmount = (int)num;
             if (Main.rand.NextFloat(0, 1) < num % 1)
+            {
                 calculatedAmount++;
+            }
+
             calculatedAmount += flatIncrease;
             num = calculatedAmount;
             if (calculatedAmount > 0 && doLifesteal == true)
@@ -174,11 +198,16 @@ namespace PetsOverhaul.Systems
                 {
                     Player.HealEffect(calculatedAmount);
                     if (calculatedAmount > Player.statLifeMax2 - Player.statLife)
+                    {
                         calculatedAmount = Player.statLifeMax2 - Player.statLife;
+                    }
+
                     if (respectLifeStealCap == true)
                     {
                         if (calculatedAmount > Player.lifeSteal)
+                        {
                             calculatedAmount = (int)Player.lifeSteal;
+                        }
 
                         if (Player.lifeSteal > 0)
                         {
@@ -195,7 +224,10 @@ namespace PetsOverhaul.Systems
                 {
                     Player.ManaEffect(calculatedAmount);
                     if (calculatedAmount > Player.statManaMax2 - Player.statMana)
+                    {
                         calculatedAmount = Player.statManaMax2 - Player.statMana;
+                    }
+
                     Player.statMana += calculatedAmount;
                 }
             }
@@ -274,19 +306,27 @@ namespace PetsOverhaul.Systems
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             if (ModContent.GetInstance<Personalization>().DifficultAmount != 0)
+            {
                 modifiers.FinalDamage *= 1f - ModContent.GetInstance<Personalization>().DifficultAmount * 0.01f;
+            }
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
             if (ModContent.GetInstance<Personalization>().DifficultAmount != 0)
+            {
                 modifiers.FinalDamage *= 1f + ModContent.GetInstance<Personalization>().DifficultAmount * 0.01f;
+            }
+
             modifiers.ModifyHurtInfo += (ref Player.HurtInfo info) =>
             {
                 if (info.Damage > currentShield && currentShield > 0)
                 {
                     CombatText.NewText(Player.Hitbox, Color.Cyan, -currentShield, true);
                     if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+                    {
                         SoundEngine.PlaySound(SoundID.NPCDeath43 with { PitchVariance = 0.4f, Pitch = -0.8f, Volume = 0.2f }, Player.position);
+                    }
+
                     info.Damage -= currentShield;
                     shieldToBeReduced += currentShield;
                 }
@@ -298,13 +338,21 @@ namespace PetsOverhaul.Systems
             {
                 CombatText.NewText(Player.Hitbox, Color.Cyan, -info.Damage, true);
                 if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+                {
                     SoundEngine.PlaySound(SoundID.NPCDeath43 with { PitchVariance = 0.4f, Pitch = -0.8f, Volume = 0.2f }, Player.position);
+                }
+
                 info.SoundDisabled = true;
                 shieldToBeReduced += info.Damage;
                 if (info.Damage <= 1)
+                {
                     Player.SetImmuneTimeForAllTypes(Player.longInvince ? 40 : 20);
+                }
                 else
+                {
                     Player.SetImmuneTimeForAllTypes(Player.longInvince ? 80 : 40);
+                }
+
                 return true;
             }
             return false;
@@ -324,14 +372,22 @@ namespace PetsOverhaul.Systems
             }
             timer--;
             if (timer < -1)
+            {
                 timer = -1;
+            }
+
             if (timer == 0)
             {
                 if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false && ((ModContent.GetInstance<Personalization>().LowCooldownSoundDisabled && timerMax > 90) || ModContent.GetInstance<Personalization>().LowCooldownSoundDisabled == false))
+                {
                     SoundEngine.PlaySound(SoundID.MaxMana with { PitchVariance = 0.3f, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew }, Player.position);
+                }
             }
             if (abilityHaste < -0.9f)
+            {
                 abilityHaste = -0.9f;
+            }
+
             timerMax = (int)(timerMax * (1 / (1 + abilityHaste)));
             petSwapCooldown = 600;
             abilityHaste = 0;
@@ -342,7 +398,7 @@ namespace PetsOverhaul.Systems
             {
                 while (shieldToBeReduced > 0)
                 {
-                    var value = petShield.Find(x => x.shieldTimer == petShield.Min(x => x.shieldTimer));
+                    (int shieldAmount, int shieldTimer) value = petShield.Find(x => x.shieldTimer == petShield.Min(x => x.shieldTimer));
                     int index = petShield.IndexOf(value);
                     if (value.shieldAmount <= shieldToBeReduced)
                     {
@@ -364,7 +420,7 @@ namespace PetsOverhaul.Systems
                 petShield.ForEach(x => currentShield += x.shieldAmount);
                 for (int i = 0; i < petShield.Count; i++)
                 {
-                    var shieldValue = petShield[i];
+                    (int shieldAmount, int shieldTimer) shieldValue = petShield[i];
                     shieldValue.shieldTimer--;
                     petShield[i] = shieldValue;
                 }
@@ -375,7 +431,9 @@ namespace PetsOverhaul.Systems
         {
             previousPetItem = Player.miscEquips[0].type;
             if (ModContent.GetInstance<Personalization>().DisableNotice == false)
+            {
                 Main.NewText("[c/90C2AA:Pets Overhaul 2.2.2 latest changes: Junimo Exp Popup texts!]\n[c/90C2AA:Immense Junimo exp table improvements, check Changelog for full list]\nIf you happen to come across any bugs, our would like to be\nup to date with our constantly updating Mod and growing community,\nwe encourage you to join our community and our Discord server!");
+            }
         }
         public override void OnHurt(Player.HurtInfo info)
         {
@@ -388,12 +446,18 @@ namespace PetsOverhaul.Systems
         }
         public override void UpdateEquips()
         {
-            if (Player.miscEquips[0].type == ItemID.None) return;
+            if (Player.miscEquips[0].type == ItemID.None)
+            {
+                return;
+            }
 
             if (previousPetItem != Player.miscEquips[0].type)
             {
                 if (ModContent.GetInstance<Personalization>().SwapCooldown == false)
+                {
                     Player.AddBuff(ModContent.BuffType<ObliviousPet>(), petSwapCooldown);
+                }
+
                 previousPetItem = Player.miscEquips[0].type;
             }
             if (ModContent.GetInstance<Personalization>().PassiveSoundDisabled == false && Main.rand.NextBool(3600))
@@ -421,7 +485,7 @@ namespace PetsOverhaul.Systems
     /// <summary>
     /// GlobalItem class that contains many useful booleans and methods for mainly gathering and item randomizing purposes
     /// </summary>
-    sealed public class ItemPet : GlobalItem
+    public sealed class ItemPet : GlobalItem
     {
         public override bool InstancePerEntity => true;
         public static List<Vector2> updateReplacedTile = new();
@@ -459,7 +523,9 @@ namespace PetsOverhaul.Systems
                 numToBeRandomized %= randomizeTo;
             }
             if (Main.rand.NextBool(numToBeRandomized, randomizeTo))
+            {
                 a++;
+            }
 
             return a;
 
@@ -516,7 +582,7 @@ namespace PetsOverhaul.Systems
             if ((source is EntitySource_TileBreak || source is EntitySource_ShakeTree) && Junimo.HarvestingXpPerGathered.Exists(x => x.plantList.Contains(item.type) && x.expAmount > 1000))
             {
                 rareHerbBoost = true;
-                if ((new int[] { ItemID.GemTreeAmberSeed, ItemID.GemTreeAmethystSeed, ItemID.GemTreeDiamondSeed, ItemID.GemTreeEmeraldSeed, ItemID.GemTreeRubySeed, ItemID.GemTreeSapphireSeed, ItemID.GemTreeTopazSeed, ItemID.Amethyst, ItemID.Topaz, ItemID.Sapphire, ItemID.Emerald, ItemID.Ruby, ItemID.Amber, ItemID.Diamond, ItemID.StoneBlock }.Contains(item.type) && gemTree == false) || (item.type == ItemID.BambooBlock && bambooBoost == false))
+                if (new int[] { ItemID.GemTreeAmberSeed, ItemID.GemTreeAmethystSeed, ItemID.GemTreeDiamondSeed, ItemID.GemTreeEmeraldSeed, ItemID.GemTreeRubySeed, ItemID.GemTreeSapphireSeed, ItemID.GemTreeTopazSeed, ItemID.Amethyst, ItemID.Topaz, ItemID.Sapphire, ItemID.Emerald, ItemID.Ruby, ItemID.Amber, ItemID.Diamond, ItemID.StoneBlock }.Contains(item.type) && gemTree == false || item.type == ItemID.BambooBlock && bambooBoost == false)
                 {
                     rareHerbBoost = false;
                 }
@@ -524,7 +590,7 @@ namespace PetsOverhaul.Systems
             else if ((source is EntitySource_TileBreak || source is EntitySource_ShakeTree) && Junimo.HarvestingXpPerGathered.Exists(x => x.plantList.Contains(item.type)))
             {
                 herbBoost = true;
-                if ((new int[] { ItemID.GemTreeAmberSeed, ItemID.GemTreeAmethystSeed, ItemID.GemTreeDiamondSeed, ItemID.GemTreeEmeraldSeed, ItemID.GemTreeRubySeed, ItemID.GemTreeSapphireSeed, ItemID.GemTreeTopazSeed, ItemID.Amethyst, ItemID.Topaz, ItemID.Sapphire, ItemID.Emerald, ItemID.Ruby, ItemID.Amber, ItemID.Diamond,ItemID.StoneBlock }.Contains(item.type) && gemTree == false)||(item.type == ItemID.BambooBlock && bambooBoost == false))
+                if (new int[] { ItemID.GemTreeAmberSeed, ItemID.GemTreeAmethystSeed, ItemID.GemTreeDiamondSeed, ItemID.GemTreeEmeraldSeed, ItemID.GemTreeRubySeed, ItemID.GemTreeSapphireSeed, ItemID.GemTreeTopazSeed, ItemID.Amethyst, ItemID.Topaz, ItemID.Sapphire, ItemID.Emerald, ItemID.Ruby, ItemID.Amber, ItemID.Diamond, ItemID.StoneBlock }.Contains(item.type) && gemTree == false || item.type == ItemID.BambooBlock && bambooBoost == false)
                 {
                     herbBoost = false;
                 }
@@ -634,7 +700,7 @@ namespace PetsOverhaul.Systems
         public override void NetSend(Item item, BinaryWriter writer)
         {
             BitsByte sources1 = new(itemFromNpc, herbBoost, rareHerbBoost, oreBoost, bambooBoost, dirt, commonBlock, tree);
-            BitsByte sources2 = new(blockNotByPlayer, gemTree, pickedUpBefore, itemFromBoss, itemFromBag,harvestingDrop,miningDrop,fishingDrop);
+            BitsByte sources2 = new(blockNotByPlayer, gemTree, pickedUpBefore, itemFromBoss, itemFromBag, harvestingDrop, miningDrop, fishingDrop);
             BitsByte sources3 = new(fortuneHarvestingDrop, fortuneMiningDrop, fortuneFishingDrop);
             writer.Write(sources1);
             writer.Write(sources2);
@@ -654,7 +720,7 @@ namespace PetsOverhaul.Systems
     /// <summary>
     /// GlobalNPC class that contains useful booleans and methods such as Slow() and seaCreature
     /// </summary>
-    sealed public class NpcPet : GlobalNPC
+    public sealed class NpcPet : GlobalNPC
     {
         public enum SlowId
         {
@@ -721,7 +787,10 @@ namespace PetsOverhaul.Systems
                     VeloChangedGround2 = true;
                 }
                 else
+                {
                     VeloChangedGround2 = false;
+                }
+
                 if (VeloChangedGround2 == false)
                 {
                     GroundVelo = npc.velocity.X;
@@ -732,7 +801,10 @@ namespace PetsOverhaul.Systems
                     VeloChangedFlying2 = true;
                 }
                 else
+                {
                     VeloChangedFlying2 = false;
+                }
+
                 if (VeloChangedFlying2 == false)
                 {
                     FlyingVelo = npc.velocity;
@@ -751,7 +823,7 @@ namespace PetsOverhaul.Systems
                     SlowList.ForEach(x => slowAmount += x.slowAmount);
                     for (int i = 0; i < SlowList.Count; i++) //List'lerde struct'lar bir nevi readonly olarak çalıştığından, değeri alıp tekrar atıyoruz
                     {
-                        var slow = SlowList[i];
+                        (SlowId, float slowAmount, int slowTime) slow = SlowList[i];
                         slow.slowTime--;
                         SlowList[i] = slow;
                     }
@@ -762,15 +834,21 @@ namespace PetsOverhaul.Systems
                     }
                 }
                 if (slowAmount != 0)
+                {
                     Slow(npc, slowAmount);
+                }
             }
         }
         public override void OnSpawn(NPC npc, IEntitySource source)
         {
             if (source is EntitySource_FishedOut)
+            {
                 seaCreature = true;
+            }
             else
+            {
                 seaCreature = false;
+            }
         }
         /// <summary>
         /// Slows if enemy is not a boss or a friendly npc. Also does not slow an npc's vertical speed if they are affected by gravity, but does so if they arent. Due to the formula, you may use a positive number for slowAmount freely and as much as you want, it almost will never completely stop an enemy. Negative values however, easily can get out of hand and cause unwanted effects. Due to that, a cap of -0.9f exists for negative values, which 10x's the speed.
@@ -778,7 +856,10 @@ namespace PetsOverhaul.Systems
         private void Slow(NPC npc, float slow)
         {
             if (slow < -0.9f)
+            {
                 slow = -0.9f;
+            }
+
             FlyingVelo = npc.velocity;
             GroundVelo = npc.velocity.X;
             if (npc.noGravity == false)
@@ -787,15 +868,19 @@ namespace PetsOverhaul.Systems
                 VeloChangedGround = true;
             }
             else
+            {
                 VeloChangedGround = false;
+            }
+
             if (npc.noGravity)
             {
                 npc.velocity *= 1 / (1 + slow);
                 VeloChangedFlying = true;
             }
             else
+            {
                 VeloChangedFlying = false;
-
+            }
         }
         /// <summary>
         /// Use this to add Slow to the NPC.
@@ -844,7 +929,7 @@ namespace PetsOverhaul.Systems
             }
         }
     }
-    sealed public class ProjectileSourceChecks : GlobalProjectile
+    public sealed class ProjectileSourceChecks : GlobalProjectile
     {
         public override bool InstancePerEntity => true;
         public bool isPlanteraProjectile = false;

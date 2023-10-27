@@ -1,21 +1,20 @@
-﻿using Terraria;
-using Terraria.ID;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using Terraria.ModLoader;
+using System;
 using System.Collections.Generic;
+using Terraria;
+using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.Localization;
-using Terraria.GameInput;
-using PetsOverhaul.Config;
-
-using PetsOverhaul.Config;
-using Terraria.GameInput;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class PlanteraSeedling : ModPlayer
+    public sealed class PlanteraSeedling : ModPlayer
     {
         public float secondMultiplier = 0f;
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             if (Pet.PetInUseWithSwapCd(ItemID.PlanteraPetItem) && modifiers.DamageType.CountsAsClass<RangedDamageClass>())
@@ -27,16 +26,23 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    sealed public class PlanteraPetItem : GlobalItem
+    public sealed class PlanteraPetItem : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.PlanteraPetItem;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.PlanteraPetItem;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             PlanteraSeedling planteraSeedling = Main.LocalPlayer.GetModPlayer<PlanteraSeedling>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.PlanteraPetItem")
-                        .Replace("<maxAmount>", (planteraSeedling.secondMultiplier * 100 + 100).ToString())
+                        .Replace("<maxAmount>", Math.Round(planteraSeedling.secondMultiplier * 100 + 100, 5).ToString())
                         ));
         }
     }

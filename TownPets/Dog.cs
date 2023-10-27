@@ -1,7 +1,7 @@
-﻿using Terraria.ID;
+﻿using PetsOverhaul.Buffs.TownPetBuffs;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
-using PetsOverhaul.Buffs.TownPetBuffs;
 
 namespace PetsOverhaul.TownPets
 {
@@ -16,12 +16,14 @@ namespace PetsOverhaul.TownPets
                     Player.AddBuff(ModContent.BuffType<TownPetDog>(), 2);
                     break;
                 }
-            } 
+            }
         }
         public override void PostUpdateEquips()
         {
             if (Player.HasBuff(ModContent.BuffType<TownPetDog>()))
+            {
                 dogFish += 1;
+            }
         }
     }
 }

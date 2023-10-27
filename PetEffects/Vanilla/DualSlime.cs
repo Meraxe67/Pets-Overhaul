@@ -1,20 +1,17 @@
-﻿using Terraria;
-using Terraria.ID;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using Terraria.ModLoader;
 using System.Collections.Generic;
+using Terraria;
+using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.Localization;
-using Terraria.GameInput;
-using PetsOverhaul.Config;
-
-using PetsOverhaul.Config;
-using Terraria.GameInput;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class DualSlime : ModPlayer
+    public sealed class DualSlime : ModPlayer
     {
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         // King, in SlimePrince
         public float wetSpeed = 0.9f;
         public float wetDmg = 0.07f;
@@ -35,13 +32,20 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int baseCounterChnc = 90;
     }
 
-    sealed public class ResplendentDessert : GlobalItem
+    public sealed class ResplendentDessert : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.ResplendentDessert;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.ResplendentDessert;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             DualSlime babyOgre = Main.LocalPlayer.GetModPlayer<DualSlime>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ResplendentDessert")
                 .Replace("<approxWeak>", "10")

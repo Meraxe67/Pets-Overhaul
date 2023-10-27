@@ -1,18 +1,17 @@
-﻿using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
 using System.Collections.Generic;
-using Terraria.Localization;
-
-using PetsOverhaul.Config;
+using Terraria;
 using Terraria.GameInput;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class DungeonGuardian : ModPlayer
+    public sealed class DungeonGuardian : ModPlayer
     {
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public int armorPen = 5;
         public int dungArmorPenBonus = 3;
         public int lifeRegen = 8;
@@ -43,13 +42,20 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    sealed public class BoneKey : GlobalItem
+    public sealed class BoneKey : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.BoneKey;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.BoneKey;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             DungeonGuardian dungeonGuardian = Main.LocalPlayer.GetModPlayer<DungeonGuardian>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BoneKey")
                         .Replace("<armorPen>", dungeonGuardian.armorPen.ToString())

@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 using PetsOverhaul.PetEffects.Vanilla;
 using PetsOverhaul.Systems;
-
-using Terraria;
+using System.Collections.Generic;
 using Terraria.ModLoader;
 
 namespace PetsOverhaul.ModSupport
@@ -66,18 +61,25 @@ namespace PetsOverhaul.ModSupport
         public Dictionary<string, ModItem> InternalNameToModdedItemInstance = new Dictionary<string, ModItem> { };
         public void InitializeMod()
         {
-            if (!ModLoader.TryGetMod(InternalModName, out ModInstance)) return;
+            if (!ModLoader.TryGetMod(InternalModName, out ModInstance))
+            {
+                return;
+            }
+
             MergePetItems();
             MergeJunimoExp();
         }
 
         public void MergePetItems()
         {
-            if (InternalModdedItemNames == null) return;
+            if (InternalModdedItemNames == null)
+            {
+                return;
+            }
+
             foreach (string internalName in InternalModdedItemNames)
             {
-                ModItem item;
-                ModInstance.TryFind(internalName, out item);
+                ModInstance.TryFind(internalName, out ModItem item);
                 //Console.WriteLine($"IN: {internalName}\n Type: {item.Type}");
 
                 ModContent.GetInstance<PetRegistry>().TerrariaPetItemIds.TryAdd(internalName, item.Type);
@@ -87,10 +89,25 @@ namespace PetsOverhaul.ModSupport
 
         public void MergeJunimoExp()
         {
-            if (MiningXpPerModdedBlock != null) Junimo.MiningXpPerBlock.AddRange(MiningXpPerModdedBlock);
-            if (HarvestingXpPerModdedPlant != null) Junimo.HarvestingXpPerGathered.AddRange(HarvestingXpPerModdedPlant);
-            if (FishingXpPerModdedFish != null) Junimo.FishingXpPerCaught.AddRange(FishingXpPerModdedFish);
-            if (FishingXpPerModdedKill != null)Junimo.FishingXpPerKill.AddRange(FishingXpPerModdedKill);
+            if (MiningXpPerModdedBlock != null)
+            {
+                Junimo.MiningXpPerBlock.AddRange(MiningXpPerModdedBlock);
+            }
+
+            if (HarvestingXpPerModdedPlant != null)
+            {
+                Junimo.HarvestingXpPerGathered.AddRange(HarvestingXpPerModdedPlant);
+            }
+
+            if (FishingXpPerModdedFish != null)
+            {
+                Junimo.FishingXpPerCaught.AddRange(FishingXpPerModdedFish);
+            }
+
+            if (FishingXpPerModdedKill != null)
+            {
+                Junimo.FishingXpPerKill.AddRange(FishingXpPerModdedKill);
+            }
         }
 
         public bool IsModLoaded()

@@ -1,13 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using PetsOverhaul.PetEffects.Vanilla;
-using PetsOverhaul.Systems;
-
-using Terraria;
-using Terraria.ModLoader;
-
 namespace PetsOverhaul.ModSupport
 {
     public static class ModManager

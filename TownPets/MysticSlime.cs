@@ -1,8 +1,8 @@
-﻿using Terraria;
+﻿using PetsOverhaul.Buffs.TownPetBuffs;
+using PetsOverhaul.Systems;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using PetsOverhaul.Buffs.TownPetBuffs;
-using PetsOverhaul.Systems;
 
 namespace PetsOverhaul.TownPets
 {
@@ -24,7 +24,7 @@ namespace PetsOverhaul.TownPets
             if (Player.HasBuff(ModContent.BuffType<TownPetMystic>()))
             {
                 Player.GetModPlayer<GlobalPet>().abilityHaste += mysticHaste;
-                
+
             }
         }
     }

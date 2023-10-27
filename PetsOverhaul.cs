@@ -1,16 +1,5 @@
-using Microsoft.Xna.Framework;
-
-using System;
-using System.Collections.Generic;
-
-
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.UI;
-using PetsOverhaul.Systems;
-using System.Linq;
 using PetsOverhaul.ModSupport;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul
 {

@@ -1,7 +1,7 @@
-﻿using Terraria;
-using Terraria.ModLoader;
+﻿using PetsOverhaul.Buffs.TownPetBuffs;
+using Terraria;
 using Terraria.ID;
-using PetsOverhaul.Buffs.TownPetBuffs;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.TownPets
 {
@@ -21,7 +21,9 @@ namespace PetsOverhaul.TownPets
         public override void PostUpdateEquips()
         {
             if (Player.HasBuff(ModContent.BuffType<TownPetCat>()))
-            Player.moveSpeed *= catSpeed;
+            {
+                Player.moveSpeed *= catSpeed;
+            }
         }
     }
 }

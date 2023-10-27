@@ -12,7 +12,7 @@ Mods: {
 			/* JunimoExpTooltip:
 				'''
 				Disables Junimo Pet's all Experience gains if you don't have Stardrop
-				in any of your Inventories or it's not in your Pet Item slot.
+				in your Inventory or Void bag, or it's not in your Pet Item slot.
 				''' */
 			// JunimoExpGainMessageLabel: Disable Junimo Exp pop-up messages
 			/* JunimoExpGainMessageTooltip:
@@ -32,7 +32,7 @@ Mods: {
 				Enables all added Pet and Item tooltips to be only visible while
 				the Down (as in your downward input, generally S) button is being held.
 				''' */
-			// TooltipShiftToggleInGame: Hold the Down button to show the Pet tooltip
+			// TooltipShiftToggleInGame: Hold the 'Down' button to view the Pet tooltip
 			// HurtSoundLabel: Disable custom hurt sounds
 			/* HurtSoundTooltip:
 				'''
@@ -48,8 +48,8 @@ Mods: {
 			// PassiveSoundLabel: Disable passive Pet sounds
 			/* PassiveSoundTooltip:
 				'''
-				Disables Pet sound effects that play randomly without
-				any actions similar to Ambient sound effects.
+				Disables Pet sound effects that plays passively
+				similar to vanilla's Ambient sound effects.
 				''' */
 			// AbilitySoundLabel: Disable ability sounds
 			/* AbilitySoundTooltip:
@@ -67,7 +67,7 @@ Mods: {
 			/* MoreDifficultTooltip:
 				'''
 				Sets how much % lower damage the Player will deal and how much % extra damage the Player will receive.
-				This is implemented due to Pets Overhaul adding extra Powercreep into the game.
+				This is implemented due to Pets Overhaul adding extra Powercreep into the game. Min 0, Max 20%.
 				Keep it at 0 if you wish it to be disabled. It's recommended it to be around 7 to 10%.
 				''' */
 			// SwapCooldownLabel: Disable Pet Swap cooldown

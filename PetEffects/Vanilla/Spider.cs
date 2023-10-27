@@ -1,18 +1,16 @@
-﻿using Terraria;
-using Terraria.ID;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using Terraria.ModLoader;
+using System;
 using System.Collections.Generic;
+using Terraria;
+using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.Localization;
-using Terraria.GameInput;
-using PetsOverhaul.Config;
-
-using PetsOverhaul.Config;
-using Terraria.GameInput;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class Spider : ModPlayer
+    public sealed class Spider : ModPlayer
     {
         public int venomFlatDmg = 13;
         public int poisonFlatDmg = 5;
@@ -23,7 +21,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float kbIncreaseVenom = 1.6f;
         public float kbIncreasePoison = 1.25f;
         public int poisonTime = 600;
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
         {
             if (Pet.PetInUseWithSwapCd(ItemID.SpiderEgg))
@@ -119,16 +118,23 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    sealed public class SpiderEgg : GlobalItem
+    public sealed class SpiderEgg : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.SpiderEgg;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.SpiderEgg;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             Spider spider = Main.LocalPlayer.GetModPlayer<Spider>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.SpiderEgg")
-                        .Replace("<poisonTime>", (spider.poisonTime / 60f).ToString())
+                        .Replace("<poisonTime>", Math.Round(spider.poisonTime / 60f, 5).ToString())
                         .Replace("<poiPerc>", spider.poisonDmgMult.ToString())
                         .Replace("<poiFlat>", spider.poisonFlatDmg.ToString())
                         .Replace("<poiKb>", spider.kbIncreasePoison.ToString())

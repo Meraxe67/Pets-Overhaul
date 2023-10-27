@@ -1,20 +1,17 @@
-﻿using Terraria;
-using Terraria.ID;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using Terraria.ModLoader;
 using System.Collections.Generic;
+using Terraria;
+using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.Localization;
-using Terraria.GameInput;
-using PetsOverhaul.Config;
-
-using PetsOverhaul.Config;
-using Terraria.GameInput;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class BabyPenguin : ModPlayer
+    public sealed class BabyPenguin : ModPlayer
     {
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         internal int penguinOldChilledTime = 0;
         public int snowFish = 25;
         public int oceanFish = 15;
@@ -56,20 +53,27 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             if (Pet.PetInUse(ItemID.Fish) && (fish.type == ItemID.FrostMinnow || fish.type == ItemID.AtlanticCod))
             {
-                for (int i = 0; i < ItemPet.Randomizer(snowFishChance* fish.stack); i++)
+                for (int i = 0; i < ItemPet.Randomizer(snowFishChance * fish.stack); i++)
                 {
                     Player.QuickSpawnItem(Player.GetSource_Misc("FishingItem"), fish, 1);
                 }
             }
         }
     }
-    sealed public class Fish : GlobalItem
+    public sealed class Fish : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.Fish;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.Fish;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             BabyPenguin babyPenguin = Main.LocalPlayer.GetModPlayer<BabyPenguin>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.Fish")
                 .Replace("<fp>", babyPenguin.regularFish.ToString())

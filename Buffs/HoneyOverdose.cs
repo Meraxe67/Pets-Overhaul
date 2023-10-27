@@ -2,12 +2,11 @@
 using PetsOverhaul.Systems;
 using Terraria;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace PetsOverhaul.Buffs
 {
-    sealed public class HoneyOverdose : ModBuff
+    public sealed class HoneyOverdose : ModBuff
     {
         public float abilityHasteIncr = 0;
         public override void SetStaticDefaults()

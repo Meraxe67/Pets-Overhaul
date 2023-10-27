@@ -1,20 +1,18 @@
-﻿using Terraria;
-using Terraria.ID;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using Terraria.ModLoader;
+using System;
 using System.Collections.Generic;
+using Terraria;
+using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.Localization;
-using Terraria.GameInput;
-using PetsOverhaul.Config;
-
-using PetsOverhaul.Config;
-using Terraria.GameInput;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class BabyDinosaur : ModPlayer
+    public sealed class BabyDinosaur : ModPlayer
     {
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public int chance = 175; // 17.5% because its with 1000
         public static void AddItemsToPool()
         {
@@ -41,26 +39,36 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
                 AddItemsToPool();
                 if (GlobalPet.pool.Count > 0)
+                {
                     for (int i = 0; i < ItemPet.Randomizer(chance * item.stack, 1000); i++)
                     {
                         Player.QuickSpawnItem(Player.GetSource_Misc("MiningItem"), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
                     }
+                }
+
                 GlobalPet.pool.Clear();
 
             }
             return true;
         }
     }
-    sealed public class AmberMosquito : GlobalItem
+    public sealed class AmberMosquito : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.AmberMosquito;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.AmberMosquito;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             BabyDinosaur babyDinosaur = Main.LocalPlayer.GetModPlayer<BabyDinosaur>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.AmberMosquito")
-                .Replace("<oreChance>", (babyDinosaur.chance / 10f).ToString())
+                .Replace("<oreChance>", Math.Round(babyDinosaur.chance / 10f, 5).ToString())
             ));
         }
     }

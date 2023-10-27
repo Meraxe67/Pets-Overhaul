@@ -1,19 +1,18 @@
-﻿using Terraria;
-using Terraria.ID;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using Terraria.ModLoader;
-using System.Collections.Generic;
 using System;
-using Terraria.Localization;
-
-using PetsOverhaul.Config;
+using System.Collections.Generic;
+using Terraria;
 using Terraria.GameInput;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class Turtle : ModPlayer
+    public sealed class Turtle : ModPlayer
     {
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public float moveSpd = 0.12f;
         public float def = 1.11f;
         public float kbResist = 0.25f;
@@ -43,19 +42,26 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    sealed public class Seaweed : GlobalItem
+    public sealed class Seaweed : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.Seaweed;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.Seaweed;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             Turtle turtle = Main.LocalPlayer.GetModPlayer<Turtle>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.Seaweed")
             .Replace("<def>", turtle.def.ToString())
-                        .Replace("<kbResist>", (1 - turtle.kbResist).ToString())
-                        .Replace("<moveSpd>", (turtle.moveSpd * 100).ToString())
-                        .Replace("<dmg>", (turtle.dmgReduce * 100).ToString())
+                        .Replace("<kbResist>", turtle.kbResist.ToString())
+                        .Replace("<moveSpd>", Math.Round(turtle.moveSpd * 100, 5).ToString())
+                        .Replace("<dmg>", Math.Round(turtle.dmgReduce * 100, 5).ToString())
                         ));
         }
     }

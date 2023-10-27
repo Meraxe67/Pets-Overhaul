@@ -1,28 +1,30 @@
-﻿using Terraria;
-using Terraria.ID;
-using PetsOverhaul.Systems;
-using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using PetsOverhaul.Projectiles;
-using System.Collections.Generic;
-using Terraria.Localization;
-
+﻿using Microsoft.Xna.Framework;
 using PetsOverhaul.Config;
+using PetsOverhaul.Projectiles;
+using PetsOverhaul.Systems;
+using System.Collections.Generic;
+using Terraria;
 using Terraria.GameInput;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class DynamiteKitten : ModPlayer
+    public sealed class DynamiteKitten : ModPlayer
     {
         public int cooldown = 120;
         public float damageMult = 0.6f;
         public float kbMult = 1.7f;
         public int armorPen = 15;
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.BallOfFuseWire))
+            {
                 Pet.timerMax = cooldown;
+            }
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -34,13 +36,20 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    sealed public class BallOfFuseWire : GlobalItem
+    public sealed class BallOfFuseWire : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.BallOfFuseWire;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.BallOfFuseWire;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             DynamiteKitten dynamiteKitten = Main.LocalPlayer.GetModPlayer<DynamiteKitten>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BallOfFuseWire")
                         .Replace("<kb>", dynamiteKitten.kbMult.ToString())

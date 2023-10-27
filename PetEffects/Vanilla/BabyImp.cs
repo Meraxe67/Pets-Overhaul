@@ -1,20 +1,18 @@
-﻿using Terraria;
-using Terraria.ID;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using Terraria.ModLoader;
+using System;
 using System.Collections.Generic;
+using Terraria;
+using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.Localization;
-using Terraria.GameInput;
-using PetsOverhaul.Config;
-
-using PetsOverhaul.Config;
-using Terraria.GameInput;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class BabyImp : ModPlayer
+    public sealed class BabyImp : ModPlayer
     {
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public int lavaImmune = 600;
         public int lavaDef = 10;
         public float lavaSpd = 0.15f;
@@ -49,20 +47,27 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    sealed public class HellCake : GlobalItem
+    public sealed class HellCake : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.HellCake;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.HellCake;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             BabyImp babyImp = Main.LocalPlayer.GetModPlayer<BabyImp>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.HellCake")
-                .Replace("<immuneTime>", (babyImp.lavaImmune / 60f).ToString())
+                .Replace("<immuneTime>", Math.Round(babyImp.lavaImmune / 60f, 5).ToString())
                 .Replace("<lavaDef>", babyImp.lavaDef.ToString())
-                .Replace("<lavaSpd>", (babyImp.lavaSpd * 100).ToString())
+                .Replace("<lavaSpd>", Math.Round(babyImp.lavaSpd * 100, 5).ToString())
                 .Replace("<obbyDef>", babyImp.obbyDef.ToString())
-                .Replace("<obbySpd>", (babyImp.obbySpd * 100).ToString())
+                .Replace("<obbySpd>", Math.Round(babyImp.obbySpd * 100, 5).ToString())
             ));
         }
     }

@@ -1,12 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
-using PetsOverhaul.PetEffects;
-using System.Collections.Generic;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ObjectData;
-using Terraria.WorldBuilding;
 namespace PetsOverhaul.Systems
 {
     public class TileChecks : GlobalTile
@@ -26,7 +21,7 @@ namespace PetsOverhaul.Systems
         /// <summary>
         /// Includes tree tiles. Is used by Blue Chicken.
         /// </summary>
-        public static bool[] treeTile = TileID.Sets.Factory.CreateBoolSet(false, TileID.TreeAmber,TileID.TreeAmethyst,TileID.TreeAsh,TileID.TreeDiamond,TileID.TreeEmerald,TileID.TreeRuby,TileID.Trees,TileID.TreeSapphire,TileID.TreeTopaz,TileID.MushroomTrees,TileID.PalmTree,TileID.VanityTreeSakura,TileID.VanityTreeYellowWillow);
+        public static bool[] treeTile = TileID.Sets.Factory.CreateBoolSet(false, TileID.TreeAmber, TileID.TreeAmethyst, TileID.TreeAsh, TileID.TreeDiamond, TileID.TreeEmerald, TileID.TreeRuby, TileID.Trees, TileID.TreeSapphire, TileID.TreeTopaz, TileID.MushroomTrees, TileID.PalmTree, TileID.VanityTreeSakura, TileID.VanityTreeYellowWillow);
         public override void PlaceInWorld(int i, int j, int type, Item item)
         {
             PlayerPlacedBlockList.placedBlocksByPlayer.Add(new Vector2(i, j));

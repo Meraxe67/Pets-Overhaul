@@ -1,20 +1,18 @@
-﻿using Terraria;
-using Terraria.ID;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using Terraria.ModLoader;
+using System;
 using System.Collections.Generic;
+using Terraria;
+using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.Localization;
-using Terraria.GameInput;
-using PetsOverhaul.Config;
-
-using PetsOverhaul.Config;
-using Terraria.GameInput;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class BabyEater : ModPlayer
+    public sealed class BabyEater : ModPlayer
     {
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public float moveSpd = 0.10f;
         public float jumpSpd = 0.5f;
         public int fallDamageTile = 20;
@@ -23,7 +21,10 @@ namespace PetsOverhaul.PetEffects.Vanilla
             if (Pet.PetInUseWithSwapCd(ItemID.EatersBone))
             {
                 if (Player.ZoneCorrupt || Player.ZoneCrimson)
+                {
                     Player.extraFall += fallDamageTile;
+                }
+
                 Player.moveSpeed += moveSpd;
                 Player.jumpSpeedBoost += jumpSpd;
                 Player.autoJump = true;
@@ -37,17 +38,24 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    sealed public class EatersBone : GlobalItem
+    public sealed class EatersBone : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.EatersBone;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.EatersBone;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             BabyEater babyEater = Main.LocalPlayer.GetModPlayer<BabyEater>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EatersBone")
-                .Replace("<moveSpd>", (babyEater.moveSpd * 100).ToString())
-                .Replace("<jumpSpd>", (babyEater.jumpSpd * 100).ToString())
+                .Replace("<moveSpd>", Math.Round(babyEater.moveSpd * 100, 5).ToString())
+                .Replace("<jumpSpd>", Math.Round(babyEater.jumpSpd * 100, 5).ToString())
                 .Replace("<fallRes>", babyEater.fallDamageTile.ToString())
             ));
         }

@@ -1,21 +1,20 @@
-﻿using Terraria;
-using Terraria.ID;
+﻿using Microsoft.Xna.Framework;
+using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using Terraria.ModLoader;
-using Terraria.Audio;
-using Microsoft.Xna.Framework;
-using PetsOverhaul.Config;
+using System;
 using System.Collections.Generic;
-using Terraria.Localization;
-
-using PetsOverhaul.Config;
+using Terraria;
+using Terraria.Audio;
 using Terraria.GameInput;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class SuspiciousEye : ModPlayer
+    public sealed class SuspiciousEye : ModPlayer
     {
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public int phaseCd = 9000;
         public int phaseTime = 1800;
         private int timer = 0;
@@ -26,9 +25,14 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.EyeOfCthulhuPetItem))
+            {
                 Pet.timerMax = phaseCd;
+            }
+
             if (timer >= -1)
+            {
                 timer--;
+            }
         }
         public override void UpdateEquips()
         {
@@ -39,12 +43,17 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     timer = phaseTime;
                     Pet.timer = Pet.timerMax;
                     if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+                    {
                         SoundEngine.PlaySound(SoundID.ForceRoar with { PitchVariance = 0.3f }, Player.position);
-                    AdvancedPopupRequest popupMessage = new AdvancedPopupRequest();
-                    popupMessage.Text = "ENRAGED!";
-                    popupMessage.DurationInFrames = 150;
-                    popupMessage.Velocity = new Vector2(0, -10);
-                    popupMessage.Color = Color.DarkRed;
+                    }
+
+                    AdvancedPopupRequest popupMessage = new AdvancedPopupRequest
+                    {
+                        Text = "ENRAGED!",
+                        DurationInFrames = 150,
+                        Velocity = new Vector2(0, -10),
+                        Color = Color.DarkRed
+                    };
                     PopupText.NewText(popupMessage, Player.position);
                 }
                 if (timer <= phaseTime && timer >= 0)
@@ -69,30 +78,39 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 }
                 else if (timer == 0)
                 {
-                    AdvancedPopupRequest popupMessage = new AdvancedPopupRequest();
-                    popupMessage.Text = "Calmed Down.";
-                    popupMessage.DurationInFrames = 150;
-                    popupMessage.Velocity = new Vector2(0, -10);
-                    popupMessage.Color = Color.OrangeRed;
+                    AdvancedPopupRequest popupMessage = new AdvancedPopupRequest
+                    {
+                        Text = "Calmed Down.",
+                        DurationInFrames = 150,
+                        Velocity = new Vector2(0, -10),
+                        Color = Color.OrangeRed
+                    };
                     PopupText.NewText(popupMessage, Player.position);
                 }
             }
         }
     }
-    sealed public class EyeOfCthulhuPetItem : GlobalItem
+    public sealed class EyeOfCthulhuPetItem : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.EyeOfCthulhuPetItem;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.EyeOfCthulhuPetItem;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             SuspiciousEye suspiciousEye = Main.LocalPlayer.GetModPlayer<SuspiciousEye>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EyeOfCthulhuPetItem")
-                        .Replace("<defToDmg>", (suspiciousEye.dmgMult * 100).ToString())
-                        .Replace("<defToSpd>", (suspiciousEye.spdMult * 100).ToString())
-                        .Replace("<defToCrit>", (suspiciousEye.critMult * 100).ToString())
-                        .Replace("<enrageLength>", (suspiciousEye.phaseTime / 60f).ToString())
-                        .Replace("<enrageCd>", (suspiciousEye.phaseCd / 360f).ToString())
+                        .Replace("<defToDmg>", Math.Round(suspiciousEye.dmgMult * 100, 5).ToString())
+                        .Replace("<defToSpd>", Math.Round(suspiciousEye.spdMult * 100, 5).ToString())
+                        .Replace("<defToCrit>", Math.Round(suspiciousEye.critMult * 100, 5).ToString())
+                        .Replace("<enrageLength>", Math.Round(suspiciousEye.phaseTime / 60f, 5).ToString())
+                        .Replace("<enrageCd>", Math.Round(suspiciousEye.phaseCd / 360f, 5).ToString())
                         ));
         }
     }

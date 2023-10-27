@@ -1,18 +1,16 @@
-﻿using Terraria;
-using Terraria.ID;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using Terraria.ModLoader;
+using System;
 using System.Collections.Generic;
+using Terraria;
+using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.Localization;
-using Terraria.GameInput;
-using PetsOverhaul.Config;
-
-using PetsOverhaul.Config;
-using Terraria.GameInput;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class MiniPrime : ModPlayer
+    public sealed class MiniPrime : ModPlayer
     {
         public int shieldRecovery = 7500; //all 5 shields timer combined
         public float dmgIncrease = 0.07f;
@@ -20,13 +18,16 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float defIncrease = 1.15f;
         public float shieldMult = 0.06f;
         public int shieldTime = 300;
-        int lastShield = 0;
-        int shieldIndex = 0;
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        private int lastShield = 0;
+        private int shieldIndex = 0;
+
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.SkeletronPrimePetItem))
+            {
                 Pet.timerMax = shieldRecovery;
+            }
         }
         public override void PostUpdateEquips()
         {
@@ -37,7 +38,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     if (Pet.petShield[shieldIndex].shieldAmount < lastShield)
                     {
                         Pet.timer += Pet.timerMax / 5;
-                        var shield = Pet.petShield[shieldIndex];
+                        (int shieldAmount, int shieldTimer) shield = Pet.petShield[shieldIndex];
                         shield.shieldTimer = shieldTime;
                         Pet.petShield[shieldIndex] = shield;
                     }
@@ -52,7 +53,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     if (Pet.petShield[shieldIndex].shieldAmount < lastShield)
                     {
                         Pet.timer += Pet.timerMax / 5;
-                        var shield = Pet.petShield[shieldIndex];
+                        (int shieldAmount, int shieldTimer) shield = Pet.petShield[shieldIndex];
                         shield.shieldTimer = shieldTime;
                         Pet.petShield[shieldIndex] = shield;
                     }
@@ -67,7 +68,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     if (Pet.petShield[shieldIndex].shieldAmount < lastShield)
                     {
                         Pet.timer += Pet.timerMax / 5;
-                        var shield = Pet.petShield[shieldIndex];
+                        (int shieldAmount, int shieldTimer) shield = Pet.petShield[shieldIndex];
                         shield.shieldTimer = shieldTime;
                         Pet.petShield[shieldIndex] = shield;
                     }
@@ -82,7 +83,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     if (Pet.petShield[shieldIndex].shieldAmount < lastShield)
                     {
                         Pet.timer += Pet.timerMax / 5;
-                        var shield = Pet.petShield[shieldIndex];
+                        (int shieldAmount, int shieldTimer) shield = Pet.petShield[shieldIndex];
                         shield.shieldTimer = shieldTime;
                         Pet.petShield[shieldIndex] = shield;
                     }
@@ -97,7 +98,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     if (Pet.petShield[shieldIndex].shieldAmount < lastShield)
                     {
                         Pet.timer += Pet.timerMax / 5;
-                        var shield = Pet.petShield[shieldIndex];
+                        (int shieldAmount, int shieldTimer) shield = Pet.petShield[shieldIndex];
                         shield.shieldTimer = shieldTime;
                         Pet.petShield[shieldIndex] = shield;
                     }
@@ -118,21 +119,28 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    sealed public class SkeletronPrimePetItem : GlobalItem
+    public sealed class SkeletronPrimePetItem : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.SkeletronPrimePetItem;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.SkeletronPrimePetItem;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             MiniPrime miniPrime = Main.LocalPlayer.GetModPlayer<MiniPrime>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.SkeletronPrimePetItem")
-                        .Replace("<shieldMaxHealthAmount>", (miniPrime.shieldMult * 100).ToString())
-                        .Replace("<shieldCooldown>", (miniPrime.shieldRecovery / 300f).ToString())
-                        .Replace("<dmg>", (miniPrime.dmgIncrease * 100).ToString())
+                        .Replace("<shieldMaxHealthAmount>", Math.Round(miniPrime.shieldMult * 100, 5).ToString())
+                        .Replace("<shieldCooldown>", Math.Round(miniPrime.shieldRecovery / 300f, 5).ToString())
+                        .Replace("<dmg>", Math.Round(miniPrime.dmgIncrease * 100, 5).ToString())
                         .Replace("<crit>", miniPrime.critIncrease.ToString())
                         .Replace("<def>", miniPrime.defIncrease.ToString())
-                        .Replace("<shieldLifetime>", (miniPrime.shieldTime / 60f).ToString())
+                        .Replace("<shieldLifetime>", Math.Round(miniPrime.shieldTime / 60f, 5).ToString())
                         ));
         }
     }

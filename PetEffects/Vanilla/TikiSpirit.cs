@@ -1,24 +1,23 @@
-﻿using Terraria;
-using Terraria.ID;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using Terraria.ModLoader;
+using System;
 using System.Collections.Generic;
+using Terraria;
+using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.Localization;
-using Terraria.GameInput;
-using PetsOverhaul.Config;
-
-using PetsOverhaul.Config;
-using Terraria.GameInput;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class TikiSpirit : ModPlayer
+    public sealed class TikiSpirit : ModPlayer
     {
         public int whipCritBonus = 10;
         public int nonWhipCrit = 8;
-        public float atkSpdToDmgConversion = 0.3f;
+        public float atkSpdToDmgConversion = 0.30f;
         public float atkSpdToRangeConversion = 0.15f;
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.TikiTotem))
@@ -67,17 +66,24 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    sealed public class TikiTotem : GlobalItem
+    public sealed class TikiTotem : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.TikiTotem;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.TikiTotem;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             TikiSpirit tikiSpirit = Main.LocalPlayer.GetModPlayer<TikiSpirit>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.TikiTotem")
-                       .Replace("<atkSpdToDmg>", (tikiSpirit.atkSpdToDmgConversion * 100).ToString())
-                       .Replace("<atkSpdToRange>", (tikiSpirit.atkSpdToRangeConversion * 100).ToString())
+                       .Replace("<atkSpdToDmg>", Math.Round(tikiSpirit.atkSpdToDmgConversion * 100, 5).ToString())
+                       .Replace("<atkSpdToRange>", Math.Round(tikiSpirit.atkSpdToRangeConversion * 100, 5).ToString())
                        .Replace("<nonWhipCrit>", tikiSpirit.nonWhipCrit.ToString())
                        .Replace("<whipCrit>", tikiSpirit.whipCritBonus.ToString())
                        ));

@@ -1,20 +1,19 @@
-﻿using Terraria;
-using Terraria.ID;
+﻿using Microsoft.Xna.Framework;
+using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using Terraria.ModLoader;
-using Terraria.Audio;
-using Microsoft.Xna.Framework;
-using Terraria.DataStructures;
-using PetsOverhaul.Config;
+using System;
 using System.Collections.Generic;
-using Terraria.Localization;
-
-using PetsOverhaul.Config;
+using Terraria;
+using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameInput;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class IceQueen : ModPlayer
+    public sealed class IceQueen : ModPlayer
     {
         public int cooldown = 10800;
         private bool frozenTomb = false;
@@ -24,11 +23,14 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int freezeDamage = 200;
         public int immuneTime = 150;
         public int tombTime = 300;
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.IceQueenPetItem))
+            {
                 Pet.timerMax = cooldown;
+            }
         }
         public override void PostUpdateEquips()
         {
@@ -52,9 +54,13 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     if (iceQueenFrame % 30 == 0 && ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
                     {
                         if (Main.rand.NextBool())
+                        {
                             SoundEngine.PlaySound(SoundID.Item48 with { PitchVariance = 0.3f, Volume = 0.8f }, Player.position + Main.rand.NextVector2Circular(queenRange, queenRange));
+                        }
                         else
+                        {
                             SoundEngine.PlaySound(SoundID.Item49 with { PitchVariance = 0.3f, Volume = 0.8f }, Player.position + Main.rand.NextVector2Circular(queenRange, queenRange));
+                        }
                     }
                     iceQueenFrame++;
                     Player.buffImmune[BuffID.Frozen] = false;
@@ -74,12 +80,18 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         {
                             int crit = (int)Player.GetTotalCritChance<GenericDamageClass>();
                             if (crit > 100)
+                            {
                                 crit = 100;
+                            }
+
                             npc.SimpleStrikeNPC(freezeDamage, 1, Main.rand.NextBool(crit, 100), 0, DamageClass.Generic);
                         }
                     }
                     if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+                    {
                         SoundEngine.PlaySound(SoundID.Shatter with { PitchVariance = 0.2f }, Player.position);
+                    }
+
                     Player.HealEffect(100);
                     Player.immune = false;
                     Player.SetImmuneTimeForAllTypes(immuneTime);
@@ -95,7 +107,10 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
 
                 if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+                {
                     SoundEngine.PlaySound(SoundID.Item30 with { PitchVariance = 0.5f, MaxInstances = 5, Pitch = -0.5f }, Player.position);
+                }
+
                 frozenTomb = true;
                 Player.statLife = 1;
                 Pet.timer = Pet.timerMax;
@@ -107,22 +122,29 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    sealed public class IceQueenPetItem : GlobalItem
+    public sealed class IceQueenPetItem : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.IceQueenPetItem;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.IceQueenPetItem;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             IceQueen iceQueen = Main.LocalPlayer.GetModPlayer<IceQueen>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.IceQueenPetItem")
-                        .Replace("<frozenTombTime>", (iceQueen.tombTime / 60f).ToString())
-                        .Replace("<range>", (iceQueen.queenRange / 16f).ToString())
-                        .Replace("<slowAmount>", (iceQueen.slowAmount * 100).ToString())
+                        .Replace("<frozenTombTime>", Math.Round(iceQueen.tombTime / 60f, 5).ToString())
+                        .Replace("<range>", Math.Round(iceQueen.queenRange / 16f, 5).ToString())
+                        .Replace("<slowAmount>", Math.Round(iceQueen.slowAmount * 100, 5).ToString())
                         .Replace("<healthRecovery>", (iceQueen.tombTime / 3).ToString())
                         .Replace("<baseDmg>", iceQueen.freezeDamage.ToString())
-                        .Replace("<postTombImmunity>", (iceQueen.immuneTime / 60f).ToString())
-                        .Replace("<tombCooldown>", (iceQueen.cooldown / 3600f).ToString())
+                        .Replace("<postTombImmunity>", Math.Round(iceQueen.immuneTime / 60f, 5).ToString())
+                        .Replace("<tombCooldown>", Math.Round(iceQueen.cooldown / 3600f, 5).ToString())
                         ));
         }
     }

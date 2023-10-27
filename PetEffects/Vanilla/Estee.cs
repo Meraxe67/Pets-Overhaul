@@ -1,20 +1,18 @@
-﻿using Terraria;
-using Terraria.ID;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using Terraria.ModLoader;
+using System;
 using System.Collections.Generic;
+using Terraria;
+using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.Localization;
-using Terraria.GameInput;
-using PetsOverhaul.Config;
-
-using PetsOverhaul.Config;
-using Terraria.GameInput;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class Estee : ModPlayer
+    public sealed class Estee : ModPlayer
     {
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public float manaIncrease = 0.15f;
         public float manaMagicIncreasePer1 = 0.001f;
         public float penaltyMult = 0.5f;
@@ -48,18 +46,25 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    sealed public class CelestialWand : GlobalItem
+    public sealed class CelestialWand : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.CelestialWand;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.CelestialWand;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             Estee estee = Main.LocalPlayer.GetModPlayer<Estee>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.CelestialWand")
-                        .Replace("<maxMana>", (estee.manaIncrease * 100).ToString())
+                        .Replace("<maxMana>", Math.Round(estee.manaIncrease * 100, 5).ToString())
                         .Replace("<dmgPenalty>", estee.penaltyMult.ToString())
-                        .Replace("<manaToDmg>", (estee.manaMagicIncreasePer1 * 100).ToString())
+                        .Replace("<manaToDmg>", Math.Round(estee.manaMagicIncreasePer1 * 100, 5).ToString())
                         ));
         }
     }

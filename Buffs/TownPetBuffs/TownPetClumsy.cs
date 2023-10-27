@@ -1,6 +1,6 @@
-﻿using Terraria;
+﻿using PetsOverhaul.TownPets;
+using Terraria;
 using Terraria.ID;
-using PetsOverhaul.TownPets;
 using Terraria.ModLoader;
 
 namespace PetsOverhaul.Buffs.TownPetBuffs

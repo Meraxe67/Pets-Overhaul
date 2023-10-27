@@ -1,20 +1,18 @@
-﻿using Terraria;
-using Terraria.ID;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using Terraria.ModLoader;
+using System;
 using System.Collections.Generic;
+using Terraria;
+using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.Localization;
-using Terraria.GameInput;
-using PetsOverhaul.Config;
-
-using PetsOverhaul.Config;
-using Terraria.GameInput;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class CursedSapling : ModPlayer
+    public sealed class CursedSapling : ModPlayer
     {
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public float whipSpeed = 0.025f;
         public float whipRange = 0.04f;
         public float pumpkinWeaponDmg = 0.1f;
@@ -52,20 +50,27 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    sealed public class CursedSaplingItem : GlobalItem
+    public sealed class CursedSaplingItem : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.CursedSapling;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.CursedSapling;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             CursedSapling cursedSapling = Main.LocalPlayer.GetModPlayer<CursedSapling>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.CursedSapling")
                         .Replace("<minionSlot>", cursedSapling.maxMinion.ToString())
-                        .Replace("<dmg>", (cursedSapling.pumpkinWeaponDmg * 100).ToString())
-                        .Replace("<ravenDmg>", (cursedSapling.ravenDmg * 100).ToString())
-                        .Replace("<whipRange>", (cursedSapling.whipRange * 100).ToString())
-                        .Replace("<whipSpeed>", (cursedSapling.whipSpeed * 100).ToString())
+                        .Replace("<dmg>", Math.Round(cursedSapling.pumpkinWeaponDmg * 100, 5).ToString())
+                        .Replace("<ravenDmg>", Math.Round(cursedSapling.ravenDmg * 100, 5).ToString())
+                        .Replace("<whipRange>", Math.Round(cursedSapling.whipRange * 100, 5).ToString())
+                        .Replace("<whipSpeed>", Math.Round(cursedSapling.whipSpeed * 100, 5).ToString())
                         ));
         }
     }

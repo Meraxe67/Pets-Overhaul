@@ -1,18 +1,16 @@
-﻿using Terraria;
-using Terraria.ID;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using Terraria.ModLoader;
+using System;
 using System.Collections.Generic;
+using Terraria;
+using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.Localization;
-using Terraria.GameInput;
-using PetsOverhaul.Config;
-
-using PetsOverhaul.Config;
-using Terraria.GameInput;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class TheTwins : ModPlayer
+    public sealed class TheTwins : ModPlayer
     {
         public int healthDmgCd = 42;
         public int closeRange = 112;
@@ -22,7 +20,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float bossHpDmg = 0.001f;
         public int infernoTime = 240;
         public float defMult = 1.5f;
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.TwinsPetItem))
@@ -59,23 +58,30 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    sealed public class TwinsPetItem : GlobalItem
+    public sealed class TwinsPetItem : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.TwinsPetItem;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.TwinsPetItem;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             TheTwins theTwins = Main.LocalPlayer.GetModPlayer<TheTwins>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.TwinsPetItem")
-                        .Replace("<closeRange>", (theTwins.closeRange / 16f).ToString())
-                        .Replace("<cursedTime>", (theTwins.infernoTime / 60f).ToString())
+                        .Replace("<closeRange>", Math.Round(theTwins.closeRange / 16f, 5).ToString())
+                        .Replace("<cursedTime>", Math.Round(theTwins.infernoTime / 60f, 5).ToString())
                         .Replace("<defLifesteal>", theTwins.defMult.ToString())
-                        .Replace("<dealtDmgLifesteal>", (theTwins.defLifestealDmgMult * 100).ToString())
-                        .Replace("<longRange>", (theTwins.longRange / 16f).ToString())
-                        .Replace("<hpDmg>", (theTwins.regularEnemyHpDmg * 100).ToString())
-                        .Replace("<bossHpDmg>", (theTwins.bossHpDmg * 100).ToString())
-                        .Replace("<hpDmgCooldown>", (theTwins.healthDmgCd / 60f).ToString())
+                        .Replace("<dealtDmgLifesteal>", Math.Round(theTwins.defLifestealDmgMult * 100, 5).ToString())
+                        .Replace("<longRange>", Math.Round(theTwins.longRange / 16f, 5).ToString())
+                        .Replace("<hpDmg>", Math.Round(theTwins.regularEnemyHpDmg * 100, 5).ToString())
+                        .Replace("<bossHpDmg>", Math.Round(theTwins.bossHpDmg * 100, 5).ToString())
+                        .Replace("<hpDmgCooldown>", Math.Round(theTwins.healthDmgCd / 60f, 5).ToString())
                         ));
         }
     }

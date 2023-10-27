@@ -1,13 +1,5 @@
-﻿using System;
+﻿using PetsOverhaul.Systems;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Microsoft.Xna.Framework.Input;
-
-using PetsOverhaul.Systems;
-
 using Terraria.ModLoader;
 
 namespace PetsOverhaul.DebugCommands
@@ -45,8 +37,13 @@ namespace PetsOverhaul.DebugCommands
                 if (!int.TryParse(args[0], out int type))
                 {
                     if (ModContent.GetInstance<PetRegistry>().TerrariaPetItemIds.ContainsKey(args[0]))
+                    {
                         caller.Reply($"Name: {args[0]} Id: {ModContent.GetInstance<PetRegistry>().TerrariaPetItemIds[args[0]]}\n");
-                    else caller.Reply("Nonexistant");
+                    }
+                    else
+                    {
+                        caller.Reply("Nonexistant");
+                    }
                 }
                 else
                 {

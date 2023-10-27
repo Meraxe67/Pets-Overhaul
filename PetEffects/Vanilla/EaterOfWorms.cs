@@ -1,21 +1,21 @@
-﻿using Terraria.Audio;
-using Terraria;
-using Terraria.ID;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using Terraria.ModLoader;
-using PetsOverhaul.Config;
+using System;
 using System.Collections.Generic;
-using Terraria.Localization;
-
-using PetsOverhaul.Config;
+using Terraria;
+using Terraria.Audio;
 using Terraria.GameInput;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class EaterOfWorms : ModPlayer
+    public sealed class EaterOfWorms : ModPlayer
     {
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
-        List<(int X, int Y)> tilesToRandomize = new();
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
+
+        private readonly List<(int X, int Y)> tilesToRandomize = new();
         public int tileBreakXSpread = 2;
         public int tileBreakYSpread = 2;
         public int tileBreakSpreadChance = 75;
@@ -45,21 +45,27 @@ namespace PetsOverhaul.PetEffects.Vanilla
                             for (mineY = -tileBreakYSpread; mineY <= tileBreakYSpread; mineY++)
                             {
                                 if (Main.tile[prevX + mineX, prevY + mineY].TileType == oldTileType)
+                                {
                                     tilesToRandomize.Add((prevX + mineX, prevY + mineY));
+                                }
                             }
                             if (Main.tile[prevX + mineX, prevY + mineY].TileType == oldTileType)
+                            {
                                 tilesToRandomize.Add((prevX + mineX, prevY + mineY));
+                            }
                         }
                         for (int i = 0; i < ItemPet.Randomizer(tileBreakSpreadChance); i++)
                         {
                             if (tilesToRandomize.Count > 0)
                             {
-                                var tileToBreak = tilesToRandomize[Main.rand.Next(tilesToRandomize.Count)];
+                                (int X, int Y) tileToBreak = tilesToRandomize[Main.rand.Next(tilesToRandomize.Count)];
                                 if (Player.HasEnoughPickPowerToHurtTile(tileToBreak.X, tileToBreak.Y))
                                 {
                                     Player.PickTile(tileToBreak.X, tileToBreak.Y, 5000);
                                     if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+                                    {
                                         SoundEngine.PlaySound(SoundID.WormDig with { PitchVariance = 0.4f }, Player.position);
+                                    }
                                 }
                             }
                         }
@@ -82,21 +88,27 @@ namespace PetsOverhaul.PetEffects.Vanilla
                             for (mineY = -tileBreakYSpread; mineY <= tileBreakYSpread; mineY++)
                             {
                                 if (Main.tile[prevX + mineX, prevY + mineY].TileType == oldTileType)
+                                {
                                     tilesToRandomize.Add((prevX + mineX, prevY + mineY));
+                                }
                             }
                             if (Main.tile[prevX + mineX, prevY + mineY].TileType == oldTileType)
+                            {
                                 tilesToRandomize.Add((prevX + mineX, prevY + mineY));
+                            }
                         }
                         for (int i = 0; i < ItemPet.Randomizer(tileBreakSpreadChance); i++)
                         {
                             if (tilesToRandomize.Count > 0)
                             {
-                                var tileToBreak = tilesToRandomize[Main.rand.Next(tilesToRandomize.Count)];
-                                if (Player.HasEnoughPickPowerToHurtTile(tileToBreak.X,tileToBreak.Y))
+                                (int X, int Y) tileToBreak = tilesToRandomize[Main.rand.Next(tilesToRandomize.Count)];
+                                if (Player.HasEnoughPickPowerToHurtTile(tileToBreak.X, tileToBreak.Y))
                                 {
-                                    Player.PickTile(tileToBreak.X,tileToBreak.Y, 5000);
+                                    Player.PickTile(tileToBreak.X, tileToBreak.Y, 5000);
                                     if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+                                    {
                                         SoundEngine.PlaySound(SoundID.WormDig with { PitchVariance = 0.4f }, Player.position);
+                                    }
                                 }
                             }
                         }
@@ -108,16 +120,23 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    sealed public class EaterOfWorldsPetItem : GlobalItem
+    public sealed class EaterOfWorldsPetItem : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.EaterOfWorldsPetItem;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.EaterOfWorldsPetItem;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             EaterOfWorms eaterOfWorms = Main.LocalPlayer.GetModPlayer<EaterOfWorms>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EaterOfWorldsPetItem")
-                       .Replace("<miningSpeed>", (eaterOfWorms.nonOreSpeed * 100).ToString())
+                       .Replace("<miningSpeed>", Math.Round(eaterOfWorms.nonOreSpeed * 100, 5).ToString())
                        .Replace("<multipleBreakChance>", eaterOfWorms.tileBreakSpreadChance.ToString())
                        .Replace("<width>", eaterOfWorms.tileBreakXSpread.ToString())
                        .Replace("<length>", eaterOfWorms.tileBreakYSpread.ToString())

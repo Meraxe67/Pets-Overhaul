@@ -1,17 +1,17 @@
-﻿using Terraria;
-using Terraria.ID;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using Terraria.ModLoader;
-using System.Linq;
+using System;
 using System.Collections.Generic;
-using Terraria.Localization;
-
-using PetsOverhaul.Config;
+using System.Linq;
+using Terraria;
 using Terraria.GameInput;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class Moonling : ModPlayer
+    public sealed class Moonling : ModPlayer
     {
         public float meleeDr = 0.15f;
         public float meleeSpd = 0.2f;
@@ -29,13 +29,14 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int sumMinion = 2;
         public int sumSentry = 2;
         public int defense = 10;
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.MoonLordPetItem))
             {
                 StatModifier[] stats = { Player.GetDamage<MeleeDamageClass>(), Player.GetDamage<RangedDamageClass>(), Player.GetDamage<MagicDamageClass>(), Player.GetDamage<SummonDamageClass>() };
-                var highestDamage = stats.MaxBy(x => x.Additive);
+                StatModifier highestDamage = stats.MaxBy(x => x.Additive);
                 if (highestDamage == Player.GetDamage<MeleeDamageClass>())
                 {
                     Player.endurance += meleeDr;
@@ -67,29 +68,36 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    sealed public class MoonLordPetItem : GlobalItem
+    public sealed class MoonLordPetItem : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.MoonLordPetItem;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.MoonLordPetItem;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             Moonling moonling = Main.LocalPlayer.GetModPlayer<Moonling>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.MoonLordPetItem")
-                        .Replace("<sumRange>", (moonling.sumWhipRng * 100).ToString())
-                        .Replace("<sumSpd>", (moonling.sumWhipSpd * 100).ToString())
-                        .Replace("<sumDmg>", (moonling.sumDmg * 100).ToString())
+                        .Replace("<sumRange>", Math.Round(moonling.sumWhipRng * 100, 5).ToString())
+                        .Replace("<sumSpd>", Math.Round(moonling.sumWhipSpd * 100, 5).ToString())
+                        .Replace("<sumDmg>", Math.Round(moonling.sumDmg * 100, 5).ToString())
                         .Replace("<sumMax>", moonling.sumMinion.ToString())
                         .Replace("<mana>", moonling.magicMana.ToString())
-                        .Replace("<manaCost>", (moonling.magicManaCost * 100).ToString())
+                        .Replace("<manaCost>", Math.Round(moonling.magicManaCost * 100, 5).ToString())
                         .Replace("<magicCrit>", moonling.magicCrit.ToString())
-                        .Replace("<magicDmg>", (moonling.magicDmg * 100).ToString())
+                        .Replace("<magicDmg>", Math.Round(moonling.magicDmg * 100, 5).ToString())
                         .Replace("<armorPen>", moonling.rangedPen.ToString())
                         .Replace("<rangedCrit>", moonling.rangedCr.ToString())
-                        .Replace("<rangedDmg>", (moonling.rangedDmg * 100).ToString())
-                        .Replace("<dr>", (moonling.meleeDr * 100).ToString())
-                        .Replace("<meleeSpd>", (moonling.meleeSpd * 100).ToString())
-                        .Replace("<meleeDmg>", (moonling.meleeDmg * 100).ToString())
+                        .Replace("<rangedDmg>", Math.Round(moonling.rangedDmg * 100, 5).ToString())
+                        .Replace("<dr>", Math.Round(moonling.meleeDr * 100, 5).ToString())
+                        .Replace("<meleeSpd>", Math.Round(moonling.meleeSpd * 100, 5).ToString())
+                        .Replace("<meleeDmg>", Math.Round(moonling.meleeDmg * 100, 5).ToString())
                         .Replace("<def>", moonling.defense.ToString())
                         ));
         }

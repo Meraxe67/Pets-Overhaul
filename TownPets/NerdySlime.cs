@@ -1,7 +1,7 @@
-﻿using Terraria;
+﻿using PetsOverhaul.Buffs.TownPetBuffs;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using PetsOverhaul.Buffs.TownPetBuffs;
 
 namespace PetsOverhaul.TownPets
 {
@@ -22,7 +22,7 @@ namespace PetsOverhaul.TownPets
         {
             if (Player.HasBuff(ModContent.BuffType<TownPetNerd>()))
             {
-                if(NPC.downedMoonlord)
+                if (NPC.downedMoonlord)
                 {
                     Lighting.AddLight(Player.Center, TorchID.UltraBright);
                     Player.nightVision = true;

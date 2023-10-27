@@ -1,18 +1,16 @@
-﻿using Terraria;
-using Terraria.ID;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using Terraria.ModLoader;
+using System;
 using System.Collections.Generic;
+using Terraria;
+using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.Localization;
-using Terraria.GameInput;
-using PetsOverhaul.Config;
-
-using PetsOverhaul.Config;
-using Terraria.GameInput;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class MiniMinotaur : ModPlayer
+    public sealed class MiniMinotaur : ModPlayer
     {
         public int minotaurStack = 0;
         public int minotaurCd = 12;
@@ -23,7 +21,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float moveSpd = 0.0025f;
         public float defMult = 0.002f;
 
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.TartarSauce))
@@ -36,7 +34,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     minotaurStack--;
                 }
                 if (minotaurStack > maxStack)
+                {
                     minotaurStack = maxStack;
+                }
             }
         }
         public override void PostUpdateEquips()
@@ -87,25 +87,32 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    sealed public class TartarSauce : GlobalItem
+    public sealed class TartarSauce : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.TartarSauce;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.TartarSauce;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             MiniMinotaur miniMinotaur = Main.LocalPlayer.GetModPlayer<MiniMinotaur>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.TartarSauce")
-                        .Replace("<cooldown>", (miniMinotaur.minotaurCd / 60f).ToString())
+                        .Replace("<cooldown>", Math.Round(miniMinotaur.minotaurCd / 60f, 5).ToString())
                         .Replace("<maxStack>", miniMinotaur.maxStack.ToString())
-                        .Replace("<maxDef>", (miniMinotaur.defMult * 100 * miniMinotaur.maxStack).ToString())
-                        .Replace("<maxMeleeSpd>", (miniMinotaur.meleeSpd * 100 * miniMinotaur.maxStack).ToString())
-                        .Replace("<maxDmg>", (miniMinotaur.meleeDmg * 100 * miniMinotaur.maxStack).ToString())
-                        .Replace("<maxSpd>", (miniMinotaur.moveSpd * 100 * miniMinotaur.maxStack).ToString())
-                        .Replace("<meleeSpd>", (miniMinotaur.meleeSpd * 100).ToString())
-                        .Replace("<moveSpd>", (miniMinotaur.moveSpd * 100).ToString())
-                        .Replace("<dmg>", (miniMinotaur.meleeDmg * 100).ToString())
-                        .Replace("<def>", (miniMinotaur.defMult * 100).ToString())
+                        .Replace("<maxDef>", Math.Round(miniMinotaur.defMult * 100 * miniMinotaur.maxStack, 5).ToString())
+                        .Replace("<maxMeleeSpd>", Math.Round(miniMinotaur.meleeSpd * 100 * miniMinotaur.maxStack, 5).ToString())
+                        .Replace("<maxDmg>", Math.Round(miniMinotaur.meleeDmg * 100 * miniMinotaur.maxStack, 5).ToString())
+                        .Replace("<maxSpd>", Math.Round(miniMinotaur.moveSpd * 100 * miniMinotaur.maxStack, 5).ToString())
+                        .Replace("<meleeSpd>", Math.Round(miniMinotaur.meleeSpd * 100, 5).ToString())
+                        .Replace("<moveSpd>", Math.Round(miniMinotaur.moveSpd * 100, 5).ToString())
+                        .Replace("<dmg>", Math.Round(miniMinotaur.meleeDmg * 100, 5).ToString())
+                        .Replace("<def>", Math.Round(miniMinotaur.defMult * 100, 5).ToString())
                         ));
         }
     }

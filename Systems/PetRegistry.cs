@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using PetsOverhaul.PetEffects.Vanilla;
+﻿using System.Collections.Generic;
 
 using Terraria;
 using Terraria.Audio;
@@ -13,7 +10,7 @@ namespace PetsOverhaul.Systems
     /// <summary>
     /// ModPlayer class that implements several helperfunctions to reduce repitition.
     /// </summary>
-    sealed public class PetRegistry : ModPlayer
+    public sealed class PetRegistry : ModPlayer
     {
         public Dictionary<string, int> TerrariaPetItemIds = new Dictionary<string, int> {
             {"Seaweed", ItemID.Seaweed},
@@ -470,7 +467,11 @@ namespace PetsOverhaul.Systems
 
         public bool isPetItem(int itemId)
         {
-            if (TerrariaPetItemIds.ContainsValue(itemId)) return true;
+            if (TerrariaPetItemIds.ContainsValue(itemId))
+            {
+                return true;
+            }
+
             return false;
         }
 
@@ -478,16 +479,26 @@ namespace PetsOverhaul.Systems
         {
             SoundStyle itemsHurtSound = SoundID.MenuClose;
 
-            if (PetItemIdToHurtSound.ContainsKey(itemId)) itemsHurtSound = PetItemIdToHurtSound[itemId][Main.rand.Next(PetItemIdToHurtSound[itemId].Length)];
+            if (PetItemIdToHurtSound.ContainsKey(itemId))
+            {
+                itemsHurtSound = PetItemIdToHurtSound[itemId][Main.rand.Next(PetItemIdToHurtSound[itemId].Length)];
+            }
             else if (itemId == ItemID.BerniePetItem)
             {
-                if (Player.Male == true) itemsHurtSound = SoundID.DSTMaleHurt with { PitchVariance = 0.2f };
-                else itemsHurtSound = SoundID.DSTFemaleHurt with { PitchVariance = 0.2f };
-
+                if (Player.Male == true)
+                {
+                    itemsHurtSound = SoundID.DSTMaleHurt with { PitchVariance = 0.2f };
+                }
+                else
+                {
+                    itemsHurtSound = SoundID.DSTFemaleHurt with { PitchVariance = 0.2f };
+                }
             }
 
-            if (itemsHurtSound == SoundID.MenuClose) return ReLogic.Utilities.SlotId.Invalid;
-
+            if (itemsHurtSound == SoundID.MenuClose)
+            {
+                return ReLogic.Utilities.SlotId.Invalid;
+            }
 
             return SoundEngine.PlaySound(itemsHurtSound);
         }
@@ -496,10 +507,15 @@ namespace PetsOverhaul.Systems
         {
             SoundStyle petSummonSound = SoundID.MenuClose;
 
-            if (PetItemIdToAmbientSound.ContainsKey(itemId)) petSummonSound = PetItemIdToAmbientSound[itemId][Main.rand.Next(PetItemIdToAmbientSound[itemId].Length)];
+            if (PetItemIdToAmbientSound.ContainsKey(itemId))
+            {
+                petSummonSound = PetItemIdToAmbientSound[itemId][Main.rand.Next(PetItemIdToAmbientSound[itemId].Length)];
+            }
 
-            if (petSummonSound == SoundID.MenuClose) return ReLogic.Utilities.SlotId.Invalid;
-
+            if (petSummonSound == SoundID.MenuClose)
+            {
+                return ReLogic.Utilities.SlotId.Invalid;
+            }
 
             return SoundEngine.PlaySound(petSummonSound);
         }
@@ -508,7 +524,10 @@ namespace PetsOverhaul.Systems
         {
             SoundStyle petKillSound = SoundID.MenuClose;
 
-            if (PetItemidToKillSound.ContainsKey(itemId)) petKillSound = PetItemidToKillSound[itemId];
+            if (PetItemidToKillSound.ContainsKey(itemId))
+            {
+                petKillSound = PetItemidToKillSound[itemId];
+            }
             else if (itemId == ItemID.CompanionCube)
             {
                 if (Main.rand.NextBool(25))
@@ -521,8 +540,10 @@ namespace PetsOverhaul.Systems
                 }
             }
 
-            if (petKillSound == SoundID.MenuClose) return ReLogic.Utilities.SlotId.Invalid;
-
+            if (petKillSound == SoundID.MenuClose)
+            {
+                return ReLogic.Utilities.SlotId.Invalid;
+            }
 
             return SoundEngine.PlaySound(petKillSound);
         }

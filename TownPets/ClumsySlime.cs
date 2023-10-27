@@ -1,7 +1,7 @@
-﻿using Terraria;
+﻿using PetsOverhaul.Buffs.TownPetBuffs;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using PetsOverhaul.Buffs.TownPetBuffs;
 
 namespace PetsOverhaul.TownPets
 {
@@ -21,7 +21,9 @@ namespace PetsOverhaul.TownPets
         public override void ModifyLuck(ref float luck)
         {
             if (Player.HasBuff(ModContent.BuffType<TownPetClumsy>()))
+            {
                 luck += clumsyLuck;
+            }
         }
     }
 }

@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-
-using PetsOverhaul.Config;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-
+using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameInput;
@@ -12,7 +11,7 @@ using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class SlimePrince : ModPlayer
+    public sealed class SlimePrince : ModPlayer
     {
         public float wetSpeed = 0.10f;
         public float wetDmg = 0.08f;
@@ -26,7 +25,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int burnCap = 50;
         public Player slimeDual;
         public Player slimePrince;
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
             if (GlobalPet.KingSlimePetActive(out slimePrince) && Player.HasBuff(BuffID.Wet)) //Burda kullanan oyuncunun statlarını almıyor.
@@ -53,7 +53,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    sealed public class SlimePrinceandDualNpc : GlobalNPC
+    public sealed class SlimePrinceandDualNpc : GlobalNPC
     {
         public Player slimeDual;
         public Player slimePrince;
@@ -133,7 +133,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    sealed public class PrinceSlimeandDualSlimeEnemyProj : GlobalProjectile
+    public sealed class PrinceSlimeandDualSlimeEnemyProj : GlobalProjectile
     {
         public override bool InstancePerEntity => true;
         public bool fromNpcAndWet = false;
@@ -163,25 +163,32 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    sealed public class KingSlimePetItem : GlobalItem
+    public sealed class KingSlimePetItem : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.KingSlimePetItem;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.KingSlimePetItem;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             SlimePrince slimePrince = Main.LocalPlayer.GetModPlayer<SlimePrince>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.KingSlimePetItem")
-                        .Replace("<burnHp>", (slimePrince.healthDmg * 100).ToString())
+                        .Replace("<burnHp>", Math.Round(slimePrince.healthDmg * 100, 5).ToString())
                         .Replace("<burnCap>", slimePrince.burnCap.ToString())
                         .Replace("<extraKb>", slimePrince.bonusKb.ToString())
-                        .Replace("<jumpSpd>", (slimePrince.slimyJump * 100).ToString())
+                        .Replace("<jumpSpd>", Math.Round(slimePrince.slimyJump * 100, 5).ToString())
                         .Replace("<kbBoost>", slimePrince.slimyKb.ToString())
                         .Replace("<enemyDmgRecieve>", slimePrince.wetRecievedHigher.ToString())
                         .Replace("<enemyDmgDeal>", slimePrince.wetDealtLower.ToString())
-                        .Replace("<dmg>", (slimePrince.wetDmg * 100).ToString())
-                        .Replace("<def>", (slimePrince.wetDef * 100).ToString())
-                        .Replace("<moveSpd>", (slimePrince.wetSpeed * 100).ToString())
+                        .Replace("<dmg>", Math.Round(slimePrince.wetDmg * 100, 5).ToString())
+                        .Replace("<def>", Math.Round(slimePrince.wetDef * 100, 5).ToString())
+                        .Replace("<moveSpd>", Math.Round(slimePrince.wetSpeed * 100, 5).ToString())
                         ));
         }
     }

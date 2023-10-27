@@ -1,32 +1,34 @@
-﻿using Terraria;
-using Terraria.ID;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using Terraria.ModLoader;
+using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
-using static Terraria.Player;
-using Terraria.Localization;
-
-using PetsOverhaul.Config;
 using Terraria.GameInput;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
+using static Terraria.Player;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class SkeletronJr : ModPlayer
+    public sealed class SkeletronJr : ModPlayer
     {
         public List<(int, int)> skeletronTakenDamage = new(100000);
         private int timer = 0;
         public float enemyDamageIncrease = 1.2f;
         public int playerDamageTakenSpeed = 4;
         public float playerTakenMult = 1f;
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PreUpdate()
         {
             timer++;
             if (timer > 10000)
+            {
                 timer = 10000;
+            }
         }
         public override void PostUpdateEquips()
         {
@@ -39,10 +41,13 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     Player.statLife -= totalDmg;
                     CombatText.NewText(Player.getRect(), CombatText.DamagedHostile, totalDmg);
                     if (Player.statLife <= 0)
+                    {
                         Player.KillMe(PlayerDeathReason.ByCustomReason(Player.name + " could not contain Skeletron's curse."), 1, 0);
+                    }
+
                     for (int i = 0; i < skeletronTakenDamage.Count; i++) //List'lerde struct'lar bir nevi readonly olarak çalıştığından, değeri alıp tekrar atıyoruz
                     {
-                        var point = skeletronTakenDamage[i];
+                        (int, int) point = skeletronTakenDamage[i];
                         point.Item1 -= point.Item2 / playerDamageTakenSpeed;
                         skeletronTakenDamage[i] = point;
                     }
@@ -59,9 +64,14 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 SoundEngine.PlaySound(SoundID.PlayerHit with { PitchVariance = 0.2f }, Player.position);
                 skeletronTakenDamage.Add((info.Damage, info.Damage));
                 if (info.Damage <= 1)
+                {
                     Player.SetImmuneTimeForAllTypes(Player.longInvince ? 40 : 20);
+                }
                 else
+                {
                     Player.SetImmuneTimeForAllTypes(Player.longInvince ? 80 : 40);
+                }
+
                 return true;
             }
             return false;
@@ -71,7 +81,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             skeletronTakenDamage.Clear();
         }
     }
-    sealed public class SkeletronJrEnemy : GlobalNPC
+    public sealed class SkeletronJrEnemy : GlobalNPC
     {
         public override bool InstancePerEntity => true;
         public List<(int, int)> skeletronDealtDamage = new(100000);
@@ -107,7 +117,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
                 for (int i = 0; i < skeletronDealtDamage.Count; i++) //List'lerde struct'lar bir nevi readonly olarak çalıştığından, değeri alıp tekrar atıyoruz
                 {
-                    var point = skeletronDealtDamage[i];
+                    (int, int) point = skeletronDealtDamage[i];
                     point.Item2--;
                     skeletronDealtDamage[i] = point;
                 }
@@ -121,18 +131,25 @@ namespace PetsOverhaul.PetEffects.Vanilla
             skeletronDealtDamage.Clear();
         }
     }
-    sealed public class SkeletronPetItem : GlobalItem
+    public sealed class SkeletronPetItem : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.SkeletronPetItem;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.SkeletronPetItem;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             SkeletronJr skeletronJr = Main.LocalPlayer.GetModPlayer<SkeletronJr>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.SkeletronPetItem")
-                        .Replace("<recievedMult>", (skeletronJr.playerTakenMult * 100).ToString())
+                        .Replace("<recievedMult>", Math.Round(skeletronJr.playerTakenMult * 100, 5).ToString())
                         .Replace("<recievedHowLong>", skeletronJr.playerDamageTakenSpeed.ToString())
-                        .Replace("<dealtMult>", (skeletronJr.enemyDamageIncrease * 100).ToString())
+                        .Replace("<dealtMult>", Math.Round(skeletronJr.enemyDamageIncrease * 100, 5).ToString())
                         ));
         }
     }

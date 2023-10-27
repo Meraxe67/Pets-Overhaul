@@ -1,20 +1,18 @@
-﻿using Terraria;
-using Terraria.ID;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using Terraria.ModLoader;
+using System;
 using System.Collections.Generic;
+using Terraria;
+using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.Localization;
-using Terraria.GameInput;
-using PetsOverhaul.Config;
-
-using PetsOverhaul.Config;
-using Terraria.GameInput;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class GlitteryButterfly : ModPlayer
+    public sealed class GlitteryButterfly : ModPlayer
     {
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public int wingTime = 45;
         public int bonusTimeIfExisting = 150;
         public float healthPenalty = 0.08f;
@@ -33,25 +31,36 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 else
                 {
                     if (Player.equippedWings.type == ItemID.CreativeWings)
+                    {
                         Player.wingTimeMax += wingTime;
+                    }
                     else
+                    {
                         Player.wingTimeMax += bonusTimeIfExisting;
+                    }
                 }
             }
         }
     }
-    sealed public class BedazzledNectar : GlobalItem
+    public sealed class BedazzledNectar : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.BedazzledNectar;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.BedazzledNectar;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             GlitteryButterfly glitteryButterfly = Main.LocalPlayer.GetModPlayer<GlitteryButterfly>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BedazzledNectar")
-                        .Replace("<flight>", (glitteryButterfly.wingTime / 60f).ToString())
-                        .Replace("<bonusFlight>", (glitteryButterfly.bonusTimeIfExisting / 60f).ToString())
-                        .Replace("<healthNerf>", (glitteryButterfly.healthPenalty * 100).ToString())
+                        .Replace("<flight>", Math.Round(glitteryButterfly.wingTime / 60f, 5).ToString())
+                        .Replace("<bonusFlight>", Math.Round(glitteryButterfly.bonusTimeIfExisting / 60f, 5).ToString())
+                        .Replace("<healthNerf>", Math.Round(glitteryButterfly.healthPenalty * 100, 5).ToString())
                         ));
         }
     }

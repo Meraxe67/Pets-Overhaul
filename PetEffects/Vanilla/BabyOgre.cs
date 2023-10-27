@@ -1,20 +1,18 @@
-﻿using Terraria;
-using Terraria.ID;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using Terraria.ModLoader;
+using System;
 using System.Collections.Generic;
+using Terraria;
+using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.Localization;
-using Terraria.GameInput;
-using PetsOverhaul.Config;
-
-using PetsOverhaul.Config;
-using Terraria.GameInput;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class BabyOgre : ModPlayer
+    public sealed class BabyOgre : ModPlayer
     {
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public float dr = 0.1f;
         public float nonMeleedmg = 0.2f;
         public int crit = 20;
@@ -95,31 +93,38 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    sealed public class DD2OgrePetItem : GlobalItem
+    public sealed class DD2OgrePetItem : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.DD2OgrePetItem;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.DD2OgrePetItem;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             BabyOgre babyOgre = Main.LocalPlayer.GetModPlayer<BabyOgre>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DD2OgrePetItem")
                 .Replace("<moveSpdNerf>", babyOgre.movespdNerf.ToString())
                 .Replace("<atkSpdNerf>", babyOgre.atkSpdMult.ToString())
-                .Replace("<dmgNerf>", (babyOgre.nonMeleedmg * 100).ToString())
+                .Replace("<dmgNerf>", Math.Round(babyOgre.nonMeleedmg * 100, 5).ToString())
                 .Replace("<horizontalNerf>", babyOgre.horizontalMult.ToString())
                 .Replace("<verticalNerf>", babyOgre.verticalMult.ToString())
                 .Replace("<trueMeleeMults>", babyOgre.trueMeleeMultipliers.ToString())
                 .Replace("<trueMeleeCrit>", babyOgre.crit.ToString())
-                .Replace("<healthIncrease>", (babyOgre.healthIncrease * 100).ToString())
+                .Replace("<healthIncrease>", Math.Round(babyOgre.healthIncrease * 100, 5).ToString())
                 .Replace("<defMult>", babyOgre.defMult.ToString())
-                .Replace("<damageReduction>", (babyOgre.dr * 100).ToString())
+                .Replace("<damageReduction>", Math.Round(babyOgre.dr * 100, 5).ToString())
             ));
         }
 
     }
-    sealed public class BabyOgreWing : GlobalItem
-    { 
+    public sealed class BabyOgreWing : GlobalItem
+    {
         public override bool InstancePerEntity => true;
         public override void HorizontalWingSpeeds(Item item, Player player, ref float speed, ref float acceleration)
         {

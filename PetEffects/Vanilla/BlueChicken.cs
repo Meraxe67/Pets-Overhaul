@@ -1,23 +1,19 @@
-﻿using Terraria.Audio;
-using Terraria;
-using Terraria.ID;
-using PetsOverhaul.Systems;
-using Terraria.ModLoader;
-using PetsOverhaul.Config;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Items;
+using PetsOverhaul.Systems;
 using System.Collections.Generic;
+using Terraria;
+using Terraria.Audio;
+using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.Localization;
-using Terraria.GameInput;
-using System.Linq;
-
-using PetsOverhaul.Config;
-using Terraria.GameInput;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
-    sealed public class BlueChicken : ModPlayer
+    public sealed class BlueChicken : ModPlayer
     {
-        GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public int blueEggTimer = 28800;
         public float tipsyMovespd = 0.1f;
         public int plantChance = 25;
@@ -31,7 +27,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 {
                     Player.QuickSpawnItem(Player.GetSource_Misc("BlueChicken"), ModContent.ItemType<Egg>());
                     if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+                    {
                         SoundEngine.PlaySound(SoundID.NPCDeath3 with { PitchVariance = 0.1f, Pitch = 0.9f }, Player.position);
+                    }
                 }
             }
         }
@@ -118,43 +116,59 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 {
                     PoolTree();
                     if (GlobalPet.pool.Count > 0)
+                    {
                         for (int i = 0; i < ItemPet.Randomizer(treeChance * item.stack); i++)
                         {
                             Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
                         }
+                    }
+
                     GlobalPet.pool.Clear();
                 }
                 else if (itemChck.rareHerbBoost)
                 {
                     PoolRarePlant();
                     if (GlobalPet.pool.Count > 0)
+                    {
                         for (int i = 0; i < ItemPet.Randomizer(rarePlantChance * item.stack); i++)
                         {
                             Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
                         }
+                    }
+
                     GlobalPet.pool.Clear();
                 }
                 else if (itemChck.herbBoost)
                 {
                     PoolPlant();
                     if (GlobalPet.pool.Count > 0)
+                    {
                         for (int i = 0; i < ItemPet.Randomizer(plantChance * item.stack); i++)
                         {
                             Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
                         }
+                    }
+
                     GlobalPet.pool.Clear();
                 }
             }
             return true;
         }
     }
-    sealed public class BlueEgg : GlobalItem
+    public sealed class BlueEgg : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.BlueEgg;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.BlueEgg;
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            {
+                return;
+            }
+
             BlueChicken blueChicken = Main.LocalPlayer.GetModPlayer<BlueChicken>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BlueEgg")
                 .Replace("<plantChance>", blueChicken.plantChance.ToString())
