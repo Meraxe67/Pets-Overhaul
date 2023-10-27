@@ -26,7 +26,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 {
                     Player.wings = 1;
                     Player.wingsLogic = 1;
-                    Player.wingTimeMax = 0;
+                    Player.wingTimeMax = 1;
                 }
             }
         }

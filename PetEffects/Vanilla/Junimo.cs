@@ -25,12 +25,12 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float harvestingExpToCoinMult = 1.2f;
         public int junimoHarvestingLevel = 1;
         public int junimoHarvestingExp = 0;
-        private int popupExpHarv = 0; //Represents current existing exp value on popup texts
-        private int popupExpMining = 0;
-        private int popupExpFish = 0;
-        private int popupIndexHarv = 0;
-        private int popupIndexMining = 0;
-        private int popupIndexFish = 0;
+        public int popupExpHarv = 0; //Represents current existing exp value on popup texts
+        public int popupExpMining = 0;
+        public int popupExpFish = 0;
+        public int popupIndexHarv = 0;
+        public int popupIndexMining = 0;
+        public int popupIndexFish = 0;
         public int[] junimoHarvestingLevelsToXp = new int[]
         {
             0,
