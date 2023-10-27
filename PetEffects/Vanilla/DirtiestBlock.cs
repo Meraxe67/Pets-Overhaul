@@ -6,15 +6,14 @@ using System.Collections.Generic;
 using Terraria.Localization;
 using Terraria.GameInput;
 using PetsOverhaul.Config;
-
-using PetsOverhaul.Config;
-using Terraria.GameInput;
+using Microsoft.Xna.Framework;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
     sealed public class DirtiestBlock : ModPlayer
     {
         GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        Junimo Juni { get => Player.GetModPlayer<Junimo>(); }
         public int dirtCoin = 300;
         public int soilCoin = 200;
         public int everythingCoin = 100;
@@ -25,10 +24,26 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 if (itemChck.dirt == true)
                 {
                     Player.QuickSpawnItem(Player.GetSource_Misc("MiningItem"), ItemID.CopperCoin, ItemPet.Randomizer(item.stack * dirtCoin));
+                    if (Juni.junimoExpCheck())
+                    {
+                        int value = ItemPet.Randomizer((int)(dirtCoin * Juni.junimoInUseMultiplier * item.stack * Pet.miningExpBoost),10000);
+                        Juni.junimoMiningExp += value;
+                        Juni.popupExpMining += value;
+                        if (value>0)
+                        Juni.popupIndexMining = Juni.PopupExp(Juni.popupIndexMining, Juni.popupExpMining, Color.LightGray);
+                    }
                 }
                 else if (itemChck.commonBlock == true)
                 {
                     Player.QuickSpawnItem(Player.GetSource_Misc("MiningItem"), ItemID.CopperCoin, ItemPet.Randomizer(item.stack * soilCoin));
+                    if (Juni.junimoExpCheck())
+                    {
+                        int value = ItemPet.Randomizer((int)(dirtCoin * Juni.junimoInUseMultiplier * item.stack * Pet.miningExpBoost),10000);
+                        Juni.junimoMiningExp += value;
+                        Juni.popupExpMining += value;
+                        if (value > 0)
+                            Juni.popupIndexMining = Juni.PopupExp(Juni.popupIndexMining, Juni.popupExpMining, Color.LightGray);
+                    }
                 }
                 else if (itemChck.blockNotByPlayer == true)
                 {
