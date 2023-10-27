@@ -79,7 +79,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 .Replace("<fp>", babyPenguin.regularFish.ToString())
                 .Replace("<oceanFp>", babyPenguin.oceanFish.ToString())
                 .Replace("<snowFp>", babyPenguin.snowFish.ToString())
-                .Replace("<catchChancce>", babyPenguin.snowFishChance.ToString())
+                .Replace("<catchChance>", babyPenguin.snowFishChance.ToString())
                 .Replace("<chilledMult>", babyPenguin.chillingMultiplier.ToString())
             ));
         }

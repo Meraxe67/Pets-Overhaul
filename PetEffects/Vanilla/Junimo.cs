@@ -588,6 +588,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             Junimo junimo = Main.LocalPlayer.GetModPlayer<Junimo>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.JunimoPetItem")
                         .Replace("<maxLvl>", junimo.maxLvls.ToString())
+                        .Replace("<expOutsideInvActiveOrNo>", ModContent.GetInstance<Personalization>().JunimoExpWhileNotInInv? "inactive" : "active")
                         .Replace("<harvestingProfit>", Math.Round(junimo.harvestingExpToCoinMult * junimo.junimoInUseMultiplier * junimo.junimoHarvestingLevel, 5).ToString())
                         .Replace("<bonusHealth>", Math.Round(junimo.junimoHarvestingLevel * 0.25f * junimo.junimoInUseMultiplier, 5).ToString())
                         .Replace("<flatHealth>", (junimo.junimoHarvestingLevel * junimo.junimoInUseMultiplier).ToString())
