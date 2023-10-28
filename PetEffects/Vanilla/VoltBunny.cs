@@ -14,12 +14,10 @@ namespace PetsOverhaul.PetEffects.Vanilla
     public sealed class VoltBunny : ModPlayer
     {
         public float movespdFlat = 0.05f;
-        public float movespdMult = 1.1f;
+        public float movespdMult = 1.08f;
         public float movespdToDmg = 0.2f;
-        public float lightningRod = 0.1f;
-        private int lightningRodTime = 0;
-        public int lightningRodMax = 300;
-
+        public float staticParalysis = 3f;
+        public int staticLength = 45;
         private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
@@ -28,23 +26,16 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 Player.moveSpeed += movespdFlat;
                 Player.moveSpeed *= movespdMult;
                 Player.GetDamage<GenericDamageClass>() += (Player.moveSpeed - 1f) * movespdToDmg;
-                Player.buffImmune[BuffID.Electrified] = false;
-                if (lightningRodTime > 0)
-                {
-                    lightningRodTime--;
-                    Player.GetDamage<GenericDamageClass>() += lightningRod; //Ability'i Lightning Rod' dan Static'e çevir
-                }
-                if (Player.HasBuff(BuffID.Electrified))
-                {
-                    AdvancedPopupRequest popupMessage = new();
-                    popupMessage.Text = "Lightning Rod makes the user immune to Electrified!";
-                    popupMessage.DurationInFrames = 120;
-                    popupMessage.Velocity = new Vector2(0, -7);
-                    popupMessage.Color = Color.LightGoldenrodYellow;
-                    PopupText.NewText(popupMessage, Player.position);
-                    Player.ClearBuff(BuffID.Electrified);
-                    lightningRodTime = lightningRodMax;
-                }
+            }
+        }
+    }
+    public sealed class EnemyHittingVoltBunny : GlobalNPC
+    {
+        public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
+        {
+            if (target.GetModPlayer<GlobalPet>().PetInUseWithSwapCd(ItemID.LightningCarrot)&&npc.TryGetGlobalNPC(out NpcPet npcPet))
+            {
+                npcPet.AddSlow(NpcPet.SlowId.PikachuStatic, target.GetModPlayer<VoltBunny>().staticParalysis, target.GetModPlayer<VoltBunny>().staticLength);
             }
         }
     }
@@ -64,11 +55,11 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
             VoltBunny voltBunny = Main.LocalPlayer.GetModPlayer<VoltBunny>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.LightningCarrot")
-                       .Replace("<flatSpd>", Math.Round(voltBunny.movespdFlat * 100, 5).ToString())
+                       .Replace("<flatSpd>", Math.Round(voltBunny.movespdFlat * 100, 2).ToString())
                        .Replace("<multSpd>", voltBunny.movespdMult.ToString())
-                       .Replace("<spdToDmg>", Math.Round(voltBunny.movespdToDmg * 100, 5).ToString())
-                       .Replace("<electricRod>", Math.Round(voltBunny.lightningRod * 100, 5).ToString())
-                       .Replace("<electricRodDuration>", Math.Round(voltBunny.lightningRodMax / 60f, 5).ToString())
+                       .Replace("<spdToDmg>", Math.Round(voltBunny.movespdToDmg * 100, 2).ToString())
+                       .Replace("<staticAmount>", Math.Round(voltBunny.staticParalysis * 100, 2).ToString())
+                       .Replace("<staticTime>", Math.Round(voltBunny.staticLength / 60f, 2).ToString())
                        ));
         }
     }

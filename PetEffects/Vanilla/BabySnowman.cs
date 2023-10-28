@@ -51,9 +51,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
             BabySnowman babySnowman = Main.LocalPlayer.GetModPlayer<BabySnowman>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ToySled")
-                .Replace("<frostburnTime>", Math.Round(babySnowman.frostburnTime / 60f, 5).ToString())
-                .Replace("<slowAmount>", Math.Round(babySnowman.snowmanSlow * 100, 5).ToString())
-                .Replace("<slowTime>", Math.Round(babySnowman.slowTime / 60f, 5).ToString())
+                .Replace("<frostburnTime>", Math.Round(babySnowman.frostburnTime / 60f, 2).ToString())
+                .Replace("<slowAmount>", Math.Round(babySnowman.snowmanSlow * 100, 2).ToString())
+                .Replace("<slowTime>", Math.Round(babySnowman.slowTime / 60f, 2).ToString())
             ));
         }
     }

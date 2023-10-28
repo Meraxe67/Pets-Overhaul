@@ -13,7 +13,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
     {
         private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public int squashlingCommonChance = 80;
-        public int squashlingRareChance = 8;
+        public int squashlingRareChance = 10;
         public override bool OnPickup(Item item)
         {
             if (item.TryGetGlobalItem(out ItemPet itemChck) && Pet.PickupChecks(item, ItemID.MagicalPumpkinSeed, itemChck))

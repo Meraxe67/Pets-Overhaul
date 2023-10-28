@@ -14,46 +14,52 @@ namespace PetsOverhaul.PetEffects.Vanilla
         private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public int npcCoin = 15;
         public int npcItem = 6;
-        public int bossCoin = 5;
-        public int bossItem = 10;
-        public int bagCoin = 3;
-        public int bagItem = 5;
+        public int bossCoin = 7;
+        public int bossItem = 5;
+        public int bagCoin = 5;
+        public int bagItem = 4;
+        private int chanceToRollItem = 0;
         public override bool OnPickup(Item item)
         {
             if (item.TryGetGlobalItem(out ItemPet itemChck) && Pet.PickupChecks(item, ItemID.OrnateShadowKey, itemChck))
             {
+                chanceToRollItem = 0;
                 if (itemChck.itemFromNpc == true)
                 {
                     if (item.IsACoin)
                     {
-                        item.stack += ItemPet.Randomizer(npcCoin * item.stack);
+                        chanceToRollItem += npcCoin * item.stack;
                     }
                     else
                     {
-                        item.stack += ItemPet.Randomizer(npcItem * item.stack);
+                        chanceToRollItem += npcItem * item.stack;
                     }
                 }
                 if (itemChck.itemFromBoss == true && ItemID.Sets.BossBag[item.type] == false)
                 {
                     if (item.IsACoin)
                     {
-                        item.stack += ItemPet.Randomizer(bossCoin * item.stack);
+                        chanceToRollItem += bossCoin * item.stack;
                     }
                     else
                     {
-                        item.stack += ItemPet.Randomizer(bossItem * item.stack);
+                        chanceToRollItem += bossItem * item.stack;
                     }
                 }
                 if (itemChck.itemFromBag == true)
                 {
                     if (item.IsACoin)
                     {
-                        item.stack += ItemPet.Randomizer(bagCoin * item.stack);
+                        chanceToRollItem += bagCoin * item.stack;
                     }
                     else
                     {
-                        item.stack += ItemPet.Randomizer(bagItem * item.stack);
+                        chanceToRollItem += bagItem * item.stack;
                     }
+                }
+                for (int i = 0; i < ItemPet.Randomizer(chanceToRollItem); i++)
+                {
+                    Player.QuickSpawnItem(Player.GetSource_Misc("GlobalItem"), item, 1);
                 }
             }
             return true;

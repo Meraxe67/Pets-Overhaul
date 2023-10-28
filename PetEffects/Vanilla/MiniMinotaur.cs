@@ -103,16 +103,16 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
             MiniMinotaur miniMinotaur = Main.LocalPlayer.GetModPlayer<MiniMinotaur>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.TartarSauce")
-                        .Replace("<cooldown>", Math.Round(miniMinotaur.minotaurCd / 60f, 5).ToString())
+                        .Replace("<cooldown>", Math.Round(miniMinotaur.minotaurCd / 60f, 2).ToString())
                         .Replace("<maxStack>", miniMinotaur.maxStack.ToString())
-                        .Replace("<maxDef>", Math.Round(miniMinotaur.defMult * 100 * miniMinotaur.maxStack, 5).ToString())
-                        .Replace("<maxMeleeSpd>", Math.Round(miniMinotaur.meleeSpd * 100 * miniMinotaur.maxStack, 5).ToString())
-                        .Replace("<maxDmg>", Math.Round(miniMinotaur.meleeDmg * 100 * miniMinotaur.maxStack, 5).ToString())
-                        .Replace("<maxSpd>", Math.Round(miniMinotaur.moveSpd * 100 * miniMinotaur.maxStack, 5).ToString())
-                        .Replace("<meleeSpd>", Math.Round(miniMinotaur.meleeSpd * 100, 5).ToString())
-                        .Replace("<moveSpd>", Math.Round(miniMinotaur.moveSpd * 100, 5).ToString())
-                        .Replace("<dmg>", Math.Round(miniMinotaur.meleeDmg * 100, 5).ToString())
-                        .Replace("<def>", Math.Round(miniMinotaur.defMult * 100, 5).ToString())
+                        .Replace("<maxDef>", Math.Round(miniMinotaur.defMult * 100 * miniMinotaur.maxStack, 2).ToString())
+                        .Replace("<maxMeleeSpd>", Math.Round(miniMinotaur.meleeSpd * 100 * miniMinotaur.maxStack, 2).ToString())
+                        .Replace("<maxDmg>", Math.Round(miniMinotaur.meleeDmg * 100 * miniMinotaur.maxStack, 2).ToString())
+                        .Replace("<maxSpd>", Math.Round(miniMinotaur.moveSpd * 100 * miniMinotaur.maxStack, 2).ToString())
+                        .Replace("<meleeSpd>", Math.Round(miniMinotaur.meleeSpd * 100, 2).ToString())
+                        .Replace("<moveSpd>", Math.Round(miniMinotaur.moveSpd * 100, 2).ToString())
+                        .Replace("<dmg>", Math.Round(miniMinotaur.meleeDmg * 100, 2).ToString())
+                        .Replace("<def>", Math.Round(miniMinotaur.defMult * 100, 2).ToString())
                         ));
         }
     }

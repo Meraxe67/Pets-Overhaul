@@ -285,7 +285,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                             value = HarvestingXpPerGathered[index].expAmount;
                         }
 
-                        if (item.maxStack != 1 && Player.HasItemInInventoryOrOpenVoidBag(ItemID.JunimoPetItem) || Pet.PetInUse(ItemID.JunimoPetItem))
+                        if (Player.HasItemInInventoryOrOpenVoidBag(ItemID.JunimoPetItem) || Pet.PetInUse(ItemID.JunimoPetItem))
                         {
                             int junimoCash = ItemPet.Randomizer((int)(harvestingExpToCoinMult * junimoHarvestingLevel * value * junimoInUseMultiplier * item.stack), 100);
                             if (junimoCash > 1000000)
@@ -332,7 +332,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                             popupExpMining += value;
                             popupIndexMining = PopupExp(popupIndexMining, popupExpMining, Color.LightGray);
                         }
-                        if (item.maxStack != 1 && Player.HasItemInInventoryOrOpenVoidBag(ItemID.JunimoPetItem) || Pet.PetInUse(ItemID.JunimoPetItem))
+                        if (Player.HasItemInInventoryOrOpenVoidBag(ItemID.JunimoPetItem) || Pet.PetInUse(ItemID.JunimoPetItem))
                         {
                             for (int i = 0; i < ItemPet.Randomizer(junimoMiningLevel * junimoInUseMultiplier * item.stack); i++)
                             {
@@ -589,19 +589,19 @@ namespace PetsOverhaul.PetEffects.Vanilla
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.JunimoPetItem")
                         .Replace("<maxLvl>", junimo.maxLvls.ToString())
                         .Replace("<expOutsideInvActiveOrNo>", ModContent.GetInstance<Personalization>().JunimoExpWhileNotInInv? "inactive" : "active")
-                        .Replace("<harvestingProfit>", Math.Round(junimo.harvestingExpToCoinMult * junimo.junimoInUseMultiplier * junimo.junimoHarvestingLevel, 5).ToString())
-                        .Replace("<bonusHealth>", Math.Round(junimo.junimoHarvestingLevel * 0.25f * junimo.junimoInUseMultiplier, 5).ToString())
+                        .Replace("<harvestingProfit>", Math.Round(junimo.harvestingExpToCoinMult * junimo.junimoInUseMultiplier * junimo.junimoHarvestingLevel, 2).ToString())
+                        .Replace("<bonusHealth>", Math.Round(junimo.junimoHarvestingLevel * 0.25f * junimo.junimoInUseMultiplier, 2).ToString())
                         .Replace("<flatHealth>", (junimo.junimoHarvestingLevel * junimo.junimoInUseMultiplier).ToString())
                         .Replace("<harvestLevel>", junimo.junimoHarvestingLevel.ToString())
                         .Replace("<harvestNext>", junimo.junimoHarvestingLevel >= junimo.maxLvls ? "Max Level!" : (junimo.junimoHarvestingLevelsToXp[junimo.junimoHarvestingLevel] - junimo.junimoHarvestingExp).ToString())
                         .Replace("<harvestCurrent>", junimo.junimoHarvestingExp.ToString())
                         .Replace("<miningBonusDrop>", (junimo.junimoMiningLevel * junimo.junimoInUseMultiplier).ToString())
-                        .Replace("<bonusReduction>", Math.Round(junimo.junimoMiningLevel * junimo.junimoInUseMultiplier * 0.2f, 5).ToString())
+                        .Replace("<bonusReduction>", Math.Round(junimo.junimoMiningLevel * junimo.junimoInUseMultiplier * 0.2f, 2).ToString())
                         .Replace("<miningLevel>", junimo.junimoMiningLevel.ToString())
                         .Replace("<miningNext>", junimo.junimoMiningLevel >= junimo.maxLvls ? "Max Level!" : (junimo.junimoMiningLevelsToXp[junimo.junimoMiningLevel] - junimo.junimoMiningExp).ToString())
                         .Replace("<miningCurrent>", junimo.junimoMiningExp.ToString())
-                        .Replace("<fishingPower>", Math.Round(junimo.junimoFishingLevel * junimo.junimoInUseMultiplier * 0.5f, 5).ToString())
-                        .Replace("<bonusDamage>", Math.Round(junimo.junimoFishingLevel * junimo.junimoInUseMultiplier * 0.2f, 5).ToString())
+                        .Replace("<fishingPower>", Math.Round(junimo.junimoFishingLevel * junimo.junimoInUseMultiplier * 0.5f, 2).ToString())
+                        .Replace("<bonusDamage>", Math.Round(junimo.junimoFishingLevel * junimo.junimoInUseMultiplier * 0.2f, 2).ToString())
                         .Replace("<fishingLevel>", junimo.junimoFishingLevel.ToString())
                         .Replace("<fishingNext>", junimo.junimoFishingLevel >= junimo.maxLvls ? "Max Level!" : (junimo.junimoFishingLevelsToXp[junimo.junimoFishingLevel] - junimo.junimoFishingExp).ToString())
                         .Replace("<fishingCurrent>", junimo.junimoFishingExp.ToString())

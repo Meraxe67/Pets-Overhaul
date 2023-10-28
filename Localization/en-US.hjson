@@ -212,7 +212,7 @@ Mods: {
 				surface has a <harvestChance>% chance, <rarePlantChance>% chance for rare
 				plants, to give +1 stack, gemstone trees
 				have a <gemstoneTreeChance>% chance on top of the regular chance
-				Grants a permanent blue shine on the Player.
+				Grants a blue shine to the Player, with a <shineMult> scale.
 				'''
 			ChesterPetItem:
 				'''
@@ -447,8 +447,8 @@ Mods: {
 				[c/E39DA9:Offensive and Mobility Pet]
 				Grants an extra <flatSpd>% movement speed, multiplies it by
 				<multSpd>x movement speed boosts over 100% will grant
-				you a damage boost equal to <spdToDmg>% of it. Immunity
-				to Electrified, giving you <electricRod>% damage for <electricRodDuration> seconds
+				you a damage boost equal to <spdToDmg>% of it. Enemies that
+				contacts you gets slowed by <staticAmount>% for <staticTime> seconds
 				'''
 			ZephyrFish:
 				'''

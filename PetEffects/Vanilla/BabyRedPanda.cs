@@ -58,8 +58,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
             BabyRedPanda babyRedPanda = Main.LocalPlayer.GetModPlayer<BabyRedPanda>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BambooLeaf")
-                .Replace("<atkSpd>", Math.Round(babyRedPanda.regularAtkSpd * 100, 5).ToString())
-                .Replace("<jungleAtkSpd>", Math.Round(babyRedPanda.jungleBonusSpd * 100, 5).ToString())
+                .Replace("<atkSpd>", Math.Round(babyRedPanda.regularAtkSpd * 100, 2).ToString())
+                .Replace("<jungleAtkSpd>", Math.Round(babyRedPanda.jungleBonusSpd * 100, 2).ToString())
                 .Replace("<aggro>", babyRedPanda.aggroReduce.ToString())
                 .Replace("<bambooChance>", babyRedPanda.bambooChance.ToString())
             ));

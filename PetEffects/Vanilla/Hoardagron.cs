@@ -111,8 +111,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         .Replace("<arrowVelo>", hoardagron.arrowSpd.ToString())
                         .Replace("<arrowPierce>", hoardagron.arrowPen.ToString())
                         .Replace("<bulletVelo>", hoardagron.bulletSpd.ToString())
-                        .Replace("<treshold>", Math.Round(hoardagron.specialTreshold * 100, 5).ToString())
-                        .Replace("<bossTreshold>", Math.Round(hoardagron.specialBossTreshold * 100, 5).ToString())
+                        .Replace("<treshold>", Math.Round(hoardagron.specialTreshold * 100, 2).ToString())
+                        .Replace("<bossTreshold>", Math.Round(hoardagron.specialBossTreshold * 100, 2).ToString())
                         ));
         }
     }

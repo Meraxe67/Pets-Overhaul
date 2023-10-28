@@ -82,8 +82,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
                        .Replace("<shield1>", pigman.tier1Shield.ToString())
                        .Replace("<shield2>", pigman.tier2Shield.ToString())
                        .Replace("<shield3>", pigman.tier3Shield.ToString())
-                       .Replace("<shieldTime>", Math.Round(pigman.shieldTime / 60f, 5).ToString())
-                       .Replace("<cooldown>", Math.Round(pigman.shieldCooldown / 60f, 5).ToString())
+                       .Replace("<shieldTime>", Math.Round(pigman.shieldTime / 60f, 2).ToString())
+                       .Replace("<cooldown>", Math.Round(pigman.shieldCooldown / 60f, 2).ToString())
                        ));
         }
     }

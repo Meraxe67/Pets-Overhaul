@@ -82,10 +82,10 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         .Replace("<baseMult>", tinyFishron.fishingPowerPenalty.ToString())
                         .Replace("<anglerFishingPower>", tinyFishron.fpPerQuest.ToString())
                         .Replace("<flatChance>", tinyFishron.stackChance.ToString())
-                        .Replace("<fishingPowerChance>", Math.Round(tinyFishron.multiplier * 100, 5).ToString())
+                        .Replace("<fishingPowerChance>", Math.Round(tinyFishron.multiplier * 100, 2).ToString())
                         .Replace("<bobberChance>", tinyFishron.bobberChance.ToString())
                         .Replace("<anglerQuests>", Main.LocalPlayer.anglerQuestsFinished.ToString())
-                        .Replace("<currentAnglerWithBaseMult>", Math.Round(Main.LocalPlayer.anglerQuestsFinished * tinyFishron.fpPerQuest + tinyFishron.fishingPowerPenalty, 5).ToString())
+                        .Replace("<currentAnglerWithBaseMult>", Math.Round(Main.LocalPlayer.anglerQuestsFinished * tinyFishron.fpPerQuest + tinyFishron.fishingPowerPenalty, 2).ToString())
                         ));
         }
     }

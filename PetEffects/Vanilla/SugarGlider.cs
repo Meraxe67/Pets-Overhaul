@@ -48,7 +48,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EucaluptusSap")
                         .Replace("<speed>", sugarGlider.speedMult.ToString())
                         .Replace("<acceleration>", sugarGlider.accMult.ToString())
-                        .Replace("<flatIncrease>", Math.Round(sugarGlider.accSpeedRaise * 100, 5).ToString())
+                        .Replace("<flatIncrease>", Math.Round(sugarGlider.accSpeedRaise * 100, 2).ToString())
                         ));
         }
     }

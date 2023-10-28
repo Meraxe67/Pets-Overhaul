@@ -74,14 +74,14 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
             TheTwins theTwins = Main.LocalPlayer.GetModPlayer<TheTwins>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.TwinsPetItem")
-                        .Replace("<closeRange>", Math.Round(theTwins.closeRange / 16f, 5).ToString())
-                        .Replace("<cursedTime>", Math.Round(theTwins.infernoTime / 60f, 5).ToString())
+                        .Replace("<closeRange>", Math.Round(theTwins.closeRange / 16f, 2).ToString())
+                        .Replace("<cursedTime>", Math.Round(theTwins.infernoTime / 60f, 2).ToString())
                         .Replace("<defLifesteal>", theTwins.defMult.ToString())
-                        .Replace("<dealtDmgLifesteal>", Math.Round(theTwins.defLifestealDmgMult * 100, 5).ToString())
-                        .Replace("<longRange>", Math.Round(theTwins.longRange / 16f, 5).ToString())
-                        .Replace("<hpDmg>", Math.Round(theTwins.regularEnemyHpDmg * 100, 5).ToString())
-                        .Replace("<bossHpDmg>", Math.Round(theTwins.bossHpDmg * 100, 5).ToString())
-                        .Replace("<hpDmgCooldown>", Math.Round(theTwins.healthDmgCd / 60f, 5).ToString())
+                        .Replace("<dealtDmgLifesteal>", Math.Round(theTwins.defLifestealDmgMult * 100, 2).ToString())
+                        .Replace("<longRange>", Math.Round(theTwins.longRange / 16f, 2).ToString())
+                        .Replace("<hpDmg>", Math.Round(theTwins.regularEnemyHpDmg * 100, 2).ToString())
+                        .Replace("<bossHpDmg>", Math.Round(theTwins.bossHpDmg * 100, 2).ToString())
+                        .Replace("<hpDmgCooldown>", Math.Round(theTwins.healthDmgCd / 60f, 2).ToString())
                         ));
         }
     }

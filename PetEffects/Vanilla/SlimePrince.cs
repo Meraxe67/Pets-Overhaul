@@ -179,16 +179,16 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
             SlimePrince slimePrince = Main.LocalPlayer.GetModPlayer<SlimePrince>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.KingSlimePetItem")
-                        .Replace("<burnHp>", Math.Round(slimePrince.healthDmg * 100, 5).ToString())
+                        .Replace("<burnHp>", Math.Round(slimePrince.healthDmg * 100, 2).ToString())
                         .Replace("<burnCap>", slimePrince.burnCap.ToString())
                         .Replace("<extraKb>", slimePrince.bonusKb.ToString())
-                        .Replace("<jumpSpd>", Math.Round(slimePrince.slimyJump * 100, 5).ToString())
+                        .Replace("<jumpSpd>", Math.Round(slimePrince.slimyJump * 100, 2).ToString())
                         .Replace("<kbBoost>", slimePrince.slimyKb.ToString())
                         .Replace("<enemyDmgRecieve>", slimePrince.wetRecievedHigher.ToString())
                         .Replace("<enemyDmgDeal>", slimePrince.wetDealtLower.ToString())
-                        .Replace("<dmg>", Math.Round(slimePrince.wetDmg * 100, 5).ToString())
-                        .Replace("<def>", Math.Round(slimePrince.wetDef * 100, 5).ToString())
-                        .Replace("<moveSpd>", Math.Round(slimePrince.wetSpeed * 100, 5).ToString())
+                        .Replace("<dmg>", Math.Round(slimePrince.wetDmg * 100, 2).ToString())
+                        .Replace("<def>", Math.Round(slimePrince.wetDef * 100, 2).ToString())
+                        .Replace("<moveSpd>", Math.Round(slimePrince.wetSpeed * 100, 2).ToString())
                         ));
         }
     }

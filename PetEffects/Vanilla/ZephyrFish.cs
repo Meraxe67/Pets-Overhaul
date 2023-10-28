@@ -110,13 +110,13 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
             ZephyrFish zephyrFish = Main.LocalPlayer.GetModPlayer<ZephyrFish>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ZephyrFish")
-                        .Replace("<windFish>", Math.Round(zephyrFish.speedMult / 8f, 5).ToString())
+                        .Replace("<windFish>", Math.Round(zephyrFish.speedMult / 8f, 2).ToString())
                         .Replace("<regularChance>", zephyrFish.baseChance.ToString())
                         .Replace("<windChance>", zephyrFish.windChance.ToString())
-                        .Replace("<anglerPower>", Math.Round(zephyrFish.powerPerQuest * 100, 5).ToString())
-                        .Replace("<maxAnglerPower>", Math.Round(zephyrFish.maxQuestPower * 100, 5).ToString())
+                        .Replace("<anglerPower>", Math.Round(zephyrFish.powerPerQuest * 100, 2).ToString())
+                        .Replace("<maxAnglerPower>", Math.Round(zephyrFish.maxQuestPower * 100, 2).ToString())
                         .Replace("<anglerQuests>", Main.LocalPlayer.anglerQuestsFinished.ToString())
-                        .Replace("<currentAnglerPower>", Math.Round(zephyrFish.powerPerQuest * Main.LocalPlayer.anglerQuestsFinished * 100, 5).ToString())
+                        .Replace("<currentAnglerPower>", Math.Round(zephyrFish.powerPerQuest * Main.LocalPlayer.anglerQuestsFinished * 100, 2).ToString())
                         ));
         }
     }

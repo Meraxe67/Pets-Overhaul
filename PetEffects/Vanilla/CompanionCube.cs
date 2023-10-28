@@ -90,11 +90,11 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
             CompanionCube companionCube = Main.LocalPlayer.GetModPlayer<CompanionCube>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.CompanionCube")
-                        .Replace("<manaToHealth>", Math.Round(companionCube.manaToHealth * 100, 5).ToString())
-                        .Replace("<healthToMana>", Math.Round(companionCube.healthToMana * 100, 5).ToString())
-                        .Replace("<manaPotionNerf>", Math.Round(companionCube.manaPotionNerf * 100, 5).ToString())
-                        .Replace("<manaToHealthNerf>", Math.Round(companionCube.manaToHealthNerf * 100, 5).ToString())
-                        .Replace("<halfOfSickness>", Math.Round(Player.manaSickLessDmg * 100, 5).ToString())
+                        .Replace("<manaToHealth>", Math.Round(companionCube.manaToHealth * 100, 2).ToString())
+                        .Replace("<healthToMana>", Math.Round(companionCube.healthToMana * 100, 2).ToString())
+                        .Replace("<manaPotionNerf>", Math.Round(companionCube.manaPotionNerf * 100, 2).ToString())
+                        .Replace("<manaToHealthNerf>", Math.Round(companionCube.manaToHealthNerf * 100, 2).ToString())
+                        .Replace("<halfOfSickness>", Math.Round(Player.manaSickLessDmg * 100, 2).ToString())
                         ));
         }
     }

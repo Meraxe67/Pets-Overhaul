@@ -22,9 +22,11 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
                 if (itemChck.dirt == true)
                 {
+                    Main.NewText("dirt");
                     Player.QuickSpawnItem(Player.GetSource_Misc("MiningItem"), ItemID.CopperCoin, ItemPet.Randomizer(item.stack * dirtCoin));
                     if (Juni.junimoExpCheck())
                     {
+                       
                         int value = ItemPet.Randomizer((int)(dirtCoin * Juni.junimoInUseMultiplier * item.stack * Pet.miningExpBoost), 10000);
                         Juni.junimoMiningExp += value;
                         Juni.popupExpMining += value;
@@ -39,6 +41,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     Player.QuickSpawnItem(Player.GetSource_Misc("MiningItem"), ItemID.CopperCoin, ItemPet.Randomizer(item.stack * soilCoin));
                     if (Juni.junimoExpCheck())
                     {
+                        Main.NewText("stone");
                         int value = ItemPet.Randomizer((int)(dirtCoin * Juni.junimoInUseMultiplier * item.stack * Pet.miningExpBoost), 10000);
                         Juni.junimoMiningExp += value;
                         Juni.popupExpMining += value;
@@ -50,6 +53,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 }
                 else if (itemChck.blockNotByPlayer == true)
                 {
+                    Main.NewText("any");
                     Player.QuickSpawnItem(Player.GetSource_Misc("MiningItem"), ItemID.CopperCoin, ItemPet.Randomizer(item.stack * everythingCoin));
                 }
             }

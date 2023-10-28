@@ -29,7 +29,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             if (Pet.PetInUse(ItemID.DogWhistle) && target.active == false && target.rarity > 0 && target.CountsAsACritter == false && target.SpawnedFromStatue == false)
             {
-                Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), ItemID.SilverCoin, ItemPet.Randomizer(rareEnemyCoin * target.rarity));
+                Player.QuickSpawnItem(Player.GetSource_Misc("GlobalItem"), ItemID.SilverCoin, ItemPet.Randomizer(rareEnemyCoin * target.rarity));
             }
         }
         public override void OnCatchNPC(NPC npc, Item item, bool failed)
@@ -39,17 +39,23 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
                 if (npc.rarity > 0)
                 {
-                    Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), ItemID.SilverCoin, ItemPet.Randomizer(rareCritterCoin * npc.rarity));
-                    Player.QuickSpawnItem(Player.GetSource_CatchEntity(npc), npc.catchItem, ItemPet.Randomizer(rareCatchChance));
+                    Player.QuickSpawnItem(Player.GetSource_Misc("GlobalItem"), ItemID.SilverCoin, ItemPet.Randomizer(rareCritterCoin * npc.rarity));
+                    for (int i = 0; i < ItemPet.Randomizer(rareCatchChance); i++)
+                    {
+                        Player.QuickSpawnItem(Player.GetSource_Misc("GlobalItem"), npc.catchItem, 1);
+                        if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+                            SoundEngine.PlaySound(SoundID.Item65 with { PitchVariance = 0.3f, MaxInstances = 5, Volume = 0.5f }, Player.position);
+                    }
+                    
                 }
                 else
                 {
-                    Player.QuickSpawnItem(Player.GetSource_CatchEntity(npc), npc.catchItem, ItemPet.Randomizer(catchChance));
-                }
-
-                if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
-                {
-                    SoundEngine.PlaySound(SoundID.Item65 with { PitchVariance = 0.3f, MaxInstances = 5 }, Player.position);
+                    for (int i = 0; i < ItemPet.Randomizer(catchChance); i++)
+                    {
+                        Player.QuickSpawnItem(Player.GetSource_Misc("GlobalItem"), npc.catchItem, 1);
+                            SoundEngine.PlaySound(SoundID.Item65 with { PitchVariance = 0.3f, MaxInstances = 1, Volume = 0.5f }, Player.position);
+                    }
+                    
                 }
             }
         }
@@ -72,8 +78,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DogWhistle")
                 .Replace("<critter>", puppy.catchChance.ToString())
                 .Replace("<rareCritter>", puppy.rareCatchChance.ToString())
-                .Replace("<rareCritterCoin>", Math.Round(puppy.rareCritterCoin / 100f, 5).ToString())
-                .Replace("<rareEnemyCoin>", Math.Round(puppy.rareEnemyCoin / 100f, 5).ToString())
+                .Replace("<rareCritterCoin>", Math.Round(puppy.rareCritterCoin / 100f, 2).ToString())
+                .Replace("<rareEnemyCoin>", Math.Round(puppy.rareEnemyCoin / 100f, 2).ToString())
             ));
         }
     }

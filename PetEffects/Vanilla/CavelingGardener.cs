@@ -15,6 +15,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int cavelingRegularPlantChance = 30;
         public int cavelingGemTreeChance = 100;
         public int cavelingRarePlantChance = 15;
+        public float shineMult = 0.5f;
         public override bool OnPickup(Item item)
         {
             if (item.TryGetGlobalItem(out ItemPet itemChck) && Pet.PickupChecks(item, ItemID.GlowTulip, itemChck))
@@ -42,7 +43,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             if (Pet.PetInUse(ItemID.GlowTulip))
             {
-                Lighting.AddLight(Player.Center, TorchID.Blue);
+                Lighting.AddLight(Player.Center, new Microsoft.Xna.Framework.Vector3(0.0013f * Main.mouseTextColor, 0.0064f * Main.mouseTextColor, 0.0115f * Main.mouseTextColor) * shineMult);
             }
         }
     }
@@ -65,6 +66,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 .Replace("<harvestChance>", cavelingGardener.cavelingRegularPlantChance.ToString())
                 .Replace("<rarePlantChance>", cavelingGardener.cavelingRarePlantChance.ToString())
                 .Replace("<gemstoneTreeChance>", cavelingGardener.cavelingGemTreeChance.ToString())
+                .Replace("<shineMult>", cavelingGardener.shineMult.ToString())
             ));
         }
     }

@@ -138,13 +138,13 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
             IceQueen iceQueen = Main.LocalPlayer.GetModPlayer<IceQueen>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.IceQueenPetItem")
-                        .Replace("<frozenTombTime>", Math.Round(iceQueen.tombTime / 60f, 5).ToString())
-                        .Replace("<range>", Math.Round(iceQueen.queenRange / 16f, 5).ToString())
-                        .Replace("<slowAmount>", Math.Round(iceQueen.slowAmount * 100, 5).ToString())
+                        .Replace("<frozenTombTime>", Math.Round(iceQueen.tombTime / 60f, 2).ToString())
+                        .Replace("<range>", Math.Round(iceQueen.queenRange / 16f, 2).ToString())
+                        .Replace("<slowAmount>", Math.Round(iceQueen.slowAmount * 100, 2).ToString())
                         .Replace("<healthRecovery>", (iceQueen.tombTime / 3).ToString())
                         .Replace("<baseDmg>", iceQueen.freezeDamage.ToString())
-                        .Replace("<postTombImmunity>", Math.Round(iceQueen.immuneTime / 60f, 5).ToString())
-                        .Replace("<tombCooldown>", Math.Round(iceQueen.cooldown / 3600f, 5).ToString())
+                        .Replace("<postTombImmunity>", Math.Round(iceQueen.immuneTime / 60f, 2).ToString())
+                        .Replace("<tombCooldown>", Math.Round(iceQueen.cooldown / 3600f, 2).ToString())
                         ));
         }
     }

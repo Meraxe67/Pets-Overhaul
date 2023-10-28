@@ -60,10 +60,10 @@ namespace PetsOverhaul.PetEffects.Vanilla
             AlienSkater alienSkater = Main.LocalPlayer.GetModPlayer<AlienSkater>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.MartianPetItem")
                 .Replace("<wingMult>", alienSkater.wingTime.ToString())
-                .Replace("<acc>", Math.Round(alienSkater.accelerator * 100, 5).ToString())
+                .Replace("<acc>", Math.Round(alienSkater.accelerator * 100, 2).ToString())
                 .Replace("<speedMult>", alienSkater.speedMult.ToString())
                 .Replace("<accMult>", alienSkater.accMult.ToString())
-                .Replace("<flatSpdAcc>", Math.Round(alienSkater.speedAccIncr * 100, 5).ToString())
+                .Replace("<flatSpdAcc>", Math.Round(alienSkater.speedAccIncr * 100, 2).ToString())
             ));
         }
     }

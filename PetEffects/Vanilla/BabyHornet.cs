@@ -130,11 +130,11 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
             BabyHornet babyHornet = Main.LocalPlayer.GetModPlayer<BabyHornet>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.Nectar")
-                .Replace("<antidotePercent>", Math.Round(babyHornet.healthRecovery * 100, 5).ToString())
-                .Replace("<antidoteCd>", Math.Round(babyHornet.nectarCooldown / 60f, 5).ToString())
-                .Replace("<moveSpd>", Math.Round(babyHornet.moveSpdIncr * 100, 5).ToString())
+                .Replace("<antidotePercent>", Math.Round(babyHornet.healthRecovery * 100, 2).ToString())
+                .Replace("<antidoteCd>", Math.Round(babyHornet.nectarCooldown / 60f, 2).ToString())
+                .Replace("<moveSpd>", Math.Round(babyHornet.moveSpdIncr * 100, 2).ToString())
                 .Replace("<def>", babyHornet.defReduction.ToString())
-                .Replace("<dmgCrit>", Math.Round(babyHornet.dmgReduction * 100, 5).ToString())
+                .Replace("<dmgCrit>", Math.Round(babyHornet.dmgReduction * 100, 2).ToString())
                 .Replace("<maxMinion>", babyHornet.maxMinion.ToString())
                 .Replace("<regularChance>", babyHornet.beeChance.ToString())
                 .Replace("<summonChance>", (babyHornet.beeChance * 2).ToString())

@@ -71,10 +71,10 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
             ItsyBetsy itsyBetsy = Main.LocalPlayer.GetModPlayer<ItsyBetsy>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DD2BetsyPetItem")
-                        .Replace("<debuffTime>", Math.Round(itsyBetsy.debuffTime / 60f, 5).ToString())
-                        .Replace("<defDecrease>", Math.Round(itsyBetsy.defReduction * 100, 5).ToString())
+                        .Replace("<debuffTime>", Math.Round(itsyBetsy.debuffTime / 60f, 2).ToString())
+                        .Replace("<defDecrease>", Math.Round(itsyBetsy.defReduction * 100, 2).ToString())
                         .Replace("<maxStack>", itsyBetsy.maxStacks.ToString())
-                        .Replace("<missingHpSteal>", Math.Round(itsyBetsy.missingHpRecover * 100, 5).ToString())
+                        .Replace("<missingHpSteal>", Math.Round(itsyBetsy.missingHpRecover * 100, 2).ToString())
                         ));
         }
     }

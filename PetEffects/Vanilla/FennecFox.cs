@@ -53,10 +53,10 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
             FennecFox fennecFox = Main.LocalPlayer.GetModPlayer<FennecFox>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ExoticEasternChewToy")
-                        .Replace("<meleeSpd>", Math.Round(fennecFox.meleeSpdIncrease * 100, 5).ToString())
-                        .Replace("<moveSpd>", Math.Round(fennecFox.speedIncrease * 100, 5).ToString())
+                        .Replace("<meleeSpd>", Math.Round(fennecFox.meleeSpdIncrease * 100, 2).ToString())
+                        .Replace("<moveSpd>", Math.Round(fennecFox.speedIncrease * 100, 2).ToString())
                         .Replace("<sizeNerf>", fennecFox.sizeDecrease.ToString())
-                        .Replace("<dmg>", Math.Round(fennecFox.meleeDmg * 100, 5).ToString())
+                        .Replace("<dmg>", Math.Round(fennecFox.meleeDmg * 100, 2).ToString())
                         ));
         }
     }

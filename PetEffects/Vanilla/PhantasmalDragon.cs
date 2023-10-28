@@ -165,14 +165,14 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
             PhantasmalDragon phantasmalDragon = Main.LocalPlayer.GetModPlayer<PhantasmalDragon>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.LunaticCultistPetItem")
-                       .Replace("<cooldown>", Math.Round(phantasmalDragon.phantasmDragonCooldown / 60f, 5).ToString())
+                       .Replace("<cooldown>", Math.Round(phantasmalDragon.phantasmDragonCooldown / 60f, 2).ToString())
                        .Replace("<icePierce>", phantasmalDragon.icePierce.ToString())
-                       .Replace("<icePercent>", Math.Round(phantasmalDragon.iceMult * 100, 5).ToString())
+                       .Replace("<icePercent>", Math.Round(phantasmalDragon.iceMult * 100, 2).ToString())
                        .Replace("<iceFlat>", phantasmalDragon.iceFlat.ToString())
-                       .Replace("<lightPercent>", Math.Round(phantasmalDragon.lightMult * 100, 5).ToString())
+                       .Replace("<lightPercent>", Math.Round(phantasmalDragon.lightMult * 100, 2).ToString())
                        .Replace("<lightFlat>", phantasmalDragon.lightFlat.ToString())
                        .Replace("<lightPierce>", phantasmalDragon.lightPierce.ToString())
-                       .Replace("<firePercent>", Math.Round(phantasmalDragon.fireMult * 100, 5).ToString())
+                       .Replace("<firePercent>", Math.Round(phantasmalDragon.fireMult * 100, 2).ToString())
                        .Replace("<fireFlat>", phantasmalDragon.fireFlat.ToString())
                        ));
         }

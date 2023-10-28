@@ -54,8 +54,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
             BabyEater babyEater = Main.LocalPlayer.GetModPlayer<BabyEater>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EatersBone")
-                .Replace("<moveSpd>", Math.Round(babyEater.moveSpd * 100, 5).ToString())
-                .Replace("<jumpSpd>", Math.Round(babyEater.jumpSpd * 100, 5).ToString())
+                .Replace("<moveSpd>", Math.Round(babyEater.moveSpd * 100, 2).ToString())
+                .Replace("<jumpSpd>", Math.Round(babyEater.jumpSpd * 100, 2).ToString())
                 .Replace("<fallRes>", babyEater.fallDamageTile.ToString())
             ));
         }

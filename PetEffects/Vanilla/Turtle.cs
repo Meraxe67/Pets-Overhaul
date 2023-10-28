@@ -60,8 +60,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.Seaweed")
             .Replace("<def>", turtle.def.ToString())
                         .Replace("<kbResist>", turtle.kbResist.ToString())
-                        .Replace("<moveSpd>", Math.Round(turtle.moveSpd * 100, 5).ToString())
-                        .Replace("<dmg>", Math.Round(turtle.dmgReduce * 100, 5).ToString())
+                        .Replace("<moveSpd>", Math.Round(turtle.moveSpd * 100, 2).ToString())
+                        .Replace("<dmg>", Math.Round(turtle.dmgReduce * 100, 2).ToString())
                         ));
         }
     }

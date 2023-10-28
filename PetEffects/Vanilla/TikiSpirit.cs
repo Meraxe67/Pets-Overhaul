@@ -82,8 +82,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
             TikiSpirit tikiSpirit = Main.LocalPlayer.GetModPlayer<TikiSpirit>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.TikiTotem")
-                       .Replace("<atkSpdToDmg>", Math.Round(tikiSpirit.atkSpdToDmgConversion * 100, 5).ToString())
-                       .Replace("<atkSpdToRange>", Math.Round(tikiSpirit.atkSpdToRangeConversion * 100, 5).ToString())
+                       .Replace("<atkSpdToDmg>", Math.Round(tikiSpirit.atkSpdToDmgConversion * 100, 2).ToString())
+                       .Replace("<atkSpdToRange>", Math.Round(tikiSpirit.atkSpdToRangeConversion * 100, 2).ToString())
                        .Replace("<nonWhipCrit>", tikiSpirit.nonWhipCrit.ToString())
                        .Replace("<whipCrit>", tikiSpirit.whipCritBonus.ToString())
                        ));

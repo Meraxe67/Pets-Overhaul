@@ -63,11 +63,11 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
             BabyImp babyImp = Main.LocalPlayer.GetModPlayer<BabyImp>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.HellCake")
-                .Replace("<immuneTime>", Math.Round(babyImp.lavaImmune / 60f, 5).ToString())
+                .Replace("<immuneTime>", Math.Round(babyImp.lavaImmune / 60f, 2).ToString())
                 .Replace("<lavaDef>", babyImp.lavaDef.ToString())
-                .Replace("<lavaSpd>", Math.Round(babyImp.lavaSpd * 100, 5).ToString())
+                .Replace("<lavaSpd>", Math.Round(babyImp.lavaSpd * 100, 2).ToString())
                 .Replace("<obbyDef>", babyImp.obbyDef.ToString())
-                .Replace("<obbySpd>", Math.Round(babyImp.obbySpd * 100, 5).ToString())
+                .Replace("<obbySpd>", Math.Round(babyImp.obbySpd * 100, 2).ToString())
             ));
         }
     }

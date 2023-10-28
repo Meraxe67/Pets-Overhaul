@@ -42,7 +42,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
             PlanteraSeedling planteraSeedling = Main.LocalPlayer.GetModPlayer<PlanteraSeedling>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.PlanteraPetItem")
-                        .Replace("<maxAmount>", Math.Round(planteraSeedling.secondMultiplier * 100 + 100, 5).ToString())
+                        .Replace("<maxAmount>", Math.Round(planteraSeedling.secondMultiplier * 100 + 100, 2).ToString())
                         ));
         }
     }

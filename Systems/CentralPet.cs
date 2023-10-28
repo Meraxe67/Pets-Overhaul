@@ -22,6 +22,10 @@ namespace PetsOverhaul.Systems
     public sealed class GlobalPet : ModPlayer
     {
         /// <summary>
+        /// Influences the chance to increase stack of the item from your pet that doesn't fit into any other fortune category. This also increases all other fortunes with half effectiveness.
+        /// </summary>
+        public int globalFortune = 0;
+        /// <summary>
         /// Influences the chance to increase stack of the item that your Harvesting Pet gave.
         /// </summary>
         public int harvestingFortune = 0;
@@ -84,7 +88,7 @@ namespace PetsOverhaul.Systems
         /// </summary>
         public bool PickupChecks(Item item, int petitemid, ItemPet itemPet)
         {
-            if (itemPet.pickedUpBefore == false && Player.CanPullItem(item, Player.ItemSpace(item)) && PetInUse(petitemid) && item.maxStack != 1)
+            if (itemPet.pickedUpBefore == false && Player.CanPullItem(item, Player.ItemSpace(item)) && PetInUse(petitemid))
             {
                 return true;
             }
@@ -95,11 +99,19 @@ namespace PetsOverhaul.Systems
         }
         public override bool OnPickup(Item item)
         {
-            if (item.TryGetGlobalItem(out ItemPet fortune) && fortune.pickedUpBefore == false && Player.CanPullItem(item, Player.ItemSpace(item)) && item.maxStack != 1)
+            if (item.TryGetGlobalItem(out ItemPet fortune) && fortune.pickedUpBefore == false && Player.CanPullItem(item, Player.ItemSpace(item)))
             {
+                if (fortune.globalDrop)
+                {
+                    for (int i = 0; i < ItemPet.Randomizer(globalFortune * item.stack); i++)
+                    {
+                        Player.QuickSpawnItem(Player.GetSource_Misc("GlobalFortuneItem"), item, 1);
+                    }
+                }
+
                 if (fortune.harvestingDrop)
                 {
-                    for (int i = 0; i < ItemPet.Randomizer(harvestingFortune * item.stack); i++)
+                    for (int i = 0; i < ItemPet.Randomizer((globalFortune*10/2 + harvestingFortune*10) * item.stack,1000); i++) //Multiplied by 10 and divided by 1000 since we divide globalFortune by 2, to get more precise numbers.
                     {
                         Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingFortuneItem"), item, 1);
                     }
@@ -107,7 +119,7 @@ namespace PetsOverhaul.Systems
 
                 if (fortune.miningDrop)
                 {
-                    for (int i = 0; i < ItemPet.Randomizer(miningFortune * item.stack); i++)
+                    for (int i = 0; i < ItemPet.Randomizer((globalFortune*10/2 + miningFortune*10) * item.stack,1000); i++)
                     {
                         Player.QuickSpawnItem(Player.GetSource_Misc("MiningFortuneItem"), item, 1);
                     }
@@ -115,7 +127,7 @@ namespace PetsOverhaul.Systems
 
                 if (fortune.fishingDrop)
                 {
-                    for (int i = 0; i < ItemPet.Randomizer(fishingFortune * item.stack); i++)
+                    for (int i = 0; i < ItemPet.Randomizer((globalFortune*10/2 + fishingFortune) * item.stack,1000); i++)
                     {
                         Player.QuickSpawnItem(Player.GetSource_Misc("FishingFortuneItem"), item, 1);
                     }
@@ -362,6 +374,7 @@ namespace PetsOverhaul.Systems
             fishingFortune = 0;
             harvestingFortune = 0;
             miningFortune = 0;
+            globalFortune = 0;
             fishingExpBoost = 1f;
             harvestingExpBoost = 1f;
             miningExpBoost = 1f;
@@ -378,7 +391,7 @@ namespace PetsOverhaul.Systems
 
             if (timer == 0)
             {
-                if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false && ((ModContent.GetInstance<Personalization>().LowCooldownSoundDisabled && timerMax > 90) || ModContent.GetInstance<Personalization>().LowCooldownSoundDisabled == false))
+                if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false && (ModContent.GetInstance<Personalization>().LowCooldownSoundDisabled && timerMax > 90 || ModContent.GetInstance<Personalization>().LowCooldownSoundDisabled == false))
                 {
                     SoundEngine.PlaySound(SoundID.MaxMana with { PitchVariance = 0.3f, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew }, Player.position);
                 }
@@ -508,11 +521,12 @@ namespace PetsOverhaul.Systems
         public bool harvestingDrop = false;
         public bool miningDrop = false;
         public bool fishingDrop = false;
+        public bool globalDrop = false;
         public bool fortuneHarvestingDrop = false;
         public bool fortuneMiningDrop = false;
         public bool fortuneFishingDrop = false;
         /// <summary>
-        /// Randomizes the given number. numToBeRandomized / randomizeTo returns how many times its 100% chance and rolls if the leftover, non-100% amount is true. item.stack += Randomizer(250) returns +2 and +1 more with 50% chance.
+        /// Randomizes the given number. numToBeRandomized / randomizeTo returns how many times its 100% chance and rolls if the leftover, non-100% amount is true. Randomizer(250) returns +2 and +1 more with 50% chance.
         /// </summary>
         public static int Randomizer(int numToBeRandomized, int randomizeTo = 100)
         {
@@ -608,7 +622,7 @@ namespace PetsOverhaul.Systems
             {
                 oreBoost = false;
             }
-            if (source is EntitySource_TileBreak brokenDirt && TileID.Sets.Dirt[Main.tile[brokenDirt.TileCoords].TileType] && PlayerPlacedBlockList.placedBlocksByPlayer.Contains(brokenDirt.TileCoords.ToVector2()))
+            if (source is EntitySource_TileBreak brokenDirt && TileID.Sets.Dirt[Main.tile[brokenDirt.TileCoords].TileType] && PlayerPlacedBlockList.placedBlocksByPlayer.Contains(brokenDirt.TileCoords.ToVector2()) == false)
             {
                 dirt = true;
             }
@@ -616,7 +630,7 @@ namespace PetsOverhaul.Systems
             {
                 dirt = false;
             }
-            if (source is EntitySource_TileBreak soil && (TileID.Sets.Conversion.Moss[Main.tile[soil.TileCoords].TileType] || TileChecks.commonTiles[Main.tile[soil.TileCoords].TileType]) && PlayerPlacedBlockList.placedBlocksByPlayer.Contains(soil.TileCoords.ToVector2()))
+            if (source is EntitySource_TileBreak soil && (TileID.Sets.Conversion.Moss[Main.tile[soil.TileCoords].TileType] || TileChecks.commonTiles[Main.tile[soil.TileCoords].TileType]) && PlayerPlacedBlockList.placedBlocksByPlayer.Contains(soil.TileCoords.ToVector2()) == false)
             {
                 commonBlock = true;
             }
@@ -664,6 +678,14 @@ namespace PetsOverhaul.Systems
             {
                 fishingDrop = false;
             }
+            if (source is EntitySource_Misc { Context: "GlobalItem" })
+            {
+                fishingDrop = true;
+            }
+            else
+            {
+                fishingDrop = false;
+            }
             if (source is EntitySource_Misc { Context: "HarvestingFortuneItem" })
             {
                 fortuneHarvestingDrop = true;
@@ -701,7 +723,7 @@ namespace PetsOverhaul.Systems
         {
             BitsByte sources1 = new(itemFromNpc, herbBoost, rareHerbBoost, oreBoost, bambooBoost, dirt, commonBlock, tree);
             BitsByte sources2 = new(blockNotByPlayer, gemTree, pickedUpBefore, itemFromBoss, itemFromBag, harvestingDrop, miningDrop, fishingDrop);
-            BitsByte sources3 = new(fortuneHarvestingDrop, fortuneMiningDrop, fortuneFishingDrop);
+            BitsByte sources3 = new(globalDrop,fortuneHarvestingDrop, fortuneMiningDrop, fortuneFishingDrop);
             writer.Write(sources1);
             writer.Write(sources2);
             writer.Write(sources3);
@@ -713,7 +735,7 @@ namespace PetsOverhaul.Systems
             BitsByte sources2 = reader.ReadByte();
             sources2.Retrieve(ref blockNotByPlayer, ref gemTree, ref pickedUpBefore, ref itemFromBoss, ref itemFromBag, ref harvestingDrop, ref miningDrop, ref fishingDrop);
             BitsByte sources3 = reader.ReadByte();
-            sources3.Retrieve(ref fortuneHarvestingDrop, ref fortuneMiningDrop, ref fortuneFishingDrop);
+            sources3.Retrieve(ref globalDrop,ref fortuneHarvestingDrop, ref fortuneMiningDrop, ref fortuneFishingDrop);
         }
 
     }
@@ -724,7 +746,7 @@ namespace PetsOverhaul.Systems
     {
         public enum SlowId
         {
-            Grinch = 0, Snowman = 1, QueenSlime = 2, Deerclops = 3, IceQueen = 4, Misc = 5
+            Grinch = 0, Snowman = 1, QueenSlime = 2, Deerclops = 3, IceQueen = 4, PikachuStatic = 5, Misc = 6
         }
         public List<(SlowId, float slowAmount, int slowTime)> SlowList = new(100);
         /// <summary>

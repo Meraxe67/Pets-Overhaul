@@ -134,7 +134,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
             Spider spider = Main.LocalPlayer.GetModPlayer<Spider>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.SpiderEgg")
-                        .Replace("<poisonTime>", Math.Round(spider.poisonTime / 60f, 5).ToString())
+                        .Replace("<poisonTime>", Math.Round(spider.poisonTime / 60f, 2).ToString())
                         .Replace("<poiPerc>", spider.poisonDmgMult.ToString())
                         .Replace("<poiFlat>", spider.poisonFlatDmg.ToString())
                         .Replace("<poiKb>", spider.kbIncreasePoison.ToString())

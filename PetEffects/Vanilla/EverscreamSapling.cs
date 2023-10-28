@@ -68,10 +68,10 @@ namespace PetsOverhaul.PetEffects.Vanilla
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EverscreamPetItem")
                         .Replace("<magicCritNerf>", everscreamSapling.critMult.ToString())
                         .Replace("<maxMana>", everscreamSapling.manaIncrease.ToString())
-                        .Replace("<missingMana>", Math.Round(everscreamSapling.missingManaPercent * 100, 5).ToString())
+                        .Replace("<missingMana>", Math.Round(everscreamSapling.missingManaPercent * 100, 2).ToString())
                         .Replace("<flatMana>", everscreamSapling.flatRecovery.ToString())
                         .Replace("<manaRecoveryCd>", (everscreamSapling.cooldown / 60f).ToString())
-                        .Replace("<dmg>", Math.Round(everscreamSapling.dmgIncr * 100, 5).ToString())
+                        .Replace("<dmg>", Math.Round(everscreamSapling.dmgIncr * 100, 2).ToString())
                         .Replace("<crit>", everscreamSapling.howMuchCrit.ToString())
                         ));
         }

@@ -68,7 +68,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         .Replace("<seaCreatureDmg>", sharkPup.seaCreatureDamage.ToString())
                         .Replace("<seaCreatureResist>", sharkPup.seaCreatureResist.ToString())
                         .Replace("<shield>", sharkPup.shieldOnCatch.ToString())
-                        .Replace("<shieldTime>", Math.Round(sharkPup.shieldTime / 60f, 5).ToString())
+                        .Replace("<shieldTime>", Math.Round(sharkPup.shieldTime / 60f, 2).ToString())
                         ));
         }
     }

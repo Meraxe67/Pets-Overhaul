@@ -98,9 +98,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
             Bernie bernie = Main.LocalPlayer.GetModPlayer<Bernie>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BerniePetItem")
-                .Replace("<burnRange>", Math.Round(bernie.bernieRange / 16f, 5).ToString())
-                .Replace("<burnDrainMana>", Math.Round(bernie.burnDrain * 4 * 0.05f, 5).ToString())
-                .Replace("<burnDrainHealth>", Math.Round(bernie.burnDrain * 2 * 0.05f, 5).ToString())
+                .Replace("<burnRange>", Math.Round(bernie.bernieRange / 16f, 2).ToString())
+                .Replace("<burnDrainMana>", Math.Round(bernie.burnDrain * 4 * 0.05f, 2).ToString())
+                .Replace("<burnDrainHealth>", Math.Round(bernie.burnDrain * 2 * 0.05f, 2).ToString())
                 .Replace("<maxDrain>", bernie.maxBurning.ToString())
             ));
         }

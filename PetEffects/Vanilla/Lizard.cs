@@ -132,13 +132,13 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
             Lizard lizard = Main.LocalPlayer.GetModPlayer<Lizard>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.LizardEgg")
-                        .Replace("<transformTime>", Math.Round(lizard.transformTime / 60f, 5).ToString())
+                        .Replace("<transformTime>", Math.Round(lizard.transformTime / 60f, 2).ToString())
                         .Replace("<hitCount>", lizard.maxSteroidCount.ToString())
                         .Replace("<hitDmg>", lizard.dmgMultIncrease.ToString())
                         .Replace("<hitFlat>", lizard.dmgFlatIncrease.ToString())
-                        .Replace("<lifesteal>", Math.Round(lizard.lizardLifesteal * 100, 5).ToString())
-                        .Replace("<maxHpRecovery>", Math.Round(lizard.lizardLifestealHealth * 100, 5).ToString())
-                        .Replace("<transformCooldown>", Math.Round(lizard.transformCd / 60f, 5).ToString())
+                        .Replace("<lifesteal>", Math.Round(lizard.lizardLifesteal * 100, 2).ToString())
+                        .Replace("<maxHpRecovery>", Math.Round(lizard.lizardLifestealHealth * 100, 2).ToString())
+                        .Replace("<transformCooldown>", Math.Round(lizard.transformCd / 60f, 2).ToString())
                         ));
         }
     }

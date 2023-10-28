@@ -62,9 +62,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
             Estee estee = Main.LocalPlayer.GetModPlayer<Estee>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.CelestialWand")
-                        .Replace("<maxMana>", Math.Round(estee.manaIncrease * 100, 5).ToString())
+                        .Replace("<maxMana>", Math.Round(estee.manaIncrease * 100, 2).ToString())
                         .Replace("<dmgPenalty>", estee.penaltyMult.ToString())
-                        .Replace("<manaToDmg>", Math.Round(estee.manaMagicIncreasePer1 * 100, 5).ToString())
+                        .Replace("<manaToDmg>", Math.Round(estee.manaMagicIncreasePer1 * 100, 2).ToString())
                         ));
         }
     }

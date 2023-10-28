@@ -111,14 +111,14 @@ namespace PetsOverhaul.PetEffects.Vanilla
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DD2OgrePetItem")
                 .Replace("<moveSpdNerf>", babyOgre.movespdNerf.ToString())
                 .Replace("<atkSpdNerf>", babyOgre.atkSpdMult.ToString())
-                .Replace("<dmgNerf>", Math.Round(babyOgre.nonMeleedmg * 100, 5).ToString())
+                .Replace("<dmgNerf>", Math.Round(babyOgre.nonMeleedmg * 100, 2).ToString())
                 .Replace("<horizontalNerf>", babyOgre.horizontalMult.ToString())
                 .Replace("<verticalNerf>", babyOgre.verticalMult.ToString())
                 .Replace("<trueMeleeMults>", babyOgre.trueMeleeMultipliers.ToString())
                 .Replace("<trueMeleeCrit>", babyOgre.crit.ToString())
-                .Replace("<healthIncrease>", Math.Round(babyOgre.healthIncrease * 100, 5).ToString())
+                .Replace("<healthIncrease>", Math.Round(babyOgre.healthIncrease * 100, 2).ToString())
                 .Replace("<defMult>", babyOgre.defMult.ToString())
-                .Replace("<damageReduction>", Math.Round(babyOgre.dr * 100, 5).ToString())
+                .Replace("<damageReduction>", Math.Round(babyOgre.dr * 100, 2).ToString())
             ));
         }
 

@@ -61,8 +61,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
             Sapling sapling = Main.LocalPlayer.GetModPlayer<Sapling>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.Seedling")
-                        .Replace("<lifesteal>", Math.Round(sapling.regularLifesteal * 100, 5).ToString())
-                        .Replace("<planteraSteal>", Math.Round(sapling.planteraLifesteal * 100, 5).ToString())
+                        .Replace("<lifesteal>", Math.Round(sapling.regularLifesteal * 100, 2).ToString())
+                        .Replace("<planteraSteal>", Math.Round(sapling.planteraLifesteal * 100, 2).ToString())
                         ));
         }
     }
