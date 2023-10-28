@@ -53,6 +53,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     for (int i = 0; i < ItemPet.Randomizer(catchChance); i++)
                     {
                         Player.QuickSpawnItem(Player.GetSource_Misc("GlobalItem"), npc.catchItem, 1);
+                        if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
                             SoundEngine.PlaySound(SoundID.Item65 with { PitchVariance = 0.3f, MaxInstances = 1, Volume = 0.5f }, Player.position);
                     }
                     
