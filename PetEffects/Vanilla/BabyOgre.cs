@@ -13,18 +13,38 @@ namespace PetsOverhaul.PetEffects.Vanilla
     public sealed class BabyOgre : ModPlayer
     {
         private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
-        public float dr = 0.1f;
+        public float dr = 0.09f;
         public float nonMeleedmg = 0.2f;
         public int crit = 20;
-        public float defMult = 1.25f;
-        public float movespdNerf = 0.5f;
+        public float defMult = 1.33f;
+        public float movespdNerf = 0.6f;
         public float healthIncrease = 0.25f;
-        public float atkSpdMult = 0.3f;
+        public float atkSpdMult = 0.33f;
         public float horizontalMult = 0.8f;
         public float verticalMult = 0.7f;
-        public float trueMeleeMultipliers = 3.5f;
+        public float trueMeleeMultipliers = 3f;
+        
         public override void PostUpdateEquips()
         {
+            if (Main.masterMode == true)
+            {
+                healthIncrease = 0.75f;
+                dr = 0.075f;
+                defMult = 1.33f;
+            }
+            else if (Main.expertMode == true)
+            {
+                healthIncrease = 0.50f;
+                dr = 0.05f;
+                defMult = 1.26f;
+            }
+            else
+            {
+                healthIncrease = 0.25f;
+                dr = 0.025f;
+                defMult = 1.19f;
+            }
+
             if (Pet.PetInUseWithSwapCd(ItemID.DD2OgrePetItem) && Player.mount.Active == false)
             {
                 Player.endurance += dr;
@@ -35,20 +55,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 Player.moveSpeed *= movespdNerf;
                 Player.maxRunSpeed *= movespdNerf;
                 Player.noKnockback = true;
-                if (Main.masterMode == true)
-                {
-                    healthIncrease = Player.statLifeMax2 * 0.75f;
-                }
-                else if (Main.expertMode == true)
-                {
-                    healthIncrease = Player.statLifeMax2 * 0.50f;
-                }
-                else
-                {
-                    healthIncrease = Player.statLifeMax2 * 0.25f;
-                }
-
-                Player.statLifeMax2 += (int)healthIncrease;
+                Player.statLifeMax2 += (int)(healthIncrease*Player.statLifeMax2);
             }
         }
         public override float UseSpeedMultiplier(Item item)
