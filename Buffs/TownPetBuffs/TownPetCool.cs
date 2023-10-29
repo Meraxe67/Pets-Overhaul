@@ -21,7 +21,10 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
                     buffName = "Cool Aura";
                 }
             }
-            tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetCool>()).Replace("<CoolCrit>", Main.LocalPlayer.GetModPlayer<TownPet>().critHitsAreCool.ToString());
+            tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetCool>())
+                .Replace("<CoolCrit>", Main.LocalPlayer.GetModPlayer<TownPet>().critHitsAreCool.ToString())
+                .Replace("<CoolMining>", Main.LocalPlayer.GetModPlayer<TownPet>().coolMiningFort.ToString())
+                ;
             rare = 0;
         }
     }

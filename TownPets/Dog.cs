@@ -22,7 +22,8 @@ namespace PetsOverhaul.TownPets
         {
             if (Player.HasBuff(ModContent.BuffType<TownPetDog>()))
             {
-                dogFish += 1;
+                Player.fishingSkill += dogFish;
+                Pet.fishingExpBoost += dogFishExp;
             }
         }
     }

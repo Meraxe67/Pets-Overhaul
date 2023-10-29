@@ -2,6 +2,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using System;
 namespace PetsOverhaul.Buffs.TownPetBuffs
 {
     public class TownPetSquire : ModBuff
@@ -20,7 +21,10 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
                     buffName = "Courageous Aura";
                 }
             }
-            tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetSquire>()).Replace("<SquireDmg>", Main.LocalPlayer.GetModPlayer<TownPet>().squireDamage.ToString());
+            tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetSquire>())
+                .Replace("<SquireDmg>", Math.Round(Main.LocalPlayer.GetModPlayer<TownPet>().squireDamage * 100, 2).ToString())
+                .Replace("<SquireMining>", Math.Round(Main.LocalPlayer.GetModPlayer<TownPet>().squireMiningExp * 100, 2).ToString())
+                ;
             rare = 0;
         }
     }

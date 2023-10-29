@@ -24,7 +24,9 @@ namespace PetsOverhaul.TownPets
             if (Player.HasBuff(ModContent.BuffType<TownPetMystic>()))
             {
                 Player.GetModPlayer<GlobalPet>().abilityHaste += mysticHaste;
-
+                Pet.fishingExpBoost += mysticAllExp;
+                Pet.miningExpBoost += mysticAllExp;
+                Pet.harvestingExpBoost += mysticAllExp;
             }
         }
     }

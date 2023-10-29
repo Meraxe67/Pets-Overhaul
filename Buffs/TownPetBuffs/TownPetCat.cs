@@ -21,7 +21,10 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
                     buffName = "Cat Aura";
                 }
             }
-            tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetCat>()).Replace("<CatMovespd>", Main.LocalPlayer.GetModPlayer<TownPet>().catSpeed.ToString());
+            tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetCat>())
+                .Replace("<CatMovespd>", Main.LocalPlayer.GetModPlayer<TownPet>().catSpeed.ToString())
+                .Replace("<CatFish>", Main.LocalPlayer.GetModPlayer<TownPet>().catFishFort.ToString())
+                ;
             rare = 0;
         }
     }

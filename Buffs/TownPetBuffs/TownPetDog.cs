@@ -2,6 +2,8 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using System;
+
 namespace PetsOverhaul.Buffs.TownPetBuffs
 {
     public class TownPetDog : ModBuff
@@ -20,7 +22,10 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
                     buffName = "Dog Aura";
                 }
             }
-            tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetDog>()).Replace("<DogFish>", Main.LocalPlayer.GetModPlayer<TownPet>().dogFish.ToString());
+            tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetDog>())
+                .Replace("<DogFish>", Main.LocalPlayer.GetModPlayer<TownPet>().dogFish.ToString())
+                .Replace("<DogFishExp>", Math.Round(Main.LocalPlayer.GetModPlayer<TownPet>().dogFishExp*100,2).ToString())
+                ;
             rare = 0;
         }
     }

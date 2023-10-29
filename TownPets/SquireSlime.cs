@@ -23,6 +23,7 @@ namespace PetsOverhaul.TownPets
             if (Player.HasBuff(ModContent.BuffType<TownPetSquire>()))
             {
                 Player.GetDamage<GenericDamageClass>() += squireDamage;
+                Pet.miningExpBoost += squireMiningExp;
             }
         }
     }

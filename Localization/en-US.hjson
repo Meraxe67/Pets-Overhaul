@@ -1,5 +1,14 @@
 Mods: {
 	PetsOverhaul: {
+		Notice:
+			'''
+			[c/90C2AA:Pets Overhaul 2.2.3 latest changes: Town Pet Improvements,]
+			[c/90C2AA:A lot of tooltip improvements, Junimo improvements & more!]
+			If you happen to come across any bugs, our would like to be up to
+			date with our constantly updating Mod and growing community,
+			we encourage you to join our community and our Discord server!
+			'''
+
 		Config: {
 			Personalization: Personalization
 			JunimoLevelupLabel: Disable Junimo levelup notification
@@ -669,43 +678,78 @@ Mods: {
 				Description:
 					'''
 					Your pet has no idea what's going on due to being swapped recently!
-					Your pet's combat-related effects are disabled!
+					Your pet's all combat-related effects are disabled!
 					'''
 			}
 
 			TownPetBunny: {
 				DisplayName: <Name>'s Aura
-				Description: Increases your Jump speed by <BunnyJump>%
+				Description:
+					'''
+					Increases your Jump speed by <BunnyJump>% and
+					Your Harvesting Exp by <BunnyHarvesting>%,
+					which increases Junimo's Harvesting exp.
+					'''
 			}
 
 			TownPetCat: {
 				DisplayName: <Name>'s Aura
-				Description: Multiplies movement speed by <CatMovespd>x
+				Description:
+					'''
+					Multiplies movement speed by <CatMovespd>x and
+					Fishing Fortune by +<CatFish>, which increases
+					bonus items dropped by your fishing Pets.
+					'''
 			}
 
 			TownPetDog: {
 				DisplayName: <Name>'s Aura
-				Description: Increases Fishing Power by +<DogFish>
+				Description:
+					'''
+					Increases Fishing Power by +<DogFish> and
+					Your Fishing Exp by <DogFishExp>%,
+					which increases Junimo's Fishing exp.
+					'''
 			}
 
 			TownPetClumsy: {
 				DisplayName: <Name>'s Aura
-				Description: Increases luck by +<ClumsyLuck>
+				Description:
+					'''
+					Increases luck by +<ClumsyLuck> and Global
+					Fortune by <ClumsyGlobal> which increases
+					bonus items dropped by all of your Pets.
+					'''
 			}
 
 			TownPetCool: {
 				DisplayName: <Name>'s Aura
-				Description: Increases Critical Chance by <CoolCrit>%
+				Description:
+					'''
+					Increases Crit Chance by <CoolCrit>% and
+					Mining Fortune by +<CoolMining>, which increases
+					bonus items dropped by your mining Pets.
+					'''
 			}
 
 			TownPetDiva: {
 				DisplayName: <Name>'s Aura
-				Description: Grants a <DivaDisc>% base price refund after buying an item
+				Description:
+					'''
+					Grants a <DivaDisc>% base price refund after buying an item
+					Refund coins are affected by Global Fortune.
+					'''
 			}
 
 			TownPetMystic: {
 				DisplayName: <Name>'s Aura
-				Description: Increases Ability Haste by <MysticHaste>%
+				Description:
+					'''
+					Increases Ability Haste by <MysticHaste>%
+					which reduces your Pet's ability cooldown
+					and Junimo's Harvesting, Mining and
+					Fishing exp by <MysticAllExp>%
+					'''
 			}
 
 			TownPetNerd: {
@@ -732,14 +776,21 @@ Mods: {
 				DisplayName: <Name>'s Aura
 				Description:
 					'''
-					Increases Defense by +<OldDef>
-					Multiplies incoming knockback by <OldKb>x;
+					Increases Defense by +<OldDef>, multiplies
+					incoming knockback by <OldKb>x and increases
+					Harvesting Fortune by +<OldHarvesting>, which increases
+					bonus items dropped by your harvesting Pets.
 					'''
 			}
 
 			TownPetSquire: {
 				DisplayName: <Name>'s Aura
-				Description: Increases Damage by <SquireDmg>%
+				Description:
+					'''
+					Increases Damage by <SquireDmg>% and
+					your Mining Exp by <SquireMining>%,
+					which increases Junimo's Mining exp.
+					'''
 			}
 
 			TownPetSurly: {

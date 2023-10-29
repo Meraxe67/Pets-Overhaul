@@ -3,6 +3,7 @@ using PetsOverhaul.Systems;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using System;
 
 namespace PetsOverhaul.Buffs
 {
@@ -17,7 +18,7 @@ namespace PetsOverhaul.Buffs
         public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare)
         {
             rare = 0;
-            tip = Lang.GetBuffDescription(ModContent.BuffType<HoneyOverdose>()).Replace("<AbilityHaste>", abilityHasteIncr.ToString());
+            tip = Lang.GetBuffDescription(ModContent.BuffType<HoneyOverdose>()).Replace("<AbilityHaste>", Math.Round(abilityHasteIncr*100,2).ToString());
         }
         public override void Update(Player player, ref int buffIndex)
         {

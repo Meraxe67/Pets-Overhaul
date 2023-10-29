@@ -23,6 +23,7 @@ namespace PetsOverhaul.TownPets
             if (Player.HasBuff(ModContent.BuffType<TownPetCat>()))
             {
                 Player.moveSpeed *= catSpeed;
+                Pet.fishingFortune += catFishFort;
             }
         }
     }

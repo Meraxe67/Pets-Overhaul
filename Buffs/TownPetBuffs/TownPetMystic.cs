@@ -2,6 +2,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using System;
 namespace PetsOverhaul.Buffs.TownPetBuffs
 {
     public class TownPetMystic : ModBuff
@@ -20,7 +21,10 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
                     buffName = "Mystic Aura";
                 }
             }
-            tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetMystic>()).Replace("<MysticHaste>", Main.LocalPlayer.GetModPlayer<TownPet>().mysticHaste.ToString());
+            tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetMystic>())
+                .Replace("<MysticHaste>", Math.Round(Main.LocalPlayer.GetModPlayer<TownPet>().mysticHaste * 100, 2).ToString())
+                .Replace("<MysticAllExp>", Math.Round(Main.LocalPlayer.GetModPlayer<TownPet>().mysticAllExp * 100, 2).ToString())
+                ;
             rare = 0;
         }
     }

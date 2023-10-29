@@ -20,8 +20,11 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
                     buffName = "Antique Aura";
                 }
             }
-            tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetOld>()).Replace("<OldDef>", Main.LocalPlayer.GetModPlayer<TownPet>().oldDef.ToString())
-                .Replace("<OldKb>", Main.LocalPlayer.GetModPlayer<TownPet>().oldKbResist.ToString());
+            tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetOld>())
+                .Replace("<OldDef>", Main.LocalPlayer.GetModPlayer<TownPet>().oldDef.ToString())
+                .Replace("<OldKb>", Main.LocalPlayer.GetModPlayer<TownPet>().oldKbResist.ToString())
+                .Replace("<OldHarvesting>", Main.LocalPlayer.GetModPlayer<TownPet>().oldHarvFort.ToString())
+                ;
 
             rare = 0;
         }

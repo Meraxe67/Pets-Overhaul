@@ -23,6 +23,7 @@ namespace PetsOverhaul.TownPets
             if (Player.HasBuff(ModContent.BuffType<TownPetCool>()))
             {
                 Player.GetCritChance<GenericDamageClass>() += critHitsAreCool;
+                Pet.miningFortune += coolMiningFort;
             }
         }
     }

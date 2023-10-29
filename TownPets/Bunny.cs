@@ -24,6 +24,7 @@ namespace PetsOverhaul.TownPets
             if (Player.HasBuff(ModContent.BuffType<TownPetBunny>()))
             {
                 Player.jumpSpeedBoost += Player.jumpSpeed * bunnyJump;
+                Pet.harvestingExpBoost += bunnyHarvExp;
             }
         }
     }

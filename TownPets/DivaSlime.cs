@@ -22,25 +22,25 @@ namespace PetsOverhaul.TownPets
         {
             if (Player.HasBuff(ModContent.BuffType<TownPetDiva>()))
             {
-                int refundAmount = (int)(item.GetStoreValue() / 100 * divaDisc);
+                int refundAmount = (int)(item.GetStoreValue() * divaDisc);
                 if (refundAmount > 1000000)
                 {
-                    Player.QuickSpawnItem(Player.GetSource_Buff(Player.FindBuffIndex(ModContent.BuffType<TownPetDiva>())), ItemID.PlatinumCoin, refundAmount / 1000000);
+                    Player.QuickSpawnItem(Player.GetSource_Misc("GlobalItem"), ItemID.PlatinumCoin, refundAmount / 1000000);
                     refundAmount %= 1000000;
                 }
                 if (refundAmount > 10000)
                 {
-                    Player.QuickSpawnItem(Player.GetSource_Buff(Player.FindBuffIndex(ModContent.BuffType<TownPetDiva>())), ItemID.GoldCoin, refundAmount / 10000);
+                    Player.QuickSpawnItem(Player.GetSource_Misc("GlobalItem"), ItemID.GoldCoin, refundAmount / 10000);
                     refundAmount %= 10000;
                 }
                 if (refundAmount > 100)
                 {
-                    Player.QuickSpawnItem(Player.GetSource_Buff(Player.FindBuffIndex(ModContent.BuffType<TownPetDiva>())), ItemID.SilverCoin, refundAmount / 100);
+                    Player.QuickSpawnItem(Player.GetSource_Misc("GlobalItem"), ItemID.SilverCoin, refundAmount / 100);
                     refundAmount %= 100;
                 }
                 if (refundAmount >= 1)
                 {
-                    Player.QuickSpawnItem(Player.GetSource_Buff(Player.FindBuffIndex(ModContent.BuffType<TownPetDiva>())), ItemID.CopperCoin, refundAmount / 1);
+                    Player.QuickSpawnItem(Player.GetSource_Misc("GlobalItem"), ItemID.CopperCoin, refundAmount / 1);
                 }
             }
         }

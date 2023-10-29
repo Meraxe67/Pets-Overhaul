@@ -18,6 +18,13 @@ namespace PetsOverhaul.TownPets
                 }
             }
         }
+        public override void PostUpdateEquips()
+        {
+            if (Player.HasBuff(ModContent.BuffType<TownPetClumsy>()))
+            {
+                Pet.globalFortune += clumsyGlobalFort;
+            }
+        }
         public override void ModifyLuck(ref float luck)
         {
             if (Player.HasBuff(ModContent.BuffType<TownPetClumsy>()))

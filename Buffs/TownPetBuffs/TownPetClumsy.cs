@@ -21,7 +21,10 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
                     buffName = "Unlucky Aura";
                 }
             }
-            tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetClumsy>()).Replace("<ClumsyLuck>", Main.LocalPlayer.GetModPlayer<TownPet>().clumsyLuck.ToString());
+            tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetClumsy>())
+                .Replace("<ClumsyLuck>", Main.LocalPlayer.GetModPlayer<TownPet>().clumsyLuck.ToString())
+                .Replace("<ClumsyGlobal>", Main.LocalPlayer.GetModPlayer<TownPet>().clumsyGlobalFort.ToString())
+                ;
             rare = 0;
         }
     }

@@ -2,6 +2,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using System;
 
 namespace PetsOverhaul.Buffs.TownPetBuffs
 {
@@ -21,7 +22,9 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
                     buffName = "Shining Aura";
                 }
             }
-            tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetDiva>()).Replace("<DivaDisc>", Main.LocalPlayer.GetModPlayer<TownPet>().divaDisc.ToString());
+            tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetDiva>())
+                .Replace("<DivaDisc>", Math.Round((Main.LocalPlayer.GetModPlayer<TownPet>().divaDisc) * 100, 2).ToString())
+                ;
             rare = 0;
         }
     }
