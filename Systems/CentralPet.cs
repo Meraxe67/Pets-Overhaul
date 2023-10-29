@@ -818,6 +818,7 @@ namespace PetsOverhaul.Systems
                 {
                     GroundVelo = npc.velocity.X;
                 }
+
                 if (VeloChangedFlying == true)
                 {
                     npc.velocity = FlyingVelo;
