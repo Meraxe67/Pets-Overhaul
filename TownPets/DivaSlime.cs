@@ -2,6 +2,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using PetsOverhaul.Systems;
 
 namespace PetsOverhaul.TownPets
 {
@@ -22,7 +23,7 @@ namespace PetsOverhaul.TownPets
         {
             if (Player.HasBuff(ModContent.BuffType<TownPetDiva>()))
             {
-                int refundAmount = (int)(item.GetStoreValue() * divaDisc);
+                int refundAmount = ItemPet.Randomizer((int)(item.GetStoreValue() * divaDisc*1000),1000);
                 if (refundAmount > 1000000)
                 {
                     Player.QuickSpawnItem(Player.GetSource_Misc("GlobalItem"), ItemID.PlatinumCoin, refundAmount / 1000000);

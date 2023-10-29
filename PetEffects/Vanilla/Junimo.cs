@@ -27,9 +27,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int popupExpHarv = 0; //Represents current existing exp value on popup texts
         public int popupExpMining = 0;
         public int popupExpFish = 0;
-        public int popupIndexHarv = 0;
-        public int popupIndexMining = 0;
-        public int popupIndexFish = 0;
+        public int popupIndexHarv = -1;
+        public int popupIndexMining = -1;
+        public int popupIndexFish = -1;
         public int[] junimoHarvestingLevelsToXp = new int[]
         {
             0,
@@ -221,7 +221,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     Main.popupText[classIndex].name = "+" + classExp.ToString() + " exp";
                     Main.popupText[classIndex].position = Player.Center;
                     Main.popupText[classIndex].velocity = popupVelo;
-                    Main.popupText[classIndex].lifeTime = (classExp + 180) > 700 ? 700 : (classExp + 180);
+                    Main.popupText[classIndex].lifeTime = classExp + 180 > 700 ? 700 : (classExp + 180);
                     Main.popupText[classIndex].Update(classIndex);
                 }
                 else
@@ -268,129 +268,127 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public override bool OnPickup(Item item)
         {
-            if (item.TryGetGlobalItem(out ItemPet itemChck))
+            if (item.TryGetGlobalItem(out ItemPet itemChck) && Player.CanPullItem(item, Player.ItemSpace(item)) && itemChck.pickedUpBefore == false)
             {
-                if (Player.CanPullItem(item, Player.ItemSpace(item)) && itemChck.pickedUpBefore == false)
+                if (itemChck.rareHerbBoost || itemChck.herbBoost)
                 {
-                    if (itemChck.rareHerbBoost || itemChck.herbBoost)
+                    int value;
+                    int index = HarvestingXpPerGathered.IndexOf(HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)));
+                    if (index == -1)
                     {
+                        value = 50; //0.5 exp
+                    }
+                    else
+                    {
+                        value = HarvestingXpPerGathered[index].expAmount;
+                    }
+
+                    if (Player.HasItemInInventoryOrOpenVoidBag(ItemID.JunimoPetItem) || Pet.PetInUse(ItemID.JunimoPetItem))
+                    {
+                        int junimoCash = ItemPet.Randomizer((int)(harvestingExpToCoinMult * junimoHarvestingLevel * value * junimoInUseMultiplier * item.stack), 100);
+                        if (junimoCash > 1000000)
+                        {
+                            Player.QuickSpawnItem(Player.GetSource_Misc("JunimoItem"), ItemID.PlatinumCoin, junimoCash / 1000000);
+                            junimoCash %= 1000000;
+                        }
+                        if (junimoCash > 10000)
+                        {
+                            Player.QuickSpawnItem(Player.GetSource_Misc("JunimoItem"), ItemID.GoldCoin, junimoCash / 10000);
+                            junimoCash %= 10000;
+                        }
+                        if (junimoCash > 100)
+                        {
+                            Player.QuickSpawnItem(Player.GetSource_Misc("JunimoItem"), ItemID.SilverCoin, junimoCash / 100);
+                            junimoCash %= 100;
+                        }
+                        Player.QuickSpawnItem(Player.GetSource_Misc("JunimoItem"), ItemID.CopperCoin, junimoCash);
+                    }
+                    if (junimoExpCheck())
+                    {
+                        value = ItemPet.Randomizer((int)(value * junimoInUseMultiplier * item.stack * Pet.harvestingExpBoost));
+                        junimoHarvestingExp += value;
+                        popupExpHarv += value;
+                        popupIndexHarv = PopupExp(popupIndexHarv, popupExpHarv, Color.LightGreen);
+                    }
+                }
+                else if (itemChck.oreBoost)
+                {
+                    if (junimoExpCheck())
+                    {
+                        int index = MiningXpPerBlock.IndexOf(MiningXpPerBlock.Find(x => x.Item2.Contains(item.type)));
                         int value;
-                        int index = HarvestingXpPerGathered.IndexOf(HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)));
                         if (index == -1)
                         {
-                            value = 50; //0.5 exp
+                            value = ItemPet.Randomizer((int)(Pet.miningExpBoost * 50 * item.stack * junimoInUseMultiplier));
                         }
                         else
                         {
-                            value = HarvestingXpPerGathered[index].expAmount;
+                            value = ItemPet.Randomizer((int)(MiningXpPerBlock[index].expAmount * junimoInUseMultiplier * item.stack * Pet.miningExpBoost));
                         }
 
-                        if (Player.HasItemInInventoryOrOpenVoidBag(ItemID.JunimoPetItem) || Pet.PetInUse(ItemID.JunimoPetItem))
+                        junimoMiningExp += value;
+                        popupExpMining += value;
+                        popupIndexMining = PopupExp(popupIndexMining, popupExpMining, Color.LightGray);
+                    }
+                    if (Player.HasItemInInventoryOrOpenVoidBag(ItemID.JunimoPetItem) || Pet.PetInUse(ItemID.JunimoPetItem))
+                    {
+                        for (int i = 0; i < ItemPet.Randomizer(junimoMiningLevel * junimoInUseMultiplier * item.stack); i++)
                         {
-                            int junimoCash = ItemPet.Randomizer((int)(harvestingExpToCoinMult * junimoHarvestingLevel * value * junimoInUseMultiplier * item.stack), 100);
-                            if (junimoCash > 1000000)
-                            {
-                                Player.QuickSpawnItem(Player.GetSource_Misc("JunimoItem"), ItemID.PlatinumCoin, junimoCash / 1000000);
-                                junimoCash %= 1000000;
-                            }
-                            if (junimoCash > 10000)
-                            {
-                                Player.QuickSpawnItem(Player.GetSource_Misc("JunimoItem"), ItemID.GoldCoin, junimoCash / 10000);
-                                junimoCash %= 10000;
-                            }
-                            if (junimoCash > 100)
-                            {
-                                Player.QuickSpawnItem(Player.GetSource_Misc("JunimoItem"), ItemID.SilverCoin, junimoCash / 100);
-                                junimoCash %= 100;
-                            }
-                            Player.QuickSpawnItem(Player.GetSource_Misc("JunimoItem"), ItemID.CopperCoin, junimoCash);
+                            Player.QuickSpawnItem(item.GetSource_Misc("JunimoItem"), item, 1);
                         }
-                        if (junimoExpCheck())
+                    }
+                }
+
+                if (junimoExpCheck())
+                {
+                    if (itemChck.harvestingDrop || itemChck.fortuneHarvestingDrop)
+                    {
+                        int index = HarvestingXpPerGathered.IndexOf(HarvestingXpPerGathered.Find(x => x.Item2.Contains(item.type)));
+                        if (index == -1)
                         {
-                            value = ItemPet.Randomizer((int)(value * junimoInUseMultiplier * item.stack * Pet.harvestingExpBoost));
+
+                        }
+                        else
+                        {
+                            int value = ItemPet.Randomizer((int)(HarvestingXpPerGathered[index].expAmount * junimoInUseMultiplier * item.stack * Pet.harvestingExpBoost));
                             junimoHarvestingExp += value;
                             popupExpHarv += value;
                             popupIndexHarv = PopupExp(popupIndexHarv, popupExpHarv, Color.LightGreen);
                         }
                     }
-                    else if (itemChck.oreBoost)
+                    if (itemChck.miningDrop || itemChck.fortuneMiningDrop)
                     {
-                        if (junimoExpCheck())
+                        int index = MiningXpPerBlock.IndexOf(MiningXpPerBlock.Find(x => x.Item2.Contains(item.type)));
+                        if (index == -1)
                         {
-                            int index = MiningXpPerBlock.IndexOf(MiningXpPerBlock.Find(x => x.Item2.Contains(item.type)));
-                            int value;
-                            if (index == -1)
-                            {
-                                value = ItemPet.Randomizer((int)(Pet.miningExpBoost * 50 * item.stack * junimoInUseMultiplier));
-                            }
-                            else
-                            {
-                                value = ItemPet.Randomizer((int)(MiningXpPerBlock[index].expAmount * junimoInUseMultiplier * item.stack * Pet.miningExpBoost));
-                            }
 
+                        }
+                        else
+                        {
+                            int value = ItemPet.Randomizer((int)(MiningXpPerBlock[index].expAmount * junimoInUseMultiplier * item.stack * Pet.miningExpBoost));
                             junimoMiningExp += value;
                             popupExpMining += value;
                             popupIndexMining = PopupExp(popupIndexMining, popupExpMining, Color.LightGray);
                         }
-                        if (Player.HasItemInInventoryOrOpenVoidBag(ItemID.JunimoPetItem) || Pet.PetInUse(ItemID.JunimoPetItem))
-                        {
-                            for (int i = 0; i < ItemPet.Randomizer(junimoMiningLevel * junimoInUseMultiplier * item.stack); i++)
-                            {
-                                Player.QuickSpawnItem(item.GetSource_Misc("JunimoItem"), item, 1);
-                            }
-                        }
                     }
-
-                    if (junimoExpCheck())
+                    if (itemChck.fishingDrop || itemChck.fortuneFishingDrop)
                     {
-                        if (itemChck.harvestingDrop || itemChck.fortuneHarvestingDrop)
+                        int index = FishingXpPerCaught.IndexOf(FishingXpPerCaught.Find(x => x.Item2.Contains(item.type)));
+                        if (index == -1)
                         {
-                            int index = HarvestingXpPerGathered.IndexOf(HarvestingXpPerGathered.Find(x => x.Item2.Contains(item.type)));
-                            if (index == -1)
-                            {
 
-                            }
-                            else
-                            {
-                                int value = ItemPet.Randomizer((int)(HarvestingXpPerGathered[index].expAmount * junimoInUseMultiplier * item.stack * Pet.harvestingExpBoost));
-                                junimoHarvestingExp += value;
-                                popupExpHarv += value;
-                                popupIndexHarv = PopupExp(popupIndexHarv, popupExpHarv, Color.LightGreen);
-                            }
                         }
-                        if (itemChck.miningDrop || itemChck.fortuneMiningDrop)
+                        else
                         {
-                            int index = MiningXpPerBlock.IndexOf(MiningXpPerBlock.Find(x => x.Item2.Contains(item.type)));
-                            if (index == -1)
-                            {
-
-                            }
-                            else
-                            {
-                                int value = ItemPet.Randomizer((int)(MiningXpPerBlock[index].expAmount * junimoInUseMultiplier * item.stack * Pet.miningExpBoost));
-                                junimoMiningExp += value;
-                                popupExpMining += value;
-                                popupIndexMining = PopupExp(popupIndexMining, popupExpMining, Color.LightGray);
-                            }
+                            int value = ItemPet.Randomizer((int)(Pet.fishingExpBoost * FishingXpPerCaught[index].expAmount * junimoInUseMultiplier * item.stack));
+                            junimoFishingExp += value;
+                            popupExpFish += value;
+                            popupIndexFish = PopupExp(popupIndexFish, popupExpFish, Color.LightSkyBlue);
                         }
-                        if (itemChck.fishingDrop || itemChck.fortuneFishingDrop)
-                        {
-                            int index = FishingXpPerCaught.IndexOf(FishingXpPerCaught.Find(x => x.Item2.Contains(item.type)));
-                            if (index == -1)
-                            {
-
-                            }
-                            else
-                            {
-                                int value = ItemPet.Randomizer((int)(Pet.fishingExpBoost * FishingXpPerCaught[index].expAmount * junimoInUseMultiplier * item.stack));
-                                junimoFishingExp += value;
-                                popupExpFish += value;
-                                popupIndexFish = PopupExp(popupIndexFish, popupExpFish, Color.LightSkyBlue);
-                            }
-                        }
-
                     }
+
                 }
+
             }
             return true;
         }
@@ -456,17 +454,17 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public override void PreUpdate()
         {
-            if (popupIndexHarv != -1 && Main.popupText[popupIndexHarv].lifeTime <= 0)
+            if (popupIndexHarv > -1 && Main.popupText[popupIndexHarv].lifeTime <= 0)
             {
                 popupIndexHarv = -1;
                 popupExpHarv = 0;
             }
-            if (popupIndexMining != -1 && Main.popupText[popupIndexMining].lifeTime <= 0)
+            if (popupIndexMining > -1 && Main.popupText[popupIndexMining].lifeTime <= 0)
             {
                 popupIndexMining = -1;
                 popupExpMining = 0;
             }
-            if (popupIndexFish != -1 && Main.popupText[popupIndexFish].lifeTime <= 0)
+            if (popupIndexFish > -1 && Main.popupText[popupIndexFish].lifeTime <= 0)
             {
                 popupIndexFish = -1;
                 popupExpFish = 0;
@@ -588,7 +586,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             Junimo junimo = Main.LocalPlayer.GetModPlayer<Junimo>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.JunimoPetItem")
                         .Replace("<maxLvl>", junimo.maxLvls.ToString())
-                        .Replace("<expOutsideInvActiveOrNo>", ModContent.GetInstance<Personalization>().JunimoExpWhileNotInInv? "inactive" : "active")
+                        .Replace("<expOutsideInvActiveOrNo>", ModContent.GetInstance<Personalization>().JunimoExpWhileNotInInv ? "inactive" : "active")
                         .Replace("<harvestingProfit>", Math.Round(junimo.harvestingExpToCoinMult * junimo.junimoInUseMultiplier * junimo.junimoHarvestingLevel, 2).ToString())
                         .Replace("<bonusHealth>", Math.Round(junimo.junimoHarvestingLevel * 0.25f * junimo.junimoInUseMultiplier, 2).ToString())
                         .Replace("<flatHealth>", (junimo.junimoHarvestingLevel * junimo.junimoInUseMultiplier).ToString())
