@@ -22,7 +22,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 {
                     for (int i = 0; i < ItemPet.Randomizer(squashlingCommonChance * item.stack); i++)
                     {
-                        Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), item, 1);
+                        Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), item, 1);
                     }
                 }
 
@@ -30,7 +30,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 {
                     for (int i = 0; i < ItemPet.Randomizer(squashlingRareChance * item.stack); i++)
                     {
-                        Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), item, 1);
+                        Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), item, 1);
                     }
                 }
             }

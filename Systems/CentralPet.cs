@@ -77,6 +77,14 @@ namespace PetsOverhaul.Systems
         /// Increase this value to reduce ability cooldowns. Eg. 0.1f increases how fast ability will return by 10%. Negative values will increase the cooldowns. Negative is capped at -0.9f. Do not use this to directly reduce a cooldown, use the timer field instead. Ability Haste reduces timerMax with a more balanced calculation.
         /// </summary>
         public float abilityHaste = 0;
+        static public IEntitySource GetSource_Pet(EntitySource_Pet.TypeId typeId, string context = null)
+        {
+            return new EntitySource_Pet
+            {
+                ContextType = typeId,
+                Context = context
+            };
+        }
         public static void ItemWeight(int itemId, int weight)
         {
             for (int i = 0; i < weight; i++)
@@ -106,31 +114,31 @@ namespace PetsOverhaul.Systems
                 {
                     for (int i = 0; i < ItemPet.Randomizer(globalFortune * item.stack); i++)
                     {
-                        Player.QuickSpawnItem(Player.GetSource_Misc("GlobalFortuneItem"), item, 1);
+                        Player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.globalItem), item, 1);
                     }
                 }
 
                 if (fortune.harvestingDrop)
                 {
-                    for (int i = 0; i < ItemPet.Randomizer((globalFortune*10/2 + harvestingFortune*10) * item.stack,1000); i++) //Multiplied by 10 and divided by 1000 since we divide globalFortune by 2, to get more precise numbers.
+                    for (int i = 0; i < ItemPet.Randomizer((globalFortune * 10 / 2 + harvestingFortune * 10) * item.stack, 1000); i++) //Multiplied by 10 and divided by 1000 since we divide globalFortune by 2, to get more precise numbers.
                     {
-                        Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingFortuneItem"), item, 1);
+                        Player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.harvestingFortuneItem), item, 1);
                     }
                 }
 
                 if (fortune.miningDrop)
                 {
-                    for (int i = 0; i < ItemPet.Randomizer((globalFortune*10/2 + miningFortune*10) * item.stack,1000); i++)
+                    for (int i = 0; i < ItemPet.Randomizer((globalFortune * 10 / 2 + miningFortune * 10) * item.stack, 1000); i++)
                     {
-                        Player.QuickSpawnItem(Player.GetSource_Misc("MiningFortuneItem"), item, 1);
+                        Player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.miningFortuneItem), item, 1);
                     }
                 }
 
                 if (fortune.fishingDrop)
                 {
-                    for (int i = 0; i < ItemPet.Randomizer((globalFortune*10/2 + fishingFortune) * item.stack,1000); i++)
+                    for (int i = 0; i < ItemPet.Randomizer((globalFortune * 10 / 2 + fishingFortune) * item.stack, 1000); i++)
                     {
-                        Player.QuickSpawnItem(Player.GetSource_Misc("FishingFortuneItem"), item, 1);
+                        Player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.fishingFortuneItem), item, 1);
                     }
                 }
             }
@@ -345,27 +353,57 @@ namespace PetsOverhaul.Systems
                 }
             };
         }
+        public static void HandleShieldBlockMessage(BinaryReader reader, int whoAmI, int damageAmount)
+        {
+            int player = reader.ReadByte();
+            if (Main.netMode == NetmodeID.Server)
+            {
+                player = whoAmI;
+            }
+
+            Main.player[player].GetModPlayer<GlobalPet>().ShieldFullBlockEffect(damageAmount);
+
+            if (Main.netMode == NetmodeID.Server)
+            {
+                SendShieldBlockToServer(player, damageAmount);
+            }
+        }
+        public static void SendShieldBlockToServer(int whoAmI, int dmgAmount)
+        {
+            ModPacket packet = ModContent.GetInstance<PetsOverhaul>().GetPacket();
+            packet.Write((byte)PetsOverhaul.MessageType.shieldFullAbsorb);
+            packet.Write(dmgAmount);
+            packet.Write((byte)whoAmI);
+            packet.Send(ignoreClient: whoAmI);
+        }
+        public void ShieldFullBlockEffect(int damage)
+        {
+            CombatText.NewText(Player.Hitbox, Color.Cyan, -damage, true);
+            if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+            {
+                SoundEngine.PlaySound(SoundID.NPCDeath43 with { PitchVariance = 0.4f, Pitch = -0.8f, Volume = 0.2f }, Player.position);
+            }
+            if (damage <= 1)
+            {
+                Player.SetImmuneTimeForAllTypes(Player.longInvince ? 40 : 20);
+            }
+            else
+            {
+                Player.SetImmuneTimeForAllTypes(Player.longInvince ? 80 : 40);
+            }
+            if (Player.whoAmI == Main.myPlayer)
+            {
+                shieldToBeReduced += damage;
+                if (Main.netMode != NetmodeID.SinglePlayer)
+                    SendShieldBlockToServer(Player.whoAmI, damage);
+            }
+        }
         public override bool ConsumableDodge(Player.HurtInfo info)
         {
             if (info.Damage <= currentShield && currentShield > 0)
             {
-                CombatText.NewText(Player.Hitbox, Color.Cyan, -info.Damage, true);
-                if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
-                {
-                    SoundEngine.PlaySound(SoundID.NPCDeath43 with { PitchVariance = 0.4f, Pitch = -0.8f, Volume = 0.2f }, Player.position);
-                }
-
                 info.SoundDisabled = true;
-                shieldToBeReduced += info.Damage;
-                if (info.Damage <= 1)
-                {
-                    Player.SetImmuneTimeForAllTypes(Player.longInvince ? 40 : 20);
-                }
-                else
-                {
-                    Player.SetImmuneTimeForAllTypes(Player.longInvince ? 80 : 40);
-                }
-
+                ShieldFullBlockEffect(info.Damage);
                 return true;
             }
             return false;
@@ -408,18 +446,18 @@ namespace PetsOverhaul.Systems
         }
         public override void PostUpdate()
         {
-            if (petShield.Count > 0 && shieldToBeReduced > 0)
+            if (petShield.Count > 0)
             {
-                while (shieldToBeReduced > 0)
+                while (shieldToBeReduced > 0 && petShield.Count > 0)
                 {
                     (int shieldAmount, int shieldTimer) value = petShield.Find(x => x.shieldTimer == petShield.Min(x => x.shieldTimer));
                     int index = petShield.IndexOf(value);
-                    if (value.shieldAmount <= shieldToBeReduced)
+                    if (index != -1 && value.shieldAmount <= shieldToBeReduced)
                     {
                         shieldToBeReduced -= value.shieldAmount;
                         petShield.RemoveAt(index);
                     }
-                    else if (value.shieldAmount > shieldToBeReduced)
+                    else if (index != -1 && value.shieldAmount > shieldToBeReduced)
                     {
                         value.shieldAmount -= shieldToBeReduced;
                         shieldToBeReduced = 0;
@@ -427,10 +465,7 @@ namespace PetsOverhaul.Systems
                     }
                 }
                 shieldToBeReduced = 0;
-            }
-            currentShield = 0;
-            if (petShield.Count > 0)
-            {
+                currentShield = 0;
                 petShield.ForEach(x => currentShield += x.shieldAmount);
                 for (int i = 0; i < petShield.Count; i++)
                 {
@@ -502,15 +537,12 @@ namespace PetsOverhaul.Systems
     public sealed class ItemPet : GlobalItem
     {
         public override bool InstancePerEntity => true;
-        public static List<Vector2> updateReplacedTile = new();
+        public static List<Point16> updateReplacedTile = new();
         public bool itemFromNpc = false;
-        public bool sharkTooltipChangeRegular = false;
-        public bool sharkTooltipChangeButMecha = false;
         public bool herbBoost = false;
         public bool rareHerbBoost = false;
         public bool oreBoost = false;
         public bool bambooBoost = false;
-        public bool fishron = false;
         public bool dirt = false;
         public bool commonBlock = false;
         public bool tree = false;
@@ -526,6 +558,7 @@ namespace PetsOverhaul.Systems
         public bool fortuneHarvestingDrop = false;
         public bool fortuneMiningDrop = false;
         public bool fortuneFishingDrop = false;
+        public bool seaPlant = false;
         /// <summary>
         /// Randomizes the given number. numToBeRandomized / randomizeTo returns how many times its 100% chance and rolls if the leftover, non-100% amount is true. Randomizer(250) returns +2 and +1 more with 50% chance.
         /// </summary>
@@ -554,177 +587,82 @@ namespace PetsOverhaul.Systems
         }
         public override void OnSpawn(Item item, IEntitySource source)
         {
-            if (source is EntitySource_Loot { Entity: NPC { boss: false } })
+            if (source is EntitySource_TileBreak brokenTile)
             {
-                itemFromNpc = true;
+                ushort tileType = Main.tile[brokenTile.TileCoords].TileType;
+
+                gemTree = TileID.Sets.CountsAsGemTree[tileType];
+
+                bambooBoost = tileType == TileID.Bamboo;
+
+                tree = TileChecks.treeTile[tileType];
+
+                if (PlayerPlacedBlockList.placedBlocksByPlayer.Remove(new Point16(brokenTile.TileCoords)) == false)
+                {
+                    seaPlant = tileType == TileID.Coral || tileType == TileID.BeachPiles;
+                    oreBoost = TileID.Sets.Ore[tileType] || TileChecks.gemTile[tileType] || TileChecks.extractableAndOthers[tileType] || item.type == ItemID.LifeCrystal;
+                    dirt = TileID.Sets.Dirt[tileType];
+                    commonBlock = TileID.Sets.Conversion.Moss[tileType] || TileChecks.commonTiles[tileType];
+                    blockNotByPlayer = true;
+                }
+                if (updateReplacedTile.Count > 0)
+                {
+                    PlayerPlacedBlockList.placedBlocksByPlayer.AddRange(updateReplacedTile);
+                }
             }
-            else
+            if ((source is EntitySource_TileBreak || source is EntitySource_ShakeTree) && Junimo.HarvestingXpPerGathered.Exists(x => x.plantList.Contains(item.type)))
             {
-                itemFromNpc = false;
+                if (Junimo.HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)).expAmount >= 1000)
+                    rareHerbBoost = true;
+                else
+                    herbBoost = true;
+                if (source is not EntitySource_ShakeTree
+                    && gemTree == false && new int[] { ItemID.GemTreeAmberSeed, ItemID.GemTreeAmethystSeed, ItemID.GemTreeDiamondSeed, ItemID.GemTreeEmeraldSeed, ItemID.GemTreeRubySeed, ItemID.GemTreeSapphireSeed, ItemID.GemTreeTopazSeed, ItemID.Amethyst, ItemID.Topaz, ItemID.Sapphire, ItemID.Emerald, ItemID.Ruby, ItemID.Amber, ItemID.Diamond, ItemID.StoneBlock }.Contains(item.type)
+                    || bambooBoost == false && item.type == ItemID.BambooBlock
+                    || tree == false && new int[] { ItemID.Wood, ItemID.AshWood, ItemID.BorealWood, ItemID.PalmWood, ItemID.Ebonwood, ItemID.Shadewood, ItemID.StoneBlock, ItemID.RichMahogany, ItemID.Pearlwood, ItemID.SpookyWood }.Contains(item.type)
+                    || seaPlant == false && new int[] { ItemID.Coral, ItemID.Seashell, ItemID.Starfish, ItemID.LightningWhelkShell, ItemID.TulipShell, ItemID.JunoniaShell }.Contains(item.type))
+                {
+                    rareHerbBoost = false;
+                    herbBoost = false;
+                }
             }
-            if (source is EntitySource_Loot lootSource && lootSource.Entity is NPC npc && (npc.boss == true || npc.GetGlobalNPC<NpcPet>().nonBossTrueBosses[npc.type]))
+            if (source is EntitySource_Loot lootSource && lootSource.Entity is NPC npc)
             {
-                itemFromBoss = true;
-            }
-            else
-            {
-                itemFromBoss = false;
+                if (npc.boss == true || npc.GetGlobalNPC<NpcPet>().nonBossTrueBosses[npc.type])
+                {
+                    itemFromBoss = true;
+                }
+                else
+                {
+                    itemFromNpc = true;
+                }
             }
             if (source is EntitySource_ItemOpen)
             {
                 itemFromBag = true;
             }
-            else
+            if (source is EntitySource_Pet petSource)
             {
-                itemFromBag = false;
-            }
-            if (source is EntitySource_TileBreak gemstoneTree && TileID.Sets.CountsAsGemTree[Main.tile[gemstoneTree.TileCoords].TileType])
-            {
-                gemTree = true;
-            }
-            else
-            {
-                gemTree = false;
-            }
-            if (source is EntitySource_TileBreak bamboo && Main.tile[bamboo.TileCoords].TileType == TileID.Bamboo)
-            {
-                bambooBoost = true;
-            }
-            else
-            {
-                bambooBoost = false;
-            }
-            if ((source is EntitySource_TileBreak || source is EntitySource_ShakeTree) && Junimo.HarvestingXpPerGathered.Exists(x => x.plantList.Contains(item.type) && x.expAmount > 1000))
-            {
-                rareHerbBoost = true;
-                if (new int[] { ItemID.GemTreeAmberSeed, ItemID.GemTreeAmethystSeed, ItemID.GemTreeDiamondSeed, ItemID.GemTreeEmeraldSeed, ItemID.GemTreeRubySeed, ItemID.GemTreeSapphireSeed, ItemID.GemTreeTopazSeed, ItemID.Amethyst, ItemID.Topaz, ItemID.Sapphire, ItemID.Emerald, ItemID.Ruby, ItemID.Amber, ItemID.Diamond, ItemID.StoneBlock }.Contains(item.type) && gemTree == false || item.type == ItemID.BambooBlock && bambooBoost == false)
-                {
-                    rareHerbBoost = false;
-                }
-            }
-            else if ((source is EntitySource_TileBreak || source is EntitySource_ShakeTree) && Junimo.HarvestingXpPerGathered.Exists(x => x.plantList.Contains(item.type)))
-            {
-                herbBoost = true;
-                if (new int[] { ItemID.GemTreeAmberSeed, ItemID.GemTreeAmethystSeed, ItemID.GemTreeDiamondSeed, ItemID.GemTreeEmeraldSeed, ItemID.GemTreeRubySeed, ItemID.GemTreeSapphireSeed, ItemID.GemTreeTopazSeed, ItemID.Amethyst, ItemID.Topaz, ItemID.Sapphire, ItemID.Emerald, ItemID.Ruby, ItemID.Amber, ItemID.Diamond, ItemID.StoneBlock }.Contains(item.type) && gemTree == false || item.type == ItemID.BambooBlock && bambooBoost == false)
-                {
-                    herbBoost = false;
-                }
-            }
-            else
-            {
-                herbBoost = false;
-                rareHerbBoost = false;
-            }
-            if (source is EntitySource_TileBreak brokenOre && PlayerPlacedBlockList.placedBlocksByPlayer.Contains(brokenOre.TileCoords.ToVector2()) == false && (TileID.Sets.Ore[Main.tile[brokenOre.TileCoords].TileType] || TileChecks.gemTile[Main.tile[brokenOre.TileCoords].TileType] || TileChecks.extractableAndOthers[Main.tile[brokenOre.TileCoords].TileType] || item.type == ItemID.LifeCrystal)) //Due to Life Crystals being a multitile, its so hard to track the broken tile, so they will be exception for Mining.
-            {
-                oreBoost = true;
-            }
-            else
-            {
-                oreBoost = false;
-            }
-            if (source is EntitySource_TileBreak brokenDirt && TileID.Sets.Dirt[Main.tile[brokenDirt.TileCoords].TileType] && PlayerPlacedBlockList.placedBlocksByPlayer.Contains(brokenDirt.TileCoords.ToVector2()) == false)
-            {
-                dirt = true;
-            }
-            else
-            {
-                dirt = false;
-            }
-            if (source is EntitySource_TileBreak soil && (TileID.Sets.Conversion.Moss[Main.tile[soil.TileCoords].TileType] || TileChecks.commonTiles[Main.tile[soil.TileCoords].TileType]) && PlayerPlacedBlockList.placedBlocksByPlayer.Contains(soil.TileCoords.ToVector2()) == false)
-            {
-                commonBlock = true;
-            }
-            else
-            {
-                commonBlock = false;
-            }
-            if (source is EntitySource_TileBreak tileTree && TileChecks.treeTile[Main.tile[tileTree.TileCoords].TileType])
-            {
-                tree = true;
-            }
-            else
-            {
-                tree = false;
-            }
-            if (source is EntitySource_TileBreak brokenTile && PlayerPlacedBlockList.placedBlocksByPlayer.Contains(brokenTile.TileCoords.ToVector2()) == false)
-            {
-                blockNotByPlayer = true;
-            }
-            else
-            {
-                blockNotByPlayer = false;
-            }
-            if (source is EntitySource_Misc { Context: "HarvestingItem" })
-            {
-                harvestingDrop = true;
-            }
-            else
-            {
-                harvestingDrop = false;
-            }
-            if (source is EntitySource_Misc { Context: "MiningItem" })
-            {
-                miningDrop = true;
-            }
-            else
-            {
-                miningDrop = false;
-            }
-            if (source is EntitySource_Misc { Context: "FishingItem" })
-            {
-                fishingDrop = true;
-            }
-            else
-            {
-                fishingDrop = false;
-            }
-            if (source is EntitySource_Misc { Context: "GlobalItem" })
-            {
-                fishingDrop = true;
-            }
-            else
-            {
-                fishingDrop = false;
-            }
-            if (source is EntitySource_Misc { Context: "HarvestingFortuneItem" })
-            {
-                fortuneHarvestingDrop = true;
-            }
-            else
-            {
-                fortuneHarvestingDrop = false;
-            }
-            if (source is EntitySource_Misc { Context: "MiningFortuneItem" })
-            {
-                fortuneMiningDrop = true;
-            }
-            else
-            {
-                fortuneMiningDrop = false;
-            }
-            if (source is EntitySource_Misc { Context: "FishingFortuneItem" })
-            {
-                fortuneFishingDrop = true;
-            }
-            else
-            {
-                fortuneFishingDrop = false;
-            }
-            if (source is EntitySource_TileBreak playerPlacedCheck)
-            {
-                PlayerPlacedBlockList.placedBlocksByPlayer.Remove(playerPlacedCheck.TileCoords.ToVector2());
-            }
-            if (updateReplacedTile.Count > 0)
-            {
-                PlayerPlacedBlockList.placedBlocksByPlayer.AddRange(updateReplacedTile);
+                globalDrop = petSource.ContextType == EntitySource_Pet.TypeId.globalItem;
+
+                harvestingDrop = petSource.ContextType == EntitySource_Pet.TypeId.harvestingItem;
+
+                miningDrop = petSource.ContextType == EntitySource_Pet.TypeId.miningItem;
+
+                fishingDrop = petSource.ContextType == EntitySource_Pet.TypeId.fishingItem;
+
+                fortuneHarvestingDrop = petSource.ContextType == EntitySource_Pet.TypeId.harvestingFortuneItem;
+
+                fortuneMiningDrop = petSource.ContextType == EntitySource_Pet.TypeId.miningFortuneItem;
+
+                fortuneFishingDrop = petSource.ContextType == EntitySource_Pet.TypeId.fishingFortuneItem;
             }
         }
         public override void NetSend(Item item, BinaryWriter writer)
         {
             BitsByte sources1 = new(itemFromNpc, herbBoost, rareHerbBoost, oreBoost, bambooBoost, dirt, commonBlock, tree);
             BitsByte sources2 = new(blockNotByPlayer, gemTree, pickedUpBefore, itemFromBoss, itemFromBag, harvestingDrop, miningDrop, fishingDrop);
-            BitsByte sources3 = new(globalDrop,fortuneHarvestingDrop, fortuneMiningDrop, fortuneFishingDrop);
+            BitsByte sources3 = new(globalDrop, fortuneHarvestingDrop, fortuneMiningDrop, fortuneFishingDrop, seaPlant);
             writer.Write(sources1);
             writer.Write(sources2);
             writer.Write(sources3);
@@ -736,7 +674,7 @@ namespace PetsOverhaul.Systems
             BitsByte sources2 = reader.ReadByte();
             sources2.Retrieve(ref blockNotByPlayer, ref gemTree, ref pickedUpBefore, ref itemFromBoss, ref itemFromBag, ref harvestingDrop, ref miningDrop, ref fishingDrop);
             BitsByte sources3 = reader.ReadByte();
-            sources3.Retrieve(ref globalDrop,ref fortuneHarvestingDrop, ref fortuneMiningDrop, ref fortuneFishingDrop);
+            sources3.Retrieve(ref globalDrop, ref fortuneHarvestingDrop, ref fortuneMiningDrop, ref fortuneFishingDrop, ref seaPlant);
         }
 
     }
@@ -749,7 +687,7 @@ namespace PetsOverhaul.Systems
         {
             Grinch = 0, Snowman = 1, QueenSlime = 2, Deerclops = 3, IceQueen = 4, PikachuStatic = 5, Misc = 6
         }
-        public List<(SlowId, float slowAmount, int slowTime)> SlowList = new(100);
+        public List<(SlowId, float slowAmount, int slowTime)> SlowList = new();
         /// <summary>
         /// If you need to find out how much current cumulative slow amount is, use this.
         /// </summary>
@@ -957,10 +895,8 @@ namespace PetsOverhaul.Systems
     {
         public override bool InstancePerEntity => true;
         public bool isPlanteraProjectile = false;
-        public bool planteroProj = false;
+        public bool petProj = false;
         public bool isFromSentry = false;
-        public bool phantasmProjectile = false;
-        public bool beeProj = false;
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
             if (source is EntitySource_ItemUse item && (item.Item.type == ItemID.VenusMagnum || item.Item.type == ItemID.NettleBurst || item.Item.type == ItemID.LeafBlower || item.Item.type == ItemID.FlowerPow || item.Item.type == ItemID.WaspGun || item.Item.type == ItemID.Seedler))
@@ -971,17 +907,9 @@ namespace PetsOverhaul.Systems
             {
                 isPlanteraProjectile = true;
             }
-            else
+            if (source is EntitySource_Pet { ContextType: EntitySource_Pet.TypeId.petProjectile })
             {
-                isPlanteraProjectile = false;
-            }
-            if (source is EntitySource_Misc { Context: "Plantero" })
-            {
-                planteroProj = true;
-            }
-            else
-            {
-                planteroProj = false;
+                petProj = true;
             }
             if (source is EntitySource_Parent parent2 && parent2.Entity is Projectile proj2 && proj2.sentry)
             {
@@ -990,22 +918,6 @@ namespace PetsOverhaul.Systems
             else
             {
                 isFromSentry = false;
-            }
-            if (source is EntitySource_Misc { Context: "PhantasmalDragon" })
-            {
-                phantasmProjectile = true;
-            }
-            else
-            {
-                phantasmProjectile = false;
-            }
-            if (source is EntitySource_Misc { Context: "BabyHornet" })
-            {
-                beeProj = true;
-            }
-            else
-            {
-                beeProj = false;
             }
         }
     }

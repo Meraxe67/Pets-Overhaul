@@ -55,7 +55,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
                 for (int i = 0; i < ItemPet.Randomizer(snowFishChance * fish.stack); i++)
                 {
-                    Player.QuickSpawnItem(Player.GetSource_Misc("FishingItem"), fish, 1);
+                    Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.fishingItem), fish, 1);
                 }
             }
         }

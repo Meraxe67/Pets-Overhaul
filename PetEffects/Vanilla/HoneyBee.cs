@@ -30,7 +30,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
         }
     }
-    public sealed class QueenBeePetItem : GlobalItem
+    public sealed class HoneyBeePotions : GlobalItem
     {
         public override bool InstancePerEntity => true;
         public override bool ConsumeItem(Item item, Player player)
@@ -77,20 +77,20 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     for (int i = 0; i < Main.maxPlayers; i++)
                     {
                         Player targetPlayer = Main.player[i];
-                        if (Main.player[i].active && !Main.player[i].HasBuff(ModContent.BuffType<HoneyOverdose>()) && player.Distance(Main.player[i].Center) < honeyBee.range && player.whoAmI != Main.player[i].whoAmI)
+                        if (targetPlayer.active && targetPlayer.HasBuff(ModContent.BuffType<HoneyOverdose>()) == false && player.Distance(targetPlayer.Center) < honeyBee.range && player.whoAmI != targetPlayer.whoAmI)
                         {
-                            if (Main.player[i].statLife + (int)(Main.player[i].statLifeMax2 * honeyBee.honeyfinHealth) > Main.player[i].statLifeMax2)
+                            if (targetPlayer.statLife + (int)(targetPlayer.statLifeMax2 * honeyBee.honeyfinHealth) > targetPlayer.statLifeMax2)
                             {
-                                Main.player[i].statLife = Main.player[i].statLifeMax2;
+                                targetPlayer.statLife = targetPlayer.statLifeMax2;
                             }
                             else
                             {
-                                Main.player[i].statLife += (int)(Main.player[i].statLifeMax2 * honeyBee.honeyfinHealth);
+                                targetPlayer.statLife += (int)(targetPlayer.statLifeMax2 * honeyBee.honeyfinHealth);
                             }
 
-                            Main.player[i].HealEffect((int)(Main.player[i].statLifeMax2 * honeyBee.honeyfinHealth));
-                            Main.player[i].AddBuff(BuffID.Honey, 600);
-                            Main.player[i].AddBuff(ModContent.BuffType<HoneyOverdose>(), (int)(honeyBee.honeyOverdoseTime * (1 / (1 + player.GetModPlayer<GlobalPet>().abilityHaste))));
+                            targetPlayer.HealEffect((int)(targetPlayer.statLifeMax2 * honeyBee.honeyfinHealth));
+                            targetPlayer.AddBuff(BuffID.Honey, 600);
+                            targetPlayer.AddBuff(ModContent.BuffType<HoneyOverdose>(), (int)(honeyBee.honeyOverdoseTime * (1 / (1 + player.GetModPlayer<GlobalPet>().abilityHaste))));
                         }
                     }
                 }
@@ -98,6 +98,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
             return true;
         }
+    }
+    sealed public class QueenBeePetItem : GlobalItem
+    {
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
             return entity.type == ItemID.QueenBeePetItem;

@@ -199,7 +199,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {(250, new int[]{ ItemID.GemTreeAmberSeed,ItemID.GemTreeAmethystSeed,ItemID.GemTreeDiamondSeed,ItemID.GemTreeEmeraldSeed,ItemID.GemTreeRubySeed,ItemID.GemTreeSapphireSeed,ItemID.GemTreeTopazSeed,ItemID.Amethyst,ItemID.Topaz,ItemID.Sapphire,ItemID.Emerald,ItemID.Ruby,ItemID.Amber,ItemID.Diamond }) },
             {(300, new int[]{ ItemID.Pearlwood,ItemID.SpookyWood}) },
             {(350, new int[]{ ItemID.JungleSpores}) },
-            {(500, new int[]{ ItemID.Coral,ItemID.Seashell,ItemID.Starfish}) },
+            {(500, new int[]{ ItemID.Coral,ItemID.Seashell,ItemID.Starfish,ItemID.LightningWhelkShell,ItemID.TulipShell,ItemID.JunoniaShell}) },
             {(1250, new int[]{ ItemID.SpicyPepper,ItemID.Pomegranate,ItemID.Elderberry,ItemID.BlackCurrant,ItemID.Apple,ItemID.Apricot,ItemID.Banana,ItemID.BloodOrange,ItemID.Cherry,ItemID.Coconut,ItemID.Grapefruit,ItemID.Lemon,ItemID.Mango,ItemID.Peach,ItemID.Pineapple,ItemID.Plum }) },
             {(1500, new int[]{ ModContent.ItemType<Egg>()}) },
             {(2500, new int[]{ ItemID.Dragonfruit,ItemID.Starfruit,ItemID.Grapes}) },
@@ -288,20 +288,20 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         int junimoCash = ItemPet.Randomizer((int)(harvestingExpToCoinMult * junimoHarvestingLevel * value * junimoInUseMultiplier * item.stack), 100);
                         if (junimoCash > 1000000)
                         {
-                            Player.QuickSpawnItem(Player.GetSource_Misc("JunimoItem"), ItemID.PlatinumCoin, junimoCash / 1000000);
+                            Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.PlatinumCoin, junimoCash / 1000000);
                             junimoCash %= 1000000;
                         }
                         if (junimoCash > 10000)
                         {
-                            Player.QuickSpawnItem(Player.GetSource_Misc("JunimoItem"), ItemID.GoldCoin, junimoCash / 10000);
+                            Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.GoldCoin, junimoCash / 10000);
                             junimoCash %= 10000;
                         }
                         if (junimoCash > 100)
                         {
-                            Player.QuickSpawnItem(Player.GetSource_Misc("JunimoItem"), ItemID.SilverCoin, junimoCash / 100);
+                            Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.SilverCoin, junimoCash / 100);
                             junimoCash %= 100;
                         }
-                        Player.QuickSpawnItem(Player.GetSource_Misc("JunimoItem"), ItemID.CopperCoin, junimoCash);
+                        Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.CopperCoin, junimoCash);
                     }
                     if (junimoExpCheck())
                     {
@@ -334,7 +334,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     {
                         for (int i = 0; i < ItemPet.Randomizer(junimoMiningLevel * junimoInUseMultiplier * item.stack); i++)
                         {
-                            Player.QuickSpawnItem(item.GetSource_Misc("JunimoItem"), item, 1);
+                            Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), item, 1);
                         }
                     }
                 }
@@ -396,7 +396,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             if (Pet.PetInUse(ItemID.JunimoPetItem) || Player.HasItemInInventoryOrOpenVoidBag(ItemID.JunimoPetItem))
             {
-                int noSwapCd = Player.HasBuff(ModContent.BuffType<ObliviousPet>()) ? 1 : 2;
+                int noSwapCd =(Player.HasBuff(ModContent.BuffType<ObliviousPet>()) == false&& Pet.PetInUse(ItemID.JunimoPetItem)) ? 2 : 1;
                 Player.endurance += junimoMiningLevel * 0.002f * noSwapCd;
                 Player.GetDamage<GenericDamageClass>() *= 1f + junimoFishingLevel * 0.002f * noSwapCd;
                 if (Player.statLifeMax2 * junimoHarvestingLevel * 0.0025f * junimoInUseMultiplier > junimoHarvestingLevel * noSwapCd)

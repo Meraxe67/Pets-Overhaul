@@ -35,7 +35,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
                 for (int i = 0; i < ItemPet.Randomizer(bambooChance * item.stack); i++)
                 {
-                    Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), item, 1);
+                    Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), item, 1);
                 }
             }
 

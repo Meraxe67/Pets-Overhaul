@@ -59,7 +59,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 }
                 for (int i = 0; i < ItemPet.Randomizer(chanceToRollItem); i++)
                 {
-                    Player.QuickSpawnItem(Player.GetSource_Misc("GlobalItem"), item, 1);
+                    Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), item, 1);
                 }
             }
             return true;

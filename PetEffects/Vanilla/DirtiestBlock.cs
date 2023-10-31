@@ -22,7 +22,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
                 if (itemChck.dirt == true)
                 {
-                    Player.QuickSpawnItem(Player.GetSource_Misc("MiningItem"), ItemID.CopperCoin, ItemPet.Randomizer(item.stack * dirtCoin));
+                    Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.CopperCoin, ItemPet.Randomizer(item.stack * dirtCoin));
                     if (Juni.junimoExpCheck())
                     {
                        
@@ -37,7 +37,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 }
                 else if (itemChck.commonBlock == true)
                 {
-                    Player.QuickSpawnItem(Player.GetSource_Misc("MiningItem"), ItemID.CopperCoin, ItemPet.Randomizer(item.stack * soilCoin));
+                    Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.CopperCoin, ItemPet.Randomizer(item.stack * soilCoin));
                     if (Juni.junimoExpCheck())
                     {
                         int value = ItemPet.Randomizer((int)(dirtCoin * Juni.junimoInUseMultiplier * item.stack * Pet.miningExpBoost), 10000);
@@ -52,7 +52,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 else if (itemChck.blockNotByPlayer == true)
                 {
                     Main.NewText("any");
-                    Player.QuickSpawnItem(Player.GetSource_Misc("MiningItem"), ItemID.CopperCoin, ItemPet.Randomizer(item.stack * everythingCoin));
+                    Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.CopperCoin, ItemPet.Randomizer(item.stack * everythingCoin));
                 }
             }
             return true;

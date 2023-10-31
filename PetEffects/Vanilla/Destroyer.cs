@@ -34,7 +34,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
                 for (int i = 0; i < ItemPet.Randomizer((Player.statDefense * defItemMult + flatAmount) * item.stack); i++)
                 {
-                    Player.QuickSpawnItem(Player.GetSource_Misc("MiningItem"), item, 1);
+                    Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.miningItem), item, 1);
                 }
             }
 

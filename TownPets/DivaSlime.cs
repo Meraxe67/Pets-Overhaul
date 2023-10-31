@@ -26,22 +26,22 @@ namespace PetsOverhaul.TownPets
                 int refundAmount = ItemPet.Randomizer((int)(item.GetStoreValue() * divaDisc*1000),1000);
                 if (refundAmount > 1000000)
                 {
-                    Player.QuickSpawnItem(Player.GetSource_Misc("GlobalItem"), ItemID.PlatinumCoin, refundAmount / 1000000);
+                    Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.PlatinumCoin, refundAmount / 1000000);
                     refundAmount %= 1000000;
                 }
                 if (refundAmount > 10000)
                 {
-                    Player.QuickSpawnItem(Player.GetSource_Misc("GlobalItem"), ItemID.GoldCoin, refundAmount / 10000);
+                    Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.GoldCoin, refundAmount / 10000);
                     refundAmount %= 10000;
                 }
                 if (refundAmount > 100)
                 {
-                    Player.QuickSpawnItem(Player.GetSource_Misc("GlobalItem"), ItemID.SilverCoin, refundAmount / 100);
+                    Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.SilverCoin, refundAmount / 100);
                     refundAmount %= 100;
                 }
                 if (refundAmount >= 1)
                 {
-                    Player.QuickSpawnItem(Player.GetSource_Misc("GlobalItem"), ItemID.CopperCoin, refundAmount / 1);
+                    Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.CopperCoin, refundAmount / 1);
                 }
             }
         }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 namespace PetsOverhaul.Systems
@@ -24,11 +25,11 @@ namespace PetsOverhaul.Systems
         public static bool[] treeTile = TileID.Sets.Factory.CreateBoolSet(false, TileID.TreeAmber, TileID.TreeAmethyst, TileID.TreeAsh, TileID.TreeDiamond, TileID.TreeEmerald, TileID.TreeRuby, TileID.Trees, TileID.TreeSapphire, TileID.TreeTopaz, TileID.MushroomTrees, TileID.PalmTree, TileID.VanityTreeSakura, TileID.VanityTreeYellowWillow);
         public override void PlaceInWorld(int i, int j, int type, Item item)
         {
-            PlayerPlacedBlockList.placedBlocksByPlayer.Add(new Vector2(i, j));
+            PlayerPlacedBlockList.placedBlocksByPlayer.Add(new Point16(i, j));
         }
         public override bool CanReplace(int i, int j, int type, int tileTypeBeingPlaced)
         {
-            ItemPet.updateReplacedTile.Add(new Vector2(i, j));
+            ItemPet.updateReplacedTile.Add(new Point16(i, j));
             return true;
         }
     }

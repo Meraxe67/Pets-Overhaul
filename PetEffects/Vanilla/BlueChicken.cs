@@ -25,7 +25,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
                 if (Main.rand.NextBool(blueEggTimer))
                 {
-                    Player.QuickSpawnItem(Player.GetSource_Misc("BlueChicken"), ModContent.ItemType<Egg>());
+                    Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), ModContent.ItemType<Egg>());
                     if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
                     {
                         SoundEngine.PlaySound(SoundID.NPCDeath3 with { PitchVariance = 0.1f, Pitch = 0.9f }, Player.position);
@@ -119,7 +119,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     {
                         for (int i = 0; i < ItemPet.Randomizer(treeChance * item.stack); i++)
                         {
-                            Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
+                            Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
                         }
                     }
 
@@ -132,7 +132,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     {
                         for (int i = 0; i < ItemPet.Randomizer(rarePlantChance * item.stack); i++)
                         {
-                            Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
+                            Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
                         }
                     }
 
@@ -145,7 +145,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     {
                         for (int i = 0; i < ItemPet.Randomizer(plantChance * item.stack); i++)
                         {
-                            Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
+                            Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
                         }
                     }
 

@@ -42,7 +42,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 {
                     for (int i = 0; i < ItemPet.Randomizer(chance * item.stack, 1000); i++)
                     {
-                        Player.QuickSpawnItem(Player.GetSource_Misc("MiningItem"), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
+                        Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.miningItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
                     }
                 }
 

@@ -29,7 +29,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             if (Pet.PetInUse(ItemID.GlommerPetItem) && Main.rand.NextBool(18000))
             {
-                Player.QuickSpawnItem(Player.GetSource_Misc("Glommer"), ItemID.PoopBlock);
+                Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.PoopBlock);
             }
 
             if (Pet.PetInUseWithSwapCd(ItemID.GlommerPetItem))

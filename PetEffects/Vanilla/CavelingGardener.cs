@@ -24,7 +24,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 {
                     for (int i = 0; i < ItemPet.Randomizer((cavelingRegularPlantChance + (itemChck.gemTree ? cavelingGemTreeChance : 0)) * item.stack); i++)
                     {
-                        Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), item, 1);
+                        Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), item, 1);
                     }
                 }
 
@@ -32,7 +32,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 {
                     for (int i = 0; i < ItemPet.Randomizer(cavelingRarePlantChance * item.stack); i++)
                     {
-                        Player.QuickSpawnItem(Player.GetSource_Misc("HarvestingItem"), item, 1);
+                        Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), item, 1);
                     }
                 }
             }

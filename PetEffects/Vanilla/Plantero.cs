@@ -20,7 +20,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (proj.GetGlobalProjectile<ProjectileSourceChecks>().planteroProj == false && Pet.PetInUseWithSwapCd(ItemID.MudBud))
+            if (proj.GetGlobalProjectile<ProjectileSourceChecks>().petProj == false && Pet.PetInUseWithSwapCd(ItemID.MudBud))
             {
                 for (int i = 0; i < ItemPet.Randomizer(spawnChance + (int)(spawnChance * Pet.abilityHaste)); i++)
                 {
@@ -36,7 +36,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                             projId = ProjectileID.SporeGas3;
                             break;
                     }
-                    Projectile.NewProjectile(Player.GetSource_Misc("PetProjectile"), location, velocity, projId, (int)(damageDone * damageMult) + flatDmg, knockBack, Main.myPlayer);
+                    Projectile.NewProjectile(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.petProjectile), location, velocity, projId, (int)(damageDone * damageMult) + flatDmg, knockBack, Main.myPlayer);
                 }
             }
         }
@@ -58,7 +58,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                             projId = ProjectileID.SporeGas3;
                             break;
                     }
-                    Projectile.NewProjectile(Player.GetSource_Misc("PetProjectile"), location, velocity, projId, (int)(damageDone * damageMult) + flatDmg, knockBack, Main.myPlayer);
+                    Projectile.NewProjectile(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.petProjectile), location, velocity, projId, (int)(damageDone * damageMult) + flatDmg, knockBack, Main.myPlayer);
                 }
             }
         }

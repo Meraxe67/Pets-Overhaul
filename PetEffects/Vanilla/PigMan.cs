@@ -20,7 +20,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int tier3Shield = 20;
         public int shieldTime = 1800;
     }
-    public sealed class PigPetItem : GlobalItem
+    public sealed class PigmanEat : GlobalItem
     {
         public override bool InstancePerEntity => true;
         public override bool ConsumeItem(Item item, Player player)
@@ -63,6 +63,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
             return true;
         }
+    }
+    sealed public class PigPetItem : GlobalItem
+    { 
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
             return entity.type == ItemID.PigPetItem;

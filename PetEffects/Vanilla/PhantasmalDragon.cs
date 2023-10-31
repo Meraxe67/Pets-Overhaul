@@ -48,12 +48,12 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.LunaticCultistPetItem) && Pet.timer <= 0 && proj.GetGlobalProjectile<ProjectileSourceChecks>().phantasmProjectile == false)
+            if (Pet.PetInUseWithSwapCd(ItemID.LunaticCultistPetItem) && Pet.timer <= 0 && proj.GetGlobalProjectile<ProjectileSourceChecks>().petProj == false)
             {
                 switch (Main.rand.Next(3))
                 {
                     case 0:
-                        int ice = Projectile.NewProjectile(Player.GetSource_Misc("PetProjectile"), new Vector2(target.Center.X, target.Center.Y), Main.rand.NextVector2Circular(5f, 5f), ProjectileID.CultistBossIceMist, IceDamage(damageDone), hit.Knockback, Player.whoAmI);
+                        int ice = Projectile.NewProjectile(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.petProjectile), new Vector2(target.Center.X, target.Center.Y), Main.rand.NextVector2Circular(5f, 5f), ProjectileID.CultistBossIceMist, IceDamage(damageDone), hit.Knockback, Player.whoAmI);
                         Main.projectile[ice].friendly = true;
                         Main.projectile[ice].hostile = false;
                         Main.projectile[ice].tileCollide = false;
@@ -69,7 +69,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                             }
 
                             Dust.NewDustDirect(new Vector2(Player.Center.X + Main.rand.NextFloat(-25f, 25f), Player.Center.Y - 400f), 25, 25, DustID.FlameBurst, 0, 0, 25);
-                            int fire = Projectile.NewProjectile(Player.GetSource_Misc("PetProjectile"), new Vector2(target.Center.X + Main.rand.NextFloat(-25f, 25f), target.Center.Y - 400f), new Vector2(Main.rand.NextFloat(5f, -5f), 7f), ProjectileID.CultistBossFireBall, FireDamage(damageDone), hit.Knockback, Player.whoAmI);
+                            int fire = Projectile.NewProjectile(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.petProjectile), new Vector2(target.Center.X + Main.rand.NextFloat(-25f, 25f), target.Center.Y - 400f), new Vector2(Main.rand.NextFloat(5f, -5f), 7f), ProjectileID.CultistBossFireBall, FireDamage(damageDone), hit.Knockback, Player.whoAmI);
                             Main.projectile[fire].friendly = true;
                             Main.projectile[fire].hostile = false;
                             Main.projectile[fire].tileCollide = true;
@@ -84,7 +84,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                                 SoundEngine.PlaySound(SoundID.Zombie90 with { PitchVariance = 0.5f, MaxInstances = 10, Volume = 0.3f }, Player.position);
                             }
 
-                            int light = Projectile.NewProjectile(Player.GetSource_Misc("PetProjectile"), new Vector2(target.Center.X - Main.rand.Next(-300, 300), target.Center.Y - Main.rand.Next(-300, 300)), Vector2.Zero, ProjectileID.HallowBossSplitShotCore, LightDamage(damageDone), hit.Knockback, Player.whoAmI);
+                            int light = Projectile.NewProjectile(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.petProjectile), new Vector2(target.Center.X - Main.rand.Next(-300, 300), target.Center.Y - Main.rand.Next(-300, 300)), Vector2.Zero, ProjectileID.HallowBossSplitShotCore, LightDamage(damageDone), hit.Knockback, Player.whoAmI);
                             Main.projectile[light].friendly = true;
                             Main.projectile[light].hostile = false;
                             Main.projectile[light].tileCollide = false;
@@ -104,7 +104,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 switch (Main.rand.Next(3))
                 {
                     case 0:
-                        int ice = Projectile.NewProjectile(Player.GetSource_Misc("PetProjectile"), new Vector2(target.Center.X, target.Center.Y), Main.rand.NextVector2Circular(5f, 5f), ProjectileID.CultistBossIceMist, IceDamage(damageDone), hit.Knockback, Player.whoAmI);
+                        int ice = Projectile.NewProjectile(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.petProjectile), new Vector2(target.Center.X, target.Center.Y), Main.rand.NextVector2Circular(5f, 5f), ProjectileID.CultistBossIceMist, IceDamage(damageDone), hit.Knockback, Player.whoAmI);
                         Main.projectile[ice].friendly = true;
                         Main.projectile[ice].hostile = false;
                         Main.projectile[ice].tileCollide = false;
@@ -120,7 +120,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                             }
 
                             Dust.NewDustDirect(new Vector2(Player.Center.X + Main.rand.NextFloat(-25f, 25f), Player.Center.Y - 400f), 25, 25, DustID.FlameBurst, 0, 0, 25);
-                            int fire = Projectile.NewProjectile(Player.GetSource_Misc("PetProjectile"), new Vector2(target.Center.X + Main.rand.NextFloat(-25f, 25f), target.Center.Y - 400f), new Vector2(Main.rand.NextFloat(5f, -5f), 7f), ProjectileID.CultistBossFireBall, FireDamage(damageDone), hit.Knockback, Player.whoAmI);
+                            int fire = Projectile.NewProjectile(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.petProjectile), new Vector2(target.Center.X + Main.rand.NextFloat(-25f, 25f), target.Center.Y - 400f), new Vector2(Main.rand.NextFloat(5f, -5f), 7f), ProjectileID.CultistBossFireBall, FireDamage(damageDone), hit.Knockback, Player.whoAmI);
                             Main.projectile[fire].friendly = true;
                             Main.projectile[fire].hostile = false;
                             Main.projectile[fire].tileCollide = true;
@@ -135,7 +135,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                                 SoundEngine.PlaySound(SoundID.Zombie90 with { PitchVariance = 0.5f, MaxInstances = 10, Volume = 0.3f }, Player.position);
                             }
 
-                            int light = Projectile.NewProjectile(Player.GetSource_Misc("PetProjectile"), new Vector2(target.Center.X - Main.rand.Next(-300, 300), target.Center.Y - Main.rand.Next(-300, 300)), Vector2.Zero, ProjectileID.HallowBossSplitShotCore, LightDamage(damageDone), hit.Knockback, Player.whoAmI);
+                            int light = Projectile.NewProjectile(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.petProjectile), new Vector2(target.Center.X - Main.rand.Next(-300, 300), target.Center.Y - Main.rand.Next(-300, 300)), Vector2.Zero, ProjectileID.HallowBossSplitShotCore, LightDamage(damageDone), hit.Knockback, Player.whoAmI);
                             Main.projectile[light].friendly = true;
                             Main.projectile[light].hostile = false;
                             Main.projectile[light].tileCollide = false;
