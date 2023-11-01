@@ -18,9 +18,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int everythingCoin = 100;
         public override bool OnPickup(Item item)
         {
-            if (item.TryGetGlobalItem(out ItemPet itemChck) && Pet.PickupChecks(item, ItemID.DirtiestBlock, itemChck))
+            if (Pet.PickupChecks(item, ItemID.DirtiestBlock, out ItemPet itemChck)&&itemChck.blockNotByPlayer == true)
             {
-                if (itemChck.dirt == true)
+                if (item.type == ItemID.DirtBlock)
                 {
                     Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.CopperCoin, ItemPet.Randomizer(item.stack * dirtCoin));
                     if (Juni.junimoExpCheck())
@@ -49,9 +49,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         }
                     }
                 }
-                else if (itemChck.blockNotByPlayer == true)
+                else 
                 {
-                    Main.NewText("any");
                     Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.CopperCoin, ItemPet.Randomizer(item.stack * everythingCoin));
                 }
             }

@@ -268,9 +268,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public override bool OnPickup(Item item)
         {
-            if (item.TryGetGlobalItem(out ItemPet itemChck) && Player.CanPullItem(item, Player.ItemSpace(item)) && itemChck.pickedUpBefore == false)
+            if (Player.CanPullItem(item, Player.ItemSpace(item)) && item.TryGetGlobalItem(out ItemPet itemChck) && itemChck.pickedUpBefore == false)
             {
-                if (itemChck.rareHerbBoost || itemChck.herbBoost)
+                if (itemChck.herbBoost)
                 {
                     int value;
                     int index = HarvestingXpPerGathered.IndexOf(HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)));

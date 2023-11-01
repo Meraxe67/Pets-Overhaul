@@ -95,16 +95,15 @@ namespace PetsOverhaul.Systems
         /// <summary>
         /// Runs all of the standart OnPickup's checks for the Pet to work with no problems.
         /// </summary>
-        public bool PickupChecks(Item item, int petitemid, ItemPet itemPet)
+        public bool PickupChecks(Item item, int petitemid, out ItemPet itemPet)
         {
-            if (itemPet.pickedUpBefore == false && Player.CanPullItem(item, Player.ItemSpace(item)) && PetInUse(petitemid))
+            if (PetInUse(petitemid) && Player.CanPullItem(item, Player.ItemSpace(item)) && item.TryGetGlobalItem(out ItemPet petItemCheck) && petItemCheck.pickedUpBefore == false)
             {
+                itemPet = petItemCheck;
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            itemPet = null;
+            return false;
         }
         public override bool OnPickup(Item item)
         {
@@ -410,6 +409,8 @@ namespace PetsOverhaul.Systems
         }
         public override void PreUpdate()
         {
+            if (ItemPet.updateReplacedTile.Count > 0)
+                ItemPet.updateReplacedTile.Clear();
             fishingFortune = 0;
             harvestingFortune = 0;
             miningFortune = 0;
@@ -537,17 +538,45 @@ namespace PetsOverhaul.Systems
     public sealed class ItemPet : GlobalItem
     {
         public override bool InstancePerEntity => true;
+        /// <summary>
+        /// Includes tiles that are considered 'soil' tiles, except Dirt. Used by Dirtiest Block.
+        /// </summary>
+        public static bool[] commonTiles = TileID.Sets.Factory.CreateBoolSet(false, TileID.Mud, TileID.SnowBlock, TileID.Ash, TileID.ClayBlock, TileID.Marble, TileID.Granite, TileID.Ebonstone, TileID.Crimstone, TileID.Pearlstone, TileID.Sand, TileID.Ebonsand, TileID.Crimsand, TileID.Pearlsand, TileID.CorruptSandstone, TileID.Sandstone, TileID.CrimsonSandstone, TileID.HallowSandstone, TileID.HardenedSand, TileID.CorruptHardenedSand, TileID.CrimsonHardenedSand, TileID.HallowHardenedSand, TileID.IceBlock, TileID.CorruptIce, TileID.FleshIce, TileID.HallowedIce, TileID.Stone, TileID.Ebonstone, TileID.Crimstone, TileID.Pearlstone);
+        /// <summary>
+        /// Includes Gem tiles.
+        /// </summary>
+        public static bool[] gemTile = TileID.Sets.Factory.CreateBoolSet(false, TileID.Amethyst, TileID.Topaz, TileID.Sapphire, TileID.Emerald, TileID.Ruby, TileID.AmberStoneBlock, TileID.Diamond, TileID.ExposedGems, TileID.Crystals);
+        /// <summary>
+        /// Includes tiles that are extractable by an Extractinator and a few other stuff that aren't recognized as ores such as Obsidian and Luminite
+        /// </summary>
+        public static bool[] extractableAndOthers = TileID.Sets.Factory.CreateBoolSet(false, TileID.DesertFossil, TileID.Slush, TileID.Silt, TileID.Obsidian, TileID.LunarOre, TileID.DesertFossil);
+        /// <summary>
+        /// Includes tiles that counts as trees.
+        /// </summary>
+        public static bool[] treeTile = TileID.Sets.Factory.CreateBoolSet(false, TileID.TreeAmber, TileID.TreeAmethyst, TileID.TreeAsh, TileID.TreeDiamond, TileID.TreeEmerald, TileID.TreeRuby, TileID.Trees, TileID.TreeSapphire, TileID.TreeTopaz, TileID.MushroomTrees, TileID.PalmTree, TileID.VanityTreeSakura, TileID.VanityTreeYellowWillow, TileID.Bamboo, TileID.Cactus);
+        /// <summary>
+        /// Contains items dropped by gemstone trees. Current only use is Caveling Gardener.
+        /// </summary>
+        public static bool[] gemstoneTreeItem = ItemID.Sets.Factory.CreateBoolSet(false, ItemID.GemTreeAmberSeed, ItemID.GemTreeAmethystSeed, ItemID.GemTreeDiamondSeed, ItemID.GemTreeEmeraldSeed, ItemID.GemTreeRubySeed, ItemID.GemTreeSapphireSeed, ItemID.GemTreeTopazSeed, ItemID.Amethyst, ItemID.Topaz, ItemID.Sapphire, ItemID.Emerald, ItemID.Ruby, ItemID.Amber, ItemID.Diamond, ItemID.StoneBlock);
+        /// <summary>
+        /// Contains items dropped by trees. Current only use is Blue Chicken.
+        /// </summary>
+        public static bool[] treeItem = ItemID.Sets.Factory.CreateBoolSet(false, ItemID.Acorn, ItemID.BambooBlock, ItemID.Cactus, ItemID.Wood, ItemID.AshWood, ItemID.BorealWood, ItemID.PalmWood, ItemID.Ebonwood, ItemID.Shadewood, ItemID.RichMahogany, ItemID.Pearlwood, ItemID.SpookyWood);
+        /// <summary>
+        /// Contains items dropped by trees. Current only use is Blue Chicken.
+        /// </summary>
+        public static bool[] seaPlantItem = ItemID.Sets.Factory.CreateBoolSet(false, ItemID.Coral, ItemID.Seashell, ItemID.Starfish, ItemID.LightningWhelkShell, ItemID.TulipShell, ItemID.JunoniaShell);
+        /// <summary>
+        /// Adds coordinates in this to PlayerPlacedBlockList if a tile has been replaced and item is obtained through that way. In GlobalTile, Add to this in the CanReplace() hook.
+        /// </summary>
         public static List<Point16> updateReplacedTile = new();
+
+        //Checks to determine which Pet should benefit
         public bool itemFromNpc = false;
         public bool herbBoost = false;
-        public bool rareHerbBoost = false;
         public bool oreBoost = false;
-        public bool bambooBoost = false;
-        public bool dirt = false;
         public bool commonBlock = false;
-        public bool tree = false;
         public bool blockNotByPlayer = false;
-        public bool gemTree = false;
         public bool pickedUpBefore = false;
         public bool itemFromBag = false;
         public bool itemFromBoss = false;
@@ -558,7 +587,12 @@ namespace PetsOverhaul.Systems
         public bool fortuneHarvestingDrop = false;
         public bool fortuneMiningDrop = false;
         public bool fortuneFishingDrop = false;
-        public bool seaPlant = false;
+        public bool plantWithTile = false;
+
+        /// <summary>
+        /// 1000 is 10 exp.
+        /// </summary>
+        public const int MinimumExpForRarePlant = 1000;
         /// <summary>
         /// Randomizes the given number. numToBeRandomized / randomizeTo returns how many times its 100% chance and rolls if the leftover, non-100% amount is true. Randomizer(250) returns +2 and +1 more with 50% chance.
         /// </summary>
@@ -587,60 +621,22 @@ namespace PetsOverhaul.Systems
         }
         public override void OnSpawn(Item item, IEntitySource source)
         {
-            if (source is EntitySource_TileBreak brokenTile)
-            {
-                ushort tileType = Main.tile[brokenTile.TileCoords].TileType;
-
-                gemTree = TileID.Sets.CountsAsGemTree[tileType];
-
-                bambooBoost = tileType == TileID.Bamboo;
-
-                tree = TileChecks.treeTile[tileType];
-
-                if (PlayerPlacedBlockList.placedBlocksByPlayer.Remove(new Point16(brokenTile.TileCoords)) == false)
-                {
-                    seaPlant = tileType == TileID.Coral || tileType == TileID.BeachPiles;
-                    oreBoost = TileID.Sets.Ore[tileType] || TileChecks.gemTile[tileType] || TileChecks.extractableAndOthers[tileType] || item.type == ItemID.LifeCrystal;
-                    dirt = TileID.Sets.Dirt[tileType];
-                    commonBlock = TileID.Sets.Conversion.Moss[tileType] || TileChecks.commonTiles[tileType];
-                    blockNotByPlayer = true;
-                }
-                if (updateReplacedTile.Count > 0)
-                {
-                    PlayerPlacedBlockList.placedBlocksByPlayer.AddRange(updateReplacedTile);
-                }
-            }
-            if ((source is EntitySource_TileBreak || source is EntitySource_ShakeTree) && Junimo.HarvestingXpPerGathered.Exists(x => x.plantList.Contains(item.type)))
-            {
-                if (Junimo.HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)).expAmount >= 1000)
-                    rareHerbBoost = true;
-                else
-                    herbBoost = true;
-                if (source is not EntitySource_ShakeTree
-                    && gemTree == false && new int[] { ItemID.GemTreeAmberSeed, ItemID.GemTreeAmethystSeed, ItemID.GemTreeDiamondSeed, ItemID.GemTreeEmeraldSeed, ItemID.GemTreeRubySeed, ItemID.GemTreeSapphireSeed, ItemID.GemTreeTopazSeed, ItemID.Amethyst, ItemID.Topaz, ItemID.Sapphire, ItemID.Emerald, ItemID.Ruby, ItemID.Amber, ItemID.Diamond, ItemID.StoneBlock }.Contains(item.type)
-                    || bambooBoost == false && item.type == ItemID.BambooBlock
-                    || tree == false && new int[] { ItemID.Wood, ItemID.AshWood, ItemID.BorealWood, ItemID.PalmWood, ItemID.Ebonwood, ItemID.Shadewood, ItemID.StoneBlock, ItemID.RichMahogany, ItemID.Pearlwood, ItemID.SpookyWood }.Contains(item.type)
-                    || seaPlant == false && new int[] { ItemID.Coral, ItemID.Seashell, ItemID.Starfish, ItemID.LightningWhelkShell, ItemID.TulipShell, ItemID.JunoniaShell }.Contains(item.type))
-                {
-                    rareHerbBoost = false;
-                    herbBoost = false;
-                }
-            }
-            if (source is EntitySource_Loot lootSource && lootSource.Entity is NPC npc)
-            {
-                if (npc.boss == true || npc.GetGlobalNPC<NpcPet>().nonBossTrueBosses[npc.type])
-                {
-                    itemFromBoss = true;
-                }
-                else
-                {
-                    itemFromNpc = true;
-                }
-            }
-            if (source is EntitySource_ItemOpen)
-            {
-                itemFromBag = true;
-            }
+            itemFromNpc = false;
+            herbBoost = false;
+            oreBoost = false;
+            commonBlock = false;
+            blockNotByPlayer = false;
+            pickedUpBefore = false;
+            itemFromBag = false;
+            itemFromBoss = false;
+            harvestingDrop = false;
+            miningDrop = false;
+            fishingDrop = false;
+            globalDrop = false;
+            fortuneHarvestingDrop = false;
+            fortuneMiningDrop = false;
+            fortuneFishingDrop = false;
+            plantWithTile = false;
             if (source is EntitySource_Pet petSource)
             {
                 globalDrop = petSource.ContextType == EntitySource_Pet.TypeId.globalItem;
@@ -657,24 +653,71 @@ namespace PetsOverhaul.Systems
 
                 fortuneFishingDrop = petSource.ContextType == EntitySource_Pet.TypeId.fishingFortuneItem;
             }
+            else if (source is EntitySource_TileBreak || source is EntitySource_ShakeTree)
+            {
+                if (Junimo.HarvestingXpPerGathered.Exists(x => x.plantList.Contains(item.type)))
+                    herbBoost = true;
+
+                if (source is EntitySource_TileBreak brokenTile)
+                {
+                    ushort tileType = Main.tile[brokenTile.TileCoords].TileType;
+
+                    plantWithTile = TileID.Sets.CountsAsGemTree[tileType] || treeTile[tileType];
+
+
+                    if (PlayerPlacedBlockList.placedBlocksByPlayer.Remove(new Point16(brokenTile.TileCoords)) == false)
+                    {
+                        oreBoost = TileID.Sets.Ore[tileType] || gemTile[tileType] || extractableAndOthers[tileType] || item.type == ItemID.LifeCrystal;
+                        commonBlock = TileID.Sets.Conversion.Moss[tileType] || commonTiles[tileType];
+                        blockNotByPlayer = true;
+                    }
+
+                    if (plantWithTile == false && (gemstoneTreeItem[item.type] || treeItem[item.type]) || blockNotByPlayer == true && seaPlantItem[item.type])
+                    {
+                        herbBoost = false;
+                    }
+
+                    if (updateReplacedTile.Count > 0)
+                    {
+                        PlayerPlacedBlockList.placedBlocksByPlayer.AddRange(updateReplacedTile);
+                    }
+                }
+            }
+            else if (source is EntitySource_Loot lootSource && lootSource.Entity is NPC npc)
+            {
+                if (npc.boss == true || npc.GetGlobalNPC<NpcPet>().nonBossTrueBosses[npc.type])
+                {
+                    itemFromBoss = true;
+                }
+                else
+                {
+                    itemFromNpc = true;
+                }
+            }
+            else if (source is EntitySource_ItemOpen)
+            {
+                itemFromBag = true;
+            }
         }
         public override void NetSend(Item item, BinaryWriter writer)
         {
-            BitsByte sources1 = new(itemFromNpc, herbBoost, rareHerbBoost, oreBoost, bambooBoost, dirt, commonBlock, tree);
-            BitsByte sources2 = new(blockNotByPlayer, gemTree, pickedUpBefore, itemFromBoss, itemFromBag, harvestingDrop, miningDrop, fishingDrop);
-            BitsByte sources3 = new(globalDrop, fortuneHarvestingDrop, fortuneMiningDrop, fortuneFishingDrop, seaPlant);
-            writer.Write(sources1);
-            writer.Write(sources2);
-            writer.Write(sources3);
+            if (Main.netMode != NetmodeID.SinglePlayer)
+            {
+                BitsByte sources1 = new(blockNotByPlayer, pickedUpBefore, itemFromNpc, itemFromBoss, itemFromBag, herbBoost, plantWithTile, oreBoost);
+                BitsByte sources2 = new(commonBlock, harvestingDrop, miningDrop, fishingDrop, globalDrop, fortuneHarvestingDrop, fortuneMiningDrop, fortuneFishingDrop);
+                writer.Write(sources1);
+                writer.Write(sources2);
+            }
         }
         public override void NetReceive(Item item, BinaryReader reader)
         {
-            BitsByte sources1 = reader.ReadByte();
-            sources1.Retrieve(ref itemFromNpc, ref herbBoost, ref rareHerbBoost, ref oreBoost, ref bambooBoost, ref dirt, ref commonBlock, ref tree);
-            BitsByte sources2 = reader.ReadByte();
-            sources2.Retrieve(ref blockNotByPlayer, ref gemTree, ref pickedUpBefore, ref itemFromBoss, ref itemFromBag, ref harvestingDrop, ref miningDrop, ref fishingDrop);
-            BitsByte sources3 = reader.ReadByte();
-            sources3.Retrieve(ref globalDrop, ref fortuneHarvestingDrop, ref fortuneMiningDrop, ref fortuneFishingDrop, ref seaPlant);
+            if (Main.netMode != NetmodeID.SinglePlayer)
+            {
+                BitsByte sources1 = reader.ReadByte();
+                sources1.Retrieve(ref blockNotByPlayer, ref pickedUpBefore, ref itemFromNpc, ref itemFromBoss, ref itemFromBag, ref herbBoost, ref plantWithTile, ref oreBoost);
+                BitsByte sources2 = reader.ReadByte();
+                sources2.Retrieve(ref commonBlock, ref harvestingDrop, ref miningDrop, ref fishingDrop, ref globalDrop, ref fortuneHarvestingDrop, ref fortuneMiningDrop, ref fortuneFishingDrop);
+            }
         }
 
     }

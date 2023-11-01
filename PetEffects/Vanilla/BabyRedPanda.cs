@@ -31,7 +31,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public override bool OnPickup(Item item)
         {
-            if (item.TryGetGlobalItem(out ItemPet itemPet) && Pet.PickupChecks(item, ItemID.BambooLeaf, itemPet) && itemPet.bambooBoost)
+            if (Pet.PickupChecks(item, ItemID.BambooLeaf, out ItemPet _) && item.type == ItemID.BambooBlock)
             {
                 for (int i = 0; i < ItemPet.Randomizer(bambooChance * item.stack); i++)
                 {

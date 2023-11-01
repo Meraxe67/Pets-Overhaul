@@ -21,7 +21,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         private int chanceToRollItem = 0;
         public override bool OnPickup(Item item)
         {
-            if (item.TryGetGlobalItem(out ItemPet itemChck) && Pet.PickupChecks(item, ItemID.OrnateShadowKey, itemChck))
+            if (Pet.PickupChecks(item, ItemID.OrnateShadowKey, out ItemPet itemChck))
             {
                 chanceToRollItem = 0;
                 if (itemChck.itemFromNpc == true)

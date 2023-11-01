@@ -1,6 +1,7 @@
 ﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;
@@ -16,21 +17,13 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int squashlingRareChance = 10;
         public override bool OnPickup(Item item)
         {
-            if (item.TryGetGlobalItem(out ItemPet itemChck) && Pet.PickupChecks(item, ItemID.MagicalPumpkinSeed, itemChck))
+            if (Pet.PickupChecks(item, ItemID.MagicalPumpkinSeed, out ItemPet itemChck))
             {
                 if (itemChck.herbBoost == true)
                 {
-                    for (int i = 0; i < ItemPet.Randomizer(squashlingCommonChance * item.stack); i++)
+                    for (int i = 0; i < ItemPet.Randomizer((Junimo.HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)).expAmount >= ItemPet.MinimumExpForRarePlant) ? squashlingRareChance : squashlingCommonChance) * item.stack; i++)
                     {
-                        Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), item, 1);
-                    }
-                }
-
-                if (itemChck.rareHerbBoost == true)
-                {
-                    for (int i = 0; i < ItemPet.Randomizer(squashlingRareChance * item.stack); i++)
-                    {
-                        Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), item, 1);
+                        Player.QuickSpawnItemDirect(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), item, 1);
                     }
                 }
             }

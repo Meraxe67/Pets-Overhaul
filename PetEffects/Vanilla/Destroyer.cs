@@ -30,7 +30,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public override bool OnPickup(Item item)
         {
-            if (item.TryGetGlobalItem(out ItemPet itemPet) && Pet.PickupChecks(item, ItemID.DestroyerPetItem, itemPet) && itemPet.oreBoost)
+            if (Pet.PickupChecks(item, ItemID.DestroyerPetItem, out ItemPet itemChck) && itemChck.oreBoost)
             {
                 for (int i = 0; i < ItemPet.Randomizer((Player.statDefense * defItemMult + flatAmount) * item.stack); i++)
                 {

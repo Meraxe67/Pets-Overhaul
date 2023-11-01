@@ -6,6 +6,8 @@ using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using System.Linq;
+using Microsoft.Xna.Framework;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
@@ -18,19 +20,11 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float shineMult = 0.5f;
         public override bool OnPickup(Item item)
         {
-            if (item.TryGetGlobalItem(out ItemPet itemChck) && Pet.PickupChecks(item, ItemID.GlowTulip, itemChck))
+            if (Pet.PickupChecks(item, ItemID.GlowTulip, out ItemPet itemChck))
             {
-                if ((itemChck.gemTree || itemChck.herbBoost) && (Player.ZoneDirtLayerHeight || Player.ZoneRockLayerHeight || Player.ZoneUnderworldHeight))
+                if (itemChck.herbBoost && (Player.ZoneDirtLayerHeight || Player.ZoneRockLayerHeight || Player.ZoneUnderworldHeight))
                 {
-                    for (int i = 0; i < ItemPet.Randomizer((cavelingRegularPlantChance + (itemChck.gemTree ? cavelingGemTreeChance : 0)) * item.stack); i++)
-                    {
-                        Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), item, 1);
-                    }
-                }
-
-                if (itemChck.rareHerbBoost && (Player.ZoneDirtLayerHeight || Player.ZoneRockLayerHeight || Player.ZoneUnderworldHeight))
-                {
-                    for (int i = 0; i < ItemPet.Randomizer(cavelingRarePlantChance * item.stack); i++)
+                    for (int i = 0; i < ItemPet.Randomizer(((Junimo.HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)).expAmount >= ItemPet.MinimumExpForRarePlant) ? cavelingRarePlantChance : cavelingRegularPlantChance + ((itemChck.plantWithTile && ItemPet.gemstoneTreeItem[item.type]) ? cavelingGemTreeChance : 0)) * item.stack); i++)
                     {
                         Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), item, 1);
                     }
@@ -43,7 +37,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             if (Pet.PetInUse(ItemID.GlowTulip))
             {
-                Lighting.AddLight(Player.Center, new Microsoft.Xna.Framework.Vector3(0.0013f * Main.mouseTextColor, 0.0064f * Main.mouseTextColor, 0.0115f * Main.mouseTextColor) * shineMult);
+                Lighting.AddLight(Player.Center, new Vector3(0.0013f * Main.mouseTextColor, 0.0064f * Main.mouseTextColor, 0.0115f * Main.mouseTextColor) * shineMult);
             }
         }
     }
