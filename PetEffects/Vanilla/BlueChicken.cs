@@ -26,7 +26,15 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
                 if (Main.rand.NextBool(blueEggTimer))
                 {
-                    Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), ModContent.ItemType<Egg>());
+                    if (Main.rand.NextBool(200))
+                    {
+                       if (Main.rand.NextBool(2,5))
+                            Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), ItemID.BlueEgg);
+                       else
+                            Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), ItemID.RottenEgg);
+                    }
+                    else
+                        Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), ModContent.ItemType<Egg>());
                     if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
                     {
                         SoundEngine.PlaySound(SoundID.NPCDeath3 with { PitchVariance = 0.1f, Pitch = 0.9f }, Player.position);
@@ -113,7 +121,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             if (Pet.PickupChecks(item, ItemID.BlueEgg, out ItemPet itemChck))
             {
-                if (itemChck.plantWithTile&&ItemPet.treeItem[item.type])
+                if (itemChck.plantWithTile && ItemPet.treeItem[item.type])
                 {
                     PoolTree();
                     if (GlobalPet.pool.Count > 0)
