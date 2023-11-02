@@ -28,6 +28,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             if (Pet.PetInUseWithSwapCd(ItemID.SpiffoPlush) && target.active == false && proj.CountsAsClass<RangedDamageClass>() && proj.penetrate >= 0)
             {
                 proj.penetrate += ItemPet.Randomizer(penetrateChance);
+                proj.usesLocalNPCImmunity = true;
             }
         }
         public override bool CanConsumeAmmo(Item weapon, Item ammo)

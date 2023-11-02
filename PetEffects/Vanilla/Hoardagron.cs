@@ -42,14 +42,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     velocity *= bulletSpd;
                 }
 
-                if (AmmoID.Sets.IsSpecialist[item.useAmmo])
-                {
-                    specialist = true;
-                }
-                else
-                {
-                    specialist = false;
-                }
+                specialist = AmmoID.Sets.IsSpecialist[item.useAmmo];
             }
         }
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
@@ -74,21 +67,14 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
             Hoardagron player = Main.player[projectile.owner].GetModPlayer<Hoardagron>();
-
             if (player.Pet.PetInUseWithSwapCd(ItemID.DD2PetDragon))
             {
                 if (player.arrow && projectile.penetrate >= 0)
                 {
                     projectile.penetrate += player.arrowPen;
+                    projectile.usesLocalNPCImmunity = true;
                 }
-                if (player.specialist)
-                {
-                    special = true;
-                }
-                else
-                {
-                    special = false;
-                }
+                special = player.specialist;
             }
         }
     }
