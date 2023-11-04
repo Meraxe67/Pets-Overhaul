@@ -139,7 +139,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public bool fromNpcAndWet = false;
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
-            if (source is EntitySource_Parent parent3 && parent3.Entity is NPC npc && npc.HasBuff(BuffID.Wet))
+            if (source is EntitySource_Parent parent && parent.Entity is NPC npc && npc.HasBuff(BuffID.Wet))
             {
                 fromNpcAndWet = true;
             }

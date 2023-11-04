@@ -19,6 +19,7 @@ namespace PetsOverhaul.TownPets
         public float mysticHaste = 0.02f;
         public float nerdBuildSpeed = 1.05f;
         public float oldKbResist = 0.95f;
+        public float nerdLightScale = 0.2f;
 
         public float mysticAllExp = 0.01f;
         public float bunnyHarvExp = 0.02f;
@@ -44,6 +45,7 @@ namespace PetsOverhaul.TownPets
                 mysticHaste = 0.06f;
                 nerdBuildSpeed = 1.3f;
                 oldKbResist = 0.85f;
+                nerdLightScale = 1.1f;
 
                 mysticAllExp = 0.03f;
                 bunnyHarvExp = 0.06f;
@@ -69,6 +71,7 @@ namespace PetsOverhaul.TownPets
                 mysticHaste = 0.04f;
                 nerdBuildSpeed = 1.2f;
                 oldKbResist = 0.90f;
+                nerdLightScale = 0.5f;
 
                 mysticAllExp = 0.02f;
                 bunnyHarvExp = 0.04f;
@@ -93,6 +96,7 @@ namespace PetsOverhaul.TownPets
                 mysticHaste = 0.02f;
                 nerdBuildSpeed = 1.1f;
                 oldKbResist = 0.95f;
+                nerdLightScale = 0.2f;
 
                 mysticAllExp = 0.01f;
                 bunnyHarvExp = 0.02f;

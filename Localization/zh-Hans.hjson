@@ -711,19 +711,20 @@ Mods: {
 				// DisplayName: <Name>'s Aura
 				/* Description:
 					'''
-					Grants Dangersense
 					Multiplies your placement speed by <NerdPlacement>x
+					Grants a white shine with scale of <NerdShineScale>x
 					''' */
 				/* PostHardmodeDescription:
 					'''
-					Grants Dangersense and Wire vision
+					Grants Dangersense and Night vision
 					Multiplies your placement speed by <NerdPlacement>x
+					Grants a white shine with scale of <NerdShineScale>x
 					''' */
 				/* PostMoonlordDescription:
 					'''
-					Grants night vision, ultrabright shine
-					Dangersense and Wire vision
+					Grants Dangersense, Night and Wire vision
 					Multiplies your placement speed by <NerdPlacement>x
+					Grants a white shine with scale of <NerdShineScale>x
 					''' */
 			}
 

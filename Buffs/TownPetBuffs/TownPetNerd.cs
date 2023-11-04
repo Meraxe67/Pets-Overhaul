@@ -22,17 +22,24 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
                     buffName = "Nerdy Aura";
                 }
             }
+            TownPet townPet = Main.LocalPlayer.GetModPlayer<TownPet>();
             if (NPC.downedMoonlord)
             {
-                tip = Language.GetTextValue("Mods.PetsOverhaul.Buffs.TownPetNerd.PostMoonlordDescription").Replace("<NerdPlacement>", Main.LocalPlayer.GetModPlayer<TownPet>().nerdBuildSpeed.ToString());
+                tip = Language.GetTextValue("Mods.PetsOverhaul.Buffs.TownPetNerd.PostMoonlordDescription")
+                    .Replace("<NerdPlacement>", townPet.nerdBuildSpeed.ToString())
+                    .Replace("<NerdShineScale>", townPet.nerdLightScale.ToString());
             }
             else if (Main.hardMode)
             {
-                tip = Language.GetTextValue("Mods.PetsOverhaul.Buffs.TownPetNerd.PostHardmodeDescription").Replace("<NerdPlacement>", Main.LocalPlayer.GetModPlayer<TownPet>().nerdBuildSpeed.ToString());
+                tip = Language.GetTextValue("Mods.PetsOverhaul.Buffs.TownPetNerd.PostHardmodeDescription")
+                    .Replace("<NerdPlacement>", townPet.nerdBuildSpeed.ToString())
+                    .Replace("<NerdShineScale>", townPet.nerdLightScale.ToString());
             }
             else
             {
-                tip = Language.GetTextValue("Mods.PetsOverhaul.Buffs.TownPetNerd.Description").Replace("<NerdPlacement>", Main.LocalPlayer.GetModPlayer<TownPet>().nerdBuildSpeed.ToString());
+                tip = Language.GetTextValue("Mods.PetsOverhaul.Buffs.TownPetNerd.Description")
+                    .Replace("<NerdPlacement>", townPet.nerdBuildSpeed.ToString())
+                    .Replace("<NerdShineScale>", townPet.nerdLightScale.ToString());
             }
             rare = 0;
         }

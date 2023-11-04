@@ -54,15 +54,11 @@ namespace PetsOverhaul.Systems
         public bool[] burnDebuffs = BuffID.Sets.Factory.CreateBoolSet(false, BuffID.Burning, BuffID.OnFire, BuffID.OnFire3, BuffID.Frostburn, BuffID.CursedInferno, BuffID.ShadowFlame, BuffID.Frostburn2);
         public Color skin;
         public bool skinColorChanged = false;
-        public static List<int> pool = new();
+        public static List<int> pool = new(50000);
         public List<(int shieldAmount, int shieldTimer)> petShield = new();
         public int currentShield = 0;
         public int shieldToBeReduced = 0;
         public bool jumpRegistered = false;
-
-        /// <summary>
-        /// Adds the specified ItemID to the 'pool' list with amount of specified weight. Capacity is 100000.
-        /// </summary>
         public int petSwapCooldown = 600;
         internal int previousPetItem = 0;
         /// <summary>
@@ -113,6 +109,7 @@ namespace PetsOverhaul.Systems
                 {
                     for (int i = 0; i < ItemPet.Randomizer(globalFortune * item.stack); i++)
                     {
+                        //    Item.NewItem(GetSource_Pet(EntitySource_Pet.TypeId.globalItem), Player.Hitbox, item);
                         Player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.globalItem), item, 1);
                     }
                 }
@@ -203,7 +200,7 @@ namespace PetsOverhaul.Systems
         /// </summary>
         public int Lifesteal(int baseAmount, float percentageAmount, int flatIncrease = 0, bool manaSteal = false, bool respectLifeStealCap = true, bool doLifesteal = true)
         {
-            float num = baseAmount * percentageAmount;
+            float num = baseAmount * (Player.HasBuff(BuffID.MoonLeech) ? percentageAmount * 0.33f : percentageAmount);
             int calculatedAmount = (int)num;
             if (Main.rand.NextFloat(0, 1) < num % 1)
             {
@@ -593,6 +590,7 @@ namespace PetsOverhaul.Systems
         /// 1000 is 10 exp.
         /// </summary>
         public const int MinimumExpForRarePlant = 1000;
+
         /// <summary>
         /// Randomizes the given number. numToBeRandomized / randomizeTo returns how many times its 100% chance and rolls if the leftover, non-100% amount is true. Randomizer(250) returns +2 and +1 more with 50% chance.
         /// </summary>
@@ -636,7 +634,6 @@ namespace PetsOverhaul.Systems
             fortuneHarvestingDrop = false;
             fortuneMiningDrop = false;
             fortuneFishingDrop = false;
-            plantWithTile = false;
             if (source is EntitySource_Pet petSource)
             {
                 globalDrop = petSource.ContextType == EntitySource_Pet.TypeId.globalItem;
@@ -662,9 +659,6 @@ namespace PetsOverhaul.Systems
                 {
                     ushort tileType = Main.tile[brokenTile.TileCoords].TileType;
 
-                    plantWithTile = TileID.Sets.CountsAsGemTree[tileType] || treeTile[tileType];
-
-
                     if (PlayerPlacedBlockList.placedBlocksByPlayer.Remove(new Point16(brokenTile.TileCoords)) == false)
                     {
                         oreBoost = TileID.Sets.Ore[tileType] || gemTile[tileType] || extractableAndOthers[tileType] || item.type == ItemID.LifeCrystal;
@@ -672,7 +666,7 @@ namespace PetsOverhaul.Systems
                         blockNotByPlayer = true;
                     }
 
-                    if (plantWithTile == false && (gemstoneTreeItem[item.type] || treeItem[item.type]) || blockNotByPlayer == true && seaPlantItem[item.type])
+                    if (TileID.Sets.CountsAsGemTree[tileType] == false && gemstoneTreeItem[item.type] || treeTile[tileType] == false && treeItem[item.type] || blockNotByPlayer == false && seaPlantItem[item.type])
                     {
                         herbBoost = false;
                     }
@@ -703,8 +697,8 @@ namespace PetsOverhaul.Systems
         {
             if (Main.netMode != NetmodeID.SinglePlayer)
             {
-                BitsByte sources1 = new(blockNotByPlayer, pickedUpBefore, itemFromNpc, itemFromBoss, itemFromBag, herbBoost, plantWithTile, oreBoost);
-                BitsByte sources2 = new(commonBlock, harvestingDrop, miningDrop, fishingDrop, globalDrop, fortuneHarvestingDrop, fortuneMiningDrop, fortuneFishingDrop);
+                BitsByte sources1 = new(blockNotByPlayer, pickedUpBefore, itemFromNpc, itemFromBoss, itemFromBag, herbBoost, oreBoost, commonBlock);
+                BitsByte sources2 = new(globalDrop, harvestingDrop, miningDrop, fishingDrop, fortuneHarvestingDrop, fortuneMiningDrop, fortuneFishingDrop);
                 writer.Write(sources1);
                 writer.Write(sources2);
             }
@@ -714,9 +708,9 @@ namespace PetsOverhaul.Systems
             if (Main.netMode != NetmodeID.SinglePlayer)
             {
                 BitsByte sources1 = reader.ReadByte();
-                sources1.Retrieve(ref blockNotByPlayer, ref pickedUpBefore, ref itemFromNpc, ref itemFromBoss, ref itemFromBag, ref herbBoost, ref plantWithTile, ref oreBoost);
+                sources1.Retrieve(ref blockNotByPlayer, ref pickedUpBefore, ref itemFromNpc, ref itemFromBoss, ref itemFromBag, ref herbBoost, ref oreBoost, ref commonBlock);
                 BitsByte sources2 = reader.ReadByte();
-                sources2.Retrieve(ref commonBlock, ref harvestingDrop, ref miningDrop, ref fishingDrop, ref globalDrop, ref fortuneHarvestingDrop, ref fortuneMiningDrop, ref fortuneFishingDrop);
+                sources2.Retrieve(ref globalDrop, ref harvestingDrop, ref miningDrop, ref fishingDrop, ref fortuneHarvestingDrop, ref fortuneMiningDrop, ref fortuneFishingDrop);
             }
         }
 
@@ -846,14 +840,12 @@ namespace PetsOverhaul.Systems
         }
         public override void OnSpawn(NPC npc, IEntitySource source)
         {
-            if (source is EntitySource_FishedOut)
+            if (source is EntitySource_FishedOut || npc.type == NPCID.DukeFishron)
             {
                 seaCreature = true;
             }
             else
-            {
                 seaCreature = false;
-            }
         }
         /// <summary>
         /// Slows if enemy is not a boss or a friendly npc. Also does not slow an npc's vertical speed if they are affected by gravity, but does so if they arent. Due to the formula, you may use a positive number for slowAmount freely and as much as you want, it almost will never completely stop an enemy. Negative values however, easily can get out of hand and cause unwanted effects. Due to that, a cap of -0.9f exists for negative values, which 10x's the speed.
@@ -942,6 +934,9 @@ namespace PetsOverhaul.Systems
         public bool isFromSentry = false;
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
+            isPlanteraProjectile = false;
+            petProj = false;
+            isFromSentry = false;
             if (source is EntitySource_ItemUse item && (item.Item.type == ItemID.VenusMagnum || item.Item.type == ItemID.NettleBurst || item.Item.type == ItemID.LeafBlower || item.Item.type == ItemID.FlowerPow || item.Item.type == ItemID.WaspGun || item.Item.type == ItemID.Seedler))
             {
                 isPlanteraProjectile = true;
@@ -957,10 +952,6 @@ namespace PetsOverhaul.Systems
             if (source is EntitySource_Parent parent2 && parent2.Entity is Projectile proj2 && proj2.sentry)
             {
                 isFromSentry = true;
-            }
-            else
-            {
-                isFromSentry = false;
             }
         }
     }

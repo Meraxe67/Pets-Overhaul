@@ -24,14 +24,14 @@ namespace PetsOverhaul.TownPets
             {
                 if (NPC.downedMoonlord)
                 {
-                    Lighting.AddLight(Player.Center, TorchID.UltraBright);
-                    Player.nightVision = true;
+                    Player.InfoAccMechShowWires = true;
                 }
                 if (Main.hardMode)
                 {
-                    Player.InfoAccMechShowWires = true;
+                    Player.nightVision = true;
+                    Player.dangerSense = true;
                 }
-                Player.dangerSense = true;
+                Lighting.AddLight(Player.Center, new Microsoft.Xna.Framework.Vector3(2.55f,2.55f,2.55f)*nerdLightScale);
                 Player.tileSpeed *= nerdBuildSpeed;
             }
         }

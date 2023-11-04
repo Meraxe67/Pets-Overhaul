@@ -272,7 +272,7 @@ Mods: {
 				Increases your max mana by <maxMana>% and increases your magic damage by 
 				<manaToDmg>% for every 1 mana you have over 200 mana. But, multiplies your magic
 				damage bonuses over 100% by <dmgPenalty>x, extra 15% penalty when using Spectre Hood, 
-				and reduces by currently how much Mana Sickness reduces, divided by 4
+				and reduces more by currently how much Mana Sickness reduces, divided by 4
 				'''
 			EyeSpring:
 				'''
@@ -326,7 +326,7 @@ Mods: {
 				Ores, gems and extractables can drop +1 more with <miningBonusDrop>% chance, +<bonusReduction>% damage reduction
 				Current level: [c/96A8B0:<miningLevel>] Experience needed for next level: [c/96A8B0:<miningNext>] Current total experience: [c/96A8B0:<miningCurrent>]
 				[c/0382E9:Fishing]
-				Increases Fishing Power by <fishingPower>% multiplicatively, +<bonusDamage>% increase to all types of damage
+				Increases Fishing Power by <fishingPower>% multiplicatively and grants extra rewards upon completing an Angler Quest, +<bonusDamage>% damage increase
 				Current level: [c/0382E9:<fishingLevel>] Experience needed for next level: [c/0382E9:<fishingNext>] Current total experience: [c/0382E9:<fishingCurrent>]
 				'''
 			BirdieRattle:
@@ -398,6 +398,7 @@ Mods: {
 				'''
 				[c/0ea80e:Defensive Pet]
 				Gain <lifesteal>% lifesteal, increased to <planteraSteal>% for Plantera's weapons
+				While affected by Moonbite, lifesteal is 33% effective.
 				'''
 			SpiderEgg:
 				'''
@@ -421,8 +422,8 @@ Mods: {
 				'''
 				[c/716DAF:Fishing and Offensive Pet]
 				Gain <fishingPower> fishing power, deal <seaCreatureDmg>x damage, and receive
-				<seaCreatureResist>x damage from fished-up enemies and gives the player
-				<shield> shield for <shieldTime> seconds upon catching anything
+				<seaCreatureResist>x damage from fished-up enemy hits and projectiles,
+				and gives the player <shield> shield for <shieldTime> seconds upon catching fish
 				'''
 			SpiffoPlush:
 				'''
@@ -756,19 +757,20 @@ Mods: {
 				DisplayName: <Name>'s Aura
 				Description:
 					'''
-					Grants Dangersense
 					Multiplies your placement speed by <NerdPlacement>x
+					Grants a white shine with scale of <NerdShineScale>x
 					'''
 				PostHardmodeDescription:
 					'''
-					Grants Dangersense and Wire vision
+					Grants Dangersense and Night vision
 					Multiplies your placement speed by <NerdPlacement>x
+					Grants a white shine with scale of <NerdShineScale>x
 					'''
 				PostMoonlordDescription:
 					'''
-					Grants night vision, ultrabright shine
-					Dangersense and Wire vision
+					Grants Dangersense, Night and Wire vision
 					Multiplies your placement speed by <NerdPlacement>x
+					Grants a white shine with scale of <NerdShineScale>x
 					'''
 			}
 

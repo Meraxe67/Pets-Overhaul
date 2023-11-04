@@ -3,6 +3,7 @@ using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
@@ -12,13 +13,13 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class SharkPup : ModPlayer
     {
-        public float seaCreatureResist = 0.8f;
-        public float seaCreatureDamage = 1.2f;
+        public float seaCreatureResist = 0.9f;
+        public float seaCreatureDamage = 1.1f;
         public int shieldOnCatch = 5;
-        public int shieldTime = 600;
+        public int shieldTime = 900;
         public int fishingPow = 10;
 
-        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
         {
             if (Pet.PetInUseWithSwapCd(ItemID.SharkBait) && npc.GetGlobalNPC<NpcPet>().seaCreature)
@@ -45,6 +46,33 @@ namespace PetsOverhaul.PetEffects.Vanilla
             if (Pet.PetInUseWithSwapCd(ItemID.SharkBait))
             {
                 Pet.petShield.Add((shieldOnCatch, shieldTime));
+            }
+        }
+    }
+    public sealed class SeaCreatureProj : GlobalProjectile
+    {
+        public override bool InstancePerEntity => true;
+        public bool seaCreatureProj = false;
+        public override void OnSpawn(Projectile projectile, IEntitySource source)
+        {
+            if (source is EntitySource_Parent parent && parent.Entity is NPC npc && npc.GetGlobalNPC<NpcPet>().seaCreature)
+            {
+                seaCreatureProj = true;
+            }
+            else
+            {
+                seaCreatureProj = false;
+            }
+        }
+        public override void ModifyHitPlayer(Projectile projectile, Player target, ref Player.HurtModifiers modifiers)
+        {
+            if (seaCreatureProj == true)
+            {
+                SharkPup player = target.GetModPlayer<SharkPup>();
+                if (player.Pet.PetInUseWithSwapCd(ItemID.SharkBait))
+                {
+                    modifiers.FinalDamage *= player.seaCreatureResist;
+                }
             }
         }
     }

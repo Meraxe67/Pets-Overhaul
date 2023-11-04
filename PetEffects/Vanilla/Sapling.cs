@@ -12,9 +12,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class Sapling : ModPlayer
     {
-        public float planteraLifesteal = 0.033f;
-        public float regularLifesteal = 0.012f;
-
+        public float planteraLifesteal = 0.03f;
+        public float regularLifesteal = 0.009f;
         private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
