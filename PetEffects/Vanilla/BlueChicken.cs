@@ -121,26 +121,22 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             if (Pet.PickupChecks(item, ItemID.BlueEgg, out ItemPet itemChck))
             {
-                if (itemChck.plantWithTile && ItemPet.treeItem[item.type])
-                {
-                    PoolTree();
-                    if (GlobalPet.pool.Count > 0)
-                    {
-                        for (int i = 0; i < ItemPet.Randomizer(treeChance * item.stack); i++)
-                        {
-                            Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
-                        }
-                    }
-
-                    GlobalPet.pool.Clear();
-                }
-                else if (itemChck.herbBoost)
+                if (itemChck.herbBoost)
                 {
                     if (Junimo.HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)).expAmount >= ItemPet.MinimumExpForRarePlant)
                     {
                         PoolRarePlant();
                         if (GlobalPet.pool.Count > 0)
                             for (int i = 0; i < ItemPet.Randomizer(rarePlantChance * item.stack); i++)
+                            {
+                                Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
+                            }
+                    }
+                    else if (ItemPet.treeItem[item.type])
+                    {
+                        PoolTree();
+                        if (GlobalPet.pool.Count > 0)
+                            for (int i = 0; i < ItemPet.Randomizer(treeChance * item.stack); i++)
                             {
                                 Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
                             }
@@ -154,7 +150,6 @@ namespace PetsOverhaul.PetEffects.Vanilla
                                 Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
                             }
                     }
-
                     GlobalPet.pool.Clear();
                 }
             }

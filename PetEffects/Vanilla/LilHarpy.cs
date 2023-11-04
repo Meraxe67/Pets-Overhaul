@@ -16,7 +16,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int harpyCd = 780;
         public int fuelMax = 180;
         public int harpyFlight = 180;
-
+        private bool cooldownStarted;
         private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PreUpdate()
         {
@@ -32,6 +32,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
                 if (Pet.timer == 0)
                 {
+                    cooldownStarted = false;
                     harpyFlight = fuelMax;
                     AdvancedPopupRequest popupMessage = new();
                     popupMessage.Text = "Cooldown Refreshed!";
@@ -55,9 +56,10 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     }
                     Player.noFallDmg = true;
                 }
-                if (harpyFlight < fuelMax)
+                if (cooldownStarted == false && harpyFlight < fuelMax)
                 {
                     Pet.timer = Pet.timerMax;
+                    cooldownStarted = true;
                 }
             }
         }
