@@ -23,7 +23,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 if (item.type == ItemID.DirtBlock)
                 {
                     Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.CopperCoin, ItemPet.Randomizer(item.stack * dirtCoin));
-                    if (Juni.junimoExpCheck())
+                    if (Juni.JunimoExpCheck())
                     {
                        
                         int value = ItemPet.Randomizer((int)(dirtCoin * Juni.junimoInUseMultiplier * item.stack * Pet.miningExpBoost), 10000);
@@ -31,21 +31,21 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         Juni.popupExpMining += value;
                         if (value > 0)
                         {
-                            Juni.popupIndexMining = Juni.PopupExp(Juni.popupIndexMining, Juni.popupExpMining, Color.LightGray);
+                            Juni.popupIndexMining = Juni.PopupExp(Juni.popupIndexMining, Juni.popupExpMining, new Color(150, 168, 176));
                         }
                     }
                 }
                 else if (itemChck.commonBlock == true)
                 {
                     Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.CopperCoin, ItemPet.Randomizer(item.stack * soilCoin));
-                    if (Juni.junimoExpCheck())
+                    if (Juni.JunimoExpCheck())
                     {
                         int value = ItemPet.Randomizer((int)(dirtCoin * Juni.junimoInUseMultiplier * item.stack * Pet.miningExpBoost), 10000);
                         Juni.junimoMiningExp += value;
                         Juni.popupExpMining += value;
                         if (value > 0)
                         {
-                            Juni.popupIndexMining = Juni.PopupExp(Juni.popupIndexMining, Juni.popupExpMining, Color.LightGray);
+                            Juni.popupIndexMining = Juni.PopupExp(Juni.popupIndexMining, Juni.popupExpMining, new Color(150, 168, 176));
                         }
                     }
                 }

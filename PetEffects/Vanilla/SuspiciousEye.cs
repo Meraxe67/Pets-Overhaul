@@ -47,7 +47,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         SoundEngine.PlaySound(SoundID.ForceRoar with { PitchVariance = 0.3f }, Player.position);
                     }
 
-                    AdvancedPopupRequest popupMessage = new AdvancedPopupRequest
+                    AdvancedPopupRequest popupMessage = new()
                     {
                         Text = "ENRAGED!",
                         DurationInFrames = 150,
@@ -78,7 +78,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 }
                 else if (timer == 0)
                 {
-                    AdvancedPopupRequest popupMessage = new AdvancedPopupRequest
+                    AdvancedPopupRequest popupMessage = new()
                     {
                         Text = "Calmed Down.",
                         DurationInFrames = 150,

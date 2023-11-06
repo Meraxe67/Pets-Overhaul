@@ -43,7 +43,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     if (player.active && player.HasBuff(ModContent.BuffType<HoneyOverdose>()) == false)
                     {
                         player.statLife += (int)(player.statLifeMax2 * honeyBee.bottledHealth) / 2;
-                        player.HealEffect((int)(player.statLifeMax2 * honeyBee.bottledHealth) / 2);
+                            player.HealEffect((int)(player.statLifeMax2 * honeyBee.bottledHealth) / 2);
                     }
                     for (int i = 0; i < Main.maxPlayers; i++)
                     {
@@ -58,8 +58,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                             {
                                 targetPlayer.statLife += (int)(targetPlayer.statLifeMax2 * honeyBee.bottledHealth);
                             }
-
-                            targetPlayer.HealEffect((int)(targetPlayer.statLifeMax2 * honeyBee.bottledHealth));
+                                targetPlayer.HealEffect((int)(targetPlayer.statLifeMax2 * honeyBee.bottledHealth));
                             targetPlayer.AddBuff(BuffID.Honey, 1200);
                             targetPlayer.AddBuff(ModContent.BuffType<HoneyOverdose>(), (int)(honeyBee.honeyOverdoseTime * (1 / (1 + player.GetModPlayer<GlobalPet>().abilityHaste))));
 
@@ -72,7 +71,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     if (player.active && player.HasBuff(ModContent.BuffType<HoneyOverdose>()) == false)
                     {
                         player.statLife += (int)(player.statLifeMax2 * honeyBee.honeyfinHealth) / 2;
-                        player.HealEffect((int)(player.statLifeMax2 * honeyBee.honeyfinHealth) / 2);
+                            player.HealEffect((int)(player.statLifeMax2 * honeyBee.honeyfinHealth) / 2);
                     }
                     for (int i = 0; i < Main.maxPlayers; i++)
                     {
@@ -87,8 +86,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                             {
                                 targetPlayer.statLife += (int)(targetPlayer.statLifeMax2 * honeyBee.honeyfinHealth);
                             }
-
-                            targetPlayer.HealEffect((int)(targetPlayer.statLifeMax2 * honeyBee.honeyfinHealth));
+                                targetPlayer.HealEffect((int)(targetPlayer.statLifeMax2 * honeyBee.honeyfinHealth));
                             targetPlayer.AddBuff(BuffID.Honey, 600);
                             targetPlayer.AddBuff(ModContent.BuffType<HoneyOverdose>(), (int)(honeyBee.honeyOverdoseTime * (1 / (1 + player.GetModPlayer<GlobalPet>().abilityHaste))));
                         }

@@ -2,9 +2,9 @@ Mods: {
 	PetsOverhaul: {
 		Notice:
 			'''
-			[c/90C2AA:Pets Overhaul 2.2.4 latest changes: A lot of major bug fixes]
-			[c/90C2AA:Fixed so many pets from being unusable, a lot of systemical]
-			[c/90C2AA:optimizations, Shields now works in Multiplayer & more]
+			[c/90C2AA:Pets Overhaul 2.2.6 latest changes: New Max 40 Junimo Levels]
+			[c/90C2AA:New Junimo Fishing Perk: Gives you bonus loot upon completing]
+			[c/90C2AA:an Angler Quest, Fishing Enemy Kill Exp improvements & more]
 			If you happen to come across any bugs, our would like to be up to
 			date with our constantly updating Mod and growing community,
 			we encourage you to join our community and our Discord server!
@@ -12,6 +12,8 @@ Mods: {
 
 		Config: {
 			Personalization: Personalization
+			JunimoExpActive: "[c/AEAEAE:active]"
+			JunimoExpInactive: "[c/AEAEAE:inactive]"
 			JunimoLevelupLabel: Disable Junimo levelup notification
 			JunimoLevelupTooltip:
 				'''
@@ -213,7 +215,7 @@ Mods: {
 				a table. Items vary from seeds to fruits. Plants
 				and herbs have a <plantChance>% chance, rare plants have a <rarePlantChance>%
 				and choppables have <choppableChance>%, Approximately every <eggMinute> minutes
-				gives you an Egg. Rarely you might get a different egg
+				gives you an Egg. Rarely, you might get a different egg...
 				'''
 			GlowTulip:
 				'''
@@ -455,9 +457,9 @@ Mods: {
 			LightningCarrot:
 				'''
 				[c/E39DA9:Offensive and Mobility Pet]
-				Grants an extra <flatSpd>% movement speed, multiplies it by
-				<multSpd>x movement speed boosts over 100% will grant
-				you a damage boost equal to <spdToDmg>% of it. Enemies that
+				Grants an extra <flatSpd>% movement speed, multiplies it by <multSpd>x.
+				Also, Movement speed boosts over 100% grants you a 
+				damage boost equal to <spdToDmg>% of it. Enemies that
 				contacts you gets slowed by <staticAmount>% for <staticTime> seconds
 				'''
 			ZephyrFish:
@@ -748,8 +750,8 @@ Mods: {
 					'''
 					Increases Ability Haste by <MysticHaste>%
 					which reduces your Pet's ability cooldown
-					and Junimo's Harvesting, Mining and
-					Fishing exp by <MysticAllExp>%
+					and increases Junimo's Harvesting, 
+					Mining and Fishing exp by <MysticAllExp>%
 					'''
 			}
 
@@ -825,7 +827,7 @@ Mods: {
 				DisplayName: Egg
 				Tooltip:
 					'''
-					It's a shane it isn't blue.
+					It's a 'Shane' that it isn't blue.
 					Seems cookable, unlike Rotten Egg.
 					'''
 			}

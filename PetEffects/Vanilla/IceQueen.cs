@@ -43,7 +43,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         NPC npc = Main.npc[i];
                         if (npc.active && Player.Distance(npc.Center) < queenRange)
                         {
-                            npc.GetGlobalNPC<NpcPet>().AddSlow(NpcPet.SlowId.IceQueen, slowAmount, 1);
+                            npc.GetGlobalNPC<NpcPet>().AddSlow(NpcPet.SlowId.IceQueen, slowAmount, 2);
                         }
                     }
                     for (int i = 0; i < 20 + iceQueenFrame / 15; i++)
@@ -91,8 +91,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     {
                         SoundEngine.PlaySound(SoundID.Shatter with { PitchVariance = 0.2f }, Player.position);
                     }
-
-                    Player.HealEffect(100);
+                        Player.HealEffect(100);
                     Player.immune = false;
                     Player.SetImmuneTimeForAllTypes(immuneTime);
                     frozenTomb = false;

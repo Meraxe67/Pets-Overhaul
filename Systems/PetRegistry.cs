@@ -500,7 +500,7 @@ namespace PetsOverhaul.Systems
                 return ReLogic.Utilities.SlotId.Invalid;
             }
 
-            return SoundEngine.PlaySound(itemsHurtSound);
+            return SoundEngine.PlaySound(itemsHurtSound, Player.Center);
         }
 
         public ReLogic.Utilities.SlotId playEquipSoundFromItemId(int itemId)
@@ -517,7 +517,7 @@ namespace PetsOverhaul.Systems
                 return ReLogic.Utilities.SlotId.Invalid;
             }
 
-            return SoundEngine.PlaySound(petSummonSound);
+            return SoundEngine.PlaySound(petSummonSound, Player.Center);
         }
 
         public ReLogic.Utilities.SlotId playKillSoundFromItemId(int itemId)
@@ -545,7 +545,7 @@ namespace PetsOverhaul.Systems
                 return ReLogic.Utilities.SlotId.Invalid;
             }
 
-            return SoundEngine.PlaySound(petKillSound);
+            return SoundEngine.PlaySound(petKillSound, Player.Center);
         }
     }
 }

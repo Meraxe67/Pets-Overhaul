@@ -54,7 +54,10 @@ namespace PetsOverhaul.Systems
         public bool[] burnDebuffs = BuffID.Sets.Factory.CreateBoolSet(false, BuffID.Burning, BuffID.OnFire, BuffID.OnFire3, BuffID.Frostburn, BuffID.CursedInferno, BuffID.ShadowFlame, BuffID.Frostburn2);
         public Color skin;
         public bool skinColorChanged = false;
-        public static List<int> pool = new(50000);
+        /// <summary>
+        /// Is cleared at the end of PostUpdate hook. Main use is for Weighted Lists with usage of ItemWeight() Method. Retrieve a value using Main.rand.Next() for its index for Weighted list usage.
+        /// </summary>
+        public static List<int> pool = new();
         public List<(int shieldAmount, int shieldTimer)> petShield = new();
         public int currentShield = 0;
         public int shieldToBeReduced = 0;
@@ -81,6 +84,9 @@ namespace PetsOverhaul.Systems
                 Context = context
             };
         }
+        /// <summary>
+        /// Add an id to pool List with how many times it should be added as the weight.
+        /// </summary>
         public static void ItemWeight(int itemId, int weight)
         {
             for (int i = 0; i < weight; i++)
@@ -213,7 +219,7 @@ namespace PetsOverhaul.Systems
             {
                 if (manaSteal == false)
                 {
-                    Player.HealEffect(calculatedAmount);
+                        Player.HealEffect(calculatedAmount);
                     if (calculatedAmount > Player.statLifeMax2 - Player.statLife)
                     {
                         calculatedAmount = Player.statLifeMax2 - Player.statLife;
@@ -473,6 +479,8 @@ namespace PetsOverhaul.Systems
                 }
                 petShield.RemoveAll(x => x.shieldTimer <= 0 || x.shieldAmount <= 0);
             }
+            if (pool.Count>0)
+                pool.Clear();
         }
         public override void OnEnterWorld()
         {
@@ -486,10 +494,7 @@ namespace PetsOverhaul.Systems
         {
 
             if (ModContent.GetInstance<Personalization>().HurtSoundDisabled == false)
-            {
-                PetRegistry PetRegister = Player.GetModPlayer<PetRegistry>();
-                info.SoundDisabled = PetRegister.playHurtSoundFromItemId(Player.miscEquips[0].type) != ReLogic.Utilities.SlotId.Invalid;
-            }
+                info.SoundDisabled = Player.GetModPlayer<PetRegistry>().playHurtSoundFromItemId(Player.miscEquips[0].type) != ReLogic.Utilities.SlotId.Invalid;
         }
         public override void UpdateEquips()
         {
@@ -508,10 +513,7 @@ namespace PetsOverhaul.Systems
                 previousPetItem = Player.miscEquips[0].type;
             }
             if (ModContent.GetInstance<Personalization>().PassiveSoundDisabled == false && Main.rand.NextBool(3600))
-            {
-                PetRegistry PetRegister = Player.GetModPlayer<PetRegistry>();
-                PetRegister.playEquipSoundFromItemId(Player.miscEquips[0].type);
-            }
+                Player.GetModPlayer<PetRegistry>().playEquipSoundFromItemId(Player.miscEquips[0].type);
         }
         public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
         {
@@ -521,10 +523,7 @@ namespace PetsOverhaul.Systems
         public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
         {
             if (ModContent.GetInstance<Personalization>().DeathSoundDisabled == false)
-            {
-                PetRegistry PetRegister = Player.GetModPlayer<PetRegistry>();
-                playSound = PetRegister.playKillSoundFromItemId(Player.miscEquips[0].type) == ReLogic.Utilities.SlotId.Invalid;
-            }
+                playSound = Player.GetModPlayer<PetRegistry>().playKillSoundFromItemId(Player.miscEquips[0].type) == ReLogic.Utilities.SlotId.Invalid;
 
             return true;
         }
@@ -730,6 +729,7 @@ namespace PetsOverhaul.Systems
         /// </summary>
         public float slowAmount { get; internal set; }
         public bool seaCreature;
+        public int playerThatFishedUp;
         public int maulCounter;
         public int curseCounter;
         /// <summary>
@@ -840,8 +840,14 @@ namespace PetsOverhaul.Systems
         }
         public override void OnSpawn(NPC npc, IEntitySource source)
         {
-            if (source is EntitySource_FishedOut || npc.type == NPCID.DukeFishron)
+            if (source is EntitySource_FishedOut fisherman && fisherman.Fisher is Player player)
             {
+                playerThatFishedUp = player.whoAmI;
+                seaCreature = true;
+            }
+            else if (npc.type == NPCID.DukeFishron && source is EntitySource_BossSpawn fisher && fisher.Target is Player player2)
+            {
+                playerThatFishedUp = player2.whoAmI;
                 seaCreature = true;
             }
             else

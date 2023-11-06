@@ -16,7 +16,6 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int chance = 175; // 17.5% because its with 1000
         public static void AddItemsToPool()
         {
-            GlobalPet.pool.Clear();
             GlobalPet.ItemWeight(ItemID.TinOre, 10);
             GlobalPet.ItemWeight(ItemID.CopperOre, 10);
             GlobalPet.ItemWeight(ItemID.Amethyst, 9);
@@ -45,8 +44,6 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.miningItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
                     }
                 }
-
-                GlobalPet.pool.Clear();
 
             }
             return true;

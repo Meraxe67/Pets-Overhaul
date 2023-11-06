@@ -2,6 +2,8 @@ using PetsOverhaul.ModSupport;
 using System.IO;
 using Terraria.ModLoader;
 using PetsOverhaul.Systems;
+using PetsOverhaul.PetEffects.Vanilla;
+using System;
 
 namespace PetsOverhaul
 {
@@ -9,7 +11,8 @@ namespace PetsOverhaul
     {
         public enum MessageType : byte
         {
-            shieldFullAbsorb
+            shieldFullAbsorb,
+            seaCreatureOnKill,
         }
         public override void PostSetupContent()
         {
@@ -18,12 +21,17 @@ namespace PetsOverhaul
         public override void HandlePacket(BinaryReader reader, int whoAmI)
         {
             MessageType msgType = (MessageType)reader.ReadByte();
-            int damage = reader.ReadInt32();
             switch (msgType)
             {
                 case MessageType.shieldFullAbsorb:
+                    int damage = reader.ReadInt32();
                     GlobalPet.HandleShieldBlockMessage(reader, whoAmI,damage);
                     break;
+                case MessageType.seaCreatureOnKill:
+                    int npcId = reader.ReadInt32();
+                    Junimo.RunSeaCreatureOnKill(reader,whoAmI,npcId);
+                    break;
+                    default: throw new ArgumentOutOfRangeException(nameof(msgType));
             }
         }
     }

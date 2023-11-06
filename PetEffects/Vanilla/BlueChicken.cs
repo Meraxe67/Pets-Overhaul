@@ -44,7 +44,6 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public static void PoolPlant()
         {
-            GlobalPet.pool.Clear();
             GlobalPet.ItemWeight(ItemID.GrassSeeds, 300);
             GlobalPet.ItemWeight(ItemID.JungleGrassSeeds, 275);
             GlobalPet.ItemWeight(ItemID.AshGrassSeeds, 250);
@@ -69,7 +68,6 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public static void PoolRarePlant()
         {
-            GlobalPet.pool.Clear();
             GlobalPet.ItemWeight(ItemID.JungleSpores, 60);
             GlobalPet.ItemWeight(ItemID.SpicyPepper, 24);
             GlobalPet.ItemWeight(ItemID.Pomegranate, 24);
@@ -85,7 +83,6 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public static void PoolTree()
         {
-            GlobalPet.pool.Clear();
             GlobalPet.ItemWeight(ItemID.Acorn, 300);
             GlobalPet.ItemWeight(ItemID.Wood, 300);
             GlobalPet.ItemWeight(ItemID.BorealWood, 250);
@@ -150,7 +147,6 @@ namespace PetsOverhaul.PetEffects.Vanilla
                                 Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
                             }
                     }
-                    GlobalPet.pool.Clear();
                 }
             }
             return true;
