@@ -8,6 +8,7 @@ using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using System.IO;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
@@ -29,72 +30,66 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 healValue += (int)(healValue * selfPotionIncrease);
             }
         }
+        public static void HealByHoneyBee(bool isBottledHoney,int healersWhoAmI, bool selfHeal)
+        {
+            HoneyBee healer = Main.player[healersWhoAmI].GetModPlayer<HoneyBee>();
+            if (selfHeal)
+            {
+                Player player = healer.Player;
+                int healAmount = (int)(player.statLifeMax2 * (isBottledHoney ? healer.bottledHealth : healer.honeyfinHealth)/2);
+                player.HealEffect(healAmount);
+                if (player.statLife + healAmount > player.statLifeMax2)
+                {
+                    player.statLife = player.statLifeMax2;
+                }
+                else
+                {
+                    player.statLife += healAmount;
+                }
+                player.AddBuff(BuffID.Honey, (isBottledHoney ? healer.bottledHoneyBuff : healer.honeyfinHoneyBuff)/2);
+                player.AddBuff(ModContent.BuffType<HoneyOverdose>(), (int)(healer.honeyOverdoseTime * (1 / (1 + healer.abilityHaste))));
+            }
+            else
+            for (int i = 0; i < Main.maxPlayers; i++)
+            {
+                Player player = Main.player[i];
+                if (i == healersWhoAmI || player.active == false || player.dead || player.Distance(healer.Player.Center) >= healer.range || player.HasBuff(ModContent.BuffType<HoneyOverdose>()))
+                {
+                    continue;
+                }
+                int healAmount = (int)(player.statLifeMax2 * (isBottledHoney ? healer.bottledHealth : healer.honeyfinHealth));
+                player.HealEffect(healAmount);
+                if (player.statLife + healAmount > player.statLifeMax2)
+                {
+                    player.statLife = player.statLifeMax2;
+                }
+                else
+                {
+                    player.statLife += healAmount;
+                }
+                player.AddBuff(BuffID.Honey, isBottledHoney ? healer.bottledHoneyBuff : healer.honeyfinHoneyBuff);
+                player.AddBuff(ModContent.BuffType<HoneyOverdose>(), (int)(healer.honeyOverdoseTime * (1 / (1 + healer.abilityHaste))));
+            }
+        }
     }
     public sealed class HoneyBeePotions : GlobalItem
     {
-        public override bool InstancePerEntity => true;
         public override bool ConsumeItem(Item item, Player player)
         {
-            if (player.TryGetModPlayer(out HoneyBee honeyBee) && honeyBee.Pet.PetInUse(ItemID.QueenBeePetItem))
+            if (player.GetModPlayer<GlobalPet>().PetInUseWithSwapCd(ItemID.QueenBeePetItem) && (item.type == ItemID.BottledHoney || item.type == ItemID.Honeyfin))
             {
-                if (item.type == ItemID.BottledHoney)
+                bool isBottledHoney = item.type == ItemID.BottledHoney;
+                HoneyBee.HealByHoneyBee(isBottledHoney, player.whoAmI, true);
+                if (Main.netMode == NetmodeID.MultiplayerClient)
                 {
-                    player.AddBuff(ModContent.BuffType<HoneyOverdose>(), (int)(honeyBee.honeyOverdoseTime * (1 / (1 + player.GetModPlayer<GlobalPet>().abilityHaste))));
-                    if (player.active && player.HasBuff(ModContent.BuffType<HoneyOverdose>()) == false)
-                    {
-                        player.statLife += (int)(player.statLifeMax2 * honeyBee.bottledHealth) / 2;
-                            player.HealEffect((int)(player.statLifeMax2 * honeyBee.bottledHealth) / 2);
-                    }
-                    for (int i = 0; i < Main.maxPlayers; i++)
-                    {
-                        Player targetPlayer = Main.player[i];
-                        if (targetPlayer.active && targetPlayer.HasBuff(ModContent.BuffType<HoneyOverdose>()) == false && player.Distance(targetPlayer.Center) < honeyBee.range && player.whoAmI != targetPlayer.whoAmI)
-                        {
-                            if (targetPlayer.statLife + (int)(targetPlayer.statLifeMax2 * honeyBee.bottledHealth) > targetPlayer.statLifeMax2)
-                            {
-                                targetPlayer.statLife = targetPlayer.statLifeMax2;
-                            }
-                            else
-                            {
-                                targetPlayer.statLife += (int)(targetPlayer.statLifeMax2 * honeyBee.bottledHealth);
-                            }
-                                targetPlayer.HealEffect((int)(targetPlayer.statLifeMax2 * honeyBee.bottledHealth));
-                            targetPlayer.AddBuff(BuffID.Honey, 1200);
-                            targetPlayer.AddBuff(ModContent.BuffType<HoneyOverdose>(), (int)(honeyBee.honeyOverdoseTime * (1 / (1 + player.GetModPlayer<GlobalPet>().abilityHaste))));
-
-                        }
-                    }
+                    ModPacket packet = Mod.GetPacket();
+                    packet.Write((byte)PetsOverhaul.MessageType.honeyBeeHeal);
+                    packet.Write(isBottledHoney);
+                    packet.Write((byte)player.whoAmI); 
+                    packet.Send();
                 }
-                if (item.type == ItemID.Honeyfin)
-                {
-                    player.AddBuff(ModContent.BuffType<HoneyOverdose>(), (int)(honeyBee.honeyOverdoseTime * (1 / (1 + player.GetModPlayer<GlobalPet>().abilityHaste))));
-                    if (player.active && player.HasBuff(ModContent.BuffType<HoneyOverdose>()) == false)
-                    {
-                        player.statLife += (int)(player.statLifeMax2 * honeyBee.honeyfinHealth) / 2;
-                            player.HealEffect((int)(player.statLifeMax2 * honeyBee.honeyfinHealth) / 2);
-                    }
-                    for (int i = 0; i < Main.maxPlayers; i++)
-                    {
-                        Player targetPlayer = Main.player[i];
-                        if (targetPlayer.active && targetPlayer.HasBuff(ModContent.BuffType<HoneyOverdose>()) == false && player.Distance(targetPlayer.Center) < honeyBee.range && player.whoAmI != targetPlayer.whoAmI)
-                        {
-                            if (targetPlayer.statLife + (int)(targetPlayer.statLifeMax2 * honeyBee.honeyfinHealth) > targetPlayer.statLifeMax2)
-                            {
-                                targetPlayer.statLife = targetPlayer.statLifeMax2;
-                            }
-                            else
-                            {
-                                targetPlayer.statLife += (int)(targetPlayer.statLifeMax2 * honeyBee.honeyfinHealth);
-                            }
-                                targetPlayer.HealEffect((int)(targetPlayer.statLifeMax2 * honeyBee.honeyfinHealth));
-                            targetPlayer.AddBuff(BuffID.Honey, 600);
-                            targetPlayer.AddBuff(ModContent.BuffType<HoneyOverdose>(), (int)(honeyBee.honeyOverdoseTime * (1 / (1 + player.GetModPlayer<GlobalPet>().abilityHaste))));
-                        }
-                    }
-                }
-
             }
-            return true;
+            return base.ConsumeItem(item,player);
         }
     }
     sealed public class QueenBeePetItem : GlobalItem
