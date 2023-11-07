@@ -61,7 +61,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     return false;
                 }
             }
-            return true;
+            return base.ConsumeItem(item,player);
         }
     }
     sealed public class PigPetItem : GlobalItem

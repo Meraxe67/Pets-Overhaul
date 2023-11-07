@@ -15,7 +15,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class TinyDeerclops : ModPlayer
     {
-        public List<Point> deerclopsTakenDamage = new();
+        public List<(int storedDamage, int timer)> deerclopsTakenDamage = new();
         public int damageStoreTime = 300;
         public float healthTreshold = 0.4f;
         public int range = 480;
@@ -29,7 +29,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             if (Pet.PetInUse(ItemID.DeerclopsPetItem))
             {
-                deerclopsTakenDamage.Add(new Point(info.Damage, 0));
+                deerclopsTakenDamage.Add((info.Damage, damageStoreTime));
             }
         }
         public override void PreUpdate()
@@ -47,13 +47,13 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 {
                     for (int i = 0; i < deerclopsTakenDamage.Count; i++) //List'lerde struct'lar bir nevi readonly olarak çalıştığından, değeri alıp tekrar atıyoruz
                     {
-                        Point point = deerclopsTakenDamage[i];
-                        point.Y++;
-                        deerclopsTakenDamage[i] = point;
+                        var value = deerclopsTakenDamage[i];
+                        value.timer--;
+                        deerclopsTakenDamage[i] = value;
                     }
-                    deerclopsTakenDamage.RemoveAll(x => x.Y >= damageStoreTime);
+                    deerclopsTakenDamage.RemoveAll(x => x.timer <= 0);
                     int totalDamage = 0;
-                    deerclopsTakenDamage.ForEach(x => totalDamage += x.X);
+                    deerclopsTakenDamage.ForEach(x => totalDamage += x.storedDamage);
                     if (totalDamage > Player.statLifeMax2 * healthTreshold && Pet.timer <= 0)
                     {
                         Pet.timer = Pet.timerMax;

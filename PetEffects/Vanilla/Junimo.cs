@@ -362,7 +362,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 }
 
                 Main.popupText[classIndex].rotation = Main.rand.NextFloat(0.2f);
-                //Main.popupText[classIndex].scale += classExp * 0.01f; - doesnt seem to work -
+                Main.popupText[classIndex].scale += classExp * 0.01f; //-doesnt seem to work -
             }
             return classIndex;
         }
@@ -464,7 +464,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     }
                 }
             }
-            return true;
+            return base.OnPickup(item);
         }
         public override void PostUpdateEquips()
         {

@@ -39,7 +39,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 }
             }
 
-            return true;
+            return base.OnPickup(item);
         }
     }
     public sealed class BambooLeaf : GlobalItem

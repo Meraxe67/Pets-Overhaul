@@ -144,7 +144,7 @@ namespace PetsOverhaul.Systems
                     }
                 }
             }
-            return true;
+            return base.OnPickup(item);
         }
         /// <summary>
         /// Checks if the given Pet Item is in use and checks if pet has been lately swapped or not.
@@ -408,7 +408,7 @@ namespace PetsOverhaul.Systems
                 ShieldFullBlockEffect(info.Damage);
                 return true;
             }
-            return false;
+            return base.ConsumableDodge(info);
         }
         public override void PreUpdate()
         {
@@ -525,7 +525,7 @@ namespace PetsOverhaul.Systems
             if (ModContent.GetInstance<Personalization>().DeathSoundDisabled == false)
                 playSound = Player.GetModPlayer<PetRegistry>().playKillSoundFromItemId(Player.miscEquips[0].type) == ReLogic.Utilities.SlotId.Invalid;
 
-            return true;
+            return base.PreKill(damage,hitDirection,pvp,ref playSound,ref genGore,ref damageSource);
         }
     }
     /// <summary>
@@ -545,7 +545,7 @@ namespace PetsOverhaul.Systems
         /// <summary>
         /// Includes tiles that are extractable by an Extractinator and a few other stuff that aren't recognized as ores such as Obsidian and Luminite
         /// </summary>
-        public static bool[] extractableAndOthers = TileID.Sets.Factory.CreateBoolSet(false, TileID.DesertFossil, TileID.Slush, TileID.Silt, TileID.Obsidian, TileID.LunarOre, TileID.DesertFossil);
+        public static bool[] extractableAndOthers = TileID.Sets.Factory.CreateBoolSet(false, TileID.DesertFossil, TileID.Slush, TileID.Silt, TileID.Obsidian, TileID.LunarOre);
         /// <summary>
         /// Includes tiles that counts as trees.
         /// </summary>
@@ -810,7 +810,7 @@ namespace PetsOverhaul.Systems
                 }
             }
 
-            return true;
+            return base.PreAI(npc);
         }
         public override void PostAI(NPC npc)
         {

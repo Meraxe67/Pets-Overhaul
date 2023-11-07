@@ -510,7 +510,7 @@ Mods: {
 				recover every other nearby (<range>~ tiles) player's health, <bottledHealth>%, and <honeyfinHealth>% respectively,
 				give Honey buff for <bottledHoneyTime> and <honeyfinHoneyTime> seconds respectively, applies Honey Overdose for 60s.
 				Any player with Honey Overdose cannot be healed again and have <abilityHaste>% Ability Haste
-				The user also gains half of the healing effect and full Honey Overdose duration.
+				The user also gains half of the effects and full Honey Overdose duration.
 				'''
 			DeerclopsPetItem:
 				'''

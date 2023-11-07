@@ -54,7 +54,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.CopperCoin, ItemPet.Randomizer(item.stack * everythingCoin));
                 }
             }
-            return true;
+            return base.OnPickup(item);
 
         }
     }

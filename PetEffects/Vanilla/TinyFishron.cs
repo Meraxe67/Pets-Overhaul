@@ -60,7 +60,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     Projectile.NewProjectile(source, position, bobberSpeed, ProjectileID.FishingBobber, 0, 0f, Player.whoAmI);
                 }
             }
-            return true;
+            return base.Shoot(item, source, position, velocity, type, damage, knockback);
         }
     }
     public sealed class DukeFishronPetItem : GlobalItem

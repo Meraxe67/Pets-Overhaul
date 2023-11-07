@@ -62,7 +62,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), item, 1);
                 }
             }
-            return true;
+            return base.OnPickup(item);
         }
     }
     public sealed class OrnateShadowKey : GlobalItem

@@ -4,6 +4,8 @@ using Terraria.ModLoader;
 using PetsOverhaul.Systems;
 using PetsOverhaul.PetEffects.Vanilla;
 using System;
+using Terraria;
+using Terraria.ID;
 
 namespace PetsOverhaul
 {
@@ -13,6 +15,7 @@ namespace PetsOverhaul
         {
             shieldFullAbsorb,
             seaCreatureOnKill,
+            honeyBeeHeal,
         }
         public override void PostSetupContent()
         {
@@ -31,6 +34,23 @@ namespace PetsOverhaul
                     int npcId = reader.ReadInt32();
                     Junimo.RunSeaCreatureOnKill(reader,whoAmI,npcId);
                     break;
+                case MessageType.honeyBeeHeal:
+                    bool bottledHoney = reader.ReadBoolean();
+                    int honeyBeeWhoAmI = reader.ReadByte();
+                    if (Main.netMode == NetmodeID.Server)
+                    {
+                        ModPacket packet = GetPacket();
+                        packet.Write((byte)msgType);
+                        packet.Write(bottledHoney);
+                        packet.Write((byte)honeyBeeWhoAmI);
+                        packet.Send(ignoreClient: honeyBeeWhoAmI);
+                    }
+                    HoneyBee.HealByHoneyBee(bottledHoney, honeyBeeWhoAmI,false);
+                    break;
+
+
+
+
                     default: throw new ArgumentOutOfRangeException(nameof(msgType));
             }
         }
