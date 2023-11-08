@@ -15,7 +15,7 @@ namespace PetsOverhaul.Buffs
         }
         public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare)
         {
-            tip = "Your pet has been swapped very recently,\nyour pets combat related effects are disabled!";
+            tip = Lang.GetBuffDescription(ModContent.BuffType<ObliviousPet>());
             rare = 0;
         }
     }

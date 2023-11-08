@@ -35,7 +35,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.BrainOfCthulhuPetItem) && Pet.LifestealCheck(target))
+            if (Pet.PetInUseWithSwapCd(ItemID.BrainOfCthulhuPetItem) && GlobalPet.LifestealCheck(target))
             {
                 int decreaseFromPool = Pet.Lifesteal(damageDone, lifestealAmount, doLifesteal: false);
                 if (decreaseFromPool >= lifePool)

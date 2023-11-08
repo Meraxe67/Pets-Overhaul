@@ -40,7 +40,6 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 speed += alienSkater.speedAccIncr;
                 acceleration += alienSkater.speedAccIncr;
             }
-
         }
     }
     public sealed class MartianPetItem : GlobalItem

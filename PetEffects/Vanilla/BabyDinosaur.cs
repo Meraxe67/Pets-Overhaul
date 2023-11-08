@@ -44,7 +44,6 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.miningItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
                     }
                 }
-
             }
             return base.OnPickup(item);
         }

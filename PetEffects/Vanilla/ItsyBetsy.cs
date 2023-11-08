@@ -37,7 +37,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (target.active == false && Pet.LifestealCheck(target) && target.GetGlobalNPC<NpcPet>().curseCounter > 0)
+            if (target.active == false && GlobalPet.LifestealCheck(target) && target.GetGlobalNPC<NpcPet>().curseCounter > 0)
             {
                 int mult = 1;
                 if (target.GetGlobalNPC<NpcPet>().curseCounter >= maxStacks)

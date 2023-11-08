@@ -76,7 +76,7 @@ namespace PetsOverhaul.Systems
         /// Increase this value to reduce ability cooldowns. Eg. 0.1f increases how fast ability will return by 10%. Negative values will increase the cooldowns. Negative is capped at -0.9f. Do not use this to directly reduce a cooldown, use the timer field instead. Ability Haste reduces timerMax with a more balanced calculation.
         /// </summary>
         public float abilityHaste = 0;
-        static public IEntitySource GetSource_Pet(EntitySource_Pet.TypeId typeId, string context = null)
+        public static IEntitySource GetSource_Pet(EntitySource_Pet.TypeId typeId, string context = null)
         {
             return new EntitySource_Pet
             {
@@ -151,29 +151,14 @@ namespace PetsOverhaul.Systems
         /// </summary>
         public bool PetInUseWithSwapCd(int petItemID)
         {
-
-            if (Player.miscEquips[0].type == petItemID && Player.HasBuff(ModContent.BuffType<ObliviousPet>()) == false)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return Player.miscEquips[0].type == petItemID && Player.HasBuff(ModContent.BuffType<ObliviousPet>()) == false;
         }
         /// <summary>
         /// Checks if the given Pet Item is in use without being affected by swapping cooldown.
         /// </summary>
         public bool PetInUse(int petItemID)
         {
-            if (Player.miscEquips[0].type == petItemID)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return Player.miscEquips[0].type == petItemID;
         }
         public override void SaveData(TagCompound tag)
         {
@@ -185,16 +170,9 @@ namespace PetsOverhaul.Systems
             skin = tag.Get<Color>("SkinColor");
             skinColorChanged = tag.GetBool("SkinColorChanged");
         }
-        public bool LifestealCheck(NPC npc)
+        public static bool LifestealCheck(NPC npc)
         {
-            if (npc.friendly || npc.SpawnedFromStatue || npc.type == NPCID.TargetDummy)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return !npc.friendly && !npc.SpawnedFromStatue && npc.type != NPCID.TargetDummy;
         }
         /// <summary>
         /// percentageAmount% of baseAmount is converted to healing, non converted amount can still grant +1, depending on a roll. If manaSteal is set to true, 
@@ -219,7 +197,7 @@ namespace PetsOverhaul.Systems
             {
                 if (manaSteal == false)
                 {
-                        Player.HealEffect(calculatedAmount);
+                    Player.HealEffect(calculatedAmount);
                     if (calculatedAmount > Player.statLifeMax2 - Player.statLife)
                     {
                         calculatedAmount = Player.statLifeMax2 - Player.statLife;
@@ -271,14 +249,7 @@ namespace PetsOverhaul.Systems
                     break;
                 }
             }
-            if (anyPlayerHasSlimePet == true)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return anyPlayerHasSlimePet == true;
         }
         public static bool QueenSlimePetActive(out Player owner)
         {
@@ -294,14 +265,7 @@ namespace PetsOverhaul.Systems
                     break;
                 }
             }
-            if (anyPlayerHasSlimePet == true)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return anyPlayerHasSlimePet == true;
         }
         public static bool DualSlimePetActive(out Player owner)
         {
@@ -317,14 +281,7 @@ namespace PetsOverhaul.Systems
                     break;
                 }
             }
-            if (anyPlayerHasSlimePet == true)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return anyPlayerHasSlimePet == true;
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
@@ -397,7 +354,9 @@ namespace PetsOverhaul.Systems
             {
                 shieldToBeReduced += damage;
                 if (Main.netMode != NetmodeID.SinglePlayer)
+                {
                     SendShieldBlockToServer(Player.whoAmI, damage);
+                }
             }
         }
         public override bool ConsumableDodge(Player.HurtInfo info)
@@ -413,7 +372,10 @@ namespace PetsOverhaul.Systems
         public override void PreUpdate()
         {
             if (ItemPet.updateReplacedTile.Count > 0)
+            {
                 ItemPet.updateReplacedTile.Clear();
+            }
+
             fishingFortune = 0;
             harvestingFortune = 0;
             miningFortune = 0;
@@ -479,8 +441,10 @@ namespace PetsOverhaul.Systems
                 }
                 petShield.RemoveAll(x => x.shieldTimer <= 0 || x.shieldAmount <= 0);
             }
-            if (pool.Count>0)
+            if (pool.Count > 0)
+            {
                 pool.Clear();
+            }
         }
         public override void OnEnterWorld()
         {
@@ -494,7 +458,9 @@ namespace PetsOverhaul.Systems
         {
 
             if (ModContent.GetInstance<Personalization>().HurtSoundDisabled == false)
+            {
                 info.SoundDisabled = Player.GetModPlayer<PetRegistry>().playHurtSoundFromItemId(Player.miscEquips[0].type) != ReLogic.Utilities.SlotId.Invalid;
+            }
         }
         public override void UpdateEquips()
         {
@@ -513,7 +479,9 @@ namespace PetsOverhaul.Systems
                 previousPetItem = Player.miscEquips[0].type;
             }
             if (ModContent.GetInstance<Personalization>().PassiveSoundDisabled == false && Main.rand.NextBool(3600))
+            {
                 Player.GetModPlayer<PetRegistry>().playEquipSoundFromItemId(Player.miscEquips[0].type);
+            }
         }
         public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
         {
@@ -523,9 +491,11 @@ namespace PetsOverhaul.Systems
         public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
         {
             if (ModContent.GetInstance<Personalization>().DeathSoundDisabled == false)
+            {
                 playSound = Player.GetModPlayer<PetRegistry>().playKillSoundFromItemId(Player.miscEquips[0].type) == ReLogic.Utilities.SlotId.Invalid;
+            }
 
-            return base.PreKill(damage,hitDirection,pvp,ref playSound,ref genGore,ref damageSource);
+            return base.PreKill(damage, hitDirection, pvp, ref playSound, ref genGore, ref damageSource);
         }
     }
     /// <summary>
@@ -651,8 +621,7 @@ namespace PetsOverhaul.Systems
             }
             else if (source is EntitySource_TileBreak || source is EntitySource_ShakeTree)
             {
-                if (Junimo.HarvestingXpPerGathered.Exists(x => x.plantList.Contains(item.type)))
-                    herbBoost = true;
+                herbBoost = Junimo.HarvestingXpPerGathered.Exists(x => x.plantList.Contains(item.type));
 
                 if (source is EntitySource_TileBreak brokenTile)
                 {
@@ -851,7 +820,9 @@ namespace PetsOverhaul.Systems
                 seaCreature = true;
             }
             else
+            {
                 seaCreature = false;
+            }
         }
         /// <summary>
         /// Slows if enemy is not a boss or a friendly npc. Also does not slow an npc's vertical speed if they are affected by gravity, but does so if they arent. Due to the formula, you may use a positive number for slowAmount freely and as much as you want, it almost will never completely stop an enemy. Negative values however, easily can get out of hand and cause unwanted effects. Due to that, a cap of -0.9f exists for negative values, which 10x's the speed.

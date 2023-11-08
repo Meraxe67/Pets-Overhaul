@@ -14,7 +14,7 @@ namespace PetsOverhaul.Systems
         public override bool CanReplace(int i, int j, int type, int tileTypeBeingPlaced)
         {
             ItemPet.updateReplacedTile.Add(new Point16(i, j));
-            return true;
+            return base.CanReplace(i,j,type,tileTypeBeingPlaced);
         }
     }
 }

@@ -43,7 +43,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.EverscreamPetItem) && Pet.LifestealCheck(target) && hit.Crit && Pet.timer <= 0)
+            if (Pet.PetInUseWithSwapCd(ItemID.EverscreamPetItem) && GlobalPet.LifestealCheck(target) && hit.Crit && Pet.timer <= 0)
             {
                 Pet.Lifesteal(Player.statManaMax2 - Player.statMana, missingManaPercent, flatRecovery, true, false);
                 Pet.timer = Pet.timerMax;

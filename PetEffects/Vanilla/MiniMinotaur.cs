@@ -56,7 +56,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.TartarSauce) && Pet.timer <= 0 && item.CountsAsClass<MeleeDamageClass>())
+            if (Pet.PetInUseWithSwapCd(ItemID.TartarSauce) && GlobalPet.LifestealCheck(target) && Pet.timer <= 0 && item.CountsAsClass<MeleeDamageClass>())
             {
                 if (minotaurStack < 80)
                 {
@@ -72,7 +72,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.TartarSauce) && Pet.timer <= 0 && proj.CountsAsClass<MeleeDamageClass>())
+            if (Pet.PetInUseWithSwapCd(ItemID.TartarSauce) && GlobalPet.LifestealCheck(target) && Pet.timer <= 0 && proj.CountsAsClass<MeleeDamageClass>())
             {
                 if (minotaurStack < 80)
                 {

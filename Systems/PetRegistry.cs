@@ -467,12 +467,7 @@ namespace PetsOverhaul.Systems
 
         public bool isPetItem(int itemId)
         {
-            if (TerrariaPetItemIds.ContainsValue(itemId))
-            {
-                return true;
-            }
-
-            return false;
+            return TerrariaPetItemIds.ContainsValue(itemId);
         }
 
         public ReLogic.Utilities.SlotId playHurtSoundFromItemId(int itemId)

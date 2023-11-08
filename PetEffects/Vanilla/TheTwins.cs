@@ -50,7 +50,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Player.Distance(target.Center) < closeRange && Pet.LifestealCheck(target) && Pet.PetInUseWithSwapCd(ItemID.TwinsPetItem))
+            if (Player.Distance(target.Center) < closeRange && GlobalPet.LifestealCheck(target) && Pet.PetInUseWithSwapCd(ItemID.TwinsPetItem))
             {
                 target.AddBuff(BuffID.CursedInferno, infernoTime);
                 Pet.Lifesteal(Player.statDefense * defMult * (Player.endurance + 1f), hit.Damage * defLifestealDmgMult);

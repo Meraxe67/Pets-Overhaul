@@ -17,7 +17,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.Seedling) && Pet.LifestealCheck(target))
+            if (Pet.PetInUseWithSwapCd(ItemID.Seedling) && GlobalPet.LifestealCheck(target))
             {
                 if (proj.GetGlobalProjectile<ProjectileSourceChecks>().isPlanteraProjectile)
                 {
@@ -31,7 +31,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.Seedling) && Pet.LifestealCheck(target))
+            if (Pet.PetInUseWithSwapCd(ItemID.Seedling) && GlobalPet.LifestealCheck(target))
             {
                 if (item.type == ItemID.Seedler || item.type == ItemID.TheAxe)
                 {

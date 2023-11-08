@@ -9,7 +9,6 @@ namespace PetsOverhaul.Buffs
 {
     public sealed class HoneyOverdose : ModBuff
     {
-        public float abilityHasteIncr = 0;
         public override void SetStaticDefaults()
         {
             Main.debuff[Type] = true;
@@ -18,12 +17,8 @@ namespace PetsOverhaul.Buffs
         public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare)
         {
             rare = 0;
-            tip = Lang.GetBuffDescription(ModContent.BuffType<HoneyOverdose>()).Replace("<AbilityHaste>", Math.Round(abilityHasteIncr*100,2).ToString());
-        }
-        public override void Update(Player player, ref int buffIndex)
-        {
-            abilityHasteIncr = player.GetModPlayer<HoneyBee>().abilityHaste;
-            player.GetModPlayer<GlobalPet>().abilityHaste += abilityHasteIncr;
+            tip = Lang.GetBuffDescription(ModContent.BuffType<HoneyOverdose>())
+                .Replace("<AbilityHaste>", Math.Round(Main.LocalPlayer.GetModPlayer<HoneyBee>().currentAbilityHasteBonus * 100,2).ToString());
         }
     }
 }

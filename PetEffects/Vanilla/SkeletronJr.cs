@@ -74,7 +74,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
                 return true;
             }
-            return false;
+            return base.ConsumableDodge(info);
         }
         public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
         {
@@ -124,7 +124,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 skeletronDealtDamage.RemoveAll(x => x.Item2 <= 0);
             }
 
-            return true;
+            return base.PreAI(npc);
         }
         public override void OnKill(NPC npc)
         {

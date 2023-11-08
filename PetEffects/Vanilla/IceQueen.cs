@@ -76,7 +76,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     for (int i = 0; i < Main.maxNPCs; i++)
                     {
                         NPC npc = Main.npc[i];
-                        if (npc.active && Player.Distance(npc.Center) < queenRange && Pet.LifestealCheck(npc))
+                        if (npc.active && Player.Distance(npc.Center) < queenRange && GlobalPet.LifestealCheck(npc))
                         {
                             int crit = (int)Player.GetTotalCritChance<GenericDamageClass>();
                             if (crit > 100)
@@ -117,7 +117,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
             else
             {
-                return true;
+                return base.PreKill(damage,hitDirection,pvp,ref playSound, ref genGore,ref damageSource);
             }
         }
     }

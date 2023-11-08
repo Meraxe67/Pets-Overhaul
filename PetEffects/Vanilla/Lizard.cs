@@ -93,7 +93,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.LizardEgg) && steroidCount > 0 && onLizardSteroidsOrNah == true && Pet.LifestealCheck(target))
+            if (Pet.PetInUseWithSwapCd(ItemID.LizardEgg) && steroidCount > 0 && onLizardSteroidsOrNah == true && GlobalPet.LifestealCheck(target))
             {
                 Pet.Lifesteal(damageDone, lizardLifesteal, Pet.Lifesteal(Player.statLifeMax2, lizardLifestealHealth, respectLifeStealCap: false, doLifesteal: false));
                 steroidCount--;

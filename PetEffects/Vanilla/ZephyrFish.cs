@@ -56,7 +56,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
                 amplifiedFishingChance = false;
             }
-            return true;
+            return base.Shoot(item,source,position,velocity,type,damage,knockback);
         }
         public override void CatchFish(FishingAttempt attempt, ref int itemDrop, ref int npcSpawn, ref AdvancedPopupRequest sonar, ref Vector2 sonarPosition)
         {
