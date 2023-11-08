@@ -1,7 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
+﻿using Terraria;
 using Terraria.DataStructures;
-using Terraria.ID;
 using Terraria.ModLoader;
 namespace PetsOverhaul.Systems
 {
@@ -14,7 +12,7 @@ namespace PetsOverhaul.Systems
         public override bool CanReplace(int i, int j, int type, int tileTypeBeingPlaced)
         {
             ItemPet.updateReplacedTile.Add(new Point16(i, j));
-            return base.CanReplace(i,j,type,tileTypeBeingPlaced);
+            return base.CanReplace(i, j, type, tileTypeBeingPlaced);
         }
     }
 }

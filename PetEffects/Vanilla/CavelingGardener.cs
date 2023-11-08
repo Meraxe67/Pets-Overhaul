@@ -1,13 +1,13 @@
-﻿using PetsOverhaul.Config;
+﻿using Microsoft.Xna.Framework;
+using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using System.Linq;
-using Microsoft.Xna.Framework;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
@@ -24,7 +24,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
                 if (itemChck.herbBoost && (Player.ZoneDirtLayerHeight || Player.ZoneRockLayerHeight || Player.ZoneUnderworldHeight))
                 {
-                    for (int i = 0; i < ItemPet.Randomizer(((Junimo.HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)).expAmount >= ItemPet.MinimumExpForRarePlant) ? cavelingRarePlantChance : cavelingRegularPlantChance + ( ItemPet.gemstoneTreeItem[item.type] ? cavelingGemTreeChance : 0)) * item.stack); i++)
+                    for (int i = 0; i < ItemPet.Randomizer(((Junimo.HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)).expAmount >= ItemPet.MinimumExpForRarePlant) ? cavelingRarePlantChance : cavelingRegularPlantChance + (ItemPet.gemstoneTreeItem[item.type] ? cavelingGemTreeChance : 0)) * item.stack); i++)
                     {
                         Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), item, 1);
                     }

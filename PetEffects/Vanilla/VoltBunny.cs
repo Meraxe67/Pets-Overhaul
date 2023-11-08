@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using PetsOverhaul.Config;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
@@ -33,7 +32,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
     {
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
-            if (target.GetModPlayer<GlobalPet>().PetInUseWithSwapCd(ItemID.LightningCarrot)&&npc.TryGetGlobalNPC(out NpcPet npcPet))
+            if (target.GetModPlayer<GlobalPet>().PetInUseWithSwapCd(ItemID.LightningCarrot) && npc.TryGetGlobalNPC(out NpcPet npcPet))
             {
                 npcPet.AddSlow(NpcPet.SlowId.PikachuStatic, target.GetModPlayer<VoltBunny>().staticParalysis, target.GetModPlayer<VoltBunny>().staticLength);
             }

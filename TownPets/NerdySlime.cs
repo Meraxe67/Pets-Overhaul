@@ -31,7 +31,7 @@ namespace PetsOverhaul.TownPets
                     Player.nightVision = true;
                     Player.dangerSense = true;
                 }
-                Lighting.AddLight(Player.Center, new Microsoft.Xna.Framework.Vector3(2.55f,2.55f,2.55f)*nerdLightScale);
+                Lighting.AddLight(Player.Center, new Microsoft.Xna.Framework.Vector3(2.55f, 2.55f, 2.55f) * nerdLightScale);
                 Player.tileSpeed *= nerdBuildSpeed;
             }
         }

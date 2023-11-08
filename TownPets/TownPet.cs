@@ -1,6 +1,6 @@
-﻿using Terraria;
+﻿using PetsOverhaul.Systems;
+using Terraria;
 using Terraria.ModLoader;
-using PetsOverhaul.Systems;
 
 namespace PetsOverhaul.TownPets
 {
@@ -55,7 +55,6 @@ namespace PetsOverhaul.TownPets
                 oldHarvFort = 6;
                 coolMiningFort = 6;
                 clumsyGlobalFort = 3;
-
             }
             else if (Main.hardMode)
             {

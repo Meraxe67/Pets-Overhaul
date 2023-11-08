@@ -34,7 +34,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public override bool OnPickup(Item item)
         {
-            if (Pet.PickupChecks(item, ItemID.AmberMosquito, out ItemPet itemChck)&&itemChck.oreBoost)
+            if (Pet.PickupChecks(item, ItemID.AmberMosquito, out ItemPet itemChck) && itemChck.oreBoost)
             {
                 AddItemsToPool();
                 if (GlobalPet.pool.Count > 0)

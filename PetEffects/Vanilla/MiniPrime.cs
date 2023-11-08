@@ -32,13 +32,13 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         private void AddDefaultShield()
         {
-            shieldIndex = Pet.petShield.Count-1;
+            shieldIndex = Pet.petShield.Count - 1;
             Pet.petShield[shieldIndex] = ((int)(Player.statLifeMax2 * shieldMult), 2);
         }
         private void AddShieldWithTimer()
         {
             Pet.timer += Pet.timerMax / 5;
-            var shield = Pet.petShield[shieldIndex];
+            (int shieldAmount, int shieldTimer) shield = Pet.petShield[shieldIndex];
             shield.shieldTimer = shieldTime;
             Pet.petShield[shieldIndex] = shield;
         }
@@ -105,8 +105,11 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         AddDefaultShield();
                     }
                 }
-                if(oldShieldCount > shieldIndex)
-                lastShield = Pet.petShield[shieldIndex].shieldAmount;
+                if (oldShieldCount > shieldIndex)
+                {
+                    lastShield = Pet.petShield[shieldIndex].shieldAmount;
+                }
+
                 if (Pet.currentShield > 0)
                 {
                     Player.GetDamage<GenericDamageClass>() += dmgIncrease;

@@ -1,9 +1,8 @@
 ﻿using PetsOverhaul.PetEffects.Vanilla;
-using PetsOverhaul.Systems;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using System;
 
 namespace PetsOverhaul.Buffs
 {
@@ -18,7 +17,7 @@ namespace PetsOverhaul.Buffs
         {
             rare = 0;
             tip = Lang.GetBuffDescription(ModContent.BuffType<HoneyOverdose>())
-                .Replace("<AbilityHaste>", Math.Round(Main.LocalPlayer.GetModPlayer<HoneyBee>().currentAbilityHasteBonus * 100,2).ToString());
+                .Replace("<AbilityHaste>", Math.Round(Main.LocalPlayer.GetModPlayer<HoneyBee>().currentAbilityHasteBonus * 100, 2).ToString());
         }
     }
 }

@@ -20,7 +20,6 @@ namespace PetsOverhaul.Systems
             {
                 tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.Config.TooltipShiftToggleInGame")));
             }
-
         }
     }
 }

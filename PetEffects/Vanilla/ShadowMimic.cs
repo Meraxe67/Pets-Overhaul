@@ -26,36 +26,15 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 chanceToRollItem = 0;
                 if (itemChck.itemFromNpc == true)
                 {
-                    if (item.IsACoin)
-                    {
-                        chanceToRollItem += npcCoin * item.stack;
-                    }
-                    else
-                    {
-                        chanceToRollItem += npcItem * item.stack;
-                    }
+                    chanceToRollItem += (item.IsACoin ? npcCoin : npcItem) * item.stack;
                 }
                 if (itemChck.itemFromBoss == true && ItemID.Sets.BossBag[item.type] == false)
                 {
-                    if (item.IsACoin)
-                    {
-                        chanceToRollItem += bossCoin * item.stack;
-                    }
-                    else
-                    {
-                        chanceToRollItem += bossItem * item.stack;
-                    }
+                    chanceToRollItem += (item.IsACoin ? bossCoin : bossItem) * item.stack;
                 }
                 if (itemChck.itemFromBag == true)
                 {
-                    if (item.IsACoin)
-                    {
-                        chanceToRollItem += bagCoin * item.stack;
-                    }
-                    else
-                    {
-                        chanceToRollItem += bagItem * item.stack;
-                    }
+                    chanceToRollItem += (item.IsACoin ? bagCoin : bagItem) * item.stack;
                 }
                 for (int i = 0; i < ItemPet.Randomizer(chanceToRollItem); i++)
                 {

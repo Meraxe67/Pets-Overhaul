@@ -16,8 +16,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
         private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public int catchChance = 65;
         public int rareCatchChance = 15;
-        public int rareCritterCoin = 250;
-        public int rareEnemyCoin = 400;
+        public int rareCritterCoin = 25000;
+        public int rareEnemyCoin = 40000;
         public override void UpdateEquips()
         {
             if (Pet.PetInUse(ItemID.DogWhistle))
@@ -29,7 +29,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             if (Pet.PetInUse(ItemID.DogWhistle) && target.active == false && target.rarity > 0 && target.CountsAsACritter == false && target.SpawnedFromStatue == false)
             {
-                Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.SilverCoin, ItemPet.Randomizer(rareEnemyCoin * target.rarity));
+                Pet.GiveCoins(ItemPet.Randomizer(rareEnemyCoin * target.rarity));
             }
         }
         public override void OnCatchNPC(NPC npc, Item item, bool failed)
@@ -39,14 +39,16 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
                 if (npc.rarity > 0)
                 {
-                    Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.SilverCoin, ItemPet.Randomizer(rareCritterCoin * npc.rarity));
+                    Pet.GiveCoins(ItemPet.Randomizer(rareCritterCoin * npc.rarity));
                     for (int i = 0; i < ItemPet.Randomizer(rareCatchChance); i++)
                     {
                         Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), npc.catchItem, 1);
                         if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+                        {
                             SoundEngine.PlaySound(SoundID.Item65 with { PitchVariance = 0.3f, MaxInstances = 5, Volume = 0.5f }, Player.position);
+                        }
                     }
-                    
+
                 }
                 else
                 {
@@ -54,9 +56,11 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     {
                         Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), npc.catchItem, 1);
                         if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+                        {
                             SoundEngine.PlaySound(SoundID.Item65 with { PitchVariance = 0.3f, MaxInstances = 1, Volume = 0.5f }, Player.position);
+                        }
                     }
-                    
+
                 }
             }
         }

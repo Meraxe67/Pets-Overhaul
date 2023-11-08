@@ -1,11 +1,11 @@
 using PetsOverhaul.ModSupport;
-using System.IO;
-using Terraria.ModLoader;
-using PetsOverhaul.Systems;
 using PetsOverhaul.PetEffects.Vanilla;
+using PetsOverhaul.Systems;
 using System;
+using System.IO;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul
 {
@@ -28,11 +28,11 @@ namespace PetsOverhaul
             {
                 case MessageType.shieldFullAbsorb:
                     int damage = reader.ReadInt32();
-                    GlobalPet.HandleShieldBlockMessage(reader, whoAmI,damage);
+                    GlobalPet.HandleShieldBlockMessage(reader, whoAmI, damage);
                     break;
                 case MessageType.seaCreatureOnKill:
                     int npcId = reader.ReadInt32();
-                    Junimo.RunSeaCreatureOnKill(reader,whoAmI,npcId);
+                    Junimo.RunSeaCreatureOnKill(reader, whoAmI, npcId);
                     break;
                 case MessageType.honeyBeeHeal:
                     bool bottledHoney = reader.ReadBoolean();
@@ -45,13 +45,13 @@ namespace PetsOverhaul
                         packet.Write((byte)honeyBeeWhoAmI);
                         packet.Send(ignoreClient: honeyBeeWhoAmI);
                     }
-                    HoneyBee.HealByHoneyBee(bottledHoney, honeyBeeWhoAmI,false);
+                    HoneyBee.HealByHoneyBee(bottledHoney, honeyBeeWhoAmI, false);
                     break;
 
 
 
 
-                    default: throw new ArgumentOutOfRangeException(nameof(msgType));
+                default: throw new ArgumentOutOfRangeException(nameof(msgType));
             }
         }
     }

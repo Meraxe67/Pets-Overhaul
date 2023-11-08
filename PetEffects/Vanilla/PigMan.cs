@@ -61,11 +61,11 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     return false;
                 }
             }
-            return base.ConsumeItem(item,player);
+            return base.ConsumeItem(item, player);
         }
     }
-    sealed public class PigPetItem : GlobalItem
-    { 
+    public sealed class PigPetItem : GlobalItem
+    {
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
             return entity.type == ItemID.PigPetItem;

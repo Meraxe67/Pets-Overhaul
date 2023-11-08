@@ -23,7 +23,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float horizontalMult = 0.8f;
         public float verticalMult = 0.7f;
         public float trueMeleeMultipliers = 3f;
-        
+
         public override void PostUpdateEquips()
         {
             if (Main.masterMode == true)
@@ -55,7 +55,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 Player.moveSpeed *= movespdNerf;
                 Player.maxRunSpeed *= movespdNerf;
                 Player.noKnockback = true;
-                Player.statLifeMax2 += (int)(healthIncrease*Player.statLifeMax2);
+                Player.statLifeMax2 += (int)(healthIncrease * Player.statLifeMax2);
             }
         }
         public override float UseSpeedMultiplier(Item item)

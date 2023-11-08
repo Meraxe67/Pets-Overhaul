@@ -91,7 +91,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     {
                         SoundEngine.PlaySound(SoundID.Shatter with { PitchVariance = 0.2f }, Player.position);
                     }
-                        Player.HealEffect(100);
+                    Player.HealEffect(100);
                     Player.immune = false;
                     Player.SetImmuneTimeForAllTypes(immuneTime);
                     frozenTomb = false;
@@ -117,7 +117,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
             else
             {
-                return base.PreKill(damage,hitDirection,pvp,ref playSound, ref genGore,ref damageSource);
+                return base.PreKill(damage, hitDirection, pvp, ref playSound, ref genGore, ref damageSource);
             }
         }
     }

@@ -1,6 +1,5 @@
 ﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
@@ -32,29 +31,26 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public override void PostUpdateEquips()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.SkeletronPetItem))
+            if (skeletronTakenDamage.Count > 0 && timer >= 60)
             {
-                if (skeletronTakenDamage.Count > 0 && timer >= 60)
+                int totalDmg = 0;
+                skeletronTakenDamage.ForEach(x => totalDmg += x.Item2 / playerDamageTakenSpeed);
+                Player.statLife -= totalDmg;
+                CombatText.NewText(Player.getRect(), CombatText.DamagedHostile, totalDmg);
+                if (Player.statLife <= 0)
                 {
-                    int totalDmg = 0;
-                    skeletronTakenDamage.ForEach(x => totalDmg += x.Item2 / playerDamageTakenSpeed);
-                    Player.statLife -= totalDmg;
-                    CombatText.NewText(Player.getRect(), CombatText.DamagedHostile, totalDmg);
-                    if (Player.statLife <= 0)
-                    {
-                        Player.KillMe(PlayerDeathReason.ByCustomReason(Player.name + " could not contain Skeletron's curse."), 1, 0);
-                    }
-
-                    for (int i = 0; i < skeletronTakenDamage.Count; i++) //List'lerde struct'lar bir nevi readonly olarak çalıştığından, değeri alıp tekrar atıyoruz
-                    {
-                        (int, int) point = skeletronTakenDamage[i];
-                        point.Item1 -= point.Item2 / playerDamageTakenSpeed;
-                        skeletronTakenDamage[i] = point;
-                    }
-                    skeletronTakenDamage.RemoveAll(x => x.Item1 <= 0);
-
-                    timer = 0;
+                    Player.KillMe(PlayerDeathReason.ByCustomReason(Player.name + " could not contain Skeletron's curse."), 1, 0);
                 }
+
+                for (int i = 0; i < skeletronTakenDamage.Count; i++)
+                {
+                    (int, int) point = skeletronTakenDamage[i];
+                    point.Item1 -= point.Item2 / playerDamageTakenSpeed;
+                    skeletronTakenDamage[i] = point;
+                }
+                skeletronTakenDamage.RemoveAll(x => x.Item1 <= 0);
+
+                timer = 0;
             }
         }
         public override bool ConsumableDodge(HurtInfo info)

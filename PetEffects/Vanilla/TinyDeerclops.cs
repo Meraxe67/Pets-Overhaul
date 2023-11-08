@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using PetsOverhaul.Config;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.PetEffects.Vanilla;
 using PetsOverhaul.Systems;
 using System;
@@ -47,7 +46,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 {
                     for (int i = 0; i < deerclopsTakenDamage.Count; i++) //List'lerde struct'lar bir nevi readonly olarak çalıştığından, değeri alıp tekrar atıyoruz
                     {
-                        var value = deerclopsTakenDamage[i];
+                        (int storedDamage, int timer) value = deerclopsTakenDamage[i];
                         value.timer--;
                         deerclopsTakenDamage[i] = value;
                     }

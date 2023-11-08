@@ -16,7 +16,7 @@ namespace PetsOverhaul.Systems
         }
         public override void SaveWorldData(TagCompound tag)
         {
-                tag.Add("placedBlocksbyPlayer", placedBlocksByPlayer);
+            tag.Add("placedBlocksbyPlayer", placedBlocksByPlayer);
         }
         public override void LoadWorldData(TagCompound tag)
         {
@@ -25,10 +25,14 @@ namespace PetsOverhaul.Systems
                 object MyKeyData = tag["placedBlocksbyPlayer"];
 
                 if (MyKeyData is List<Vector2> oldList)
+                {
                     placedBlocksByPlayer = oldList.ConvertAll(x => x.ToPoint16());
+                }
 
                 if (MyKeyData is List<Point16> correct)
+                {
                     placedBlocksByPlayer = correct;
+                }
             }
         }
     }

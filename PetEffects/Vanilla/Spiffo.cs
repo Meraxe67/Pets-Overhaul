@@ -35,7 +35,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             return Pet.PetInUseWithSwapCd(ItemID.SpiffoPlush) && Main.rand.NextBool(ammoReserveChance, 100)
                 ? false
-                : base.CanConsumeAmmo(weapon,ammo);
+                : base.CanConsumeAmmo(weapon, ammo);
         }
     }
     public sealed class SpiffoPlush : GlobalItem

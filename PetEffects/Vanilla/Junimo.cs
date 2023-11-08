@@ -9,7 +9,6 @@ using System.IO;
 using System.Linq;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
@@ -362,7 +361,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 }
 
                 Main.popupText[classIndex].rotation = Main.rand.NextFloat(0.2f);
-                Main.popupText[classIndex].scale += classExp * 0.01f; //-doesnt seem to work -
+                //Main.popupText[classIndex].scale += classExp * 0.01f; //-doesnt seem to work -
             }
             return classIndex;
         }
@@ -380,23 +379,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
                     if (Player.HasItemInInventoryOrOpenVoidBag(ItemID.JunimoPetItem) || Pet.PetInUse(ItemID.JunimoPetItem))
                     {
-                        int junimoCash = ItemPet.Randomizer((int)(harvestingExpToCoinPerLevel * junimoHarvestingLevel * value * junimoInUseMultiplier * item.stack), 100);
-                        if (junimoCash > 1000000)
-                        {
-                            Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.PlatinumCoin, junimoCash / 1000000);
-                            junimoCash %= 1000000;
-                        }
-                        if (junimoCash > 10000)
-                        {
-                            Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.GoldCoin, junimoCash / 10000);
-                            junimoCash %= 10000;
-                        }
-                        if (junimoCash > 100)
-                        {
-                            Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.SilverCoin, junimoCash / 100);
-                            junimoCash %= 100;
-                        }
-                        Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.CopperCoin, junimoCash);
+                        Pet.GiveCoins(ItemPet.Randomizer((int)(harvestingExpToCoinPerLevel * junimoHarvestingLevel * value * junimoInUseMultiplier * item.stack)));
                     }
                     if (JunimoExpCheck())
                     {
@@ -489,10 +472,13 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
                 AnglerQuestPool();
                 if (GlobalPet.pool.Count > 0)
+                {
                     for (int i = 0; i < ItemPet.Randomizer(Main.rand.Next(baseRoll + junimoFishingLevel * junimoInUseMultiplier, (int)((baseRoll + junimoFishingLevel * junimoInUseMultiplier) * Main.rand.NextFloat(1f, 1.5f)))); i++)
                     {
                         Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
                     }
+                }
+
                 int value = ItemPet.Randomizer((int)(Pet.fishingExpBoost * anglerQuestExp * junimoInUseMultiplier));
                 junimoFishingExp += value;
                 popupExpFish += value;
@@ -658,7 +644,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     packet.Send(toClient: playerId);
                 }
                 else
+                {
                     Main.player[playerId].GetModPlayer<Junimo>().ExpOnSeaCreatureKill(npc.type);
+                }
             }
         }
     }

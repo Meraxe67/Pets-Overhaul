@@ -465,12 +465,12 @@ namespace PetsOverhaul.Systems
             }
         };
 
-        public bool isPetItem(int itemId)
+        public bool İsPetItem(int itemId)
         {
             return TerrariaPetItemIds.ContainsValue(itemId);
         }
 
-        public ReLogic.Utilities.SlotId playHurtSoundFromItemId(int itemId)
+        public ReLogic.Utilities.SlotId PlayHurtSoundFromItemId(int itemId)
         {
             SoundStyle itemsHurtSound = SoundID.MenuClose;
 
@@ -480,25 +480,13 @@ namespace PetsOverhaul.Systems
             }
             else if (itemId == ItemID.BerniePetItem)
             {
-                if (Player.Male == true)
-                {
-                    itemsHurtSound = SoundID.DSTMaleHurt with { PitchVariance = 0.2f };
-                }
-                else
-                {
-                    itemsHurtSound = SoundID.DSTFemaleHurt with { PitchVariance = 0.2f };
-                }
+                itemsHurtSound = Player.Male == true ? (SoundID.DSTMaleHurt with { PitchVariance = 0.2f }) : (SoundID.DSTFemaleHurt with { PitchVariance = 0.2f });
             }
 
-            if (itemsHurtSound == SoundID.MenuClose)
-            {
-                return ReLogic.Utilities.SlotId.Invalid;
-            }
-
-            return SoundEngine.PlaySound(itemsHurtSound, Player.Center);
+            return itemsHurtSound == SoundID.MenuClose ? ReLogic.Utilities.SlotId.Invalid : SoundEngine.PlaySound(itemsHurtSound, Player.Center);
         }
 
-        public ReLogic.Utilities.SlotId playEquipSoundFromItemId(int itemId)
+        public ReLogic.Utilities.SlotId PlayEquipSoundFromItemId(int itemId)
         {
             SoundStyle petSummonSound = SoundID.MenuClose;
 
@@ -507,15 +495,10 @@ namespace PetsOverhaul.Systems
                 petSummonSound = PetItemIdToAmbientSound[itemId][Main.rand.Next(PetItemIdToAmbientSound[itemId].Length)];
             }
 
-            if (petSummonSound == SoundID.MenuClose)
-            {
-                return ReLogic.Utilities.SlotId.Invalid;
-            }
-
-            return SoundEngine.PlaySound(petSummonSound, Player.Center);
+            return petSummonSound == SoundID.MenuClose ? ReLogic.Utilities.SlotId.Invalid : SoundEngine.PlaySound(petSummonSound, Player.Center);
         }
 
-        public ReLogic.Utilities.SlotId playKillSoundFromItemId(int itemId)
+        public ReLogic.Utilities.SlotId PlayKillSoundFromItemId(int itemId)
         {
             SoundStyle petKillSound = SoundID.MenuClose;
 
@@ -525,22 +508,12 @@ namespace PetsOverhaul.Systems
             }
             else if (itemId == ItemID.CompanionCube)
             {
-                if (Main.rand.NextBool(25))
-                {
-                    petKillSound = SoundID.NPCDeath61 with { PitchVariance = 0.5f, Volume = 0.7f };
-                }
-                else
-                {
-                    petKillSound = SoundID.NPCDeath59 with { PitchVariance = 0.5f };
-                }
+                petKillSound = Main.rand.NextBool(25)
+                    ? (SoundID.NPCDeath61 with { PitchVariance = 0.5f, Volume = 0.7f })
+                    : (SoundID.NPCDeath59 with { PitchVariance = 0.5f });
             }
 
-            if (petKillSound == SoundID.MenuClose)
-            {
-                return ReLogic.Utilities.SlotId.Invalid;
-            }
-
-            return SoundEngine.PlaySound(petKillSound, Player.Center);
+            return petKillSound == SoundID.MenuClose ? ReLogic.Utilities.SlotId.Invalid : SoundEngine.PlaySound(petKillSound, Player.Center);
         }
     }
 }

@@ -107,6 +107,28 @@ namespace PetsOverhaul.Systems
             itemPet = null;
             return false;
         }
+        /// <summary>
+        /// Spawns coins accordingly to the given value and converts it to a higher coin tier if possible. Source of spawned coins will be globalItem. Recommended use is with ItemPet.Randomizer() to achieve more precise and 'natural' values. (100x the intended coin value)
+        /// </summary>
+        public void GiveCoins(int coinAmount)
+        {
+            if (coinAmount > 1000000)
+            {
+                Player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.PlatinumCoin, coinAmount / 1000000);
+                coinAmount %= 1000000;
+            }
+            if (coinAmount > 10000)
+            {
+                Player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.GoldCoin, coinAmount / 10000);
+                coinAmount %= 10000;
+            }
+            if (coinAmount > 100)
+            {
+                Player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.SilverCoin, coinAmount / 100);
+                coinAmount %= 100;
+            }
+            Player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.CopperCoin, coinAmount);
+        }
         public override bool OnPickup(Item item)
         {
             if (item.TryGetGlobalItem(out ItemPet fortune) && fortune.pickedUpBefore == false && Player.CanPullItem(item, Player.ItemSpace(item)))
@@ -459,7 +481,7 @@ namespace PetsOverhaul.Systems
 
             if (ModContent.GetInstance<Personalization>().HurtSoundDisabled == false)
             {
-                info.SoundDisabled = Player.GetModPlayer<PetRegistry>().playHurtSoundFromItemId(Player.miscEquips[0].type) != ReLogic.Utilities.SlotId.Invalid;
+                info.SoundDisabled = Player.GetModPlayer<PetRegistry>().PlayHurtSoundFromItemId(Player.miscEquips[0].type) != ReLogic.Utilities.SlotId.Invalid;
             }
         }
         public override void UpdateEquips()
@@ -480,7 +502,7 @@ namespace PetsOverhaul.Systems
             }
             if (ModContent.GetInstance<Personalization>().PassiveSoundDisabled == false && Main.rand.NextBool(3600))
             {
-                Player.GetModPlayer<PetRegistry>().playEquipSoundFromItemId(Player.miscEquips[0].type);
+                Player.GetModPlayer<PetRegistry>().PlayEquipSoundFromItemId(Player.miscEquips[0].type);
             }
         }
         public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
@@ -492,7 +514,7 @@ namespace PetsOverhaul.Systems
         {
             if (ModContent.GetInstance<Personalization>().DeathSoundDisabled == false)
             {
-                playSound = Player.GetModPlayer<PetRegistry>().playKillSoundFromItemId(Player.miscEquips[0].type) == ReLogic.Utilities.SlotId.Invalid;
+                playSound = Player.GetModPlayer<PetRegistry>().PlayKillSoundFromItemId(Player.miscEquips[0].type) == ReLogic.Utilities.SlotId.Invalid;
             }
 
             return base.PreKill(damage, hitDirection, pvp, ref playSound, ref genGore, ref damageSource);

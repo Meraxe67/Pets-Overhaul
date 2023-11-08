@@ -8,7 +8,6 @@ using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using System.IO;
 
 namespace PetsOverhaul.PetEffects.Vanilla
 {
@@ -59,6 +58,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 player.GetModPlayer<HoneyBee>().currentAbilityHasteBonus = healer.abilityHaste;
             }
             else
+            {
                 for (int i = 0; i < Main.maxPlayers; i++)
                 {
                     Player player = Main.player[i];
@@ -80,6 +80,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     player.AddBuff(ModContent.BuffType<HoneyOverdose>(), (int)(healer.honeyOverdoseTime * (1 / (1 + healer.abilityHaste))));
                     player.GetModPlayer<HoneyBee>().currentAbilityHasteBonus = healer.abilityHaste;
                 }
+            }
         }
     }
     public sealed class HoneyBeePotions : GlobalItem
@@ -102,7 +103,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             return base.ConsumeItem(item, player);
         }
     }
-    sealed public class QueenBeePetItem : GlobalItem
+    public sealed class QueenBeePetItem : GlobalItem
     {
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {

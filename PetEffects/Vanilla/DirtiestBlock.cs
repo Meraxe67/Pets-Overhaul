@@ -18,14 +18,13 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int everythingCoin = 100;
         public override bool OnPickup(Item item)
         {
-            if (Pet.PickupChecks(item, ItemID.DirtiestBlock, out ItemPet itemChck)&&itemChck.blockNotByPlayer == true)
+            if (Pet.PickupChecks(item, ItemID.DirtiestBlock, out ItemPet itemChck) && itemChck.blockNotByPlayer == true)
             {
                 if (item.type == ItemID.DirtBlock)
                 {
-                    Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.CopperCoin, ItemPet.Randomizer(item.stack * dirtCoin));
+                    Pet.GiveCoins(ItemPet.Randomizer(item.stack * dirtCoin));
                     if (Juni.JunimoExpCheck())
                     {
-                       
                         int value = ItemPet.Randomizer((int)(dirtCoin * Juni.junimoInUseMultiplier * item.stack * Pet.miningExpBoost), 10000);
                         Juni.junimoMiningExp += value;
                         Juni.popupExpMining += value;
@@ -37,7 +36,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 }
                 else if (itemChck.commonBlock == true)
                 {
-                    Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.CopperCoin, ItemPet.Randomizer(item.stack * soilCoin));
+                    Pet.GiveCoins(ItemPet.Randomizer(item.stack * soilCoin));
                     if (Juni.JunimoExpCheck())
                     {
                         int value = ItemPet.Randomizer((int)(dirtCoin * Juni.junimoInUseMultiplier * item.stack * Pet.miningExpBoost), 10000);
@@ -49,9 +48,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         }
                     }
                 }
-                else 
+                else
                 {
-                    Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.CopperCoin, ItemPet.Randomizer(item.stack * everythingCoin));
+                    Pet.GiveCoins(ItemPet.Randomizer(item.stack * everythingCoin));
                 }
             }
             return base.OnPickup(item);
