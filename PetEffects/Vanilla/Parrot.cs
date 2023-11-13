@@ -12,20 +12,72 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class Parrot : ModPlayer
     {
-        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
-        public int chance = 13;
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        public int projChance = 20;
+        public int meleeChance = 25;
+        public float projDamage = 0.75f;
+        public float meleeDamage = 0.75f;
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
+
+        public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.ParrotCracker))
+            if (Pet.PetInUseWithSwapCd(1180))
             {
-                for (int i = 0; i < ItemPet.Randomizer(chance); i++)
+                for (int i = 0; i < ItemPet.Randomizer(meleeChance); i++)
                 {
-                    target.StrikeNPC(hit);
-                    if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
-                    {
-                        SoundEngine.PlaySound(SoundID.Zombie78 with { PitchVariance = 1f, MaxInstances = 3 }, target.position);
-                    }
+                    target.StrikeNPC(hit with { Damage = (int)(damageDone * meleeDamage) });
+                    PlayParrotSound();
                 }
+            }
+        }
+
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (Pet.PetInUseWithSwapCd(ItemID.ParrotCracker) && (proj.minion || proj.sentry))
+            {
+                for (int i = 0; i < ItemPet.Randomizer(meleeChance); i++)
+                {
+                    target.StrikeNPC(hit with { Damage = (int)(damageDone * meleeDamage) });
+                    PlayParrotSound();
+                }
+            }
+        }
+
+        public void PlayParrotSound()
+        {
+            if (!ModContent.GetInstance<Personalization>().AbilitySoundDisabled)
+            {
+                SoundStyle style = default;
+                switch (Main.rand.Next(3))
+                {
+                    case 0:
+                        style = SoundID.Zombie78 with
+                        {
+                            PitchVariance = 1f,
+                            MaxInstances = 1,
+                            SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest,
+                            Volume = 0.25f
+                        };
+                        break;
+                    case 1:
+                        style = SoundID.Cockatiel with
+                        {
+                            PitchVariance = 1f,
+                            MaxInstances = 1,
+                            SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest,
+                            Volume = 0.25f
+                        };
+                        break;
+                    case 2:
+                        style = SoundID.Macaw with
+                        {
+                            PitchVariance = 1f,
+                            MaxInstances = 1,
+                            SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest,
+                            Volume = 0.25f
+                        };
+                        break;
+                }
+                SoundEngine.PlaySound(in style, Player.position);
             }
         }
     }
@@ -38,15 +90,15 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            if (!ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift || PlayerInput.Triggers.Current.KeyStatus["Down"])
             {
-                return;
+                Parrot modPlayer = Main.LocalPlayer.GetModPlayer<Parrot>();
+                tooltips.Add(new TooltipLine(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ParrotCracker")
+                    .Replace("<projChance>", modPlayer.projChance.ToString())
+                    .Replace("<projDamage>", modPlayer.projDamage.ToString())
+                    .Replace("<meleeChance>", modPlayer.meleeChance.ToString())
+                    .Replace("<meleeDamage>", modPlayer.meleeDamage.ToString())));
             }
-
-            Parrot parrot = Main.LocalPlayer.GetModPlayer<Parrot>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ParrotCracker")
-                        .Replace("<chance>", parrot.chance.ToString())
-                        ));
         }
     }
 }
