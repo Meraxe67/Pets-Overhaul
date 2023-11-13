@@ -2,7 +2,7 @@ Mods: {
 	PetsOverhaul: {
 		Notice:
 			'''
-			[c/90C2AA:Pets Overhaul 2.2.6 最新更改: 现在祝尼魔最大等级是40]
+			[c/90C2AA:Pets Overhaul 2.2.7 latest changes: Portugues translation!]
 			[c/90C2AA:New Junimo Fishing Perk: Gives you bonus loot upon completing]
 			[c/90C2AA:an Angler Quest, Fishing Enemy Kill Exp improvements & more]
 			如果你在游玩中碰到了任何漏洞与问题,你都可以与我们进行反馈,
@@ -355,7 +355,10 @@ Mods: {
 			ParrotCracker:
 				'''
 				[c/f6546a:攻击型宠物]
-				你的所有攻击有<chance>%几率造成两次伤害
+				所有由你或你的仆从/哨兵射击/施放的投射物
+				有<projChance>%的几率再次射击/施放,造成<projDamage>倍伤害.
+				真近战攻击和近战仆从/哨兵攻击命中敌人有<meleeChance>%
+				的几率再次对敌人造成一次伤害,造成<meleeDamage>倍伤害.
 				'''
 			PigPetItem:
 				'''
