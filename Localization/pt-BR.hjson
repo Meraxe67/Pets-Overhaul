@@ -1,0 +1,759 @@
+Mods: {
+	PetsOverhaul: {
+		/* Notice:
+			'''
+			[c/90C2AA:Pets Overhaul 2.2.7 latest changes: Portugues translation!]
+			[c/90C2AA:New Junimo Fishing Perk: Gives you bonus loot upon completing]
+			[c/90C2AA:an Angler Quest, Fishing Enemy Kill Exp improvements & more]
+			If you happen to come across any bugs, our would like to be up to
+			date with our constantly updating Mod and growing community,
+			we encourage you to join our community and our Discord server!
+			''' */
+
+		Config: {
+			Personalization: Personalização
+			// JunimoExpActive: "[c/AEAEAE:active]"
+			// JunimoExpInactive: "[c/AEAEAE:inactive]"
+			JunimoLevelupLabel: Desabilitar a notificação de nível de Junimo
+			JunimoLevelupTooltip: Desabilita o texto e som das notificações de aumento de nível de Junimo ao aumentar o nível de uma classe. Não desabilita a mecânica de nível.
+			JunimoExpLabel: Desabilitar ganho de Exp enquanto não tiver o Junimo
+			JunimoExpTooltip: Desabilita todo o ganho de experiência de Junimo se não tiver o Pingo de Estrela em qualquer um de seus inventários ou não estiver no espaço de pets.
+			// JunimoExpGainMessageLabel: Disable Junimo Exp pop-up messages
+			/* JunimoExpGainMessageTooltip:
+				'''
+				Disables all pop-up texts that appears upon gaining exp,
+				Does not disable Exp gain or anything else but the message.
+				''' */
+			// NoticeLabel: Disable Pets Overhaul's notice
+			/* NoticeTooltip:
+				'''
+				Disables message sent by Pets Overhaul upon logging into the world.
+				Notices may contain brief information about the latest updates.
+				''' */
+			TooltipShiftToggleLabel: Habilitar que as informações de pets/items sejam alternáveis
+			TooltipShiftToggleTooltip: Habilita que todas as informações de pets e items sejam visíveis apenas quando Baixo (Tecla para baixo, geralmente S) estiver sendo pressionada
+			TooltipShiftToggleInGame: Segure o Botão para baixo para informações
+			HurtSoundLabel: Desabilitar sons de dor personalizados
+			HurtSoundTooltip: Desabilita efeitos sonoros adicionados por pets quando o jogador recebe dano.
+			DeathSoundLabel: Desabilitar sons de morte personalizados
+			DeathSoundTooltip: Desabilita sons de morte personalizados quando o jogador morre.
+			PassiveSoundLabel: Desabilitar sons passivos de pet
+			PassiveSoundTooltip: Desabilita efeitos sonoros de pet que tocam aleatóriamente sem efeitos similar à efeitos sonoros de ambiente.
+			AbilitySoundLabel: Desabilitar sons de habilidades
+			AbilitySoundTooltip: Desabilita efeitos sonoros de pet que tocam ao processar habilidades, recarga do tempo de espera, etc. (não recomendado, estes sons podem te ajudar)
+			LowCooldownSoundLabel: Desabilitar som de temporizador curto
+			LowCooldownSoundTooltip: Desabilita efeito sonoro de recarga de tempo de espera se o tempo de recarga das habilidades de pet forem menores que 1 segundo.
+			MoreDifficultLabel: Desabilitar jogador ser mais fraco
+			MoreDifficultTooltip: Desabilita o jogador causar 5% menos dano e receber 5% mais dano, que é implementado para contrariar o mod adicionar um aumento de poder
+			SwapCooldownLabel: Desabilitar tempo de recarga em troca de pet
+			SwapCooldownTooltip: Desabilita o jogador de ganhar o Debuff Pet Desatento ao trocar de pet. Prevenindo qualquer vantagem relacionada à combate de ativar durante esse tempo (Não recomendado)
+		}
+
+		PetItemTooltips: {
+			Seaweed:
+				'''
+				[c/0ea80e:Pet Defensivo]
+				Garante	 <def>x de Defesa e <kbResist>x de Resistência à recuo
+				Diminui velocidade de movimento em -<moveSpd>% e dano em -<dmg>%
+				'''
+			AmberMosquito:
+				'''
+				[c/96A8B0:Pet Minerador]
+				Cavar um minério, joia, ou extraível tem <oreChance>% de chance
+				de dar ao jogador um minério ou joia aleatória, o drop é
+				escolhido de uma tabela, menos valiosos são mais comuns
+				'''
+			EatersBone:
+				'''
+				[c/ccf5f5:Pet de Mobilidade]
+				Dá <moveSpd>% de velocidade de movimento, <jumpSpd>% de velocidade de pulo,
+				Permite o pulo automático e <fallRes> blocos de resistência à queda,
+				se estiver em um bioma maligno
+				'''
+			BoneRattle:
+				'''
+				[c/0ea80e:Pet Defensivo]
+				Se não receber dano de qualquer fonte por <stage1Time> segundos sua
+				regeneração de vida aumenta em <stage1Regen>. Se não receber
+				dano por <stage2Time> segundos, a regeneração aumenta para <stage2Regen>
+				Danificar um inimigo não irá interromper esse efeito a menos
+				que tenha passado da marca de <stage1Time>-segundos onde o cronometro voltará para a marca de <stage1Time> segundos
+				Também, ganhe <shieldAmount>% de escudo à vida enquanto estiver na marca de <stage2Time>-segundos
+				'''
+			BabyGrinchMischiefWhistle:
+				'''
+				[c/7F9FBB:Pet Ofensivo e Utilitário]
+				Inimigos não chefes num raio de <slowRange>-blocos desaceleram em <slowAmount>%
+				dá o efeito permanente de calor e todas as armas da
+				Lua de Gelo ganham <dmg>% de dano e <crit>% de aumento de chance de dano crítico
+				'''
+			Nectar:
+				'''
+				[c/97C8DD:Pet de Invocação e Utilitário]
+				Se envenenado ou afetado pela peçonha ácida, cura <antidotePercent>% da vida máxima
+				e remove os dois efeitos, a cura tem um resfriamento de <antidoteCd>-segundos
+				Diminúi defesa em -<def>, todo dano e chance de dano critico em -<dmgCrit>%
+				Mas aumenta o número maximo de lacaios em +<maxMinion> e velocidade de movimento em <moveSpd>%
+				todos os ataques tem <regularChance>% de chance (<summonChance>% para ataques de lacaios) de invocar
+				uma abelha amigavel que causa <beeDmg> de dano e <beeKb> de Recuo. Afetado pelo Pacote de Colmeias
+				'''
+			HellCake:
+				'''
+				[c/14C17C:Pet Defensivo e Utilitário]
+				Imunidade à lava por <immuneTime> segundos, acumula com o amuleto de lava
+				Dá efeito de nadadeiras, <lavaDef> de defesa, e <lavaSpd>% de velocidade de movimento na lava
+				Pele de Obsidiana dá <obbyDef> de defesa e -<obbySpd>% de velocidade de movimento
+				'''
+			Fish:
+				'''
+				[c/10B4F5:Pet de Pesca e Utilitário]
+				dá <fp> de poder de pesca, <oceanFp> no oceano e <snowFp> no bioma de neve
+				Dobra todas as pescas de Piaba congelada e Bacalhau-do-Atlântico
+				dá efeito de nadadeiras enquanto nos biomas de gelo e oceano
+				Multiplica a duração de debuffs de resfriado em <chilledMult>x
+				'''
+			BambooLeaf:
+				'''
+				[c/E0B130:Pet Ofensivo e de Coleta]
+				Ganha <atkSpd>% de velocidade de movimento, <jungleAtkSpd>% no bioma da selva
+				Inimigos tem menos chances de mirar em você
+				<bambooChance>% de chance de dar bambu extra ao quebrar árvore de bambu
+				'''
+			BoneKey:
+				'''
+				[c/8D7A40:Pet Defensivo e Ofensivo]
+				Te faz completamente imune ao calabouço em todo pre-hardmode
+				Ganha <armorPen> de penetração de armadura, enquanto no calabouço, ganha
+				<dungArmorPen> de penetração de armadura e <dungRegen> regeneração de vida
+				'''
+			ToySled:
+				'''
+				[c/f6546a:Pet Ofensivo]
+				aplica <frostburnTime>- segundos de queimadura de gelo melhorada e
+				<slowAmount>% de desaceleração por <slowTime> segundos em acerto, todos os valores
+				são triplicados se usar toda a armadura congelada
+				'''
+			StrangeGlowingMushroom:
+				'''
+				[c/7CEBFA:Pet de Mobilidade e Utilitário]
+				Ataques recuperam o tempo de buffs em <buffRecover> segundos, <cooldown> segundos de resfriamento
+				Sempre confuso e aumenta todos os seguintes atributos em <floatIncr>%
+				(ou +<intIncr> dependendo do atributo); dano, resistência de recuo, chance de dano crítico,
+				sorte, mana, dano crítico, vida, recuo, velocidade de ataque, defesa, penetração de armadura, 
+				poder de pesca, redução de dano, regeneração de mana, velocidade de pulo, tempo de voo,
+				velocidade de habilidade, <moveSpd>% de impulso para velocidade de movimento e dá o buff de visão noturna
+				'''
+			FullMoonSqueakyToy:
+				'''
+				[c/FA377D:Pet Ofensivo e Suporte]
+				Multiplica a chance de dano crítico em <critMult>x, mas reduz
+				seu dano crítico em <crDmgReduction>%, Acerto Crítico em um inimigo
+				aplica debuff Espancado e o debuff acumula em até <maxStacks>
+				vezes, Cada acúmulo aumenta o dano que o inimigo recebe
+				em <stackDmg>% e aumenta seu dano crítico nele em <stackCritDmg>%
+				'''
+			BerniePetItem:
+				'''
+				[c/14C17C:Pet Defensivo e Utilitário]
+				Inimigos em um raio de <burnRange> blocos terá seus efeitos de queimadura
+				passar 100% mais lento e para cada inimigo queimando dentro desse raio recupera <burnDrainMana> de mana
+				e <burnDrainHealth> de vida a cada 5 segundos, acumulando em até <maxDrain> inimigos, imunidade a todas as queimaduras
+				'''
+			UnluckyYarn:
+				'''
+				[c/1bdeff:Pet Utilitário]
+				dá <flatLuck> com mínimo de -<minimumMoon> ou máximo de <maximumMoon> sorte
+				dependendo na fase da lua durante a noite,
+				Mais alto durante Lua Nova, Mais baixo durante a Lua Cheia
+				'''
+			BlueEgg:
+				'''
+				[c/CDFF00:Pet de Coleta]
+				Coletar qualquer coisa te dá um item aleatório de uma
+				tabela. Itens variam de sementes à frutas, plantas
+				e ervas tem chance de <plantChance>%, plantas raras tem <rarePlantChance>%
+				e cortáveis tem <choppableChance>%, Ocasionalmente te dá um Ovo.
+				Aumenta velocidade de movimento em <moveSpd>% se estiver Bêbado
+				'''
+			GlowTulip:
+				'''
+				[c/7CF074:Pet Utilitário e de Coleta]
+				Todas as plantas e árvores coletadas abaixo
+				da superfície tem <harvestChance>% de chance, <rarePlantChance>% chance para plantas raras,
+				de darem +1,
+				árvores de joia tem <gemstoneTreeChance>% de chance à mais que a chance comum
+				dá Luz permanente
+				'''
+			ChesterPetItem:
+				'''
+				[c/1bdeff:Pet Utilitário]
+				Aumenta o alcançe de coleta de itens em <pickupRange> e
+				alcançe do posicionamento em <placementRange> blocos
+				dá 8 defesa enquanto algum armazenamento estiver aberto
+				'''
+			CompanionCube:
+				'''
+				[c/22A091:Pet Mágico e Defensivo]
+				Recupera vida igual à <manaToHealth>% do uso de mana e
+				Recupera mana igual à <healthToMana>% do dano recebido
+				Se Enjoo por Mana estiver ativo, Reduz a
+				efetividade da poção de mana em <manaPotionNerf>% e mana para vida
+				em -<manaToHealthNerf>%, ambos são dobrados se Enjoo por Mana estiver
+				reduzindo dano magico mais que sua quantidade inicial, 25%
+				'''
+			CursedSapling:
+				'''
+				[c/8A2BE2:Pet de Invocação]
+				Aumenta número máximo de lacaios em <minionSlot>, armas da Lua de Abóbora
+				ganham <dmg>% de dano, aumento de <ravenDmg>% dano para o
+				Cajado de Corvo, Aumenta o Alcançe da Colheita Maldita em <whipRange>%
+				e velocidade em <whipSpeed>% por quantidade de espaço maximo de lacaios, qualquer outro
+				chicote recebe um quarto desse efeito
+				'''
+			DirtiestBlock:
+				'''
+				[c/96A8B0:Pet Minerador]
+				Minerar qualquer coisa dá <any> moedas de cobre
+				Minerar blocos comuns dá <soil> moedas de cobre
+				Minerar terra dá <dirt> moedas de cobre
+				'''
+			BallOfFuseWire:
+				'''
+				[c/f6546a:Pet Ofensivo]
+				Ataques causam dano em àrea, esse ataque não causa recuo,
+				tem o dano base de <dmg>% do dano que você causou e pode causar
+				dano crítico, tem <armorPen> de penetração de armadura e um resfriamento de 2 segundos
+				'''
+			CelestialWand:
+				'''
+				[c/3399FF:Pet Mágico]
+				Aumenta sua mana máxima em <maxMana>%, Diminúi os Bonûs de dano magico
+				acima de 100% em <dmgPenalty>%, <manaToDmg>% de impulso de dano magico para cada
+				1 de mana máxima que tiver acima do máximo de 200 mana, não
+				diminúi a si mesmo, extra 15% penalidade quando usar o Capuz Espectral, 
+				e reduz uma penalidade extra atual de enjoô de mana dividida por 4
+				'''
+			EyeSpring:
+				'''
+				[c/ccf5f5:Pet de Mobilidade]
+				Dá <jumpBoost>% de velocidade de pulo, e <acceleration>% de aceleração, e sua
+				velocidade de subida com asas é multiplicado em<ascNerf>x
+				'''
+			ExoticEasternChewToy:
+				'''
+				[c/DABE8E:Pet de Mobilidade e Corpo a Corpo]
+				Impulsiona velocidade de ataque corpo a corpo em <meleeSpd>% e velocidade de movimento em <moveSpd>%
+				enquanto segura uma arma corpo a corpo mas diminui tamanho de arma corpo a corpo em <sizeNerf>%
+				Aumenta dano corpo a corpo em <dmg>%
+				'''
+			BedazzledNectar:
+				'''
+				[c/ccf5f5:Pet de Mobilidade]
+				Agora você pode voar por <flight> segundos e ganha imunidade a dano de queda
+				ou aumenta em <bonusFlight> segundos do tempo de vôo de suas asas atuais
+				Perde <healthNerf>% de sua vida máxima se não tiver nenhuma asa
+				Asas de Iniciante ganham apenas <flight> de tempo de vôo extra, sem penalidades à vida
+				'''
+			GlommerPetItem:
+				'''
+				[c/A250C4:Pet Mágico e de Suporte]
+				dá <sanityAmount>% de velocidade de habilidade para todos os jogadores no raio de <sanityRange>-blocos
+				Multiplica sua mana máxima igual à sua velocidade de habilidade,
+				recupera <manaRecover> mana a cada <manaRecoverCd> segundos, recuperação não é afetada por
+				nenhum fator, Glommer também defeca ocasionalmente, tome cuidado.
+				'''
+			DD2PetDragon:
+				'''
+				[c/FFB3BA:Pet Atirador]
+				Multiplica velocidade de flechas em <arrowVelo>x e aumenta perfuração de flechas em <arrowPierce>
+				Multiplica sua velocidade de balas em <bulletVelo>x e
+				suas armas especializadas vão causar dano crítico em inimigos abaixo de
+				<treshold>% de vida todas as vezes, diminui para <bossTreshold>% para chefes
+				'''
+			JunimoPetItem:
+				'''
+				[c/CDFF00:Pet de Coleta], [c/96A8B0:Mineração] e [c/0382E9:Pesca]
+				Ganhe experiência ao coletar itens de suas respectivas classes
+				Ganho de experiência pode ou não estar ativo no seu inventário/bolsa do vazio dependendo das suas escolhas de configuração
+				Efeitos ativam enquanto o item de pet estiver em seu inventário ou bolsa do vazio aberta
+				Ambos os efeitos e ganho de experiência e são dobrados quando o Pet Junimo é o pet primário em uso
+				Níveis tem o nivel máximo de <maxLvl> no momento, Tarefas mais difíceis dão mais experiência.
+				[c/CDFF00:Harvesting]: Plantas e Cortaveis dão <HarvestingProfit> moedas de cobre, +<harvestingRare> por plantas raras, +<bonusHealth> (Mínimo +<flatHealth>) Vida Máxima
+				Nível atual: [c/CDFF00:<harvestLevel>] Experiência necessária para o proximo nivel: [c/CDFF00:<harvestNext>]
+				[c/96A8B0:Mining]: Minérios, joias e Extraíveis podem dar +1 a mais com <MiningBonusDrop>% de chance, +<BonusReduction>% redução de dano
+				Nível Atual: [c/96A8B0:<miningLevel>] Experiência necessária para o proximo nivel: [c/96A8B0:<miningNext>]
+				[c/0382E9:Fishing]: Aumenta poder de pesca em <fishingPower>% multiplicativamente, +<bonusDamage>% Aumento para todas as formas de dano
+				Nível Atual: [c/0382E9:<fishingLevel>] Experiência necessária para o proximo nivel: [c/0382E9:<fishingNext>]
+				'''
+			BirdieRattle:
+				'''
+				[c/ccf5f5:Pet de Mobilidade]
+				Dá <flightTime> Segundos de tempo de vôo, Porém, Tempo de vôo
+				consumido permaneçe quando tocar o chão e impede de usar as
+				asas até que o tempo de <cooldown>s de resfriamento, você
+				não consegue pairar de forma alguma enquanto o efeito estiver ativo. você ainda
+				terá imunidade à dano de queda o tempo todo e
+				o tempo de resfriamento começa assim que começar a voar
+				'''
+			LizardEgg:
+				'''
+				[c/8D7A40:Pet Defensivo e Ofensivo]
+				entrar em combate enquanto abaixo de 55% de vida te transforma em um Lagharto por <transformTime>s;
+				20% Velocidade de movimento, 5 defesa, 10% dano, e amplifica os seus próximos <hitCount> ataques,
+				<hitDmg>% mais <hitFlat> puro de aumento de dano e cura <lifesteal>% dano causado mais <maxHpRecovery>% dá sua
+				vida máxima. A transformação em Lagharto tem o resfriamento de <transformCooldown>-
+				'''
+			TartarSauce:
+				'''
+				[c/e69138:Pet Corpo a Corpo]
+				Acertar um inimigo com ataques corpo a corpo te dá acúmulo de
+				2 para corpo a corpo verdadeiro, 1 para projéteis corpo a corpo, <cooldown> resfriamento
+				Para um maximo de <maxStack> acúmulos, você perde 4 acúmulos por segundo
+				quando não acertar um inimigo no período de 10-Segundos
+				No acúmulo máximo dá <maxDef>% defesa, <maxMeleeSpd>% velocidade corpo a corpo,
+				<maxDmg>% dano corpo a corpo mas perde -<maxSpd>% velocidade de movimento máxima, para cada acúmulo;
+				<meleeSpd>% velocidade de ataque, -<moveSpd>% velocidade de movimento, <dmg>% dano, <def>% defesa
+				'''
+			ParrotCracker:
+				'''
+				[c/f6546a:Pet Ofensivo]
+				Todos os seus projéteis tem uma chance de  <projChance>% de
+				ser atirado uma segunda vez por seu papagaio com <projDamage>x do dano com
+				seus proprios frames de imunidade. ataques de corpo a corpo verdadeiro tem <meleeChance>% 
+				de chance de acertar novamente com <meleeDamage>x do dano.
+				'''
+			PigPetItem:
+				'''
+				[c/1bdeff:Pet Utilitário]
+				consumir qualquer item de comida tem <foodChance>% de chance de não
+				consumir o item, <potionChance>% para poções, consumir items de comida
+				te daõ  <shield1>/<shield2>/<shield3> escudo por <shieldTime> segundos
+				determinados pelo tempo de Bem Alimentado. <cooldown> segundos de resfriamento
+				'''
+			MudBud:
+				'''
+				[c/f6546a:Pet Ofensivo]
+				Acertar inimigos te <chance>% de chance de espalhar esporos que causam danos a inimigos em
+				algum lugar proximo à eles. esporos causam <dmg>% do seu dano +<flatDmg> dano e
+				tem <kb> recúo. Incapaz de gerar a sí mesmo
+				'''
+			DD2PetGato:
+				'''
+				[c/8A2BE2:Pet de Invocação]
+				Permite invocações de sentinela causar dano crítico com um bonus +<crit>% 
+				 de chance, aumenta sentinelas em <maxSentry>
+				'''
+			DogWhistle:
+				'''
+				[c/1bdeff:Pet Utilitário]
+				Dá efeito de caçador permanentemente, uma chance de <critter>%
+				de dobrar insetos capturados, Diminúi em <rareCritter>%
+				para insetos raros. dá <rareCritterCoin> vezes a raridade
+				do valor do inseto capturado em moedas de prata, <rareEnemyCoin> vezes
+				o valor da raridade de um inimigo morto em moedas de prata
+				'''
+			Seedling:
+				'''
+				[c/0ea80e:Pet Defensivo]
+				ganhe <lifesteal>% de roubo de vida, aumenta para <planteraSteal>% com as armas da Plantera
+				'''
+			SpiderEgg:
+				'''
+				[c/f6546a:Pet Ofensivo]
+				Causar dano à inimigos aplica veneno por <poisonTime> segundos e remove
+				imunidade de veneno se eles não forem imunes à Peçonha
+				Todo alvo que já estiver envenenado receberá <poiPerc>%+<poiFlat> mais dano,
+				<poiKb>x mais recúo e <poiCrit>% de chance de acerto crítico extra
+				esse efeito vira <venomPerc>%+<venomFlat> mais dano, <venomKb>x mais recúo e
+				<venomCrit>% de chance de ataque crítico para alvos que tem efeito de Peçonha
+				'''
+			OrnateShadowKey:
+				'''
+				[c/1bdeff:Pet Utilitário]
+				Você tem a chance de aumentar o seu saque
+				<npcCoin>% mais moedas e <npcItem>% mais items de inimigos
+				<bossCoin>% mais moedas e <bossItem>% mais items de chefes
+				<bagCoin>% mais moedas e <bagItem>% mais items de bolsas, etc.
+				'''
+			SharkBait:
+				'''
+				[c/716DAF:Pet Ofensivo e de Pesca]
+				Dá <fishingPower> poder de pesca, causa <seaCreatureDmg>x mais dano, e recebe
+				<seaCreatureResist>x menos dano para inimigos pescados e dá ao jogador
+				<shield> de escudo por <shieldTime> segundos ao pescar qualquer coisa
+				'''
+			SpiffoPlush:
+				'''
+				[c/FFB3BA:Pet Atirador]
+				<ammoReserve>% de chance de não consumir munição, projéteis de armas à distância
+				dão <armorPen> penetração de armadura Contra inimigos do tipo Zumbi e
+				Matar qualquer inimigo tem <penChance>% de chance de aumentar sua penetração em 1
+				'''
+			MagicalPumpkinSeed:
+				'''
+				[c/CDFF00:Pet de Coleta]
+				Coletar plantas dá +1 com <plant>%
+				de chance. Diminúi para <rarePlant>% em plantas raras
+				'''
+			EucaluptusSap:
+				'''
+				[c/ccf5f5:Pet de Mobilidade]
+				Permite Pairar, Multiplica velocidade horizontal de vôo
+				e aceleração em <speed>x e <acceleration>x Respectivamente
+				e aumenta os dois por mais <flatIncrease>%
+				'''
+			TikiTotem:
+				'''
+				[c/8A2BE2:Pet de Invocação]
+				Dá <atkSpdToDmg>% da velocidade de ataque com chicote como dano de invocação,
+				<atkSpdToRange>% da velocidade de ataque como alcançe, Permitindo críticos,
+				tendo -<nonWhipCrit>% penalidade para não chicotes, <whipCrit>% bonus para chicotes
+				'''
+			LightningCarrot:
+				'''
+				[c/E39DA9:Pet de Mobilidade e Ofensivo]
+				dá um adicional de <flatSpd>% velocidade de movimento, multiplica em
+				<multSpd>x Impulsos de velocidade de movimento acima de 100% dão
+				um impulso de dano igual à <spdToDmg>% da velocidade. imunidade
+				à Eletrificado, te dando <electricRod>% de dano por <electricRodDuration> segundos
+				'''
+			ZephyrFish:
+				'''
+				[c/0382E9:Pet de Pesca]
+				Aumenta seu poder de pesca dependendo da força atual do vento, +1 por
+				<windFish> mph, Dá <regularChance>% de chance de ganhar +1 do peixe que pescar, 
+				Aumenta para <windChance>% se não estiver abaixo da superfície, força do vento for maior 
+				que 10mph e sua isca estiver no lado oposto de onde o vento estiver
+				vindo, aumenta seu poder de pesca em <anglerPower>% por tarefa do pescador, máximo de <maxAnglerPower>%
+				Tarefas do Pescador Completadas: <anglerQuests>, Aumento de Poder de Pesca Atual: <currentAnglerPower>%
+				'''
+			EyeOfCthulhuPetItem:
+				'''
+				[c/f6546a:Pet Ofensivo]
+				quando estiver abaixo de 50% de vida, entra em modo de raiva, consome toda sua defesa,
+				dá dano, velocidade de movimento, e crítica, <defToDmg>%, <defToSpd>%, e <defToCrit>% da defesa respectivamente
+				também enquanto com raiva, avanços terão quase nenhum tempo de resfriamento para avançar novamente
+				isso dura <enrageLength> segundos, não consegue ir àcima de 50% de vida enquanto com raiva
+				o tempo de <enrageCd> minutos de resfriamento começam assim que estiver com raiva
+				'''
+			BrainOfCthulhuPetItem:
+				'''
+				[c/0ea80e:Pet Defensivo]
+				te dá <lifesteal>% de roubo de vida, porém, a quantidade que consegue se curar é
+				<maxPool>% da sua vida máxima. essa quantidade se recupera <healthRecovery> a cada segundo
+				'''
+			EaterOfWorldsPetItem:
+				'''
+				[c/96A8B0:Pet Minerador]
+				dá <miningSpeed>% velocidade de mineração para blocos não minério/joia,
+				<multipleBreakChance>% de chance de minerar outro
+				minério/joia do mesmo tipo em um raio de <width>x<length> blocos.
+				'''
+			KingSlimePetItem:
+				'''
+				[c/FF1493:Pet Suporte]
+				Muda os efeitos de Gosmento e Molhado globalmente, efeito de Gosmento dá um bonus de <burnHp>%
+				de dano à vida se junto com uma queimadura, (<burnCap> máximo) e recebe <extraKb>x mais recúo.
+				Gosmento dá à jogadores afetados <jumpSpd>% de velocidade de pulo, <kbBoost>% de impulso de recúo
+				e resestência. Molhado faz inimigos receberem <enemyDmgRecieve>% mais dano e causarem <enemyDmgDeal>% menos dano
+				Molhado beneficia jogadores com <dmg>% mais dano,<def> defesa, e <moveSpd>% velocidade de movimento
+				'''
+			QueenBeePetItem:
+				'''
+				[c/FF1493:Pet Suporte]
+				cura <extraHeal>% mais com todas as poções de cura. ao consumir Mel Engarrafado ou 
+				Barbatanas de Mel, Recuperam a vida de qualquer jogador proximo (<range>~ blocos) , <bottledHealth>%, e <honeyfinHealth>% respectivamente, dá efeito de mel 
+				para <bottledHoneyTime> e <honeyfinHoneyTime> segundos respectivamente, aplica overdose de mel por 60s.
+				qualquer jogador com overdose de mel não pode ser curado novamente e tem 15% de velocidade de Habilidade
+				O usuário também ganha metade do efeito de cura e duração completa da overdose de mel.
+				'''
+			DeerclopsPetItem:
+				'''
+				[c/0ea80e:Pet Defensivo]
+				armazena o dano recebido, se o dano recebido chegar à %<treshold> da sua vida
+				em <tresholdTime> segundos, dá <immunityTime> segundos de imunidade à todos os tipos, e aplica  <slowAmount>% de lentidão,
+				confusão e queimadura de gelo em inimigos  num raio de <range>-blocos por <debuffTime> segundos
+				dano é armazenado separadamente e o efeito tem <cooldown>-segundos de resfriamento
+				'''
+			SkeletronPetItem:
+				'''
+				[c/f6546a:Pet Ofensivo]
+				Todo dano que recebe ou causa será Dano com o Tempo
+				você recebe <recievedMult>% do dano durante <recievedHowLong> segundos
+				inimigos recebem 100% do dano que você causa como
+				<dealtMult>% do dano por 4 segundos
+				Inimigos que podem morrer por seu ataque são executados.
+				'''
+			QueenSlimePetItem:
+				'''
+				[c/FA377D:Pet Ofensivo e Suporte]
+				Melhora a Geleia Brilhante, agora desacelera inimigos em <slow>%,
+				e dá à jogadores <haste>% de velocidade de habilidade, e todo acerto adiciona 1 contador,
+				(chance extra de adicionar mais contadores com maior velocidade de habilidade) todo
+				sexto ataque causa +<dmg>% dano e dá +<shield> escudo por <shieldTime> segundos.
+				'''
+			SkeletronPrimePetItem:
+				'''
+				[c/8D7A40:Pet Ofensivo e Defensivo]
+				te dá 5 escudos. escudos apenas estarão disponiveis quando estiver
+				com 100% de vida, abaixo de 100%, 75%, 50% e 25%
+				de vida respectivamente. todos os escudos são <shieldMaxHealthAmount>% da sua vida máxima, e
+				1 escudo se recupera a cada <shieldCooldown> segundos. também, dá
+				<dmg>% de dano,<crit>% de crítico, e <def>% de defesa enquanto tiver qualquer escudo ativo.
+				'''
+			DestroyerPetItem:
+				'''
+				[c/4CA858:Pet Defensivo e  de Mineração]
+				minérios, joias ou extraíveis tem chance de dar 1 a mais, essa chance
+				é igual à <defMultChance>% de sua defesa + <flatAmount>%, dá <defMultIncrease>%
+				de defesa, também dobre o efeito da poção de pele de ferro, dando <ironskinDef> mais
+				'''
+			TwinsPetItem:
+				'''
+				[c/f6546a:Pet Ofensivo]
+				Causando dano a inimigos muito proximos à você (<closeRange>~ blocos) aplica chamas amaldiçoadas
+				por <cursedTime> segundos e roubo de vida <defLifesteal>% da sua defesa multiplicada por
+				sua redução de dano dividida por <dealtDmgLifesteal>% do dano que causou.
+				causar dano a inimigos distantes de você (<longRange>~ blocos) adiciona <hpDmg>% da vida máxima
+				ao seu dano , <bossHpDmg>% para chefes, tem um resfriamento de <hpDmgCooldown> segundos
+				'''
+			EverscreamPetItem:
+				'''
+				[c/3399FF:Pet Mágico]
+				Multiplica seu dano crítico mágico por <magicCritNerf>x, Mana em <maxMana>, ataques críticos mágicos recuperam <missingMana>%
+				de sua mana que falta + <flatMana>, isso pode acontecer a cada <manaRecoveryCd> segundos, e dá dano e crítico
+				dependendo de quanta mano você tiver, com máximo de <dmg>% dano mágico e <crit>% de chance de crítico
+				'''
+			MartianPetItem:
+				'''
+				[c/ccf5f5:Pet de Mobilidade]
+				dá <wingMult>x de tempo máximo de vôo, <acc>% de impulso de aceleração,
+				multiplica velocidade de vôo horizontal em <speedMult>x, aceleração em <accMult>x
+				 e aumenta velocidade de vôo horizontal e aceleração em <flatSpdAcc>%
+				'''
+			DD2OgrePetItem:
+				'''
+				[c/849B25:Pet Defensivo e Corpo a Corpo]
+				multiplica a velocidade de movimento do jogador em <moveSpdNerf>x e velocidade de ataque com ataques corpo a corpo verdadeiros em <atkSpdNerf>x, ataques não corpo a corpo em <dmgNerf>x,
+				desabilita trocar de direção enquanto estiver atacando com armas corpo, corta à metade seu tempo de vôo e multiplica velocidade de vôo horizontal e aceleração em <horizontalNerf>x
+				vertical ascent speeds by <verticalNerf>x,but multiplies true melee size, damage and knockback by <trueMeleeMults> crit by <trueMeleeCrit>%, maximum health by <healthIncrease>%,
+				e defesa em <defMult>x, redução de dano em <damageReduction>, e imunidade à recúo. efeitos inativos se qualquer montaria estiver ativa
+				'''
+			DukeFishronPetItem:
+				'''
+				[c/0382E9:Pet de Pesca]
+				multiplica seu Poder de Pesca em <baseMult>x + <anglerFishingPower> por tarefa do Pescador máxima 1x,
+				mas ganha <flatChance>% + <fishingPowerChance>% de seu poder de pesca como chance de saque em dobro, 
+				<bobberChance>% de chance de lançar outra isca junto a sua atual.
+				Tarefas do Pescador Completas: <anglerQuests>, Multiplicador Atual de Poder de Pesca: <currentAnglerWithBaseMult>x
+				'''
+			LunaticCultistPetItem:
+				'''
+				[c/f6546a:Pet Ofensivo]
+				a cada <cooldown> segundos acertando um inimigo conjura um dos 3 efeitos de encantamento de área:
+				6 Fragmentos de Gelo que viajam em movimento hexagonal, que pode acertar até <icePierce> vezes
+				e causa <icePercent>% do seu dano +<iceFlat>, 5 Esferas de Luz ao redor do seu alvo causando
+				<lightPercent>% do seu dano +<lightFlat> que pode acertar até <lightPierce> inimigos, 4 Bolas de Fogo acima do seu
+				alvo que viaja aleatóriamente causando <firePercent>% do seu dano +<fireFlat>
+				'''
+			DD2BetsyPetItem:
+				'''
+				[c/FF6BA8:Pet Atirador e Suporte]
+				causando dano a inimigos com armas à distância aplica o efeito de Condenação da Rainha
+				por <debuffTime> segundos, Diminuindo a sua defesa em <defDecrease>%. aumenta em até <maxStack> acúmulos.
+				após alguem matar um inimigo com o efeito Condenação da Rainha, eles tem roubo de vida de <missingHpSteal>%
+				de sua vida máxima por acúmulo, dobrado se o alvo tiver acúmulo máximo
+				'''
+			IceQueenPetItem:
+				'''
+				[c/0ea80e:Pet Defensivo]
+				em vez de receber dano fatal, entra em estado de Congelado por <frozenTombTime> segundos,
+				desacelera todos os inimigos num raio de <range>-blocos em <slowAmount>% enquanto isso, fique imune
+				à todo dano e recupere <healthRecovery> de vida, em seguida, cause <baseDmg> de dano base
+				a todos os inimigos e imune por mais <postTombImmunity> segundos, tem um resfriamento de <tombCooldown>-minutos
+				'''
+			PlanteraPetItem:
+				'''
+				[c/FFB3BA:Pet Atirador]
+				acertos à distância em inimigos terá dano de execução, quanto menor
+				a vida deles for, mais o dano aumenta, em até <maxAmount>%
+				'''
+			MoonLordPetItem:
+				'''
+				[c/8D7A40:Pet Defensivo e Ofensivo]
+				adapta a qualquer classe que tiver mais dano. padrão para corpo a corpo>à distância>Mágico>invocação
+				Invocação: <sumRange>% de dano com chicote, <sumSpd>% de velocidade de chicote, <sumDmg>% dano de invocação, +<sumMax> máximo de lacaios e sentinelas
+				Mágico: <mana> mana, <manaCost>% de redução de custo de mana, <magicCrit>% de dano crítico mágico, <magicDmg>% de dano mágico
+				À Distância: <armorPen> penetração á distância, <rangedCrit>% de crítico à distância, <rangedDmg>% de dano à distância
+				Corpo a Corpo: <dr>% de redução de dano, <meleeSpd>% de velocidade corpo a corpo, <meleeDmg>% dano corpo a corpo, +<def> defesa
+				'''
+			ResplendentDessert:
+				'''
+				[c/FA377D:Pet Ofensivo e Suporte]
+				é o efeito da Principe Geleia e Princesa Geleia juntos. com efeitos
+				10% mais fracos porém.
+				'''
+			Carrot:
+				'''
+				[c/ccf5f5:Pet de Mobilidade]
+				todo pulo que for mais que a metade te dá 1 acúmulo
+				cada acúmulo dá <moveSpeed> velocidade de movimento e <jumpSpeed>% de velocidade de pullo
+				máximo de 10 acúmulos e reseta para 0 se não pular em 4 segundos
+				'''
+		}
+
+		Buffs: {
+			HoneyOverdose: {
+				DisplayName: Overdose de Mel
+				Description:
+					'''
+					Uma Abelinha já te deu muito mel! 
+					dá <AbilityHaste>% velocidade de habilidade.
+					'''
+			}
+
+			Mauled: {
+				DisplayName: Espancado
+				Description:
+					'''
+					Um Lobisomen te arrebentou!
+					Acúmulo Atual: <MaulCounter>.
+					'''
+			}
+
+			QueensDamnation: {
+				DisplayName: Condenação da Rainha
+				Description:
+					'''
+					A rainha dragão te amaldiçõou.
+					Acúmulo Máximo: <CurseCounter>.
+					'''
+			}
+
+			ObliviousPet: {
+				DisplayName: Pet Desatento
+				Description:
+					'''
+					seu pet não faz ideia do que sequer está acontecendo por ter sido trocado recentemente!
+					Seus efeitos de combate de pets estão desativados!
+					'''
+			}
+
+			TownPetBunny: {
+				DisplayName: Aura De <Name>
+				Description: Aumenta sua velocidade de pulo em <BunnyJump>%
+			}
+
+			TownPetCat: {
+				DisplayName: Aura De <Name>
+				Description: Multiplica sua velocidade de movimento em <CatMovespd>x
+			}
+
+			TownPetDog: {
+				DisplayName: Aura De <Name>
+				Description: Aumenta poder de pesca em +<DogFish>
+			}
+
+			TownPetClumsy: {
+				DisplayName: Aura De <Name>
+				Description: Aumenta sorte em +<ClumsyLuck>
+			}
+
+			TownPetCool: {
+				DisplayName: Aura De <Name>
+				Description: Aumenta chance de crítico em <CoolCrit>%
+			}
+
+			TownPetDiva: {
+				DisplayName: Aura De <Name>
+				Description: dá <DivaDisc>% de preço base de reembolso após comprar um item
+			}
+
+			TownPetMystic: {
+				DisplayName: Aura De <Name>
+				Description: Aumenta Velocidade de Habilidade em <MysticHaste>%
+			}
+
+			TownPetNerd: {
+				DisplayName: Aura De <Name>
+				Description:
+					'''
+					Dá Sentido de Perigo
+					Multiplica sua velocidade de construção em <NerdPlacement>x
+					'''
+				PostHardmodeDescription:
+					'''
+					Sentido de Perigo e Visão de Fios
+					Multiplica sua velocidade de construção em <NerdPlacement>x
+					'''
+				PostMoonlordDescription:
+					'''
+					Dá visão noturna, Luz UltraBrilhante
+					Sentido de Perigo e Visão de Fios
+					Multiplica sua velocidade de construção em <NerdPlacement>x
+					'''
+			}
+
+			TownPetOld: {
+				DisplayName: Aura De <Name>
+				Description:
+					'''
+					Aumenta defesa em +<OldDef>
+					Multiplica o Recuo em <OldKb>x;
+					'''
+			}
+
+			TownPetSquire: {
+				DisplayName: Aura De <Name>
+				Description: Aumenta o Dano em <SquireDmg>%
+			}
+
+			TownPetSurly: {
+				DisplayName: Aura De <Name>
+				Description:
+					'''
+					Aumenta o Nascimento de inimigos em <SurlySpawn>%
+					e dá o efeito de Vela Sombria
+					'''
+			}
+		}
+
+		Items: {
+			EndlessBalloonSack: {
+				DisplayName: Saco de Balões Infinitos
+				Tooltip: Enchido com toda a banheira da Garota Da Festa
+			}
+
+			MasteryShard: {
+				DisplayName: Fragmento de Maestria
+				Tooltip:
+					'''
+					Combine com qualquer troféu de boss para
+					criar seu respectivo pet do modo mestre.
+					Apenas 3 por mundo.
+					'''
+			}
+
+			Egg: {
+				DisplayName: Ovo
+				Tooltip:
+					'''
+					É uma pena não ser azul.
+					Diferente de Ovos Podres, parece que pode ser cozido.
+					'''
+			}
+		}
+
+		Projectiles.DynamiteKittyBoom.DisplayName: Dynamite Kitty Boom
+
+		Configs: {
+			JunimoLevelup: {
+				DisplayName: Aumento de Nível de Junimo
+				Headers.Personalization: Cabeçalho de Personalização
+			}
+
+			Personalization.DisplayName: Personalização
+			GlobalChanges.DisplayName: Mudanças Globais
+		}
+	}
+}
