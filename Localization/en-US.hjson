@@ -2,9 +2,9 @@ Mods: {
 	PetsOverhaul: {
 		Notice:
 			'''
-			[c/90C2AA:Pets Overhaul 2.2.6 latest changes: New Max 40 Junimo Levels]
-			[c/90C2AA:New Junimo Fishing Perk: Gives you bonus loot upon completing]
-			[c/90C2AA:an Angler Quest, Fishing Enemy Kill Exp improvements & more]
+			[c/90C2AA:Pets Overhaul 2.2.7 latest changes: Portuguese Translation (By Starite_Fusion)]
+			[c/90C2AA:New Junimo Fishing Perk: Gives you bonus loot upon completing an Angler Quest]
+			[c/90C2AA:Fishing Enemy Kill Exp improvements, Parrot Pet Rework & More!]
 			If you happen to come across any bugs, our would like to be up to
 			date with our constantly updating Mod and growing community,
 			we encourage you to join our community and our Discord server!
@@ -392,9 +392,8 @@ Mods: {
 				Grants hunter effect permanently, a <critter>% chance
 				to double the caught critter, decreased to <rareCritter>%
 				for rare critters. Grants <rareCritterCoin> times the rarity
-				value of caught critter silver coins, <rareEnemyCoin> times
-				the rarity value of a killed enemy silver coins
-				Coins are benefited by Harvesting Fortune stat.
+				value of caught critter as coins, <rareEnemyCoin> times
+				the rarity value of a killed enemy as coins.
 				'''
 			Seedling:
 				'''
