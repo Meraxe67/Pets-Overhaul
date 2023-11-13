@@ -13,7 +13,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
     public class Squashling : ModPlayer
     {
         private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
-        public int squashlingCommonChance = 80;
+        public int squashlingCommonChance = 50;
         public int squashlingRareChance = 10;
         public override bool OnPickup(Item item)
         {
