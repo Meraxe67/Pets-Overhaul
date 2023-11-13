@@ -353,7 +353,6 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     Main.popupText[classIndex].position = Player.Center;
                     Main.popupText[classIndex].velocity = popupVelo;
                     Main.popupText[classIndex].lifeTime = classExp + 180 > 700 ? 700 : (classExp + 180);
-                    Main.popupText[classIndex].Update(classIndex);
                 }
                 else
                 {
@@ -361,7 +360,6 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 }
 
                 Main.popupText[classIndex].rotation = Main.rand.NextFloat(0.2f);
-                //Main.popupText[classIndex].scale += classExp * 0.01f; //-doesnt seem to work -
             }
             return classIndex;
         }
