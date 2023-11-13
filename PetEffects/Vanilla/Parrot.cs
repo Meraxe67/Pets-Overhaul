@@ -3,6 +3,7 @@ using PetsOverhaul.Systems;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
@@ -20,7 +21,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUseWithSwapCd(1180))
+            if (Pet.PetInUseWithSwapCd(ItemID.ParrotCracker))
             {
                 for (int i = 0; i < ItemPet.Randomizer(meleeChance); i++)
                 {
@@ -78,6 +79,22 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         break;
                 }
                 SoundEngine.PlaySound(in style, Player.position);
+            }
+        }
+    }
+    public sealed class ParrotExtraProjectile : GlobalProjectile
+    {
+        public override bool InstancePerEntity => true;
+
+        public override void OnSpawn(Projectile projectile, IEntitySource source)
+        {
+            if (projectile.damage > 0 && ((!projectile.minion || !projectile.sentry) && source is EntitySource_ItemUse || source is EntitySource_Parent { Entity: Projectile entity } && (entity.minion || entity.sentry)) && Main.player[projectile.owner].TryGetModPlayer(out Parrot parrot) && parrot.Pet.PetInUseWithSwapCd(ItemID.ParrotCracker))
+            {
+                for (int i = 0; i < ItemPet.Randomizer(parrot.projChance); i++)
+                {
+                    Projectile.NewProjectile(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.petProjectile), projectile.position, projectile.velocity * Main.rand.NextFloat(0.9f, 1.1f), projectile.type, (int)(projectile.damage * parrot.projDamage), projectile.knockBack, projectile.owner);
+                    parrot.PlayParrotSound();
+                }
             }
         }
     }

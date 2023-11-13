@@ -27,5 +27,7 @@ Remember to have your pet equipped in pet slot to have their effects.
 Please report any bugs or imbalances with a pet being way too strong or way too effective compared to other ones at that stage of the game, please report it to our discord or comment about it on the steam page! Open to any sorts of feedback, feel free to join our discord from below!
 https://discord.gg/KubSpqvDGE
 Chinese Translation done by: [url=https://steamcommunity.com/id/Celestepic/]Celestepic[/url]
-Icon made by: [url=https://steamcommunity.com/id/IsThatFurqi]Furqi[/url]
-Thanks to [url=https://steamcommunity.com/id/WaffleDevs]WaffleDevs[/url] for contributing to Code!
+Brazilian Portuguese Translation done by: [url=https://steamcommunity.com/profiles/76561198818085801]Starite_Fusion[/url]
+All Icons and Artwork done by: [url=https://steamcommunity.com/id/IsThatFurqi]Furqi[/url]
+Thanks to [url=https://steamcommunity.com/id/WaffleDevs]WaffleDevs[/url] for contributing to the code
+And thanks to tModLoader community for helping with the code!

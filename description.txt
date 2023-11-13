@@ -18,6 +18,7 @@ You can use vanity Pets by equipping a pet in the pet slot, but turn its visibil
 Remember to have your pet equipped in a pet slot to have their effects.
 Please report any bugs or imbalances with a pet being way too strong or way too effective compared to other ones at that stage of the game, please report it to our discord or comment about it on the Steam page! Open to any sort of feedback, feel free to join our discord from below!
 Chinese Translation by: Celestepic
-Icon made by: Furqi
+Brazillian Portuguese Translation by: Starite_Fusion
+Icon and all artwork made by: Furqi
 and thanks to WaffleDevs for contributing to Code
 https://discord.gg/KubSpqvDGE
