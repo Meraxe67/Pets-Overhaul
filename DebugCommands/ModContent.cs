@@ -52,4 +52,13 @@ namespace PetsOverhaul.DebugCommands
             }
         }
     }
+    public class PlayerPlacedBlockListCommand : ModCommand
+    {
+        public override string Command => "LengthOfList";
+        public override CommandType Type => CommandType.Chat;
+        public override void Action(CommandCaller caller, string input, string[] args)
+        {
+            caller.Reply(PlayerPlacedBlockList.placedBlocksByPlayer.Count.ToString());
+        }
+    }
 }
