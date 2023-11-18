@@ -16,6 +16,14 @@ namespace PetsOverhaul.Systems
         }
         public override void AddRecipes()
         {
+             Recipe.Create(ItemID.ShadowOrb)
+                .AddIngredient(ItemID.ShadowScale, 12)
+                .AddTile(TileID.Anvils)
+                .Register();
+             Recipe.Create(ItemID.CrimsonHeart)
+                .AddIngredient(ItemID.TissueSample, 12)
+                .AddTile(TileID.Anvils)
+                .Register();
             MasterPetCraft(ItemID.KingSlimePetItem, ItemID.KingSlimeTrophy);
             MasterPetCraft(ItemID.EyeOfCthulhuPetItem, ItemID.EyeofCthulhuTrophy);
             MasterPetCraft(ItemID.EaterOfWorldsPetItem, ItemID.EaterofWorldsTrophy);
