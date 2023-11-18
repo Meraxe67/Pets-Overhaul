@@ -411,6 +411,7 @@ Mods: {
 				your specialist ranged weapons will critically hit enemies below
 				<treshold>% health all of the time, decreased down to <bossTreshold>% for bosses
 				'''
+			JunimoMaxLevelText: Max Level!
 			JunimoPetItem:
 				'''
 				[c/CDFF00:Harvesting], [c/96A8B0:Mining] and [c/0382E9:Fishing Pet]

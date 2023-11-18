@@ -368,6 +368,7 @@ Mods: {
 				suas armas especializadas vão causar dano crítico em inimigos abaixo de
 				<treshold>% de vida todas as vezes, diminui para <bossTreshold>% para chefes
 				'''
+			// JunimoMaxLevelText: Max Level!
 			JunimoPetItem:
 				'''
 				[c/CDFF00:Pet de Coleta], [c/96A8B0:Mineração] e [c/0382E9:Pesca]

@@ -407,6 +407,7 @@ Mods: {
 				不使用弓箭和子弹为弹药的远程武器必定对
 				生命值低于<treshold>%的敌人暴击,Boss则是低于<bossTreshold>%.
 				'''
+			// JunimoMaxLevelText: Max Level!
 			JunimoPetItem:
 				'''
 				[c/CDFF00:采集],[c/96A8B0:挖掘]与[c/0382E9:钓鱼型宠物]
