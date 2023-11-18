@@ -76,6 +76,41 @@ namespace PetsOverhaul.Systems
         /// Increase this value to reduce ability cooldowns. Eg. 0.1f increases how fast ability will return by 10%. Negative values will increase the cooldowns. Negative is capped at -0.9f. Do not use this to directly reduce a cooldown, use the timer field instead. Ability Haste reduces timerMax with a more balanced calculation.
         /// </summary>
         public float abilityHaste = 0;
+
+        /// <summary>
+        /// Used to change alternating color of maximum Light Pet Rolls alongside colorSwitched, increases 0.01f every frame, until hitting 1f, where it decreases 0.01f every frame and so on.
+        /// </summary>
+        static float colorVal = 0;
+        /// <summary>
+        /// Used to change alternating color of maximum Light Pet Rolls alongside colorVal
+        /// </summary>
+        static bool colorSwitched = false;
+        static readonly Color lowQuality = new(130, 130, 130);
+        static readonly Color midQuality = new(77, 117, 154);
+        static readonly Color highQuality = new(252, 194, 0);
+        /// <summary>
+        /// Alternates between (165, 249, 255) and (255, 207, 249) every frame.
+        /// </summary>
+        static Color maxQuality = new(165, 249, 255);
+        /// <summary>
+        /// Converts given text to be corresponding color of Light Pet quality values
+        /// </summary>
+        /// <param name="text">Text to be converted</param>
+        /// <param name="currentRoll">Current roll of the stat</param>
+        /// <param name="maxRoll">Maximum roll of the stat</param>
+        /// <returns>Text with its color changed depending on quality amount</returns>
+        public static string LightPetRarityColorConvert(string text, int currentRoll, int maxRoll)
+        {
+            if (currentRoll == maxRoll)
+                return $"[c/{maxQuality.Hex3()}:{text}]";
+            else if (currentRoll > maxRoll * 0.66f)
+                return $"[c/{highQuality.Hex3()}:{text}]";
+            else if (currentRoll > maxRoll * 0.33f)
+                return $"[c/{midQuality.Hex3()}:{text}]";
+            else
+                return $"[c/{lowQuality.Hex3()}:{text}]";
+        }
+
         public static IEntitySource GetSource_Pet(EntitySource_Pet.TypeId typeId, string context = null)
         {
             return new EntitySource_Pet
@@ -398,6 +433,13 @@ namespace PetsOverhaul.Systems
                 ItemPet.updateReplacedTile.Clear();
             }
 
+            if (colorVal >= 1f)
+                colorSwitched = true;
+            else if (colorVal <= 0f)
+                colorSwitched = false;
+            colorVal += colorSwitched ? -0.01f : 0.01f;
+            maxQuality = Color.Lerp(new Color(165, 249, 255), new Color(255, 207, 249), colorVal);
+
             fishingFortune = 0;
             harvestingFortune = 0;
             miningFortune = 0;
@@ -703,7 +745,6 @@ namespace PetsOverhaul.Systems
                 sources2.Retrieve(ref globalDrop, ref harvestingDrop, ref miningDrop, ref fishingDrop, ref fortuneHarvestingDrop, ref fortuneMiningDrop, ref fortuneFishingDrop);
             }
         }
-
     }
     /// <summary>
     /// GlobalNPC class that contains useful booleans and methods such as Slow() and seaCreature
@@ -718,7 +759,7 @@ namespace PetsOverhaul.Systems
         /// <summary>
         /// If you need to find out how much current cumulative slow amount is, use this.
         /// </summary>
-        public float slowAmount { get; internal set; }
+        public float SlowAmount { get; internal set; }
         public bool seaCreature;
         public int playerThatFishedUp;
         public int maulCounter;
@@ -748,7 +789,10 @@ namespace PetsOverhaul.Systems
             if (npc.type == NPCID.Golem && MasteryShardCheck.masteryShardObtained3 == false)
             {
                 npcLoot.Add(ItemDropRule.ByCondition(new FirstKillGolem(), ModContent.ItemType<MasteryShard>()));
-
+            }
+            if (npc.type == NPCID.MoonLordCore && Main.expertMode == false && Main.masterMode == false)
+            {
+                npcLoot.Add(ItemDropRule.Common(ItemID.SuspiciousLookingTentacle));
             }
         }
         public override void OnKill(NPC npc)
@@ -807,10 +851,10 @@ namespace PetsOverhaul.Systems
         {
             if (npc.active && (npc.townNPC == false || npc.isLikeATownNPC == false || npc.friendly == false) && (npc.boss == false || nonBossTrueBosses[npc.type] == false))
             {
-                slowAmount = 0;
+                SlowAmount = 0;
                 if (SlowList.Count > 0)
                 {
-                    SlowList.ForEach(x => slowAmount += x.slowAmount);
+                    SlowList.ForEach(x => SlowAmount += x.slowAmount);
                     for (int i = 0; i < SlowList.Count; i++) //List'lerde struct'lar bir nevi readonly olarak çalıştığından, değeri alıp tekrar atıyoruz
                     {
                         (SlowId, float slowAmount, int slowTime) slow = SlowList[i];
@@ -823,9 +867,9 @@ namespace PetsOverhaul.Systems
                         SlowList.RemoveAt(indexToRemove);
                     }
                 }
-                if (slowAmount != 0)
+                if (SlowAmount != 0)
                 {
-                    Slow(npc, slowAmount);
+                    Slow(npc, SlowAmount);
                 }
             }
         }
@@ -908,7 +952,6 @@ namespace PetsOverhaul.Systems
                     Dust dust = Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.Blood, Main.rand.NextFloat(0f, 1f), Main.rand.NextFloat(0f, 3f), 75, default, Main.rand.NextFloat(0.5f, 0.8f));
                     dust.velocity *= 0.8f;
                 }
-
             }
             if (npc.HasBuff(ModContent.BuffType<QueensDamnation>()))
             {
