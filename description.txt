@@ -1,9 +1,10 @@
-2.2 Release! Make sure to check any Changelog to see changes! Adjust your Config to better match your personal preferences!
-Explore new 65+ unique effects from pets and 10+ Town Pet Aura Effects to enrich your playthrough where the unique effects 'make sense' with who the pet is, further enhancing the pet's personality! Pets cover every aspect of the game and every situation there is! Fishing, Mining, Combat, Mobility, Survivability, Harvesting and more!
+2.3 Release, new Quality System with Light Pets! Make sure to check any Changelog to see changes! Adjust your Config to better match your personal preferences!
+Explore new 65+ unique effects from pets, 9 Light Pet Effects and 10+ Town Pet Aura Effects to enrich your playthrough where the unique effects 'make sense' with who the pet is, further enhancing the pet's personality! Pets cover every aspect of the game and every situation there is! Fishing, Mining, Combat, Mobility, Survivability, Harvesting and more!
 
 The mod aims to make all pets have a purpose other than being entirely vanity, feel more 'rewarding' to obtain, have more personality with their effects, be worth grinding for, and be interesting to explore.
 
 New mechanics:
+Stat Quality: Your Light Pets will roll for its stats to be higher or lower!
 Ability Haste: Helping you be able to use your pet's ability faster and more frequently! Usually granted by Supportive Pets to other players.
 Shield: Reduces the damage you receive by a flat amount. Stacks.
 Town Pets grant you beneficial Auras in a 125/137.5/150 block range! Their effects and range scale up upon entering Hardmode and upon killing Moon Lord!
