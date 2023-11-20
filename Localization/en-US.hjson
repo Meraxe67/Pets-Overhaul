@@ -462,7 +462,10 @@ Mods: {
 			ParrotCracker:
 				'''
 				[c/f6546a:Offensive Pet]
-				All of your attacks have a <chance>% chance of hitting a second time
+				All projectiles by you or your Minions/Sentries have a <projChance>% chance
+				to be re-shot by your Parrot with <projDamage>x of the damage. 
+				All Melee and close combat Minion/Sentry hits have a <meleeChance>% chance
+				to hit again with <meleeDamage>x of the damage.
 				'''
 			PigPetItem:
 				'''

@@ -933,7 +933,7 @@ namespace PetsOverhaul.Systems
         /// </summary>
         public void AddSlow(SlowId slowType, float slowValue, int slowTimer, NPC npc)
         {
-            if (npc.active && (npc.townNPC == false || npc.isLikeATownNPC == false || npc.friendly == false) && (npc.boss == false || nonBossTrueBosses[npc.type] == false))
+            if (npc.active && (npc.townNPC == false || npc.isLikeATownNPC == false || npc.friendly == false) && npc.boss == false && nonBossTrueBosses[npc.type] == false)
             {
                 int indexToReplace;
                 if (SlowList.Exists(x => x.Item1 == slowType && x.slowAmount < slowValue))
