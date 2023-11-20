@@ -12,6 +12,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class Pigman : ModPlayer
     {
+        GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public int foodChance = 15;
         public int potionChance = 10;
         public int shieldCooldown = 420;
@@ -19,6 +20,14 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int tier2Shield = 15;
         public int tier3Shield = 20;
         public int shieldTime = 1800;
+
+        public override void PreUpdate()
+        {
+            if (Pet.PetInUse(ItemID.PigPetItem))
+            {
+                Pet.timerMax = shieldCooldown;
+            }
+        }
     }
     public sealed class PigmanEat : GlobalItem
     {
@@ -29,7 +38,6 @@ namespace PetsOverhaul.PetEffects.Vanilla
             Pigman pig = player.GetModPlayer<Pigman>();
             if (Pet.PetInUse(ItemID.PigPetItem))
             {
-                Pet.timerMax = pig.shieldCooldown;
                 if (BuffID.Sets.IsWellFed[item.buffType])
                 {
                     if (Pet.timer <= 0 && Pet.PetInUseWithSwapCd(ItemID.PigPetItem))

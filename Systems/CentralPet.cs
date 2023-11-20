@@ -418,7 +418,7 @@ namespace PetsOverhaul.Systems
         }
         public override bool ConsumableDodge(Player.HurtInfo info)
         {
-            if (info.Damage <= currentShield && currentShield > 0)
+            if (currentShield > 0 && info.Damage <= currentShield - shieldToBeReduced)
             {
                 info.SoundDisabled = true;
                 ShieldFullBlockEffect(info.Damage);
@@ -473,9 +473,11 @@ namespace PetsOverhaul.Systems
             timerMax = (int)(timerMax * (1 / (1 + abilityHaste)));
             petSwapCooldown = 600;
             abilityHaste = 0;
+
         }
         public override void PostUpdate()
         {
+
             if (petShield.Count > 0)
             {
                 while (shieldToBeReduced > 0 && petShield.Count > 0)
@@ -494,17 +496,21 @@ namespace PetsOverhaul.Systems
                         petShield[index] = value;
                     }
                 }
+
                 shieldToBeReduced = 0;
                 currentShield = 0;
+
+                petShield.RemoveAll(x => x.shieldTimer < 1 || x.shieldAmount <= 0);
                 petShield.ForEach(x => currentShield += x.shieldAmount);
+
                 for (int i = 0; i < petShield.Count; i++)
                 {
                     (int shieldAmount, int shieldTimer) shieldValue = petShield[i];
                     shieldValue.shieldTimer--;
                     petShield[i] = shieldValue;
                 }
-                petShield.RemoveAll(x => x.shieldTimer <= 0 || x.shieldAmount <= 0);
             }
+
             if (pool.Count > 0)
             {
                 pool.Clear();
@@ -849,7 +855,7 @@ namespace PetsOverhaul.Systems
         }
         public override void PostAI(NPC npc)
         {
-            if (npc.active && (npc.townNPC == false || npc.isLikeATownNPC == false || npc.friendly == false) && (npc.boss == false || nonBossTrueBosses[npc.type] == false))
+            if (npc.active)
             {
                 SlowAmount = 0;
                 if (SlowList.Count > 0)
@@ -923,24 +929,27 @@ namespace PetsOverhaul.Systems
             }
         }
         /// <summary>
-        /// Use this to add Slow to the NPC.
+        /// Use this to add Slow to the NPC. Also checks if the NPC is a boss or a friendly npc or not.
         /// </summary>
-        public void AddSlow(SlowId slowType, float slowValue, int slowTimer)
+        public void AddSlow(SlowId slowType, float slowValue, int slowTimer, NPC npc)
         {
-            int indexToReplace;
-            if (SlowList.Exists(x => x.Item1 == slowType && x.slowAmount < slowValue))
+            if (npc.active && (npc.townNPC == false || npc.isLikeATownNPC == false || npc.friendly == false) && (npc.boss == false || nonBossTrueBosses[npc.type] == false))
             {
-                indexToReplace = SlowList.FindIndex(x => x.Item1 == slowType && x.slowAmount < slowValue);
-                SlowList[indexToReplace] = (slowType, slowValue, slowTimer);
-            }
-            else if (SlowList.Exists(x => x.Item1 == slowType && x.slowAmount == slowValue && x.slowTime < slowTimer))
-            {
-                indexToReplace = SlowList.FindIndex(x => x.Item1 == slowType && x.slowAmount == slowValue && x.slowTime < slowTimer);
-                SlowList[indexToReplace] = (slowType, slowValue, slowTimer);
-            }
-            else if (SlowList.Exists(x => x.Item1 == slowType) == false)
-            {
-                SlowList.Add((slowType, slowValue, slowTimer));
+                int indexToReplace;
+                if (SlowList.Exists(x => x.Item1 == slowType && x.slowAmount < slowValue))
+                {
+                    indexToReplace = SlowList.FindIndex(x => x.Item1 == slowType && x.slowAmount < slowValue);
+                    SlowList[indexToReplace] = (slowType, slowValue, slowTimer);
+                }
+                else if (SlowList.Exists(x => x.Item1 == slowType && x.slowAmount == slowValue && x.slowTime < slowTimer))
+                {
+                    indexToReplace = SlowList.FindIndex(x => x.Item1 == slowType && x.slowAmount == slowValue && x.slowTime < slowTimer);
+                    SlowList[indexToReplace] = (slowType, slowValue, slowTimer);
+                }
+                else if (SlowList.Exists(x => x.Item1 == slowType) == false)
+                {
+                    SlowList.Add((slowType, slowValue, slowTimer));
+                }
             }
         }
         public override void DrawEffects(NPC npc, ref Color drawColor)

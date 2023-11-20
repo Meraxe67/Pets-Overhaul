@@ -43,12 +43,6 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         SoundEngine.PlaySound(SoundID.Zombie21 with { Pitch = -0.7f, PitchVariance = 0.3f, Volume = 0.75f }, Player.position);
                     }
                 }
-                if (timer <= 0)
-                {
-                    Pet.petShield.Add(((int)(Player.statLifeMax2 * stage2ShieldMult), 1));
-                    Player.lifeRegen += stage2regen;
-                    Player.crimsonRegen = true;
-                }
                 if (timer == (int)(stage1time * (1 / (1 + Pet.abilityHaste))))
                 {
                     if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
@@ -56,7 +50,13 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         SoundEngine.PlaySound(new SoundStyle(SoundID.DD2_DrakinShot.SoundPath + "0") with { Pitch = -0.7f, PitchVariance = 0.3f, Volume = 0.75f }, Player.position);
                     }
                 }
-                if (timer <= (int)(stage1time * (1 / (1 + Pet.abilityHaste))))
+                if (timer <= 0)
+                {
+                    Pet.petShield.Add(((int)(Player.statLifeMax2 * stage2ShieldMult), 1));
+                    Player.lifeRegen += stage2regen;
+                    Player.crimsonRegen = true;
+                }
+                else if (timer <= (int)(stage1time * (1 / (1 + Pet.abilityHaste))))
                 {
                     Player.lifeRegen += stage1regen;
                     Player.crimsonRegen = true;
@@ -65,7 +65,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUse(ItemID.BoneRattle))
+            if (Pet.PetInUse(ItemID.BoneRattle) && timer < (int)(stage1time * (1 / (1 + Pet.abilityHaste))))
             {
                 timer = (int)(stage1time * (1 / (1 + Pet.abilityHaste))) - 1;
             }
@@ -74,6 +74,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             if (Pet.PetInUse(ItemID.BoneRattle))
             {
+                
                 timer = (int)(stage2time * (1 / (1 + Pet.abilityHaste)));
             }
         }

@@ -12,6 +12,7 @@
     <None Remove="Items\egg.png" />
     <None Remove="Items\MasteryShard.png" />
     <None Remove="Localization\mastery_shard_sprite_sheet.png" />
+    <None Remove="Localization\pt-BR.hjson" />
     <None Remove="NPCS\ExamplePerson.png" />
     <None Remove="NPCS\ExamplePerson_Head.png" />
     <None Remove="NPCS\ExamplePerson_Party.png" />

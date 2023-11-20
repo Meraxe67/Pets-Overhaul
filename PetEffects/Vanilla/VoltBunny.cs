@@ -34,7 +34,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             if (target.GetModPlayer<GlobalPet>().PetInUseWithSwapCd(ItemID.LightningCarrot) && npc.TryGetGlobalNPC(out NpcPet npcPet))
             {
-                npcPet.AddSlow(NpcPet.SlowId.PikachuStatic, target.GetModPlayer<VoltBunny>().staticParalysis, target.GetModPlayer<VoltBunny>().staticLength);
+                npcPet.AddSlow(NpcPet.SlowId.PikachuStatic, target.GetModPlayer<VoltBunny>().staticParalysis, target.GetModPlayer<VoltBunny>().staticLength,npc);
             }
         }
     }
