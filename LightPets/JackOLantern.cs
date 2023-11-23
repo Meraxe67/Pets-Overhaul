@@ -93,15 +93,15 @@ namespace PetsOverhaul.LightPets
                         .Replace("<luckBase>", baseLuck.ToString())
                         .Replace("<luckPer>", luckPerRoll.ToString())
 
-                        .Replace("<currentAtkSpd>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentAtkSpd * 100, 2).ToString(), atkSpdRoll, atkSpdMaxRoll))
+                        .Replace("<currentAtkSpd>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentAtkSpd * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), atkSpdRoll, atkSpdMaxRoll))
                         .Replace("<atkSpdRoll>", GlobalPet.LightPetRarityColorConvert(atkSpdRoll.ToString(), atkSpdRoll, atkSpdMaxRoll))
                         .Replace("<atkSpdMaxRoll>", GlobalPet.LightPetRarityColorConvert(atkSpdMaxRoll.ToString(), atkSpdRoll, atkSpdMaxRoll))
 
-                        .Replace("<currentExp>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentHarvExp * 100, 2).ToString(), harvExpRoll, harvExpMaxRoll))
+                        .Replace("<currentExp>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentHarvExp * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), harvExpRoll, harvExpMaxRoll))
                         .Replace("<expRoll>", GlobalPet.LightPetRarityColorConvert(harvExpRoll.ToString(), harvExpRoll, harvExpMaxRoll))
                         .Replace("<expMaxRoll>", GlobalPet.LightPetRarityColorConvert(harvExpMaxRoll.ToString(), harvExpRoll, harvExpMaxRoll))
 
-                        .Replace("<currentLuck>", GlobalPet.LightPetRarityColorConvert(CurrentLuck.ToString(), luckRoll, luckMaxRoll))
+                        .Replace("<currentLuck>", GlobalPet.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + CurrentLuck.ToString(), luckRoll, luckMaxRoll))
                         .Replace("<luckRoll>", GlobalPet.LightPetRarityColorConvert(luckRoll.ToString(), luckRoll, luckMaxRoll))
                         .Replace("<luckMaxRoll>", GlobalPet.LightPetRarityColorConvert(luckMaxRoll.ToString(), luckRoll, luckMaxRoll))
                         ));

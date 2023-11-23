@@ -1,5 +1,10 @@
 Mods: {
 	PetsOverhaul: {
+		// Operators are for cases where a Language does not use them when specifying a bonus but solely use words.
+		%: %
+		x: x
+		+: +
+		-: -
 		Notice:
 			'''
 			[c/90C2AA:Pets Overhaul 2.3 latest changes: Light Pets Update, with Stat Quality Mechanic!]
@@ -98,18 +103,18 @@ Mods: {
 				Grants <manaBase> + <manaPer> Mana Per Quality, <expBase> + <expPer>% Harvesting Exp per quality,
 				increasing your Junimo Pet's harvesting exp gains, and 
 				<fortBase> + <fortPer> Harvesting Fortune per quality, increasing your Harvesting Pet's drops
-				Mana Bonus: <currentMana>, Quality <manaRoll> out of <manaMaxRoll>
-				Harvesting Exp Bonus: <currentExp>, Quality <expRoll> out of <expMaxRoll>
-				Harvesting Fortune Bonus: <currentFort>, Quality <fortRoll> out of <fortMaxRoll>
+				Mana Bonus: <currentMana> Quality <manaRoll> out of <manaMaxRoll>
+				Harvesting Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
+				Harvesting Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
 				'''
 			CrimsonHeart:
 				'''
 				Grants <hpBase> + <hpPer> Health Per Quality, <expBase> + <expPer>% Fishing Exp per quality,
 				increasing your Junimo Pet's fishing exp gains, and 
 				<fortBase> + <fortPer> Fishing Fortune per quality, increasing your Fishing Pet's drops
-				Health Bonus: <currentHp>, Quality <hpRoll> out of <hpMaxRoll>
-				Fishing Exp Bonus: <currentExp>, Quality <expRoll> out of <expMaxRoll>
-				Fishing Fortune Bonus: <currentFort>, Quality <fortRoll> out of <fortMaxRoll>
+				Health Bonus: <currentHp> Quality <hpRoll> out of <hpMaxRoll>
+				Fishing Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
+				Fishing Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
 				'''
 			MagicLantern:
 				'''
@@ -117,9 +122,9 @@ Mods: {
 				<expBase> + <expPer>% Mining Exp per quality, increasing your Junimo Pet's mining exp gains
 				and <fortBase> + <fortPer> Mining Fortune per quality, increasing your Mining Pet's drops
 				Defense Bonus: <currentDef>, Quality <defRoll> out of <defMaxRoll>
-				Percentage Defense Bonus: <currentDefMult>, Quality <defMultRoll> out of <defMultMaxRoll>
-				Mining Exp Bonus: <currentExp>, Quality <expRoll> out of <expMaxRoll>
-				Mining Fortune Bonus: <currentFort>, Quality <fortRoll> out of <fortMaxRoll>
+				Percentage Defense Bonus: <currentDefMult> Quality <defMultRoll> out of <defMultMaxRoll>
+				Mining Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
+				Mining Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
 				'''
 			FairyBell:
 				'''
@@ -127,65 +132,65 @@ Mods: {
 				how frequent you can use your current Pet's ability and increases 
 				<fortBase> + <fortPer> Global Fortune per quality, increasing all of your Pets bonus item drops,
 				which works with 50% effectiveness with already classified Pets.
-				Ability Haste Bonus: <currentHaste>, Quality <hasteRoll> out of <hasteMaxRoll>
-				Global Fortune Bonus: <currentFort>, Quality <fortRoll> out of <fortMaxRoll>
+				Ability Haste Bonus: <currentHaste> Quality <hasteRoll> out of <hasteMaxRoll>
+				Global Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
 				'''
 			CreeperEgg:
 				'''
 				Grants <sumBase> + <sumPer>% per quality Summon damage, <meleeBase> + <meleePer>% per quality Melee damage
 				and <atkSpdBase> + <atkSpdPer>% per quality Melee attack speed, affecting whips.
-				Summon Damage Bonus: <currentSum>, Quality <sumRoll> out of <sumMaxRoll>
-				Melee Damage Bonus: <currentMelee>, Quality <meleeRoll> out of <meleeMaxRoll>
-				Melee/Whip Speed Bonus: <currentAtkSpd>, Quality <atkSpdRoll> out of <atkSpdMaxRoll>
+				Summon Damage Bonus: <currentSum> Quality <sumRoll> out of <sumMaxRoll>
+				Melee Damage Bonus: <currentMelee> Quality <meleeRoll> out of <meleeMaxRoll>
+				Melee/Whip Speed Bonus: <currentAtkSpd> Quality <atkSpdRoll> out of <atkSpdMaxRoll>
 				'''
 			WispInABottle:
 				'''
 				Grants <magicBase> + <magicPer>% per quality Magic damage, <rangedBase> + <rangedPer>% per quality Ranged damage.
 				Increases traveling speed of Magic and Ranged projectiles by <projSpdBase> + <projSpdPer>% per quality.
 				Increases damage of Projectiles that is from your active pet by <petProjBase> + <petProjPer>% per quality.
-				Magic Damage Bonus: <currentMagic>, Quality <magicRoll> out of <magicMaxRoll>
-				Ranged Damage Bonus: <currentRanged>, Quality <rangedRoll> out of <rangedMaxRoll>
-				Magic/Ranged Projectile Speed Bonus: <currentProjSpd>, Quality <projSpdRoll> out of <projSpdMaxRoll>
-				Pet Projectile Damage Bonus: <currentPetProj>, Quality <petProjRoll> out of <petProjMaxRoll>
+				Magic Damage Bonus: <currentMagic> Quality <magicRoll> out of <magicMaxRoll>
+				Ranged Damage Bonus: <currentRanged> Quality <rangedRoll> out of <rangedMaxRoll>
+				Magic/Ranged Projectile Speed Bonus: <currentProjSpd> Quality <projSpdRoll> out of <projSpdMaxRoll>
+				Pet Projectile Damage Bonus: <currentPetProj> Quality <petProjRoll> out of <petProjMaxRoll>
 				'''
 			JackOLantern:
 				'''
 				Grants <atkSpdBase> + <atkSpdPer>% Attack Speed Per Quality, <expBase> + <expPer>% Harvesting Exp boost per quality
 				increasing your Junimo Pet's harvesting exp gains, and <luckBase> + <luckPer> Luck per quality.
-				Attack Speed Bonus: <currentAtkSpd>, Quality <atkSpdRoll> out of <atkSpdMaxRoll>
-				Luck Bonus: <currentLuck>, Quality <luckRoll> out of <luckMaxRoll>
-				Harvesting Exp Bonus: <currentExp>, Quality <expRoll> out of <expMaxRoll>
+				Attack Speed Bonus: <currentAtkSpd> Quality <atkSpdRoll> out of <atkSpdMaxRoll>
+				Luck Bonus: <currentLuck> Quality <luckRoll> out of <luckMaxRoll>
+				Harvesting Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				'''
 			ToyGolem:
 				'''
 				Grants <regenPer> Life Regen Per Quality, <healthBase> + <healthPer>% bonus maximum health per quality,
 				and <expBase> + <expPer>% Mining Exp boost per quality increasing your Junimo Pet's mining exp gain
-				Life Regen Bonus: <currentRegen>, Quality <regenRoll> out of <regenMaxRoll>
-				Health Percentage Bonus: <currentHealth>, Quality <healthRoll> out of <healthMaxRoll>
-				Mining Exp Bonus: <currentExp>, Quality <expRoll> out of <expMaxRoll>
+				Life Regen Bonus: <currentRegen> Quality <regenRoll> out of <regenMaxRoll>
+				Health Percentage Bonus: <currentHealth> Quality <healthRoll> out of <healthMaxRoll>
+				Mining Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				'''
 			JewelOfLight:
 				'''
 				Grants <moveSpdBase> + <moveSpdPer>% Movement Speed Per Quality, <wingBase> + <wingPer> seconds wing time per quality,
 				and <expBase> + <expPer>% Fishing Exp boost per quality increasing your Junimo Pet's fishing exp gain
-				Movement Speed Bonus: <currentMoveSpd>, Quality <moveSpdRoll> out of <moveSpdMaxRoll>
-				Wing Time Bonus: <currentWing>, Quality <wingRoll> out of <wingMaxRoll>
-				Fishing Exp Bonus: <currentExp>, Quality <expRoll> out of <expMaxRoll>
+				Movement Speed Bonus: <currentMoveSpd> Quality <moveSpdRoll> out of <moveSpdMaxRoll>
+				Wing Time Bonus: <currentWing> Quality <wingRoll> out of <wingMaxRoll>
+				Fishing Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				'''
 			SuspiciousLookingTentacle:
 				'''
-				Increases Defense by <defPer> per quality. Current: <currentDef>, Quality <defRoll> out of <defMax>
-				Movement Speed by <msPer>% per quality. Current: <currentMs>, Quality <msRoll> out of <msMax>
-				All Damage by <dmgPer>% per quality. Current: <currentDmg>, Quality <dmgRoll> out of <dmgMax>
-				Crit Chance by <critPer>% per quality. Current: <currentCrit>, Quality <critRoll> out of <critMax>
-				Ranged % Armor Pen by <penPer>% per quality. Current: <currentPen>, Quality <penRoll> out of <penMax>
-				Ranged Crit Damage by <crDmgPer>% per quality. Current: <currentCrDmg>, Quality <crDmgRoll> out of <crDmgMax>
-				Max Minion Slots by +<minPer> per quality. Current: <currentMin>, Quality <minRoll> out of <minMax>
-				Whip Range by <whipPer>% per quality. Current: <currentWhip>, Quality <whipRoll> out of <whipMax>
-				Mana Potion Effectiveness by <potPer>% per quality. Current: <currentPot>, Quality <potRoll> out of <potMax>
-				Maximum Mana by +<manaPer> per quality. Current: <currentMana>, Quality <manaRoll> out of <manaMax>
-				Melee Size by <sizePer>% per quality. Current: <currentSize>, Quality <sizeRoll> out of <sizeMax>
-				<healPer>% lifesteal per quality with <healAmount> (10% of your defense) on Melee Hits. Current: <currentHeal>, Quality <healRoll> out of <healMax>
+				Increases Defense by <defPer> per quality. Current: <currentDef> Quality <defRoll> out of <defMax>
+				Movement Speed by <msPer>% per quality. Current: <currentMs> Quality <msRoll> out of <msMax>
+				All Damage by <dmgPer>% per quality. Current: <currentDmg> Quality <dmgRoll> out of <dmgMax>
+				Crit Chance by <critPer>% per quality. Current: <currentCrit> Quality <critRoll> out of <critMax>
+				Ranged % Armor Pen by <penPer>% per quality. Current: <currentPen> Quality <penRoll> out of <penMax>
+				Ranged Crit Damage by <crDmgPer>% per quality. Current: <currentCrDmg> Quality <crDmgRoll> out of <crDmgMax>
+				Max Minion Slots by +<minPer> per quality. Current: <currentMin> Quality <minRoll> out of <minMax>
+				Whip Range by <whipPer>% per quality. Current: <currentWhip> Quality <whipRoll> out of <whipMax>
+				Mana Potion Effectiveness by <potPer>% per quality. Current: <currentPot> Quality <potRoll> out of <potMax>
+				Maximum Mana by +<manaPer> per quality. Current: <currentMana> Quality <manaRoll> out of <manaMax>
+				Melee Size by <sizePer>% per quality. Current: <currentSize> Quality <sizeRoll> out of <sizeMax>
+				<healPer>% lifesteal per quality with <healAmount> (10% of your defense) on Melee Hits. Current: <currentHeal> Quality <healRoll> out of <healMax>
 				'''
 		}
 

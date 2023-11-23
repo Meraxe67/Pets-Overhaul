@@ -86,15 +86,15 @@ namespace PetsOverhaul.LightPets
                         .Replace("<fortBase>", baseHarvFort.ToString())
                         .Replace("<fortPer>", harvFortPerRoll.ToString())
 
-                        .Replace("<currentMana>", GlobalPet.LightPetRarityColorConvert(CurrentMana.ToString(), manaRoll, manaMaxRoll))
+                        .Replace("<currentMana>", GlobalPet.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + CurrentMana.ToString(), manaRoll, manaMaxRoll))
                         .Replace("<manaRoll>", GlobalPet.LightPetRarityColorConvert(manaRoll.ToString(), manaRoll, manaMaxRoll))
                         .Replace("<manaMaxRoll>", GlobalPet.LightPetRarityColorConvert(manaMaxRoll.ToString(), manaRoll, manaMaxRoll))
 
-                        .Replace("<currentExp>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentHarvExp * 100, 2).ToString(), harvExpRoll, harvExpMaxRoll))
+                        .Replace("<currentExp>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentHarvExp * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), harvExpRoll, harvExpMaxRoll))
                         .Replace("<expRoll>", GlobalPet.LightPetRarityColorConvert(harvExpRoll.ToString(), harvExpRoll, harvExpMaxRoll))
                         .Replace("<expMaxRoll>", GlobalPet.LightPetRarityColorConvert(harvExpMaxRoll.ToString(), harvExpRoll, harvExpMaxRoll))
 
-                        .Replace("<currentFort>", GlobalPet.LightPetRarityColorConvert(CurrentHarvFort.ToString(), harvFortRoll, harvFortMaxRoll))
+                        .Replace("<currentFort>", GlobalPet.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + CurrentHarvFort.ToString(), harvFortRoll, harvFortMaxRoll))
                         .Replace("<fortRoll>", GlobalPet.LightPetRarityColorConvert(harvFortRoll.ToString(), harvFortRoll, harvFortMaxRoll))
                         .Replace("<fortMaxRoll>", GlobalPet.LightPetRarityColorConvert(harvFortMaxRoll.ToString(), harvFortRoll, harvFortMaxRoll))
                         ));

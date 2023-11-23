@@ -86,15 +86,15 @@ namespace PetsOverhaul.LightPets
                         .Replace("<atkSpdBase>", Math.Round(baseAtkSpd * 100, 2).ToString())
                         .Replace("<atkSpdPer>", Math.Round(atkSpdPerRoll * 100, 2).ToString())
 
-                        .Replace("<currentSum>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentSummonerDmg*100,2).ToString(), sumRoll, sumMaxRoll))
+                        .Replace("<currentSum>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentSummonerDmg * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), sumRoll, sumMaxRoll))
                         .Replace("<sumRoll>", GlobalPet.LightPetRarityColorConvert(sumRoll.ToString(), sumRoll, sumMaxRoll))
                         .Replace("<sumMaxRoll>", GlobalPet.LightPetRarityColorConvert(sumMaxRoll.ToString(), sumRoll, sumMaxRoll))
 
-                        .Replace("<currentMelee>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentMeleeDmg * 100, 2).ToString(), meleeRoll, meleeMaxRoll))
+                        .Replace("<currentMelee>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentMeleeDmg * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), meleeRoll, meleeMaxRoll))
                         .Replace("<meleeRoll>", GlobalPet.LightPetRarityColorConvert(meleeRoll.ToString(), meleeRoll, meleeMaxRoll))
                         .Replace("<meleeMaxRoll>", GlobalPet.LightPetRarityColorConvert(meleeMaxRoll.ToString(), meleeRoll, meleeMaxRoll))
 
-                        .Replace("<currentAtkSpd>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentAtkSpd*100,2).ToString(), atkSpdRoll, atkSpdMaxRoll))
+                        .Replace("<currentAtkSpd>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentAtkSpd * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), atkSpdRoll, atkSpdMaxRoll))
                         .Replace("<atkSpdRoll>", GlobalPet.LightPetRarityColorConvert(atkSpdRoll.ToString(), atkSpdRoll, atkSpdMaxRoll))
                         .Replace("<atkSpdMaxRoll>", GlobalPet.LightPetRarityColorConvert(atkSpdMaxRoll.ToString(), atkSpdRoll, atkSpdMaxRoll))
                         ));

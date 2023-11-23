@@ -84,15 +84,15 @@ namespace PetsOverhaul.LightPets
                         .Replace("<expBase>", Math.Round(baseMiningExp * 100, 2).ToString())
                         .Replace("<expPer>", Math.Round(miningExpPerRoll * 100, 2).ToString())
 
-                        .Replace("<currentRegen>", GlobalPet.LightPetRarityColorConvert(CurrentRegen.ToString(), regenRoll, regenMaxRoll))
+                        .Replace("<currentRegen>", GlobalPet.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + CurrentRegen.ToString(), regenRoll, regenMaxRoll))
                         .Replace("<regenRoll>", GlobalPet.LightPetRarityColorConvert(regenRoll.ToString(), regenRoll, regenMaxRoll))
                         .Replace("<regenMaxRoll>", GlobalPet.LightPetRarityColorConvert(regenMaxRoll.ToString(), regenRoll, regenMaxRoll))
 
-                        .Replace("<currentExp>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentMiningExp * 100, 2).ToString(), miningExpRoll, miningExpMaxRoll))
+                        .Replace("<currentExp>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentMiningExp * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), miningExpRoll, miningExpMaxRoll))
                         .Replace("<expRoll>", GlobalPet.LightPetRarityColorConvert(miningExpRoll.ToString(), miningExpRoll, miningExpMaxRoll))
                         .Replace("<expMaxRoll>", GlobalPet.LightPetRarityColorConvert(miningExpMaxRoll.ToString(), miningExpRoll, miningExpMaxRoll))
 
-                        .Replace("<currentHealth>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentHealth*100,2).ToString(), healthRoll, healthMaxRoll))
+                        .Replace("<currentHealth>", GlobalPet.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + Math.Round(CurrentHealth * 100, 2).ToString(), healthRoll, healthMaxRoll))
                         .Replace("<healthRoll>", GlobalPet.LightPetRarityColorConvert(healthRoll.ToString(), healthRoll, healthMaxRoll))
                         .Replace("<healthMaxRoll>", GlobalPet.LightPetRarityColorConvert(healthMaxRoll.ToString(), healthRoll, healthMaxRoll))
                         ));

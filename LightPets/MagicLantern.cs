@@ -19,7 +19,7 @@ namespace PetsOverhaul.LightPets
             if (Player.miscEquips[1].type == ItemID.MagicLantern && Player.miscEquips[1].TryGetGlobalItem(out MagicLantern magicLantern))
             {
                 Player.statDefense += magicLantern.CurrentDef;
-                Player.statDefense *= magicLantern.CurrentDefMult+1f;
+                Player.statDefense *= magicLantern.CurrentDefMult + 1f;
                 Pet.miningExpBoost += magicLantern.CurrentMiningExp;
                 Pet.miningFortune += magicLantern.CurrentMiningFort;
             }
@@ -98,19 +98,19 @@ namespace PetsOverhaul.LightPets
                         .Replace("<fortBase>", baseMiningFort.ToString())
                         .Replace("<fortPer>", miningFortPerRoll.ToString())
 
-                        .Replace("<currentDef>", GlobalPet.LightPetRarityColorConvert(CurrentDef.ToString(), defRoll, defMaxRoll))
+                        .Replace("<currentDef>", GlobalPet.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + CurrentDef.ToString(), defRoll, defMaxRoll))
                         .Replace("<defRoll>", GlobalPet.LightPetRarityColorConvert(defRoll.ToString(), defRoll, defMaxRoll))
                         .Replace("<defMaxRoll>", GlobalPet.LightPetRarityColorConvert(defMaxRoll.ToString(), defRoll, defMaxRoll))
 
-                        .Replace("<currentDefMult>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentDefMult * 100, 2).ToString(), defMultRoll, defMultMaxRoll))
+                        .Replace("<currentDefMult>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentDefMult * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), defMultRoll, defMultMaxRoll))
                         .Replace("<defMultRoll>", GlobalPet.LightPetRarityColorConvert(defMultRoll.ToString(), defMultRoll, defMultMaxRoll))
                         .Replace("<defMultMaxRoll>", GlobalPet.LightPetRarityColorConvert(defMultMaxRoll.ToString(), defMultRoll, defMultMaxRoll))
 
-                        .Replace("<currentExp>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentMiningExp * 100, 2).ToString(), miningExpRoll, miningExpMaxRoll))
+                        .Replace("<currentExp>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentMiningExp * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), miningExpRoll, miningExpMaxRoll))
                         .Replace("<expRoll>", GlobalPet.LightPetRarityColorConvert(miningExpRoll.ToString(), miningExpRoll, miningExpMaxRoll))
                         .Replace("<expMaxRoll>", GlobalPet.LightPetRarityColorConvert(miningExpMaxRoll.ToString(), miningExpRoll, miningExpMaxRoll))
 
-                        .Replace("<currentFort>", GlobalPet.LightPetRarityColorConvert(CurrentMiningFort.ToString(), miningFortRoll, miningFortMaxRoll))
+                        .Replace("<currentFort>", GlobalPet.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + CurrentMiningFort.ToString(), miningFortRoll, miningFortMaxRoll))
                         .Replace("<fortRoll>", GlobalPet.LightPetRarityColorConvert(miningFortRoll.ToString(), miningFortRoll, miningFortMaxRoll))
                         .Replace("<fortMaxRoll>", GlobalPet.LightPetRarityColorConvert(miningFortMaxRoll.ToString(), miningFortRoll, miningFortMaxRoll))
                         ));

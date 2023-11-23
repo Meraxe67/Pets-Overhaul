@@ -81,21 +81,21 @@ namespace PetsOverhaul.LightPets
                         .Replace("<moveSpdBase>", Math.Round(baseMoveSpd * 100, 2).ToString())
                         .Replace("<moveSpdPer>", Math.Round(moveSpdPerRoll * 100, 2).ToString())
 
-                        .Replace("<wingBase>", Math.Round(baseWing / 60f,2).ToString())
-                        .Replace("<wingPer>", Math.Round(wingPerRoll / 60f,2).ToString())
+                        .Replace("<wingBase>", Math.Round(baseWing / 60f, 2).ToString())
+                        .Replace("<wingPer>", Math.Round(wingPerRoll / 60f, 2).ToString())
 
                         .Replace("<expBase>", Math.Round(baseFishingExp * 100, 2).ToString())
                         .Replace("<expPer>", Math.Round(fishingExpPerRoll * 100, 2).ToString())
 
-                        .Replace("<currentMoveSpd>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentMoveSpd*100,2).ToString(), moveSpdRoll, moveSpdMaxRoll))
+                        .Replace("<currentMoveSpd>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentMoveSpd * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), moveSpdRoll, moveSpdMaxRoll))
                         .Replace("<moveSpdRoll>", GlobalPet.LightPetRarityColorConvert(moveSpdRoll.ToString(), moveSpdRoll, moveSpdMaxRoll))
                         .Replace("<moveSpdMaxRoll>", GlobalPet.LightPetRarityColorConvert(moveSpdMaxRoll.ToString(), moveSpdRoll, moveSpdMaxRoll))
 
-                        .Replace("<currentWing>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentFlightTime / 60f,2).ToString(), wingRoll, wingMaxRoll))
+                        .Replace("<currentWing>", GlobalPet.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + Math.Round(CurrentFlightTime / 60f, 2).ToString(), wingRoll, wingMaxRoll))
                         .Replace("<wingRoll>", GlobalPet.LightPetRarityColorConvert(wingRoll.ToString(), wingRoll, wingMaxRoll))
                         .Replace("<wingMaxRoll>", GlobalPet.LightPetRarityColorConvert(wingMaxRoll.ToString(), wingRoll, wingMaxRoll))
 
-                        .Replace("<currentExp>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentFishingExp * 100, 2).ToString(), fishingExpRoll, fishingExpMaxRoll))
+                        .Replace("<currentExp>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentFishingExp * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), fishingExpRoll, fishingExpMaxRoll))
                         .Replace("<expRoll>", GlobalPet.LightPetRarityColorConvert(fishingExpRoll.ToString(), fishingExpRoll, fishingExpMaxRoll))
                         .Replace("<expMaxRoll>", GlobalPet.LightPetRarityColorConvert(fishingExpMaxRoll.ToString(), fishingExpRoll, fishingExpMaxRoll))
 

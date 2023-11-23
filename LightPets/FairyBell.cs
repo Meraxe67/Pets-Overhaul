@@ -67,17 +67,17 @@ namespace PetsOverhaul.LightPets
             }
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.FairyBell")
 
-                        .Replace("<hasteBase>", Math.Round(baseHaste*100,2).ToString())
-                        .Replace("<hastePer>", Math.Round(hastePerRoll*100,2).ToString())
+                        .Replace("<hasteBase>", Math.Round(baseHaste * 100, 2).ToString())
+                        .Replace("<hastePer>", Math.Round(hastePerRoll * 100, 2).ToString())
 
                         .Replace("<fortBase>", baseGlobalFort.ToString())
                         .Replace("<fortPer>", globalFortPerRoll.ToString())
 
-                        .Replace("<currentHaste>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentHaste*100,2).ToString(), hasteRoll, hasteMaxRoll))
+                        .Replace("<currentHaste>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentHaste * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), hasteRoll, hasteMaxRoll))
                         .Replace("<hasteRoll>", GlobalPet.LightPetRarityColorConvert(hasteRoll.ToString(), hasteRoll, hasteMaxRoll))
                         .Replace("<hasteMaxRoll>", GlobalPet.LightPetRarityColorConvert(hasteMaxRoll.ToString(), hasteRoll, hasteMaxRoll))
 
-                        .Replace("<currentFort>", GlobalPet.LightPetRarityColorConvert(CurrentGlobalFort.ToString(), globalFortRoll, globalFortMaxRoll))
+                        .Replace("<currentFort>", GlobalPet.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + CurrentGlobalFort.ToString(), globalFortRoll, globalFortMaxRoll))
                         .Replace("<fortRoll>", GlobalPet.LightPetRarityColorConvert(globalFortRoll.ToString(), globalFortRoll, globalFortMaxRoll))
                         .Replace("<fortMaxRoll>", GlobalPet.LightPetRarityColorConvert(globalFortMaxRoll.ToString(), globalFortRoll, globalFortMaxRoll))
 
