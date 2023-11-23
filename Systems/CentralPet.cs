@@ -80,18 +80,18 @@ namespace PetsOverhaul.Systems
         /// <summary>
         /// Used to change alternating color of maximum Light Pet Rolls alongside colorSwitched, increases 0.01f every frame, until hitting 1f, where it decreases 0.01f every frame and so on.
         /// </summary>
-        static float colorVal = 0;
+        public static float colorVal = 0;
         /// <summary>
         /// Used to change alternating color of maximum Light Pet Rolls alongside colorVal
         /// </summary>
         static bool colorSwitched = false;
-        static readonly Color lowQuality = new(130, 130, 130);
-        static readonly Color midQuality = new(77, 117, 154);
-        static readonly Color highQuality = new(252, 194, 0);
+        public static readonly Color lowQuality = new(130, 130, 130);
+        public static readonly Color midQuality = new(77, 117, 154);
+        public static readonly Color highQuality = new(252, 194, 0);
         /// <summary>
         /// Alternates between (165, 249, 255) and (255, 207, 249) every frame.
         /// </summary>
-        static Color maxQuality = new(165, 249, 255);
+        public static Color maxQuality = new(165, 249, 255);
         /// <summary>
         /// Converts given text to be corresponding color of Light Pet quality values
         /// </summary>
@@ -796,8 +796,15 @@ namespace PetsOverhaul.Systems
             {
                 npcLoot.Add(ItemDropRule.ByCondition(new FirstKillGolem(), ModContent.ItemType<MasteryShard>()));
             }
-            if (npc.type == NPCID.MoonLordCore && Main.expertMode == false && Main.masterMode == false)
+            if (npc.type == NPCID.SkeletronHead && MasteryShardCheck.masteryShardObtained4 == false)
             {
+                npcLoot.Add(ItemDropRule.ByCondition(new FirstKillSkeletron(), ModContent.ItemType<MasteryShard>()));
+            }
+            if (npc.type == NPCID.MoonLordCore)
+            {
+                if (MasteryShardCheck.masteryShardObtained5 == false)
+                    npcLoot.Add(ItemDropRule.ByCondition(new FirstKillMoonLord(), ModContent.ItemType<MasteryShard>()));
+                if (Main.expertMode == false && Main.masterMode == false)
                 npcLoot.Add(ItemDropRule.Common(ItemID.SuspiciousLookingTentacle));
             }
         }
@@ -814,6 +821,14 @@ namespace PetsOverhaul.Systems
             if (npc.type == NPCID.Golem)
             {
                 MasteryShardCheck.masteryShardObtained3 = true;
+            }
+            if (npc.type == NPCID.SkeletronHead)
+            {
+                MasteryShardCheck.masteryShardObtained4 = true;
+            }
+            if (npc.type == NPCID.MoonLordCore)
+            {
+                MasteryShardCheck.masteryShardObtained5 = true;
             }
         }
         public override bool PreAI(NPC npc)

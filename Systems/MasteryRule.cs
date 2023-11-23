@@ -53,4 +53,38 @@ namespace PetsOverhaul.Systems
             return null;
         }
     }
+    public class FirstKillSkeletron : IItemDropRuleCondition, IProvideItemConditionDescription
+    {
+        public bool CanDrop(DropAttemptInfo info)
+        {
+            return !MasteryShardCheck.masteryShardObtained4;
+        }
+
+        public bool CanShowItemDropInUI()
+        {
+            return true;
+        }
+
+        public string GetConditionDescription()
+        {
+            return null;
+        }
+    }
+    public class FirstKillMoonLord : IItemDropRuleCondition, IProvideItemConditionDescription
+    {
+        public bool CanDrop(DropAttemptInfo info)
+        {
+            return !MasteryShardCheck.masteryShardObtained5;
+        }
+
+        public bool CanShowItemDropInUI()
+        {
+            return true;
+        }
+
+        public string GetConditionDescription()
+        {
+            return null;
+        }
+    }
 }

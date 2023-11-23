@@ -841,6 +841,40 @@ Mods: {
 					Diferente de Ovos Podres, parece que pode ser cozido.
 					'''
 			}
+
+			LihzahrdWrench: {
+				// DisplayName: Lihzahrd Wrench
+				/* Tooltip:
+					'''
+					Keep this in your inventory or void bag to allow 
+					crafting of Toy Golem Pet infinitely.
+					''' */
+			}
+
+			PrismaticOptic: {
+				// DisplayName: Prismatic Optic
+				/* Tooltip:
+					'''
+					Keep this in your inventory or void bag to allow 
+					crafting of Fairy Princess Pet infinitely.
+					''' */
+			}
+
+			PumpkingsHead: {
+				// DisplayName: Pumpking's Head
+				/* Tooltip:
+					'''
+					This year's harvest seems to be bountiful.
+					Keep this in your inventory or void bag to allow 
+					crafting of Jack O'Lantern Pet infinitely.
+					''' */
+			}
+		}
+
+		Condition: {
+			// GolemCondition: Requires a Lihzahrd Wrench to be in your inventory.
+			// EmpressCondition: Requires a Prismatic Optic to be in your inventory.
+			// PumpkingCondition: Requires the Pumpking's Head to be in your inventory.
 		}
 
 		Projectiles.DynamiteKittyBoom.DisplayName: Dynamite Kitty Boom

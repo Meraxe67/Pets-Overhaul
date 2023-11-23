@@ -10,7 +10,10 @@
   <ItemGroup>
     <None Remove="Buffs\ChillingFear.png" />
     <None Remove="Items\egg.png" />
+    <None Remove="Items\LihzahrdWrench.png" />
     <None Remove="Items\MasteryShard.png" />
+    <None Remove="Items\PrismaticOptic.png" />
+    <None Remove="Items\PumpkingsHead.png" />
     <None Remove="Localization\mastery_shard_sprite_sheet.png" />
     <None Remove="Localization\pt-BR.hjson" />
     <None Remove="NPCS\ExamplePerson.png" />

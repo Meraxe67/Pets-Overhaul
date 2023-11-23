@@ -2,28 +2,29 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-
+using Terraria.Localization;
 namespace PetsOverhaul.Systems
 {
     public class Recipes : ModSystem
     {
         public static void MasterPetCraft(int result, int itemToPairWithMasteryShard)
         {
-            Recipe recipe = Recipe.Create(result);
-            recipe.AddIngredient(ModContent.ItemType<MasteryShard>());
-            recipe.AddIngredient(itemToPairWithMasteryShard);
-            recipe.Register();
+            Recipe.Create(result).
+            AddIngredient(ModContent.ItemType<MasteryShard>()).
+            AddIngredient(itemToPairWithMasteryShard).
+            Register();
         }
         public override void AddRecipes()
         {
-             Recipe.Create(ItemID.ShadowOrb)
-                .AddIngredient(ItemID.ShadowScale, 12)
-                .AddTile(TileID.Anvils)
-                .Register();
-             Recipe.Create(ItemID.CrimsonHeart)
-                .AddIngredient(ItemID.TissueSample, 12)
-                .AddTile(TileID.Anvils)
-                .Register();
+            Recipe.Create(ItemID.ShadowOrb)
+               .AddIngredient(ItemID.ShadowScale, 12)
+               .AddTile(TileID.Anvils)
+               .Register();
+            Recipe.Create(ItemID.CrimsonHeart)
+               .AddIngredient(ItemID.TissueSample, 12)
+               .AddTile(TileID.Anvils)
+               .Register();
+
             MasterPetCraft(ItemID.KingSlimePetItem, ItemID.KingSlimeTrophy);
             MasterPetCraft(ItemID.EyeOfCthulhuPetItem, ItemID.EyeofCthulhuTrophy);
             MasterPetCraft(ItemID.EaterOfWorldsPetItem, ItemID.EaterofWorldsTrophy);
@@ -45,6 +46,27 @@ namespace PetsOverhaul.Systems
             MasterPetCraft(ItemID.MartianPetItem, ItemID.MartianSaucerTrophy);
             MasterPetCraft(ItemID.EverscreamPetItem, ItemID.EverscreamTrophy);
             MasterPetCraft(ItemID.IceQueenPetItem, ItemID.IceQueenTrophy);
+
+            MasterPetCraft(ModContent.ItemType<LihzahrdWrench>(), ItemID.GolemTrophy);
+            MasterPetCraft(ModContent.ItemType<PrismaticOptic>(), ItemID.FairyQueenTrophy);
+            MasterPetCraft(ModContent.ItemType<PumpkingsHead>(), ItemID.PumpkingTrophy);
+
+            Recipe.Create(ItemID.GolemPetItem)
+                .AddIngredient(ItemID.LunarTabletFragment, 10)
+                .AddCondition(new Condition("Mods.PetsOverhaul.Condition.GolemCondition", () => Main.LocalPlayer.HasItemInInventoryOrOpenVoidBag(ModContent.ItemType<LihzahrdWrench>())))
+                .AddTile(TileID.MythrilAnvil)
+                .Register();
+            Recipe.Create(ItemID.FairyQueenPetItem)
+                .AddIngredient(ItemID.SoulofFlight, 15)
+                .AddCondition(new Condition("Mods.PetsOverhaul.Condition.EmpressCondition", () => Main.LocalPlayer.HasItemInInventoryOrOpenVoidBag(ModContent.ItemType<PrismaticOptic>())))
+                .AddTile(TileID.MythrilAnvil)
+                .Register();
+            Recipe.Create(ItemID.PumpkingPetItem)
+                .AddIngredient(ItemID.Pumpkin, 75)
+                .AddIngredient(ItemID.SpookyWood, 25)
+                .AddCondition(new Condition("Mods.PetsOverhaul.Condition.PumpkingCondition", () => Main.LocalPlayer.HasItemInInventoryOrOpenVoidBag(ModContent.ItemType<PumpkingsHead>())))
+                .AddTile(TileID.MythrilAnvil)
+                .Register();
         }
     }
 }
