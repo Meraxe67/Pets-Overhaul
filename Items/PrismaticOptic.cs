@@ -11,7 +11,7 @@ namespace PetsOverhaul.Items
     {
         public override void SetStaticDefaults()
         {
-            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(15, 4));
+            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(10, 4));
             ItemID.Sets.AnimatesAsSoul[Item.type] = true;
         }
         public override void SetDefaults()
