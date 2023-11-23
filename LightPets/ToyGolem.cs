@@ -92,7 +92,7 @@ namespace PetsOverhaul.LightPets
                         .Replace("<expRoll>", GlobalPet.LightPetRarityColorConvert(miningExpRoll.ToString(), miningExpRoll, miningExpMaxRoll))
                         .Replace("<expMaxRoll>", GlobalPet.LightPetRarityColorConvert(miningExpMaxRoll.ToString(), miningExpRoll, miningExpMaxRoll))
 
-                        .Replace("<currentHealth>", GlobalPet.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + Math.Round(CurrentHealth * 100, 2).ToString(), healthRoll, healthMaxRoll))
+                        .Replace("<currentHealth>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentHealth * 100, 2).ToString()+ Language.GetTextValue("Mods.PetsOverhaul.%"), healthRoll, healthMaxRoll))
                         .Replace("<healthRoll>", GlobalPet.LightPetRarityColorConvert(healthRoll.ToString(), healthRoll, healthMaxRoll))
                         .Replace("<healthMaxRoll>", GlobalPet.LightPetRarityColorConvert(healthMaxRoll.ToString(), healthRoll, healthMaxRoll))
                         ));

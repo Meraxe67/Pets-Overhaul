@@ -89,8 +89,8 @@ namespace PetsOverhaul.LightPets
 
                         .Replace("<defPer>", defPerRoll.ToString())
 
-                        .Replace("<defMultBase>", defMultPerRoll.ToString())
-                        .Replace("<defMultPer>", defMultPerRoll.ToString())
+                        .Replace("<defMultBase>", Math.Round(defMultBase * 100, 2).ToString())
+                        .Replace("<defMultPer>", Math.Round(defMultPerRoll * 100, 2).ToString())
 
                         .Replace("<expBase>", Math.Round(baseMiningExp * 100, 2).ToString())
                         .Replace("<expPer>", Math.Round(miningExpPerRoll * 100, 2).ToString())

@@ -1,7 +1,7 @@
 Mods: {
 	PetsOverhaul: {
 		// Operators are for cases where a Language does not use them when specifying a bonus but solely use words.
-		// %: " "
+		// %: %
 		// x: x
 		// +: +
 		// -: -
@@ -120,7 +120,7 @@ Mods: {
 				Grants <defPer> Defense per quality and <defMultBase> + <defMultPer> per quality percentage defense increase.
 				<expBase> + <expPer>% Mining Exp per quality, increasing your Junimo Pet's mining exp gains
 				and <fortBase> + <fortPer> Mining Fortune per quality, increasing your Mining Pet's drops
-				Defense Bonus: <currentDef>, Quality <defRoll> out of <defMaxRoll>
+				Defense Bonus: <currentDef> Quality <defRoll> out of <defMaxRoll>
 				Percentage Defense Bonus: <currentDefMult> Quality <defMultRoll> out of <defMultMaxRoll>
 				Mining Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				Mining Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
