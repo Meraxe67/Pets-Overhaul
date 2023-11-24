@@ -1,6 +1,6 @@
 Mods: {
 	PetsOverhaul: {
-		// Operators are for cases where a Language does not use them when specifying a bonus but solely use words.
+		// Operators are for cases where a Language does not use them when specifying a bonus but solely use words. Put "" instead if need them to be empty.
 		// %: %
 		// x: x
 		// +: +

@@ -49,7 +49,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             if (Pet.PetInUseWithSwapCd(ItemID.DD2PetDragon) && proj.GetGlobalProjectile<HoardagronProj>().special)
             {
-                if ((target.boss == true || target.GetGlobalNPC<NpcPet>().nonBossTrueBosses[target.type]) && target.life < (int)(target.lifeMax * specialBossTreshold))
+                if ((target.boss == true || NpcPet.nonBossTrueBosses[target.type]) && target.life < (int)(target.lifeMax * specialBossTreshold))
                 {
                     modifiers.SetCrit();
                 }
