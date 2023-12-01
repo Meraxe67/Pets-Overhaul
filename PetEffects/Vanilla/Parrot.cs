@@ -13,8 +13,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class Parrot : ModPlayer
     {
-        public int projChance = 20;
-        public int meleeChance = 25;
+        public int projChance = 22;
+        public int meleeChance = 28;
         public float projDamage = 0.75f;
         public float meleeDamage = 0.75f;
         public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();

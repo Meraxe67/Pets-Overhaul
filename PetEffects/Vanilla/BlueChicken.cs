@@ -26,9 +26,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
                 if (Main.rand.NextBool(blueEggTimer))
                 {
-                    if (Main.rand.NextBool(200))
+                    if (Main.rand.NextBool(15, 100))
                     {
-                        if (Main.rand.NextBool(2, 5))
+                        if (Main.rand.NextBool(4, 100))
                         {
                             Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), ItemID.BlueEgg);
                         }
@@ -71,7 +71,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
             GlobalPet.ItemWeight(ItemID.BlackCurrant, 20);
             GlobalPet.ItemWeight(ItemID.Rambutan, 20);
             GlobalPet.ItemWeight(ItemID.MagicalPumpkinSeed, 2);
-            //ItemWeight(ItemID.Grapes, 1);
+            if (Main.hardMode)
+            GlobalPet.ItemWeight(ItemID.Grapes, 3);
         }
         public static void PoolRarePlant()
         {
@@ -86,7 +87,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
             GlobalPet.ItemWeight(ItemID.StrangePlant3, 4);
             GlobalPet.ItemWeight(ItemID.StrangePlant4, 4);
             GlobalPet.ItemWeight(ItemID.MagicalPumpkinSeed, 1);
-            //ItemWeight(ItemID.Grapes, 1);
+            if (Main.hardMode)
+                GlobalPet.ItemWeight(ItemID.Grapes, 3);
         }
         public static void PoolTree()
         {
@@ -115,11 +117,14 @@ namespace PetsOverhaul.PetEffects.Vanilla
             GlobalPet.ItemWeight(ItemID.GemTreeSapphireSeed, 13);
             GlobalPet.ItemWeight(ItemID.GemTreeEmeraldSeed, 12);
             GlobalPet.ItemWeight(ItemID.GemTreeRubySeed, 11);
-            GlobalPet.ItemWeight(ItemID.GemTreeAmberSeed, 10);
-            GlobalPet.ItemWeight(ItemID.GemTreeDiamondSeed, 9);
+            GlobalPet.ItemWeight(ItemID.GemTreeAmberSeed, 11);
+            GlobalPet.ItemWeight(ItemID.GemTreeDiamondSeed, 10);
             GlobalPet.ItemWeight(ItemID.EucaluptusSap, 1);
-            //ItemWeight(ItemID.Dragonfruit, 3);
-            //ItemWeight(ItemID.Starfruit, 1);
+            if (Main.hardMode)
+            {
+                GlobalPet.ItemWeight(ItemID.Dragonfruit, 3);
+                GlobalPet.ItemWeight(ItemID.Starfruit, 3);
+            }
         }
         public override bool OnPickup(Item item)
         {

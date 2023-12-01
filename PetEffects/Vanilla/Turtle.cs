@@ -16,11 +16,13 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float moveSpd = 0.12f;
         public float def = 1.11f;
         public float kbResist = 0.25f;
-        public float dmgReduce = 0.05f;
+        public float dmgReduce = 0.04f;
+        public int flatDef = 1;
         public override void PostUpdateEquips()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.Seaweed))
             {
+                Player.statDefense += flatDef;
                 Player.statDefense.FinalMultiplier *= def;
                 Player.moveSpeed -= moveSpd;
                 Player.maxRunSpeed -= moveSpd * 3;
@@ -58,8 +60,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
             Turtle turtle = Main.LocalPlayer.GetModPlayer<Turtle>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.Seaweed")
-            .Replace("<def>", turtle.def.ToString())
+                        .Replace("<def>", turtle.def.ToString())
                         .Replace("<kbResist>", turtle.kbResist.ToString())
+                        .Replace("<flat>", turtle.flatDef.ToString())
                         .Replace("<moveSpd>", Math.Round(turtle.moveSpd * 100, 2).ToString())
                         .Replace("<dmg>", Math.Round(turtle.dmgReduce * 100, 2).ToString())
                         ));

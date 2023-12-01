@@ -101,10 +101,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
         {
-
             if (Pet.PetInUseWithSwapCd(ItemID.IceQueenPetItem) && Pet.timer <= 0)
             {
-
                 if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
                 {
                     SoundEngine.PlaySound(SoundID.Item30 with { PitchVariance = 0.5f, MaxInstances = 5, Pitch = -0.5f }, Player.position);

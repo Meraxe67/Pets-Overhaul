@@ -13,8 +13,9 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using Terraria.ModLoader.Core;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria.ModLoader.IO;
+using Terraria.UI;
 
 namespace PetsOverhaul.Systems
 {

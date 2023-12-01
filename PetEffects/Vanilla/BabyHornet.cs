@@ -23,12 +23,12 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int critReduction = 3;
         public float moveSpdIncr = 0.03f;
         public float healthRecovery = 0.05f;
-        public int beeChance = 5;
+        public int beeChance = 7;
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.Nectar))
             {
-                Player.GetModPlayer<GlobalPet>().timerMax = nectarCooldown;
+                Pet.timerMax = nectarCooldown;
             }
         }
         public override void PreUpdateBuffs()

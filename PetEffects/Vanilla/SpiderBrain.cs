@@ -13,9 +13,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
     public sealed class SpiderBrain : ModPlayer
     {
         public int lifePool = 0;
-        public float lifePoolMaxPerc = 0.1f;
-        public int cdDoAddToPool = 25;
-        public float lifestealAmount = 0.065f;
+        public float lifePoolMaxPerc = 0.075f;
+        public int cdDoAddToPool = 20;
+        public float lifestealAmount = 0.05f;
 
         private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PreUpdate()

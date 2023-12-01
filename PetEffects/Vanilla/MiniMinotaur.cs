@@ -19,7 +19,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float meleeSpd = 0.0023f;
         public float meleeDmg = 0.00125f;
         public float moveSpd = 0.0025f;
-        public float defMult = 0.002f;
+        public float defMult = 0.0023f;
 
         private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PreUpdate()
