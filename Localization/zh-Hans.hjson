@@ -1,6 +1,6 @@
 Mods: {
 	PetsOverhaul: {
-		// Operators are for cases where a Language does not use them when specifying a bonus but solely use words. Put "" instead if need them to be empty.
+		// Operators are for cases where a Language does not use them when specifying a bonus but solely uses words. Put "" instead if need them to be empty.
 		// %: %
 		// x: x
 		// +: +
@@ -128,7 +128,7 @@ Mods: {
 			/* FairyBell:
 				'''
 				Grants <hasteBase> + <hastePer>% Ability Haste per quality which increases
-				how frequent you can use your current Pet's ability and increases 
+				how frequently you can use your current Pet's ability and increases 
 				<fortBase> + <fortPer> Global Fortune per quality, increasing all of your Pets bonus item drops,
 				which works with 50% effectiveness with already classified Pets.
 				Ability Haste Bonus: <currentHaste> Quality <hasteRoll> out of <hasteMaxRoll>
@@ -145,8 +145,8 @@ Mods: {
 			/* WispInABottle:
 				'''
 				Grants <magicBase> + <magicPer>% per quality Magic damage, <rangedBase> + <rangedPer>% per quality Ranged damage.
-				Increases traveling speed of Magic and Ranged projectiles by <projSpdBase> + <projSpdPer>% per quality.
-				Increases damage of Projectiles that is from your active pet by <petProjBase> + <petProjPer>% per quality.
+				Increases the traveling speed of Magic and Ranged projectiles by <projSpdBase> + <projSpdPer>% per quality.
+				Increases the damage of Projectiles that are from your active pet by <petProjBase> + <petProjPer>% per quality.
 				Magic Damage Bonus: <currentMagic> Quality <magicRoll> out of <magicMaxRoll>
 				Ranged Damage Bonus: <currentRanged> Quality <rangedRoll> out of <rangedMaxRoll>
 				Magic/Ranged Projectile Speed Bonus: <currentProjSpd> Quality <projSpdRoll> out of <projSpdMaxRoll>
@@ -173,7 +173,7 @@ Mods: {
 				Grants <moveSpdBase> + <moveSpdPer>% Movement Speed Per Quality, <wingBase> + <wingPer> seconds wing time per quality,
 				and <expBase> + <expPer>% Fishing Exp boost per quality increasing your Junimo Pet's fishing exp gain
 				Movement Speed Bonus: <currentMoveSpd> Quality <moveSpdRoll> out of <moveSpdMaxRoll>
-				Wing Time Bonus: <currentWing> Quality <wingRoll> out of <wingMaxRoll>
+				Wing-Time Bonus: <currentWing> Quality <wingRoll> out of <wingMaxRoll>
 				Fishing Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				''' */
 			/* SuspiciousLookingTentacle:

@@ -1,17 +1,17 @@
 Mods: {
 	PetsOverhaul: {
-		// Operators are for cases where a Language does not use them when specifying a bonus but solely use words. Put "" instead if need them to be empty.
+		// Operators are for cases where a Language does not use them when specifying a bonus but solely uses words. Put "" instead if need them to be empty.
 		%: %
 		x: x
 		+: +
 		-: -
 		Notice:
 			'''
-			[c/90C2AA:Pets Overhaul 2.3 latest changes: Light Pets Update, with Stat Quality Mechanic!]
+			[c/90C2AA:Pets Overhaul 2.3.2 latest changes: Balance Changes, Light Pets, Mastery Shard Improvements & More]
 			[c/90C2AA:All Light Pet stats are influenced by that stat's Quality, improving it significantly.]
-			[c/90C2AA:Qualities are rolled when item is first time in Player's inventory! Moonlord now drops]
-			[c/90C2AA:Its Light Pet in non-Expert+ worlds, recipes for Shadow Orb/Crimson Heart has been added.]
-			If you happen to come across any bugs, our would like to be up to
+			[c/90C2AA:Qualities are rolled when the item is the first time in your inventory! Moonlord now drops]
+			[c/90C2AA:It's Light Pet in non-Expert+ worlds, recipes for Shadow Orb/Crimson Heart have been added.]
+			If you happen to come across any bugs or would like to be up to
 			date with our constantly updating Mod and growing community,
 			we encourage you to join our community and our Discord server!
 			'''
@@ -23,7 +23,7 @@ Mods: {
 			JunimoLevelupLabel: Disable Junimo levelup notification
 			JunimoLevelupTooltip:
 				'''
-				Disables Junimo Pet's both Level-up text and sound effect notifications
+				Disables Junimo Pet's Level-up text and sound effect notifications
 				upon increasing a class's level. Does not disable the level mechanic.
 				'''
 			JunimoExpLabel: Disable Junimo Exp gain while you don't have it
@@ -35,7 +35,7 @@ Mods: {
 			JunimoExpGainMessageLabel: Disable Junimo Exp pop-up messages
 			JunimoExpGainMessageTooltip:
 				'''
-				Disables all pop-up texts that appears upon gaining exp,
+				Disables all pop-up texts that appear upon gaining exp,
 				Does not disable Exp gain or anything else but the message.
 				'''
 			NoticeLabel: Disable Pets Overhaul's notice
@@ -66,7 +66,7 @@ Mods: {
 			PassiveSoundLabel: Disable passive Pet sounds
 			PassiveSoundTooltip:
 				'''
-				Disables Pet sound effects that plays passively
+				Disables Pet sound effects that play passively
 				similar to vanilla's Ambient sound effects.
 				'''
 			AbilitySoundLabel: Disable ability sounds
@@ -129,7 +129,7 @@ Mods: {
 			FairyBell:
 				'''
 				Grants <hasteBase> + <hastePer>% Ability Haste per quality which increases
-				how frequent you can use your current Pet's ability and increases 
+				how frequently you can use your current Pet's ability and increases 
 				<fortBase> + <fortPer> Global Fortune per quality, increasing all of your Pets bonus item drops,
 				which works with 50% effectiveness with already classified Pets.
 				Ability Haste Bonus: <currentHaste> Quality <hasteRoll> out of <hasteMaxRoll>
@@ -146,8 +146,8 @@ Mods: {
 			WispInABottle:
 				'''
 				Grants <magicBase> + <magicPer>% per quality Magic damage, <rangedBase> + <rangedPer>% per quality Ranged damage.
-				Increases traveling speed of Magic and Ranged projectiles by <projSpdBase> + <projSpdPer>% per quality.
-				Increases damage of Projectiles that is from your active pet by <petProjBase> + <petProjPer>% per quality.
+				Increases the traveling speed of Magic and Ranged projectiles by <projSpdBase> + <projSpdPer>% per quality.
+				Increases the damage of Projectiles that are from your active pet by <petProjBase> + <petProjPer>% per quality.
 				Magic Damage Bonus: <currentMagic> Quality <magicRoll> out of <magicMaxRoll>
 				Ranged Damage Bonus: <currentRanged> Quality <rangedRoll> out of <rangedMaxRoll>
 				Magic/Ranged Projectile Speed Bonus: <currentProjSpd> Quality <projSpdRoll> out of <projSpdMaxRoll>
@@ -174,7 +174,7 @@ Mods: {
 				Grants <moveSpdBase> + <moveSpdPer>% Movement Speed Per Quality, <wingBase> + <wingPer> seconds wing time per quality,
 				and <expBase> + <expPer>% Fishing Exp boost per quality increasing your Junimo Pet's fishing exp gain
 				Movement Speed Bonus: <currentMoveSpd> Quality <moveSpdRoll> out of <moveSpdMaxRoll>
-				Wing Time Bonus: <currentWing> Quality <wingRoll> out of <wingMaxRoll>
+				Wing-Time Bonus: <currentWing> Quality <wingRoll> out of <wingMaxRoll>
 				Fishing Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				'''
 			SuspiciousLookingTentacle:
@@ -198,8 +198,8 @@ Mods: {
 			Seaweed:
 				'''
 				[c/0ea80e:Defensive Pet]
-				Grants <def>x defense and multiplies recieved knockback by <kbResist>x
-				Decreases movement speed by -<moveSpd>% and damage by -<dmg>%
+				Grants +<flat> flat and <def>x defense and multiplies received knockback by <kbResist>x
+				Decreases movement speed by -<moveSpd>% and all damage by -<dmg>%
 				'''
 			AmberMosquito:
 				'''
@@ -282,11 +282,11 @@ Mods: {
 				'''
 				[c/7CEBFA:Utility and Mobility Pet]
 				Hits recover buffs remaining time by <buffRecover> seconds, <cooldown> second cd
-				Always be confused and increases all following stats by <floatIncr>%
+				Always be confused and increase all following stats by <floatIncr>%
 				(or +<intIncr> depending on stat); damage, knockback resistance, crit chance,
 				luck, mana, crit damage, health, knockback, attack speed, defense, armor pen, 
 				fishing power, damage reduction, mana regen, jump speed, wing time,
-				ability haste, <moveSpd>% boost to movement speed and night vision buff
+				ability haste, <moveSpd>% boost to movement speed, and night vision buff
 				'''
 			FullMoonSqueakyToy:
 				'''
@@ -300,7 +300,7 @@ Mods: {
 			BerniePetItem:
 				'''
 				[c/14C17C:Utility and Defensive Pet]
-				Enemies that are in <burnRange> tile radius will have their burn type debuffs 
+				Enemies that are in <burnRange> tile radius will have their burn-type debuffs 
 				run out 100% slower and for every enemy burning inside the radius recovers <burnDrainMana> mana
 				and <burnDrainHealth> health every second, stacking up to <maxDrain> enemies, immunity to all burn debuffs
 				'''
@@ -377,7 +377,7 @@ Mods: {
 				Increases your max mana by <maxMana>% and increases your magic damage by 
 				<manaToDmg>% for every 1 mana you have over 200 mana. But, multiplies your magic
 				damage bonuses over 100% by <dmgPenalty>x, extra 15% penalty when using Spectre Hood, 
-				and reduces more by currently how much Mana Sickness reduces, divided by 4
+				and reduces more by how much Mana Sickness currently reduces, divided by 4
 				'''
 			EyeSpring:
 				'''
@@ -420,7 +420,7 @@ Mods: {
 			JunimoPetItem:
 				'''
 				[c/CDFF00:Harvesting], [c/96A8B0:Mining] and [c/0382E9:Fishing Pet]
-				Gain Experience as you gather more materials or do certain actions on their respective Class.
+				Gain Experience as you gather more materials or do certain actions in their respective Class.
 				Exp gain while Junimo's item is outside of your inventory/void bag is currently <expOutsideInvActiveOrNo>. (Changeable in Config)
 				Effects are active while the Pet Item is in Inventory or an Open Void Bag or while is equipped.
 				Both the effects and experience gain are doubled if Junimo Pet is the primary Pet that is currently in use.
@@ -564,7 +564,7 @@ Mods: {
 				'''
 				[c/E39DA9:Offensive and Mobility Pet]
 				Grants an extra <flatSpd>% movement speed, multiplies it by <multSpd>x.
-				Also, Movement speed boosts over 100% grants you a 
+				Also, Movement speed boosts over 100% grant you a 
 				damage boost equal to <spdToDmg>% of it. Enemies that
 				contacts you gets slowed by <staticAmount>% for <staticTime> seconds
 				'''
@@ -591,7 +591,7 @@ Mods: {
 				'''
 				[c/0ea80e:Defensive Pet]
 				Grants you <lifesteal>% lifesteal, however, the pool of how much you can heal is
-				<maxPool>% of your max health. The pool recovers <healthRecovery> every second
+				<maxPool>% of your max health. The pool recovers +1 health every <healthRecovery> second
 				'''
 			EaterOfWorldsPetItem:
 				'''
@@ -603,7 +603,7 @@ Mods: {
 			KingSlimePetItem:
 				'''
 				[c/FF1493:Supportive Pet]
-				Changes Slimy and Wet debuffs globally, Slimy debuff adds a bonus <burnHp>%
+				Changes Slime Gun and Water Gun's debuffs globally, Slimy debuff adds a bonus <burnHp>%
 				health damage if paired with a burn, (<burnCap> cap) and take <extraKb>x kb.
 				Slimed grants affected players' <jumpSpd>% jump speed, <kbBoost>x knockback boost
 				and resist. Wet makes enemies receive <enemyDmgRecieve>x damage and deal <enemyDmgDeal>x damage
@@ -615,13 +615,13 @@ Mods: {
 				Heal <extraHeal>% more from all healing potions. Upon consuming Bottled Honey or Honeyfin,
 				recover every other nearby (<range>~ tiles) player's health, <bottledHealth>%, and <honeyfinHealth>% respectively,
 				give Honey buff for <bottledHoneyTime> and <honeyfinHoneyTime> seconds respectively, applies Honey Overdose for 60s.
-				Any player with Honey Overdose cannot be healed again and have <abilityHaste>% Ability Haste
+				Any player with Honey Overdose are unable to be healed again and gain <abilityHaste>% Ability Haste
 				The user also gains half of the effects and full Honey Overdose duration.
 				'''
 			DeerclopsPetItem:
 				'''
 				[c/0ea80e:Defensive Pet]
-				Store damage you receive, if damage taken reaches more than <treshold>% of your health
+				Store damage you take, if damage taken reaches more than <treshold>% of your health
 				in <tresholdTime> seconds, gain <immunityTime> seconds of immunity to all types, and apply a <slowAmount>% slow,
 				confusion and frostfire on enemies in a <range>-tile radius for <debuffTime> seconds
 				Damages are stored separately and the effect has a <cooldown>-second cooldown
@@ -650,12 +650,12 @@ Mods: {
 				health respectively. All shields are <shieldMaxHealthAmount>% of your maximum health,
 				and a shield gets recovered every <shieldCooldown> seconds. Also, gain
 				<dmg>% damage, <crit>% crit, and <def>x defense while you have any shield active.
-				Any shield persists for <shieldLifetime> seconds after receiving damage, then dissapears.
+				Any shield persists for <shieldLifetime> seconds after receiving damage, then disappears.
 				'''
 			DestroyerPetItem:
 				'''
 				[c/4CA858:Mining and Defensive Pet]
-				Ores, gems, or extractable tiles have a chance to drop 1 more, this
+				Ores, gems, or extractable tiles have a chance to drop higher amounts, this
 				chance is equal to <defMultChance>% of your defense + <flatAmount>%, grants <defMultIncrease>x
 				defense, also doubles Ironskin potion's effect, giving <ironskinDef> more
 				'''
@@ -673,7 +673,7 @@ Mods: {
 				[c/3399FF:Magic Pet]
 				Multiplies your magic crit by <magicCritNerf>x, increases mana by <maxMana>, critical magic attacks recover <missingMana>%
 				of your missing mana + <flatMana>, this can be procced every <manaRecoveryCd> seconds, and gain damage and crit
-				depending on how much mana you have, a maximum of <dmg>% magic damage and a <crit>% crit chance
+				depending on how much mana you have, a maximum of <dmg>% magic damage, and a <crit>% crit chance
 				'''
 			MartianPetItem:
 				'''
@@ -686,7 +686,7 @@ Mods: {
 				'''
 				[c/849B25:Melee and Defensive Pet]
 				Multiplies player's movement speed by <moveSpdNerf>x and attack speed of true melee by <atkSpdNerf>x, reduces non-melee damage by -<dmgNerf>%, disables turning
-				around while swinging, halves your wing time and multiplies horizontal wing speed and acceleration by <horizontalNerf>x and
+				around while swinging, halves your wing time, and multiplies horizontal wing speed and acceleration by <horizontalNerf>x and
 				vertical ascent speeds by <verticalNerf>x, but multiplies true melee size, damage and knockback by <trueMeleeMults>x, defense by <defMult>x, increases crit by <trueMeleeCrit>%,
 				maximum health by <healthIncrease>%, damage reduction by <damageReduction>%, and knockback immunity. Effects are not active if any mount is in use
 				'''
@@ -727,7 +727,7 @@ Mods: {
 				'''
 				[c/FFB3BA:Ranged Pet]
 				Ranged hits on enemies will have execution damage, lower
-				their health is, more damage it increases, up to <maxAmount>%
+				their health is, the more damage it increases, up to <maxAmount>%
 				'''
 			MoonLordPetItem:
 				'''
@@ -866,19 +866,19 @@ Mods: {
 				Description:
 					'''
 					Multiplies your placement speed by <NerdPlacement>x
-					Grants a white shine with scale of <NerdShineScale>x
+					Grants a white shine with a scale of <NerdShineScale>x
 					'''
 				PostHardmodeDescription:
 					'''
 					Grants Dangersense and Night vision
 					Multiplies your placement speed by <NerdPlacement>x
-					Grants a white shine with scale of <NerdShineScale>x
+					Grants a white shine with a scale of <NerdShineScale>x
 					'''
 				PostMoonlordDescription:
 					'''
-					Grants Dangersense, Night and Wire vision
+					Grants Dangersense, Night, and Wire vision
 					Multiplies your placement speed by <NerdPlacement>x
-					Grants a white shine with scale of <NerdShineScale>x
+					Grants a white shine with a scale of <NerdShineScale>x
 					'''
 			}
 

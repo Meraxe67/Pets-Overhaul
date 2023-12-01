@@ -1,17 +1,17 @@
 Mods: {
 	PetsOverhaul: {
-		// Operators are for cases where a Language does not use them when specifying a bonus but solely use words. Put "" instead if need them to be empty.
+		// Operators are for cases where a Language does not use them when specifying a bonus but solely uses words. Put "" instead if need them to be empty.
 		// %: %
 		// x: x
 		// +: +
 		// -: -
 		/* Notice:
 			'''
-			[c/90C2AA:Pets Overhaul 2.3 latest changes: Light Pets Update, with Stat Quality Mechanic!]
+			[c/90C2AA:Pets Overhaul 2.3.2 latest changes: Balance Changes, Light Pets, Mastery Shard Improvements & More]
 			[c/90C2AA:All Light Pet stats are influenced by that stat's Quality, improving it significantly.]
-			[c/90C2AA:Qualities are rolled when item is first time in Player's inventory! Moonlord now drops]
-			[c/90C2AA:Its Light Pet in non-Expert+ worlds, recipes for Shadow Orb/Crimson Heart has been added.]
-			If you happen to come across any bugs, our would like to be up to
+			[c/90C2AA:Qualities are rolled when the item is the first time in your inventory! Moonlord now drops]
+			[c/90C2AA:It's Light Pet in non-Expert+ worlds, recipes for Shadow Orb/Crimson Heart have been added.]
+			If you happen to come across any bugs or would like to be up to
 			date with our constantly updating Mod and growing community,
 			we encourage you to join our community and our Discord server!
 			''' */
@@ -27,7 +27,7 @@ Mods: {
 			// JunimoExpGainMessageLabel: Disable Junimo Exp pop-up messages
 			/* JunimoExpGainMessageTooltip:
 				'''
-				Disables all pop-up texts that appears upon gaining exp,
+				Disables all pop-up texts that appear upon gaining exp,
 				Does not disable Exp gain or anything else but the message.
 				''' */
 			// NoticeLabel: Disable Pets Overhaul's notice
@@ -87,7 +87,7 @@ Mods: {
 			/* FairyBell:
 				'''
 				Grants <hasteBase> + <hastePer>% Ability Haste per quality which increases
-				how frequent you can use your current Pet's ability and increases 
+				how frequently you can use your current Pet's ability and increases 
 				<fortBase> + <fortPer> Global Fortune per quality, increasing all of your Pets bonus item drops,
 				which works with 50% effectiveness with already classified Pets.
 				Ability Haste Bonus: <currentHaste> Quality <hasteRoll> out of <hasteMaxRoll>
@@ -104,8 +104,8 @@ Mods: {
 			/* WispInABottle:
 				'''
 				Grants <magicBase> + <magicPer>% per quality Magic damage, <rangedBase> + <rangedPer>% per quality Ranged damage.
-				Increases traveling speed of Magic and Ranged projectiles by <projSpdBase> + <projSpdPer>% per quality.
-				Increases damage of Projectiles that is from your active pet by <petProjBase> + <petProjPer>% per quality.
+				Increases the traveling speed of Magic and Ranged projectiles by <projSpdBase> + <projSpdPer>% per quality.
+				Increases the damage of Projectiles that are from your active pet by <petProjBase> + <petProjPer>% per quality.
 				Magic Damage Bonus: <currentMagic> Quality <magicRoll> out of <magicMaxRoll>
 				Ranged Damage Bonus: <currentRanged> Quality <rangedRoll> out of <rangedMaxRoll>
 				Magic/Ranged Projectile Speed Bonus: <currentProjSpd> Quality <projSpdRoll> out of <projSpdMaxRoll>
@@ -132,7 +132,7 @@ Mods: {
 				Grants <moveSpdBase> + <moveSpdPer>% Movement Speed Per Quality, <wingBase> + <wingPer> seconds wing time per quality,
 				and <expBase> + <expPer>% Fishing Exp boost per quality increasing your Junimo Pet's fishing exp gain
 				Movement Speed Bonus: <currentMoveSpd> Quality <moveSpdRoll> out of <moveSpdMaxRoll>
-				Wing Time Bonus: <currentWing> Quality <wingRoll> out of <wingMaxRoll>
+				Wing-Time Bonus: <currentWing> Quality <wingRoll> out of <wingMaxRoll>
 				Fishing Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				''' */
 			/* SuspiciousLookingTentacle:
