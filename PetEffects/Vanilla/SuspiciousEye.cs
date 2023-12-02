@@ -110,7 +110,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         .Replace("<defToSpd>", Math.Round(suspiciousEye.spdMult * 100, 2).ToString())
                         .Replace("<defToCrit>", Math.Round(suspiciousEye.critMult * 100, 2).ToString())
                         .Replace("<enrageLength>", Math.Round(suspiciousEye.phaseTime / 60f, 2).ToString())
-                        .Replace("<enrageCd>", Math.Round(suspiciousEye.phaseCd / 360f, 2).ToString())
+                        .Replace("<enrageCd>", Math.Round(suspiciousEye.phaseCd / 60f, 2).ToString())
                         ));
         }
     }

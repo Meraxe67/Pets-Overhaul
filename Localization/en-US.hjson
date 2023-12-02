@@ -300,9 +300,9 @@ Mods: {
 			BerniePetItem:
 				'''
 				[c/14C17C:Utility and Defensive Pet]
-				Enemies that are in <burnRange> tile radius will have their burn-type debuffs 
-				run out 100% slower and for every enemy burning inside the radius recovers <burnDrainMana> mana
-				and <burnDrainHealth> health every second, stacking up to <maxDrain> enemies, immunity to all burn debuffs
+				Enemies that are in <burnRange> tile radius will have their burn-type debuffs last
+				100% longer and for every enemy burning inside the radius recovers <burnDrainMana> mana and
+				<burnDrainHealth> health every second, stacking up to <maxDrain> enemies, immunity to all burn debuffs
 				'''
 			UnluckyYarn:
 				'''
@@ -398,7 +398,7 @@ Mods: {
 				You can now fly for <flight> seconds and gain immunity to fall damage
 				Or you may add <bonusFlight> seconds of flight time to your current wings
 				Lose <healthNerf>% of your max health if the player already has no wings
-				Fledgling Wings only gains <flight> bonus wing time, with no health penalty
+				Fledgling Wings only gains <flight> seconds wing time, with no health penalty
 				'''
 			GlommerPetItem:
 				'''
@@ -411,7 +411,7 @@ Mods: {
 			DD2PetDragon:
 				'''
 				[c/FFB3BA:Ranged Pet]
-				Multiplies arrow speed by <arrowVelo>x increases arrow's pierce by <arrowPierce>
+				Multiplies arrow speed by <arrowVelo>x, increases arrow's pierce by <arrowPierce>
 				Multiplies your bullet speed by <bulletVelo>x and
 				your specialist ranged weapons will critically hit enemies below
 				<treshold>% health all of the time, decreased down to <bossTreshold>% for bosses
@@ -585,7 +585,7 @@ Mods: {
 				gain damage, movement speed, and crit, <defToDmg>%, <defToSpd>%, and <defToCrit>% of the defense respectively
 				Also while enraged, dashes will have little to no cooldown to dash again
 				This lasts <enrageLength> seconds you cannot go over 50% health during enrage
-				Its <enrageCd> minute cooldown begins as soon as u are enraged
+				Its <enrageCd> second cooldown begins as soon as u are enraged
 				'''
 			BrainOfCthulhuPetItem:
 				'''
