@@ -625,7 +625,6 @@ namespace PetsOverhaul.Systems
         public bool fortuneHarvestingDrop = false;
         public bool fortuneMiningDrop = false;
         public bool fortuneFishingDrop = false;
-        public bool plantWithTile = false;
 
         /// <summary>
         /// 1000 is 10 exp.
