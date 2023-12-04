@@ -13,7 +13,7 @@ namespace PetsOverhaul.LightPets
 {
     public sealed class ToyGolemEffect : ModPlayer
     {
-        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public override void PostUpdateEquips()
         {
             if (Player.miscEquips[1].type == ItemID.GolemPetItem && Player.miscEquips[1].TryGetGlobalItem(out ToyGolem toyGolem))

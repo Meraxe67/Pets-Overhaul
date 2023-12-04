@@ -13,7 +13,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class HoneyBee : ModPlayer
     {
-        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public float bottledHealth = 0.18f;
         public float honeyfinHealth = 0.25f;
         public float selfPotionIncrease = 0.1f;

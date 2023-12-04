@@ -22,7 +22,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float kbIncreasePoison = 1.25f;
         public int poisonTime = 600;
 
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
         {
             if (Pet.PetInUseWithSwapCd(ItemID.SpiderEgg))

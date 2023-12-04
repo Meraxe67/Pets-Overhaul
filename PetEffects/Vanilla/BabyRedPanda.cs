@@ -12,7 +12,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class BabyRedPanda : ModPlayer
     {
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public int aggroReduce = 500;
         public float regularAtkSpd = 0.06f;
         public float jungleBonusSpd = 0.04f;
@@ -29,17 +29,20 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 }
             }
         }
-        public override bool OnPickup(Item item)
+        public override void Load()
         {
-            if (Pet.PickupChecks(item, ItemID.BambooLeaf, out ItemPet _) && item.type == ItemID.BambooBlock)
+            PetsOverhaul.OnPickupActions += PreOnPickup;
+        }
+        public void PreOnPickup(Item item, Player player)
+        {
+            GlobalPet PickerPet = player.GetModPlayer<GlobalPet>();
+            if (PickerPet.PickupChecks(item, ItemID.BambooLeaf, out ItemPet _) && item.type == ItemID.BambooBlock)
             {
                 for (int i = 0; i < ItemPet.Randomizer(bambooChance * item.stack); i++)
                 {
-                    Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), item, 1);
+                    player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), item, 1);
                 }
             }
-
-            return base.OnPickup(item);
         }
     }
     public sealed class BambooLeaf : GlobalItem

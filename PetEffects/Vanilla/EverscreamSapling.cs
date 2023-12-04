@@ -20,7 +20,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int flatRecovery = 5;
         public int manaIncrease = 100;
 
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.EverscreamPetItem))

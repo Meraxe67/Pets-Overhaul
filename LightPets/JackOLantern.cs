@@ -13,7 +13,7 @@ namespace PetsOverhaul.LightPets
 {
     public sealed class JackOLanternEffect : ModPlayer
     {
-        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public override void PostUpdateEquips()
         {
             if (Player.miscEquips[1].type == ItemID.PumpkingPetItem && Player.miscEquips[1].TryGetGlobalItem(out JackOLantern jackOLantern))

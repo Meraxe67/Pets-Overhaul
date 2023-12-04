@@ -21,7 +21,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int infernoTime = 240;
         public float defMult = 1.5f;
 
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.TwinsPetItem))

@@ -19,7 +19,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int shieldTime = 900;
         public int fishingPow = 10;
 
-        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
         {
             if (Pet.PetInUseWithSwapCd(ItemID.SharkBait) && npc.GetGlobalNPC<NpcPet>().seaCreature)

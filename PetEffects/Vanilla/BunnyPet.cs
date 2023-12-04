@@ -13,7 +13,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class CarrotBunny : ModPlayer
     {
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         private int bunnyTimer = 0;
         public int bunnyStack = 0;
         public float jumpPerStk = 0.02f;

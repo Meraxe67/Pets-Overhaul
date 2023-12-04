@@ -12,7 +12,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class FennecFox : ModPlayer
     {
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public float sizeDecrease = 0.85f;
         public float speedIncrease = 0.15f;
         public float meleeSpdIncrease = 0.18f;

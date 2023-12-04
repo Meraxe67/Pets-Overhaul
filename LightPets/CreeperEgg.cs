@@ -13,7 +13,7 @@ namespace PetsOverhaul.LightPets
 {
     public sealed class CreeperEggEffect : ModPlayer
     {
-        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public override void PostUpdateEquips()
         {
             if (Player.miscEquips[1].type == ItemID.DD2PetGhost && Player.miscEquips[1].TryGetGlobalItem(out CreeperEgg creeperEgg))

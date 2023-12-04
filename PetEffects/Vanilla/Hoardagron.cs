@@ -21,7 +21,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float specialTreshold = 0.2f;
         public float specialBossTreshold = 0.06f;
         public int arrowPen = 1;
-        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public override void ModifyShootStats(Item item, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
             if (Pet.PetInUseWithSwapCd(ItemID.DD2PetDragon))

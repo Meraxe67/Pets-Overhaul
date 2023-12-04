@@ -13,7 +13,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class Puppy : ModPlayer
     {
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public int catchChance = 65;
         public int rareCatchChance = 15;
         public int rareCritterCoin = 25000;

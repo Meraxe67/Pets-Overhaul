@@ -17,7 +17,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int cdDoAddToPool = 20;
         public float lifestealAmount = 0.05f;
 
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.BrainOfCthulhuPetItem))

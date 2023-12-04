@@ -14,7 +14,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class BlueChicken : ModPlayer
     {
-        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public int blueEggTimer = 28800;
         public float tipsyMovespd = 0.1f;
         public int plantChance = 25;

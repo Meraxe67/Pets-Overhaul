@@ -11,13 +11,18 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class DirtiestBlock : ModPlayer
     {
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
-        private Junimo Juni => Player.GetModPlayer<Junimo>();
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public int dirtCoin = 300;
         public int soilCoin = 200;
         public int everythingCoin = 100;
-        public override bool OnPickup(Item item)
+        public override void Load()
         {
+            PetsOverhaul.OnPickupActions += PreOnPickup;
+        }
+        public void PreOnPickup(Item item, Player player)
+        {
+            Pet = player.GetModPlayer<GlobalPet>();
+            Junimo Juni = player.GetModPlayer<Junimo>();
             if (Pet.PickupChecks(item, ItemID.DirtiestBlock, out ItemPet itemChck) && itemChck.blockNotByPlayer == true)
             {
                 if (item.type == ItemID.DirtBlock)
@@ -53,7 +58,6 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     Pet.GiveCoins(ItemPet.Randomizer(item.stack * everythingCoin));
                 }
             }
-            return base.OnPickup(item);
 
         }
     }

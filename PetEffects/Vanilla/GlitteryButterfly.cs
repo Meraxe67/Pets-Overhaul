@@ -12,7 +12,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class GlitteryButterfly : ModPlayer
     {
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public int wingTime = 45;
         public int bonusTimeIfExisting = 150;
         public float healthPenalty = 0.08f;

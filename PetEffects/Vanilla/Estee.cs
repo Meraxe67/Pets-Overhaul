@@ -12,7 +12,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class Estee : ModPlayer
     {
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public float manaIncrease = 0.15f;
         public float manaMagicIncreasePer1 = 0.001f;
         public float penaltyMult = 0.5f;

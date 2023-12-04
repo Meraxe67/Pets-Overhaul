@@ -21,7 +21,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float moveSpd = 0.0025f;
         public float defMult = 0.0023f;
 
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.TartarSauce))

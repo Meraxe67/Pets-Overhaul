@@ -19,7 +19,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class Junimo : ModPlayer
     {
-        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public int maxLvls = 40;
         public int maxXp = 2147480000;
         public float miningResistPerLevel = 0.0014f;
@@ -367,15 +367,20 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             return ModContent.GetInstance<Personalization>().JunimoExpWhileNotInInv == false || Player.HasItemInInventoryOrOpenVoidBag(ItemID.JunimoPetItem) || Pet.PetInUse(ItemID.JunimoPetItem);
         }
-        public override bool OnPickup(Item item)
+        public override void Load()
         {
-            if (Player.CanPullItem(item, Player.ItemSpace(item)) && item.TryGetGlobalItem(out ItemPet itemChck) && itemChck.pickedUpBefore == false)
+            PetsOverhaul.OnPickupActions += PreOnPickup;
+        }
+        public void PreOnPickup(Item item, Player player)
+        {
+            Pet = player.GetModPlayer<GlobalPet>();
+            if (player.CanPullItem(item, player.ItemSpace(item)) && item.TryGetGlobalItem(out ItemPet itemChck) && itemChck.pickedUpBefore == false)
             {
                 if (itemChck.herbBoost)
                 {
                     int value = HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)).expAmount;
 
-                    if (Player.HasItemInInventoryOrOpenVoidBag(ItemID.JunimoPetItem) || Pet.PetInUse(ItemID.JunimoPetItem))
+                    if (player.HasItemInInventoryOrOpenVoidBag(ItemID.JunimoPetItem) || Pet.PetInUse(ItemID.JunimoPetItem))
                     {
                         Pet.GiveCoins(ItemPet.Randomizer((int)(harvestingExpToCoinPerLevel * junimoHarvestingLevel * value * junimoInUseMultiplier * item.stack)));
                     }
@@ -399,11 +404,11 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         popupExpMining += value;
                         popupIndexMining = PopupExp(popupIndexMining, popupExpMining, new Color(150, 168, 176));
                     }
-                    if (Player.HasItemInInventoryOrOpenVoidBag(ItemID.JunimoPetItem) || Pet.PetInUse(ItemID.JunimoPetItem))
+                    if (player.HasItemInInventoryOrOpenVoidBag(ItemID.JunimoPetItem) || Pet.PetInUse(ItemID.JunimoPetItem))
                     {
                         for (int i = 0; i < ItemPet.Randomizer((int)(junimoMiningLevel * miningOrePerLevel * junimoInUseMultiplier) * item.stack); i++)
                         {
-                            Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), item, 1);
+                            player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), item, 1);
                         }
                     }
                 }
@@ -445,7 +450,6 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     }
                 }
             }
-            return base.OnPickup(item);
         }
         public override void PostUpdateEquips()
         {

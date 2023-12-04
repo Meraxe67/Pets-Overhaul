@@ -10,7 +10,7 @@ namespace PetsOverhaul.PetEffects.ThoriumMod
 {
     public sealed class PinkSlime : ModPlayer
     {
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public override void PostUpdateEquips()
         {
 

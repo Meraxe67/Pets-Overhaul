@@ -12,22 +12,26 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public class Squashling : ModPlayer
     {
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public int squashlingCommonChance = 50;
         public int squashlingRareChance = 10;
-        public override bool OnPickup(Item item)
+        public override void Load()
         {
+            PetsOverhaul.OnPickupActions += PreOnPickup;
+        }
+        public void PreOnPickup(Item item, Player player)
+        {
+            Pet = player.GetModPlayer<GlobalPet>();
             if (Pet.PickupChecks(item, ItemID.MagicalPumpkinSeed, out ItemPet itemChck))
             {
                 if (itemChck.herbBoost == true)
                 {
                     for (int i = 0; i < ItemPet.Randomizer((Junimo.HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)).expAmount >= ItemPet.MinimumExpForRarePlant) ? squashlingRareChance : squashlingCommonChance) * item.stack; i++)
                     {
-                        Player.QuickSpawnItemDirect(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), item, 1);
+                        player.QuickSpawnItemDirect(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), item, 1);
                     }
                 }
             }
-            return base.OnPickup(item);
         }
     }
     public sealed class MagicalPumpkinSeed : GlobalItem

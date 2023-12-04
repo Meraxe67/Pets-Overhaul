@@ -11,7 +11,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class DungeonGuardian : ModPlayer
     {
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public int armorPen = 5;
         public int dungArmorPenBonus = 3;
         public int lifeRegen = 8;

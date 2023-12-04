@@ -11,7 +11,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class BabyPenguin : ModPlayer
     {
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         internal int penguinOldChilledTime = 0;
         public int snowFish = 25;
         public int oceanFish = 15;

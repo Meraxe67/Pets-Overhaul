@@ -14,7 +14,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int bonusCritChance = 10;
         public int turretIncrease = 1;
 
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public override void PostUpdateEquips()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.DD2PetGato))

@@ -24,7 +24,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float dmgMultIncrease = 1.1f;
         public int dmgFlatIncrease = 10;
 
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public override void PreUpdate()
         {
             if (Pet.skinColorChanged == false)

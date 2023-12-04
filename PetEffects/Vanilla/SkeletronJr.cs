@@ -20,7 +20,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int playerDamageTakenSpeed = 4;
         public float playerTakenMult = 1f;
 
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public override void PreUpdate()
         {
             timer++;

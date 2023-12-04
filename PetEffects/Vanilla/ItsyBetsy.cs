@@ -18,7 +18,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float defReduction = 0.02f;
         public float missingHpRecover = 0.004f;
 
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             if (target.GetGlobalNPC<NpcPet>().curseCounter > maxStacks)

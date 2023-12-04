@@ -13,7 +13,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class EaterOfWorms : ModPlayer
     {
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
 
         private readonly List<(int X, int Y)> tilesToRandomize = new();
         public int tileBreakXSpread = 2;

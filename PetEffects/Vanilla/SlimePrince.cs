@@ -26,7 +26,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public Player slimeDual;
         public Player slimePrince;
 
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public override void PostUpdateEquips()
         {
             if (GlobalPet.KingSlimePetActive(out slimePrince) && Player.HasBuff(BuffID.Wet)) //Burda kullanan oyuncunun statlarını almıyor.
