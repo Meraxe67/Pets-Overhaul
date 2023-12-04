@@ -12,7 +12,6 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class BabyDinosaur : ModPlayer
     {
-        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public int chance = 175; // 17.5% because its with 1000
         public static void AddItemsToPool()
         {
@@ -32,8 +31,13 @@ namespace PetsOverhaul.PetEffects.Vanilla
             GlobalPet.ItemWeight(ItemID.Diamond, 6);
             GlobalPet.ItemWeight(ItemID.Amber, 6);
         }
-        public override bool OnPickup(Item item)
+        public override void Load()
         {
+            PetsOverhaul.OnPickupActions += PreOnPickup;
+        }
+        public void PreOnPickup(Item item, Player player)
+        {
+            GlobalPet Pet = player.GetModPlayer<GlobalPet>();
             if (Pet.PickupChecks(item, ItemID.AmberMosquito, out ItemPet itemChck) && itemChck.oreBoost)
             {
                 AddItemsToPool();
@@ -41,11 +45,10 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 {
                     for (int i = 0; i < ItemPet.Randomizer(chance * item.stack, 1000); i++)
                     {
-                        Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.miningItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
+                        player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.miningItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
                     }
                 }
             }
-            return base.OnPickup(item);
         }
     }
     public sealed class AmberMosquito : GlobalItem

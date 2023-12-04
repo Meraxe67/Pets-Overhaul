@@ -11,7 +11,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class DirtiestBlock : ModPlayer
     {
-        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
         private Junimo Juni => Player.GetModPlayer<Junimo>();
         public int dirtCoin = 300;
         public int soilCoin = 200;

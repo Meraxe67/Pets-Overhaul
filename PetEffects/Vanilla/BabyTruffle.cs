@@ -12,7 +12,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class BabyTruffle : ModPlayer
     {
-        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
         public float increaseFloat = 0.04f;
         public int increaseInt = 4;
         public float moveSpd = 0.2f;

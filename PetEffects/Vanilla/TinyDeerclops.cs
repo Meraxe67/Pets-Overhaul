@@ -23,7 +23,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int immuneTime = 180;
         public int cooldown = 1800;
 
-        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
         public override void OnHurt(Player.HurtInfo info)
         {
             if (Pet.PetInUse(ItemID.DeerclopsPetItem))

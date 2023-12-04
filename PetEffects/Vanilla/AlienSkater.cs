@@ -12,7 +12,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class AlienSkater : ModPlayer
     {
-        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
         public float accelerator = 0.25f;
         public float wingTime = 1.4f;
         public float speedMult = 1.3f;

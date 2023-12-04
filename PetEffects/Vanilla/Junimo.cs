@@ -19,7 +19,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class Junimo : ModPlayer
     {
-        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
+        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
         public int maxLvls = 40;
         public int maxXp = 2147480000;
         public float miningResistPerLevel = 0.0014f;

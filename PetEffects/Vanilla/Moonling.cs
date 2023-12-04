@@ -30,7 +30,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int sumSentry = 2;
         public int defense = 10;
 
-        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
         public override void PostUpdateEquips()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.MoonLordPetItem))

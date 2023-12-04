@@ -17,7 +17,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int burnDrain = 6;
         public int maxBurning = 5;
         public int EnemiesBurning { get; internal set; }
-        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.BerniePetItem))

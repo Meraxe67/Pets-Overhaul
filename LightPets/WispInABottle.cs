@@ -15,7 +15,7 @@ namespace PetsOverhaul.LightPets
 {
     public sealed class WispInABottleEffect : ModPlayer
     {
-        GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
+        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
         public override void PostUpdateEquips()
         {
             if (Player.miscEquips[1].type == ItemID.WispinaBottle && Player.miscEquips[1].TryGetGlobalItem(out WispInABottle wispInABottle))

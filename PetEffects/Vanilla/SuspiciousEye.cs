@@ -14,7 +14,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class SuspiciousEye : ModPlayer
     {
-        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
         public int phaseCd = 9000;
         public int phaseTime = 1800;
         private int timer = 0;

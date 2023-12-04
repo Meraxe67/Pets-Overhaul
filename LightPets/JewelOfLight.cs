@@ -13,7 +13,7 @@ namespace PetsOverhaul.LightPets
 {
     public sealed class JewelOfLightEffect : ModPlayer
     {
-        GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
+        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
         public override void PostUpdateEquips()
         {
             if (Player.miscEquips[1].type == ItemID.FairyQueenPetItem && Player.miscEquips[1].TryGetGlobalItem(out JewelOfLight empress))

@@ -14,7 +14,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class BlueChicken : ModPlayer
     {
-        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
+        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
         public int blueEggTimer = 28800;
         public float tipsyMovespd = 0.1f;
         public int plantChance = 25;
@@ -126,8 +126,13 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 GlobalPet.ItemWeight(ItemID.Starfruit, 3);
             }
         }
-        public override bool OnPickup(Item item)
+        public override void Load()
         {
+            PetsOverhaul.OnPickupActions += PreOnPickup;
+        }
+        public void PreOnPickup(Item item, Player player)
+        {
+            Pet = player.GetModPlayer<GlobalPet>();
             if (Pet.PickupChecks(item, ItemID.BlueEgg, out ItemPet itemChck))
             {
                 if (itemChck.herbBoost)
@@ -139,7 +144,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         {
                             for (int i = 0; i < ItemPet.Randomizer(rarePlantChance * item.stack); i++)
                             {
-                                Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
+                                player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
                             }
                         }
                     }
@@ -150,7 +155,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         {
                             for (int i = 0; i < ItemPet.Randomizer(treeChance * item.stack); i++)
                             {
-                                Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
+                                player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
                             }
                         }
                     }
@@ -161,13 +166,12 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         {
                             for (int i = 0; i < ItemPet.Randomizer(plantChance * item.stack); i++)
                             {
-                                Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
+                                player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
                             }
                         }
                     }
                 }
             }
-            return base.OnPickup(item);
         }
     }
     public sealed class BlueEgg : GlobalItem

@@ -12,7 +12,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class CursedSapling : ModPlayer
     {
-        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
         public float whipSpeed = 0.025f;
         public float whipRange = 0.04f;
         public float pumpkinWeaponDmg = 0.1f;

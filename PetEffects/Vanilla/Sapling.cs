@@ -14,7 +14,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
     {
         public float planteraLifesteal = 0.03f;
         public float regularLifesteal = 0.009f;
-        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Pet.PetInUseWithSwapCd(ItemID.Seedling) && GlobalPet.LifestealCheck(target))

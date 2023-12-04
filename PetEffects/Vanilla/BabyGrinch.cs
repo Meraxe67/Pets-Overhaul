@@ -17,7 +17,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float grinchSlow = 1f;
         public int grinchRange = 400;
 
-        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
             if (Pet.PetInUseWithSwapCd(ItemID.BabyGrinchMischiefWhistle))

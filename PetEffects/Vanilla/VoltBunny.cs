@@ -17,7 +17,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float movespdToDmg = 0.2f;
         public float staticParalysis = 3f;
         public int staticLength = 45;
-        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
         public override void PostUpdateEquips()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.LightningCarrot))

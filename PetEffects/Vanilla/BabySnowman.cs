@@ -16,7 +16,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float snowmanSlow = 0.2f;
         public int slowTime = 180;
 
-        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Pet.PetInUseWithSwapCd(ItemID.ToySled))

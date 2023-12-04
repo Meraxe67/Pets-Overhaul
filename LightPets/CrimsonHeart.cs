@@ -13,7 +13,7 @@ namespace PetsOverhaul.LightPets
 {
     public sealed class CrimsonHeartEffect : ModPlayer
     {
-        GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
+        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
         public override void PostUpdateEquips()
         {
             if (Player.miscEquips[1].type == ItemID.CrimsonHeart && Player.miscEquips[1].TryGetGlobalItem(out CrimsonHeart crimsonHeart))

@@ -17,7 +17,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float glommerSanityAura = 0.2f;
         public int glommerSanityRange = 4000;
 
-        private GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
+                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); private set { } }
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.GlommerPetItem))
