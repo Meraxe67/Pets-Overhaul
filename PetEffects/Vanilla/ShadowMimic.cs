@@ -11,6 +11,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class ShadowMimic : ModPlayer
     {
+        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
         public int npcCoin = 15;
         public int npcItem = 6;
         public int bossCoin = 7;
@@ -24,8 +25,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public void PreOnPickup(Item item, Player player)
         {
-            GlobalPet Pet = player.GetModPlayer<GlobalPet>();
-            if (Pet.PickupChecks(item, ItemID.OrnateShadowKey, out ItemPet itemChck))
+            GlobalPet PickerPet = player.GetModPlayer<GlobalPet>();
+            if (PickerPet.PickupChecks(item, ItemID.OrnateShadowKey, out ItemPet itemChck))
             {
                 chanceToRollItem = 0;
                 if (itemChck.itemFromNpc == true)

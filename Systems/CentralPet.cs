@@ -166,16 +166,20 @@ namespace PetsOverhaul.Systems
             }
             Player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.CopperCoin, coinAmount);
         }
-        public override bool OnPickup(Item item)
+        public override void Load()
         {
-            if (item.TryGetGlobalItem(out ItemPet fortune) && fortune.pickedUpBefore == false && Player.CanPullItem(item, Player.ItemSpace(item)))
+            PetsOverhaul.OnPickupActions += PreOnPickup;
+        }
+        public void PreOnPickup(Item item, Player player)
+        {
+            if (item.TryGetGlobalItem(out ItemPet fortune) && fortune.pickedUpBefore == false && player.CanPullItem(item, player.ItemSpace(item)))
             {
                 if (fortune.globalDrop)
                 {
                     for (int i = 0; i < ItemPet.Randomizer(globalFortune * item.stack); i++)
                     {
                         //    Item.NewItem(GetSource_Pet(EntitySource_Pet.TypeId.globalItem), Player.Hitbox, item);
-                        Player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.globalItem), item, 1);
+                        player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.globalItem), item, 1);
                     }
                 }
 
@@ -183,7 +187,7 @@ namespace PetsOverhaul.Systems
                 {
                     for (int i = 0; i < ItemPet.Randomizer((globalFortune * 10 / 2 + harvestingFortune * 10) * item.stack, 1000); i++) //Multiplied by 10 and divided by 1000 since we divide globalFortune by 2, to get more precise numbers.
                     {
-                        Player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.harvestingFortuneItem), item, 1);
+                        player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.harvestingFortuneItem), item, 1);
                     }
                 }
 
@@ -191,7 +195,7 @@ namespace PetsOverhaul.Systems
                 {
                     for (int i = 0; i < ItemPet.Randomizer((globalFortune * 10 / 2 + miningFortune * 10) * item.stack, 1000); i++)
                     {
-                        Player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.miningFortuneItem), item, 1);
+                        player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.miningFortuneItem), item, 1);
                     }
                 }
 
@@ -199,11 +203,10 @@ namespace PetsOverhaul.Systems
                 {
                     for (int i = 0; i < ItemPet.Randomizer((globalFortune * 10 / 2 + fishingFortune) * item.stack, 1000); i++)
                     {
-                        Player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.fishingFortuneItem), item, 1);
+                        player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.fishingFortuneItem), item, 1);
                     }
                 }
             }
-            return base.OnPickup(item);
         }
         /// <summary>
         /// Checks if the given Pet Item is in use and checks if pet has been lately swapped or not.
