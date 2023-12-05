@@ -35,15 +35,16 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             PetsOverhaul.OnPickupActions += PreOnPickup;
         }
-        public void PreOnPickup(Item item, Player player)
+        public static void PreOnPickup(Item item, Player player)
         {
             GlobalPet Pet = player.GetModPlayer<GlobalPet>();
+            BabyDinosaur dino = player.GetModPlayer<BabyDinosaur>();
             if (Pet.PickupChecks(item, ItemID.AmberMosquito, out ItemPet itemChck) && itemChck.oreBoost)
             {
                 AddItemsToPool();
                 if (GlobalPet.pool.Count > 0)
                 {
-                    for (int i = 0; i < ItemPet.Randomizer(chance * item.stack, 1000); i++)
+                    for (int i = 0; i < ItemPet.Randomizer(dino.chance * item.stack, 1000); i++)
                     {
                         player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.miningItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
                     }

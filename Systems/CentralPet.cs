@@ -170,22 +170,22 @@ namespace PetsOverhaul.Systems
         {
             PetsOverhaul.OnPickupActions += PreOnPickup;
         }
-        public void PreOnPickup(Item item, Player player)
+        public static void PreOnPickup(Item item, Player player)
         {
+            GlobalPet PickerPet = player.GetModPlayer<GlobalPet>();
             if (item.TryGetGlobalItem(out ItemPet fortune) && fortune.pickedUpBefore == false && player.CanPullItem(item, player.ItemSpace(item)))
             {
                 if (fortune.globalDrop)
                 {
-                    for (int i = 0; i < ItemPet.Randomizer(globalFortune * item.stack); i++)
+                    for (int i = 0; i < ItemPet.Randomizer(PickerPet.globalFortune * item.stack); i++)
                     {
-                        //    Item.NewItem(GetSource_Pet(EntitySource_Pet.TypeId.globalItem), Player.Hitbox, item);
                         player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.globalItem), item, 1);
                     }
                 }
 
                 if (fortune.harvestingDrop)
                 {
-                    for (int i = 0; i < ItemPet.Randomizer((globalFortune * 10 / 2 + harvestingFortune * 10) * item.stack, 1000); i++) //Multiplied by 10 and divided by 1000 since we divide globalFortune by 2, to get more precise numbers.
+                    for (int i = 0; i < ItemPet.Randomizer((PickerPet.globalFortune * 10 / 2 + PickerPet.harvestingFortune * 10) * item.stack, 1000); i++) //Multiplied by 10 and divided by 1000 since we divide globalFortune by 2, to get more precise numbers.
                     {
                         player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.harvestingFortuneItem), item, 1);
                     }
@@ -193,7 +193,7 @@ namespace PetsOverhaul.Systems
 
                 if (fortune.miningDrop)
                 {
-                    for (int i = 0; i < ItemPet.Randomizer((globalFortune * 10 / 2 + miningFortune * 10) * item.stack, 1000); i++)
+                    for (int i = 0; i < ItemPet.Randomizer((PickerPet.globalFortune * 10 / 2 + PickerPet.miningFortune * 10) * item.stack, 1000); i++)
                     {
                         player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.miningFortuneItem), item, 1);
                     }
@@ -201,7 +201,7 @@ namespace PetsOverhaul.Systems
 
                 if (fortune.fishingDrop)
                 {
-                    for (int i = 0; i < ItemPet.Randomizer((globalFortune * 10 / 2 + fishingFortune) * item.stack, 1000); i++)
+                    for (int i = 0; i < ItemPet.Randomizer((PickerPet.globalFortune * 10 / 2 + PickerPet.fishingFortune) * item.stack, 1000); i++)
                     {
                         player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.fishingFortuneItem), item, 1);
                     }

@@ -19,43 +19,44 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             PetsOverhaul.OnPickupActions += PreOnPickup;
         }
-        public void PreOnPickup(Item item, Player player)
+        public static void PreOnPickup(Item item, Player player)
         {
             GlobalPet PickerPet = player.GetModPlayer<GlobalPet>();
             Junimo Juni = player.GetModPlayer<Junimo>();
+            DirtiestBlock dirt = player.GetModPlayer<DirtiestBlock>();
             if (PickerPet.PickupChecks(item, ItemID.DirtiestBlock, out ItemPet itemChck) && itemChck.blockNotByPlayer == true)
             {
                 if (item.type == ItemID.DirtBlock)
                 {
-                    PickerPet.GiveCoins(ItemPet.Randomizer(item.stack * dirtCoin));
+                    PickerPet.GiveCoins(ItemPet.Randomizer(item.stack * dirt.dirtCoin));
                     if (Juni.JunimoExpCheck())
                     {
-                        int value = ItemPet.Randomizer((int)(dirtCoin * Juni.junimoInUseMultiplier * item.stack * PickerPet.miningExpBoost), 10000);
+                        int value = ItemPet.Randomizer((int)(dirt.dirtCoin * Juni.junimoInUseMultiplier * item.stack * PickerPet.miningExpBoost), 10000);
                         Juni.junimoMiningExp += value;
                         Juni.popupExpMining += value;
                         if (value > 0)
                         {
-                            Juni.popupIndexMining = Junimo.PopupExp(Juni.popupIndexMining, Juni.popupExpMining, new Color(150, 168, 176),player);
+                            Juni.popupIndexMining = Juni.PopupExp(Juni.popupIndexMining, Juni.popupExpMining, new Color(150, 168, 176));
                         }
                     }
                 }
                 else if (itemChck.commonBlock == true)
                 {
-                    PickerPet.GiveCoins(ItemPet.Randomizer(item.stack * soilCoin));
+                    PickerPet.GiveCoins(ItemPet.Randomizer(item.stack * dirt.soilCoin));
                     if (Juni.JunimoExpCheck())
                     {
-                        int value = ItemPet.Randomizer((int)(dirtCoin * Juni.junimoInUseMultiplier * item.stack * PickerPet.miningExpBoost), 10000);
+                        int value = ItemPet.Randomizer((int)(dirt.dirtCoin * Juni.junimoInUseMultiplier * item.stack * PickerPet.miningExpBoost), 10000);
                         Juni.junimoMiningExp += value;
                         Juni.popupExpMining += value;
                         if (value > 0)
                         {
-                            Juni.popupIndexMining = Junimo.PopupExp(Juni.popupIndexMining, Juni.popupExpMining, new Color(150, 168, 176),player);
+                            Juni.popupIndexMining = Juni.PopupExp(Juni.popupIndexMining, Juni.popupExpMining, new Color(150, 168, 176));
                         }
                     }
                 }
                 else
                 {
-                    PickerPet.GiveCoins(ItemPet.Randomizer(item.stack * everythingCoin));
+                    PickerPet.GiveCoins(ItemPet.Randomizer(item.stack * dirt.everythingCoin));
                 }
             }
 

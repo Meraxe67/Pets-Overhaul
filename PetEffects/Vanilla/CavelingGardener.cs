@@ -22,14 +22,15 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             PetsOverhaul.OnPickupActions += PreOnPickup;
         }
-        public void PreOnPickup(Item item, Player player)
+        public static void PreOnPickup(Item item, Player player)
         {
             GlobalPet PickerPet = player.GetModPlayer<GlobalPet>();
+            CavelingGardener caveling = player.GetModPlayer<CavelingGardener>();
             if (PickerPet.PickupChecks(item, ItemID.GlowTulip, out ItemPet itemChck))
             {
                 if (itemChck.herbBoost && (player.ZoneDirtLayerHeight || player.ZoneRockLayerHeight || player.ZoneUnderworldHeight))
                 {
-                    for (int i = 0; i < ItemPet.Randomizer(((Junimo.HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)).expAmount >= ItemPet.MinimumExpForRarePlant) ? cavelingRarePlantChance : cavelingRegularPlantChance + (ItemPet.gemstoneTreeItem[item.type] ? cavelingGemTreeChance : 0)) * item.stack); i++)
+                    for (int i = 0; i < ItemPet.Randomizer(((Junimo.HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)).expAmount >= ItemPet.MinimumExpForRarePlant) ? caveling.cavelingRarePlantChance : caveling.cavelingRegularPlantChance + (ItemPet.gemstoneTreeItem[item.type] ? caveling.cavelingGemTreeChance : 0)) * item.stack); i++)
                     {
                         player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), item, 1);
                     }

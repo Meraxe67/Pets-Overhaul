@@ -33,12 +33,13 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             PetsOverhaul.OnPickupActions += PreOnPickup;
         }
-        public void PreOnPickup(Item item, Player player)
+        public static void PreOnPickup(Item item, Player player)
         {
             GlobalPet PickerPet = player.GetModPlayer<GlobalPet>();
+            BabyRedPanda panda = player.GetModPlayer<BabyRedPanda>();
             if (PickerPet.PickupChecks(item, ItemID.BambooLeaf, out ItemPet _) && item.type == ItemID.BambooBlock)
             {
-                for (int i = 0; i < ItemPet.Randomizer(bambooChance * item.stack); i++)
+                for (int i = 0; i < ItemPet.Randomizer(panda.bambooChance * item.stack); i++)
                 {
                     player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), item, 1);
                 }

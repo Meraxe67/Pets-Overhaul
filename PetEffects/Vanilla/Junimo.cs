@@ -256,30 +256,6 @@ namespace PetsOverhaul.PetEffects.Vanilla
             { (2000, new int[] { ItemID.LadyOfTheLake, ItemID.Toxikarp, ItemID.Bladetongue, ItemID.CrystalSerpent }) },
             { (2500, new int[] { ItemID.ObsidianSwordfish, ItemID.ScalyTruffle }) }
         };
-        public static void RunSeaCreatureOnKill(BinaryReader reader, int whoAmI, int npcId)
-        {
-            int player = reader.ReadByte();
-            if (Main.netMode == NetmodeID.Server)
-            {
-                player = whoAmI;
-            }
-            Main.player[player].GetModPlayer<Junimo>().ExpOnSeaCreatureKill(npcId);
-        }
-        public void ExpOnSeaCreatureKill(int npcId)
-        {
-            if (Player.whoAmI == Main.myPlayer && JunimoExpCheck())
-            {
-                int value;
-                int index = FishingXpPerKill.IndexOf(FishingXpPerKill.Find(x => x.enemyList.Contains(npcId)));
-                value = index == -1
-                    ? ItemPet.Randomizer((int)(defaultSeaCreatureExp * junimoInUseMultiplier * Pet.fishingExpBoost))
-                    : ItemPet.Randomizer((int)(FishingXpPerKill[index].expAmount * junimoInUseMultiplier * Pet.fishingExpBoost));
-
-                junimoFishingExp += value;
-                popupExpFish += value;
-                popupIndexFish = PopupExp(popupIndexFish, popupExpFish, new Color(3, 130, 233),Player);
-            }
-        }
 
         public int baseRoll = 100; //3
         public int rollChancePerLevel = 10; // 0.2
@@ -342,7 +318,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         /// <summary>
         /// Updates currently existing classes popup experience text or creates a new one if its nonexistent. This won't do anything if Config option to disable Exp popups are true. Returns Index of newly created Popup text, or will still return same index as before, if it already exists.
         /// </summary>
-        public static int PopupExp(int classIndex, int classExp, Color color, Player player)
+        public int PopupExp(int classIndex, int classExp, Color color)
         {
             if (ModContent.GetInstance<Personalization>().JunimoExpGainMessage == false)
             {
@@ -350,13 +326,13 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 if (classIndex != -1)
                 {
                     Main.popupText[classIndex].name = "+" + classExp.ToString() + " exp";
-                    Main.popupText[classIndex].position = player.Center;
+                    Main.popupText[classIndex].position = Player.Center;
                     Main.popupText[classIndex].velocity = popupVelo;
                     Main.popupText[classIndex].lifeTime = classExp + 180 > 700 ? 700 : (classExp + 180);
                 }
                 else
                 {
-                    classIndex = PopupText.NewText(new AdvancedPopupRequest() with { Velocity = popupVelo, DurationInFrames = 180, Color = color, Text = "+" + classExp.ToString() + " exp" }, player.Center);
+                    classIndex = PopupText.NewText(new AdvancedPopupRequest() with { Velocity = popupVelo, DurationInFrames = 180, Color = color, Text = "+" + classExp.ToString() + " exp" }, Player.Center);
                 }
                 Main.popupText[classIndex].rotation = Main.rand.NextFloat(0.2f);
             }
@@ -370,9 +346,10 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             PetsOverhaul.OnPickupActions += PreOnPickup;
         }
-        public void PreOnPickup(Item item, Player player)
+        public static void PreOnPickup(Item item, Player player)
         {
             GlobalPet PickerPet = player.GetModPlayer<GlobalPet>();
+            Junimo juni = player.GetModPlayer<Junimo>();
             if (player.CanPullItem(item, player.ItemSpace(item)) && item.TryGetGlobalItem(out ItemPet itemChck) && itemChck.pickedUpBefore == false)
             {
                 if (itemChck.herbBoost)
@@ -381,71 +358,71 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
                     if (player.HasItemInInventoryOrOpenVoidBag(ItemID.JunimoPetItem) || PickerPet.PetInUse(ItemID.JunimoPetItem))
                     {
-                        PickerPet.GiveCoins(ItemPet.Randomizer((int)(harvestingExpToCoinPerLevel * junimoHarvestingLevel * value * junimoInUseMultiplier * item.stack)));
+                        PickerPet.GiveCoins(ItemPet.Randomizer((int)(juni.harvestingExpToCoinPerLevel * juni.junimoHarvestingLevel * value * juni.junimoInUseMultiplier * item.stack)));
                     }
-                    if (JunimoExpCheck())
+                    if (juni.JunimoExpCheck())
                     {
-                        value = ItemPet.Randomizer((int)(value * junimoInUseMultiplier * item.stack * PickerPet.harvestingExpBoost));
-                        junimoHarvestingExp += value;
-                        popupExpHarv += value;
-                        popupIndexHarv = PopupExp(popupIndexHarv, popupExpHarv, new Color(205, 255, 0),player);
+                        value = ItemPet.Randomizer((int)(value * juni.junimoInUseMultiplier * item.stack * PickerPet.harvestingExpBoost));
+                        juni.junimoHarvestingExp += value;
+                        juni.popupExpHarv += value;
+                        juni.popupIndexHarv = juni.PopupExp(juni.popupIndexHarv, juni.popupExpHarv, new Color(205, 255, 0));
                     }
                 }
                 else if (itemChck.oreBoost)
                 {
-                    if (JunimoExpCheck())
+                    if (juni.JunimoExpCheck())
                     {
                         int index = MiningXpPerBlock.IndexOf(MiningXpPerBlock.Find(x => x.oreList.Contains(item.type)));
                         int value = index == -1
-                            ? ItemPet.Randomizer((int)(PickerPet.miningExpBoost * defaultExps * item.stack * junimoInUseMultiplier))
-                            : ItemPet.Randomizer((int)(MiningXpPerBlock[index].expAmount * junimoInUseMultiplier * item.stack * PickerPet.miningExpBoost));
-                        junimoMiningExp += value;
-                        popupExpMining += value;
-                        popupIndexMining = PopupExp(popupIndexMining, popupExpMining, new Color(150, 168, 176),player);
+                            ? ItemPet.Randomizer((int)(PickerPet.miningExpBoost * juni.defaultExps * item.stack * juni.junimoInUseMultiplier))
+                            : ItemPet.Randomizer((int)(MiningXpPerBlock[index].expAmount * juni.junimoInUseMultiplier * item.stack * PickerPet.miningExpBoost));
+                        juni.junimoMiningExp += value;
+                        juni.popupExpMining += value;
+                        juni.popupIndexMining = juni.PopupExp(juni.popupIndexMining, juni.popupExpMining, new Color(150, 168, 176));
                     }
                     if (player.HasItemInInventoryOrOpenVoidBag(ItemID.JunimoPetItem) || PickerPet.PetInUse(ItemID.JunimoPetItem))
                     {
-                        for (int i = 0; i < ItemPet.Randomizer((int)(junimoMiningLevel * miningOrePerLevel * junimoInUseMultiplier) * item.stack); i++)
+                        for (int i = 0; i < ItemPet.Randomizer((int)(juni.junimoMiningLevel * juni.miningOrePerLevel * juni.junimoInUseMultiplier) * item.stack); i++)
                         {
                             player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), item, 1);
                         }
                     }
                 }
 
-                if (JunimoExpCheck())
+                if (juni.JunimoExpCheck())
                 {
                     if (itemChck.harvestingDrop || itemChck.fortuneHarvestingDrop)
                     {
                         int value;
                         int index = HarvestingXpPerGathered.IndexOf(HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)));
                         value = index == -1
-                            ? defaultExps
-                            : ItemPet.Randomizer((int)(HarvestingXpPerGathered[index].expAmount * junimoInUseMultiplier * item.stack * PickerPet.harvestingExpBoost));
-                        junimoHarvestingExp += value;
-                        popupExpHarv += value;
-                        popupIndexHarv = PopupExp(popupIndexHarv, popupExpHarv, new Color(205, 255, 0), player);
+                            ? juni.defaultExps
+                            : ItemPet.Randomizer((int)(HarvestingXpPerGathered[index].expAmount * juni.junimoInUseMultiplier * item.stack * PickerPet.harvestingExpBoost));
+                        juni.junimoHarvestingExp += value;
+                        juni.popupExpHarv += value;
+                        juni.popupIndexHarv = juni.PopupExp(juni.popupIndexHarv, juni.popupExpHarv, new Color(205, 255, 0));
                     }
                     if (itemChck.miningDrop || itemChck.fortuneMiningDrop)
                     {
                         int value;
                         int index = MiningXpPerBlock.IndexOf(MiningXpPerBlock.Find(x => x.oreList.Contains(item.type)));
                         value = index == -1
-                            ? defaultExps
-                            : ItemPet.Randomizer((int)(MiningXpPerBlock[index].expAmount * junimoInUseMultiplier * item.stack * PickerPet.miningExpBoost));
-                        junimoMiningExp += value;
-                        popupExpMining += value;
-                        popupIndexMining = PopupExp(popupIndexMining, popupExpMining, new Color(150, 168, 176),player);
+                            ? juni.defaultExps
+                            : ItemPet.Randomizer((int)(MiningXpPerBlock[index].expAmount * juni.junimoInUseMultiplier * item.stack * PickerPet.miningExpBoost));
+                        juni.junimoMiningExp += value;
+                        juni.popupExpMining += value;
+                        juni.popupIndexMining = juni.PopupExp(juni.popupIndexMining, juni.popupExpMining, new Color(150, 168, 176));
                     }
                     if (itemChck.fishingDrop || itemChck.fortuneFishingDrop)
                     {
                         int value;
                         int index = FishingXpPerCaught.IndexOf(FishingXpPerCaught.Find(x => x.fishList.Contains(item.type)));
                         value = index == -1
-                            ? defaultExps
-                            : ItemPet.Randomizer((int)(PickerPet.fishingExpBoost * FishingXpPerCaught[index].expAmount * junimoInUseMultiplier * item.stack));
-                        junimoFishingExp += value;
-                        popupExpFish += value;
-                        popupIndexFish = PopupExp(popupIndexFish, popupExpFish, new Color(3, 130, 233),player);
+                            ? juni.defaultExps
+                            : ItemPet.Randomizer((int)(PickerPet.fishingExpBoost * FishingXpPerCaught[index].expAmount * juni.junimoInUseMultiplier * item.stack));
+                        juni.junimoFishingExp += value;
+                        juni.popupExpFish += value;
+                        juni.popupIndexFish = juni.PopupExp(juni.popupIndexFish, juni.popupExpFish, new Color(3, 130, 233));
                     }
                 }
             }
@@ -467,6 +444,30 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 }
             }
         }
+        public static void RunSeaCreatureOnKill(BinaryReader reader, int whoAmI, int npcId)
+        {
+            int player = reader.ReadByte();
+            if (Main.netMode == NetmodeID.Server)
+            {
+                player = whoAmI;
+            }
+            Main.player[player].GetModPlayer<Junimo>().ExpOnSeaCreatureKill(npcId);
+        }
+        public void ExpOnSeaCreatureKill(int npcId)
+        {
+            if (Player.whoAmI == Main.myPlayer && JunimoExpCheck())
+            {
+                int value;
+                int index = FishingXpPerKill.IndexOf(FishingXpPerKill.Find(x => x.enemyList.Contains(npcId)));
+                value = index == -1
+                    ? ItemPet.Randomizer((int)(defaultSeaCreatureExp * junimoInUseMultiplier * Pet.fishingExpBoost))
+                    : ItemPet.Randomizer((int)(FishingXpPerKill[index].expAmount * junimoInUseMultiplier * Pet.fishingExpBoost));
+
+                junimoFishingExp += value;
+                popupExpFish += value;
+                popupIndexFish = PopupExp(popupIndexFish, popupExpFish, new Color(3, 130, 233));
+            }
+        }
         public override void AnglerQuestReward(float rareMultiplier, List<Item> rewardItems)
         {
             if (anglerQuestDayCheck == false && JunimoExpCheck())
@@ -484,7 +485,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 junimoFishingExp += value;
                 popupExpFish += value;
                 anglerQuestDayCheck = true;
-                popupIndexFish = PopupExp(popupIndexFish, popupExpFish, new Color(3, 130, 233),Player);
+                popupIndexFish = PopupExp(popupIndexFish, popupExpFish, new Color(3, 130, 233));
             }
         }
         public override void ModifyCaughtFish(Item fish)
@@ -497,7 +498,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     : ItemPet.Randomizer((int)(Pet.fishingExpBoost * FishingXpPerCaught[index].expAmount * junimoInUseMultiplier * fish.stack));
                 junimoFishingExp += value;
                 popupExpFish += value;
-                popupIndexFish = PopupExp(popupIndexFish, popupExpFish, new Color(3, 130, 233),Player);
+                popupIndexFish = PopupExp(popupIndexFish, popupExpFish, new Color(3, 130, 233));
             }
         }
         public override void GetFishingLevel(Item fishingRod, Item bait, ref float fishingLevel)

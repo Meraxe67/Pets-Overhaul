@@ -19,14 +19,15 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             PetsOverhaul.OnPickupActions += PreOnPickup;
         }
-        public void PreOnPickup(Item item, Player player)
+        public static void PreOnPickup(Item item, Player player)
         {
             GlobalPet PickerPet = player.GetModPlayer<GlobalPet>();
+            Squashling squash = player.GetModPlayer<Squashling>();
             if (PickerPet.PickupChecks(item, ItemID.MagicalPumpkinSeed, out ItemPet itemChck))
             {
                 if (itemChck.herbBoost == true)
                 {
-                    for (int i = 0; i < ItemPet.Randomizer((Junimo.HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)).expAmount >= ItemPet.MinimumExpForRarePlant) ? squashlingRareChance : squashlingCommonChance) * item.stack; i++)
+                    for (int i = 0; i < ItemPet.Randomizer((Junimo.HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)).expAmount >= ItemPet.MinimumExpForRarePlant) ? squash.squashlingRareChance : squash.squashlingCommonChance) * item.stack; i++)
                     {
                         player.QuickSpawnItemDirect(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), item, 1);
                     }

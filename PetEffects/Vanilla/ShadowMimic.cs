@@ -23,25 +23,26 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             PetsOverhaul.OnPickupActions += PreOnPickup;
         }
-        public void PreOnPickup(Item item, Player player)
+        public static void PreOnPickup(Item item, Player player)
         {
             GlobalPet PickerPet = player.GetModPlayer<GlobalPet>();
+            ShadowMimic mimic = player.GetModPlayer<ShadowMimic>();
             if (PickerPet.PickupChecks(item, ItemID.OrnateShadowKey, out ItemPet itemChck))
             {
-                chanceToRollItem = 0;
+                mimic.chanceToRollItem = 0;
                 if (itemChck.itemFromNpc == true)
                 {
-                    chanceToRollItem += (item.IsACoin ? npcCoin : npcItem) * item.stack;
+                    mimic.chanceToRollItem += (item.IsACoin ? mimic.npcCoin : mimic.npcItem) * item.stack;
                 }
                 if (itemChck.itemFromBoss == true && ItemID.Sets.BossBag[item.type] == false)
                 {
-                    chanceToRollItem += (item.IsACoin ? bossCoin : bossItem) * item.stack;
+                    mimic.chanceToRollItem += (item.IsACoin ? mimic.bossCoin : mimic.bossItem) * item.stack;
                 }
                 if (itemChck.itemFromBag == true)
                 {
-                    chanceToRollItem += (item.IsACoin ? bagCoin : bagItem) * item.stack;
+                    mimic.chanceToRollItem += (item.IsACoin ? mimic.bagCoin : mimic.bagItem) * item.stack;
                 }
-                for (int i = 0; i < ItemPet.Randomizer(chanceToRollItem); i++)
+                for (int i = 0; i < ItemPet.Randomizer(mimic.chanceToRollItem); i++)
                 {
                     player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), item, 1);
                 }
