@@ -5,6 +5,7 @@ Mods: {
 		// x: x
 		// +: +
 		// -: -
+		// JojaCola: A nature related NPC may be able to Purify this
 		/* Notice:
 			'''
 			[c/90C2AA:Pets Overhaul 2.3.3 latest changes: Cross-Mod compability for Pets that works on item pickup!]
@@ -18,10 +19,10 @@ Mods: {
 
 		Config: {
 			Personalization: Personalização
-			// JunimoExpActive: "[c/AEAEAE:active]"
-			// JunimoExpInactive: "[c/AEAEAE:inactive]"
 			JunimoLevelupLabel: Desabilitar a notificação de nível de Junimo
 			JunimoLevelupTooltip: Desabilita o texto e som das notificações de aumento de nível de Junimo ao aumentar o nível de uma classe. Não desabilita a mecânica de nível.
+			// JunimoExpActive: "[c/AEAEAE:active]"
+			// JunimoExpInactive: "[c/AEAEAE:inactive]"
 			JunimoExpLabel: Desabilitar ganho de Exp enquanto não tiver o Junimo
 			JunimoExpTooltip: Desabilita todo o ganho de experiência de Junimo se não tiver o Pingo de Estrela em qualquer um de seus inventários ou não estiver no espaço de pets.
 			// JunimoExpGainMessageLabel: Disable Junimo Exp pop-up messages
@@ -53,6 +54,8 @@ Mods: {
 			MoreDifficultTooltip: Desabilita o jogador causar 5% menos dano e receber 5% mais dano, que é implementado para contrariar o mod adicionar um aumento de poder
 			SwapCooldownLabel: Desabilitar tempo de recarga em troca de pet
 			SwapCooldownTooltip: Desabilita o jogador de ganhar o Debuff Pet Desatento ao trocar de pet. Prevenindo qualquer vantagem relacionada à combate de ativar durante esse tempo (Não recomendado)
+			// JojaColaEasyLabel: Joja Cola Easy Off
+			// JojaColaEasyTooltip: ""
 		}
 
 		LightPetTooltips: {

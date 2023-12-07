@@ -5,6 +5,7 @@ Mods: {
 		x: x
 		+: +
 		-: -
+		JojaCola: A nature related NPC may be able to Purify this
 		Notice:
 			'''
 			[c/90C2AA:Pets Overhaul 2.3.3 latest changes: Cross-Mod compability for Pets that works on item pickup!]
@@ -18,14 +19,14 @@ Mods: {
 
 		Config: {
 			Personalization: Personalization
-			JunimoExpActive: "[c/AEAEAE:active]"
-			JunimoExpInactive: "[c/AEAEAE:inactive]"
 			JunimoLevelupLabel: Disable Junimo levelup notification
 			JunimoLevelupTooltip:
 				'''
 				Disables Junimo Pet's Level-up text and sound effect notifications
 				upon increasing a class's level. Does not disable the level mechanic.
 				'''
+			JunimoExpActive: "[c/AEAEAE:active]"
+			JunimoExpInactive: "[c/AEAEAE:inactive]"
 			JunimoExpLabel: Disable Junimo Exp gain while you don't have it
 			JunimoExpTooltip:
 				'''
@@ -95,6 +96,8 @@ Mods: {
 				Which prevents any Combat-related perks to be active during the time.
 				(not recommended due to obvious balance reasons)
 				'''
+			JojaColaEasyLabel: Joja Cola Easy Off
+			JojaColaEasyTooltip: ""
 		}
 
 		LightPetTooltips: {

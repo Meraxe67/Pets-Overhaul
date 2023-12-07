@@ -5,6 +5,7 @@ Mods: {
 		// x: x
 		// +: +
 		// -: -
+		// JojaCola: A nature related NPC may be able to Purify this
 		Notice:
 			'''
 			[c/90C2AA:Pets Overhaul 2.2.7 latest changes: Portugues translation!]
@@ -17,14 +18,14 @@ Mods: {
 
 		Config: {
 			Personalization: 个性化设置
-			JunimoExpActive: "[c/AEAEAE:是]"
-			JunimoExpInactive: "[c/AEAEAE:否]"
 			JunimoLevelupLabel: 禁用祝尼魔升级通知
 			JunimoLevelupTooltip:
 				'''
 				禁用祝尼魔宠物在提升各类型等级时的文
 				本与音效通知.此选项不会禁用等级机制.
 				'''
+			JunimoExpActive: "[c/AEAEAE:是]"
+			JunimoExpInactive: "[c/AEAEAE:否]"
 			JunimoExpLabel: 禁用未拥有祝尼魔时获取职业经验
 			JunimoExpTooltip:
 				'''
@@ -94,6 +95,8 @@ Mods: {
 				在减益生效期间,宠物任何与战斗相关的效果都会被禁用.
 				(由于平衡性原因,不推荐禁用)
 				'''
+			// JojaColaEasyLabel: Joja Cola Easy Off
+			// JojaColaEasyTooltip: ""
 		}
 
 		LightPetTooltips: {
