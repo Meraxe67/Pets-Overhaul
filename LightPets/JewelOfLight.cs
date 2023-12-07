@@ -66,9 +66,12 @@ namespace PetsOverhaul.LightPets
         }
         public override void LoadData(Item item, TagCompound tag)
         {
-            moveSpdRoll = tag.GetInt("EmpressMoveSpd");
-            wingRoll = tag.GetInt("EmpressWing");
-            fishingExpRoll = tag.GetInt("EmpressExp");
+            if (tag.TryGet("EmpressMoveSpd", out int spd))
+                moveSpdRoll = spd;
+            if (tag.TryGet("EmpressWing", out int wing))
+                wingRoll = wing;
+            if (tag.TryGet("EmpressExp", out int exp))
+                fishingExpRoll = exp;
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {

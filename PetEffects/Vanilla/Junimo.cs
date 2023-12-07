@@ -619,13 +619,20 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public override void LoadData(TagCompound tag)
         {
-            anglerQuestDayCheck = tag.GetBool("AnglerCheck");
-            junimoHarvestingLevel = tag.GetInt("harvestlvl");
-            junimoHarvestingExp = tag.GetInt("harvestexp");
-            junimoMiningLevel = tag.GetInt("mininglvl");
-            junimoMiningExp = tag.GetInt("miningexp");
-            junimoFishingLevel = tag.GetInt("fishinglvl");
-            junimoFishingExp = tag.GetInt("fishingexp");
+            if (tag.TryGet("AnglerCheck", out bool anglerCheck))
+            anglerQuestDayCheck = anglerCheck; 
+            if (tag.TryGet("harvestlvl", out int harvLvl))
+                junimoHarvestingLevel = harvLvl;
+            if (tag.TryGet("harvestexp", out int harvExp))
+                junimoHarvestingExp = harvExp;
+            if (tag.TryGet("mininglvl", out int miningLvl))
+                junimoMiningLevel = miningLvl;
+            if (tag.TryGet("miningexp", out int miningExp))
+                junimoMiningExp = miningExp;
+            if (tag.TryGet("fishinglvl", out int fishLvl))
+                junimoFishingLevel = fishLvl;
+            if (tag.TryGet("fishingexp", out int fishExp))
+                junimoFishingExp = fishExp;
         }
     }
 

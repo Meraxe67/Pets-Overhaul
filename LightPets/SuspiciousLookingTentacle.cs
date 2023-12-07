@@ -166,18 +166,30 @@ namespace PetsOverhaul.LightPets
         }
         public override void LoadData(Item item, TagCompound tag)
         {
-            crDmgRoll = tag.GetInt("MlCrDmg");
-            critRoll = tag.GetInt("MlCrit");
-            defRoll = tag.GetInt("MlDef");
-            dmgRoll = tag.GetInt("MlDmg");
-            healRoll = tag.GetInt("MlHeal");
-            manaRoll = tag.GetInt("MlMana");
-            minRoll = tag.GetInt("MlMin");
-            msRoll = tag.GetInt("MlMs");
-            penRoll = tag.GetInt("MlPen");
-            potRoll = tag.GetInt("MlPot");
-            sizeRoll = tag.GetInt("MlSize");
-            whipRoll = tag.GetInt("MlWhip");
+            if (tag.TryGet("MlCrDmg", out int crDmg))
+                crDmgRoll = crDmg;
+            if (tag.TryGet("MlCrit", out int crChance))
+                critRoll = crChance;
+            if (tag.TryGet("MlDef", out int def))
+                defRoll = def;
+            if (tag.TryGet("MlDmg", out int dmg))
+                dmgRoll = dmg;
+            if (tag.TryGet("MlHeal", out int heal))
+                healRoll = heal;
+            if (tag.TryGet("MlMana", out int mana))
+                manaRoll = mana;
+            if (tag.TryGet("MlMin", out int minion))
+                minRoll = minion;
+            if (tag.TryGet("MlMs", out int moveSpd))
+                msRoll = moveSpd;
+            if (tag.TryGet("MlPen", out int pen))
+                penRoll = pen;
+            if (tag.TryGet("MlPot", out int pot))
+                potRoll = pot;
+            if (tag.TryGet("MlSize", out int size))
+                sizeRoll = size;
+            if (tag.TryGet("MlWhip", out int whip))
+                whipRoll = whip;
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {

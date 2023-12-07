@@ -65,9 +65,12 @@ namespace PetsOverhaul.LightPets
         }
         public override void LoadData(Item item, TagCompound tag)
         {
-            healthRoll = tag.GetInt("CrimsonHealth");
-            fishExpRoll = tag.GetInt("CrimsonExp");
-            fishFortRoll = tag.GetInt("CrimsonFort");
+            if (tag.TryGet("CrimsonHealth", out int hp))
+                healthRoll = hp;
+            if (tag.TryGet("CrimsonExp", out int exp))
+                fishExpRoll = exp;
+            if (tag.TryGet("CrimsonFort", out int fort))
+                fishFortRoll = fort;
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {

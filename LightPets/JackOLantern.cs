@@ -72,9 +72,12 @@ namespace PetsOverhaul.LightPets
         }
         public override void LoadData(Item item, TagCompound tag)
         {
-            atkSpdRoll = tag.GetInt("PumpkinAtkSpd");
-            luckRoll = tag.GetInt("PumpkinLuck");
-            harvExpRoll = tag.GetInt("PumpkinExp");
+            if (tag.TryGet("PumpkinAtkSpd", out int aSpd))
+                atkSpdRoll = aSpd;
+            if (tag.TryGet("PumpkinLuck", out int luck))
+                luckRoll = luck;
+            if (tag.TryGet("PumpkinExp", out int exp))
+                harvExpRoll = exp;
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {

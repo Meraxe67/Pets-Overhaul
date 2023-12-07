@@ -74,10 +74,14 @@ namespace PetsOverhaul.LightPets
         }
         public override void LoadData(Item item, TagCompound tag)
         {
-            defRoll = tag.GetInt("LanternDef");
-            defMultRoll = tag.GetInt("LanternMult");
-            miningExpRoll = tag.GetInt("LanternExp");
-            miningFortRoll = tag.GetInt("LanternFort");
+            if (tag.TryGet("LanternDef", out int def))
+                defRoll = def;
+            if (tag.TryGet("LanternMult", out int perc))
+                defMultRoll = perc;
+            if (tag.TryGet("LanternExp", out int exp))
+                miningExpRoll = exp;
+            if (tag.TryGet("EmpressFort", out int fort))
+                miningFortRoll = fort;
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {

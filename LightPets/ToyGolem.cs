@@ -64,9 +64,12 @@ namespace PetsOverhaul.LightPets
         }
         public override void LoadData(Item item, TagCompound tag)
         {
-            regenRoll = tag.GetInt("GolemRegen");
-            healthRoll = tag.GetInt("GolemHealth");
-            miningExpRoll = tag.GetInt("GolemExp");
+            if (tag.TryGet("GolemRegen", out int reg))
+                regenRoll = reg;
+            if (tag.TryGet("GolemHealth", out int hp))
+                healthRoll = hp;
+            if (tag.TryGet("GolemExp", out int exp))
+                miningExpRoll = exp;
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {

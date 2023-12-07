@@ -88,10 +88,14 @@ namespace PetsOverhaul.LightPets
         }
         public override void LoadData(Item item, TagCompound tag)
         {
-            magicRoll = tag.GetInt("WispMagic");
-            rangedRoll = tag.GetInt("WispRanged");
-            projSpdRoll = tag.GetInt("WispProjSpd");
-            projPetRoll = tag.GetInt("WispProjPet");
+            if (tag.TryGet("WispMagic", out int magic))
+                magicRoll = magic;
+            if (tag.TryGet("WispRanged", out int ranged))
+                rangedRoll = ranged;
+            if (tag.TryGet("WispProjSpd", out int projSpd))
+                projSpdRoll = projSpd;
+            if (tag.TryGet("WispProjPet", out int petProj))
+                projPetRoll = petProj;
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {

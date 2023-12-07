@@ -56,8 +56,10 @@ namespace PetsOverhaul.LightPets
         }
         public override void LoadData(Item item, TagCompound tag)
         {
-            hasteRoll = tag.GetInt("FairyHaste");
-            globalFortRoll = tag.GetInt("FairyFort");
+            if (tag.TryGet("FairyHaste", out int haste))
+                hasteRoll = haste;
+            if (tag.TryGet("FairyFort", out int fort))
+                globalFortRoll = fort;
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {

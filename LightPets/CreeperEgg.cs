@@ -65,9 +65,12 @@ namespace PetsOverhaul.LightPets
         }
         public override void LoadData(Item item, TagCompound tag)
         {
-            sumRoll = tag.GetInt("FlickerwickSum");
-            meleeRoll = tag.GetInt("FlickerwickMelee");
-            atkSpdRoll = tag.GetInt("FlickerwickAtkSpd");
+            if (tag.TryGet("FlickerwickSum", out int sum))
+                sumRoll = sum;
+            if (tag.TryGet("FlickerwickMelee", out int melee))
+                meleeRoll = melee;
+            if (tag.TryGet("FlickerwickAtkSpd", out int aSpd))
+                atkSpdRoll = aSpd;
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
