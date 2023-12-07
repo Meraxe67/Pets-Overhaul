@@ -7,6 +7,10 @@ namespace PetsOverhaul.Config
     {
         public override ConfigScope Mode => ConfigScope.ClientSide;
         [Header("$Mods.PetsOverhaul.Config.Personalization")]
+        [LabelKey("$Mods.PetsOverhaul.Config.JojaColaEasyLabel")]
+        [TooltipKey("$Mods.PetsOverhaul.Config.JojaColaEasyTooltip")]
+        [DefaultValue(false)]
+        public bool JojaColaEasyOff;
         [LabelKey("$Mods.PetsOverhaul.Config.JunimoLevelupLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.JunimoLevelupTooltip")]
         [DefaultValue(false)]
