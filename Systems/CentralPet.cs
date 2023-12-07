@@ -24,6 +24,7 @@ namespace PetsOverhaul.Systems
     /// </summary>
     public sealed class GlobalPet : ModPlayer
     {
+        public bool jojaColaCaught = false;
         /// <summary>
         /// Influences the chance to increase stack of the item from your pet that doesn't fit into any other fortune category. This also increases all other fortunes with half effectiveness.
         /// </summary>
@@ -226,11 +227,16 @@ namespace PetsOverhaul.Systems
         {
             tag.Add("SkinColor", skin);
             tag.Add("SkinColorChanged", skinColorChanged);
+            tag.Add("JojaColaCaughtBefore", jojaColaCaught);
         }
         public override void LoadData(TagCompound tag)
         {
-            skin = tag.Get<Color>("SkinColor");
-            skinColorChanged = tag.GetBool("SkinColorChanged");
+            if (tag.TryGet("SkinColor", out Color skinColor))
+                skin = skinColor;
+            if (tag.TryGet("SkinColorChanged", out bool skinChanged))
+                skinColorChanged = skinChanged;
+            if (tag.TryGet("jojaColaCaught", out bool jojaCaught))
+                jojaColaCaught = jojaCaught;
         }
         public static bool LifestealCheck(NPC npc)
         {
@@ -571,6 +577,16 @@ namespace PetsOverhaul.Systems
             }
 
             return base.PreKill(damage, hitDirection, pvp, ref playSound, ref genGore, ref damageSource);
+        }
+        public override void CatchFish(FishingAttempt attempt, ref int itemDrop, ref int npcSpawn, ref AdvancedPopupRequest sonar, ref Vector2 sonarPosition)
+        {
+            if (ModContent.GetInstance<Personalization>().JojaColaEasyOff == false && jojaColaCaught == false && Main.rand.NextBool(5))
+                itemDrop = ItemID.JojaCola;
+        }
+        public override void ModifyCaughtFish(Item fish)
+        {
+            if (fish.type == ItemID.JojaCola)
+                jojaColaCaught = true;
         }
     }
     /// <summary>
