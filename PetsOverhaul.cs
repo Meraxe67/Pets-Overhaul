@@ -9,6 +9,7 @@ using System.Reflection;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.DataStructures;
 
 namespace PetsOverhaul
 {
@@ -19,6 +20,8 @@ namespace PetsOverhaul
             shieldFullAbsorb,
             seaCreatureOnKill,
             honeyBeeHeal,
+            blockPlace,
+            blockReplace,
         }
         public static Action<Item, Player> OnPickupActions;
         private delegate bool orig_ItemLoaderOnPickup(Item item, Player player);
@@ -69,6 +72,16 @@ namespace PetsOverhaul
                         packet.Send(ignoreClient: honeyBeeWhoAmI);
                     }
                     HoneyBee.HealByHoneyBee(bottledHoney, honeyBeeWhoAmI, false);
+                    break;
+                case MessageType.blockPlace:
+                    int xPlace = reader.ReadInt32();
+                    int yPlace = reader.ReadInt32();
+                    PlayerPlacedBlockList.placedBlocksByPlayer.Add(new Point16(xPlace, yPlace));
+                    break;
+                case MessageType.blockReplace:
+                    int xReplace = reader.ReadInt32();
+                    int yReplace = reader.ReadInt32();
+                    ItemPet.updateReplacedTile.Add(new Point16(xReplace, yReplace));
                     break;
                 default: throw new ArgumentOutOfRangeException(nameof(msgType));
             }
