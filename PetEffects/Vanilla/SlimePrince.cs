@@ -27,19 +27,31 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public Player slimePrince;
 
         public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
+        public void PutOutTheBurn()
+        {
+            for (int i = 0; i < Player.MaxBuffs; i++)
+            {
+                if (Pet.burnDebuffs[Player.buffType[i]])
+                {
+                    Player.buffTime[i]--;
+                }
+            }
+        }
         public override void PostUpdateEquips()
         {
-            if (GlobalPet.KingSlimePetActive(out slimePrince) && Player.HasBuff(BuffID.Wet)) //Burda kullanan oyuncunun statlarını almıyor.
+            if (GlobalPet.KingSlimePetActive(out slimePrince) && Player.HasBuff(BuffID.Wet))
             {
                 Player.moveSpeed += slimePrince.GetModPlayer<SlimePrince>().wetSpeed;
                 Player.GetDamage<GenericDamageClass>() += slimePrince.GetModPlayer<SlimePrince>().wetDmg;
                 Player.statDefense *= slimePrince.GetModPlayer<SlimePrince>().wetDef;
+                PutOutTheBurn();
             }
-            else if (GlobalPet.DualSlimePetActive(out slimeDual) && Player.HasBuff(BuffID.Wet))//Burda kullanan oyuncunun statlarını almıyor.
+            else if (GlobalPet.DualSlimePetActive(out slimeDual) && Player.HasBuff(BuffID.Wet))
             {
                 Player.moveSpeed += slimeDual.GetModPlayer<DualSlime>().wetSpeed;
                 Player.GetDamage<GenericDamageClass>() += slimeDual.GetModPlayer<DualSlime>().wetDmg;
                 Player.statDefense *= slimeDual.GetModPlayer<DualSlime>().wetDef;
+                PutOutTheBurn();
             }
             if (GlobalPet.KingSlimePetActive(out slimePrince) && Player.HasBuff(BuffID.Slimed))
             {
