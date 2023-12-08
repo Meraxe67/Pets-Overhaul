@@ -17,7 +17,9 @@ namespace PetsOverhaul.Systems
                 packet.Send();
             }
             else
-            PlayerPlacedBlockList.placedBlocksByPlayer.Add(new Point16(i, j));
+            {
+                PlayerPlacedBlockList.placedBlocksByPlayer.Add(new Point16(i, j));
+            }
         }
         public override bool CanReplace(int i, int j, int type, int tileTypeBeingPlaced)
         {
@@ -30,7 +32,10 @@ namespace PetsOverhaul.Systems
                 packet.Send();
             }
             else
+            {
                 ItemPet.updateReplacedTile.Add(new Point16(i, j));
+            }
+
             return base.CanReplace(i, j, type, tileTypeBeingPlaced);
         }
     }

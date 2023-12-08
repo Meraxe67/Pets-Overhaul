@@ -1,9 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using System.Collections.Generic;
-using System.IO;
-using Terraria;
+﻿using System.Collections.Generic;
 using Terraria.DataStructures;
-using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -27,7 +23,9 @@ namespace PetsOverhaul.Systems
         public override void LoadWorldData(TagCompound tag)
         {
             if (tag.TryGet("placedBlocksByPlayer", out List<Point16> listOfPlacedBlocks))
+            {
                 placedBlocksByPlayer = listOfPlacedBlocks;
+            }
         }
     }
 }

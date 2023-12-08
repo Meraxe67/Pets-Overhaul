@@ -13,7 +13,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class CavelingGardener : ModPlayer
     {
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public int cavelingRegularPlantChance = 30;
         public int cavelingGemTreeChance = 100;
         public int cavelingRarePlantChance = 15;

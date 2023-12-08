@@ -16,7 +16,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float accMult = 1.2f;
         public float accSpeedRaise = 0.1f;
 
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.EucaluptusSap))

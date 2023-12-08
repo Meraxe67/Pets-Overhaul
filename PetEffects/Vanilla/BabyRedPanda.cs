@@ -12,7 +12,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class BabyRedPanda : ModPlayer
     {
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public int aggroReduce = 500;
         public float regularAtkSpd = 0.06f;
         public float jungleBonusSpd = 0.04f;

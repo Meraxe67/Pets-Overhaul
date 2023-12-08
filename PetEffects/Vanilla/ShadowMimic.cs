@@ -11,7 +11,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class ShadowMimic : ModPlayer
     {
-        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public int npcCoin = 15;
         public int npcItem = 6;
         public int bossCoin = 7;

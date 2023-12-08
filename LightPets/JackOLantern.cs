@@ -13,7 +13,7 @@ namespace PetsOverhaul.LightPets
 {
     public sealed class JackOLanternEffect : ModPlayer
     {
-        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
             if (Player.miscEquips[1].type == ItemID.PumpkingPetItem && Player.miscEquips[1].TryGetGlobalItem(out JackOLantern jackOLantern))
@@ -58,11 +58,19 @@ namespace PetsOverhaul.LightPets
         public override void UpdateInventory(Item item, Player player)
         {
             if (atkSpdRoll <= 0)
+            {
                 atkSpdRoll = Main.rand.Next(atkSpdMaxRoll) + 1;
+            }
+
             if (harvExpRoll <= 0)
+            {
                 harvExpRoll = Main.rand.Next(harvExpMaxRoll) + 1;
+            }
+
             if (luckRoll <= 0)
+            {
                 luckRoll = Main.rand.Next(luckMaxRoll) + 1;
+            }
         }
         public override void SaveData(Item item, TagCompound tag)
         {
@@ -73,11 +81,19 @@ namespace PetsOverhaul.LightPets
         public override void LoadData(Item item, TagCompound tag)
         {
             if (tag.TryGet("PumpkinAtkSpd", out int aSpd))
+            {
                 atkSpdRoll = aSpd;
+            }
+
             if (tag.TryGet("PumpkinLuck", out int luck))
+            {
                 luckRoll = luck;
+            }
+
             if (tag.TryGet("PumpkinExp", out int exp))
+            {
                 harvExpRoll = exp;
+            }
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {

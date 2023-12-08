@@ -13,7 +13,7 @@ namespace PetsOverhaul.LightPets
 {
     public sealed class ShadowOrbEffect : ModPlayer
     {
-        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
             if (Player.miscEquips[1].type == ItemID.ShadowOrb && Player.miscEquips[1].TryGetGlobalItem(out ShadowOrb shadowOrb))
@@ -51,11 +51,19 @@ namespace PetsOverhaul.LightPets
         public override void UpdateInventory(Item item, Player player)
         {
             if (manaRoll <= 0)
+            {
                 manaRoll = Main.rand.Next(manaMaxRoll) + 1;
+            }
+
             if (harvExpRoll <= 0)
+            {
                 harvExpRoll = Main.rand.Next(harvExpMaxRoll) + 1;
+            }
+
             if (harvFortRoll <= 0)
+            {
                 harvFortRoll = Main.rand.Next(harvFortMaxRoll) + 1;
+            }
         }
         public override void SaveData(Item item, TagCompound tag)
         {
@@ -66,11 +74,19 @@ namespace PetsOverhaul.LightPets
         public override void LoadData(Item item, TagCompound tag)
         {
             if (tag.TryGet("ShadowMana", out int mana))
+            {
                 manaRoll = mana;
+            }
+
             if (tag.TryGet("ShadowExp", out int exp))
+            {
                 harvExpRoll = exp;
+            }
+
             if (tag.TryGet("ShadowFort", out int fort))
+            {
                 harvFortRoll = fort;
+            }
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Terraria;
 using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using Terraria.ID;
 namespace PetsOverhaul.Systems
 {
     public class ItemTooltipChanges : GlobalItem

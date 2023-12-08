@@ -13,7 +13,7 @@ namespace PetsOverhaul.LightPets
 {
     public sealed class MagicLanternEffect : ModPlayer
     {
-        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
             if (Player.miscEquips[1].type == ItemID.MagicLantern && Player.miscEquips[1].TryGetGlobalItem(out MagicLantern magicLantern))
@@ -57,13 +57,24 @@ namespace PetsOverhaul.LightPets
         public override void UpdateInventory(Item item, Player player)
         {
             if (defRoll <= 0)
+            {
                 defRoll = Main.rand.Next(defMaxRoll) + 1;
+            }
+
             if (defMultRoll <= 0)
+            {
                 defMultRoll = Main.rand.Next(defMultMaxRoll) + 1;
+            }
+
             if (miningExpRoll <= 0)
+            {
                 miningExpRoll = Main.rand.Next(miningExpMaxRoll) + 1;
+            }
+
             if (miningFortRoll <= 0)
+            {
                 miningFortRoll = Main.rand.Next(miningFortMaxRoll) + 1;
+            }
         }
         public override void SaveData(Item item, TagCompound tag)
         {
@@ -75,13 +86,24 @@ namespace PetsOverhaul.LightPets
         public override void LoadData(Item item, TagCompound tag)
         {
             if (tag.TryGet("LanternDef", out int def))
+            {
                 defRoll = def;
+            }
+
             if (tag.TryGet("LanternMult", out int perc))
+            {
                 defMultRoll = perc;
+            }
+
             if (tag.TryGet("LanternExp", out int exp))
+            {
                 miningExpRoll = exp;
+            }
+
             if (tag.TryGet("EmpressFort", out int fort))
+            {
                 miningFortRoll = fort;
+            }
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {

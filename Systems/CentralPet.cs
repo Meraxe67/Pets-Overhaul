@@ -13,9 +13,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria.ModLoader.IO;
-using Terraria.UI;
 
 namespace PetsOverhaul.Systems
 {
@@ -84,10 +82,11 @@ namespace PetsOverhaul.Systems
         /// Used to change alternating color of maximum Light Pet Rolls alongside colorSwitched, increases 0.01f every frame, until hitting 1f, where it decreases 0.01f every frame and so on.
         /// </summary>
         public static float colorVal = 0;
+
         /// <summary>
         /// Used to change alternating color of maximum Light Pet Rolls alongside colorVal
         /// </summary>
-        static bool colorSwitched = false;
+        private static bool colorSwitched = false;
         public static readonly Color lowQuality = new(130, 130, 130);
         public static readonly Color midQuality = new(77, 117, 154);
         public static readonly Color highQuality = new(252, 194, 0);
@@ -105,13 +104,21 @@ namespace PetsOverhaul.Systems
         public static string LightPetRarityColorConvert(string text, int currentRoll, int maxRoll)
         {
             if (currentRoll == maxRoll)
+            {
                 return $"[c/{maxQuality.Hex3()}:{text}]";
+            }
             else if (currentRoll > maxRoll * 0.66f)
+            {
                 return $"[c/{highQuality.Hex3()}:{text}]";
+            }
             else if (currentRoll > maxRoll * 0.33f)
+            {
                 return $"[c/{midQuality.Hex3()}:{text}]";
+            }
             else
+            {
                 return $"[c/{lowQuality.Hex3()}:{text}]";
+            }
         }
 
         public static IEntitySource GetSource_Pet(EntitySource_Pet.TypeId typeId, string context = null)
@@ -232,11 +239,19 @@ namespace PetsOverhaul.Systems
         public override void LoadData(TagCompound tag)
         {
             if (tag.TryGet("SkinColor", out Color skinColor))
+            {
                 skin = skinColor;
+            }
+
             if (tag.TryGet("SkinColorChanged", out bool skinChanged))
+            {
                 skinColorChanged = skinChanged;
+            }
+
             if (tag.TryGet("jojaColaCaught", out bool jojaCaught))
+            {
                 jojaColaCaught = jojaCaught;
+            }
         }
         public static bool LifestealCheck(NPC npc)
         {
@@ -445,9 +460,14 @@ namespace PetsOverhaul.Systems
             }
 
             if (colorVal >= 1f)
+            {
                 colorSwitched = true;
+            }
             else if (colorVal <= 0f)
+            {
                 colorSwitched = false;
+            }
+
             colorVal += colorSwitched ? -0.01f : 0.01f;
             maxQuality = Color.Lerp(new Color(165, 249, 255), new Color(255, 207, 249), colorVal);
 
@@ -581,12 +601,16 @@ namespace PetsOverhaul.Systems
         public override void CatchFish(FishingAttempt attempt, ref int itemDrop, ref int npcSpawn, ref AdvancedPopupRequest sonar, ref Vector2 sonarPosition)
         {
             if (ModContent.GetInstance<Personalization>().JojaColaEasyOff == false && jojaColaCaught == false && Main.rand.NextBool(5))
+            {
                 itemDrop = ItemID.JojaCola;
+            }
         }
         public override void ModifyCaughtFish(Item fish)
         {
             if (fish.type == ItemID.JojaCola)
+            {
                 jojaColaCaught = true;
+            }
         }
     }
     /// <summary>
@@ -823,9 +847,14 @@ namespace PetsOverhaul.Systems
             if (npc.type == NPCID.MoonLordCore)
             {
                 if (MasteryShardCheck.masteryShardObtained5 == false)
+                {
                     npcLoot.Add(ItemDropRule.ByCondition(new FirstKillMoonLord(), ModContent.ItemType<MasteryShard>()));
+                }
+
                 if (Main.expertMode == false && Main.masterMode == false)
+                {
                     npcLoot.Add(ItemDropRule.Common(ItemID.SuspiciousLookingTentacle));
+                }
             }
         }
         public override void OnKill(NPC npc)

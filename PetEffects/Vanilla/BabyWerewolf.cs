@@ -20,7 +20,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int maxStacks = 15;
         public int debuffLength = 1200;
 
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
             if (Pet.PetInUse(ItemID.FullMoonSqueakyToy) && Main.moonPhase == 0)

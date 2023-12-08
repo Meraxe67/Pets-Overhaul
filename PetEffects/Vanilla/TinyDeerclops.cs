@@ -23,7 +23,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int immuneTime = 180;
         public int cooldown = 1800;
 
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void OnHurt(Player.HurtInfo info)
         {
             if (Pet.PetInUse(ItemID.DeerclopsPetItem))
@@ -66,7 +66,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                             NPC npc = Main.npc[i];
                             if (npc.active && Player.Distance(npc.Center) < range)
                             {
-                                npc.GetGlobalNPC<NpcPet>().AddSlow(NpcPet.SlowId.Deerclops, slow, applyTime,npc);
+                                npc.GetGlobalNPC<NpcPet>().AddSlow(NpcPet.SlowId.Deerclops, slow, applyTime, npc);
                                 if (npc.active && (npc.townNPC == false || npc.isLikeATownNPC == false || npc.friendly == false) && (npc.boss == false || NpcPet.nonBossTrueBosses[npc.type] == false))
                                 {
                                     npc.AddBuff(BuffID.Confused, applyTime);

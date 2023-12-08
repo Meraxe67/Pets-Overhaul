@@ -13,7 +13,7 @@ namespace PetsOverhaul.LightPets
 {
     public sealed class FairyBellEffect : ModPlayer
     {
-        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
             if (Player.miscEquips[1].type == ItemID.FairyBell && Player.miscEquips[1].TryGetGlobalItem(out FairyBell fairyBell))
@@ -45,9 +45,14 @@ namespace PetsOverhaul.LightPets
         public override void UpdateInventory(Item item, Player player)
         {
             if (hasteRoll <= 0)
+            {
                 hasteRoll = Main.rand.Next(hasteMaxRoll) + 1;
+            }
+
             if (globalFortRoll <= 0)
+            {
                 globalFortRoll = Main.rand.Next(globalFortMaxRoll) + 1;
+            }
         }
         public override void SaveData(Item item, TagCompound tag)
         {
@@ -57,9 +62,14 @@ namespace PetsOverhaul.LightPets
         public override void LoadData(Item item, TagCompound tag)
         {
             if (tag.TryGet("FairyHaste", out int haste))
+            {
                 hasteRoll = haste;
+            }
+
             if (tag.TryGet("FairyFort", out int fort))
+            {
                 globalFortRoll = fort;
+            }
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {

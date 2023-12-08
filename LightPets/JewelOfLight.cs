@@ -13,7 +13,7 @@ namespace PetsOverhaul.LightPets
 {
     public sealed class JewelOfLightEffect : ModPlayer
     {
-        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
             if (Player.miscEquips[1].type == ItemID.FairyQueenPetItem && Player.miscEquips[1].TryGetGlobalItem(out JewelOfLight empress))
@@ -21,7 +21,9 @@ namespace PetsOverhaul.LightPets
                 Player.moveSpeed += empress.CurrentMoveSpd;
                 Pet.fishingExpBoost += empress.CurrentFishingExp;
                 if (Player.equippedWings != null)
+                {
                     Player.wingTimeMax += empress.CurrentFlightTime;
+                }
             }
         }
     }
@@ -52,11 +54,19 @@ namespace PetsOverhaul.LightPets
         public override void UpdateInventory(Item item, Player player)
         {
             if (moveSpdRoll <= 0)
+            {
                 moveSpdRoll = Main.rand.Next(moveSpdMaxRoll) + 1;
+            }
+
             if (fishingExpRoll <= 0)
+            {
                 fishingExpRoll = Main.rand.Next(fishingExpMaxRoll) + 1;
+            }
+
             if (wingRoll <= 0)
+            {
                 wingRoll = Main.rand.Next(wingMaxRoll) + 1;
+            }
         }
         public override void SaveData(Item item, TagCompound tag)
         {
@@ -67,11 +77,19 @@ namespace PetsOverhaul.LightPets
         public override void LoadData(Item item, TagCompound tag)
         {
             if (tag.TryGet("EmpressMoveSpd", out int spd))
+            {
                 moveSpdRoll = spd;
+            }
+
             if (tag.TryGet("EmpressWing", out int wing))
+            {
                 wingRoll = wing;
+            }
+
             if (tag.TryGet("EmpressExp", out int exp))
+            {
                 fishingExpRoll = exp;
+            }
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {

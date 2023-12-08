@@ -1,9 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using PetsOverhaul.Systems;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using PetsOverhaul.Systems;
 
 namespace PetsOverhaul.Items
 {
@@ -26,7 +25,7 @@ namespace PetsOverhaul.Items
         }
         public override void PostUpdate()
         {
-            Lighting.AddLight(Item.Center,GlobalPet.maxQuality.ToVector3() *0.7f);
+            Lighting.AddLight(Item.Center, GlobalPet.maxQuality.ToVector3() * 0.7f);
         }
     }
 }

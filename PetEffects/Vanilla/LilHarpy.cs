@@ -17,7 +17,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int fuelMax = 180;
         public int harpyFlight = 180;
         private bool cooldownStarted;
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.BirdieRattle))

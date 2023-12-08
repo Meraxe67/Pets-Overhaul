@@ -10,7 +10,7 @@ namespace PetsOverhaul.PetEffects.ThoriumMod
 {
     public sealed class WyvernPup : ModPlayer
     {
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
 

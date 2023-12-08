@@ -17,7 +17,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int meleeChance = 28;
         public float projDamage = 0.75f;
         public float meleeDamage = 0.75f;
-        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
 
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {

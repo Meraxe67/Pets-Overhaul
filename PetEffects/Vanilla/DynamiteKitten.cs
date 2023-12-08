@@ -18,7 +18,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float kbMult = 1.7f;
         public int armorPen = 15;
 
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.BallOfFuseWire))

@@ -17,7 +17,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float atkSpdToDmgConversion = 0.30f;
         public float atkSpdToRangeConversion = 0.15f;
 
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.TikiTotem))

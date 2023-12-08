@@ -11,7 +11,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class BlackCat : ModPlayer
     {
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public float luckFlat = 0.12f;
         public float luckMoonLowest = 0.03f;
         public float luckMoonLow = 0.01f;

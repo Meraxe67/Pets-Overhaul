@@ -14,7 +14,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class PhantasmalDragon : ModPlayer
     {
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public int phantasmDragonCooldown = 120;
         public int iceFlat = 125;
         public float iceMult = 0.2f;

@@ -17,7 +17,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float grinchSlow = 1f;
         public int grinchRange = 400;
 
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
             if (Pet.PetInUseWithSwapCd(ItemID.BabyGrinchMischiefWhistle))
@@ -48,7 +48,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     NPC npc = Main.npc[i];
                     if (npc.active && Player.Distance(npc.Center) < grinchRange)
                     {
-                        npc.GetGlobalNPC<NpcPet>().AddSlow(NpcPet.SlowId.Grinch, grinchSlow, 1,npc);
+                        npc.GetGlobalNPC<NpcPet>().AddSlow(NpcPet.SlowId.Grinch, grinchSlow, 1, npc);
 
                     }
                 }

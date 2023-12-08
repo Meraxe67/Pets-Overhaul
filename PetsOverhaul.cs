@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.DataStructures;
 
 namespace PetsOverhaul
 {
@@ -27,7 +27,7 @@ namespace PetsOverhaul
         private delegate bool orig_ItemLoaderOnPickup(Item item, Player player);
         private delegate bool hook_ItemLoaderOnPickup(orig_ItemLoaderOnPickup orig, Item item, Player player);
         private static readonly MethodInfo OnPickupInfo = typeof(ItemLoader).GetMethod("OnPickup");
-        List<Hook> hooks = new();
+        private readonly List<Hook> hooks = new();
         public override void Load()
         {
             hooks.Add(new(OnPickupInfo, ItemLoaderOnPickupDetour));

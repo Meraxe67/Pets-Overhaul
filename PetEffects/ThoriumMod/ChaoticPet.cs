@@ -10,7 +10,7 @@ namespace PetsOverhaul.PetEffects.ThoriumMod
 {
     public sealed class ChaoticPet : ModPlayer
     {
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
 

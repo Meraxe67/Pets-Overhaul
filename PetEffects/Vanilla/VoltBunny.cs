@@ -17,7 +17,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float movespdToDmg = 0.2f;
         public float staticParalysis = 3f;
         public int staticLength = 45;
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.LightningCarrot))
@@ -34,7 +34,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             if (target.GetModPlayer<GlobalPet>().PetInUseWithSwapCd(ItemID.LightningCarrot) && npc.TryGetGlobalNPC(out NpcPet npcPet))
             {
-                npcPet.AddSlow(NpcPet.SlowId.PikachuStatic, target.GetModPlayer<VoltBunny>().staticParalysis, target.GetModPlayer<VoltBunny>().staticLength,npc);
+                npcPet.AddSlow(NpcPet.SlowId.PikachuStatic, target.GetModPlayer<VoltBunny>().staticParalysis, target.GetModPlayer<VoltBunny>().staticLength, npc);
             }
         }
     }

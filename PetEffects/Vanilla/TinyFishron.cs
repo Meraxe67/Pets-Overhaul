@@ -21,7 +21,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int stackChance = 10;
         public float multiplier = 1f;
 
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void GetFishingLevel(Item fishingRod, Item bait, ref float fishingLevel)
         {
             if (Pet.PetInUse(ItemID.DukeFishronPetItem))

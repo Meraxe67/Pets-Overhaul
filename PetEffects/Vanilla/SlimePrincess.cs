@@ -22,7 +22,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public Player dualSlime;
         public int baseCounterChnc = 100;
 
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
             if (GlobalPet.QueenSlimePetActive(out queenSlime) && Player.HasBuff(BuffID.GelBalloonBuff))

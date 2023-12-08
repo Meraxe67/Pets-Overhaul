@@ -13,7 +13,7 @@ namespace PetsOverhaul.LightPets
 {
     public sealed class ToyGolemEffect : ModPlayer
     {
-        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
             if (Player.miscEquips[1].type == ItemID.GolemPetItem && Player.miscEquips[1].TryGetGlobalItem(out ToyGolem toyGolem))
@@ -50,11 +50,19 @@ namespace PetsOverhaul.LightPets
         public override void UpdateInventory(Item item, Player player)
         {
             if (regenRoll <= 0)
+            {
                 regenRoll = Main.rand.Next(regenMaxRoll) + 1;
+            }
+
             if (miningExpRoll <= 0)
+            {
                 miningExpRoll = Main.rand.Next(miningExpMaxRoll) + 1;
+            }
+
             if (healthRoll <= 0)
+            {
                 healthRoll = Main.rand.Next(healthMaxRoll) + 1;
+            }
         }
         public override void SaveData(Item item, TagCompound tag)
         {
@@ -65,11 +73,19 @@ namespace PetsOverhaul.LightPets
         public override void LoadData(Item item, TagCompound tag)
         {
             if (tag.TryGet("GolemRegen", out int reg))
+            {
                 regenRoll = reg;
+            }
+
             if (tag.TryGet("GolemHealth", out int hp))
+            {
                 healthRoll = hp;
+            }
+
             if (tag.TryGet("GolemExp", out int exp))
+            {
                 miningExpRoll = exp;
+            }
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
@@ -95,7 +111,7 @@ namespace PetsOverhaul.LightPets
                         .Replace("<expRoll>", GlobalPet.LightPetRarityColorConvert(miningExpRoll.ToString(), miningExpRoll, miningExpMaxRoll))
                         .Replace("<expMaxRoll>", GlobalPet.LightPetRarityColorConvert(miningExpMaxRoll.ToString(), miningExpRoll, miningExpMaxRoll))
 
-                        .Replace("<currentHealth>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentHealth * 100, 2).ToString()+ Language.GetTextValue("Mods.PetsOverhaul.%"), healthRoll, healthMaxRoll))
+                        .Replace("<currentHealth>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentHealth * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), healthRoll, healthMaxRoll))
                         .Replace("<healthRoll>", GlobalPet.LightPetRarityColorConvert(healthRoll.ToString(), healthRoll, healthMaxRoll))
                         .Replace("<healthMaxRoll>", GlobalPet.LightPetRarityColorConvert(healthMaxRoll.ToString(), healthRoll, healthMaxRoll))
                         ));

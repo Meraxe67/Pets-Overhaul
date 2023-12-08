@@ -20,7 +20,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int stage2regen = 15;
         public float stage2ShieldMult = 0.05f;
 
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.BoneRattle))
@@ -74,7 +74,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             if (Pet.PetInUse(ItemID.BoneRattle))
             {
-                
+
                 timer = (int)(stage2time * (1 / (1 + Pet.abilityHaste)));
             }
         }

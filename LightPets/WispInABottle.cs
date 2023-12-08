@@ -4,7 +4,6 @@ using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
@@ -15,7 +14,7 @@ namespace PetsOverhaul.LightPets
 {
     public sealed class WispInABottleEffect : ModPlayer
     {
-        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
             if (Player.miscEquips[1].type == ItemID.WispinaBottle && Player.miscEquips[1].TryGetGlobalItem(out WispInABottle wispInABottle))
@@ -34,7 +33,9 @@ namespace PetsOverhaul.LightPets
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
             if (Player.miscEquips[1].type == ItemID.WispinaBottle && Player.miscEquips[1].TryGetGlobalItem(out WispInABottle wispInABottle) && proj.TryGetGlobalProjectile(out ProjectileSourceChecks check) && check.petProj)
+            {
                 modifiers.FinalDamage *= 1 + wispInABottle.CurrentPetProjectileDamage;
+            }
         }
     }
     public sealed class WispInABottle : GlobalItem
@@ -71,13 +72,24 @@ namespace PetsOverhaul.LightPets
         public override void UpdateInventory(Item item, Player player)
         {
             if (magicRoll <= 0)
+            {
                 magicRoll = Main.rand.Next(magicMaxRoll) + 1;
+            }
+
             if (rangedRoll <= 0)
+            {
                 rangedRoll = Main.rand.Next(rangedMaxRoll) + 1;
+            }
+
             if (projSpdRoll <= 0)
+            {
                 projSpdRoll = Main.rand.Next(projSpdMaxRoll) + 1;
+            }
+
             if (projPetRoll <= 0)
+            {
                 projPetRoll = Main.rand.Next(projPetMaxRoll) + 1;
+            }
         }
         public override void SaveData(Item item, TagCompound tag)
         {
@@ -89,13 +101,24 @@ namespace PetsOverhaul.LightPets
         public override void LoadData(Item item, TagCompound tag)
         {
             if (tag.TryGet("WispMagic", out int magic))
+            {
                 magicRoll = magic;
+            }
+
             if (tag.TryGet("WispRanged", out int ranged))
+            {
                 rangedRoll = ranged;
+            }
+
             if (tag.TryGet("WispProjSpd", out int projSpd))
+            {
                 projSpdRoll = projSpd;
+            }
+
             if (tag.TryGet("WispProjPet", out int petProj))
+            {
                 projPetRoll = petProj;
+            }
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {

@@ -19,7 +19,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class Junimo : ModPlayer
     {
-        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public int maxLvls = 40;
         public int maxXp = 2147480000;
         public float miningResistPerLevel = 0.0014f;
@@ -620,19 +620,39 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public override void LoadData(TagCompound tag)
         {
             if (tag.TryGet("AnglerCheck", out bool anglerCheck))
-            anglerQuestDayCheck = anglerCheck; 
+            {
+                anglerQuestDayCheck = anglerCheck;
+            }
+
             if (tag.TryGet("harvestlvl", out int harvLvl))
+            {
                 junimoHarvestingLevel = harvLvl;
+            }
+
             if (tag.TryGet("harvestexp", out int harvExp))
+            {
                 junimoHarvestingExp = harvExp;
+            }
+
             if (tag.TryGet("mininglvl", out int miningLvl))
+            {
                 junimoMiningLevel = miningLvl;
+            }
+
             if (tag.TryGet("miningexp", out int miningExp))
+            {
                 junimoMiningExp = miningExp;
+            }
+
             if (tag.TryGet("fishinglvl", out int fishLvl))
+            {
                 junimoFishingLevel = fishLvl;
+            }
+
             if (tag.TryGet("fishingexp", out int fishExp))
+            {
                 junimoFishingExp = fishExp;
+            }
         }
     }
 

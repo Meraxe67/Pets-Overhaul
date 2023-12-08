@@ -13,7 +13,7 @@ namespace PetsOverhaul.LightPets
 {
     public sealed class SuspiciousLookingTentacleEffect : ModPlayer
     {
-        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
             if (Player.miscEquips[1].type == ItemID.SuspiciousLookingTentacle && Player.miscEquips[1].TryGetGlobalItem(out SuspiciousLookingTentacle moonlord))
@@ -52,7 +52,9 @@ namespace PetsOverhaul.LightPets
                     modifiers.CritDamage += moonlord.CurrentCrDmg;
                 }
                 if (modifiers.DamageType == DamageClass.Melee && GlobalPet.LifestealCheck(target))
+                {
                     Pet.Lifesteal(Player.statDefense * 0.1f, moonlord.CurrentHeal);
+                }
             }
         }
     }
@@ -125,29 +127,64 @@ namespace PetsOverhaul.LightPets
         public override void UpdateInventory(Item item, Player player)
         {
             if (crDmgRoll <= 0)
+            {
                 crDmgRoll = Main.rand.Next(crDmgMax) + 1;
+            }
+
             if (critRoll <= 0)
+            {
                 critRoll = Main.rand.Next(critMax) + 1;
+            }
+
             if (defRoll <= 0)
+            {
                 defRoll = Main.rand.Next(defMax) + 1;
+            }
+
             if (dmgRoll <= 0)
+            {
                 dmgRoll = Main.rand.Next(dmgMax) + 1;
+            }
+
             if (healRoll <= 0)
+            {
                 healRoll = Main.rand.Next(healMax) + 1;
+            }
+
             if (manaRoll <= 0)
+            {
                 manaRoll = Main.rand.Next(manaMax) + 1;
+            }
+
             if (minRoll <= 0)
+            {
                 minRoll = Main.rand.Next(minMax) + 1;
+            }
+
             if (msRoll <= 0)
+            {
                 msRoll = Main.rand.Next(msMax) + 1;
+            }
+
             if (penRoll <= 0)
+            {
                 penRoll = Main.rand.Next(penMax) + 1;
+            }
+
             if (potRoll <= 0)
+            {
                 potRoll = Main.rand.Next(potMax) + 1;
+            }
+
             if (sizeRoll <= 0)
+            {
                 sizeRoll = Main.rand.Next(sizeMax) + 1;
+            }
+
             if (whipRoll <= 0)
+            {
                 whipRoll = Main.rand.Next(whipMax) + 1;
+            }
         }
         public override void SaveData(Item item, TagCompound tag)
         {
@@ -167,29 +204,64 @@ namespace PetsOverhaul.LightPets
         public override void LoadData(Item item, TagCompound tag)
         {
             if (tag.TryGet("MlCrDmg", out int crDmg))
+            {
                 crDmgRoll = crDmg;
+            }
+
             if (tag.TryGet("MlCrit", out int crChance))
+            {
                 critRoll = crChance;
+            }
+
             if (tag.TryGet("MlDef", out int def))
+            {
                 defRoll = def;
+            }
+
             if (tag.TryGet("MlDmg", out int dmg))
+            {
                 dmgRoll = dmg;
+            }
+
             if (tag.TryGet("MlHeal", out int heal))
+            {
                 healRoll = heal;
+            }
+
             if (tag.TryGet("MlMana", out int mana))
+            {
                 manaRoll = mana;
+            }
+
             if (tag.TryGet("MlMin", out int minion))
+            {
                 minRoll = minion;
+            }
+
             if (tag.TryGet("MlMs", out int moveSpd))
+            {
                 msRoll = moveSpd;
+            }
+
             if (tag.TryGet("MlPen", out int pen))
+            {
                 penRoll = pen;
+            }
+
             if (tag.TryGet("MlPot", out int pot))
+            {
                 potRoll = pot;
+            }
+
             if (tag.TryGet("MlSize", out int size))
+            {
                 sizeRoll = size;
+            }
+
             if (tag.TryGet("MlWhip", out int whip))
+            {
                 whipRoll = whip;
+            }
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {

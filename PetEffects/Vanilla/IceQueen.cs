@@ -24,7 +24,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int immuneTime = 150;
         public int tombTime = 300;
 
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.IceQueenPetItem))
@@ -43,7 +43,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         NPC npc = Main.npc[i];
                         if (npc.active && Player.Distance(npc.Center) < queenRange)
                         {
-                            npc.GetGlobalNPC<NpcPet>().AddSlow(NpcPet.SlowId.IceQueen, slowAmount, 5,npc);
+                            npc.GetGlobalNPC<NpcPet>().AddSlow(NpcPet.SlowId.IceQueen, slowAmount, 5, npc);
                         }
                     }
                     for (int i = 0; i < 20 + iceQueenFrame / 15; i++)

@@ -12,7 +12,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class CompanionCube : ModPlayer
     {
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public float manaToHealth = 0.11f;
         /// <summary>
         /// This is base amount for mana to health recovery before the Potion Sickness reductions.

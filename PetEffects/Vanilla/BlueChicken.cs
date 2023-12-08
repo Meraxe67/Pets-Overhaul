@@ -14,7 +14,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class BlueChicken : ModPlayer
     {
-        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public int blueEggTimer = 28800;
         public float tipsyMovespd = 0.1f;
         public int plantChance = 25;
@@ -72,7 +72,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
             GlobalPet.ItemWeight(ItemID.Rambutan, 20);
             GlobalPet.ItemWeight(ItemID.MagicalPumpkinSeed, 2);
             if (Main.hardMode)
-            GlobalPet.ItemWeight(ItemID.Grapes, 3);
+            {
+                GlobalPet.ItemWeight(ItemID.Grapes, 3);
+            }
         }
         public static void PoolRarePlant()
         {
@@ -88,7 +90,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
             GlobalPet.ItemWeight(ItemID.StrangePlant4, 4);
             GlobalPet.ItemWeight(ItemID.MagicalPumpkinSeed, 1);
             if (Main.hardMode)
+            {
                 GlobalPet.ItemWeight(ItemID.Grapes, 3);
+            }
         }
         public static void PoolTree()
         {

@@ -13,7 +13,7 @@ namespace PetsOverhaul.LightPets
 {
     public sealed class CrimsonHeartEffect : ModPlayer
     {
-        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
             if (Player.miscEquips[1].type == ItemID.CrimsonHeart && Player.miscEquips[1].TryGetGlobalItem(out CrimsonHeart crimsonHeart))
@@ -51,11 +51,19 @@ namespace PetsOverhaul.LightPets
         public override void UpdateInventory(Item item, Player player)
         {
             if (healthRoll <= 0)
+            {
                 healthRoll = Main.rand.Next(healthMaxRoll) + 1;
+            }
+
             if (fishExpRoll <= 0)
+            {
                 fishExpRoll = Main.rand.Next(fishExpMaxRoll) + 1;
+            }
+
             if (fishFortRoll <= 0)
+            {
                 fishFortRoll = Main.rand.Next(fishFortMaxRoll) + 1;
+            }
         }
         public override void SaveData(Item item, TagCompound tag)
         {
@@ -66,11 +74,19 @@ namespace PetsOverhaul.LightPets
         public override void LoadData(Item item, TagCompound tag)
         {
             if (tag.TryGet("CrimsonHealth", out int hp))
+            {
                 healthRoll = hp;
+            }
+
             if (tag.TryGet("CrimsonExp", out int exp))
+            {
                 fishExpRoll = exp;
+            }
+
             if (tag.TryGet("CrimsonFort", out int fort))
+            {
                 fishFortRoll = fort;
+            }
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {

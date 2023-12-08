@@ -13,7 +13,7 @@ namespace PetsOverhaul.LightPets
 {
     public sealed class CreeperEggEffect : ModPlayer
     {
-        public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
             if (Player.miscEquips[1].type == ItemID.DD2PetGhost && Player.miscEquips[1].TryGetGlobalItem(out CreeperEgg creeperEgg))
@@ -51,11 +51,19 @@ namespace PetsOverhaul.LightPets
         public override void UpdateInventory(Item item, Player player)
         {
             if (sumRoll <= 0)
+            {
                 sumRoll = Main.rand.Next(sumMaxRoll) + 1;
+            }
+
             if (meleeRoll <= 0)
+            {
                 meleeRoll = Main.rand.Next(meleeMaxRoll) + 1;
+            }
+
             if (atkSpdRoll <= 0)
+            {
                 atkSpdRoll = Main.rand.Next(atkSpdMaxRoll) + 1;
+            }
         }
         public override void SaveData(Item item, TagCompound tag)
         {
@@ -66,11 +74,19 @@ namespace PetsOverhaul.LightPets
         public override void LoadData(Item item, TagCompound tag)
         {
             if (tag.TryGet("FlickerwickSum", out int sum))
+            {
                 sumRoll = sum;
+            }
+
             if (tag.TryGet("FlickerwickMelee", out int melee))
+            {
                 meleeRoll = melee;
+            }
+
             if (tag.TryGet("FlickerwickAtkSpd", out int aSpd))
+            {
                 atkSpdRoll = aSpd;
+            }
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {

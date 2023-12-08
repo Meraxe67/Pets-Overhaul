@@ -22,7 +22,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         private int shieldIndex = 0;
         private int oldShieldCount = 0;
 
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.SkeletronPrimePetItem))

@@ -20,7 +20,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int windChance = 120;
         public int speedMult = 20;
         public bool amplifiedFishingChance { get; internal set; }
-                public GlobalPet Pet { get => Player.GetModPlayer<GlobalPet>(); }
+        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
             if (Pet.PetInUse(ItemID.ZephyrFish))
