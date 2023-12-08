@@ -23,7 +23,7 @@ namespace PetsOverhaul.DebugCommands
             if (args.Length == 0)
             {
                 string returnVal = "";
-                foreach (KeyValuePair<string, int> entry in ModContent.GetInstance<PetRegistry>().TerrariaPetItemIds)
+                foreach (KeyValuePair<string, int> entry in PetRegistry.PetNamesAndItems)
                 {
                     string key = entry.Key;
                     int value = entry.Value;
@@ -36,9 +36,9 @@ namespace PetsOverhaul.DebugCommands
             {
                 if (!int.TryParse(args[0], out int type))
                 {
-                    if (ModContent.GetInstance<PetRegistry>().TerrariaPetItemIds.ContainsKey(args[0]))
+                    if (PetRegistry.PetNamesAndItems.ContainsKey(args[0]))
                     {
-                        caller.Reply($"Name: {args[0]} Id: {ModContent.GetInstance<PetRegistry>().TerrariaPetItemIds[args[0]]}\n");
+                        caller.Reply($"Name: {args[0]} Id: {PetRegistry.PetNamesAndItems[args[0]]}\n");
                     }
                     else
                     {
