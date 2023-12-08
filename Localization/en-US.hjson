@@ -19,6 +19,8 @@ Mods: {
 
 		Config: {
 			Personalization: Personalization
+			JojaColaEasyLabel: Joja Cola Easy Off
+			JojaColaEasyTooltip: ""
 			JunimoLevelupLabel: Disable Junimo levelup notification
 			JunimoLevelupTooltip:
 				'''
@@ -96,8 +98,6 @@ Mods: {
 				Which prevents any Combat-related perks to be active during the time.
 				(not recommended due to obvious balance reasons)
 				'''
-			JojaColaEasyLabel: Joja Cola Easy Off
-			JojaColaEasyTooltip: ""
 		}
 
 		LightPetTooltips: {
@@ -317,10 +317,10 @@ Mods: {
 			BlueEgg:
 				'''
 				[c/CDFF00:Harvesting Pet]
-				Harvesting anything drops you a random item from
-				a table. Items vary from seeds to fruits. Plants
-				and herbs have a <plantChance>% chance, rare plants have a <rarePlantChance>%
-				and choppables have <choppableChance>%, Approximately every <eggMinute> minutes
+				Harvesting anything drops you a random item from a
+				weighted table. Items vary from seeds to fruits.
+				Plants and herbs have a <plantChance>% chance, rare plants have a <rarePlantChance>%
+				and choppables have <choppableChance>%. Approximately every <eggMinute> minutes
 				gives you an Egg. Rarely, you might get a different egg...
 				'''
 			GlowTulip:
@@ -509,7 +509,6 @@ Mods: {
 				'''
 				[c/0ea80e:Defensive Pet]
 				Gain <lifesteal>% lifesteal, increased to <planteraSteal>% for Plantera's weapons
-				While affected by Moonbite, lifesteal is 33% effective.
 				'''
 			SpiderEgg:
 				'''
@@ -517,7 +516,7 @@ Mods: {
 				Damaging enemies apply Poisoned for <poisonTime> seconds and remove
 				target's Poisoned immunity if they are not immune to Venom
 				Any target that already is Poisoned will take <poiPerc>x+<poiFlat> damage,
-				<poiKb>x  knockback and <poiCrit>% extra critical hit chance
+				<poiKb>x knockback and <poiCrit>% extra critical hit chance
 				This effect becomes <venomPerc>x+<venomFlat> damage, <venomKb>x knockback and
 				<venomCrit>% extra critical hit chance for targets that have Venom
 				'''
@@ -533,7 +532,7 @@ Mods: {
 				'''
 				[c/716DAF:Fishing and Offensive Pet]
 				Gain <fishingPower> fishing power, deal <seaCreatureDmg>x damage, and receive
-				<seaCreatureResist>x damage from fished-up enemy hits and projectiles,
+				<seaCreatureResist>x damage on all damage from fished-up enemies.
 				and gives the player <shield> shield for <shieldTime> seconds upon catching fish
 				'''
 			SpiffoPlush:
@@ -566,10 +565,9 @@ Mods: {
 			LightningCarrot:
 				'''
 				[c/E39DA9:Offensive and Mobility Pet]
-				Grants an extra <flatSpd>% movement speed, multiplies it by <multSpd>x.
-				Also, Movement speed boosts over 100% grant you a 
-				damage boost equal to <spdToDmg>% of it. Enemies that
-				contacts you gets slowed by <staticAmount>% for <staticTime> seconds
+				Increases movement speed by <flatSpd>%, and also multiplies it by <multSpd>x.
+				Increases your damage equal to <spdToDmg>% of how much bonus movement speed you have.
+				Enemies that contacts you gets slowed by <staticAmount>% for <staticTime> seconds
 				'''
 			ZephyrFish:
 				'''
@@ -593,8 +591,9 @@ Mods: {
 			BrainOfCthulhuPetItem:
 				'''
 				[c/0ea80e:Defensive Pet]
-				Grants you <lifesteal>% lifesteal, however, the pool of how much you can heal is
-				<maxPool>% of your max health. The pool recovers +1 health every <healthRecovery> second
+				Grants you <lifesteal>% lifesteal, but you can only heal as much as how much 
+				Spider Brain's life pool contains. Maximum amount life pool has 
+				is <maxPool>% of your max health and recovers +1 health every <healthRecovery> second
 				'''
 			EaterOfWorldsPetItem:
 				'''
@@ -606,11 +605,13 @@ Mods: {
 			KingSlimePetItem:
 				'''
 				[c/FF1493:Supportive Pet]
-				Changes Slime Gun and Water Gun's debuffs globally, Slimy debuff adds a bonus <burnHp>%
-				health damage if paired with a burn, (<burnCap> cap) and take <extraKb>x kb.
-				Slimed grants affected players' <jumpSpd>% jump speed, <kbBoost>x knockback boost
-				and resist. Wet makes enemies receive <enemyDmgRecieve>x damage and deal <enemyDmgDeal>x damage
-				Wet buffs players to have <dmg>% more damage, <def>% defense, and <moveSpd>% move speed
+				Changes Slime Gun and Water Gun to have effects for Enemies & Players globally
+				Slimy [i:2610]
+				Enemies: Deals <burnHp>% health damage if paired with a burn, (<burnCap> cap) and receive <extraKb>x kb.
+				Players: Grants affected players <jumpSpd>% jump speed, <kbBoost>x knockback boost and resist. 
+				Wet [i:2272]
+				Enemies: Multiplies damage received by <enemyDmgRecieve>x and multiplies all damage dealt by <enemyDmgDeal>x
+				Players: Increases damage by <dmg>%, defense by <def>%, movement speed by <moveSpd>%, and burns run out 2x faster
 				'''
 			QueenBeePetItem:
 				'''
@@ -640,10 +641,11 @@ Mods: {
 			QueenSlimePetItem:
 				'''
 				[c/FA377D:Supportive and Offensive Pet]
-				Improves Sparkle slime, now slows enemies by <slow>%,
-				and gives Players <haste>% ability haste, and every hit adds 1 counter,
-				(extra chance to add more counter with ability haste) every
-				6th hit deals <dmg>x damage and gives <shield> shield for <shieldTime> seconds.
+				Improves Sparkle Slime Balloon [i:4986] and the Endless variation of it [i:<endless>] globally
+				Enemies: Applies a <slow>% slow to all enemies affected.
+				Players: Grants <haste>% ability haste which increases how frequent your Pet's ability can be used
+				and every hit adds 1 counter, (extra chance to add more counter with ability haste) when you reach
+				6th counter, you deal <dmg>x damage and gives you <shield> shield for <shieldTime> seconds.
 				'''
 			SkeletronPrimePetItem:
 				'''
@@ -744,9 +746,10 @@ Mods: {
 			ResplendentDessert:
 				'''
 				[c/FA377D:Supportive and Offensive Pet]
-				Is both Prince and Princess Slime Pets
-				abilities combined. With approximately
-				<approxWeak>% weaker effects though.
+				Is both Prince and Princess Slime Pets abilities combined
+				with approximately <approxWeak>% weaker effects.
+				Press <keybind> to swap the Tooltip (This is for read only)
+				<tooltip>
 				'''
 			Carrot:
 				'''
@@ -986,6 +989,11 @@ Mods: {
 
 			Personalization.DisplayName: Personalization
 			GlobalChanges.DisplayName: Global Changes
+		}
+
+		Keybinds: {
+			PetTooltipHide.DisplayName: Pet Tooltip Hide
+			DualSlimeTooltipSwap.DisplayName: Dual Slime Tooltip Swap
 		}
 	}
 }

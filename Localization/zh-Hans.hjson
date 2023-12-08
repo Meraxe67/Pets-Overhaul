@@ -986,5 +986,10 @@ Mods: {
 			Personalization.DisplayName: 个性化设置
 			GlobalChanges.DisplayName: 全局改变
 		}
+
+		Keybinds: {
+			// PetTooltipHide.DisplayName: Pet Tooltip Hide
+			// DualSlimeTooltipSwap.DisplayName: Dual Slime Tooltip Swap
+		}
 	}
 }

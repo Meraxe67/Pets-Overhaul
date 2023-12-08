@@ -1,5 +1,6 @@
 ﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
+using PetsOverhaul.Items;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -68,7 +69,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down])
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !Keybinds.PetTooltipHide.Current)
             {
                 return;
             }
@@ -80,6 +81,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         .Replace("<dmg>", slimePrincess.dmgBoost.ToString())
                         .Replace("<shield>", slimePrincess.shield.ToString())
                         .Replace("<shieldTime>", Math.Round(slimePrincess.shieldTime / 60f, 2).ToString())
+                        .Replace("<endless>", ModContent.ItemType<EndlessBalloonSack>().ToString())
                         ));
         }
     }

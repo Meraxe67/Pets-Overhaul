@@ -35,7 +35,7 @@ namespace PetsOverhaul.PetEffects.ModName
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !PlayerInput.Triggers.Current.KeyStatus[TriggerNames.Down]) return;
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !Keybinds.PetTooltipHide.Current) return;
             PetName PetNameUnder = Main.LocalPlayer.GetModPlayer<PetName>();
             tooltips.Add(new(Mod, "Tooltip0", "Pet Overhaul effects coming soon!"/*Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.PetItem")*/
                 

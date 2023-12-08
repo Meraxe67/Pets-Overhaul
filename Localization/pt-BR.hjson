@@ -896,5 +896,10 @@ Mods: {
 			Personalization.DisplayName: Personalização
 			GlobalChanges.DisplayName: Mudanças Globais
 		}
+
+		Keybinds: {
+			// PetTooltipHide.DisplayName: Pet Tooltip Hide
+			// DualSlimeTooltipSwap.DisplayName: Dual Slime Tooltip Swap
+		}
 	}
 }
