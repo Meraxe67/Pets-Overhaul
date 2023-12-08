@@ -1,5 +1,7 @@
 ﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
+using PetsOverhaul.Items;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.GameInput;
@@ -11,9 +13,10 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class DualSlime : ModPlayer
     {
+        public bool swapTooltip = false;
         public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         // King, in SlimePrince
-        public float wetSpeed = 0.9f;
+        public float wetSpeed = 0.09f;
         public float wetDmg = 0.07f;
         public float wetDef = 0.07f;
         public float slimyKb = 1.45f;
@@ -30,6 +33,13 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int shieldTime = 240;
         public float dmgBoost = 1.22f;
         public int baseCounterChnc = 90;
+        public override void PostUpdate()
+        {
+            if (Keybinds.DualSlimeTooltipSwap.JustPressed)
+            {
+                swapTooltip = !swapTooltip;
+            }
+        }
     }
 
     public sealed class ResplendentDessert : GlobalItem
@@ -45,10 +55,27 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
                 return;
             }
-
-            DualSlime babyOgre = Main.LocalPlayer.GetModPlayer<DualSlime>();
+            DualSlime dualSlime = Main.LocalPlayer.GetModPlayer<DualSlime>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ResplendentDessert")
                 .Replace("<approxWeak>", "10")
+                .Replace("<keybind>", Keybinds.DualSlimeTooltipSwap.GetAssignedKeys(GlobalPet.PlayerInputMode).Count > 0 ? Keybinds.DualSlimeTooltipSwap.GetAssignedKeys(GlobalPet.PlayerInputMode)[0] : $"[c/{Colors.RarityTrash.Hex3()}:{Language.GetTextValue("Mods.PetsOverhaul.KeybindMissing")}]")
+                .Replace("<tooltip>", Language.GetTextValue($"Mods.PetsOverhaul.PetItemTooltips.{(dualSlime.swapTooltip ? "KingSlimePetItem" : "QueenSlimePetItem")}"))
+                .Replace("<burnHp>", Math.Round(dualSlime.healthDmg * 100, 2).ToString())
+                .Replace("<burnCap>", dualSlime.burnCap.ToString())
+                .Replace("<extraKb>", dualSlime.bonusKb.ToString())
+                .Replace("<jumpSpd>", Math.Round(dualSlime.slimyJump * 100, 2).ToString())
+                .Replace("<kbBoost>", dualSlime.slimyKb.ToString())
+                .Replace("<enemyDmgRecieve>", dualSlime.wetRecievedHigher.ToString())
+                .Replace("<enemyDmgDeal>", dualSlime.wetDealtLower.ToString())
+                .Replace("<dmg>", Math.Round(dualSlime.wetDmg * 100, 2).ToString())
+                .Replace("<def>", Math.Round(dualSlime.wetDef * 100, 2).ToString())
+                .Replace("<moveSpd>", Math.Round(dualSlime.wetSpeed * 100, 2).ToString())
+                .Replace("<slow>", Math.Round(dualSlime.slow * 100, 2).ToString())
+                .Replace("<haste>", Math.Round(dualSlime.haste * 100, 2).ToString())
+                .Replace("<dmgBonus>", dualSlime.dmgBoost.ToString())
+                .Replace("<shield>", dualSlime.shield.ToString())
+                .Replace("<shieldTime>", Math.Round(dualSlime.shieldTime / 60f, 2).ToString())
+                .Replace("<endless>", ModContent.ItemType<EndlessBalloonSack>().ToString())
             ));
         }
     }
