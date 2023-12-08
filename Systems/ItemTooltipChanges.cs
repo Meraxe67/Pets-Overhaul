@@ -11,7 +11,7 @@ namespace PetsOverhaul.Systems
     {
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
-            return ModContent.GetInstance<PetRegistry>().TerrariaPetItemIds.ContainsValue(entity.type) || entity.type == ItemID.JojaCola;
+            return PetRegistry.PetNamesAndItems.ContainsValue(entity.type) || entity.type == ItemID.JojaCola || PetRegistry.LightPetNamesAndItems.ContainsValue(entity.type);
         }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
@@ -22,7 +22,8 @@ namespace PetsOverhaul.Systems
             }
             else if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !Keybinds.PetTooltipHide.Current)
             {
-                tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.Config.TooltipShiftToggleInGame")));
+                tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.Config.TooltipShiftToggleInGame")
+                    .Replace("<keybind>", Keybinds.PetTooltipHide.GetAssignedKeys(GlobalPet.PlayerInputMode).Count > 0 ? Keybinds.PetTooltipHide.GetAssignedKeys(GlobalPet.PlayerInputMode)[0] : $"[c/{Colors.RarityTrash.Hex3()}:{Language.GetTextValue("Mods.PetsOverhaul.KeybindMissing")}]")));
             }
         }
     }

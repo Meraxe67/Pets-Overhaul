@@ -5,10 +5,11 @@ Mods: {
 		x: x
 		+: +
 		-: -
+		KeybindMissing: Keybind Not Registered
 		JojaCola: A nature related NPC may be able to Purify this
 		Notice:
 			'''
-			[c/90C2AA:Pets Overhaul 2.3.3 latest changes: Cross-Mod compability for Pets that works on item pickup!]
+			[c/90C2AA:Pets Overhaul 2.3.4 latest changes: Tooltip fixes, improvements and clarifications & new Keybinds!]
 			[c/90C2AA:All newly added Light Pet stats are influenced by that stat's Quality, improving it significantly.]
 			[c/90C2AA:Qualities are rolled when the item is the first time in your inventory! Moonlord now drops]
 			[c/90C2AA:It's Light Pet in non-Expert+ worlds, recipes for Shadow Orb/Crimson Heart have been added.]
@@ -19,8 +20,12 @@ Mods: {
 
 		Config: {
 			Personalization: Personalization
-			JojaColaEasyLabel: Joja Cola Easy Off
-			JojaColaEasyTooltip: ""
+			JojaColaEasyLabel: Disable Joja-Cola being obtainable easily
+			JojaColaEasyTooltip:
+				'''
+				Disables being able to catch a Joja-Cola with
+				20% chance on every catch until you catch one
+				'''
 			JunimoLevelupLabel: Disable Junimo levelup notification
 			JunimoLevelupTooltip:
 				'''
@@ -53,7 +58,7 @@ Mods: {
 				Enables all added Pet and Item tooltips to be only visible while
 				the Down (as in your downward input, generally S) button is being held.
 				'''
-			TooltipShiftToggleInGame: Hold the 'Down' button to view the Pet tooltip
+			TooltipShiftToggleInGame: Hold the <keybind> button to view the Pet tooltip
 			HurtSoundLabel: Disable custom hurt sounds
 			HurtSoundTooltip:
 				'''
@@ -645,7 +650,7 @@ Mods: {
 				Enemies: Applies a <slow>% slow to all enemies affected.
 				Players: Grants <haste>% ability haste which increases how frequent your Pet's ability can be used
 				and every hit adds 1 counter, (extra chance to add more counter with ability haste) when you reach
-				6th counter, you deal <dmg>x damage and gives you <shield> shield for <shieldTime> seconds.
+				6th counter, you deal <dmgBonus>x damage and gives you <shield> shield for <shieldTime> seconds.
 				'''
 			SkeletronPrimePetItem:
 				'''
@@ -745,10 +750,9 @@ Mods: {
 				'''
 			ResplendentDessert:
 				'''
-				[c/FA377D:Supportive and Offensive Pet]
-				Is both Prince and Princess Slime Pets abilities combined
-				with approximately <approxWeak>% weaker effects.
-				Press <keybind> to swap the Tooltip (This is for read only)
+				Is both Prince and Princess Slime Pets abilities combined while being slightly weaker.
+				Effects of Prince or Princess is overriden if there is another Prince or Princess active.
+				Press <keybind> to swap the Tooltip (This is solely for display, has no effects on perks)
 				<tooltip>
 				'''
 			Carrot:
@@ -980,20 +984,11 @@ Mods: {
 		}
 
 		Projectiles.DynamiteKittyBoom.DisplayName: Dynamite Kitty Boom
-
-		Configs: {
-			JunimoLevelup: {
-				DisplayName: Junimo Levelup
-				Headers.Personalization: Personalization Header
-			}
-
-			Personalization.DisplayName: Personalization
-			GlobalChanges.DisplayName: Global Changes
-		}
+		Configs.Personalization.DisplayName: Personalization
 
 		Keybinds: {
-			PetTooltipHide.DisplayName: Pet Tooltip Hide
-			DualSlimeTooltipSwap.DisplayName: Dual Slime Tooltip Swap
+			PetTooltipHide.DisplayName: Show Pet Tooltips
+			DualSlimeTooltipSwap.DisplayName: Swap Dual Slime Pet Tooltip
 		}
 	}
 }

@@ -78,7 +78,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.QueenSlimePetItem")
                         .Replace("<slow>", Math.Round(slimePrincess.slow * 100, 2).ToString())
                         .Replace("<haste>", Math.Round(slimePrincess.haste * 100, 2).ToString())
-                        .Replace("<dmg>", slimePrincess.dmgBoost.ToString())
+                        .Replace("<dmgBonus>", slimePrincess.dmgBoost.ToString())
                         .Replace("<shield>", slimePrincess.shield.ToString())
                         .Replace("<shieldTime>", Math.Round(slimePrincess.shieldTime / 60f, 2).ToString())
                         .Replace("<endless>", ModContent.ItemType<EndlessBalloonSack>().ToString())

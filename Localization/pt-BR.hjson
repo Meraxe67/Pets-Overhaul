@@ -5,10 +5,11 @@ Mods: {
 		// x: x
 		// +: +
 		// -: -
+		// KeybindMissing: Keybind Not Registered
 		// JojaCola: A nature related NPC may be able to Purify this
 		/* Notice:
 			'''
-			[c/90C2AA:Pets Overhaul 2.3.3 latest changes: Cross-Mod compability for Pets that works on item pickup!]
+			[c/90C2AA:Pets Overhaul 2.3.4 latest changes: Tooltip fixes, improvements and clarifications & new Keybinds!]
 			[c/90C2AA:All newly added Light Pet stats are influenced by that stat's Quality, improving it significantly.]
 			[c/90C2AA:Qualities are rolled when the item is the first time in your inventory! Moonlord now drops]
 			[c/90C2AA:It's Light Pet in non-Expert+ worlds, recipes for Shadow Orb/Crimson Heart have been added.]
@@ -19,6 +20,12 @@ Mods: {
 
 		Config: {
 			Personalization: Personalização
+			// JojaColaEasyLabel: Disable Joja-Cola being obtainable easily
+			/* JojaColaEasyTooltip:
+				'''
+				Disables being able to catch a Joja-Cola with
+				20% chance on every catch until you catch one
+				''' */
 			JunimoLevelupLabel: Desabilitar a notificação de nível de Junimo
 			JunimoLevelupTooltip: Desabilita o texto e som das notificações de aumento de nível de Junimo ao aumentar o nível de uma classe. Não desabilita a mecânica de nível.
 			// JunimoExpActive: "[c/AEAEAE:active]"
@@ -54,8 +61,6 @@ Mods: {
 			MoreDifficultTooltip: Desabilita o jogador causar 5% menos dano e receber 5% mais dano, que é implementado para contrariar o mod adicionar um aumento de poder
 			SwapCooldownLabel: Desabilitar tempo de recarga em troca de pet
 			SwapCooldownTooltip: Desabilita o jogador de ganhar o Debuff Pet Desatento ao trocar de pet. Prevenindo qualquer vantagem relacionada à combate de ativar durante esse tempo (Não recomendado)
-			// JojaColaEasyLabel: Joja Cola Easy Off
-			// JojaColaEasyTooltip: ""
 		}
 
 		LightPetTooltips: {
@@ -886,20 +891,11 @@ Mods: {
 		}
 
 		Projectiles.DynamiteKittyBoom.DisplayName: Dynamite Kitty Boom
-
-		Configs: {
-			JunimoLevelup: {
-				DisplayName: Aumento de Nível de Junimo
-				Headers.Personalization: Cabeçalho de Personalização
-			}
-
-			Personalization.DisplayName: Personalização
-			GlobalChanges.DisplayName: Mudanças Globais
-		}
+		Configs.Personalization.DisplayName: Personalização
 
 		Keybinds: {
-			// PetTooltipHide.DisplayName: Pet Tooltip Hide
-			// DualSlimeTooltipSwap.DisplayName: Dual Slime Tooltip Swap
+			// PetTooltipHide.DisplayName: Show Pet Tooltips
+			// DualSlimeTooltipSwap.DisplayName: Swap Dual Slime Pet Tooltip
 		}
 	}
 }

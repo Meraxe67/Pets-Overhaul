@@ -14,6 +14,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using Terraria.GameInput;
 
 namespace PetsOverhaul.Systems
 {
@@ -22,6 +23,7 @@ namespace PetsOverhaul.Systems
     /// </summary>
     public sealed class GlobalPet : ModPlayer
     {
+        public static InputMode PlayerInputMode => PlayerInput.CurrentProfile.InputModes.ContainsKey(InputMode.Keyboard) ? InputMode.Keyboard : InputMode.XBoxGamepad;
         public bool jojaColaCaught = false;
         /// <summary>
         /// Influences the chance to increase stack of the item from your pet that doesn't fit into any other fortune category. This also increases all other fortunes with half effectiveness.
@@ -504,7 +506,6 @@ namespace PetsOverhaul.Systems
             timerMax = (int)(timerMax * (1 / (1 + abilityHaste)));
             petSwapCooldown = 600;
             abilityHaste = 0;
-
         }
         public override void PostUpdate()
         {

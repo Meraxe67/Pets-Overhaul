@@ -5,6 +5,7 @@ Mods: {
 		// x: x
 		// +: +
 		// -: -
+		// KeybindMissing: Keybind Not Registered
 		// JojaCola: A nature related NPC may be able to Purify this
 		Notice:
 			'''
@@ -18,6 +19,12 @@ Mods: {
 
 		Config: {
 			Personalization: 个性化设置
+			// JojaColaEasyLabel: Disable Joja-Cola being obtainable easily
+			/* JojaColaEasyTooltip:
+				'''
+				Disables being able to catch a Joja-Cola with
+				20% chance on every catch until you catch one
+				''' */
 			JunimoLevelupLabel: 禁用祝尼魔升级通知
 			JunimoLevelupTooltip:
 				'''
@@ -95,8 +102,6 @@ Mods: {
 				在减益生效期间,宠物任何与战斗相关的效果都会被禁用.
 				(由于平衡性原因,不推荐禁用)
 				'''
-			// JojaColaEasyLabel: Joja Cola Easy Off
-			// JojaColaEasyTooltip: ""
 		}
 
 		LightPetTooltips: {
@@ -976,20 +981,11 @@ Mods: {
 		}
 
 		Projectiles.DynamiteKittyBoom.DisplayName: 小猫雷管
-
-		Configs: {
-			JunimoLevelup: {
-				DisplayName: 祝尼魔升级
-				Headers.Personalization: 个性化设置标题
-			}
-
-			Personalization.DisplayName: 个性化设置
-			GlobalChanges.DisplayName: 全局改变
-		}
+		Configs.Personalization.DisplayName: 个性化设置
 
 		Keybinds: {
-			// PetTooltipHide.DisplayName: Pet Tooltip Hide
-			// DualSlimeTooltipSwap.DisplayName: Dual Slime Tooltip Swap
+			// PetTooltipHide.DisplayName: Show Pet Tooltips
+			// DualSlimeTooltipSwap.DisplayName: Swap Dual Slime Pet Tooltip
 		}
 	}
 }
