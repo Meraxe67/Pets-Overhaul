@@ -126,8 +126,13 @@ namespace PetsOverhaul.PetEffects.Vanilla
             GlobalPet.ItemWeight(ItemID.EucaluptusSap, 1);
             if (Main.hardMode)
             {
+                GlobalPet.ItemWeight(ItemID.Pearlwood, 200);
                 GlobalPet.ItemWeight(ItemID.Dragonfruit, 3);
                 GlobalPet.ItemWeight(ItemID.Starfruit, 3);
+            }
+            if (NPC.downedPlantBoss)
+            {
+                GlobalPet.ItemWeight(ItemID.SpookyWood, 30);
             }
         }
         public override void Load()
