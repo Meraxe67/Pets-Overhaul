@@ -104,7 +104,6 @@ namespace PetsOverhaul.PetEffects.Vanilla
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.StrangeGlowingMushroom")
                 .Replace("<buffRecover>", Math.Round(babyTruffle.buffIncrease / 60f, 2).ToString())
                 .Replace("<cooldown>", Math.Round(babyTruffle.shroomPotionCd / 60f, 2).ToString())
-                .Replace("<floatIncr>", Math.Round(babyTruffle.increaseFloat * 100, 2).ToString())
                 .Replace("<intIncr>", babyTruffle.increaseInt.ToString())
                 .Replace("<moveSpd>", Math.Round(babyTruffle.moveSpd * 100, 2).ToString())
             ));

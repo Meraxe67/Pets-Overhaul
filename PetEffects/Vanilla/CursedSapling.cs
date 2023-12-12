@@ -13,8 +13,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
     public sealed class CursedSapling : ModPlayer
     {
         public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
-        public float whipSpeed = 0.025f;
-        public float whipRange = 0.04f;
+        public float whipSpeed = 0.00625f;
+        public float whipRange = 0.01f;
         public float pumpkinWeaponDmg = 0.1f;
         public float ravenDmg = 0.25f;
         public int maxMinion = 1;
@@ -39,13 +39,13 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 Player.maxMinions += maxMinion;
                 if (Player.HeldItem.type == ItemID.ScytheWhip)
                 {
-                    Player.GetAttackSpeed<SummonMeleeSpeedDamageClass>() += Player.maxMinions * whipSpeed;
-                    Player.whipRangeMultiplier += Player.maxMinions * whipRange;
+                    Player.GetAttackSpeed<SummonMeleeSpeedDamageClass>() += Player.maxMinions * whipSpeed * 4;
+                    Player.whipRangeMultiplier += Player.maxMinions * whipRange * 4;
                 }
                 else if (Player.HeldItem.CountsAsClass<SummonMeleeSpeedDamageClass>())
                 {
-                    Player.GetAttackSpeed<SummonMeleeSpeedDamageClass>() += Player.maxMinions * whipSpeed / 4;
-                    Player.whipRangeMultiplier += Player.maxMinions * whipRange / 4;
+                    Player.GetAttackSpeed<SummonMeleeSpeedDamageClass>() += Player.maxMinions * whipSpeed;
+                    Player.whipRangeMultiplier += Player.maxMinions * whipRange;
                 }
             }
         }

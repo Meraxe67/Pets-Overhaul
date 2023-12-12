@@ -714,6 +714,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         .Replace("<fishingLevel>", junimo.junimoFishingLevel.ToString())
                         .Replace("<fishingNext>", junimo.junimoFishingLevel >= junimo.maxLvls ? Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.JunimoMaxLevelText") : (junimo.junimoFishingLevelsToXp[junimo.junimoFishingLevel] - junimo.junimoFishingExp).ToString())
                         .Replace("<fishingCurrent>", junimo.junimoFishingExp.ToString())
+                        .Replace("<rollTime>", Math.Round((junimo.baseRoll + junimo.junimoFishingLevel * junimo.junimoInUseMultiplier * junimo.rollChancePerLevel)/100f,2).ToString())
                         ));
         }
     }

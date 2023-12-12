@@ -204,6 +204,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 .Replace("<rarePlantChance>", blueChicken.rarePlantChance.ToString())
                 .Replace("<choppableChance>", blueChicken.treeChance.ToString())
                 .Replace("<eggMinute>", (blueChicken.blueEggTimer / 3600).ToString())
+                .Replace("<egg", ModContent.ItemType<Egg>().ToString())
             ));
         }
     }

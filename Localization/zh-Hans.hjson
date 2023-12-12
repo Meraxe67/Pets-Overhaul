@@ -109,7 +109,7 @@ Mods: {
 				'''
 				Grants <manaBase> + <manaPer> Mana Per Quality, <expBase> + <expPer>% Harvesting Exp per quality,
 				increasing your Junimo Pet's harvesting exp gains, and 
-				<fortBase> + <fortPer> Harvesting Fortune per quality, increasing your Harvesting Pet's drops
+				<fortBase> + <fortPer> Harvesting Fortune per quality, increasing your Harvesting Pet's drops.
 				Mana Bonus: <currentMana> Quality <manaRoll> out of <manaMaxRoll>
 				Harvesting Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				Harvesting Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
@@ -118,7 +118,7 @@ Mods: {
 				'''
 				Grants <hpBase> + <hpPer> Health Per Quality, <expBase> + <expPer>% Fishing Exp per quality,
 				increasing your Junimo Pet's fishing exp gains, and 
-				<fortBase> + <fortPer> Fishing Fortune per quality, increasing your Fishing Pet's drops
+				<fortBase> + <fortPer> Fishing Fortune per quality, increasing your Fishing Pet's drops.
 				Health Bonus: <currentHp> Quality <hpRoll> out of <hpMaxRoll>
 				Fishing Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				Fishing Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
@@ -127,7 +127,7 @@ Mods: {
 				'''
 				Grants <defPer> Defense per quality and <defMultBase> + <defMultPer> per quality percentage defense increase.
 				<expBase> + <expPer>% Mining Exp per quality, increasing your Junimo Pet's mining exp gains
-				and <fortBase> + <fortPer> Mining Fortune per quality, increasing your Mining Pet's drops
+				and <fortBase> + <fortPer> Mining Fortune per quality, increasing your Mining Pet's drops.
 				Defense Bonus: <currentDef> Quality <defRoll> out of <defMaxRoll>
 				Percentage Defense Bonus: <currentDefMult> Quality <defMultRoll> out of <defMultMaxRoll>
 				Mining Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
@@ -171,7 +171,7 @@ Mods: {
 			/* ToyGolem:
 				'''
 				Grants <regenPer> Life Regen Per Quality, <healthBase> + <healthPer>% bonus maximum health per quality,
-				and <expBase> + <expPer>% Mining Exp boost per quality increasing your Junimo Pet's mining exp gain
+				and <expBase> + <expPer>% Mining Exp boost per quality increasing your Junimo Pet's mining exp gain.
 				Life Regen Bonus: <currentRegen> Quality <regenRoll> out of <regenMaxRoll>
 				Health Percentage Bonus: <currentHealth> Quality <healthRoll> out of <healthMaxRoll>
 				Mining Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
@@ -179,7 +179,7 @@ Mods: {
 			/* JewelOfLight:
 				'''
 				Grants <moveSpdBase> + <moveSpdPer>% Movement Speed Per Quality, <wingBase> + <wingPer> seconds wing time per quality,
-				and <expBase> + <expPer>% Fishing Exp boost per quality increasing your Junimo Pet's fishing exp gain
+				and <expBase> + <expPer>% Fishing Exp boost per quality increasing your Junimo Pet's fishing exp gain.
 				Movement Speed Bonus: <currentMoveSpd> Quality <moveSpdRoll> out of <moveSpdMaxRoll>
 				Wing-Time Bonus: <currentWing> Quality <wingRoll> out of <wingMaxRoll>
 				Fishing Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
