@@ -24,7 +24,10 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
                 Player.moveSpeed += movespdFlat;
                 Player.moveSpeed *= movespdMult;
-                Player.GetDamage<GenericDamageClass>() += (Player.moveSpeed - 1f) * movespdToDmg;
+                if (Player.moveSpeed > 1f)
+                {
+                    Player.GetDamage<GenericDamageClass>() += (Player.moveSpeed - 1f) * movespdToDmg;
+                }
             }
         }
     }

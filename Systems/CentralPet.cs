@@ -15,6 +15,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using Terraria.GameInput;
+using System;
 
 namespace PetsOverhaul.Systems
 {
@@ -103,7 +104,7 @@ namespace PetsOverhaul.Systems
         /// <param name="currentRoll">Current roll of the stat</param>
         /// <param name="maxRoll">Maximum roll of the stat</param>
         /// <returns>Text with its color changed depending on quality amount</returns>
-        public static string LightPetRarityColorConvert(string text, int currentRoll, int maxRoll)
+        public static string LightPetRarityColorConvert(string text, int currentRoll, int maxRoll) 
         {
             if (currentRoll == maxRoll)
             {
@@ -1053,11 +1054,11 @@ namespace PetsOverhaul.Systems
             isPlanteraProjectile = false;
             petProj = false;
             isFromSentry = false;
-            if (source is EntitySource_ItemUse item && (item.Item.type == ItemID.VenusMagnum || item.Item.type == ItemID.NettleBurst || item.Item.type == ItemID.LeafBlower || item.Item.type == ItemID.FlowerPow || item.Item.type == ItemID.WaspGun || item.Item.type == ItemID.Seedler))
+            if (source is EntitySource_ItemUse item && (item.Item.type == ItemID.VenusMagnum || item.Item.type == ItemID.NettleBurst || item.Item.type == ItemID.LeafBlower || item.Item.type == ItemID.FlowerPow || item.Item.type == ItemID.WaspGun || item.Item.type == ItemID.Seedler || item.Item.type == ItemID.GrenadeLauncher))
             {
                 isPlanteraProjectile = true;
             }
-            else if (source is EntitySource_Parent parent && parent.Entity is Projectile proj && (proj.type == ProjectileID.Pygmy || proj.type == ProjectileID.Pygmy2 || proj.type == ProjectileID.Pygmy3 || proj.type == ProjectileID.Pygmy4))
+            else if (source is EntitySource_Parent parent && parent.Entity is Projectile proj && (proj.type == ProjectileID.Pygmy || proj.type == ProjectileID.Pygmy2 || proj.type == ProjectileID.Pygmy3 || proj.type == ProjectileID.Pygmy4 || proj.type == ProjectileID.FlowerPow))
             {
                 isPlanteraProjectile = true;
             }
