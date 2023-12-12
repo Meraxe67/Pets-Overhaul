@@ -22,9 +22,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
                 int manaMult;
                 Player.statManaMax2 += (int)(Player.statManaMax2 * manaIncrease);
-                if (Player.statManaMax2 >= 200)
+                if (Player.statManaMax2 >= Player.statManaMax)
                 {
-                    manaMult = Player.statManaMax2 - 200;
+                    manaMult = Player.statManaMax2 - Player.statManaMax;
                 }
                 else
                 {

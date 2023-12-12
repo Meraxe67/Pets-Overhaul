@@ -22,10 +22,10 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             if (Pet.PetInUseWithSwapCd(ItemID.TikiTotem))
             {
-                if (Player.GetTotalAttackSpeed<SummonMeleeSpeedDamageClass>() - 1 > 0)
+                if (Player.GetTotalAttackSpeed<SummonMeleeSpeedDamageClass>() > Player.GetAttackSpeed<SummonMeleeSpeedDamageClass>())
                 {
-                    Player.GetDamage<SummonDamageClass>() += (Player.GetTotalAttackSpeed<SummonMeleeSpeedDamageClass>() - 1) * atkSpdToDmgConversion;
-                    Player.whipRangeMultiplier += (Player.GetTotalAttackSpeed<SummonMeleeSpeedDamageClass>() - 1) * atkSpdToRangeConversion;
+                    Player.GetDamage<SummonDamageClass>() += (Player.GetTotalAttackSpeed<SummonMeleeSpeedDamageClass>() - Player.GetAttackSpeed<SummonMeleeSpeedDamageClass>()) * atkSpdToDmgConversion;
+                    Player.whipRangeMultiplier += (Player.GetTotalAttackSpeed<SummonMeleeSpeedDamageClass>() - Player.GetAttackSpeed<SummonMeleeSpeedDamageClass>()) * atkSpdToRangeConversion;
                 }
             }
         }
