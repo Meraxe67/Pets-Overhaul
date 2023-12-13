@@ -107,16 +107,18 @@ namespace PetsOverhaul.PetEffects.Vanilla
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (!ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !Keybinds.PetTooltipHide.Current)
+            if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !Keybinds.PetTooltipHide.Current)
             {
                 return;
             }
+
             Parrot modPlayer = Main.LocalPlayer.GetModPlayer<Parrot>();
             tooltips.Add(new TooltipLine(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ParrotCracker")
                 .Replace("<projChance>", modPlayer.projChance.ToString())
                 .Replace("<projDamage>", modPlayer.projDamage.ToString())
                 .Replace("<meleeChance>", modPlayer.meleeChance.ToString())
-                .Replace("<meleeDamage>", modPlayer.meleeDamage.ToString())));
+                .Replace("<meleeDamage>", modPlayer.meleeDamage.ToString())
+                ));
         }
     }
 }
