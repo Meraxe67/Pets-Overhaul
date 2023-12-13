@@ -20,7 +20,7 @@ using System;
 namespace PetsOverhaul.Systems
 {
     /// <summary>
-    /// ModPlayer class that contains useful Methods and fields for Pet implementation.
+    /// ModPlayer class that contains useful Methods and fields for Pet implementation, works as a central class.
     /// </summary>
     public sealed class GlobalPet : ModPlayer
     {
@@ -457,10 +457,10 @@ namespace PetsOverhaul.Systems
         }
         public override void PreUpdate()
         {
-            //if (Player.HeldItem.TryGetGlobalItem(out ItemPet item)) //Player's hand slot is not being reckognized as 'inventory' in UpdateInventory() of GlobalItem, so manually updating the Hand slot
-            //{
-            //    item.pickedUpBefore = true;
-            //}
+            if (Main.mouseItem.TryGetGlobalItem(out ItemPet item) && item.pickedUpBefore == false) //Player's hand slot is not being reckognized as 'inventory' in UpdateInventory() of GlobalItem, so manually updating the Hand slot
+            {
+                item.pickedUpBefore = true;
+            }
 
             if (ItemPet.updateReplacedTile.Count > 0)
             {
@@ -701,7 +701,10 @@ namespace PetsOverhaul.Systems
         }
         public override void UpdateInventory(Item item, Player player)
         {
-            pickedUpBefore = true;
+            if (pickedUpBefore == false)
+            {
+                pickedUpBefore = true;
+            }
         }
         public override void OnSpawn(Item item, IEntitySource source)
         {
