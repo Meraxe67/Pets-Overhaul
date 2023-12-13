@@ -104,7 +104,7 @@ namespace PetsOverhaul.Systems
         /// <param name="currentRoll">Current roll of the stat</param>
         /// <param name="maxRoll">Maximum roll of the stat</param>
         /// <returns>Text with its color changed depending on quality amount</returns>
-        public static string LightPetRarityColorConvert(string text, int currentRoll, int maxRoll) 
+        public static string LightPetRarityColorConvert(string text, int currentRoll, int maxRoll)
         {
             if (currentRoll == maxRoll)
             {
@@ -190,7 +190,7 @@ namespace PetsOverhaul.Systems
                 {
                     for (int i = 0; i < ItemPet.Randomizer(PickerPet.globalFortune * item.stack); i++)
                     {
-                        player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.globalItem), item, 1);
+                        player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.globalItem), item.type, 1);
                     }
                 }
 
@@ -198,7 +198,7 @@ namespace PetsOverhaul.Systems
                 {
                     for (int i = 0; i < ItemPet.Randomizer((PickerPet.globalFortune * 10 / 2 + PickerPet.harvestingFortune * 10) * item.stack, 1000); i++) //Multiplied by 10 and divided by 1000 since we divide globalFortune by 2, to get more precise numbers.
                     {
-                        player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.harvestingFortuneItem), item, 1);
+                        player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.harvestingFortuneItem), item.type, 1);
                     }
                 }
 
@@ -206,7 +206,7 @@ namespace PetsOverhaul.Systems
                 {
                     for (int i = 0; i < ItemPet.Randomizer((PickerPet.globalFortune * 10 / 2 + PickerPet.miningFortune * 10) * item.stack, 1000); i++)
                     {
-                        player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.miningFortuneItem), item, 1);
+                        player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.miningFortuneItem), item.type, 1);
                     }
                 }
 
@@ -214,7 +214,7 @@ namespace PetsOverhaul.Systems
                 {
                     for (int i = 0; i < ItemPet.Randomizer((PickerPet.globalFortune * 10 / 2 + PickerPet.fishingFortune) * item.stack, 1000); i++)
                     {
-                        player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.fishingFortuneItem), item, 1);
+                        player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.fishingFortuneItem), item.type, 1);
                     }
                 }
             }
@@ -457,6 +457,11 @@ namespace PetsOverhaul.Systems
         }
         public override void PreUpdate()
         {
+            //if (Player.HeldItem.TryGetGlobalItem(out ItemPet item)) //Player's hand slot is not being reckognized as 'inventory' in UpdateInventory() of GlobalItem, so manually updating the Hand slot
+            //{
+            //    item.pickedUpBefore = true;
+            //}
+
             if (ItemPet.updateReplacedTile.Count > 0)
             {
                 ItemPet.updateReplacedTile.Clear();
@@ -510,7 +515,6 @@ namespace PetsOverhaul.Systems
         }
         public override void PostUpdate()
         {
-
             if (petShield.Count > 0)
             {
                 while (shieldToBeReduced > 0 && petShield.Count > 0)
@@ -697,28 +701,10 @@ namespace PetsOverhaul.Systems
         }
         public override void UpdateInventory(Item item, Player player)
         {
-            if (pickedUpBefore == false)
-            {
-                pickedUpBefore = true;
-            }
+            pickedUpBefore = true;
         }
         public override void OnSpawn(Item item, IEntitySource source)
         {
-            itemFromNpc = false;
-            herbBoost = false;
-            oreBoost = false;
-            commonBlock = false;
-            blockNotByPlayer = false;
-            pickedUpBefore = false;
-            itemFromBag = false;
-            itemFromBoss = false;
-            harvestingDrop = false;
-            miningDrop = false;
-            fishingDrop = false;
-            globalDrop = false;
-            fortuneHarvestingDrop = false;
-            fortuneMiningDrop = false;
-            fortuneFishingDrop = false;
             if (source is EntitySource_Pet petSource)
             {
                 globalDrop = petSource.ContextType == EntitySource_Pet.TypeId.globalItem;
