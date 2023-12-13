@@ -25,98 +25,52 @@ namespace PetsOverhaul.PetEffects.Vanilla
         internal int oldTileType = 0;
         internal int prevX = 0;
         internal int prevY = 0;
-        public override void PostUpdateRunSpeeds()
+        public override void PostUpdate()
         {
             if (Pet.PetInUse(ItemID.EaterOfWorldsPetItem))
             {
                 tilesToRandomize.Clear();
-                if (Main.SmartCursorShowing)
-                {
-                    Tile tile = Main.tile[Main.SmartCursorX, Main.SmartCursorY];
+                Tile tile = Main.SmartCursorShowing ? Main.tile[Main.SmartCursorX, Main.SmartCursorY] : Main.tile[Player.tileTargetX, Player.tileTargetY];
 
-                    if (Pet.PetInUse(ItemID.EaterOfWorldsPetItem) && TileID.Sets.Ore[tile.TileType] == false && ItemPet.gemTile[tile.TileType] == false && Player.controlUseItem)
-                    {
-                        Player.pickSpeed -= nonOreSpeed;
-                    }
-                    if (Pet.PetInUse(ItemID.EaterOfWorldsPetItem) && Player.controlUseItem && Player.HeldItem.pick > 0 && Main.tile[prevX, prevY].TileType == 0 && oldTileType != 0 && (TileID.Sets.Ore[oldTileType] || ItemPet.gemTile[oldTileType]) && Main.rand.NextBool(tileBreakSpreadChance, 100))
-                    {
-                        for (mineX = -tileBreakXSpread; mineX <= tileBreakXSpread; mineX++)
-                        {
-                            for (mineY = -tileBreakYSpread; mineY <= tileBreakYSpread; mineY++)
-                            {
-                                if (Main.tile[prevX + mineX, prevY + mineY].TileType == oldTileType)
-                                {
-                                    tilesToRandomize.Add((prevX + mineX, prevY + mineY));
-                                }
-                            }
-                            if (Main.tile[prevX + mineX, prevY + mineY].TileType == oldTileType)
-                            {
-                                tilesToRandomize.Add((prevX + mineX, prevY + mineY));
-                            }
-                        }
-                        for (int i = 0; i < ItemPet.Randomizer(tileBreakSpreadChance); i++)
-                        {
-                            if (tilesToRandomize.Count > 0)
-                            {
-                                (int X, int Y) tileToBreak = tilesToRandomize[Main.rand.Next(tilesToRandomize.Count)];
-                                if (Player.HasEnoughPickPowerToHurtTile(tileToBreak.X, tileToBreak.Y))
-                                {
-                                    Player.PickTile(tileToBreak.X, tileToBreak.Y, 5000);
-                                    if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
-                                    {
-                                        SoundEngine.PlaySound(SoundID.WormDig with { PitchVariance = 0.4f }, Player.position);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    prevX = Main.SmartCursorX;
-                    prevY = Main.SmartCursorY;
-                    oldTileType = tile.TileType;
-                }
-                else
+                if (Pet.PetInUse(ItemID.EaterOfWorldsPetItem) && TileID.Sets.Ore[tile.TileType] == false && ItemPet.gemTile[tile.TileType] == false && Player.controlUseItem)
                 {
-                    Tile tile = Main.tile[Player.tileTargetX, Player.tileTargetY];
-                    if (Pet.PetInUse(ItemID.EaterOfWorldsPetItem) && TileID.Sets.Ore[tile.TileType] == false && ItemPet.gemTile[tile.TileType] == false && Player.controlUseItem)
+                    Player.pickSpeed -= nonOreSpeed;
+                }
+                if (Pet.PetInUse(ItemID.EaterOfWorldsPetItem) && Player.controlUseItem && Player.HeldItem.pick > 0 && Main.tile[prevX, prevY].TileType == 0 && oldTileType != 0 && (TileID.Sets.Ore[oldTileType] || ItemPet.gemTile[oldTileType]))
+                {
+                    for (mineX = -tileBreakXSpread; mineX <= tileBreakXSpread; mineX++)
                     {
-                        Player.pickSpeed -= nonOreSpeed;
-                    }
-                    if (Pet.PetInUse(ItemID.EaterOfWorldsPetItem) && Player.controlUseItem && Player.HeldItem.pick > 0 && Main.tile[prevX, prevY].TileType == 0 && oldTileType != 0 && (TileID.Sets.Ore[oldTileType] || ItemPet.gemTile[oldTileType]) && Main.rand.NextBool(tileBreakSpreadChance, 100))
-                    {
-                        for (mineX = -tileBreakXSpread; mineX <= tileBreakXSpread; mineX++)
+                        for (mineY = -tileBreakYSpread; mineY <= tileBreakYSpread; mineY++)
                         {
-                            for (mineY = -tileBreakYSpread; mineY <= tileBreakYSpread; mineY++)
-                            {
-                                if (Main.tile[prevX + mineX, prevY + mineY].TileType == oldTileType)
-                                {
-                                    tilesToRandomize.Add((prevX + mineX, prevY + mineY));
-                                }
-                            }
                             if (Main.tile[prevX + mineX, prevY + mineY].TileType == oldTileType)
                             {
                                 tilesToRandomize.Add((prevX + mineX, prevY + mineY));
                             }
                         }
-                        for (int i = 0; i < ItemPet.Randomizer(tileBreakSpreadChance); i++)
+                        if (Main.tile[prevX + mineX, prevY + mineY].TileType == oldTileType)
                         {
-                            if (tilesToRandomize.Count > 0)
+                            tilesToRandomize.Add((prevX + mineX, prevY + mineY));
+                        }
+                    }
+                    for (int i = 0; i < ItemPet.Randomizer(tileBreakSpreadChance); i++)
+                    {
+                        if (tilesToRandomize.Count > 0)
+                        {
+                            (int X, int Y) = tilesToRandomize[Main.rand.Next(tilesToRandomize.Count)];
+                            if (Player.HasEnoughPickPowerToHurtTile(X, Y))
                             {
-                                (int X, int Y) tileToBreak = tilesToRandomize[Main.rand.Next(tilesToRandomize.Count)];
-                                if (Player.HasEnoughPickPowerToHurtTile(tileToBreak.X, tileToBreak.Y))
+                                Player.PickTile(X, Y, 5000);
+                                if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
                                 {
-                                    Player.PickTile(tileToBreak.X, tileToBreak.Y, 5000);
-                                    if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
-                                    {
-                                        SoundEngine.PlaySound(SoundID.WormDig with { PitchVariance = 0.4f }, Player.position);
-                                    }
+                                    SoundEngine.PlaySound(SoundID.WormDig with { PitchVariance = 0.4f }, Player.position);
                                 }
                             }
                         }
                     }
-                    prevX = Player.tileTargetX;
-                    prevY = Player.tileTargetY;
-                    oldTileType = tile.TileType;
                 }
+                prevX = Main.SmartCursorShowing ? Main.SmartCursorX : Player.tileTargetX;
+                prevY = Main.SmartCursorShowing ? Main.SmartCursorY : Player.tileTargetY;
+                oldTileType = tile.TileType;
             }
         }
     }

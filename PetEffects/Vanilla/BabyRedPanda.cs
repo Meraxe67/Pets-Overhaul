@@ -41,7 +41,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
                 for (int i = 0; i < ItemPet.Randomizer(panda.bambooChance * item.stack); i++)
                 {
-                    player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), item, 1);
+                    player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), item.type, 1);
                 }
             }
         }

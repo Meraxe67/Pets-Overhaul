@@ -32,7 +32,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 {
                     for (int i = 0; i < ItemPet.Randomizer(((Junimo.HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)).expAmount >= ItemPet.MinimumExpForRarePlant) ? caveling.cavelingRarePlantChance : caveling.cavelingRegularPlantChance + (ItemPet.gemstoneTreeItem[item.type] ? caveling.cavelingGemTreeChance : 0)) * item.stack); i++)
                     {
-                        player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), item, 1);
+                        player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), item.type, 1);
                     }
                 }
             }

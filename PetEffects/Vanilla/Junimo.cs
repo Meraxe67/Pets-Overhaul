@@ -205,12 +205,12 @@ namespace PetsOverhaul.PetEffects.Vanilla
             { (110, new int[] { ItemID.Acorn }) },
             { (125, new int[] { ItemID.AshGrassSeeds, ItemID.BlinkrootSeeds, ItemID.CorruptSeeds, ItemID.CrimsonSeeds, ItemID.DaybloomSeeds, ItemID.DeathweedSeeds, ItemID.FireblossomSeeds, ItemID.GrassSeeds, ItemID.HallowedSeeds, ItemID.JungleGrassSeeds, ItemID.MoonglowSeeds, ItemID.MushroomGrassSeeds, ItemID.ShiverthornSeeds, ItemID.WaterleafSeeds }) },
             { (165, new int[] { ItemID.Wood, ItemID.AshWood, ItemID.BorealWood, ItemID.PalmWood, ItemID.Ebonwood, ItemID.Shadewood, ItemID.StoneBlock, ItemID.RichMahogany }) },
-            { (220, new int[] { ItemID.Daybloom, ItemID.Blinkroot, ItemID.Deathweed, ItemID.Fireblossom, ItemID.Moonglow, ItemID.Shiverthorn, ItemID.Waterleaf, ItemID.Mushroom, ItemID.GlowingMushroom, ItemID.VileMushroom, ItemID.ViciousMushroom, ItemID.Pumpkin }) },
+            { (220, new int[] { ItemID.Daybloom, ItemID.Blinkroot, ItemID.Deathweed, ItemID.Fireblossom, ItemID.Moonglow, ItemID.Shiverthorn, ItemID.Waterleaf, ItemID.GlowingMushroom, ItemID.Pumpkin }) },
             { (250, new int[] { ItemID.GemTreeAmberSeed, ItemID.GemTreeAmethystSeed, ItemID.GemTreeDiamondSeed, ItemID.GemTreeEmeraldSeed, ItemID.GemTreeRubySeed, ItemID.GemTreeSapphireSeed, ItemID.GemTreeTopazSeed, ItemID.Amethyst, ItemID.Topaz, ItemID.Sapphire, ItemID.Emerald, ItemID.Ruby, ItemID.Amber, ItemID.Diamond }) },
-            { (300, new int[] { ItemID.Pearlwood, ItemID.SpookyWood, ItemID.Cactus, ItemID.BambooBlock }) },
+            { (300, new int[] { ItemID.Pearlwood, ItemID.SpookyWood, ItemID.Cactus, ItemID.BambooBlock, ItemID.Mushroom, ItemID.VileMushroom, ItemID.ViciousMushroom }) },
             { (400, new int[] { ItemID.JungleSpores }) },
             { (500, new int[] { ItemID.Coral, ItemID.Seashell, ItemID.Starfish, ItemID.LightningWhelkShell, ItemID.TulipShell, ItemID.JunoniaShell }) },
-            { (1750, new int[] { ItemID.SpicyPepper, ItemID.Pomegranate, ItemID.Elderberry, ItemID.BlackCurrant, ItemID.Apple, ItemID.Apricot, ItemID.Banana, ItemID.BloodOrange, ItemID.Cherry, ItemID.Coconut, ItemID.Grapefruit, ItemID.Lemon, ItemID.Mango, ItemID.Peach, ItemID.Pineapple, ItemID.Plum }) },
+            { (1750, new int[] { ItemID.SpicyPepper, ItemID.Pomegranate, ItemID.Elderberry, ItemID.BlackCurrant, ItemID.Apple, ItemID.Apricot, ItemID.Banana, ItemID.BloodOrange, ItemID.Cherry, ItemID.Coconut, ItemID.Grapefruit, ItemID.Lemon, ItemID.Mango, ItemID.Peach, ItemID.Pineapple, ItemID.Plum, ItemID.Rambutan }) },
             { (2000, new int[] { ModContent.ItemType<Egg>() }) },
             { (2500, new int[] { ItemID.Dragonfruit, ItemID.Starfruit, ItemID.Grapes }) },
             { (3500, new int[] { ItemID.GreenMushroom, ItemID.TealMushroom, ItemID.SkyBlueFlower, ItemID.YellowMarigold, ItemID.BlueBerries, ItemID.LimeKelp, ItemID.PinkPricklyPear, ItemID.OrangeBloodroot, ItemID.StrangePlant1, ItemID.StrangePlant2, ItemID.StrangePlant3, ItemID.StrangePlant4 }) },
@@ -323,17 +323,17 @@ namespace PetsOverhaul.PetEffects.Vanilla
             if (ModContent.GetInstance<Personalization>().JunimoExpGainMessage == false && Main.showItemText)
             {
                 Vector2 popupVelo = new(Main.rand.NextFloat(-4, 4), Main.rand.NextFloat(-6, -1));
-                if (classIndex <= -1)
-                {
-                    classIndex = PopupText.NewText(new AdvancedPopupRequest() with { Velocity = popupVelo, DurationInFrames = 180, Color = color, Text = "+" + classExp.ToString() + " exp" }, Player.Center);
-                    Main.popupText[classIndex].rotation = Main.rand.NextFloat(0.2f);
-                }
-                else
+                if (classIndex > -1)
                 {
                     Main.popupText[classIndex].name = "+" + classExp.ToString() + " exp";
                     Main.popupText[classIndex].position = Player.Center;
                     Main.popupText[classIndex].velocity = popupVelo;
                     Main.popupText[classIndex].lifeTime = classExp + 180 > 700 ? 700 : (classExp + 180);
+                    Main.popupText[classIndex].rotation = Main.rand.NextFloat(0.2f);
+                }
+                else
+                {
+                    classIndex = PopupText.NewText(new AdvancedPopupRequest() with { Velocity = popupVelo, DurationInFrames = 180, Color = color, Text = "+" + classExp.ToString() + " exp" }, Player.Center);
                     Main.popupText[classIndex].rotation = Main.rand.NextFloat(0.2f);
                 }
             }
@@ -385,7 +385,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     {
                         for (int i = 0; i < ItemPet.Randomizer((int)(juni.junimoMiningLevel * juni.miningOrePerLevel * juni.junimoInUseMultiplier) * item.stack); i++)
                         {
-                            player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), item, 1);
+                            player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), item.type, 1);
                         }
                     }
                 }

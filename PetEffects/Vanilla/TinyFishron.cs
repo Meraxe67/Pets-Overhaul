@@ -46,7 +46,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
                 for (int i = 0; i < ItemPet.Randomizer(stackChance + (int)(Player.fishingSkill * multiplier) * fish.stack); i++)
                 {
-                    Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.fishingItem), fish, 1);
+                    Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.fishingItem), fish.type, 1);
                 }
             }
         }
