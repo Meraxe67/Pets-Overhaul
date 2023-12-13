@@ -28,11 +28,30 @@ namespace PetsOverhaul.Systems
         }
         public override void LoadWorldData(TagCompound tag)
         {
-            masteryShardObtained1 = tag.GetBool("masteryshard1");
-            masteryShardObtained2 = tag.GetBool("masteryshard2");
-            masteryShardObtained3 = tag.GetBool("masteryshard3");
-            masteryShardObtained4 = tag.GetBool("masteryshard4");
-            masteryShardObtained5 = tag.GetBool("masteryshard5");
+            if (tag.TryGet("masteryshard1", out bool shard1))
+            {
+                masteryShardObtained1 = shard1;
+            }
+
+            if (tag.TryGet("masteryshard2", out bool shard2))
+            {
+                masteryShardObtained2 = shard2;
+            }
+
+            if (tag.TryGet("masteryshard3", out bool shard3))
+            {
+                masteryShardObtained3 = shard3;
+            }
+
+            if (tag.TryGet("masteryshard4", out bool shard4))
+            {
+                masteryShardObtained4 = shard4;
+            }
+
+            if (tag.TryGet("masteryshard5", out bool shard5))
+            {
+                masteryShardObtained5 = shard5;
+            }
         }
     }
 }
