@@ -3,6 +3,7 @@ using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
@@ -85,6 +86,10 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 Pet.timer = Pet.timerMax;
                 oocTimer = 600;
             }
+        }
+        public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
+        {
+            minotaurStack = 0;
         }
     }
     public sealed class TartarSauce : GlobalItem

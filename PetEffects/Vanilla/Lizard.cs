@@ -4,6 +4,7 @@ using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
@@ -114,6 +115,10 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 PopupText.NewText(popupMessage, Player.position);
                 Pet.timer = Pet.timerMax;
             }
+        }
+        public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
+        {
+            transformTimer = 0;
         }
     }
     public sealed class LizardEgg : GlobalItem
