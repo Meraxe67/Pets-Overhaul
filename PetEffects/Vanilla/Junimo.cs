@@ -27,7 +27,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public float harvestHpPercentPerLevel = 0.0016f;
         public float fishingPowerPerLevel = 0.004f;
         public float miningOrePerLevel = 0.9f;
-        public float harvestingExpToCoinPerLevel = 1.1f;
+        public float harvestingExpToCoinPerLevel = 0.45f;
         public int popupExpHarv = 0; //Represents current existing exp value on popup texts
         public int popupExpMining = 0;
         public int popupExpFish = 0;
@@ -39,7 +39,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         /// <summary>
         /// Default exp value used by Mining and Fishing
         /// </summary>
-        public int defaultExps = 50;
+        public int defaultExps = 100;
         public int junimoHarvestingLevel = 1;
         public int junimoHarvestingExp = 0;
         public int[] junimoHarvestingLevelsToXp = new int[]
@@ -138,42 +138,42 @@ namespace PetsOverhaul.PetEffects.Vanilla
             5,
             15,
             30,
-            50,
+            45,
+            60,
             75,
-            105,
-            140,
-            190,
-            240,
-            300,
-            375,
-            460,
-            555,
-            675,
-            800,
-            950,
-            1150,
-            1400,
-            1700,
-            2100,
-            2500,
+            95,
+            120,
+            150,
+            185,
+            230,
+            290,
+            360,
+            450,
+            560,
+            700,
+            875,
+            1075,
+            1300,
+            1550,
+            1900,
+            2400,
             3000,
-            3750,
-            4750,
-            6000,
-            7750,
+            3850,
+            4800,
+            6200,
+            8000,
             10000,
-            12750,
-            16250,
-            20000,
-            24500,
-            30000,
-            37000,
-            45000,
-            54500,
-            66000,
-            77000,
-            88000,
-            100000,
+            13000,
+            16000,
+            19500,
+            24000,
+            29500,
+            36000,
+            43750,
+            53000,
+            62000,
+            70500,
+            80000,
         };
 
         /// <summary>
@@ -471,7 +471,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public override void AnglerQuestReward(float rareMultiplier, List<Item> rewardItems)
         {
-            if (anglerQuestDayCheck == false && JunimoExpCheck(Player))
+            if (anglerQuestDayCheck == false && (Pet.PetInUse(ItemID.JunimoPetItem) || Player.HasItemInInventoryOrOpenVoidBag(ItemID.JunimoPetItem)))
             {
                 AnglerQuestPool();
                 if (GlobalPet.pool.Count > 0)
@@ -662,7 +662,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public override bool InstancePerEntity => true;
         public override void OnKill(NPC npc)
         {
-            if (npc.TryGetGlobalNPC(out NpcPet npcPet) && npcPet.seaCreature)
+            if (npc.TryGetGlobalNPC(out NpcPet npcPet) && npcPet.seaCreature && npc.friendly == false)
             {
                 int playerId = npcPet.playerThatFishedUp;
                 if (Main.netMode != NetmodeID.SinglePlayer)
@@ -710,7 +710,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         .Replace("<miningLevel>", junimo.junimoMiningLevel.ToString())
                         .Replace("<miningNext>", junimo.junimoMiningLevel >= junimo.maxLvls ? Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.JunimoMaxLevelText") : (junimo.junimoMiningLevelsToXp[junimo.junimoMiningLevel] - junimo.junimoMiningExp).ToString())
                         .Replace("<miningCurrent>", junimo.junimoMiningExp.ToString())
-                        .Replace("<fishingPower>", Math.Round(junimo.junimoFishingLevel * junimo.junimoInUseMultiplier * junimo.fishingPowerPerLevel * 100, 2).ToString())
+                        .Replace("<fishingPower>", Math.Round(junimo.junimoFishingLevel * junimo.junimoInUseMultiplier * junimo.fishingPowerPerLevel, 2).ToString())
                         .Replace("<bonusDamage>", Math.Round(junimo.junimoFishingLevel * junimo.junimoInUseMultiplier * junimo.fishingDamagePerLevel * 100, 2).ToString())
                         .Replace("<fishingLevel>", junimo.junimoFishingLevel.ToString())
                         .Replace("<fishingNext>", junimo.junimoFishingLevel >= junimo.maxLvls ? Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.JunimoMaxLevelText") : (junimo.junimoFishingLevelsToXp[junimo.junimoFishingLevel] - junimo.junimoFishingExp).ToString())
