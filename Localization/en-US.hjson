@@ -9,13 +9,12 @@ Mods: {
 		JojaCola: A nature related NPC may be able to Purify this
 		Notice:
 			'''
-			[c/90C2AA:Pets Overhaul 2.3.5 latest changes: Tooltip listings, improvements and clarifications & new Keybinds!]
-			[c/90C2AA:All newly added Light Pet stats are influenced by that stat's Quality, improving it significantly.]
-			[c/90C2AA:Qualities are rolled when the item is the first time in your inventory! Moonlord now drops]
-			[c/90C2AA:It's Light Pet in non-Expert+ worlds, recipes for Shadow Orb/Crimson Heart have been added.]
+			[c/90C2AA:Pets Overhaul 2.3.6 latest changes: Reduced Junimo's Fishing level requirements]
+			[c/90C2AA:Major/Minor bug fixes, Junimo Harvesting EXP to money multiplier nerf]
 			If you happen to come across any bugs or would like to be up to
 			date with our constantly updating Mod and growing community,
 			we encourage you to join our community and our Discord server!
+			All feedback is very much appreciated. discord.gg/KubSpqvDGE
 			'''
 
 		Config: {
@@ -106,6 +105,7 @@ Mods: {
 		}
 
 		LightPetTooltips: {
+			NotRolled: Qualities are rolled when the item is in the inventory for the first time!
 			ShadowOrb:
 				'''
 				Grants <manaBase> + <manaPer> Mana Per Quality, <expBase> + <expPer>% Harvesting Exp per quality,
@@ -482,7 +482,7 @@ Mods: {
 				- Grants <bonusReduction>% damage reduction.
 				[c/0382E9:Fishing]
 				Current level: [c/0382E9:<fishingLevel>] Experience needed for next level: [c/0382E9:<fishingNext>] Current total experience: [c/0382E9:<fishingCurrent>]
-				- Multiplies fishing power by 100% + <fishingPower>x.
+				- Multiplies fishing power by 1 + <fishingPower>x.
 				- Grants extra rewards from its weighted list upon completing an Angler Quest.
 				 * This list consists of wide range of fishing loot, where entering hardmode expands the list further.
 				 * Amount of times you will drop an item from the list is <rollTime> multiplied by a biased-towards-lower-number of 1 to 1.5.

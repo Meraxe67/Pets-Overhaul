@@ -9,13 +9,12 @@ Mods: {
 		// JojaCola: A nature related NPC may be able to Purify this
 		/* Notice:
 			'''
-			[c/90C2AA:Pets Overhaul 2.3.5 latest changes: Tooltip listings, improvements and clarifications & new Keybinds!]
-			[c/90C2AA:All newly added Light Pet stats are influenced by that stat's Quality, improving it significantly.]
-			[c/90C2AA:Qualities are rolled when the item is the first time in your inventory! Moonlord now drops]
-			[c/90C2AA:It's Light Pet in non-Expert+ worlds, recipes for Shadow Orb/Crimson Heart have been added.]
+			[c/90C2AA:Pets Overhaul 2.3.6 latest changes: Reduced Junimo's Fishing level requirements]
+			[c/90C2AA:Major/Minor bug fixes, Junimo Harvesting EXP to money multiplier nerf]
 			If you happen to come across any bugs or would like to be up to
 			date with our constantly updating Mod and growing community,
 			we encourage you to join our community and our Discord server!
+			All feedback is very much appreciated. discord.gg/KubSpqvDGE
 			''' */
 
 		Config: {
@@ -64,6 +63,7 @@ Mods: {
 		}
 
 		LightPetTooltips: {
+			// NotRolled: Qualities are rolled when the item is in the inventory for the first time!
 			/* ShadowOrb:
 				'''
 				Grants <manaBase> + <manaPer> Mana Per Quality, <expBase> + <expPer>% Harvesting Exp per quality,

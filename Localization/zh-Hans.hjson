@@ -105,6 +105,7 @@ Mods: {
 		}
 
 		LightPetTooltips: {
+			// NotRolled: Qualities are rolled when the item is in the inventory for the first time!
 			/* ShadowOrb:
 				'''
 				Grants <manaBase> + <manaPer> Mana Per Quality, <expBase> + <expPer>% Harvesting Exp per quality,
