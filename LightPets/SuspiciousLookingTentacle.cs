@@ -2,6 +2,7 @@
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;
@@ -186,6 +187,36 @@ namespace PetsOverhaul.LightPets
                 whipRoll = Main.rand.Next(whipMax) + 1;
             }
         }
+        public override void NetSend(Item item, BinaryWriter writer)
+        {
+            writer.Write((byte)crDmgRoll);
+            writer.Write((byte)critRoll);
+            writer.Write((byte)defRoll);
+            writer.Write((byte)dmgRoll);
+            writer.Write((byte)healRoll);
+            writer.Write((byte)manaRoll);
+            writer.Write((byte)minRoll);
+            writer.Write((byte)msRoll);
+            writer.Write((byte)penRoll);
+            writer.Write((byte)potRoll);
+            writer.Write((byte)sizeRoll);
+            writer.Write((byte)whipRoll);
+        }
+        public override void NetReceive(Item item, BinaryReader reader)
+        {
+            crDmgRoll = reader.ReadByte();
+            critRoll = reader.ReadByte();
+            defRoll = reader.ReadByte();
+            dmgRoll = reader.ReadByte();
+            healRoll = reader.ReadByte();
+            manaRoll = reader.ReadByte();
+            minRoll = reader.ReadByte();
+            msRoll = reader.ReadByte();
+            penRoll = reader.ReadByte();
+            potRoll = reader.ReadByte();
+            sizeRoll = reader.ReadByte();
+            whipRoll = reader.ReadByte();
+        }
         public override void SaveData(Item item, TagCompound tag)
         {
             tag.Add("MlCrDmg", crDmgRoll);
@@ -333,6 +364,10 @@ namespace PetsOverhaul.LightPets
                         .Replace("<whipMax>", GlobalPet.LightPetRarityColorConvert(whipMax.ToString(), whipRoll, whipMax))
 
                         ));
+            if (critRoll <= 0)
+            {
+                tooltips.Add(new(Mod, "Tooltip0", "[c/" + GlobalPet.lowQuality.Hex3() + ":" + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.NotRolled") + "]"));
+            }
         }
     }
 }

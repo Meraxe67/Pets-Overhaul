@@ -2,6 +2,7 @@
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;
@@ -65,6 +66,18 @@ namespace PetsOverhaul.LightPets
                 atkSpdRoll = Main.rand.Next(atkSpdMaxRoll) + 1;
             }
         }
+        public override void NetSend(Item item, BinaryWriter writer)
+        {
+            writer.Write((byte)sumRoll);
+            writer.Write((byte)meleeRoll);
+            writer.Write((byte)atkSpdRoll);
+        }
+        public override void NetReceive(Item item, BinaryReader reader)
+        {
+            sumRoll = reader.ReadByte();
+            meleeRoll = reader.ReadByte();
+            atkSpdRoll = reader.ReadByte();
+        }
         public override void SaveData(Item item, TagCompound tag)
         {
             tag.Add("FlickerwickSum", sumRoll);
@@ -117,6 +130,10 @@ namespace PetsOverhaul.LightPets
                         .Replace("<atkSpdRoll>", GlobalPet.LightPetRarityColorConvert(atkSpdRoll.ToString(), atkSpdRoll, atkSpdMaxRoll))
                         .Replace("<atkSpdMaxRoll>", GlobalPet.LightPetRarityColorConvert(atkSpdMaxRoll.ToString(), atkSpdRoll, atkSpdMaxRoll))
                         ));
+            if (atkSpdRoll <= 0)
+            {
+                tooltips.Add(new(Mod, "Tooltip0", "[c/"+ GlobalPet.lowQuality.Hex3() +":" + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.NotRolled") + "]"));
+            }
         }
     }
 }

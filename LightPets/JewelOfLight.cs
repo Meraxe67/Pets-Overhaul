@@ -2,6 +2,7 @@
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;
@@ -68,6 +69,18 @@ namespace PetsOverhaul.LightPets
                 wingRoll = Main.rand.Next(wingMaxRoll) + 1;
             }
         }
+        public override void NetSend(Item item, BinaryWriter writer)
+        {
+            writer.Write((byte)moveSpdRoll);
+            writer.Write((byte)fishingExpRoll);
+            writer.Write((byte)wingRoll);
+        }
+        public override void NetReceive(Item item, BinaryReader reader)
+        {
+            moveSpdRoll = reader.ReadByte();
+            fishingExpRoll = reader.ReadByte();
+            wingRoll = reader.ReadByte();
+        }
         public override void SaveData(Item item, TagCompound tag)
         {
             tag.Add("EmpressMoveSpd", moveSpdRoll);
@@ -121,6 +134,10 @@ namespace PetsOverhaul.LightPets
                         .Replace("<expMaxRoll>", GlobalPet.LightPetRarityColorConvert(fishingExpMaxRoll.ToString(), fishingExpRoll, fishingExpMaxRoll))
 
                         ));
+            if (wingRoll <= 0)
+            {
+                tooltips.Add(new(Mod, "Tooltip0", "[c/" + GlobalPet.lowQuality.Hex3() + ":" + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.NotRolled") + "]"));
+            }
         }
     }
 }

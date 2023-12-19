@@ -2,6 +2,7 @@
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;
@@ -54,6 +55,16 @@ namespace PetsOverhaul.LightPets
                 globalFortRoll = Main.rand.Next(globalFortMaxRoll) + 1;
             }
         }
+        public override void NetSend(Item item, BinaryWriter writer)
+        {
+            writer.Write((byte)hasteRoll);
+            writer.Write((byte)globalFortRoll);
+        }
+        public override void NetReceive(Item item, BinaryReader reader)
+        {
+            hasteRoll = reader.ReadByte();
+            globalFortRoll = reader.ReadByte();
+        }
         public override void SaveData(Item item, TagCompound tag)
         {
             tag.Add("FairyHaste", hasteRoll);
@@ -94,6 +105,10 @@ namespace PetsOverhaul.LightPets
                         .Replace("<fortMaxRoll>", GlobalPet.LightPetRarityColorConvert(globalFortMaxRoll.ToString(), globalFortRoll, globalFortMaxRoll))
 
                         ));
+            if (globalFortRoll <= 0)
+            {
+                tooltips.Add(new(Mod, "Tooltip0", "[c/" + GlobalPet.lowQuality.Hex3() + ":" + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.NotRolled") + "]"));
+            }
         }
     }
 }

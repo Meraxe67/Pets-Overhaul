@@ -2,6 +2,7 @@
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;
@@ -65,6 +66,18 @@ namespace PetsOverhaul.LightPets
                 harvFortRoll = Main.rand.Next(harvFortMaxRoll) + 1;
             }
         }
+        public override void NetSend(Item item, BinaryWriter writer)
+        {
+            writer.Write((byte)manaRoll);
+            writer.Write((byte)harvExpRoll);
+            writer.Write((byte)harvFortRoll);
+        }
+        public override void NetReceive(Item item, BinaryReader reader)
+        {
+            manaRoll = reader.ReadByte();
+            harvExpRoll = reader.ReadByte();
+            harvFortRoll = reader.ReadByte();
+        }
         public override void SaveData(Item item, TagCompound tag)
         {
             tag.Add("ShadowMana", manaRoll);
@@ -117,6 +130,10 @@ namespace PetsOverhaul.LightPets
                         .Replace("<fortRoll>", GlobalPet.LightPetRarityColorConvert(harvFortRoll.ToString(), harvFortRoll, harvFortMaxRoll))
                         .Replace("<fortMaxRoll>", GlobalPet.LightPetRarityColorConvert(harvFortMaxRoll.ToString(), harvFortRoll, harvFortMaxRoll))
                         ));
+            if (manaRoll <= 0)
+            {
+                tooltips.Add(new(Mod, "Tooltip0", "[c/" + GlobalPet.lowQuality.Hex3() + ":" + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.NotRolled") + "]"));
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;
@@ -72,6 +73,18 @@ namespace PetsOverhaul.LightPets
                 luckRoll = Main.rand.Next(luckMaxRoll) + 1;
             }
         }
+        public override void NetSend(Item item, BinaryWriter writer)
+        {
+            writer.Write((byte)atkSpdRoll);
+            writer.Write((byte)harvExpRoll);
+            writer.Write((byte)luckRoll);
+        }
+        public override void NetReceive(Item item, BinaryReader reader)
+        {
+            atkSpdRoll = reader.ReadByte();
+            harvExpRoll = reader.ReadByte();
+            luckRoll = reader.ReadByte();
+        }
         public override void SaveData(Item item, TagCompound tag)
         {
             tag.Add("PumpkinAtkSpd", atkSpdRoll);
@@ -124,6 +137,10 @@ namespace PetsOverhaul.LightPets
                         .Replace("<luckRoll>", GlobalPet.LightPetRarityColorConvert(luckRoll.ToString(), luckRoll, luckMaxRoll))
                         .Replace("<luckMaxRoll>", GlobalPet.LightPetRarityColorConvert(luckMaxRoll.ToString(), luckRoll, luckMaxRoll))
                         ));
+            if (luckRoll <= 0)
+            {
+                tooltips.Add(new(Mod, "Tooltip0", "[c/" + GlobalPet.lowQuality.Hex3() + ":" + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.NotRolled") + "]"));
+            }
         }
     }
 }

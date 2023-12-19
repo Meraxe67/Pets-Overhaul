@@ -3,6 +3,7 @@ using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;
@@ -91,6 +92,20 @@ namespace PetsOverhaul.LightPets
                 projPetRoll = Main.rand.Next(projPetMaxRoll) + 1;
             }
         }
+        public override void NetSend(Item item, BinaryWriter writer)
+        {
+            writer.Write((byte)magicRoll);
+            writer.Write((byte)rangedRoll);
+            writer.Write((byte)projSpdRoll);
+            writer.Write((byte)projPetRoll);
+        }
+        public override void NetReceive(Item item, BinaryReader reader)
+        {
+            magicRoll = reader.ReadByte();
+            rangedRoll = reader.ReadByte();
+            projSpdRoll = reader.ReadByte();
+            projPetRoll = reader.ReadByte();
+        }
         public override void SaveData(Item item, TagCompound tag)
         {
             tag.Add("WispMagic", magicRoll);
@@ -156,6 +171,10 @@ namespace PetsOverhaul.LightPets
                         .Replace("<petProjRoll>", GlobalPet.LightPetRarityColorConvert(projPetRoll.ToString(), projPetRoll, projPetMaxRoll))
                         .Replace("<petProjMaxRoll>", GlobalPet.LightPetRarityColorConvert(projPetMaxRoll.ToString(), projPetRoll, projPetMaxRoll))
                         ));
+            if (magicRoll <= 0)
+            {
+                tooltips.Add(new(Mod, "Tooltip0", "[c/" + GlobalPet.lowQuality.Hex3() + ":" + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.NotRolled") + "]"));
+            }
         }
     }
 }

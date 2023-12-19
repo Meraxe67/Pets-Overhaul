@@ -2,6 +2,7 @@
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;
@@ -76,6 +77,20 @@ namespace PetsOverhaul.LightPets
                 miningFortRoll = Main.rand.Next(miningFortMaxRoll) + 1;
             }
         }
+        public override void NetSend(Item item, BinaryWriter writer)
+        {
+            writer.Write((byte)defRoll);
+            writer.Write((byte)defMultRoll);
+            writer.Write((byte)miningExpRoll);
+            writer.Write((byte)miningFortRoll);
+        }
+        public override void NetReceive(Item item, BinaryReader reader)
+        {
+            defRoll = reader.ReadByte();
+            defMultRoll = reader.ReadByte();
+            miningExpRoll = reader.ReadByte();
+            miningFortRoll = reader.ReadByte();
+        }
         public override void SaveData(Item item, TagCompound tag)
         {
             tag.Add("LanternDef", defRoll);
@@ -140,6 +155,10 @@ namespace PetsOverhaul.LightPets
                         .Replace("<fortRoll>", GlobalPet.LightPetRarityColorConvert(miningFortRoll.ToString(), miningFortRoll, miningFortMaxRoll))
                         .Replace("<fortMaxRoll>", GlobalPet.LightPetRarityColorConvert(miningFortMaxRoll.ToString(), miningFortRoll, miningFortMaxRoll))
                         ));
+            if (defRoll <= 0)
+            {
+                tooltips.Add(new(Mod, "Tooltip0", "[c/" + GlobalPet.lowQuality.Hex3() + ":" + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.NotRolled") + "]"));
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;
@@ -64,6 +65,18 @@ namespace PetsOverhaul.LightPets
                 healthRoll = Main.rand.Next(healthMaxRoll) + 1;
             }
         }
+        public override void NetSend(Item item, BinaryWriter writer)
+        {
+            writer.Write((byte)regenRoll);
+            writer.Write((byte)miningExpRoll);
+            writer.Write((byte)healthRoll);
+        }
+        public override void NetReceive(Item item, BinaryReader reader)
+        {
+            regenRoll = reader.ReadByte();
+            miningExpRoll = reader.ReadByte();
+            healthRoll = reader.ReadByte();
+        }
         public override void SaveData(Item item, TagCompound tag)
         {
             tag.Add("GolemRegen", regenRoll);
@@ -115,6 +128,10 @@ namespace PetsOverhaul.LightPets
                         .Replace("<healthRoll>", GlobalPet.LightPetRarityColorConvert(healthRoll.ToString(), healthRoll, healthMaxRoll))
                         .Replace("<healthMaxRoll>", GlobalPet.LightPetRarityColorConvert(healthMaxRoll.ToString(), healthRoll, healthMaxRoll))
                         ));
+            if (healthRoll <= 0)
+            {
+                tooltips.Add(new(Mod, "Tooltip0", "[c/" + GlobalPet.lowQuality.Hex3() + ":" + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.NotRolled") + "]"));
+            }
         }
     }
 }

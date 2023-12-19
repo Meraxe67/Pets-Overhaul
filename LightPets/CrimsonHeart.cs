@@ -2,6 +2,7 @@
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;
@@ -65,6 +66,18 @@ namespace PetsOverhaul.LightPets
                 fishFortRoll = Main.rand.Next(fishFortMaxRoll) + 1;
             }
         }
+        public override void NetSend(Item item, BinaryWriter writer)
+        {
+            writer.Write((byte)healthRoll);
+            writer.Write((byte)fishExpRoll);
+            writer.Write((byte)fishFortRoll);
+        }
+        public override void NetReceive(Item item, BinaryReader reader)
+        {
+            healthRoll = reader.ReadByte();
+            fishExpRoll = reader.ReadByte();
+            fishFortRoll = reader.ReadByte();
+        }
         public override void SaveData(Item item, TagCompound tag)
         {
             tag.Add("CrimsonHealth", healthRoll);
@@ -117,6 +130,10 @@ namespace PetsOverhaul.LightPets
                         .Replace("<fortRoll>", GlobalPet.LightPetRarityColorConvert(fishFortRoll.ToString(), fishFortRoll, fishFortMaxRoll))
                         .Replace("<fortMaxRoll>", GlobalPet.LightPetRarityColorConvert(fishFortMaxRoll.ToString(), fishFortRoll, fishFortMaxRoll))
                         ));
+            if (fishExpRoll <= 0)
+            {
+                tooltips.Add(new(Mod, "Tooltip0", "[c/" + GlobalPet.lowQuality.Hex3() + ":" + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.NotRolled") + "]"));
+            }
         }
     }
 }
