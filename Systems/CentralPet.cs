@@ -768,23 +768,17 @@ namespace PetsOverhaul.Systems
         }
         public override void NetSend(Item item, BinaryWriter writer)
         {
-            if (Main.netMode != NetmodeID.SinglePlayer)
-            {
-                BitsByte sources1 = new(blockNotByPlayer, pickedUpBefore, itemFromNpc, itemFromBoss, itemFromBag, herbBoost, oreBoost, commonBlock);
-                BitsByte sources2 = new(globalDrop, harvestingDrop, miningDrop, fishingDrop, fortuneHarvestingDrop, fortuneMiningDrop, fortuneFishingDrop);
-                writer.Write(sources1);
-                writer.Write(sources2);
-            }
+            BitsByte sources1 = new(blockNotByPlayer, pickedUpBefore, itemFromNpc, itemFromBoss, itemFromBag, herbBoost, oreBoost, commonBlock);
+            BitsByte sources2 = new(globalDrop, harvestingDrop, miningDrop, fishingDrop, fortuneHarvestingDrop, fortuneMiningDrop, fortuneFishingDrop);
+            writer.Write(sources1);
+            writer.Write(sources2);
         }
         public override void NetReceive(Item item, BinaryReader reader)
         {
-            if (Main.netMode != NetmodeID.SinglePlayer)
-            {
-                BitsByte sources1 = reader.ReadByte();
-                sources1.Retrieve(ref blockNotByPlayer, ref pickedUpBefore, ref itemFromNpc, ref itemFromBoss, ref itemFromBag, ref herbBoost, ref oreBoost, ref commonBlock);
-                BitsByte sources2 = reader.ReadByte();
-                sources2.Retrieve(ref globalDrop, ref harvestingDrop, ref miningDrop, ref fishingDrop, ref fortuneHarvestingDrop, ref fortuneMiningDrop, ref fortuneFishingDrop);
-            }
+            BitsByte sources1 = reader.ReadByte();
+            sources1.Retrieve(ref blockNotByPlayer, ref pickedUpBefore, ref itemFromNpc, ref itemFromBoss, ref itemFromBag, ref herbBoost, ref oreBoost, ref commonBlock);
+            BitsByte sources2 = reader.ReadByte();
+            sources2.Retrieve(ref globalDrop, ref harvestingDrop, ref miningDrop, ref fishingDrop, ref fortuneHarvestingDrop, ref fortuneMiningDrop, ref fortuneFishingDrop);
         }
     }
     /// <summary>
@@ -1047,7 +1041,7 @@ namespace PetsOverhaul.Systems
             {
                 isPlanteraProjectile = true;
             }
-            else if (source is EntitySource_Parent parent && parent.Entity is Projectile proj && (proj.type == ProjectileID.Pygmy || proj.type == ProjectileID.Pygmy2 || proj.type == ProjectileID.Pygmy3 || proj.type == ProjectileID.Pygmy4 || proj.type == ProjectileID.FlowerPow))
+            else if (source is EntitySource_Parent parent && parent.Entity is Projectile proj && (proj.type == ProjectileID.Pygmy || proj.type == ProjectileID.Pygmy2 || proj.type == ProjectileID.Pygmy3 || proj.type == ProjectileID.Pygmy4 || proj.type == ProjectileID.FlowerPow || proj.type == ProjectileID.SeedlerNut))
             {
                 isPlanteraProjectile = true;
             }
