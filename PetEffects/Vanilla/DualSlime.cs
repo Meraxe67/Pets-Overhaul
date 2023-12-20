@@ -35,7 +35,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int baseCounterChnc = 90;
         public override void PostUpdate()
         {
-            if (Keybinds.DualSlimeTooltipSwap.JustPressed)
+            if (Keybinds.DualSlimeTooltipSwap != null && Keybinds.DualSlimeTooltipSwap.JustPressed)
             {
                 swapTooltip = !swapTooltip;
             }

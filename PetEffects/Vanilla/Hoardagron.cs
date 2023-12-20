@@ -66,15 +66,18 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public bool special;
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
-            Hoardagron player = Main.player[projectile.owner].GetModPlayer<Hoardagron>();
-            if (player.Pet.PetInUseWithSwapCd(ItemID.DD2PetDragon))
+            if (projectile.owner != 255 && Main.player[projectile.owner].active)
             {
-                if (player.arrow && projectile.penetrate >= 0)
+                Hoardagron player = Main.player[projectile.owner].GetModPlayer<Hoardagron>();
+                if (player.Pet.PetInUseWithSwapCd(ItemID.DD2PetDragon))
                 {
-                    projectile.penetrate += player.arrowPen;
-                    projectile.usesLocalNPCImmunity = true;
+                    if (player.arrow && projectile.penetrate >= 0)
+                    {
+                        projectile.penetrate += player.arrowPen;
+                        projectile.usesLocalNPCImmunity = true;
+                    }
+                    special = player.specialist;
                 }
-                special = player.specialist;
             }
         }
     }

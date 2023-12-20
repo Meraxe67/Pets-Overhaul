@@ -20,7 +20,7 @@ namespace PetsOverhaul.Systems
             {
                 tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.JojaCola")));
             }
-            else if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && !Keybinds.PetTooltipHide.Current)
+            else if (ModContent.GetInstance<Personalization>().TooltipsEnabledWithShift && Keybinds.PetTooltipHide != null && !Keybinds.PetTooltipHide.Current)
             {
                 tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.Config.TooltipShiftToggleInGame")
                     .Replace("<keybind>", Keybinds.PetTooltipHide.GetAssignedKeys(GlobalPet.PlayerInputMode).Count > 0 ? Keybinds.PetTooltipHide.GetAssignedKeys(GlobalPet.PlayerInputMode)[0] : $"[c/{Colors.RarityTrash.Hex3()}:{Language.GetTextValue("Mods.PetsOverhaul.KeybindMissing")}]")));
