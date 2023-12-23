@@ -374,8 +374,8 @@ Mods: {
 				- Recovers mana equal to <healthToMana>% of the damage you receive.
 				- If mana sickness is active, reduces your Mana potions effectiveness by <manaPotionNerf>% 
 				and health recovery with Mana usage by -<manaToHealthNerf>%.
-				 * Both are doubled if mana sickness is currently
-				reducing Magic Damage more than its initial amount, <halfOfSickness>%.
+				 * Both are doubled if mana sicknesses Magic Damage penalty is 
+				 currently reducing more than its initial amount, <halfOfSickness>%.
 				'''
 			CursedSapling:
 				'''
