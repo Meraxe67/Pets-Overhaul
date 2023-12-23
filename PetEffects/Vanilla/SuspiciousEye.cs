@@ -18,7 +18,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public int phaseCd = 9000;
         public int phaseTime = 1800;
-        private int timer = 0;
+        private int eocTimer = 0;
         public float critMult = 0.2f;
         public float dmgMult = 1f;
         public float spdMult = 0.6f;
@@ -30,9 +30,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 Pet.timerMax = phaseCd;
             }
 
-            if (timer >= -1)
+            if (eocTimer >= -1)
             {
-                timer--;
+                eocTimer--;
             }
         }
         public override void UpdateEquips()
@@ -41,7 +41,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
                 if (Player.statLife < Player.statLifeMax2 / 2 && Pet.timer <= 0)
                 {
-                    timer = phaseTime;
+                    eocTimer = phaseTime;
                     Pet.timer = Pet.timerMax;
                     if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
                     {
@@ -57,7 +57,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     };
                     PopupText.NewText(popupMessage, Player.position);
                 }
-                if (timer <= phaseTime && timer >= 0)
+                if (eocTimer <= phaseTime && eocTimer >= 0)
                 {
                     if (Player.statLife > Player.statLifeMax2 / 2)
                     {
@@ -77,7 +77,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         Player.eocDash = 5;
                     }
                 }
-                else if (timer == 0)
+                else if (eocTimer == 0)
                 {
                     AdvancedPopupRequest popupMessage = new()
                     {
@@ -92,7 +92,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
         {
-            phaseTime = 0;
+            eocTimer = 0;
         }
     }
     public sealed class EyeOfCthulhuPetItem : GlobalItem

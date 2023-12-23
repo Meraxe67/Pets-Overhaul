@@ -1,37 +1,22 @@
-[b]2.3 Light Pets Release, Stat Quality Rolling System![/b]
-[i]Explore new 65+ unique and exciting effects from pets, 9 Light Pet effects, where their stats vary depending on their quality and 10+ unique AoE effects from town pets/slimes to enrichen your playthrough where the unique effects 'makes sense' with who the pet is, further enhancing pets personality! Pets cover every aspect of the game and every situation there is! Fishing, Mining, Combat, Mobility, Survivability, Harvesting and more![/i]
+[b]Pets Overhaul adds a RPG-Like Leveling system for your gathering tasks, turns all of your useless, solely cosmetic purposed Pets to directly impact and enhance your gameplay with unique, interesting and build-defining effects for every situation there is![/b]
 
-The mod aims to make all pets have a purpose other than being entirely vanity, feel more 'rewarding' to obtain, have more personality with their effects, worth to grind for, effects being interesting to explore, allowing for new, interesting and unique playstyles and improving quality for all parts of the game!
-
-Features and Latest Major Update:
+Key Mechanics
 [list]
-[*]New Mechanics, such as Ability Haste and Shields, while Haste reduces cooldown of your Pet's abilities and Shield makes you recieve less damage by a flat amount.
-[*]New Light Pet Effects, granting Player various Stat boosts wher they are mostly on the supportive side for your Main Pet!
-[*]Stat Quality Mechanic for your Light Pet stats, making it so almost all Light Pets distinct from others where one may give more of a stat and one other may not!
-[*]A Stat with Quality higher than 0% will have a gray color, higher than 33% will have a grey-ish blue color, higher than 66% will have a golden color and when Quality is at maximum, 100%, it has an alternating Cyan/Pink color! (looks amazing, satisfying to look at)
-[*]New 11 Town Pets and Town Slime's Aura Effects withnin a 125/137.5/150 range, where their effects and range scale up as you enter Hardmode and kill Moon Lord!
-[*]Total of 68 new Unique Pet effects where it all is logical with what the pet is that will aid you in all sorts of tasks!
-[*]12 Different Pet Class variations!
-[*]A fully functioning Leveling system with the Junimo Pet for your Harvesting, Mining and Fishing tasks!
-[*]Full Chinese Translation support!
-[*]Full Brazilian Portuguese Translation support!
-[*]New Item: Mastery Shard, drops from EoC, WoF and Golem 1 time per world! Combine with any Trophy to craft the bosses Master Mode pet, allowing non-Master mode worlds to obtain limited amounts of Master Mode pets!
+[*] A fully implemented Leveling System, linked to your Junimo Pet for your Harvesting (gathering of Plants, trees etc.), Mining (gathering of ores, finding valuable gems and things like Life Crystals etc.) and Fishing (catching Fishes, doing angler quests and killing Fished up enemies) tasks!
+[*] 3 different types of ways to benefit you, for 3 different types of Pets! All of your Regular, Light and Town Pets will benefit you in some unique way!
+[*] A quality system for stats of Light Pets. Essentially making any Light Pet distinct from another one of the same type! One may give higher stats on a X stat, while another may on a Y stat. And one may even give perfect stats in all aspects! All depending on how lucky you are!
+[*] Regular Pets gives you unique and interesting buffs for many aspects of the game! You can for example, go full-mana build with the Estee Pet, or give yourself extra survivability in Close Combat while not missing out on Long Range damage with Twins Pet!
+[*] Town Pets gives all Players an AoE Buff, in a similar sense of a Campfire in a big radius! These buffs are more on the smaller side, they still will be benefitting you in your own territory, whether it be an utility buff or improving your combat capabilities!
+[*] New Mastery Shard item, dropping from select bosses only once per world! Allowing you to craft any Master Mode Pet or Light Pet Crafting item in a non-Master Mode world!
 [/list]
 
-The mod follows 3 rules with the effects for our beloved pets:
-[olist]
-[*]The effect MUST make sense with pets design, it has to have some sort of connection.
-[*]The effect has to be unique, no 2 pets should have 2 of the almost identical effects, even if its something similiar, it shall serve another purpose or be more effective/less effective on some other area.
-[*]The effect shall only assist the player, not something that acts as a separate thing. Effects should be more like a 'accessory' (but something more complicated and interesting than regular accessories) rather than a 'minion'.
-[/olist]
+Pets Overhaul currently supports Simplified Chinese (by: Celestepic) and Brazilian Portuguese (by: Starite_Fusion) besides English for localization options.
+If you'd like to contribute to localization by making a non-existing one or improving an existing one, contact endiepearls on Discord or any Moderation team member of Pets Overhaul on our Discord server!
 
-You can use vanity Pets by: Equipping a pet in the pet slot, but turn its visibility off. Proceed to use whatever pet you want as the vanity pet from your inventory, enjoy!
-Remember to have your pet equipped in pet slot to have their effects.
-
-Please report any bugs or imbalances with a pet being way too strong or way too effective compared to other ones at that stage of the game, please report it to our discord or comment about it on the steam page! Open to any sorts of feedback, feel free to join our discord from below!
+To give direct feedback, report bugs, to give suggestions or to learn more about the mod, join our Discord!
 https://discord.gg/KubSpqvDGE
+
+All Icons and Artwork done by: [url=https://steamcommunity.com/id/IsThatFurqi]Furqi[/url]
 Chinese Translation done by: [url=https://steamcommunity.com/id/Celestepic/]Celestepic[/url]
 Brazilian Portuguese Translation done by: [url=https://steamcommunity.com/profiles/76561198818085801]Starite_Fusion[/url]
-All Icons and Artwork done by: [url=https://steamcommunity.com/id/IsThatFurqi]Furqi[/url]
-Thanks to [url=https://steamcommunity.com/id/WaffleDevs]WaffleDevs[/url] for contributing to the code
-And thanks to tModLoader community for helping with the code!
+and thanks to [url=https://steamcommunity.com/id/WaffleDevs]WaffleDevs[/url], [url=https://steamcommunity.com/id/andro951]Andro951[/url] and the tModLoader community for helping/contributing to the code!

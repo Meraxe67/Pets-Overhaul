@@ -1,25 +1,20 @@
-2.3 Release, new Quality System with Light Pets! Make sure to check any Changelog to see changes! Adjust your Config to better match your personal preferences!
-Explore new 65+ unique effects from pets, 9 Light Pet Effects and 10+ Town Pet Aura Effects to enrich your playthrough where the unique effects 'make sense' with who the pet is, further enhancing the pet's personality! Pets cover every aspect of the game and every situation there is! Fishing, Mining, Combat, Mobility, Survivability, Harvesting and more!
+Pets Overhaul adds a RPG-Like Leveling system for your gathering tasks, turns all of your useless, solely cosmetic purposed Pets to directly impact and enhance your gameplay with unique, interesting and build-defining effects for every situation there is!
 
-The mod aims to make all pets have a purpose other than being entirely vanity, feel more 'rewarding' to obtain, have more personality with their effects, be worth grinding for, and be interesting to explore.
+Key Mechanics
+- A fully implemented Leveling System, linked to your Junimo Pet for your Harvesting (gathering of Plants, trees etc.), Mining (gathering of ores, finding valuable gems and things like Life Crystals etc.) and Fishing (catching Fishes, doing angler quests and killing Fished up enemies) tasks!
+- 3 different types of ways to benefit you, for 3 different types of Pets! All of your Regular, Light and Town Pets will benefit you in some unique way!
+- A quality system for stats of Light Pets. Essentially making any Light Pet distinct from another one of the same type! One may give higher stats on a X stat, while another may on a Y stat. And one may even give perfect stats in all aspects! All depending on how lucky you are!
+- Regular Pets gives you unique and interesting buffs for many aspects of the game! You can for example, go full-mana build with the Estee Pet, or give yourself extra survivability in Close Combat while not missing out on Long Range damage with Twins Pet!
+- Town Pets gives all Players an AoE Buff, in a similar sense of a Campfire in a big radius! These buffs are more on the smaller side, they still will be benefitting you in your own territory, whether it be an utility buff or improving your combat capabilities!
+- New Mastery Shard item, dropping from select bosses only once per world! Allowing you to craft any Master Mode Pet or Light Pet Crafting item in a non-Master Mode world!
 
-New mechanics:
-Stat Quality: Your Light Pets will roll for its stats to be higher or lower!
-Ability Haste: Helping you be able to use your pet's ability faster and more frequently! Usually granted by Supportive Pets to other players.
-Shield: Reduces the damage you receive by a flat amount. Stacks.
-Town Pets grant you beneficial Auras in a 125/137.5/150 block range! Their effects and range scale up upon entering Hardmode and upon killing Moon Lord!
-New Item: Mastery Shard, drops from EoC, WoF, and Golem 1 time per world! Combine with any Trophy to craft the bosses Master Mode pet, allowing non-Master Mode worlds to obtain limited amounts of Master Mode pets!
+Pets Overhaul currently supports Simplified Chinese (by: Celestepic) and Brazilian Portuguese (by: Starite_Fusion) besides English for localization options.
+If you'd like to contribute to localization by making a non-existing one or improving an existing one, contact endiepearls on Discord or any Moderation team member of Pets Overhaul on our Discord server!
 
-The mod follows 3 rules with the effects for our beloved pets:
-1. The effect MUST make sense with the pet's design, it has to have some sort of connection.
-2. The effect has to be unique, no 2 pets should have 2 almost identical effects, even if it's something similar, it shall serve another purpose or be more effective/less effective in some other area.
-3. The effect shall only assist the player, not something that acts as a separate thing. Effects should be more like an 'accessory' (but something more complicated and interesting than regular accessories) rather than a 'minion'.
+To give direct feedback, report bugs, to give suggestions or to learn more about the mod, join our Discord!
+https://discord.gg/KubSpqvDGE
 
-You can use vanity Pets by equipping a pet in the pet slot, but turn its visibility off. Proceed to use whatever pet you want as the vanity pet from your inventory, enjoy!
-Remember to have your pet equipped in a pet slot to have their effects.
-Please report any bugs or imbalances with a pet being way too strong or way too effective compared to other ones at that stage of the game, please report it to our discord or comment about it on the Steam page! Open to any sort of feedback, feel free to join our discord from below!
+Icon and all artwork made by: Furqi
 Chinese Translation by: Celestepic
 Brazillian Portuguese Translation by: Starite_Fusion
-Icon and all artwork made by: Furqi
-and thanks to WaffleDevs for contributing to Code
-https://discord.gg/KubSpqvDGE
+and thanks to WaffleDevs, Andro951 and tModLoader community for helping/contributing to the code!
