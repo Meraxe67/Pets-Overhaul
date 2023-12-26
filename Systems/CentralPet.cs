@@ -251,7 +251,7 @@ namespace PetsOverhaul.Systems
                 skinColorChanged = skinChanged;
             }
 
-            if (tag.TryGet("jojaColaCaught", out bool jojaCaught))
+            if (tag.TryGet("jojaColaCaughtBefore", out bool jojaCaught))
             {
                 jojaColaCaught = jojaCaught;
             }
