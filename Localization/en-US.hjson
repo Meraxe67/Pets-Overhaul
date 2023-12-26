@@ -410,7 +410,7 @@ Mods: {
 				'''
 				[c/3399FF:Magic Pet]
 				- Increases your max mana by <maxMana>%.
-				- Increases your magic damage by <manaToDmg>% for every 1 bonus mana you have over 200 mana.
+				- Increases your magic damage by <manaToDmg>% for every 1 non-base Mana you have.
 				- Multiplies your magic damage bonuses over 100% by <dmgPenalty>x.
 				- Reduces Magic damage by 15% when using Spectre set with Spectre Hood. [i:1503]
 				- Reduces Magic damage by how much Mana Sickness currently reduces, divided by 4
@@ -719,12 +719,12 @@ Mods: {
 			SkeletronPetItem:
 				'''
 				[c/f6546a:Offensive Pet]
-				- All damage you take and inflict will be damage over time.
+				- All damage you take and inflict will be dealt over time.
 				- You take <recievedMult>x damage and store the damage to be dealt over time.
 				 * Receive 1/<recievedHowLong>th of all damage stored every second.
 				- Enemies take <dealtMult>x damage and store the damage to be dealt over time.
-				 * They receive it through course of 4 seconds.
-				- If the enemy can die to your hit without the DoT, they instantly get executed.
+				 * They receive it through the course of 4 seconds.
+				- If the enemy can die to your hit without the DOT, they instantly get executed.
 				'''
 			QueenSlimePetItem:
 				'''
