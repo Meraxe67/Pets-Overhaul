@@ -630,7 +630,7 @@ namespace PetsOverhaul.Systems
         }
         public override void ModifyCaughtFish(Item fish)
         {
-            for (int i = 0; i < ItemPet.Randomizer((globalFortune + miningFortune) * 10 / 2 * fish.stack, 1000); i++)
+            for (int i = 0; i < ItemPet.Randomizer((globalFortune + fishingFortune) * 10 / 2 * fish.stack, 1000); i++)
             {
                 Player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.fishingFortuneItem), fish.type, 1);
             }
@@ -1009,7 +1009,7 @@ namespace PetsOverhaul.Systems
         /// </summary>
         public void AddSlow(SlowId slowType, float slowValue, int slowTimer, NPC npc)
         {
-            if (npc.active && (npc.townNPC == false || npc.isLikeATownNPC == false || npc.friendly == false) && npc.boss == false && nonBossTrueBosses[npc.type] == false)
+            if (npc.active && npc.buffImmune[BuffID.Confused] == false && (npc.townNPC == false || npc.isLikeATownNPC == false || npc.friendly == false) && npc.boss == false && nonBossTrueBosses[npc.type] == false)
             {
                 int indexToReplace;
                 if (SlowList.Exists(x => x.Item1 == slowType && x.slowAmount < slowValue))
