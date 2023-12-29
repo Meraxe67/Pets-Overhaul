@@ -9,8 +9,10 @@ Mods: {
 		// JojaCola: A nature related NPC may be able to Purify this
 		/* Notice:
 			'''
-			[c/90C2AA:Pets Overhaul 2.3.6 latest changes: Reduced Junimo's Fishing level requirements]
-			[c/90C2AA:Major/Minor bug fixes, Junimo Harvesting EXP to money multiplier nerf]
+			[c/90C2AA:Pets Overhaul 2.3.7 latest changes: Lowered all classes Junimo Exp Requirements.]
+			[c/90C2AA:Bug fixes, Fortune stats now increase all items rather than just Pet sourced ones.]
+			[c/90C2AA:Pet Balance changes and doubled Town pet radius and doubled their Fortune/Exp buffs.]
+			[c/90C2AA:Parrot Pet can now alternate between 2 modes with Keybind, allowing to shoot behind.]
 			If you happen to come across any bugs or would like to be up to
 			date with our constantly updating Mod and growing community,
 			we encourage you to join our community and our Discord server!
@@ -68,7 +70,7 @@ Mods: {
 				'''
 				Grants <manaBase> + <manaPer> Mana Per Quality, <expBase> + <expPer>% Harvesting Exp per quality,
 				increasing your Junimo Pet's harvesting exp gains, and 
-				<fortBase> + <fortPer> Harvesting Fortune per quality, increasing your Harvesting Pet's drops.
+				<fortBase> + <fortPer> Harvesting Fortune per quality, increasing your Harvesting drops.
 				Mana Bonus: <currentMana> Quality <manaRoll> out of <manaMaxRoll>
 				Harvesting Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				Harvesting Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
@@ -77,7 +79,7 @@ Mods: {
 				'''
 				Grants <hpBase> + <hpPer> Health Per Quality, <expBase> + <expPer>% Fishing Exp per quality,
 				increasing your Junimo Pet's fishing exp gains, and 
-				<fortBase> + <fortPer> Fishing Fortune per quality, increasing your Fishing Pet's drops.
+				<fortBase> + <fortPer> Fishing Fortune per quality, increasing your Fishing drops.
 				Health Bonus: <currentHp> Quality <hpRoll> out of <hpMaxRoll>
 				Fishing Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				Fishing Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
@@ -86,7 +88,7 @@ Mods: {
 				'''
 				Grants <defPer> Defense per quality and <defMultBase> + <defMultPer> per quality percentage defense increase.
 				<expBase> + <expPer>% Mining Exp per quality, increasing your Junimo Pet's mining exp gains
-				and <fortBase> + <fortPer> Mining Fortune per quality, increasing your Mining Pet's drops.
+				and <fortBase> + <fortPer> Mining Fortune per quality, increasing your Mining drops.
 				Defense Bonus: <currentDef> Quality <defRoll> out of <defMaxRoll>
 				Percentage Defense Bonus: <currentDefMult> Quality <defMultRoll> out of <defMultMaxRoll>
 				Mining Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
@@ -96,7 +98,7 @@ Mods: {
 				'''
 				Grants <hasteBase> + <hastePer>% Ability Haste per quality which increases
 				how frequently you can use your current Pet's ability and increases 
-				<fortBase> + <fortPer> Global Fortune per quality, increasing all of your Pets bonus item drops,
+				<fortBase> + <fortPer> Global Fortune per quality, increasing all Mining, Harvesting and Fishing drops.
 				which works with 50% effectiveness with already classified Pets.
 				Ability Haste Bonus: <currentHaste> Quality <hasteRoll> out of <hasteMaxRoll>
 				Global Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
