@@ -116,7 +116,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 Pet.timer = Pet.timerMax;
             }
         }
-        public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
+        public override void UpdateDead()
         {
             transformTimer = 0;
         }

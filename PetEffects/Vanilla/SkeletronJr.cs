@@ -72,7 +72,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             }
             return base.ConsumableDodge(info);
         }
-        public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
+        public override void UpdateDead()
         {
             skeletronTakenDamage.Clear();
         }

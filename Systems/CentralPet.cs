@@ -607,7 +607,7 @@ namespace PetsOverhaul.Systems
                 Player.GetModPlayer<PetRegistry>().PlayEquipSoundFromItemId(Player.miscEquips[0].type);
             }
         }
-        public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
+        public override void UpdateDead()
         {
             timer = -1;
             petShield.Clear();

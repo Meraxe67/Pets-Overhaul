@@ -90,7 +90,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 }
             }
         }
-        public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
+        public override void UpdateDead()
         {
             eocTimer = 0;
         }

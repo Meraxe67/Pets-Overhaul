@@ -53,7 +53,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public override void PostUpdateRunSpeeds()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.TartarSauce) && minotaurStack > 0)
-            { Player.maxRunSpeed -= moveSpd * minotaurStack * 3; }
+            {
+                Player.maxRunSpeed -= moveSpd * minotaurStack * 3;
+            }
         }
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -87,7 +89,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 oocTimer = 600;
             }
         }
-        public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
+        public override void UpdateDead()
         {
             minotaurStack = 0;
         }

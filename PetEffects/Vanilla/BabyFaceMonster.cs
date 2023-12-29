@@ -14,10 +14,10 @@ namespace PetsOverhaul.PetEffects.Vanilla
     public sealed class BabyFaceMonster : ModPlayer
     {
         private int timer = 0;
-        public int stage2time = 1200;
-        public int stage1time = 900;
+        public int stage2time = 720;
+        public int stage1time = 420;
         public int stage1regen = 3;
-        public int stage2regen = 15;
+        public int stage2regen = 9;
         public float stage2ShieldMult = 0.05f;
 
         public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
