@@ -21,19 +21,19 @@ namespace PetsOverhaul.TownPets
         public float oldKbResist = 0.95f;
         public float nerdLightScale = 0.2f;
 
-        public float mysticAllExp = 0.01f;
-        public float bunnyHarvExp = 0.02f;
-        public float dogFishExp = 0.02f;
-        public float squireMiningExp = 0.02f;
-        public int clumsyGlobalFort = 1;
-        public int catFishFort = 2;
-        public int oldHarvFort = 2;
-        public int coolMiningFort = 2;
+        public float mysticAllExp = 0.02f;
+        public float bunnyHarvExp = 0.04f;
+        public float dogFishExp = 0.04f;
+        public float squireMiningExp = 0.04f;
+        public int clumsyGlobalFort = 2;
+        public int catFishFort = 4;
+        public int oldHarvFort = 4;
+        public int coolMiningFort = 4;
         public override void PreUpdate()
         {
             if (NPC.downedMoonlord)
             {
-                auraRange = 2400;
+                auraRange = 4800;
                 bunnyJump = 0.15f;
                 catSpeed = 1.075f;
                 dogFish = 3;
@@ -47,18 +47,18 @@ namespace PetsOverhaul.TownPets
                 oldKbResist = 0.85f;
                 nerdLightScale = 1.1f;
 
-                mysticAllExp = 0.03f;
-                bunnyHarvExp = 0.06f;
-                dogFishExp = 0.06f;
-                squireMiningExp = 0.06f;
-                catFishFort = 6;
-                oldHarvFort = 6;
-                coolMiningFort = 6;
-                clumsyGlobalFort = 3;
+                mysticAllExp = 0.06f;
+                bunnyHarvExp = 0.12f;
+                dogFishExp = 0.12f;
+                squireMiningExp = 0.12f;
+                catFishFort = 12;
+                oldHarvFort = 12;
+                coolMiningFort = 12;
+                clumsyGlobalFort = 6;
             }
             else if (Main.hardMode)
             {
-                auraRange = 2200;
+                auraRange = 4400;
                 bunnyJump = 0.11f;
                 catSpeed = 1.05f;
                 dogFish = 2;
@@ -72,18 +72,18 @@ namespace PetsOverhaul.TownPets
                 oldKbResist = 0.90f;
                 nerdLightScale = 0.5f;
 
-                mysticAllExp = 0.02f;
-                bunnyHarvExp = 0.04f;
-                dogFishExp = 0.04f;
-                squireMiningExp = 0.04f;
-                catFishFort = 4;
-                oldHarvFort = 4;
-                coolMiningFort = 4;
-                clumsyGlobalFort = 2;
+                mysticAllExp = 0.04f;
+                bunnyHarvExp = 0.08f;
+                dogFishExp = 0.08f;
+                squireMiningExp = 0.08f;
+                catFishFort = 8;
+                oldHarvFort = 8;
+                coolMiningFort = 8;
+                clumsyGlobalFort = 4;
             }
             else
             {
-                auraRange = 2000;
+                auraRange = 4000;
                 bunnyJump = 0.08f;
                 catSpeed = 1.025f;
                 dogFish = 1;
@@ -97,14 +97,14 @@ namespace PetsOverhaul.TownPets
                 oldKbResist = 0.95f;
                 nerdLightScale = 0.2f;
 
-                mysticAllExp = 0.01f;
-                bunnyHarvExp = 0.02f;
-                dogFishExp = 0.02f;
-                squireMiningExp = 0.02f;
-                clumsyGlobalFort = 1;
-                catFishFort = 2;
-                oldHarvFort = 2;
-                coolMiningFort = 2;
+                mysticAllExp = 0.02f;
+                bunnyHarvExp = 0.04f;
+                dogFishExp = 0.04f;
+                squireMiningExp = 0.04f;
+                clumsyGlobalFort = 2;
+                catFishFort = 4;
+                oldHarvFort = 4;
+                coolMiningFort = 4;
             }
         }
     }

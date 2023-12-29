@@ -11,8 +11,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class Spiffo : ModPlayer
     {
-        public int ammoReserveChance = 10;
-        public int zombieArmorPen = 4;
+        public int ammoReserveChance = 20;
+        public int zombieArmorPen = 6;
         public int penetrateChance = 50;
 
         public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
