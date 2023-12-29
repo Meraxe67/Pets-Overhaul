@@ -20,7 +20,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
     public sealed class Junimo : ModPlayer
     {
         public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
-        public int maxLvls = 50;
+        public int maxLvls = 40;
         public int maxXp = 2147480000;
         public float expBoostWhileInUse = 0.33f;
         public float miningResistPerLevel = 0.0014f;
@@ -434,7 +434,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 int noSwapCd = (Player.HasBuff(ModContent.BuffType<ObliviousPet>()) == false && Pet.PetInUse(ItemID.JunimoPetItem)) ? 2 : 1;
                 Player.endurance += junimoMiningLevel * miningResistPerLevel * noSwapCd;
                 Player.GetDamage<GenericDamageClass>() *= 1f + junimoFishingLevel * fishingDamagePerLevel * noSwapCd;
-                Player.statLifeMax2 += Player.statLifeMax2 * harvestHpPercentPerLevel > 1 ? (int)(Player.statLifeMax2 * junimoHarvestingLevel * harvestHpPercentPerLevel * noSwapCd) : Player.statLifeMax2 += junimoHarvestingLevel * noSwapCd;
+                Player.statLifeMax2 += (Player.statLifeMax2 * harvestHpPercentPerLevel > 1) ? (int)(Player.statLifeMax2 * junimoHarvestingLevel * harvestHpPercentPerLevel * noSwapCd) : junimoHarvestingLevel * noSwapCd;
             }
 
             if (Pet.PetInUse(ItemID.JunimoPetItem))

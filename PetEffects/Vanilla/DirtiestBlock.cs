@@ -31,7 +31,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     PickerPet.GiveCoins(ItemPet.Randomizer(item.stack * dirt.dirtCoin));
                     if (Junimo.JunimoExpCheck(player))
                     {
-                        int value = ItemPet.Randomizer((int)(dirt.dirtCoin * Juni.junimoInUseMultiplier * item.stack * PickerPet.miningExpBoost), 10000);
+                        int value = ItemPet.Randomizer((int)(dirt.dirtCoin * item.stack * PickerPet.miningExpBoost), 10000);
                         Juni.junimoMiningExp += value;
                         Juni.popupExpMining += value;
                         if (value > 0)
@@ -45,7 +45,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     PickerPet.GiveCoins(ItemPet.Randomizer(item.stack * dirt.soilCoin));
                     if (Junimo.JunimoExpCheck(player))
                     {
-                        int value = ItemPet.Randomizer((int)(dirt.dirtCoin * Juni.junimoInUseMultiplier * item.stack * PickerPet.miningExpBoost), 10000);
+                        int value = ItemPet.Randomizer((int)(dirt.dirtCoin * item.stack * PickerPet.miningExpBoost), 10000);
                         Juni.junimoMiningExp += value;
                         Juni.popupExpMining += value;
                         if (value > 0)
