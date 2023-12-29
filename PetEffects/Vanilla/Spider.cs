@@ -14,8 +14,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
     {
         public int venomFlatDmg = 13;
         public int poisonFlatDmg = 5;
-        public float venomDmgMult = 1.15f;
-        public float poisonDmgMult = 1.05f;
+        public float venomDmgMult = 1.16f;
+        public float poisonDmgMult = 1.08f;
         public int venomCrit = 10;
         public int poisonCrit = 6;
         public float kbIncreaseVenom = 1.6f;

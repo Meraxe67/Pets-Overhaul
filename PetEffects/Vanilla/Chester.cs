@@ -14,8 +14,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
     {
         public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public int placementRange = 2;
-        public int chestOpenDef = 8;
-        public int suckingUpRange = 64;
+        public int chestOpenDef = 10;
+        public int suckingUpRange = 80;
         public override void PostUpdateEquips()
         {
             if (Pet.PetInUse(ItemID.ChesterPetItem))

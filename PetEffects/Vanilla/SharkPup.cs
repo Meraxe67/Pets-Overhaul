@@ -13,9 +13,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class SharkPup : ModPlayer
     {
-        public float seaCreatureResist = 0.9f;
+        public float seaCreatureResist = 0.85f;
         public float seaCreatureDamage = 1.1f;
-        public int shieldOnCatch = 5;
+        public int shieldOnCatch = 10;
         public int shieldTime = 900;
         public int fishingPow = 10;
 

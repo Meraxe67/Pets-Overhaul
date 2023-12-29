@@ -12,10 +12,10 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class BabyGrinch : ModPlayer
     {
-        public float winterDmg = 0.1f;
+        public float winterDmg = 0.15f;
         public int winterCrit = 10;
         public float grinchSlow = 1f;
-        public int grinchRange = 400;
+        public int grinchRange = 480;
 
         public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
