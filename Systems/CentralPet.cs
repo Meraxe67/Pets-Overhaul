@@ -708,6 +708,11 @@ namespace PetsOverhaul.Systems
         }
         public override void OnSpawn(Item item, IEntitySource source)
         {
+            if (WorldGen.generatingWorld)
+            {
+                return;
+            }
+
             if (source is EntitySource_Pet petSource)
             {
                 globalDrop = petSource.ContextType == EntitySource_Pet.TypeId.globalItem;
