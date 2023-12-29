@@ -217,6 +217,23 @@ namespace PetsOverhaul.Systems
                         player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.fishingFortuneItem), item.type, 1);
                     }
                 }
+
+                if (fortune.herbBoost)
+                {
+                    for (int i = 0; i < ItemPet.Randomizer((PickerPet.globalFortune + PickerPet.harvestingFortune) * 10 / 2 * item.stack, 1000); i++)
+                    {
+                        player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.harvestingFortuneItem), item.type, 1);
+                    }
+                }
+
+                if (fortune.oreBoost)
+                {
+                    for (int i = 0; i < ItemPet.Randomizer((PickerPet.globalFortune + PickerPet.miningFortune) * 10 / 2 * item.stack, 1000); i++)
+                    {
+                        player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.miningFortuneItem), item.type, 1);
+                    }
+                }
+                // Fish is below at ModifyCaughtFish()
             }
         }
         /// <summary>
@@ -613,6 +630,11 @@ namespace PetsOverhaul.Systems
         }
         public override void ModifyCaughtFish(Item fish)
         {
+            for (int i = 0; i < ItemPet.Randomizer((globalFortune + miningFortune) * 10 / 2 * fish.stack, 1000); i++)
+            {
+                Player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.fishingFortuneItem), fish.type, 1);
+            }
+
             if (fish.type == ItemID.JojaCola)
             {
                 jojaColaCaught = true;
