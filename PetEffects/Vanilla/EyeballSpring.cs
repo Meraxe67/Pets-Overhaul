@@ -14,7 +14,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
     public sealed class EyeballSpring : ModPlayer
     {
         public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
-        public float acceleration = 0.15f;
+        public float acceleration = 0.12f;
         public float jumpBoost = 5f;
         public float ascentPenaltyMult = 0.6f;
         public override void PostUpdateEquips()

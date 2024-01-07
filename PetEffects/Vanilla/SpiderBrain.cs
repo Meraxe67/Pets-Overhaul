@@ -13,16 +13,16 @@ namespace PetsOverhaul.PetEffects.Vanilla
     public sealed class SpiderBrain : ModPlayer
     {
         public int lifePool = 0;
-        public float lifePoolMaxPerc = 0.07f;
-        public int cdDoAddToPool = 24;
-        public float lifestealAmount = 0.045f;
+        public float lifePoolMaxPerc = 0.2f;
+        public int cdToAddToPool = 66;
+        public float lifestealAmount = 0.03f;
 
         public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.BrainOfCthulhuPetItem))
             {
-                Pet.timerMax = cdDoAddToPool;
+                Pet.timerMax = cdToAddToPool;
             }
         }
         public override void PreUpdateBuffs()
@@ -69,7 +69,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BrainOfCthulhuPetItem")
                         .Replace("<lifesteal>", Math.Round(spiderBrain.lifestealAmount * 100, 2).ToString())
                         .Replace("<maxPool>", Math.Round(spiderBrain.lifePoolMaxPerc * 100, 2).ToString())
-                        .Replace("<healthRecovery>", Math.Round(spiderBrain.cdDoAddToPool / 60f, 2).ToString())
+                        .Replace("<healthRecovery>", Math.Round(spiderBrain.cdToAddToPool / 60f, 2).ToString())
                         ));
         }
     }
