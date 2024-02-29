@@ -23,7 +23,7 @@ namespace PetsOverhaul.TownPets
             if (Player.HasBuff(ModContent.BuffType<TownPetOld>()))
             {
                 Player.statDefense += oldDef;
-                Pet.harvestingFortune += oldHarvFort;
+                Pet.harvestingFortune += HarvFort;
             }
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)

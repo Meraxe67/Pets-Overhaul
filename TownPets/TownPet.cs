@@ -21,14 +21,10 @@ namespace PetsOverhaul.TownPets
         public float oldKbResist = 0.95f;
         public float nerdLightScale = 0.2f;
 
-        public float mysticAllExp = 0.02f;
-        public float bunnyHarvExp = 0.04f;
-        public float dogFishExp = 0.04f;
-        public float squireMiningExp = 0.04f;
-        public int clumsyGlobalFort = 2;
-        public int catFishFort = 4;
-        public int oldHarvFort = 4;
-        public int coolMiningFort = 4;
+        public int GlobalFort = 2;
+        public int FishFort = 4;
+        public int HarvFort = 4;
+        public int MiningFort = 4;
         public override void PreUpdate()
         {
             if (NPC.downedMoonlord)
@@ -47,14 +43,10 @@ namespace PetsOverhaul.TownPets
                 oldKbResist = 0.85f;
                 nerdLightScale = 1.1f;
 
-                mysticAllExp = 0.06f;
-                bunnyHarvExp = 0.12f;
-                dogFishExp = 0.12f;
-                squireMiningExp = 0.12f;
-                catFishFort = 12;
-                oldHarvFort = 12;
-                coolMiningFort = 12;
-                clumsyGlobalFort = 6;
+                FishFort = 12;
+                HarvFort = 12;
+                MiningFort = 12;
+                GlobalFort = 6;
             }
             else if (Main.hardMode)
             {
@@ -72,14 +64,10 @@ namespace PetsOverhaul.TownPets
                 oldKbResist = 0.90f;
                 nerdLightScale = 0.5f;
 
-                mysticAllExp = 0.04f;
-                bunnyHarvExp = 0.08f;
-                dogFishExp = 0.08f;
-                squireMiningExp = 0.08f;
-                catFishFort = 8;
-                oldHarvFort = 8;
-                coolMiningFort = 8;
-                clumsyGlobalFort = 4;
+                FishFort = 8;
+                HarvFort = 8;
+                MiningFort = 8;
+                GlobalFort = 4;
             }
             else
             {
@@ -97,14 +85,10 @@ namespace PetsOverhaul.TownPets
                 oldKbResist = 0.95f;
                 nerdLightScale = 0.2f;
 
-                mysticAllExp = 0.02f;
-                bunnyHarvExp = 0.04f;
-                dogFishExp = 0.04f;
-                squireMiningExp = 0.04f;
-                clumsyGlobalFort = 2;
-                catFishFort = 4;
-                oldHarvFort = 4;
-                coolMiningFort = 4;
+                GlobalFort = 2;
+                FishFort = 4;
+                HarvFort = 4;
+                MiningFort = 4;
             }
         }
     }

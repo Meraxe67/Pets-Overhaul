@@ -23,7 +23,7 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
             }
             tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetClumsy>())
                 .Replace("<ClumsyLuck>", Main.LocalPlayer.GetModPlayer<TownPet>().clumsyLuck.ToString())
-                .Replace("<ClumsyGlobal>", Main.LocalPlayer.GetModPlayer<TownPet>().clumsyGlobalFort.ToString())
+                .Replace("<ClumsyGlobal>", Main.LocalPlayer.GetModPlayer<TownPet>().GlobalFort.ToString())
                 ;
             rare = 0;
         }

@@ -6,23 +6,6 @@ namespace PetsOverhaul.Config
     public class Personalization : ModConfig
     {
         public override ConfigScope Mode => ConfigScope.ClientSide;
-        [Header("$Mods.PetsOverhaul.Config.Personalization")]
-        [LabelKey("$Mods.PetsOverhaul.Config.JojaColaEasyLabel")]
-        [TooltipKey("$Mods.PetsOverhaul.Config.JojaColaEasyTooltip")]
-        [DefaultValue(false)]
-        public bool JojaColaEasyOff;
-        [LabelKey("$Mods.PetsOverhaul.Config.JunimoLevelupLabel")]
-        [TooltipKey("$Mods.PetsOverhaul.Config.JunimoLevelupTooltip")]
-        [DefaultValue(false)]
-        public bool JunimoNotifOff;
-        [LabelKey("$Mods.PetsOverhaul.Config.JunimoExpLabel")]
-        [TooltipKey("$Mods.PetsOverhaul.Config.JunimoExpTooltip")]
-        [DefaultValue(false)]
-        public bool JunimoExpWhileNotInInv;
-        [LabelKey("$Mods.PetsOverhaul.Config.JunimoExpGainMessageLabel")]
-        [TooltipKey("$Mods.PetsOverhaul.Config.JunimoExpGainMessageTooltip")]
-        [DefaultValue(false)]
-        public bool JunimoExpGainMessage;
         [LabelKey("$Mods.PetsOverhaul.Config.NoticeLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.NoticeTooltip")]
         [DefaultValue(false)]

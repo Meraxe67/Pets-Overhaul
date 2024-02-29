@@ -9,9 +9,8 @@ Mods: {
 		// JojaCola: A nature related NPC may be able to Purify this
 		/* Notice:
 			'''
-			[c/90C2AA:Pets Overhaul 2.3.7 latest changes: Lowered all classes Junimo Exp Requirements.]
-			[c/90C2AA:Bug fixes, Fortune stats now increase all items rather than just Pet sourced ones.]
-			[c/90C2AA:Pet Balance changes and doubled Town pet radius and doubled their Fortune/Exp buffs.]
+			[c/90C2AA:Pets Overhaul 2.3.8 latest changes: Reworked Junimo, now won't work while off]
+			[c/90C2AA:Removed all 'global Junimo things', gave new perks to Light Pets, balance changes etc.]
 			If you happen to come across any bugs or would like to be up to
 			date with our constantly updating Mod and growing community,
 			we encourage you to join our community and our Discord server!
@@ -20,24 +19,6 @@ Mods: {
 
 		Config: {
 			Personalization: Personalização
-			// JojaColaEasyLabel: Disable Joja-Cola being obtainable easily
-			/* JojaColaEasyTooltip:
-				'''
-				Disables being able to catch a Joja-Cola with
-				20% chance on every catch until you catch one
-				''' */
-			JunimoLevelupLabel: Desabilitar a notificação de nível de Junimo
-			JunimoLevelupTooltip: Desabilita o texto e som das notificações de aumento de nível de Junimo ao aumentar o nível de uma classe. Não desabilita a mecânica de nível.
-			// JunimoExpActive: "[c/AEAEAE:active]"
-			// JunimoExpInactive: "[c/AEAEAE:inactive]"
-			JunimoExpLabel: Desabilitar ganho de Exp enquanto não tiver o Junimo
-			JunimoExpTooltip: Desabilita todo o ganho de experiência de Junimo se não tiver o Pingo de Estrela em qualquer um de seus inventários ou não estiver no espaço de pets.
-			// JunimoExpGainMessageLabel: Disable Junimo Exp pop-up messages
-			/* JunimoExpGainMessageTooltip:
-				'''
-				Disables all pop-up texts that appear upon gaining exp,
-				Does not disable Exp gain or anything else but the message.
-				''' */
 			// NoticeLabel: Disable Pets Overhaul's notice
 			/* NoticeTooltip:
 				'''
@@ -67,30 +48,28 @@ Mods: {
 			// NotRolled: Qualities are rolled when the item is in the inventory for the first time!
 			/* ShadowOrb:
 				'''
-				Grants <manaBase> + <manaPer> Mana Per Quality, <expBase> + <expPer>% Harvesting Exp per quality,
-				increasing your Junimo Pet's harvesting exp gains, and 
+				Grants <manaBase> + <manaPer> Mana Per Quality, <expBase> + <expPer>% Movement Speed per quality
 				<fortBase> + <fortPer> Harvesting Fortune per quality, increasing your Harvesting drops.
 				Mana Bonus: <currentMana> Quality <manaRoll> out of <manaMaxRoll>
-				Harvesting Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
+				Movement Speed Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				Harvesting Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
 				''' */
 			/* CrimsonHeart:
 				'''
-				Grants <hpBase> + <hpPer> Health Per Quality, <expBase> + <expPer>% Fishing Exp per quality,
-				increasing your Junimo Pet's fishing exp gains, and 
+				Grants <hpBase> + <hpPer> Health Per Quality, <expBase> + <expPer>% Movement Speed per quality
 				<fortBase> + <fortPer> Fishing Fortune per quality, increasing your Fishing drops.
 				Health Bonus: <currentHp> Quality <hpRoll> out of <hpMaxRoll>
-				Fishing Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
+				Movement Speed Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				Fishing Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
 				''' */
 			/* MagicLantern:
 				'''
 				Grants <defPer> Defense per quality and <defMultBase> + <defMultPer> per quality percentage defense increase.
-				<expBase> + <expPer>% Mining Exp per quality, increasing your Junimo Pet's mining exp gains
+				<expBase> + <expPer>% Damage Reduction per quality
 				and <fortBase> + <fortPer> Mining Fortune per quality, increasing your Mining drops.
 				Defense Bonus: <currentDef> Quality <defRoll> out of <defMaxRoll>
 				Percentage Defense Bonus: <currentDefMult> Quality <defMultRoll> out of <defMultMaxRoll>
-				Mining Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
+				Damage Reduction Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				Mining Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
 				''' */
 			/* FairyBell:
@@ -122,27 +101,27 @@ Mods: {
 				''' */
 			/* JackOLantern:
 				'''
-				Grants <atkSpdBase> + <atkSpdPer>% Attack Speed Per Quality, <expBase> + <expPer>% Harvesting Exp boost per quality
-				increasing your Junimo Pet's harvesting exp gains, and <luckBase> + <luckPer> Luck per quality.
+				Grants <atkSpdBase> + <atkSpdPer>% Attack Speed Per Quality, <luckBase> + <luckPer> Luck per quality
+				and <expBase> + <expPer>% Harvesting Fortune per quality
 				Attack Speed Bonus: <currentAtkSpd> Quality <atkSpdRoll> out of <atkSpdMaxRoll>
 				Luck Bonus: <currentLuck> Quality <luckRoll> out of <luckMaxRoll>
-				Harvesting Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
+				Harvesting Fortune Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				''' */
 			/* ToyGolem:
 				'''
-				Grants <regenPer> Life Regen Per Quality, <healthBase> + <healthPer>% bonus maximum health per quality,
-				and <expBase> + <expPer>% Mining Exp boost per quality increasing your Junimo Pet's mining exp gain.
+				Grants <regenBase> + <regenPer> Life Regen Per Quality, <healthBase> + <healthPer>% bonus maximum health per quality,
+				and <expBase> + <expPer> Mana Regen per quality.
 				Life Regen Bonus: <currentRegen> Quality <regenRoll> out of <regenMaxRoll>
 				Health Percentage Bonus: <currentHealth> Quality <healthRoll> out of <healthMaxRoll>
-				Mining Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
+				Mana Regen Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				''' */
 			/* JewelOfLight:
 				'''
 				Grants <moveSpdBase> + <moveSpdPer>% Movement Speed Per Quality, <wingBase> + <wingPer> seconds wing time per quality,
-				and <expBase> + <expPer>% Fishing Exp boost per quality increasing your Junimo Pet's fishing exp gain.
+				and <expBase> + <expPer>% Acceleration per quality.
 				Movement Speed Bonus: <currentMoveSpd> Quality <moveSpdRoll> out of <moveSpdMaxRoll>
 				Wing-Time Bonus: <currentWing> Quality <wingRoll> out of <wingMaxRoll>
-				Fishing Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
+				Acceleration Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				''' */
 			/* SuspiciousLookingTentacle:
 				'''

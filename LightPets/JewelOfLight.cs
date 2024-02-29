@@ -20,7 +20,7 @@ namespace PetsOverhaul.LightPets
             if (Player.miscEquips[1].type == ItemID.FairyQueenPetItem && Player.miscEquips[1].TryGetGlobalItem(out JewelOfLight empress))
             {
                 Player.moveSpeed += empress.CurrentMoveSpd;
-                Pet.fishingExpBoost += empress.CurrentFishingExp;
+                Player.runAcceleration += empress.CurrentAcc;
                 if (Player.equippedWings != null)
                 {
                     Player.wingTimeMax += empress.CurrentFlightTime;
@@ -42,11 +42,11 @@ namespace PetsOverhaul.LightPets
         public int wingRoll = 0;
         public int CurrentFlightTime => baseWing + wingPerRoll * wingRoll;
 
-        public float baseFishingExp = 0.07f;
-        public float fishingExpPerRoll = 0.012f;
-        public int fishingExpMaxRoll = 20;
-        public int fishingExpRoll = 0;
-        public float CurrentFishingExp => baseFishingExp + fishingExpPerRoll * fishingExpRoll;
+        public float baseAcc = 0.05f;
+        public float accPerRoll = 0.005f;
+        public int accMaxRoll = 20;
+        public int accRoll = 0;
+        public float CurrentAcc => baseAcc + accPerRoll * accRoll;
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
@@ -59,9 +59,9 @@ namespace PetsOverhaul.LightPets
                 moveSpdRoll = Main.rand.Next(moveSpdMaxRoll) + 1;
             }
 
-            if (fishingExpRoll <= 0)
+            if (accRoll <= 0)
             {
-                fishingExpRoll = Main.rand.Next(fishingExpMaxRoll) + 1;
+                accRoll = Main.rand.Next(accMaxRoll) + 1;
             }
 
             if (wingRoll <= 0)
@@ -72,20 +72,20 @@ namespace PetsOverhaul.LightPets
         public override void NetSend(Item item, BinaryWriter writer)
         {
             writer.Write((byte)moveSpdRoll);
-            writer.Write((byte)fishingExpRoll);
+            writer.Write((byte)accRoll);
             writer.Write((byte)wingRoll);
         }
         public override void NetReceive(Item item, BinaryReader reader)
         {
             moveSpdRoll = reader.ReadByte();
-            fishingExpRoll = reader.ReadByte();
+            accRoll = reader.ReadByte();
             wingRoll = reader.ReadByte();
         }
         public override void SaveData(Item item, TagCompound tag)
         {
             tag.Add("EmpressMoveSpd", moveSpdRoll);
             tag.Add("EmpressWing", wingRoll);
-            tag.Add("EmpressExp", fishingExpRoll);
+            tag.Add("EmpressExp", accRoll);
         }
         public override void LoadData(Item item, TagCompound tag)
         {
@@ -101,7 +101,7 @@ namespace PetsOverhaul.LightPets
 
             if (tag.TryGet("EmpressExp", out int exp))
             {
-                fishingExpRoll = exp;
+                accRoll = exp;
             }
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
@@ -118,8 +118,8 @@ namespace PetsOverhaul.LightPets
                         .Replace("<wingBase>", Math.Round(baseWing / 60f, 2).ToString())
                         .Replace("<wingPer>", Math.Round(wingPerRoll / 60f, 2).ToString())
 
-                        .Replace("<expBase>", Math.Round(baseFishingExp * 100, 2).ToString())
-                        .Replace("<expPer>", Math.Round(fishingExpPerRoll * 100, 2).ToString())
+                        .Replace("<expBase>", Math.Round(baseAcc * 100, 2).ToString())
+                        .Replace("<expPer>", Math.Round(accPerRoll * 100, 2).ToString())
 
                         .Replace("<currentMoveSpd>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentMoveSpd * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), moveSpdRoll, moveSpdMaxRoll))
                         .Replace("<moveSpdRoll>", GlobalPet.LightPetRarityColorConvert(moveSpdRoll.ToString(), moveSpdRoll, moveSpdMaxRoll))
@@ -129,9 +129,9 @@ namespace PetsOverhaul.LightPets
                         .Replace("<wingRoll>", GlobalPet.LightPetRarityColorConvert(wingRoll.ToString(), wingRoll, wingMaxRoll))
                         .Replace("<wingMaxRoll>", GlobalPet.LightPetRarityColorConvert(wingMaxRoll.ToString(), wingRoll, wingMaxRoll))
 
-                        .Replace("<currentExp>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentFishingExp * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), fishingExpRoll, fishingExpMaxRoll))
-                        .Replace("<expRoll>", GlobalPet.LightPetRarityColorConvert(fishingExpRoll.ToString(), fishingExpRoll, fishingExpMaxRoll))
-                        .Replace("<expMaxRoll>", GlobalPet.LightPetRarityColorConvert(fishingExpMaxRoll.ToString(), fishingExpRoll, fishingExpMaxRoll))
+                        .Replace("<currentExp>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentAcc * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), accRoll, accMaxRoll))
+                        .Replace("<expRoll>", GlobalPet.LightPetRarityColorConvert(accRoll.ToString(), accRoll, accMaxRoll))
+                        .Replace("<expMaxRoll>", GlobalPet.LightPetRarityColorConvert(accMaxRoll.ToString(), accRoll, accMaxRoll))
 
                         ));
             if (wingRoll <= 0)

@@ -20,7 +20,7 @@ namespace PetsOverhaul.LightPets
             if (Player.miscEquips[1].type == ItemID.ShadowOrb && Player.miscEquips[1].TryGetGlobalItem(out ShadowOrb shadowOrb))
             {
                 Player.statManaMax2 += shadowOrb.CurrentMana;
-                Pet.harvestingExpBoost += shadowOrb.CurrentHarvExp;
+                Player.moveSpeed += shadowOrb.CurrentHarvExp;
                 Pet.harvestingFortune += shadowOrb.CurrentHarvFort;
             }
         }
@@ -33,11 +33,11 @@ namespace PetsOverhaul.LightPets
         public int manaRoll = 0;
         public int CurrentMana => baseMana + manaPerRoll * manaRoll;
 
-        public float baseHarvExp = 0.05f;
-        public float harvExpPerRoll = 0.01f;
-        public int harvExpMaxRoll = 15;
-        public int harvExpRoll = 0;
-        public float CurrentHarvExp => baseHarvExp + harvExpPerRoll * harvExpRoll;
+        public float baseMs = 0.025f;
+        public float msPerRoll = 0.005f;
+        public int msMaxRoll = 15;
+        public int msRoll = 0;
+        public float CurrentHarvExp => baseMs + msPerRoll * msRoll;
 
         public int baseHarvFort = 5;
         public int harvFortPerRoll = 1;
@@ -56,9 +56,9 @@ namespace PetsOverhaul.LightPets
                 manaRoll = Main.rand.Next(manaMaxRoll) + 1;
             }
 
-            if (harvExpRoll <= 0)
+            if (msRoll <= 0)
             {
-                harvExpRoll = Main.rand.Next(harvExpMaxRoll) + 1;
+                msRoll = Main.rand.Next(msMaxRoll) + 1;
             }
 
             if (harvFortRoll <= 0)
@@ -69,19 +69,19 @@ namespace PetsOverhaul.LightPets
         public override void NetSend(Item item, BinaryWriter writer)
         {
             writer.Write((byte)manaRoll);
-            writer.Write((byte)harvExpRoll);
+            writer.Write((byte)msRoll);
             writer.Write((byte)harvFortRoll);
         }
         public override void NetReceive(Item item, BinaryReader reader)
         {
             manaRoll = reader.ReadByte();
-            harvExpRoll = reader.ReadByte();
+            msRoll = reader.ReadByte();
             harvFortRoll = reader.ReadByte();
         }
         public override void SaveData(Item item, TagCompound tag)
         {
             tag.Add("ShadowMana", manaRoll);
-            tag.Add("ShadowExp", harvExpRoll);
+            tag.Add("ShadowExp", msRoll); //exp stats are obsolete
             tag.Add("ShadowFort", harvFortRoll);
         }
         public override void LoadData(Item item, TagCompound tag)
@@ -93,7 +93,7 @@ namespace PetsOverhaul.LightPets
 
             if (tag.TryGet("ShadowExp", out int exp))
             {
-                harvExpRoll = exp;
+                msRoll = exp;
             }
 
             if (tag.TryGet("ShadowFort", out int fort))
@@ -112,8 +112,8 @@ namespace PetsOverhaul.LightPets
                         .Replace("<manaBase>", baseMana.ToString())
                         .Replace("<manaPer>", manaPerRoll.ToString())
 
-                        .Replace("<expBase>", Math.Round(baseHarvExp * 100, 2).ToString())
-                        .Replace("<expPer>", Math.Round(harvExpPerRoll * 100, 2).ToString())
+                        .Replace("<expBase>", Math.Round(baseMs * 100, 2).ToString())
+                        .Replace("<expPer>", Math.Round(msPerRoll * 100, 2).ToString())
 
                         .Replace("<fortBase>", baseHarvFort.ToString())
                         .Replace("<fortPer>", harvFortPerRoll.ToString())
@@ -122,9 +122,9 @@ namespace PetsOverhaul.LightPets
                         .Replace("<manaRoll>", GlobalPet.LightPetRarityColorConvert(manaRoll.ToString(), manaRoll, manaMaxRoll))
                         .Replace("<manaMaxRoll>", GlobalPet.LightPetRarityColorConvert(manaMaxRoll.ToString(), manaRoll, manaMaxRoll))
 
-                        .Replace("<currentExp>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentHarvExp * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), harvExpRoll, harvExpMaxRoll))
-                        .Replace("<expRoll>", GlobalPet.LightPetRarityColorConvert(harvExpRoll.ToString(), harvExpRoll, harvExpMaxRoll))
-                        .Replace("<expMaxRoll>", GlobalPet.LightPetRarityColorConvert(harvExpMaxRoll.ToString(), harvExpRoll, harvExpMaxRoll))
+                        .Replace("<currentExp>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentHarvExp * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), msRoll, msMaxRoll))
+                        .Replace("<expRoll>", GlobalPet.LightPetRarityColorConvert(msRoll.ToString(), msRoll, msMaxRoll))
+                        .Replace("<expMaxRoll>", GlobalPet.LightPetRarityColorConvert(msMaxRoll.ToString(), msRoll, msMaxRoll))
 
                         .Replace("<currentFort>", GlobalPet.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + CurrentHarvFort.ToString(), harvFortRoll, harvFortMaxRoll))
                         .Replace("<fortRoll>", GlobalPet.LightPetRarityColorConvert(harvFortRoll.ToString(), harvFortRoll, harvFortMaxRoll))

@@ -15,7 +15,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int lifePool = 0;
         public float lifePoolMaxPerc = 0.2f;
         public int cdToAddToPool = 66;
-        public float lifestealAmount = 0.03f;
+        public float lifestealAmount = 0.035f;
 
         public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PreUpdate()

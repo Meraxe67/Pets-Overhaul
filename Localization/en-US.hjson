@@ -9,9 +9,8 @@ Mods: {
 		JojaCola: A nature related NPC may be able to Purify this
 		Notice:
 			'''
-			[c/90C2AA:Pets Overhaul 2.3.7 latest changes: Lowered all classes Junimo Exp Requirements.]
-			[c/90C2AA:Bug fixes, Fortune stats now increase all items rather than just Pet sourced ones.]
-			[c/90C2AA:Pet Balance changes and doubled Town pet radius and doubled their Fortune/Exp buffs.]
+			[c/90C2AA:Pets Overhaul 2.3.8 latest changes: Reworked Junimo, now won't work while off]
+			[c/90C2AA:Removed all 'global Junimo things', gave new perks to Light Pets, balance changes etc.]
 			If you happen to come across any bugs or would like to be up to
 			date with our constantly updating Mod and growing community,
 			we encourage you to join our community and our Discord server!
@@ -20,32 +19,6 @@ Mods: {
 
 		Config: {
 			Personalization: Personalization
-			JojaColaEasyLabel: Disable Joja-Cola being obtainable easily
-			JojaColaEasyTooltip:
-				'''
-				Disables being able to catch a Joja-Cola with
-				20% chance on every catch until you catch one
-				'''
-			JunimoLevelupLabel: Disable Junimo levelup notification
-			JunimoLevelupTooltip:
-				'''
-				Disables Junimo Pet's Level-up text and sound effect notifications
-				upon increasing a class's level. Does not disable the level mechanic.
-				'''
-			JunimoExpActive: "[c/AEAEAE:active]"
-			JunimoExpInactive: "[c/AEAEAE:inactive]"
-			JunimoExpLabel: Disable Junimo Exp gain while you don't have it
-			JunimoExpTooltip:
-				'''
-				Disables Junimo Pet's all Experience gains if you don't have Stardrop
-				in your Inventory or Void bag, or it's not in your Pet Item slot.
-				'''
-			JunimoExpGainMessageLabel: Disable Junimo Exp pop-up messages
-			JunimoExpGainMessageTooltip:
-				'''
-				Disables all pop-up texts that appear upon gaining exp,
-				Does not disable Exp gain or anything else but the message.
-				'''
 			NoticeLabel: Disable Pets Overhaul's notice
 			NoticeTooltip:
 				'''
@@ -109,30 +82,28 @@ Mods: {
 			NotRolled: Qualities are rolled when the item is in the inventory for the first time!
 			ShadowOrb:
 				'''
-				Grants <manaBase> + <manaPer> Mana Per Quality, <expBase> + <expPer>% Harvesting Exp per quality,
-				increasing your Junimo Pet's harvesting exp gains, and 
+				Grants <manaBase> + <manaPer> Mana Per Quality, <expBase> + <expPer>% Movement Speed per quality
 				<fortBase> + <fortPer> Harvesting Fortune per quality, increasing your Harvesting drops.
 				Mana Bonus: <currentMana> Quality <manaRoll> out of <manaMaxRoll>
-				Harvesting Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
+				Movement Speed Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				Harvesting Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
 				'''
 			CrimsonHeart:
 				'''
-				Grants <hpBase> + <hpPer> Health Per Quality, <expBase> + <expPer>% Fishing Exp per quality,
-				increasing your Junimo Pet's fishing exp gains, and 
+				Grants <hpBase> + <hpPer> Health Per Quality, <expBase> + <expPer>% Movement Speed per quality
 				<fortBase> + <fortPer> Fishing Fortune per quality, increasing your Fishing drops.
 				Health Bonus: <currentHp> Quality <hpRoll> out of <hpMaxRoll>
-				Fishing Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
+				Movement Speed Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				Fishing Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
 				'''
 			MagicLantern:
 				'''
 				Grants <defPer> Defense per quality and <defMultBase> + <defMultPer> per quality percentage defense increase.
-				<expBase> + <expPer>% Mining Exp per quality, increasing your Junimo Pet's mining exp gains
+				<expBase> + <expPer>% Damage Reduction per quality
 				and <fortBase> + <fortPer> Mining Fortune per quality, increasing your Mining drops.
 				Defense Bonus: <currentDef> Quality <defRoll> out of <defMaxRoll>
 				Percentage Defense Bonus: <currentDefMult> Quality <defMultRoll> out of <defMultMaxRoll>
-				Mining Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
+				Damage Reduction Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				Mining Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
 				'''
 			FairyBell:
@@ -164,27 +135,27 @@ Mods: {
 				'''
 			JackOLantern:
 				'''
-				Grants <atkSpdBase> + <atkSpdPer>% Attack Speed Per Quality, <expBase> + <expPer>% Harvesting Exp boost per quality
-				increasing your Junimo Pet's harvesting exp gains, and <luckBase> + <luckPer> Luck per quality.
+				Grants <atkSpdBase> + <atkSpdPer>% Attack Speed Per Quality, <luckBase> + <luckPer> Luck per quality
+				and <expBase> + <expPer>% Harvesting Fortune per quality
 				Attack Speed Bonus: <currentAtkSpd> Quality <atkSpdRoll> out of <atkSpdMaxRoll>
 				Luck Bonus: <currentLuck> Quality <luckRoll> out of <luckMaxRoll>
-				Harvesting Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
+				Harvesting Fortune Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				'''
 			ToyGolem:
 				'''
-				Grants <regenPer> Life Regen Per Quality, <healthBase> + <healthPer>% bonus maximum health per quality,
-				and <expBase> + <expPer>% Mining Exp boost per quality increasing your Junimo Pet's mining exp gain.
+				Grants <regenBase> + <regenPer> Life Regen Per Quality, <healthBase> + <healthPer>% bonus maximum health per quality,
+				and <expBase> + <expPer> Mana Regen per quality.
 				Life Regen Bonus: <currentRegen> Quality <regenRoll> out of <regenMaxRoll>
 				Health Percentage Bonus: <currentHealth> Quality <healthRoll> out of <healthMaxRoll>
-				Mining Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
+				Mana Regen Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				'''
 			JewelOfLight:
 				'''
 				Grants <moveSpdBase> + <moveSpdPer>% Movement Speed Per Quality, <wingBase> + <wingPer> seconds wing time per quality,
-				and <expBase> + <expPer>% Fishing Exp boost per quality increasing your Junimo Pet's fishing exp gain.
+				and <expBase> + <expPer>% Acceleration per quality.
 				Movement Speed Bonus: <currentMoveSpd> Quality <moveSpdRoll> out of <moveSpdMaxRoll>
 				Wing-Time Bonus: <currentWing> Quality <wingRoll> out of <wingMaxRoll>
-				Fishing Exp Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
+				Acceleration Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				'''
 			SuspiciousLookingTentacle:
 				'''
@@ -391,11 +362,9 @@ Mods: {
 			DirtiestBlock:
 				'''
 				[c/96A8B0:Mining Pet]
-				- Mining anything [i:12] gives <any> copper coin.
+				- Mining anything [i:12] gives <any> copper coins.
 				- Mining common blocks [i:3] gives <soil> copper coins.
-				 * Gives <soil>% chance to get 1 Junimo Mining Exp.
 				- Mining dirt [i:2] gives <dirt> copper coins.
-				 * Gives <dirt>% chance to get 1 Junimo Mining Exp.
 				'''
 			BallOfFuseWire:
 				'''
@@ -468,26 +437,18 @@ Mods: {
 			JunimoPetItem:
 				'''
 				[c/CDFF00:Harvesting], [c/96A8B0:Mining] and [c/0382E9:Fishing Pet]
-				- Gain Experience as you gather more materials or do certain actions in their respective Class.
-				- Exp gain while Junimo's item is outside of your inventory/void bag is currently <expOutsideInvActiveOrNo>. (Changeable in Config)
-				- Effects are active while the Pet Item is in Inventory or an Open Void Bag or while is equipped.
-				- Combat Stats are doubled and gain 33% Exp boost to all 3 classes while Junimo is your active Pet.
-				- Levels are currently maxed at <maxLvl>, greater and more difficult tasks will reward you with superior exp gain.
+				- Allows you to gain EXP for each respective class, further improving perks of this Pet.
+				- Gathering; Harvesting, Mining and Fishing items gives you money depending on items exp value.
+				- Levels are currently maxed at <maxLvl>.
 				[c/CDFF00:Harvesting]
 				Current level: [c/CDFF00:<harvestLevel>] Experience needed for next level: [c/CDFF00:<harvestNext>] Current total experience: [c/CDFF00:<harvestCurrent>]
-				- All plants and choppables gives you <harvestingProfit> times their exp as copper coins.
-				- Grants <bonusHealth>% maximum health, with a minimum of <flatHealth> maximum health.
+				- Gain <harvestingProfit> times exp value of items as copper coins and gain <flatHealth> maximum health.
 				[c/96A8B0:Mining]
 				Current level: [c/96A8B0:<miningLevel>] Experience needed for next level: [c/96A8B0:<miningNext>] Current total experience: [c/96A8B0:<miningCurrent>]
-				- Gain <miningBonusDrop>% more Ores, Gems, Extractable tiles and pretty much anything that gives Mining Exp.
-				- Grants <bonusReduction>% damage reduction.
+				- Gain <miningProfit> times exp value of items as copper coins and gain <bonusReduction>% damage reduction.
 				[c/0382E9:Fishing]
 				Current level: [c/0382E9:<fishingLevel>] Experience needed for next level: [c/0382E9:<fishingNext>] Current total experience: [c/0382E9:<fishingCurrent>]
-				- Multiplies fishing power by 1 + <fishingPower>x.
-				- Grants extra rewards from its weighted list upon completing an Angler Quest.
-				 * This list consists of wide range of fishing loot, where entering hardmode expands the list further.
-				 * Amount of times you will drop an item from the list is <rollTime> multiplied by a biased-towards-lower-number of 1 to 1.5.
-				- Increases all types of damage by <bonusDamage>%.
+				- Gain <fishingProfit> times exp value of items as copper coins and gain <bonusDamage>% damage boost.
 				'''
 			BirdieRattle:
 				'''
@@ -811,7 +772,8 @@ Mods: {
 				[c/f6546a:Offensive Pet]
 				- Every <cooldown> seconds, hitting an enemy casts one of the 3 area of effect spells:
 				 * 6 Ice Shards that travel in a hexagonal directory, that can hit up to <icePierce> times,
-				and dealing <icePercent>% of the damage you initially dealt +<iceFlat>. 
+				and dealing <icePercent>% of the damage you initially dealt +<iceFlat>.
+				 * Ice Attacks applies slow by <iceSlow>%, <iceMainSlow>% on main target for <iceSlowTime> seconds.
 				 * 5 Light Spheres around your target, that can hit up to <lightPierce> times, 
 				 and dealing <lightPercent>% of the damage you initially dealt +<lightFlat>.
 				 * 4 Fireballs on top of your target which deals <firePercent>% of the damage you initially dealt +<fireFlat>.
@@ -918,8 +880,9 @@ Mods: {
 				Description:
 					'''
 					Increases your Jump speed by <BunnyJump>% and
-					Your Harvesting Exp by <BunnyHarvesting>%,
-					which increases Junimo's Harvesting exp.
+					Your Harvesting Fortune by <BunnyHarvesting>, which increases
+					items gained by harvesting plants, fully effective
+					with your Harvesting Pets.
 					'''
 			}
 
@@ -929,8 +892,7 @@ Mods: {
 					'''
 					Multiplies movement speed by <CatMovespd>x and
 					Fishing Fortune by +<CatFish>, which increases
-					items gained by fishing, fully effective with 
-					items that sources from your Pets.
+					items gained by fishing, fully effective with your Fishing Pets.
 					'''
 			}
 
@@ -939,8 +901,9 @@ Mods: {
 				Description:
 					'''
 					Increases Fishing Power by +<DogFish> and
-					Your Fishing Exp by <DogFishExp>%,
-					which increases Junimo's Fishing exp.
+					Your Fishing Fortune by <DogFishExp>,
+					which increases items gained by fishing,
+					fully effective with your Fishing Pets.
 					'''
 			}
 
@@ -950,9 +913,7 @@ Mods: {
 					'''
 					Increases luck by +<ClumsyLuck> and Global
 					Fortune by <ClumsyGlobal> which increases
-					items gained by Mining, Harvesting and Fishing,
-					fully effective with items that sources from your 
-					active Pet that doesn't have any class specified.
+					items gained by Mining, Harvesting and Fishing and all Pets.
 					'''
 			}
 
@@ -962,8 +923,7 @@ Mods: {
 					'''
 					Increases Crit Chance by <CoolCrit>% and
 					Mining Fortune by +<CoolMining>, which increases
-					items gained by mining, fully effective with 
-					items that sources from your Pets.
+					items gained by mining, fully effective with your Mining Pets.
 					'''
 			}
 
@@ -978,8 +938,8 @@ Mods: {
 					'''
 					Increases Ability Haste by <MysticHaste>%
 					which reduces your Pet's ability cooldown
-					and increases Junimo's Harvesting, 
-					Mining and Fishing exp by <MysticAllExp>%
+					and Global Fortune by <MysticAllExp> which increases
+					items gained by Mining, Harvesting and Fishing and all Pets.
 					'''
 			}
 
@@ -1021,8 +981,8 @@ Mods: {
 				Description:
 					'''
 					Increases Damage by <SquireDmg>% and
-					your Mining Exp by <SquireMining>%,
-					which increases Junimo's Mining exp.
+					Mining Fortune by +<SquireMining>, which increases
+					items gained by mining, fully effective with your Mining Pets.
 					'''
 			}
 

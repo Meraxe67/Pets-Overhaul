@@ -23,7 +23,7 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
             }
             tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetSquire>())
                 .Replace("<SquireDmg>", Math.Round(Main.LocalPlayer.GetModPlayer<TownPet>().squireDamage * 100, 2).ToString())
-                .Replace("<SquireMining>", Math.Round(Main.LocalPlayer.GetModPlayer<TownPet>().squireMiningExp * 100, 2).ToString())
+                .Replace("<SquireMining>", Main.LocalPlayer.GetModPlayer<TownPet>().MiningFort.ToString())
                 ;
             rare = 0;
         }

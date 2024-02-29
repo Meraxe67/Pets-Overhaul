@@ -22,7 +22,7 @@ namespace PetsOverhaul.TownPets
         {
             if (Player.HasBuff(ModContent.BuffType<TownPetClumsy>()))
             {
-                Pet.globalFortune += clumsyGlobalFort;
+                Pet.globalFortune += GlobalFort;
             }
         }
         public override void ModifyLuck(ref float luck)

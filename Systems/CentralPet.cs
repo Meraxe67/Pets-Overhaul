@@ -42,18 +42,6 @@ namespace PetsOverhaul.Systems
         /// Influences the chance to increase stack of the item that your Fishing Pet gave.
         /// </summary>
         public int fishingFortune = 0;
-        /// <summary>
-        /// Influences the multiplier of the exp you gain for your Junimo Pet's Harvesting Skill.
-        /// </summary>
-        public float harvestingExpBoost = 1f;
-        /// <summary>
-        /// Influences the multiplier of the exp you gain for your Junimo Pet's Mining Skill.
-        /// </summary>
-        public float miningExpBoost = 1f;
-        /// <summary>
-        /// Influences the multiplier of the exp you gain for your Junimo Pet's Fishing Skill.
-        /// </summary>
-        public float fishingExpBoost = 1f;
 
         public bool[] burnDebuffs = BuffID.Sets.Factory.CreateBoolSet(false, BuffID.Burning, BuffID.OnFire, BuffID.OnFire3, BuffID.Frostburn, BuffID.CursedInferno, BuffID.ShadowFlame, BuffID.Frostburn2);
         public Color skin;
@@ -500,9 +488,6 @@ namespace PetsOverhaul.Systems
             harvestingFortune = 0;
             miningFortune = 0;
             globalFortune = 0;
-            fishingExpBoost = 1f;
-            harvestingExpBoost = 1f;
-            miningExpBoost = 1f;
 
             if (Player.jump == 0)
             {
@@ -621,23 +606,11 @@ namespace PetsOverhaul.Systems
 
             return base.PreKill(damage, hitDirection, pvp, ref playSound, ref genGore, ref damageSource);
         }
-        public override void CatchFish(FishingAttempt attempt, ref int itemDrop, ref int npcSpawn, ref AdvancedPopupRequest sonar, ref Vector2 sonarPosition)
-        {
-            if (ModContent.GetInstance<Personalization>().JojaColaEasyOff == false && jojaColaCaught == false && Main.rand.NextBool(5))
-            {
-                itemDrop = ItemID.JojaCola;
-            }
-        }
         public override void ModifyCaughtFish(Item fish)
         {
             for (int i = 0; i < ItemPet.Randomizer((globalFortune + fishingFortune) * 10 / 2 * fish.stack, 1000); i++)
             {
                 Player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.fishingFortuneItem), fish.type, 1);
-            }
-
-            if (fish.type == ItemID.JojaCola)
-            {
-                jojaColaCaught = true;
             }
         }
     }
@@ -815,7 +788,7 @@ namespace PetsOverhaul.Systems
     {
         public enum SlowId
         {
-            Grinch = 0, Snowman = 1, QueenSlime = 2, Deerclops = 3, IceQueen = 4, PikachuStatic = 5, Misc = 6
+            Grinch = 0, Snowman = 1, QueenSlime = 2, Deerclops = 3, IceQueen = 4, PikachuStatic = 5, PhantasmalIce = 6, Misc = 7
         }
         public List<(SlowId, float slowAmount, int slowTime)> SlowList = new();
         /// <summary>

@@ -23,7 +23,7 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
             tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetOld>())
                 .Replace("<OldDef>", Main.LocalPlayer.GetModPlayer<TownPet>().oldDef.ToString())
                 .Replace("<OldKb>", Main.LocalPlayer.GetModPlayer<TownPet>().oldKbResist.ToString())
-                .Replace("<OldHarvesting>", Main.LocalPlayer.GetModPlayer<TownPet>().oldHarvFort.ToString())
+                .Replace("<OldHarvesting>", Main.LocalPlayer.GetModPlayer<TownPet>().HarvFort.ToString())
                 ;
 
             rare = 0;

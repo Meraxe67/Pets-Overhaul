@@ -16,22 +16,22 @@ namespace PetsOverhaul.PetEffects.Vanilla
     {
         public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public int phantasmDragonCooldown = 120;
-        public int iceFlat = 125;
+        public int iceFlat = 150;
         public float iceMult = 0.2f;
         public int IceDamage(int damageDone)
         {
             int dmg = (int)(damageDone * iceMult) + iceFlat;
             return dmg;
         }
-        public int fireFlat = 100;
-        public float fireMult = 0.15f;
+        public int fireFlat = 250;
+        public float fireMult = 0.22f;
         public int FireDamage(int damageDone)
         {
             int dmg = (int)(damageDone * fireMult) + fireFlat;
             return dmg;
         }
-        public int lightFlat = 50;
-        public float lightMult = 0.1f;
+        public int lightFlat = 100;
+        public float lightMult = 0.13f;
         public int LightDamage(int damageDone)
         {
             int dmg = (int)(damageDone * lightMult) + lightFlat;
@@ -39,12 +39,20 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public int icePierce = 25;
         public int lightPierce = 10;
+        public float iceSlowAmount = 2.5f;
+        public int iceSlowTime = 600;
+        public float nerfOnNonPrimary = 0.33f;
+        internal int iceIndex = -1;
         public override void PreUpdate()
         {
-            if (Pet.PetInUse(ItemID.LunaticCultistPetItem))
+            if (iceIndex >= 0 && Main.projectile[iceIndex].active == false)
             {
-                Pet.timerMax = phantasmDragonCooldown;
+                iceIndex = -1;
             }
+                if (Pet.PetInUse(ItemID.LunaticCultistPetItem))
+                {
+                    Pet.timerMax = phantasmDragonCooldown;
+                }
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -59,6 +67,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         Main.projectile[ice].tileCollide = false;
                         Main.projectile[ice].netImportant = true;
                         Main.projectile[ice].penetrate = icePierce;
+                        target.GetGlobalNPC<NpcPet>().AddSlow(NpcPet.SlowId.PhantasmalIce, iceSlowAmount, iceSlowTime, target);
+                        iceIndex = ice;
                         break;
                     case 1:
                         for (int i = 0; i < 4; i++)
@@ -96,6 +106,11 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 }
                 Pet.timer = Pet.timerMax;
             }
+            if (Pet.PetInUseWithSwapCd(ItemID.LunaticCultistPetItem) && proj.whoAmI == iceIndex && proj.GetGlobalProjectile<ProjectileSourceChecks>().petProj)
+            {
+                target.GetGlobalNPC<NpcPet>().AddSlow(NpcPet.SlowId.PhantasmalIce, iceSlowAmount * nerfOnNonPrimary, iceSlowTime, target);
+            }
+
         }
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -169,6 +184,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
                        .Replace("<icePierce>", phantasmalDragon.icePierce.ToString())
                        .Replace("<icePercent>", Math.Round(phantasmalDragon.iceMult * 100, 2).ToString())
                        .Replace("<iceFlat>", phantasmalDragon.iceFlat.ToString())
+                       .Replace("<iceSlow>", Math.Round(phantasmalDragon.iceSlowAmount * phantasmalDragon.nerfOnNonPrimary * 100, 2).ToString())
+                       .Replace("<iceMainSlow>", Math.Round(phantasmalDragon.iceSlowAmount * 100, 2).ToString())
+                       .Replace("<iceSlowTime>", Math.Round(phantasmalDragon.iceSlowTime / 60f, 2).ToString())
                        .Replace("<lightPercent>", Math.Round(phantasmalDragon.lightMult * 100, 2).ToString())
                        .Replace("<lightFlat>", phantasmalDragon.lightFlat.ToString())
                        .Replace("<lightPierce>", phantasmalDragon.lightPierce.ToString())

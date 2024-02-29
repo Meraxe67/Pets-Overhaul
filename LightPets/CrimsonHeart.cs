@@ -20,7 +20,7 @@ namespace PetsOverhaul.LightPets
             if (Player.miscEquips[1].type == ItemID.CrimsonHeart && Player.miscEquips[1].TryGetGlobalItem(out CrimsonHeart crimsonHeart))
             {
                 Player.statLifeMax2 += crimsonHeart.CurrentHealth;
-                Pet.fishingExpBoost += crimsonHeart.CurrentFishExp;
+                Player.moveSpeed += crimsonHeart.CurrentMs;
                 Pet.fishingFortune += crimsonHeart.CurrentFishFort;
             }
         }
@@ -33,11 +33,11 @@ namespace PetsOverhaul.LightPets
         public int healthRoll = 0;
         public int CurrentHealth => baseHealth + healthPerRoll * healthRoll;
 
-        public float baseFishExp = 0.05f;
-        public float fishExpPerRoll = 0.01f;
-        public int fishExpMaxRoll = 15;
-        public int fishExpRoll = 0;
-        public float CurrentFishExp => baseFishExp + fishExpPerRoll * fishExpRoll;
+        public float baseMs = 0.025f;
+        public float msPerRoll = 0.005f;
+        public int msMaxRoll = 15;
+        public int msRoll = 0;
+        public float CurrentMs => baseMs + msPerRoll * msRoll;
 
         public int baseFishFort = 5;
         public int fishFortPerRoll = 1;
@@ -56,9 +56,9 @@ namespace PetsOverhaul.LightPets
                 healthRoll = Main.rand.Next(healthMaxRoll) + 1;
             }
 
-            if (fishExpRoll <= 0)
+            if (msRoll <= 0)
             {
-                fishExpRoll = Main.rand.Next(fishExpMaxRoll) + 1;
+                msRoll = Main.rand.Next(msMaxRoll) + 1;
             }
 
             if (fishFortRoll <= 0)
@@ -69,19 +69,19 @@ namespace PetsOverhaul.LightPets
         public override void NetSend(Item item, BinaryWriter writer)
         {
             writer.Write((byte)healthRoll);
-            writer.Write((byte)fishExpRoll);
+            writer.Write((byte)msRoll);
             writer.Write((byte)fishFortRoll);
         }
         public override void NetReceive(Item item, BinaryReader reader)
         {
             healthRoll = reader.ReadByte();
-            fishExpRoll = reader.ReadByte();
+            msRoll = reader.ReadByte();
             fishFortRoll = reader.ReadByte();
         }
         public override void SaveData(Item item, TagCompound tag)
         {
             tag.Add("CrimsonHealth", healthRoll);
-            tag.Add("CrimsonExp", fishExpRoll);
+            tag.Add("CrimsonExp", msRoll); //Exp stats are obsolete
             tag.Add("CrimsonFort", fishFortRoll);
         }
         public override void LoadData(Item item, TagCompound tag)
@@ -93,7 +93,7 @@ namespace PetsOverhaul.LightPets
 
             if (tag.TryGet("CrimsonExp", out int exp))
             {
-                fishExpRoll = exp;
+                msRoll = exp;
             }
 
             if (tag.TryGet("CrimsonFort", out int fort))
@@ -112,8 +112,8 @@ namespace PetsOverhaul.LightPets
                         .Replace("<hpBase>", baseHealth.ToString())
                         .Replace("<hpPer>", healthPerRoll.ToString())
 
-                        .Replace("<expBase>", Math.Round(baseFishExp * 100, 2).ToString())
-                        .Replace("<expPer>", Math.Round(fishExpPerRoll * 100, 2).ToString())
+                        .Replace("<expBase>", Math.Round(baseMs * 100, 2).ToString())
+                        .Replace("<expPer>", Math.Round(msPerRoll * 100, 2).ToString())
 
                         .Replace("<fortBase>", baseFishFort.ToString())
                         .Replace("<fortPer>", fishFortPerRoll.ToString())
@@ -122,15 +122,15 @@ namespace PetsOverhaul.LightPets
                         .Replace("<hpRoll>", GlobalPet.LightPetRarityColorConvert(healthRoll.ToString(), healthRoll, healthMaxRoll))
                         .Replace("<hpMaxRoll>", GlobalPet.LightPetRarityColorConvert(healthMaxRoll.ToString(), healthRoll, healthMaxRoll))
 
-                        .Replace("<currentExp>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentFishExp * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), fishExpRoll, fishExpMaxRoll))
-                        .Replace("<expRoll>", GlobalPet.LightPetRarityColorConvert(fishExpRoll.ToString(), fishExpRoll, fishExpMaxRoll))
-                        .Replace("<expMaxRoll>", GlobalPet.LightPetRarityColorConvert(fishExpMaxRoll.ToString(), fishExpRoll, fishExpMaxRoll))
+                        .Replace("<currentExp>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentMs * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), msRoll, msMaxRoll))
+                        .Replace("<expRoll>", GlobalPet.LightPetRarityColorConvert(msRoll.ToString(), msRoll, msMaxRoll))
+                        .Replace("<expMaxRoll>", GlobalPet.LightPetRarityColorConvert(msMaxRoll.ToString(), msRoll, msMaxRoll))
 
                         .Replace("<currentFort>", GlobalPet.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + CurrentFishFort.ToString(), fishFortRoll, fishFortMaxRoll))
                         .Replace("<fortRoll>", GlobalPet.LightPetRarityColorConvert(fishFortRoll.ToString(), fishFortRoll, fishFortMaxRoll))
                         .Replace("<fortMaxRoll>", GlobalPet.LightPetRarityColorConvert(fishFortMaxRoll.ToString(), fishFortRoll, fishFortMaxRoll))
                         ));
-            if (fishExpRoll <= 0)
+            if (msRoll <= 0)
             {
                 tooltips.Add(new(Mod, "Tooltip0", "[c/" + GlobalPet.lowQuality.Hex3() + ":" + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.NotRolled") + "]"));
             }

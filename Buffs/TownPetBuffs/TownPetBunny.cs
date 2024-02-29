@@ -25,7 +25,7 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
             }
             tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetBunny>())
                 .Replace("<BunnyJump>", Math.Round(Main.LocalPlayer.GetModPlayer<TownPet>().bunnyJump * 100, 2).ToString())
-                .Replace("<BunnyHarvesting>", Math.Round(Main.LocalPlayer.GetModPlayer<TownPet>().bunnyHarvExp * 100, 2).ToString())
+                .Replace("<BunnyHarvesting>", Main.LocalPlayer.GetModPlayer<TownPet>().HarvFort.ToString())
                 ;
             rare = 0;
         }

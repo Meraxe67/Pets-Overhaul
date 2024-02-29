@@ -12,9 +12,9 @@ namespace PetsOverhaul.PetEffects.Vanilla
     public sealed class DirtiestBlock : ModPlayer
     {
         public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
-        public int dirtCoin = 300;
-        public int soilCoin = 200;
-        public int everythingCoin = 100;
+        public int dirtCoin = 900;
+        public int soilCoin = 600;
+        public int everythingCoin = 300;
         public override void Load()
         {
             PetsOverhaul.OnPickupActions += PreOnPickup;
@@ -22,37 +22,16 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public static void PreOnPickup(Item item, Player player)
         {
             GlobalPet PickerPet = player.GetModPlayer<GlobalPet>();
-            Junimo Juni = player.GetModPlayer<Junimo>();
             DirtiestBlock dirt = player.GetModPlayer<DirtiestBlock>();
             if (PickerPet.PickupChecks(item, ItemID.DirtiestBlock, out ItemPet itemChck) && itemChck.blockNotByPlayer == true)
             {
                 if (item.type == ItemID.DirtBlock)
                 {
                     PickerPet.GiveCoins(ItemPet.Randomizer(item.stack * dirt.dirtCoin));
-                    if (Junimo.JunimoExpCheck(player))
-                    {
-                        int value = ItemPet.Randomizer((int)(dirt.dirtCoin * item.stack * PickerPet.miningExpBoost), 10000);
-                        Juni.junimoMiningExp += value;
-                        Juni.popupExpMining += value;
-                        if (value > 0)
-                        {
-                            Juni.popupIndexMining = Juni.PopupExp(Juni.popupIndexMining, Juni.popupExpMining, new Color(150, 168, 176));
-                        }
-                    }
                 }
                 else if (itemChck.commonBlock == true)
                 {
                     PickerPet.GiveCoins(ItemPet.Randomizer(item.stack * dirt.soilCoin));
-                    if (Junimo.JunimoExpCheck(player))
-                    {
-                        int value = ItemPet.Randomizer((int)(dirt.dirtCoin * item.stack * PickerPet.miningExpBoost), 10000);
-                        Juni.junimoMiningExp += value;
-                        Juni.popupExpMining += value;
-                        if (value > 0)
-                        {
-                            Juni.popupIndexMining = Juni.PopupExp(Juni.popupIndexMining, Juni.popupExpMining, new Color(150, 168, 176));
-                        }
-                    }
                 }
                 else
                 {

@@ -21,7 +21,7 @@ namespace PetsOverhaul.LightPets
             {
                 Player.statDefense += magicLantern.CurrentDef;
                 Player.statDefense *= magicLantern.CurrentDefMult + 1f;
-                Pet.miningExpBoost += magicLantern.CurrentMiningExp;
+                Player.endurance += magicLantern.CurrentDr;
                 Pet.miningFortune += magicLantern.CurrentMiningFort;
             }
         }
@@ -39,11 +39,11 @@ namespace PetsOverhaul.LightPets
         public int defMultRoll = 0;
         public float CurrentDefMult => defMultBase + defMultPerRoll * defMultRoll;
 
-        public float baseMiningExp = 0.05f;
-        public float miningExpPerRoll = 0.01f;
-        public int miningExpMaxRoll = 15;
-        public int miningExpRoll = 0;
-        public float CurrentMiningExp => baseMiningExp + miningExpPerRoll * miningExpRoll;
+        public float baseDr = 0.01f;
+        public float drPerRoll = 0.002f;
+        public int drMaxRoll = 15;
+        public int drRoll = 0;
+        public float CurrentDr => baseDr + drPerRoll * drRoll;
 
         public int baseMiningFort = 5;
         public int miningFortPerRoll = 1;
@@ -67,9 +67,9 @@ namespace PetsOverhaul.LightPets
                 defMultRoll = Main.rand.Next(defMultMaxRoll) + 1;
             }
 
-            if (miningExpRoll <= 0)
+            if (drRoll <= 0)
             {
-                miningExpRoll = Main.rand.Next(miningExpMaxRoll) + 1;
+                drRoll = Main.rand.Next(drMaxRoll) + 1;
             }
 
             if (miningFortRoll <= 0)
@@ -81,21 +81,21 @@ namespace PetsOverhaul.LightPets
         {
             writer.Write((byte)defRoll);
             writer.Write((byte)defMultRoll);
-            writer.Write((byte)miningExpRoll);
+            writer.Write((byte)drRoll);
             writer.Write((byte)miningFortRoll);
         }
         public override void NetReceive(Item item, BinaryReader reader)
         {
             defRoll = reader.ReadByte();
             defMultRoll = reader.ReadByte();
-            miningExpRoll = reader.ReadByte();
+            drRoll = reader.ReadByte();
             miningFortRoll = reader.ReadByte();
         }
         public override void SaveData(Item item, TagCompound tag)
         {
             tag.Add("LanternDef", defRoll);
             tag.Add("LanternMult", defMultRoll);
-            tag.Add("LanternExp", miningExpRoll);
+            tag.Add("LanternExp", drRoll);
             tag.Add("LanternFort", miningFortRoll);
         }
         public override void LoadData(Item item, TagCompound tag)
@@ -112,7 +112,7 @@ namespace PetsOverhaul.LightPets
 
             if (tag.TryGet("LanternExp", out int exp))
             {
-                miningExpRoll = exp;
+                drRoll = exp;
             }
 
             if (tag.TryGet("EmpressFort", out int fort))
@@ -133,8 +133,8 @@ namespace PetsOverhaul.LightPets
                         .Replace("<defMultBase>", Math.Round(defMultBase * 100, 2).ToString())
                         .Replace("<defMultPer>", Math.Round(defMultPerRoll * 100, 2).ToString())
 
-                        .Replace("<expBase>", Math.Round(baseMiningExp * 100, 2).ToString())
-                        .Replace("<expPer>", Math.Round(miningExpPerRoll * 100, 2).ToString())
+                        .Replace("<expBase>", Math.Round(baseDr * 100, 2).ToString())
+                        .Replace("<expPer>", Math.Round(drPerRoll * 100, 2).ToString())
 
                         .Replace("<fortBase>", baseMiningFort.ToString())
                         .Replace("<fortPer>", miningFortPerRoll.ToString())
@@ -147,9 +147,9 @@ namespace PetsOverhaul.LightPets
                         .Replace("<defMultRoll>", GlobalPet.LightPetRarityColorConvert(defMultRoll.ToString(), defMultRoll, defMultMaxRoll))
                         .Replace("<defMultMaxRoll>", GlobalPet.LightPetRarityColorConvert(defMultMaxRoll.ToString(), defMultRoll, defMultMaxRoll))
 
-                        .Replace("<currentExp>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentMiningExp * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), miningExpRoll, miningExpMaxRoll))
-                        .Replace("<expRoll>", GlobalPet.LightPetRarityColorConvert(miningExpRoll.ToString(), miningExpRoll, miningExpMaxRoll))
-                        .Replace("<expMaxRoll>", GlobalPet.LightPetRarityColorConvert(miningExpMaxRoll.ToString(), miningExpRoll, miningExpMaxRoll))
+                        .Replace("<currentExp>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentDr * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), drRoll, drMaxRoll))
+                        .Replace("<expRoll>", GlobalPet.LightPetRarityColorConvert(drRoll.ToString(), drRoll, drMaxRoll))
+                        .Replace("<expMaxRoll>", GlobalPet.LightPetRarityColorConvert(drMaxRoll.ToString(), drRoll, drMaxRoll))
 
                         .Replace("<currentFort>", GlobalPet.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + CurrentMiningFort.ToString(), miningFortRoll, miningFortMaxRoll))
                         .Replace("<fortRoll>", GlobalPet.LightPetRarityColorConvert(miningFortRoll.ToString(), miningFortRoll, miningFortMaxRoll))

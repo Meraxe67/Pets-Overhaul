@@ -23,7 +23,7 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
             }
             tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetCool>())
                 .Replace("<CoolCrit>", Main.LocalPlayer.GetModPlayer<TownPet>().critHitsAreCool.ToString())
-                .Replace("<CoolMining>", Main.LocalPlayer.GetModPlayer<TownPet>().coolMiningFort.ToString())
+                .Replace("<CoolMining>", Main.LocalPlayer.GetModPlayer<TownPet>().MiningFort.ToString())
                 ;
             rare = 0;
         }

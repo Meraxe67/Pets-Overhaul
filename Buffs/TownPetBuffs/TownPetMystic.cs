@@ -23,7 +23,7 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
             }
             tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetMystic>())
                 .Replace("<MysticHaste>", Math.Round(Main.LocalPlayer.GetModPlayer<TownPet>().mysticHaste * 100, 2).ToString())
-                .Replace("<MysticAllExp>", Math.Round(Main.LocalPlayer.GetModPlayer<TownPet>().mysticAllExp * 100, 2).ToString())
+                .Replace("<MysticAllExp>", Main.LocalPlayer.GetModPlayer<TownPet>().GlobalFort.ToString())
                 ;
             rare = 0;
         }
