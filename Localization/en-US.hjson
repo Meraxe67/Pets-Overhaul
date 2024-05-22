@@ -29,7 +29,7 @@ Mods: {
 			TooltipShiftToggleTooltip:
 				'''
 				Enables all added Pet and Item tooltips to be only visible while
-				your set Keybind is held. (You need to manually choose a Keybind)
+				your set Keybind is held. (You need to manually assign a Keybind)
 				'''
 			TooltipShiftToggleInGame: Hold the <keybind> button to view the Pet tooltip
 			HurtSoundLabel: Disable custom hurt sounds
