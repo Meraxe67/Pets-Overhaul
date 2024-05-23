@@ -25,7 +25,6 @@ namespace PetsOverhaul.Systems
     public sealed class GlobalPet : ModPlayer
     {
         public static InputMode PlayerInputMode => PlayerInput.CurrentProfile.InputModes.ContainsKey(InputMode.Keyboard) ? InputMode.Keyboard : InputMode.XBoxGamepad;
-        public bool jojaColaCaught = false;
         /// <summary>
         /// Influences the chance to increase stack of the item from your pet that doesn't fit into any other fortune category. This also increases all other fortunes with half effectiveness.
         /// </summary>
@@ -242,7 +241,6 @@ namespace PetsOverhaul.Systems
         {
             tag.Add("SkinColor", skin);
             tag.Add("SkinColorChanged", skinColorChanged);
-            tag.Add("JojaColaCaughtBefore", jojaColaCaught);
         }
         public override void LoadData(TagCompound tag)
         {
@@ -254,11 +252,6 @@ namespace PetsOverhaul.Systems
             if (tag.TryGet("SkinColorChanged", out bool skinChanged))
             {
                 skinColorChanged = skinChanged;
-            }
-
-            if (tag.TryGet("JojaColaCaughtBefore", out bool jojaCaught))
-            {
-                jojaColaCaught = jojaCaught;
             }
         }
         public static bool LifestealCheck(NPC npc)
