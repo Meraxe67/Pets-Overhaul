@@ -14,7 +14,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
     {
         public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public float accelerator = 0.15f;
-        public float wingTime = 1.4f;
+        public float wingTime = 1.25f;
         public float speedMult = 1.3f;
         public float accMult = 1.5f;
         public float speedAccIncr = 0.9f;
@@ -22,7 +22,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             if (Pet.PetInUseWithSwapCd(ItemID.MartianPetItem))
             {
-                Player.runAcceleration += 0.25f;
+                Player.runAcceleration += accelerator;
                 Player.wingTimeMax = (int)(Player.wingTimeMax * wingTime);
             }
         }

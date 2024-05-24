@@ -1,8 +1,8 @@
-[b]Pets Overhaul adds a RPG-Like Leveling system for your gathering tasks, turns all of your useless, solely cosmetic purposed Pets to directly impact and enhance your gameplay with unique, interesting and build-defining effects for every situation there is![/b]
+[b]Pets Overhaul turns all of your useless, solely cosmetic purposed Pets to directly impact and enhance your gameplay with unique, interesting and build-defining effects for every situation there is![/b]
 
 Key Mechanics
 [list]
-[*] A fully implemented Leveling System, linked to your Junimo Pet for your Harvesting (gathering of Plants, trees etc.), Mining (gathering of ores, finding valuable gems and things like Life Crystals etc.) and Fishing (catching Fishes, doing angler quests and killing Fished up enemies) tasks!
+[*] A leveling System with your Junimo Pet for your Harvesting (gathering of Plants, trees etc.), Mining (gathering of ores, finding valuable gems and things like Life Crystals etc.) and Fishing (catching Fishes, doing angler quests and killing Fished up enemies) tasks!
 [*] 3 different types of ways to benefit you, for 3 different types of Pets! All of your Regular, Light and Town Pets will benefit you in some unique way!
 [*] A quality system for stats of Light Pets. Essentially making any Light Pet distinct from another one of the same type! One may give higher stats on a X stat, while another may on a Y stat. And one may even give perfect stats in all aspects! All depending on how lucky you are!
 [*] Regular Pets gives you unique and interesting buffs for many aspects of the game! You can for example, go full-mana build with the Estee Pet, or give yourself extra survivability in Close Combat while not missing out on Long Range damage with Twins Pet!
