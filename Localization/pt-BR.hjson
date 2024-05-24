@@ -9,11 +9,9 @@ Mods: {
 		// JojaCola: A nature related NPC may be able to Purify this
 		/* Notice:
 			'''
-			[c/90C2AA:Pets Overhaul 2.3.8 latest changes: Reworked Junimo, now won't work while off]
-			[c/90C2AA:Removed all 'global Junimo things', gave new perks to Light Pets, balance changes etc.]
-			If you happen to come across any bugs or would like to be up to
-			date with our constantly updating Mod and growing community,
-			we encourage you to join our community and our Discord server!
+			[c/90C2AA:Pets Overhaul 2.3.9 latest changes: Added Pet Shield Display, small Balance Changes & Fixes]
+			[c/90C2AA:Location of Display can be customized in config, only visible while you got a Pet Shield active]
+			If you happen to come across any bugs, join our Discord server!
 			All feedback is very much appreciated. discord.gg/KubSpqvDGE
 			''' */
 
@@ -42,6 +40,12 @@ Mods: {
 			MoreDifficultTooltip: Desabilita o jogador causar 5% menos dano e receber 5% mais dano, que é implementado para contrariar o mod adicionar um aumento de poder
 			SwapCooldownLabel: Desabilitar tempo de recarga em troca de pet
 			SwapCooldownTooltip: Desabilita o jogador de ganhar o Debuff Pet Desatento ao trocar de pet. Prevenindo qualquer vantagem relacionada à combate de ativar durante esse tempo (Não recomendado)
+			// ShieldLocationLabel: Pet Shield Location
+			/* ShieldLocationTooltip:
+				'''
+				Changes where Pet Shield should be displayed when a Shield has been provided by your Pet.
+				Next to the Healthbar options works best with 1920x1080 Resolutions.
+				''' */
 		}
 
 		LightPetTooltips: {
@@ -871,7 +875,13 @@ Mods: {
 		}
 
 		Projectiles.DynamiteKittyBoom.DisplayName: Dynamite Kitty Boom
-		Configs.Personalization.DisplayName: Personalização
+
+		Configs: {
+			Personalization: {
+				DisplayName: Personalização
+				// ShieldLocation.Tooltip: ""
+			}
+		}
 
 		Keybinds: {
 			// PetTooltipHide.DisplayName: Show Pet Tooltips

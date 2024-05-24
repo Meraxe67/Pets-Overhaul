@@ -44,6 +44,10 @@ namespace PetsOverhaul.Config
         [TooltipKey("$Mods.PetsOverhaul.Config.SwapCooldownTooltip")]
         [DefaultValue(false)]
         public bool SwapCooldown;
-
+        [OptionStrings(["On the Player, Icon on the left", "On the Player, Icon on the right", "Next to the Healthbar, Icon on the left", "Next to the Healthbar, Icon on the right"])]
+        [DefaultValue("Next to the Healthbar, Icon on the right")]
+        [LabelKey("$Mods.PetsOverhaul.Config.ShieldLocationLabel")]
+        [TooltipKey("$Mods.PetsOverhaul.Config.ShieldLocationTooltip")]
+        public string ShieldLocation;
     }
 }

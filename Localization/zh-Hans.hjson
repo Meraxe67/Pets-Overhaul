@@ -76,6 +76,12 @@ Mods: {
 				在减益生效期间,宠物任何与战斗相关的效果都会被禁用.
 				(由于平衡性原因,不推荐禁用)
 				'''
+			// ShieldLocationLabel: Pet Shield Location
+			/* ShieldLocationTooltip:
+				'''
+				Changes where Pet Shield should be displayed when a Shield has been provided by your Pet.
+				Next to the Healthbar options works best with 1920x1080 Resolutions.
+				''' */
 		}
 
 		LightPetTooltips: {
@@ -954,7 +960,13 @@ Mods: {
 		}
 
 		Projectiles.DynamiteKittyBoom.DisplayName: 小猫雷管
-		Configs.Personalization.DisplayName: 个性化设置
+
+		Configs: {
+			Personalization: {
+				DisplayName: 个性化设置
+				// ShieldLocation.Tooltip: ""
+			}
+		}
 
 		Keybinds: {
 			// PetTooltipHide.DisplayName: Show Pet Tooltips
