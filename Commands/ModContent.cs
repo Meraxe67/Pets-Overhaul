@@ -54,7 +54,7 @@ namespace PetsOverhaul.Commands
     }
     public class PlayerPlacedBlockListCommand : ModCommand
     {
-        public override string Command => "LengthOfList";
+        public override string Command => "PlayerPlacedBlockAmount";
         public override CommandType Type => CommandType.Chat;
         public override void Action(CommandCaller caller, string input, string[] args)
         {
