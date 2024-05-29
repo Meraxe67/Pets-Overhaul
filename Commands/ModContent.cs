@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Terraria.ModLoader;
 
-namespace PetsOverhaul.DebugCommands
+namespace PetsOverhaul.Commands
 {
     public class ModContentCommand : ModCommand
     {
