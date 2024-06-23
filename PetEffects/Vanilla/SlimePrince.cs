@@ -43,14 +43,14 @@ namespace PetsOverhaul.PetEffects.Vanilla
             {
                 Player.moveSpeed += slimePrince.GetModPlayer<SlimePrince>().wetSpeed;
                 Player.GetDamage<GenericDamageClass>() += slimePrince.GetModPlayer<SlimePrince>().wetDmg;
-                Player.statDefense *= slimePrince.GetModPlayer<SlimePrince>().wetDef;
+                Player.statDefense *= slimePrince.GetModPlayer<SlimePrince>().wetDef + 1;
                 PutOutTheBurn();
             }
             else if (GlobalPet.DualSlimePetActive(out slimeDual) && Player.HasBuff(BuffID.Wet))
             {
                 Player.moveSpeed += slimeDual.GetModPlayer<DualSlime>().wetSpeed;
                 Player.GetDamage<GenericDamageClass>() += slimeDual.GetModPlayer<DualSlime>().wetDmg;
-                Player.statDefense *= slimeDual.GetModPlayer<DualSlime>().wetDef;
+                Player.statDefense *= slimeDual.GetModPlayer<DualSlime>().wetDef + 1;
                 PutOutTheBurn();
             }
             if (GlobalPet.KingSlimePetActive(out slimePrince) && Player.HasBuff(BuffID.Slimed))

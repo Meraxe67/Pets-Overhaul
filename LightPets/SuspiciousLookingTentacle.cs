@@ -23,7 +23,7 @@ namespace PetsOverhaul.LightPets
                 Player.moveSpeed += moonlord.CurrentMs;
                 Player.GetDamage<GenericDamageClass>() += moonlord.CurrentDmg;
                 Player.GetCritChance<GenericDamageClass>() += moonlord.CurrentCrit;
-                Player.slotsMinions -= moonlord.CurrentMinSlot;
+                Player.maxMinions += (int)Math.Round(moonlord.CurrentMinSlot);
                 Player.whipRangeMultiplier += moonlord.CurrentWhip;
                 Player.statManaMax2 += moonlord.CurrentMana;
 
