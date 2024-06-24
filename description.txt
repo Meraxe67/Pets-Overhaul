@@ -1,5 +1,7 @@
 Pets Overhaul turns all of your useless, solely cosmetic purposed Pets to directly impact and enhance your gameplay with unique, interesting and build-defining effects for every situation there is!
 
+Remember to use /pet to get further info on your questions & other useful stuff regarding the mod, such as Junimo Levels leaderboard & more!
+
 Key Mechanics
 - A Leveling System with your Junimo Pet for your Harvesting (gathering of Plants, trees etc.), Mining (gathering of ores, finding valuable gems and things like Life Crystals etc.) and Fishing (catching Fishes, doing angler quests and killing Fished up enemies) tasks!
 - 3 different types of ways to benefit you, for 3 different types of Pets! All of your Regular, Light and Town Pets will benefit you in some unique way!
