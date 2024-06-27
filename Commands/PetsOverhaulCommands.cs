@@ -2,6 +2,7 @@
 using PetsOverhaul.PetEffects.Vanilla;
 using PetsOverhaul.Systems;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -68,6 +69,12 @@ namespace PetsOverhaul.Commands
     }
     public class PetsOverhaulCommands : ModCommand
     {
+        public struct TopPlayer
+        {
+            public string PlayerName { get; set; }
+            public int PlayerLevel { get; set; }
+            public int PlayerExp { get; set; }
+        }
         public override string Command => "pet";
         public override CommandType Type => CommandType.Chat;
         public override string Description => "Pets Overhaul commands";
@@ -75,19 +82,55 @@ namespace PetsOverhaul.Commands
             + "Only use /pet to see options.";
         public override void Action(CommandCaller caller, string input, string[] args)
         {
+            void JuniScoreboard(int DisplayLimit)
+            {
+                List<TopPlayer> topMining = new(Main.PlayerList.Count);
+                List<TopPlayer> topFishing = new(Main.PlayerList.Count);
+                List<TopPlayer> topHarvesting = new(Main.PlayerList.Count);
+                for (int i = 0; i < Main.PlayerList.Count; i++)
+                {
+                    Junimo juni = Main.player[i].GetModPlayer<Junimo>();
+                    Player player = Main.player[i];
+                    topMining.Add(new TopPlayer() with { PlayerExp = juni.junimoMiningExp, PlayerLevel = juni.junimoMiningLevel, PlayerName = player.name });
+                    topFishing.Add(new TopPlayer() with { PlayerExp = juni.junimoFishingExp, PlayerLevel = juni.junimoFishingLevel, PlayerName = player.name });
+                    topHarvesting.Add(new TopPlayer() with { PlayerExp = juni.junimoHarvestingExp, PlayerLevel = juni.junimoHarvestingLevel, PlayerName = player.name });
+                }
+                caller.Reply($"\n[c/96A8B0:Top {DisplayLimit} Players with highest Junimo Mining EXP:]");
+                for (int i = DisplayLimit; i > 0; i--)
+                {
+                    TopPlayer topPlayer = topMining.Find(x => x.PlayerExp == topMining.Max(x => x.PlayerExp));
+                    caller.Reply(GlobalPet.LightPetRarityColorConvert(topPlayer.PlayerName + "'s Mining Level: " + topPlayer.PlayerLevel + " Mining Exp: " + topPlayer.PlayerExp, i - DisplayLimit + 3, 3));
+                    topMining.Remove(topPlayer);
+                }
+                caller.Reply($"\n[c/0382E9:Top {DisplayLimit} Players with highest Junimo Fishing EXP:]");
+                for (int i = DisplayLimit; i > 0; i--)
+                {
+                    TopPlayer topPlayer = topFishing.Find(x => x.PlayerExp == topFishing.Max(x => x.PlayerExp));
+                    caller.Reply(GlobalPet.LightPetRarityColorConvert(topPlayer.PlayerName + "'s Fishing Level: " + topPlayer.PlayerLevel + " Fishing Exp: " + topPlayer.PlayerExp, i - DisplayLimit + 3, 3));
+                    topFishing.Remove(topPlayer);
+                }
+                caller.Reply($"\n[c/CDFF00:Top {DisplayLimit} Players with highest Junimo Harvesting EXP:]");
+                for (int i = DisplayLimit; i > 0; i--)
+                {
+                    TopPlayer topPlayer = topHarvesting.Find(x => x.PlayerExp == topHarvesting.Max(x => x.PlayerExp));
+                    caller.Reply(GlobalPet.LightPetRarityColorConvert(topPlayer.PlayerName + "'s Harvesting Level: " + topPlayer.PlayerLevel + " Harvesting Exp: " + topPlayer.PlayerExp, i - DisplayLimit + 3, 3));
+                    topHarvesting.Remove(topPlayer);
+                }
+            }
             switch (args.Length)
             {
                 case 0:
-                    caller.Reply("[c/90C2AA:List of Pets Overhaul commands:]\n" +
-                    "/pet fortune - Displays your current fortune stats and explains their functionality.\n" +
-                    "/pet vanity - Explains how to use a 'vanity' Pet.\n" +
-                    "/pet junimoscoreboard - Displays Top 5 Online Players with highest exp counts for all 3 skills of Junimo. Only returns your EXP & level values if you're in singleplayer.\n" +
-                    "/pet faq - Displays frequently asked questions regarding Pets Overhaul.\n");
+                    caller.Reply("[c/90C2AA:List of Pets Overhaul commands:] (commands are not case sensitive)\n" +
+                    "/pet fortune, /pet fortunestat, /pet fortunestats - Displays your current fortune stats and explains their functionality.\n" +
+                    "/pet vanity, /pet vanitypet - Explains how to use a 'vanity' Pet.\n" +
+                    "/pet junimoscoreboard, /pet junimoleaderboard - Displays Top 3 Online Players with highest exp counts for all 3 skills of Junimo. Only returns your EXP & level values if you're in singleplayer.\n" +
+                    "/pet jumimoscoreboardall, /pet junimoleaderboardall - Everything same as junimoscoreboard, but displays ALL online Players' Junimo stats, listed from top to bottom. Use with caution lol\n" +
+                    "/pet faq, /pet question - Displays frequently asked questions regarding Pets Overhaul.\n", Color.Gray);
                     break;
                 case 1:
                     switch (args[0].ToLower())
                     {
-                        case "fortune":
+                        case "fortune" or "fortunestat" or "fortunestats":
                             GlobalPet Pet = caller.Player.GetModPlayer<GlobalPet>();
                             caller.Reply("All fortune stats increase amount of items obtained in said category of items. (Ex. Ores = Mining Fortune)" +
                                 "\nThey work with 100% effectiveness for items gained by Pets of same Class, 50% for items gained through non-pet means." +
@@ -99,12 +142,12 @@ namespace PetsOverhaul.Commands
                                 "\n[c/0382E9:Fishing Fortune] - Fishes, crates etc. Your Current Fishing Fortune: " + Pet.fishingFortune +
                                 "\n[c/CDFF00:Harvesting Fortune] - Herbs, plants, trees etc. Your Current Harvesting Fortune: " + Pet.harvestingFortune);
                             break;
-                        case "vanity":
+                        case "vanity" or "vanitypet":
                             caller.Reply("Step 1: Equip the pet you don't want to be visible, but want its effects active in your Pet Slot." +
                                 "\nStep 2: Disable the currently equipped Pet's visibility from little eye next to the Pet Slot." +
                                 "\nStep 3: 'Use' the Pet you want to be visible via the Pet Item from your inventory. Done!");
                             break;
-                        case "junimoscoreboard":
+                        case "junimoscoreboard" or "junimoleaderboard":
                             if (Main.netMode == NetmodeID.SinglePlayer)
                             {
                                 Junimo junimoLvls = caller.Player.GetModPlayer<Junimo>();
@@ -114,12 +157,23 @@ namespace PetsOverhaul.Commands
                             }
                             else
                             {
-                                caller.Reply("[c/96A8B0:Top 5 Players with highest Junimo Mining EXP:]");
-                                caller.Reply("[c/0382E9:Top 5 Players with highest Junimo Fishing EXP:]");
-                                caller.Reply("[c/CDFF00:Top 5 Players with highest Junimo Harvesting EXP:]");
+                                JuniScoreboard(Main.PlayerList.Count > 3 ? 3 : Main.PlayerList.Count);
                             }
                             break;
-                        case "faq":
+                        case "junimoscoreboardall" or "junimoleaderboardall":
+                            if (Main.netMode == NetmodeID.SinglePlayer)
+                            {
+                                Junimo junimoLvls = caller.Player.GetModPlayer<Junimo>();
+                                caller.Reply($"[c/96A8B0:Your Junimo Mining Level: {junimoLvls.junimoMiningLevel} Your Junimo Mining EXP: {junimoLvls.junimoMiningExp}]");
+                                caller.Reply($"[c/0382E9:Your Junimo Fishing Level: {junimoLvls.junimoFishingLevel} Your Junimo Fishing EXP: {junimoLvls.junimoFishingExp}]");
+                                caller.Reply($"[c/CDFF00:Your Junimo Harvesting Level: {junimoLvls.junimoHarvestingLevel} Your Junimo Harvesting EXP: {junimoLvls.junimoHarvestingExp}]");
+                            }
+                            else
+                            {
+                                JuniScoreboard(Main.PlayerList.Count);
+                            }
+                            break;
+                        case "faq" or "question":
                             caller.Reply("Q: Will there be crossmod content?" +
                                 "\nA: Yes. Calamity will be priority, afterwards, possibly Thorium." +
                                 "\nQ: Any way of increasing rolls of Light Pets?" +
@@ -132,20 +186,23 @@ namespace PetsOverhaul.Commands
                                 "\nA: Make sure the Pet effects you want to take in place are in the Pet slot, which locates in 'Equipment' section, on top of your Helmet slot.");
                             break;
                         default:
-                            caller.Reply("Given argument was invalid, here is list of Pets Overhaul commands:", Color.Red);
-                            caller.Reply("/pet fortune - Displays your current fortune stats and explains their functionality.\n" +
-                    "/pet vanity - Explains how to use a 'vanity' Pet.\n" +
-                    "/pet junimoscoreboard - Displays Top 5 Online Players with highest exp counts for all 3 skills of Junimo. Only returns your EXP & level values if you're in singleplayer.\n" +
-                    "/pet faq - Displays frequently asked questions regarding Pets Overhaul.\n");
+                            caller.Reply("Given argument was invalid, here is list of Pets Overhaul commands: (commands are not case sensitive)", Color.Red);
+                            caller.Reply("/pet fortune, /pet fortunestat, /pet fortunestats - Displays your current fortune stats and explains their functionality.\n" +
+                    "/pet vanity, /pet vanitypet - Explains how to use a 'vanity' Pet.\n" +
+                    "/pet junimoscoreboard, /pet junimoleaderboard - Displays Top 3 Online Players with highest exp counts for all 3 skills of Junimo. Only returns your EXP & level values if you're in singleplayer.\n" +
+                    "/pet jumimoscoreboardall, /pet junimoleaderboardall - Everything same as junimoscoreboard, but displays ALL online Players' Junimo stats, listed from top to bottom. Use with caution lol\n" +
+                    "/pet faq, /pet question - Displays frequently asked questions regarding Pets Overhaul.\n", Color.Gray);
                             break;
+
                     }
                     break;
                 default:
-                    caller.Reply("Only one argument was expected, make sure you're not using spaces for an argument. List of Pets Overhaul commands:", Color.Red);
-                    caller.Reply("/pet fortune - Displays your current fortune stats and explains their functionality.\n" +
-                    "/pet vanity - Explains how to use a 'vanity' Pet.\n" +
-                    "/pet junimoscoreboard - Displays Top 5 Online Players with highest exp counts for all 3 skills of Junimo. Only returns your EXP & level values if you're in singleplayer.\n" +
-                    "/pet faq - Displays frequently asked questions regarding Pets Overhaul.\n");
+                    caller.Reply("Only one argument was expected, make sure you're not using spaces for an argument. List of Pets Overhaul commands: (commands are not case sensitive)", Color.Red);
+                    caller.Reply("/pet fortune, /pet fortunestat, /pet fortunestats - Displays your current fortune stats and explains their functionality.\n" +
+                    "/pet vanity, /pet vanitypet - Explains how to use a 'vanity' Pet.\n" +
+                    "/pet junimoscoreboard, /pet junimoleaderboard - Displays Top 3 Online Players with highest exp counts for all 3 skills of Junimo. Only returns your EXP & level values if you're in singleplayer.\n" +
+                    "/pet jumimoscoreboardall, /pet junimoleaderboardall - Everything same as junimoscoreboard, but displays ALL online Players' Junimo stats, listed from top to bottom. Use with caution lol\n" +
+                    "/pet faq, /pet question - Displays frequently asked questions regarding Pets Overhaul.\n", Color.Gray);
                     break;
             }
         }
