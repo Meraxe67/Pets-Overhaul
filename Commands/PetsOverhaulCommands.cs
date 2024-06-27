@@ -84,36 +84,37 @@ namespace PetsOverhaul.Commands
         {
             void JuniScoreboard(int DisplayLimit)
             {
-                List<TopPlayer> topMining = new(Main.PlayerList.Count);
-                List<TopPlayer> topFishing = new(Main.PlayerList.Count);
-                List<TopPlayer> topHarvesting = new(Main.PlayerList.Count);
-                for (int i = 0; i < Main.PlayerList.Count; i++)
+                List<TopPlayer> topMining = new();
+                List<TopPlayer> topFishing = new();
+                List<TopPlayer> topHarvesting = new();
+                foreach (var player in Main.ActivePlayers)
                 {
-                    Junimo juni = Main.player[i].GetModPlayer<Junimo>();
-                    Player player = Main.player[i];
+                    Junimo juni = player.GetModPlayer<Junimo>();
                     topMining.Add(new TopPlayer() with { PlayerExp = juni.junimoMiningExp, PlayerLevel = juni.junimoMiningLevel, PlayerName = player.name });
                     topFishing.Add(new TopPlayer() with { PlayerExp = juni.junimoFishingExp, PlayerLevel = juni.junimoFishingLevel, PlayerName = player.name });
                     topHarvesting.Add(new TopPlayer() with { PlayerExp = juni.junimoHarvestingExp, PlayerLevel = juni.junimoHarvestingLevel, PlayerName = player.name });
                 }
-                caller.Reply($"\n[c/96A8B0:Top {DisplayLimit} Players with highest Junimo Mining EXP:]");
-                for (int i = DisplayLimit; i > 0; i--)
+                int displayCounter = 0;
+                caller.Reply($"\n[c/96A8B0:Top {topMining.Count} Players with highest Junimo Mining EXP:]");
+                for (int i = topMining.Count; i > 0 && displayCounter < DisplayLimit; i--, displayCounter++)
                 {
                     TopPlayer topPlayer = topMining.Find(x => x.PlayerExp == topMining.Max(x => x.PlayerExp));
-                    caller.Reply(GlobalPet.LightPetRarityColorConvert(topPlayer.PlayerName + "'s Mining Level: " + topPlayer.PlayerLevel + " Mining Exp: " + topPlayer.PlayerExp, i - DisplayLimit + 3, 3));
+                    caller.Reply(topPlayer.PlayerName + "'s Mining Level: " + topPlayer.PlayerLevel + " Mining Exp: " + topPlayer.PlayerExp, displayCounter == 0 ? Color.LavenderBlush : displayCounter == 1 ? GlobalPet.highQuality : displayCounter == 2 ? GlobalPet.midQuality : GlobalPet.lowQuality);
                     topMining.Remove(topPlayer);
                 }
-                caller.Reply($"\n[c/0382E9:Top {DisplayLimit} Players with highest Junimo Fishing EXP:]");
-                for (int i = DisplayLimit; i > 0; i--)
+                displayCounter = 0;
+                caller.Reply($"\n[c/0382E9:Top {topFishing.Count} Players with highest Junimo Fishing EXP:]");
+                for (int i = topFishing.Count; i > 0 && displayCounter < DisplayLimit; i--, displayCounter++)
                 {
                     TopPlayer topPlayer = topFishing.Find(x => x.PlayerExp == topFishing.Max(x => x.PlayerExp));
-                    caller.Reply(GlobalPet.LightPetRarityColorConvert(topPlayer.PlayerName + "'s Fishing Level: " + topPlayer.PlayerLevel + " Fishing Exp: " + topPlayer.PlayerExp, i - DisplayLimit + 3, 3));
-                    topFishing.Remove(topPlayer);
+                    caller.Reply(topPlayer.PlayerName + "'s Fishing Level: " + topPlayer.PlayerLevel + " Fishing Exp: " + topPlayer.PlayerExp, displayCounter == 0 ? Color.LavenderBlush : displayCounter == 1 ? GlobalPet.highQuality : displayCounter == 2 ? GlobalPet.midQuality : GlobalPet.lowQuality);
                 }
-                caller.Reply($"\n[c/CDFF00:Top {DisplayLimit} Players with highest Junimo Harvesting EXP:]");
-                for (int i = DisplayLimit; i > 0; i--)
+                displayCounter = 0;
+                caller.Reply($"\n[c/CDFF00:Top {topHarvesting.Count} Players with highest Junimo Harvesting EXP:]");
+                for (int i = topHarvesting.Count; i > 0 && displayCounter < DisplayLimit; i--, displayCounter++)
                 {
                     TopPlayer topPlayer = topHarvesting.Find(x => x.PlayerExp == topHarvesting.Max(x => x.PlayerExp));
-                    caller.Reply(GlobalPet.LightPetRarityColorConvert(topPlayer.PlayerName + "'s Harvesting Level: " + topPlayer.PlayerLevel + " Harvesting Exp: " + topPlayer.PlayerExp, i - DisplayLimit + 3, 3));
+                    caller.Reply(topPlayer.PlayerName + "'s Harvesting Level: " + topPlayer.PlayerLevel + " Harvesting Exp: " + topPlayer.PlayerExp, displayCounter == 0 ? Color.LavenderBlush : displayCounter == 1 ? GlobalPet.highQuality : displayCounter == 2 ? GlobalPet.midQuality : GlobalPet.lowQuality);
                     topHarvesting.Remove(topPlayer);
                 }
             }
@@ -136,11 +137,11 @@ namespace PetsOverhaul.Commands
                                 "\nThey work with 100% effectiveness for items gained by Pets of same Class, 50% for items gained through non-pet means." +
                                 "\nFor example: If you have 100 Harvesting Fortune, gathering 3 Dayblooms by hand and +2 with Magical Pumpkin Seed (Squashling Pet)" +
                                 "\nWill result in 1.5 (item gained through non-pet means, 50% effective) + 2 (item gained through Pet perk, 100% effective) more Daybloom.", Color.Gray);
-                                caller.Reply("\n[c/90C2AA:Global Fortune] - While working with 100% effectiveness on non-classified Pet Items," +
-                                "\nworks with 50% effectiveness with everything else. Your Current Global Fortune: " + Pet.globalFortune +
-                                "\n[c/96A8B0:Mining Fortune] - Ores, gems etc. Your Current Mining Fortune: " + Pet.miningFortune +
-                                "\n[c/0382E9:Fishing Fortune] - Fishes, crates etc. Your Current Fishing Fortune: " + Pet.fishingFortune +
-                                "\n[c/CDFF00:Harvesting Fortune] - Herbs, plants, trees etc. Your Current Harvesting Fortune: " + Pet.harvestingFortune);
+                            caller.Reply("\n[c/90C2AA:Global Fortune] - While working with 100% effectiveness on non-classified Pet Items," +
+                            "\nworks with 50% effectiveness with everything else. Your Current Global Fortune: " + Pet.globalFortune +
+                            "\n[c/96A8B0:Mining Fortune] - Ores, gems etc. Your Current Mining Fortune: " + Pet.miningFortune +
+                            "\n[c/0382E9:Fishing Fortune] - Fishes, crates etc. Your Current Fishing Fortune: " + Pet.fishingFortune +
+                            "\n[c/CDFF00:Harvesting Fortune] - Herbs, plants, trees etc. Your Current Harvesting Fortune: " + Pet.harvestingFortune);
                             break;
                         case "vanity" or "vanitypet":
                             caller.Reply("Step 1: Equip the pet you don't want to be visible, but want its effects active in your Pet Slot." +
@@ -157,7 +158,7 @@ namespace PetsOverhaul.Commands
                             }
                             else
                             {
-                                JuniScoreboard(Main.PlayerList.Count > 3 ? 3 : Main.PlayerList.Count);
+                                JuniScoreboard(3);
                             }
                             break;
                         case "junimoscoreboardall" or "junimoleaderboardall":
@@ -170,7 +171,7 @@ namespace PetsOverhaul.Commands
                             }
                             else
                             {
-                                JuniScoreboard(Main.PlayerList.Count);
+                                JuniScoreboard(Main.maxPlayers);
                             }
                             break;
                         case "faq" or "question":
