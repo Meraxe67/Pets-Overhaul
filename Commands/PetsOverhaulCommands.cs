@@ -135,8 +135,8 @@ namespace PetsOverhaul.Commands
                             caller.Reply("All fortune stats increase amount of items obtained in said category of items. (Ex. Ores = Mining Fortune)" +
                                 "\nThey work with 100% effectiveness for items gained by Pets of same Class, 50% for items gained through non-pet means." +
                                 "\nFor example: If you have 100 Harvesting Fortune, gathering 3 Dayblooms by hand and +2 with Magical Pumpkin Seed (Squashling Pet)" +
-                                "\nWill result in 1.5 (item gained through non-pet means, 50% effective) + 2 (item gained through Pet perk, 100% effective) more Daybloom." +
-                                "\n[c/90C2AA:Global Fortune] - While working with 100% effectiveness on non-classified Pet Items," +
+                                "\nWill result in 1.5 (item gained through non-pet means, 50% effective) + 2 (item gained through Pet perk, 100% effective) more Daybloom.", Color.Gray);
+                                caller.Reply("\n[c/90C2AA:Global Fortune] - While working with 100% effectiveness on non-classified Pet Items," +
                                 "\nworks with 50% effectiveness with everything else. Your Current Global Fortune: " + Pet.globalFortune +
                                 "\n[c/96A8B0:Mining Fortune] - Ores, gems etc. Your Current Mining Fortune: " + Pet.miningFortune +
                                 "\n[c/0382E9:Fishing Fortune] - Fishes, crates etc. Your Current Fishing Fortune: " + Pet.fishingFortune +
