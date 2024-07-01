@@ -4,7 +4,7 @@ using Terraria.ModLoader.Config;
 namespace PetsOverhaul.Config
 {
     public class Personalization : ModConfig
-    {
+    { //Remember most are 'disablers', may be a bit confusing.
         public override ConfigScope Mode => ConfigScope.ClientSide;
         [LabelKey("$Mods.PetsOverhaul.Config.NoticeLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.NoticeTooltip")]
@@ -49,5 +49,13 @@ namespace PetsOverhaul.Config
         [LabelKey("$Mods.PetsOverhaul.Config.ShieldLocationLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.ShieldLocationTooltip")]
         public string ShieldLocation;
+        [LabelKey("$Mods.PetsOverhaul.Config.DisableAbilityCooldownLabel")]
+        [TooltipKey("$Mods.PetsOverhaul.Config.DisableAbilityCooldownTooltip")]
+        [DefaultValue(true)]
+        public bool AbilityDisplay;
+        [LabelKey("$Mods.PetsOverhaul.Config.AbilityDisplayInfoLabel")]
+        [TooltipKey("$Mods.PetsOverhaul.Config.AbilityDisplayInfoTooltip")]
+        [DefaultValue(false)]
+        public bool AbilityDisplayInfo;
     }
 }
