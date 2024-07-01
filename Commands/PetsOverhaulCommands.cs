@@ -82,42 +82,6 @@ namespace PetsOverhaul.Commands
             + "Only use /pet to see options.";
         public override void Action(CommandCaller caller, string input, string[] args)
         {
-            void JuniScoreboard(int DisplayLimit)
-            {
-                List<TopPlayer> topMining = new();
-                List<TopPlayer> topFishing = new();
-                List<TopPlayer> topHarvesting = new();
-                foreach (var player in Main.ActivePlayers)
-                {
-                    Junimo juni = player.GetModPlayer<Junimo>();
-                    topMining.Add(new TopPlayer() with { PlayerExp = juni.junimoMiningExp, PlayerLevel = juni.junimoMiningLevel, PlayerName = player.name });
-                    topFishing.Add(new TopPlayer() with { PlayerExp = juni.junimoFishingExp, PlayerLevel = juni.junimoFishingLevel, PlayerName = player.name });
-                    topHarvesting.Add(new TopPlayer() with { PlayerExp = juni.junimoHarvestingExp, PlayerLevel = juni.junimoHarvestingLevel, PlayerName = player.name });
-                }
-                int displayCounter = 0;
-                caller.Reply($"\n[c/96A8B0:Top {topMining.Count} Players with highest Junimo Mining EXP:]");
-                for (int i = topMining.Count; i > 0 && displayCounter < DisplayLimit; i--, displayCounter++)
-                {
-                    TopPlayer topPlayer = topMining.Find(x => x.PlayerExp == topMining.Max(x => x.PlayerExp));
-                    caller.Reply(topPlayer.PlayerName + "'s Mining Level: " + topPlayer.PlayerLevel + " Mining Exp: " + topPlayer.PlayerExp, displayCounter == 0 ? Color.Lavender : displayCounter == 1 ? GlobalPet.highQuality : displayCounter == 2 ? GlobalPet.midQuality : GlobalPet.lowQuality);
-                    topMining.Remove(topPlayer);
-                }
-                displayCounter = 0;
-                caller.Reply($"\n[c/0382E9:Top {topFishing.Count} Players with highest Junimo Fishing EXP:]");
-                for (int i = topFishing.Count; i > 0 && displayCounter < DisplayLimit; i--, displayCounter++)
-                {
-                    TopPlayer topPlayer = topFishing.Find(x => x.PlayerExp == topFishing.Max(x => x.PlayerExp));
-                    caller.Reply(topPlayer.PlayerName + "'s Fishing Level: " + topPlayer.PlayerLevel + " Fishing Exp: " + topPlayer.PlayerExp, displayCounter == 0 ? Color.Lavender : displayCounter == 1 ? GlobalPet.highQuality : displayCounter == 2 ? GlobalPet.midQuality : GlobalPet.lowQuality);
-                }
-                displayCounter = 0;
-                caller.Reply($"\n[c/CDFF00:Top {topHarvesting.Count} Players with highest Junimo Harvesting EXP:]");
-                for (int i = topHarvesting.Count; i > 0 && displayCounter < DisplayLimit; i--, displayCounter++)
-                {
-                    TopPlayer topPlayer = topHarvesting.Find(x => x.PlayerExp == topHarvesting.Max(x => x.PlayerExp));
-                    caller.Reply(topPlayer.PlayerName + "'s Harvesting Level: " + topPlayer.PlayerLevel + " Harvesting Exp: " + topPlayer.PlayerExp, displayCounter == 0 ? Color.Lavender : displayCounter == 1 ? GlobalPet.highQuality : displayCounter == 2 ? GlobalPet.midQuality : GlobalPet.lowQuality);
-                    topHarvesting.Remove(topPlayer);
-                }
-            }
             switch (args.Length)
             {
                 case 0:
@@ -125,7 +89,7 @@ namespace PetsOverhaul.Commands
                     "/pet fortune, /pet fortunestat, /pet fortunestats - Displays your current fortune stats and explains their functionality.\n" +
                     "/pet vanity, /pet vanitypet - Explains how to use a 'vanity' Pet.\n" +
                     "/pet junimoscoreboard, /pet junimoleaderboard - Displays Top 3 Online Players with highest exp counts for all 3 skills of Junimo. Only returns your EXP & level values if you're in singleplayer.\n" +
-                    "/pet jumimoscoreboardall, /pet junimoleaderboardall - Everything same as junimoscoreboard, but displays ALL online Players' Junimo stats, listed from top to bottom. Use with caution lol\n" +
+                    "/pet {mining|fishing|harvesting}scoreboard, /pet {mining|fishing|harvesting}leaderboard - Displays limitless amount of Online Players with highest chosen skill's exp counts from Junimo's 3 skills.\n" +
                     "/pet faq, /pet question - Displays frequently asked questions regarding Pets Overhaul.\n", Color.Gray);
                     break;
                 case 1:
@@ -158,20 +122,107 @@ namespace PetsOverhaul.Commands
                             }
                             else
                             {
-                                JuniScoreboard(3);
+                                List<TopPlayer> topMining = new();
+                                List<TopPlayer> topFishing = new();
+                                List<TopPlayer> topHarvesting = new();
+                                foreach (var player in Main.ActivePlayers)
+                                {
+                                    Junimo juni = player.GetModPlayer<Junimo>();
+                                    topMining.Add(new TopPlayer() with { PlayerExp = juni.junimoMiningExp, PlayerLevel = juni.junimoMiningLevel, PlayerName = player.name });
+                                    topFishing.Add(new TopPlayer() with { PlayerExp = juni.junimoFishingExp, PlayerLevel = juni.junimoFishingLevel, PlayerName = player.name });
+                                    topHarvesting.Add(new TopPlayer() with { PlayerExp = juni.junimoHarvestingExp, PlayerLevel = juni.junimoHarvestingLevel, PlayerName = player.name });
+                                }
+                                int displayCounter = 0;
+                                caller.Reply($"\n[c/96A8B0:Top {topMining.Count} Player" + (topMining.Count > 1 ? "s" : "") + " with highest Junimo Mining EXP:]");
+                                for (int i = topMining.Count; i > 0 && displayCounter < 3; i--, displayCounter++)
+                                {
+                                    TopPlayer topPlayer = topMining.Find(x => x.PlayerExp == topMining.Max(x => x.PlayerExp));
+                                    caller.Reply(topPlayer.PlayerName + "'s Mining Level: " + topPlayer.PlayerLevel + " Mining Exp: " + topPlayer.PlayerExp, displayCounter == 0 ? Color.Lavender : displayCounter == 1 ? GlobalPet.highQuality : displayCounter == 2 ? GlobalPet.midQuality : GlobalPet.lowQuality);
+                                    topMining.Remove(topPlayer);
+                                }
+                                displayCounter = 0;
+                                caller.Reply($"\n[c/0382E9:Top {topFishing.Count} Player" + (topFishing.Count > 1 ? "s" : "") + " with highest Junimo Fishing EXP:]");
+                                for (int i = topFishing.Count; i > 0 && displayCounter < 3; i--, displayCounter++)
+                                {
+                                    TopPlayer topPlayer = topFishing.Find(x => x.PlayerExp == topFishing.Max(x => x.PlayerExp));
+                                    caller.Reply(topPlayer.PlayerName + "'s Fishing Level: " + topPlayer.PlayerLevel + " Fishing Exp: " + topPlayer.PlayerExp, displayCounter == 0 ? Color.Lavender : displayCounter == 1 ? GlobalPet.highQuality : displayCounter == 2 ? GlobalPet.midQuality : GlobalPet.lowQuality);
+                                }
+                                displayCounter = 0;
+                                caller.Reply($"\n[c/CDFF00:Top {topHarvesting.Count} Player" + (topHarvesting.Count > 1 ? "s" : "") + " with highest Junimo Harvesting EXP:]");
+                                for (int i = topHarvesting.Count; i > 0 && displayCounter < 3; i--, displayCounter++)
+                                {
+                                    TopPlayer topPlayer = topHarvesting.Find(x => x.PlayerExp == topHarvesting.Max(x => x.PlayerExp));
+                                    caller.Reply(topPlayer.PlayerName + "'s Harvesting Level: " + topPlayer.PlayerLevel + " Harvesting Exp: " + topPlayer.PlayerExp, displayCounter == 0 ? Color.Lavender : displayCounter == 1 ? GlobalPet.highQuality : displayCounter == 2 ? GlobalPet.midQuality : GlobalPet.lowQuality);
+                                    topHarvesting.Remove(topPlayer);
+                                }
                             }
                             break;
-                        case "junimoscoreboardall" or "junimoleaderboardall":
+                        case "miningscoreboard" or "miningleaderboard":
                             if (Main.netMode == NetmodeID.SinglePlayer)
                             {
-                                Junimo junimoLvls = caller.Player.GetModPlayer<Junimo>();
-                                caller.Reply($"[c/96A8B0:Your Junimo Mining Level: {junimoLvls.junimoMiningLevel} Your Junimo Mining EXP: {junimoLvls.junimoMiningExp}]");
-                                caller.Reply($"[c/0382E9:Your Junimo Fishing Level: {junimoLvls.junimoFishingLevel} Your Junimo Fishing EXP: {junimoLvls.junimoFishingExp}]");
-                                caller.Reply($"[c/CDFF00:Your Junimo Harvesting Level: {junimoLvls.junimoHarvestingLevel} Your Junimo Harvesting EXP: {junimoLvls.junimoHarvestingExp}]");
+                                caller.Reply("Please use this command on Multiplayer! If you want to see your Junimo Skills, use /pet junimoscoreboard or /pet junimoleaderboard");
                             }
                             else
                             {
-                                JuniScoreboard(Main.maxPlayers);
+                                List<TopPlayer> topMining = new();
+                                foreach (var player in Main.ActivePlayers)
+                                {
+                                    Junimo juni = player.GetModPlayer<Junimo>();
+                                    topMining.Add(new TopPlayer() with { PlayerExp = juni.junimoMiningExp, PlayerLevel = juni.junimoMiningLevel, PlayerName = player.name });
+                                }
+                                int displayCounter = 0;
+                                caller.Reply($"\n[c/96A8B0:Top {topMining.Count} Player" + (topMining.Count > 1 ? "s" : "") + " with highest Junimo Mining EXP:]");
+                                for (int i = topMining.Count; i > 0 && displayCounter < Main.maxPlayers; i--, displayCounter++)
+                                {
+                                    TopPlayer topPlayer = topMining.Find(x => x.PlayerExp == topMining.Max(x => x.PlayerExp));
+                                    caller.Reply(topPlayer.PlayerName + "'s Mining Level: " + topPlayer.PlayerLevel + " Mining Exp: " + topPlayer.PlayerExp, displayCounter == 0 ? Color.Lavender : displayCounter == 1 ? GlobalPet.highQuality : displayCounter == 2 ? GlobalPet.midQuality : GlobalPet.lowQuality);
+                                    topMining.Remove(topPlayer);
+                                }
+                            }
+                            break;
+                        case "fishingscoreboard" or "fishingleaderboard":
+                            if (Main.netMode == NetmodeID.SinglePlayer)
+                            {
+                                caller.Reply("Please use this command on Multiplayer! If you want to see your Junimo Skills, use /pet junimoscoreboard or /pet junimoleaderboard");
+                            }
+                            else
+                            {
+                                List<TopPlayer> topFishing = new();
+                                foreach (var player in Main.ActivePlayers)
+                                {
+                                    Junimo juni = player.GetModPlayer<Junimo>();
+                                    topFishing.Add(new TopPlayer() with { PlayerExp = juni.junimoFishingExp, PlayerLevel = juni.junimoFishingLevel, PlayerName = player.name });
+                                }
+                                int displayCounter = 0;
+                                caller.Reply($"\n[c/0382E9:Top {topFishing.Count} Player" + (topFishing.Count > 1 ? "s" : "") + " with highest Junimo Fishing EXP:]");
+                                for (int i = topFishing.Count; i > 0 && displayCounter < Main.maxPlayers; i--, displayCounter++)
+                                {
+                                    TopPlayer topPlayer = topFishing.Find(x => x.PlayerExp == topFishing.Max(x => x.PlayerExp));
+                                    caller.Reply(topPlayer.PlayerName + "'s Fishing Level: " + topPlayer.PlayerLevel + " Fishing Exp: " + topPlayer.PlayerExp, displayCounter == 0 ? Color.Lavender : displayCounter == 1 ? GlobalPet.highQuality : displayCounter == 2 ? GlobalPet.midQuality : GlobalPet.lowQuality);
+                                }
+                            }
+                            break;
+                        case "harvestingscoreboard" or "harvestingleaderboard":
+                            if (Main.netMode == NetmodeID.SinglePlayer)
+                            {
+                                caller.Reply("Please use this command on Multiplayer! If you want to see your Junimo Skills, use /pet junimoscoreboard or /pet junimoleaderboard");
+                            }
+                            else
+                            {
+                                List<TopPlayer> topHarvesting = new();
+                                foreach (var player in Main.ActivePlayers)
+                                {
+                                    Junimo juni = player.GetModPlayer<Junimo>();
+                                    topHarvesting.Add(new TopPlayer() with { PlayerExp = juni.junimoHarvestingExp, PlayerLevel = juni.junimoHarvestingLevel, PlayerName = player.name });
+                                }
+                                int displayCounter = 0;
+                                caller.Reply($"\n[c/CDFF00:Top {topHarvesting.Count} Player" + (topHarvesting.Count > 1 ? "s" : "") + " with highest Junimo Harvesting EXP:]");
+                                for (int i = topHarvesting.Count; i > 0 && displayCounter < Main.maxPlayers; i--, displayCounter++)
+                                {
+                                    TopPlayer topPlayer = topHarvesting.Find(x => x.PlayerExp == topHarvesting.Max(x => x.PlayerExp));
+                                    caller.Reply(topPlayer.PlayerName + "'s Harvesting Level: " + topPlayer.PlayerLevel + " Harvesting Exp: " + topPlayer.PlayerExp, displayCounter == 0 ? Color.Lavender : displayCounter == 1 ? GlobalPet.highQuality : displayCounter == 2 ? GlobalPet.midQuality : GlobalPet.lowQuality);
+                                    topHarvesting.Remove(topPlayer);
+                                }
                             }
                             break;
                         case "faq" or "question":
@@ -191,7 +242,7 @@ namespace PetsOverhaul.Commands
                             caller.Reply("/pet fortune, /pet fortunestat, /pet fortunestats - Displays your current fortune stats and explains their functionality.\n" +
                     "/pet vanity, /pet vanitypet - Explains how to use a 'vanity' Pet.\n" +
                     "/pet junimoscoreboard, /pet junimoleaderboard - Displays Top 3 Online Players with highest exp counts for all 3 skills of Junimo. Only returns your EXP & level values if you're in singleplayer.\n" +
-                    "/pet jumimoscoreboardall, /pet junimoleaderboardall - Everything same as junimoscoreboard, but displays ALL online Players' Junimo stats, listed from top to bottom. Use with caution lol\n" +
+                    "/pet {mining|fishing|harvesting}scoreboard, /pet {mining|fishing|harvesting}leaderboard - Displays limitless amount of Online Players with highest chosen skill's exp counts from Junimo's 3 skills.\n" +
                     "/pet faq, /pet question - Displays frequently asked questions regarding Pets Overhaul.\n", Color.Gray);
                             break;
 
@@ -202,7 +253,7 @@ namespace PetsOverhaul.Commands
                     caller.Reply("/pet fortune, /pet fortunestat, /pet fortunestats - Displays your current fortune stats and explains their functionality.\n" +
                     "/pet vanity, /pet vanitypet - Explains how to use a 'vanity' Pet.\n" +
                     "/pet junimoscoreboard, /pet junimoleaderboard - Displays Top 3 Online Players with highest exp counts for all 3 skills of Junimo. Only returns your EXP & level values if you're in singleplayer.\n" +
-                    "/pet jumimoscoreboardall, /pet junimoleaderboardall - Everything same as junimoscoreboard, but displays ALL online Players' Junimo stats, listed from top to bottom. Use with caution lol\n" +
+                    "/pet {mining|fishing|harvesting}scoreboard, /pet {mining|fishing|harvesting}leaderboard - Displays limitless amount of Online Players with highest chosen skill's exp counts from Junimo's 3 skills.\n" +
                     "/pet faq, /pet question - Displays frequently asked questions regarding Pets Overhaul.\n", Color.Gray);
                     break;
             }
