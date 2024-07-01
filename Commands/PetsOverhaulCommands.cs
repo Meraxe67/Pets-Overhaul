@@ -183,7 +183,7 @@ namespace PetsOverhaul.Commands
                                 "\nA: Refer to Wikis to figure how to obtain a certain Pet, vanilla Wiki can be a good helper with this." +
                                 "\nQ: Why am I randomly getting fishes, crates etc. in my inventory?" +
                                 "\nA: 99% due to your autofishing mod catching fishes procs your Fishing Fortune. (refer to /pet fortune for more info)" +
-                                "\nQ: Why is my Pet effects not working?" +
+                                "\nQ: Why is my Pet effects not working? & How do Pet Effects become activated?" +
                                 "\nA: Make sure the Pet effects you want to take in place are in the Pet slot, which locates in 'Equipment' section, on top of your Helmet slot.");
                             break;
                         default:
