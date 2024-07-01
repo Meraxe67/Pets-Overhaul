@@ -56,7 +56,7 @@ namespace PetsOverhaul.Systems
         public int petSwapCooldown = 600;
         internal int previousPetItem = 0;
         /// <summary>
-        /// This field ticks down every frame in PreUpdate() hook. Does not go below -1. Plays 'cooldown refreshment' sound effect upon reaching 0 amd displays Timer while higher than 0. Usually is recommended to use Mod's timer mechanic for timers that the Player should be aware of.
+        /// This field ticks down every frame in PreUpdate() hook. Does not go below -1. Plays 'cooldown refreshment' sound effect upon reaching 0 and displays Timer while higher than 0. Usually is recommended to use Mod's timer mechanic for timers that the Player should be aware of.
         /// </summary>
         public int timer = -1;
         /// <summary>
@@ -455,6 +455,7 @@ namespace PetsOverhaul.Systems
         }
         public override void PreUpdate()
         {
+
             if (Main.mouseItem.TryGetGlobalItem(out ItemPet item) && item.pickedUpBefore == false) //Player's hand slot is not being reckognized as 'inventory' in UpdateInventory() of GlobalItem, so manually updating the Hand slot
             {
                 item.pickedUpBefore = true;
@@ -568,11 +569,13 @@ namespace PetsOverhaul.Systems
         {
             if (Player.miscEquips[0].type == ItemID.None)
             {
+                timerMax = 0;
                 return;
             }
 
             if (previousPetItem != Player.miscEquips[0].type)
             {
+                timerMax = 0;
                 if (ModContent.GetInstance<Personalization>().SwapCooldown == false)
                 {
                     Player.AddBuff(ModContent.BuffType<ObliviousPet>(), petSwapCooldown);

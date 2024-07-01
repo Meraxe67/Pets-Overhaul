@@ -33,7 +33,7 @@ namespace PetsOverhaul.UI
                     ShieldSetting == "Next to the Healthbar, Icon on the left" ? new Vector2(Main.screenWidth * 0.81f, Main.screenHeight * 0.03f) :
                     new Vector2(Main.screenWidth * 0.81f - 30, Main.screenHeight * 0.03f);
                 spriteBatch.Draw((Texture2D)ModContent.Request<Texture2D>("PetsOverhaul/UI/PetShield"), ShieldLoc, color);
-                spriteBatch.DrawString(FontAssets.MouseText.Value, CurrentShieldVal.ToString(), new Vector2(ValueLoc.X -2,ValueLoc.Y), Color.Black);
+                spriteBatch.DrawString(FontAssets.MouseText.Value, CurrentShieldVal.ToString(), new Vector2(ValueLoc.X +2,ValueLoc.Y), Color.Black);
                 spriteBatch.DrawString(FontAssets.MouseText.Value, CurrentShieldVal.ToString(), ValueLoc, color);
             }
         }
