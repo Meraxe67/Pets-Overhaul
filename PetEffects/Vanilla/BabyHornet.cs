@@ -35,6 +35,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
         {
             if (Pet.PetInUseWithSwapCd(ItemID.Nectar))
             {
+
                 Player.buffImmune[BuffID.Poisoned] = false;
                 Player.buffImmune[BuffID.Venom] = false;
             }

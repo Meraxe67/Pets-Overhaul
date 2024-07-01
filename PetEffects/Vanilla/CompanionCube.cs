@@ -44,8 +44,6 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public override void GetHealMana(Item item, bool quickHeal, ref int healValue)
         {
-
-
             if (Pet.PetInUseWithSwapCd(ItemID.CompanionCube) && Player.manaSick)
             {
                 if (Player.manaSickReduction > Player.manaSickLessDmg)
@@ -60,7 +58,6 @@ namespace PetsOverhaul.PetEffects.Vanilla
         }
         public override void OnConsumeMana(Item item, int manaConsumed)
         {
-
             if (Pet.PetInUseWithSwapCd(ItemID.CompanionCube))
             {
                 Pet.Lifesteal(manaConsumed, manaToHealth, respectLifeStealCap: false);

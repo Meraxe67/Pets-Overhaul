@@ -12,17 +12,19 @@ namespace PetsOverhaul.PetEffects.Vanilla
 {
     public sealed class Bernie : ModPlayer
     {
-        public int bernieRange = 3200;
+        public int bernieRange = 2400;
         private int timer = 0;
         public int burnDrain = 6;
         public int maxBurning = 5;
+        public int manaDrain = 4; 
+        public int healthDrain = 3;
         public int EnemiesBurning { get; internal set; }
         public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.BerniePetItem))
             {
-                timer++;
+                timer++; //this is separate from normal Pet timers
             }
         }
         public override void PostUpdateEquips()
@@ -75,8 +77,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
                         EnemiesBurning = 5;
                     }
 
-                    Pet.Lifesteal(burnDrain * 2 * EnemiesBurning, 0.005f * (Pet.abilityHaste + 1f), respectLifeStealCap: false);
-                    Pet.Lifesteal(burnDrain * 4 * EnemiesBurning, 0.005f * (Pet.abilityHaste + 1f), respectLifeStealCap: false, manaSteal: true);
+                    Pet.Lifesteal(burnDrain * healthDrain * EnemiesBurning, 0.005f * (Pet.abilityHaste + 1f), respectLifeStealCap: false);
+                    Pet.Lifesteal(burnDrain * manaDrain * EnemiesBurning, 0.005f * (Pet.abilityHaste + 1f), respectLifeStealCap: false, manaSteal: true);
                     timer = 0;
                 }
             }
@@ -99,8 +101,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
             Bernie bernie = Main.LocalPlayer.GetModPlayer<Bernie>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BerniePetItem")
                 .Replace("<burnRange>", Math.Round(bernie.bernieRange / 16f, 2).ToString())
-                .Replace("<burnDrainMana>", Math.Round(bernie.burnDrain * 4 * 0.05f, 2).ToString())
-                .Replace("<burnDrainHealth>", Math.Round(bernie.burnDrain * 2 * 0.05f, 2).ToString())
+                .Replace("<burnDrainMana>", Math.Round(bernie.burnDrain * bernie.manaDrain * 0.05f, 2).ToString())
+                .Replace("<burnDrainHealth>", Math.Round(bernie.burnDrain * bernie.healthDrain * 0.05f, 2).ToString())
                 .Replace("<maxDrain>", bernie.maxBurning.ToString())
             ));
         }

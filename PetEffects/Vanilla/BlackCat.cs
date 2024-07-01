@@ -13,8 +13,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
     {
         public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public float luckFlat = 0.12f;
-        public float luckMoonLowest = 0.03f;
-        public float luckMoonLow = 0.01f;
+        public float luckMoonLowest = -0.03f;
+        public float luckMoonLow = -0.01f;
         public float luckMoonMid = 0.01f;
         public float luckMoonHigh = 0.03f;
         public float luckMoonHighest = 0.05f;
@@ -28,10 +28,10 @@ namespace PetsOverhaul.PetEffects.Vanilla
                     switch (Main.moonPhase)
                     {
                         case 0:
-                            luck -= luckMoonLowest;
+                            luck += luckMoonLowest;
                             break;
                         case 1:
-                            luck -= luckMoonLow;
+                            luck += luckMoonLow;
                             break;
                         case 2:
                             luck += luckMoonMid;
@@ -49,7 +49,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                             luck += luckMoonMid;
                             break;
                         case 7:
-                            luck -= luckMoonLow;
+                            luck += luckMoonLow;
                             break;
                         default:
                             break;

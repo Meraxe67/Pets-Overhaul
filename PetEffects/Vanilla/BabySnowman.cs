@@ -15,7 +15,8 @@ namespace PetsOverhaul.PetEffects.Vanilla
         public int frostburnTime = 300;
         public float snowmanSlow = 0.2f;
         public int slowTime = 180;
-        public int FrostArmorMult => Player.armor[0].type == ItemID.FrostHelmet && Player.armor[1].type == ItemID.FrostBreastplate && Player.armor[2].type == ItemID.FrostLeggings ? 3 : 1;
+        public int frostMult = 5;
+        public int FrostArmorMult => Player.armor[0].type == ItemID.FrostHelmet && Player.armor[1].type == ItemID.FrostBreastplate && Player.armor[2].type == ItemID.FrostLeggings ? frostMult : 1;
 
         public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -47,6 +48,7 @@ namespace PetsOverhaul.PetEffects.Vanilla
                 .Replace("<frostburnTime>", Math.Round(babySnowman.frostburnTime / 60f * babySnowman.FrostArmorMult, 2).ToString())
                 .Replace("<slowAmount>", Math.Round(babySnowman.snowmanSlow * 100 * babySnowman.FrostArmorMult, 2).ToString())
                 .Replace("<slowTime>", Math.Round(babySnowman.slowTime / 60f * babySnowman.FrostArmorMult, 2).ToString())
+                .Replace("<frostMult>", babySnowman.frostMult.ToString())
             ));
         }
     }
