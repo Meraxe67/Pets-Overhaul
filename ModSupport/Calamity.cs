@@ -6,50 +6,34 @@ using Terraria.ModLoader;
 
 namespace PetsOverhaul.ModSupport
 {
-    public class ThoriumSupport
+    public class CalamitySupport
     {
-        public string InternalModName = "ThoriumMod";
+        public string InternalModName = "CalamityMod";
         public string[] InternalModdedItemNames = new string[]
         {
-            "AbyssalWhistle", // Abyssal Bunny
-            "AlienResearchNotes", // Research Probe
-            "AncientCheeseBlock",// Ancient Rat
-            "AncientDrachma", // Curious Coinling
-            "AromaticBiscuit", // Skunk
-            "BalloonBall", // Tanuki Girl
-            "BioPod", // Bio-Feeder
-            "BlisterSack", // Flying Blister
-            "BloodSausage", // Lazy Bat
-            "ChaoticMarble", // Chaotic Pet
-            "CloudyChewToy", // Wyvern Pup
-            "DelectableNut", // Lil' Mog
-            "DiverPlushie", // Princess Jellyfish
-            "DoomSayersPenny", // Mini Primordials
-            "EnergizedQuadCube", // Energized Quad-Cube
-            "ExoticMynaEgg", // Exotic Myna
-            "Experiment3", // Experiment #3
-            "FishEgg", // Clownfish
-            "ForgottenLetter", // Lost Snowy Owl
-            "FragmentedRune", // Ferret
-            "FreshPickle", // Normal Dog
-            "FrozenBalloon", // Frozen Balloon
-            "GlassShard", // Glass Shard
-            "GreenFirefly", // Amnesiac
-            "GuildsStaff", // Lil' Necromancer
-            "ModelGun", // Lyrist
-            "MoleCrate", // Skull Cat
-            "PearTreeSapling", // Partridge
-            "PinkSlimeEgg", // Pink Slime
-            "PurifiersRing", // Purifier's Ring
-            "RottenMeat", // Fly
-            "SimpleBroom", // Lil' Maid
-            "StormCloud", // Storm Cloud
-            "SubterraneanBulb", // Subterranean Angler
-            "SuspiciousMoisturizerBottle", // Living Hand
-            "SweetBeet", // Beet Cookie
-            "SwordOfDestiny", // Sword Of Destiny
-            "TortleScute", // Tortle Sage
-            "WhisperingShell", // Creature
+            "ForgottenDragonEgg", //Akato
+            "AstrophageItem", //Astrophage
+            "BearsEye", //Bear
+            "CharredRelic", //Brimling
+            "CosmicPlushie", //Chibii Devourer
+            "DaawnlightSpiritOrigin", //Daawnlight
+            "TrashmanTrashcan", //DannyDevito
+            "TheEtomer", //ElectricTroublemaker
+            "AbyssShellFossil", //EscargidolonSnail
+            "GeyserShell", //FlakHermit
+            "FoxDrive", //FoxPet
+            "PrimroseKeepsake", //FurtasticDuo
+            "RomajedaOrchid", //Kendra
+            "JoyfulHeart", //LadShark
+            "Levi", //Levi
+            "RottingEyeball", //MiniHiveMind
+            "BloodyVein", //MiniPerforator
+            "Pineapple", //Pineapple
+            "PlagueCaller", //PlaguebringerBab
+            "McNuggets", //SonOfYharon
+            "BrimstoneJewel", //SupremeCalamitas
+            "HermitsBoxofOneHundredMedicines", //ThirdSage
+            "HowlsHeart", //TurnipHead
         };
         //If these arent defined, they will be skipped
 
@@ -57,12 +41,12 @@ namespace PetsOverhaul.ModSupport
         public List<(int, int[])> FishingXpPerModdedFish;
         public List<(int, int[])> FishingXpPerModdedKill;
         public List<(int, int[])> HarvestingXpPerModdedPlant;
-        public Mod ThoriumInstance;
+        public Mod CalamityInstance;
         public Dictionary<string, int> InternalNameToModdedItemId = new Dictionary<string, int> { };
         public Dictionary<string, ModItem> InternalNameToModdedItemInstance = new Dictionary<string, ModItem> { };
         public void InitializeMod()
         {
-            if (!ModLoader.TryGetMod(InternalModName, out ThoriumInstance))
+            if (!ModLoader.TryGetMod(InternalModName, out CalamityInstance))
             {
                 return;
             }
@@ -80,9 +64,9 @@ namespace PetsOverhaul.ModSupport
 
             foreach (string internalName in InternalModdedItemNames)
             {
-                ThoriumInstance.TryFind(internalName, out ModItem item);
-                if (item == null)
-                    continue;
+                CalamityInstance.TryFind(internalName, out ModItem item);
+                if (item == null) 
+                   continue;
                 //Console.WriteLine($"IN: {internalName}\n Type: {item.Type}"); //debug
                 PetRegistry.PetNamesAndItems.TryAdd(internalName, item.Type);
                 InternalNameToModdedItemId.TryAdd(internalName, item.Type);
@@ -114,7 +98,7 @@ namespace PetsOverhaul.ModSupport
 
         public bool IsModLoaded()
         {
-            return ThoriumInstance != null;
+            return CalamityInstance != null;
         }
         public bool GetModInstance(out Mod instance)
         {
@@ -123,7 +107,7 @@ namespace PetsOverhaul.ModSupport
                 instance = null;
                 return false;
             }
-            instance = ThoriumInstance;
+            instance = CalamityInstance;
             return true;
         }
 

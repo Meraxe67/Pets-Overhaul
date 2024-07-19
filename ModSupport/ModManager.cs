@@ -2,12 +2,12 @@ namespace PetsOverhaul.ModSupport
 {
     public static class ModManager
     {
-        //public static CalamitySupport Calamity;
+        public static CalamitySupport CalamityMod;
         public static ThoriumSupport ThoriumMod;
         public static void LoadMods()
         {
-            //Calamity = new CalamitySupport();
-            //Calamity.InitializeMod();
+            CalamityMod = new CalamitySupport();
+            CalamityMod.InitializeMod();
             ThoriumMod = new ThoriumSupport();
             ThoriumMod.InitializeMod();
         }
