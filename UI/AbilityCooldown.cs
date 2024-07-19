@@ -20,7 +20,7 @@ namespace PetsOverhaul.UI
         int BaseCooldown => Main.LocalPlayer.GetModPlayer<GlobalPet>().timerMax;
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (ModContent.GetInstance<Personalization>().AbilityDisplay == false || BaseCooldown > 0)
+            if (Main.playerInventory == false && (ModContent.GetInstance<Personalization>().AbilityDisplay == false || BaseCooldown > 0))
             {
                 if (ModContent.GetInstance<Personalization>().AbilityDisplayInfo == false)
                 {
