@@ -52,6 +52,7 @@ namespace PetsOverhaul.PetEffects
 
             DynamiteKitten dynamiteKitten = Main.LocalPlayer.GetModPlayer<DynamiteKitten>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BallOfFuseWire")
+                .Replace("<class>", PetColors.ClassText(dynamiteKitten.PetClassPrimary, dynamiteKitten.PetClassSecondary))
                         .Replace("<kb>", dynamiteKitten.kbMult.ToString())
                         .Replace("<dmg>", dynamiteKitten.damageMult.ToString())
                         .Replace("<armorPen>", dynamiteKitten.armorPen.ToString())

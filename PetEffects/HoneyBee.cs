@@ -54,7 +54,7 @@ namespace PetsOverhaul.PetEffects
                     player.statLife += healAmount;
                 }
                 player.AddBuff(BuffID.Honey, (isBottledHoney ? healer.bottledHoneyBuff : healer.honeyfinHoneyBuff) / 2);
-                player.AddBuff(ModContent.BuffType<HoneyOverdose>(), (int)(healer.honeyOverdoseTime * (1 / (1 + healer.abilityHaste))));
+                player.AddBuff(ModContent.BuffType<HoneyOverdose>(),healer.honeyOverdoseTime);
                 player.GetModPlayer<HoneyBee>().currentAbilityHasteBonus = healer.abilityHaste;
             }
             else

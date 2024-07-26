@@ -1,18 +1,17 @@
 Mods: {
 	PetsOverhaul: {
-		// Operators are for cases where a Language does not use them when specifying a bonus but solely uses words. Put "" instead if need them to be empty.
+		// Operators are for cases where a Language does not use them when specifying a bonus but solely uses words. Put "" instead if you need them to be empty.
 		%: %
 		x: x
 		+: +
 		-: -
 		KeybindMissing: Keybind Not Registered
-		JojaCola: A nature related NPC may be able to Purify this
+		JojaCola: A nature-related NPC may be able to Purify this
 		Notice:
 			'''
-			[c/90C2AA:Pets Overhaul 2.3.12 latest changes: Added Commands and Junimo EXP Leaderboard for competitiveness among your friends!]
-			[c/90C2AA:Use /pet to explore the new commands! Help regarding fortune stats, junimo leaderboard for top players for all 3 classes & more!]
-			[c/90C2AA:Added a Pet Ability Cooldown display, now you can tell when you'll re-use your Pet's ability more precisely! (can disable in config)]
-			[c/b4bfc5:If you happen to come across any bugs, join our Discord server!]
+			[c/90C2AA:Pets Overhaul 2.3.13 latest changes: Lots of Backend changes & Improved code quality]
+			[c/90C2AA:Please report if anything is unusual to you with the last update!]
+			[c/b4bfc5:If you encounter any bugs, join our Discord server!]
 			[c/b4bfc5:All feedback is very much appreciated. discord.gg/KubSpqvDGE]
 			[c/b4bfc5:Use] [c/ff8234:/pet] [c/b4bfc5:to see commands for Pets Overhaul, providing you more info!]
 			'''
@@ -28,8 +27,8 @@ Mods: {
 			TooltipShiftToggleLabel: Enable Pet/Item tooltips to be toggleable
 			TooltipShiftToggleTooltip:
 				'''
-				Enables all added Pet and Item tooltips to be only visible while
-				your set Keybind is held. (You need to manually assign a Keybind)
+				Enables all added Pet and Item tooltips to be visible only while
+				your set Keybind is held. (You need to manually assign a keybinding)
 				'''
 			TooltipShiftToggleInGame: Hold the <keybind> button to view the Pet tooltip
 			HurtSoundLabel: Disable custom hurt sounds
@@ -73,7 +72,7 @@ Mods: {
 			SwapCooldownTooltip:
 				'''
 				Disables Player gaining Oblivious Pet Debuff upon swapping a Pet.
-				Which prevents any Combat-related perks to be active during the time.
+				Which prevents any Combat-related perks from being active during the time.
 				(not recommended due to obvious balance reasons)
 				'''
 			ShieldLocationLabel: Pet Shield Location
@@ -85,14 +84,14 @@ Mods: {
 			DisableAbilityCooldownLabel: Disable Ability Cooldown Display If Unused
 			DisableAbilityCooldownTooltip:
 				'''
-				Makes Ability Cooldown display on right bottom corner of the screen invisible
-				if current Pet does not have an ability that uses Pet Ability Timer.
+				Makes the Ability Cooldown display on the right bottom corner of the screen invisible
+				if the current Pet does not have an ability that uses the Pet Ability Timer.
 				'''
 			AbilityDisplayInfoLabel: Disable Base Ability Cooldown Display
 			AbilityDisplayInfoTooltip:
 				'''
-				Makes Ability Cooldown display on right bottom corner of the screen
-				not include the Base Cooldown of current Pet's ability timer.
+				Makes Ability Cooldown display on the right bottom corner of the screen
+				not include the Base Cooldown of the current Pet's ability timer.
 				'''
 		}
 
@@ -128,7 +127,7 @@ Mods: {
 				'''
 				Grants <hasteBase> + <hastePer>% Ability Haste per quality which increases
 				how frequently you can use your current Pet's ability and increases 
-				<fortBase> + <fortPer> Global Fortune per quality, increasing all Mining, Harvesting and Fishing drops.
+				<fortBase> + <fortPer> Global Fortune per quality, increasing all Mining, Harvesting, and Fishing drops.
 				which works with 50% effectiveness with already classified Pets.
 				Ability Haste Bonus: <currentHaste> Quality <hasteRoll> out of <hasteMaxRoll>
 				Global Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
@@ -211,9 +210,9 @@ Mods: {
 				'''
 				<class>
 				- Grants <moveSpd>% movement speed and <jumpSpd>% jump speed.
-				- Allows you to be able to auto jump.
+				- Allows you to be able to auto-jump.
 				- Increases fall damage resistance by <fallRes> blocks if:
-				 * You're in a Evil biome.
+				 * You're in an Evil biome.
 				'''
 			BoneRattle:
 				'''
@@ -222,7 +221,7 @@ Mods: {
 				- Upon timer reaching <stage1Time> seconds, increases health regen by <stage1Regen>.
 				- Upon timer reaching <stage2Time> seconds, the regen is increased to <stage2Regen>.
 				 * Gain a <shieldAmount>% health one-hit shield when timer hits <stage2Time> seconds.
-				- Taking damage always resets timer to 0, but dealing damage only does if:
+				- Taking damage always resets the timer to 0, but dealing damage only does if:
 				 * You've passed the <stage1Time>-second mark, then it resets back to <stage1Time> seconds.
 				'''
 			BabyGrinchMischiefWhistle:
@@ -243,13 +242,13 @@ Mods: {
 				- Increases max minions by <maxMinion> and movement speed by <moveSpd>%.
 				- All hits have a <regularChance>% chance (<summonChance>% for Summon hits) to summon
 				a friendly bee with <beeDmg> base damage and <beeKb> knockback.
-				 * Hive Pack [i:3333] gives a 33% chance to summon a Strong Bee instead of regular.
+				 * Hive Pack [i:3333] gives a 33% chance to summon a Strong Bee instead of a regular.
 				'''
 			HellCake:
 				'''
 				<class>
 				- Grants Lava immunity for <immuneTime> seconds.
-				- While in lava, gain following:
+				- While in lava, gain the following:
 				 * Flipper [i:187] effect.
 				 * <lavaDef> defense.
 				 * <lavaSpd>% movement speed.
@@ -258,7 +257,7 @@ Mods: {
 			Fish:
 				'''
 				<class>
-				- Grants <fp> fishing power. This increases depending on current biome:
+				- Grants <fp> fishing power. This increases depending on the current biome:
 				 * While in the Ocean biome, increases to <oceanFp>.
 				 * While in the Snow biome, increases to <snowFp>.
 				- Increases all caught Frost Minnows [i:2306] and Atlantic Cods [i:2299] by <catchChance>%.
@@ -276,7 +275,7 @@ Mods: {
 			BoneKey:
 				'''
 				<class>
-				- Complete immunity to whole pre-hardmode Dungeon.
+				- Complete immunity to the whole pre-hardmode Dungeon.
 				- Gain <armorPen> armor penetration.
 				 * Increased by another <dungArmorPen> while in Dungeon.
 				- Gain <dungRegen> life regen while in Dungeon.
@@ -307,7 +306,7 @@ Mods: {
 				<class>
 				- Multiplies your Crit chance by <critMult>x.
 				- Reduces your Crit damage by <crDmgReduction>%.
-				- Critical hits applies Mauled debuff.
+				- Critical hits apply the Mauled debuff.
 				 * Mauled increases damage taken from all sources by <stackDmg>% per stack.
 				 * Mauled stacks up to <maxStacks> times.
 				- While attacking an enemy with Mauled, gain <stackCritDmg>% more crit damage per stack.
@@ -326,7 +325,7 @@ Mods: {
 				'''
 				<class>
 				- Increases luck by <flatLuck>.
-				- Grants luck depending on current moon cycle.
+				- Grants luck depending on the current moon cycle.
 				 * Minimum being -<minimumMoon> while its Full Moon and
 				maximum being +<maximumMoon> while its New Moon.
 				 * Only works while its Night
@@ -414,7 +413,7 @@ Mods: {
 			ExoticEasternChewToy:
 				'''
 				<class>
-				- While holding a Melee weapon grants following:
+				- While holding a Melee weapon grants the following:
 				 * Increases melee speed by <meleeSpd>%.
 				 * Increases movement speed by <moveSpd>%.
 				- Multiplies melee size by <sizeNerf>x.
@@ -455,17 +454,17 @@ Mods: {
 			JunimoPetItem:
 				'''
 				<class>
-				- Allows you to gain EXP for each respective class, further improving perks of this Pet.
-				- Gathering; Harvesting, Mining and Fishing items gives you money depending on items exp value.
-				- Levels are currently maxed at <maxLvl>.
+				- Allows you to gain EXP for each respective class, further improving the perks of this Pet.
+				- Gathering; Harvesting, Mining, and Fishing items gives you money depending on the item's exp value.
+				- Levels are maxed at <maxLvl>.
 				[c/CDFF00:Harvesting]
-				Current level: [c/CDFF00:<harvestLevel>] Experience needed for next level: [c/CDFF00:<harvestNext>] Current total experience: [c/CDFF00:<harvestCurrent>]
+				Current level: <harvestLevel> Experience needed for next level: <harvestNext> Current total experience: [c/CDFF00:<harvestCurrent>]
 				- Gain <harvestingProfit> times exp value of items as copper coins and gain <flatHealth> maximum health.
 				[c/96A8B0:Mining]
-				Current level: [c/96A8B0:<miningLevel>] Experience needed for next level: [c/96A8B0:<miningNext>] Current total experience: [c/96A8B0:<miningCurrent>]
+				Current level: <miningLevel> Experience needed for next level: <miningNext> Current total experience: [c/96A8B0:<miningCurrent>]
 				- Gain <miningProfit> times exp value of items as copper coins and gain <bonusReduction>% damage reduction.
 				[c/0382E9:Fishing]
-				Current level: [c/0382E9:<fishingLevel>] Experience needed for next level: [c/0382E9:<fishingNext>] Current total experience: [c/0382E9:<fishingCurrent>]
+				Current level: <fishingLevel> Experience needed for next level: <fishingNext> Current total experience: [c/0382E9:<fishingCurrent>]
 				- Gain <fishingProfit> times exp value of items as copper coins and gain <bonusDamage>% damage boost.
 				'''
 			BirdieRattle:
@@ -475,7 +474,7 @@ Mods: {
 				- Gives you a Harpy Wing with <flightTime> seconds of wing time.
 				 * Landing does not refresh your wing time.
 				 * You cannot glide with these wings.
-				 * You regain the wing time after cooldown of <cooldown> seconds is refreshed.
+				 * You regain the wing time after the cooldown of <cooldown> seconds is refreshed.
 				 * Refreshment cooldown begins the moment you start flying.
 				'''
 			LizardEgg:
@@ -497,7 +496,7 @@ Mods: {
 				 * 2 for true melee hits, 1 for melee projectile hits.
 				 * Gaining stacks have a <cooldown> second cooldown.
 				 * Up to a maximum of <maxStack> stacks.
-				 * Lose 4 stacks a second if you haven't gained stacks in a 10-second period.
+				 * Lose 4 stacks a second if you haven't gained stacks in 10 seconds.
 				 * Gain <meleeSpd>% melee speed per stack, max <maxMeleeSpd>%.
 				 * Lose <moveSpd>% movement speed per stack, max -<maxSpd>%.
 				 * Gain <dmg>% melee damage per stack, max <maxDmg>%.
@@ -508,7 +507,7 @@ Mods: {
 				<class>
 				- All projectiles by you or your Minions/Sentries have a <projChance>% chance
 				to be re-shot as a new projectile by your Parrot.
-				 * Properties of the projectile are same except with <projDamage>x of the damage. 
+				 * Properties of the projectile are the same except with <projDamage>x of the damage. 
 				- All non-Projectile Melee and close combat Minion/Sentry hits have a 
 				<meleeChance>% chance to hit again with <meleeDamage>x of the damage.
 				'''
@@ -517,7 +516,7 @@ Mods: {
 				<class>
 				- Eating a food has a <foodChance>% chance to not get consumed.
 				 * Reduced to <potionChance>% for potions.
-				- Eating foods gives you a shield that scales with stage of Well Fed.
+				- Eating foods gives you a shield that scales with the stage of Well Fed.
 				 * <shield1>/<shield2>/<shield3> shield respectively for every Well Fed stage.
 				 * Shield persists for <shieldTime> seconds.
 				 * This has a <cooldown> seconds cooldown.
@@ -526,7 +525,7 @@ Mods: {
 				'''
 				<class>
 				- Damaging enemies have a <chance>% chance of causing damaging spores to appear.
-				 * Spores location is somewhere near the enemy randomly and travel slightly.
+				 * Spores location is somewhere near the enemy randomly and travels slightly.
 				 * Spores deal <dmg>x of the initial damage that spawned them + <flatDmg>.
 				 * Spores have a <kb> knockback.
 				'''
@@ -573,7 +572,7 @@ Mods: {
 				- Increases boss enemy loot coin drops by <bossCoin>% and item drops by <bossItem>%.
 				 * Boss bags are unaffected by item drop boost.
 				- Increases bag opening loot coin drops by <bagCoin>% and item drops by <bagItem>%.
-				 * Bag opening is things such as presents, crates, oysters etc.
+				 * Bag opening is things such as presents, crates, oysters, etc.
 				'''
 			SharkBait:
 				'''
@@ -581,7 +580,7 @@ Mods: {
 				- Gain <fishingPower> fishing power.
 				- Deal <seaCreatureDmg>x damage to fished-up enemies and
 				receive <seaCreatureResist>x damage from all attacks of fished-up enemies.
-				 * Fished-up enemies include enemies that spawns upon catching with your rod.
+				 * Fished-up enemies include enemies that spawn upon catching with your rod.
 				 * This includes Duke Fishron and alike.
 				- Gives <shield> shield for <shieldTime> seconds upon succesfully catching anything.
 				'''
@@ -601,7 +600,7 @@ Mods: {
 			EucaluptusSap:
 				'''
 				<class>
-				- Allows player to glide.
+				- Allows the player to glide.
 				- Multiplies horizontal wing speed and acceleration by <speed>x and <acceleration>x respectively.
 				- Increases horizontal wing speed and acceleration by a flat <flatIncrease>%.
 				'''
@@ -636,9 +635,9 @@ Mods: {
 			EyeOfCthulhuPetItem:
 				'''
 				<class>
-				- The moment you're below 50% health go into an enraged state.
-				Consume all of your defense and grants following:
-				 * Sets Dash delay of all of your dashes to 5 frames. (1/12th of a second)
+				- The moment you're below 50% health, go into an enraged state,
+				consuming all of your defense and granting the following:
+				 * Sets the Dash delay of all of your dashes to 5 frames. (1/12th of a second)
 				 * Increases damage by <defToDmg>% of the defense consumed.
 				 * Increases movement speed by <defToSpd>% of the defense consumed.
 				 * Increases crit chance by <defToCrit>% of the defense consumed.
@@ -651,8 +650,8 @@ Mods: {
 				'''
 				<class>
 				- Grants you <lifesteal>% lifesteal, but how much you can lifesteal
-				is all dependant on a Health Pool, lifestealing decrements from the pool, 
-				and when pool is empty, [c/f8baba:you cannot lifesteal] before it has health in it again.
+				is all dependent on a Health Pool, lifestealing decrements from the pool, 
+				and when the pool is empty, [c/f8baba:you cannot lifesteal] before it has health in it again.
 				 * Maximum amount pool contains is equal to <maxPool>% of your max health.
 				 * Pool recovers +1 health every <healthRecovery> second.
 				'''
@@ -682,16 +681,16 @@ Mods: {
 				 * Recover player's maximum health by <bottledHealth>%, or <honeyfinHealth>% respectively.
 				 * Give Honey buff for <bottledHoneyTime> or <honeyfinHoneyTime> seconds respectively. 
 				 * Give Honey Overdose (de)buff for 60 seconds.
-				 * Honey Overdose prevents from Player to be healed by another Honey Bee for the duration.
+				 * Honey Overdose prevents the Player from being healed by another Honey Bee for the duration.
 				 * Honey Overdose also grants <abilityHaste>% ability haste for the duration which
-				 determines how frequent Player's pet's ability can be used.
+				 determines how frequently the Player's pet's ability can be used.
 				 * Player with Honey Bee gets all the benefits with half effect and full duration of Honey Overdose.
 				'''
 			DeerclopsPetItem:
 				'''
 				<class>
 				- Store damage you take for <tresholdTime> seconds.
-				 * Every damage is stored separately, a stored damage may get expired separate from others.
+				 * Every damage is stored separately, a stored damage may expire separately from others.
 				- If damage stored reaches more than <treshold>% of your health do following:
 				 * Gain <immunityTime> seconds of immunity to all types.
 				 * Apply a <slowAmount>% slow, confusion and frostfire on enemies in a <range>-tile radius for <debuffTime> seconds.
@@ -699,11 +698,11 @@ Mods: {
 			SkeletronPetItem:
 				'''
 				<class>
-				- All damage you take and inflict will be dealt over time.
-				- You take <recievedMult>x damage and store the damage to be dealt over time.
+				- All damage you take and inflict will be dealt with over time.
+				- You take <recievedMult>x damage and store the damage to be dealt with over time.
 				 * Receive 1/<recievedHowLong>th of all damage stored every second.
-				- Enemies take <dealtMult>x damage and store the damage to be dealt over time.
-				 * They receive it through the course of 4 seconds.
+				- Enemies take <dealtMult>x damage and store the damage to be dealt with over time.
+				 * They receive stored damage over 4 seconds.
 				- If the enemy can die to your hit without the DOT, they instantly get executed.
 				'''
 			QueenSlimePetItem:
@@ -711,7 +710,7 @@ Mods: {
 				<class>
 				- Improves Sparkle Slime Balloon [i:4986] and the Endless variation of it [i:<endless>] globally.
 				 * Enemies: Applies a <slow>% slow to all enemies affected.
-				 * Players: Grants <haste>% ability haste which increases how frequent your Pet's ability can be used
+				 * Players: Grants <haste>% ability haste which increases how frequently your Pet's ability can be used
 				and every hit adds 1 counter, (extra chance to add more counter with ability haste) when you reach
 				6th counter, you deal <dmgBonus>x damage and gives you <shield> shield for <shieldTime> seconds.
 				'''
@@ -720,7 +719,7 @@ Mods: {
 				<class>
 				- Gain <dmg>% damage, <crit>% crit chance, and <def>x defense while you have any shield active.
 				- Gives you 5 shields. 
-				 * Shields are only available while you're at 100% health, below 100%, 75%, 50% and 25% health respectively.
+				 * Shields are only available while you're at 100% health, below 100%, 75%, 50%, and 25% health respectively.
 				 * All shield amounts are equal to <shieldMaxHealthAmount>% of your maximum health.
 				 * A shield gets recovered every <shieldCooldown> seconds. 
 				 * A shield persists for <shieldLifetime> seconds after receiving damage, then disappears.
@@ -730,14 +729,14 @@ Mods: {
 				<class>
 				- Grants <defMultIncrease>x defense.
 				- Doubles Ironskin potion's [i:292] effect, giving <ironskinDef> more defense.
-				- Increases gathered ores, gems, simply anything mining related. 
+				- Increases gathered ores, gems, or simply anything mining-related. 
 				 * Amount it increases is equal to <defMultChance>% of your defense + <flatAmount>%.
 				'''
 			TwinsPetItem:
 				'''
 				<class>
 				- Gain benefits depending on if you're close or far away from your target.
-				- Your target being in a <closeRange> tile range causes following:
+				- Your target being in a <closeRange> tile range causes the following:
 				 * Applies Cursed Flames on your target for <cursedTime> seconds.
 				 * Apply <dealtDmgLifesteal>% of the damage you dealt as lifesteal on 
 				 <defLifesteal>x of your defense multiplied by your damage reduction.
@@ -766,7 +765,7 @@ Mods: {
 			DD2OgrePetItem:
 				'''
 				<class>
-				- Turns you into a litteral chonky immobile tank. 
+				- Turns you into a literal chonky immobile tank. 
 				 * All of the effects are not active if any mount is in use.
 				- Nerfing you by:
 				 * Multiplying player's movement speed by <moveSpdNerf>x, attack speed of true melee by <atkSpdNerf>x,
@@ -814,7 +813,7 @@ Mods: {
 				 * During the freeze, slow all enemies in a <range>-block radius by <slowAmount>%.
 				 * While frozen, be immune to all types of damage.
 				 * Recover <healthRecovery> health through the duration.
-				 * After freeze ends, deal <baseDmg> base damage to all enemies in the slow range.
+				 * After the freeze ends, deal <baseDmg> base damage to all enemies in the slow range.
 				 * Gain immunity to all types of damage <postTombImmunity> more seconds on top of freeze's immunity.
 				 * This effect has a <tombCooldown>-minute cooldown.
 				'''
@@ -824,7 +823,7 @@ Mods: {
 				- Ranged hits on enemies will deal bonus damage depending
 				on their missing health percentage.
 				 * The damage it increases can go up to <maxAmount>%.
-				 * Damage increase goes up non-linearly, the lower health is, more the damage boost is.
+				 * Damage increase goes up non-linearly, the lower health is, the more the damage boost is.
 				 * For our beloved interested mathematicians the formula is as follows:
 				FinalDamage *= 2 / (target's current health * 1f / target's max health + 1)
 				'''
@@ -840,9 +839,9 @@ Mods: {
 				'''
 			ResplendentDessert:
 				'''
-				- Is both Prince and Princess Slime Pets abilities combined while being slightly weaker.
-				 * Effects of Prince or Princess is overriden if there is another Prince or Princess active.
-				Press <keybind> to swap the Tooltip (This is solely for display, has no effects on perks)
+				- It's both Prince and Princess Slime Pets' abilities combined while being slightly weaker.
+				 * Effects of Prince or Princess are overridden if there is another Prince or Princess active.
+				Press <keybind> to swap the Tooltip (This is solely for display, and has no effects on perks)
 				<tooltip>
 				'''
 			Carrot:
@@ -931,7 +930,7 @@ Mods: {
 					'''
 					Increases luck by +<ClumsyLuck> and Global
 					Fortune by <ClumsyGlobal> which increases
-					items gained by Mining, Harvesting and Fishing and all Pets.
+					items gained by Mining, Harvesting, and Fishing and all Pets.
 					'''
 			}
 
@@ -957,7 +956,7 @@ Mods: {
 					Increases Ability Haste by <MysticHaste>%
 					which reduces your Pet's ability cooldown
 					and Global Fortune by <MysticAllExp> which increases
-					items gained by Mining, Harvesting and Fishing and all Pets.
+					items gained by Mining, Harvesting, and Fishing and all Pets.
 					'''
 			}
 
@@ -990,7 +989,7 @@ Mods: {
 					incoming knockback by <OldKb>x and increases
 					Harvesting Fortune by +<OldHarvesting>, which increases
 					items gained by harvesting, fully effective with 
-					items that sources from your Pets.
+					items that are sourced from your Pets.
 					'''
 			}
 
