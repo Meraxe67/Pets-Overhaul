@@ -899,7 +899,8 @@ Mods: {
 
 		Keybinds: {
 			// PetTooltipHide.DisplayName: Show Pet Tooltips
-			// DualSlimeTooltipSwap.DisplayName: Swap Dual Slime Pet Tooltip
+			// PetTooltipSwap.DisplayName: Switch Pet Tooltip
+			// UsePetAbility.DisplayName: Use Pet Ability
 		}
 	}
 }

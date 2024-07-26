@@ -118,21 +118,21 @@ namespace PetsOverhaul.LightPets
                         .Replace("<atkSpdBase>", Math.Round(baseAtkSpd * 100, 2).ToString())
                         .Replace("<atkSpdPer>", Math.Round(atkSpdPerRoll * 100, 2).ToString())
 
-                        .Replace("<currentSum>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentSummonerDmg * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), sumRoll, sumMaxRoll))
-                        .Replace("<sumRoll>", GlobalPet.LightPetRarityColorConvert(sumRoll.ToString(), sumRoll, sumMaxRoll))
-                        .Replace("<sumMaxRoll>", GlobalPet.LightPetRarityColorConvert(sumMaxRoll.ToString(), sumRoll, sumMaxRoll))
+                        .Replace("<currentSum>", PetColors.LightPetRarityColorConvert(Math.Round(CurrentSummonerDmg * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), sumRoll, sumMaxRoll))
+                        .Replace("<sumRoll>", PetColors.LightPetRarityColorConvert(sumRoll.ToString(), sumRoll, sumMaxRoll))
+                        .Replace("<sumMaxRoll>", PetColors.LightPetRarityColorConvert(sumMaxRoll.ToString(), sumRoll, sumMaxRoll))
 
-                        .Replace("<currentMelee>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentMeleeDmg * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), meleeRoll, meleeMaxRoll))
-                        .Replace("<meleeRoll>", GlobalPet.LightPetRarityColorConvert(meleeRoll.ToString(), meleeRoll, meleeMaxRoll))
-                        .Replace("<meleeMaxRoll>", GlobalPet.LightPetRarityColorConvert(meleeMaxRoll.ToString(), meleeRoll, meleeMaxRoll))
+                        .Replace("<currentMelee>", PetColors.LightPetRarityColorConvert(Math.Round(CurrentMeleeDmg * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), meleeRoll, meleeMaxRoll))
+                        .Replace("<meleeRoll>", PetColors.LightPetRarityColorConvert(meleeRoll.ToString(), meleeRoll, meleeMaxRoll))
+                        .Replace("<meleeMaxRoll>", PetColors.LightPetRarityColorConvert(meleeMaxRoll.ToString(), meleeRoll, meleeMaxRoll))
 
-                        .Replace("<currentAtkSpd>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentAtkSpd * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), atkSpdRoll, atkSpdMaxRoll))
-                        .Replace("<atkSpdRoll>", GlobalPet.LightPetRarityColorConvert(atkSpdRoll.ToString(), atkSpdRoll, atkSpdMaxRoll))
-                        .Replace("<atkSpdMaxRoll>", GlobalPet.LightPetRarityColorConvert(atkSpdMaxRoll.ToString(), atkSpdRoll, atkSpdMaxRoll))
+                        .Replace("<currentAtkSpd>", PetColors.LightPetRarityColorConvert(Math.Round(CurrentAtkSpd * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), atkSpdRoll, atkSpdMaxRoll))
+                        .Replace("<atkSpdRoll>", PetColors.LightPetRarityColorConvert(atkSpdRoll.ToString(), atkSpdRoll, atkSpdMaxRoll))
+                        .Replace("<atkSpdMaxRoll>", PetColors.LightPetRarityColorConvert(atkSpdMaxRoll.ToString(), atkSpdRoll, atkSpdMaxRoll))
                         ));
             if (atkSpdRoll <= 0)
             {
-                tooltips.Add(new(Mod, "Tooltip0", "[c/"+ GlobalPet.lowQuality.Hex3() +":" + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.NotRolled") + "]"));
+                tooltips.Add(new(Mod, "Tooltip0", "[c/"+ PetColors.LowQuality.Hex3() +":" + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.NotRolled") + "]"));
             }
         }
     }

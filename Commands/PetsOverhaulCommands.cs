@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using PetsOverhaul.PetEffects.Vanilla;
+using PetsOverhaul.PetEffects;
 using PetsOverhaul.Systems;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,54 +9,6 @@ using Terraria.ModLoader;
 
 namespace PetsOverhaul.Commands
 {
-    public class ModContentCommand : ModCommand
-    {
-        // CommandType.Chat means that command can be used in Chat in SP and MP
-        public override CommandType Type
-            => CommandType.Chat;
-
-        // The desired text to trigger this command
-        public override string Command
-            => "modContent";
-
-        // A short description of this command
-        public override string Description
-            => "";
-
-        public override void Action(CommandCaller caller, string input, string[] args)
-        {
-            if (args.Length == 0)
-            {
-                string returnVal = "";
-                foreach (KeyValuePair<string, int> entry in PetRegistry.PetNamesAndItems)
-                {
-                    string key = entry.Key;
-                    int value = entry.Value;
-                    returnVal += $"Name: {key} Id: {value}\n";
-
-                };
-                caller.Reply(returnVal);
-            }
-            else
-            {
-                if (!int.TryParse(args[0], out int type))
-                {
-                    if (PetRegistry.PetNamesAndItems.ContainsKey(args[0]))
-                    {
-                        caller.Reply($"Name: {args[0]} Id: {PetRegistry.PetNamesAndItems[args[0]]}\n");
-                    }
-                    else
-                    {
-                        caller.Reply("Nonexistant");
-                    }
-                }
-                else
-                {
-                    throw new UsageException("The given argument must be a string");
-                }
-            }
-        }
-    }
     public class PlayerPlacedBlockListCommand : ModCommand
     {
         public override string Command => "PlayerPlacedBlockAmount";
@@ -137,7 +89,7 @@ namespace PetsOverhaul.Commands
                                 for (int i = topMining.Count; i > 0 && displayCounter < 3; i--, displayCounter++)
                                 {
                                     TopPlayer topPlayer = topMining.Find(x => x.PlayerExp == topMining.Max(x => x.PlayerExp));
-                                    caller.Reply(topPlayer.PlayerName + "'s Mining Level: " + topPlayer.PlayerLevel + " Mining Exp: " + topPlayer.PlayerExp, displayCounter == 0 ? Color.Lavender : displayCounter == 1 ? GlobalPet.highQuality : displayCounter == 2 ? GlobalPet.midQuality : GlobalPet.lowQuality);
+                                    caller.Reply(topPlayer.PlayerName + "'s Mining Level: " + topPlayer.PlayerLevel + " Mining Exp: " + topPlayer.PlayerExp, displayCounter == 0 ? Color.Lavender : displayCounter == 1 ? PetColors.HighQuality : displayCounter == 2 ? PetColors.MidQuality : PetColors.LowQuality);
                                     topMining.Remove(topPlayer);
                                 }
                                 displayCounter = 0;
@@ -145,14 +97,14 @@ namespace PetsOverhaul.Commands
                                 for (int i = topFishing.Count; i > 0 && displayCounter < 3; i--, displayCounter++)
                                 {
                                     TopPlayer topPlayer = topFishing.Find(x => x.PlayerExp == topFishing.Max(x => x.PlayerExp));
-                                    caller.Reply(topPlayer.PlayerName + "'s Fishing Level: " + topPlayer.PlayerLevel + " Fishing Exp: " + topPlayer.PlayerExp, displayCounter == 0 ? Color.Lavender : displayCounter == 1 ? GlobalPet.highQuality : displayCounter == 2 ? GlobalPet.midQuality : GlobalPet.lowQuality);
+                                    caller.Reply(topPlayer.PlayerName + "'s Fishing Level: " + topPlayer.PlayerLevel + " Fishing Exp: " + topPlayer.PlayerExp, displayCounter == 0 ? Color.Lavender : displayCounter == 1 ? PetColors.HighQuality : displayCounter == 2 ? PetColors.MidQuality : PetColors.LowQuality);
                                 }
                                 displayCounter = 0;
                                 caller.Reply($"\n[c/CDFF00:Top {topHarvesting.Count} Player" + (topHarvesting.Count > 1 ? "s" : "") + " with highest Junimo Harvesting EXP:]");
                                 for (int i = topHarvesting.Count; i > 0 && displayCounter < 3; i--, displayCounter++)
                                 {
                                     TopPlayer topPlayer = topHarvesting.Find(x => x.PlayerExp == topHarvesting.Max(x => x.PlayerExp));
-                                    caller.Reply(topPlayer.PlayerName + "'s Harvesting Level: " + topPlayer.PlayerLevel + " Harvesting Exp: " + topPlayer.PlayerExp, displayCounter == 0 ? Color.Lavender : displayCounter == 1 ? GlobalPet.highQuality : displayCounter == 2 ? GlobalPet.midQuality : GlobalPet.lowQuality);
+                                    caller.Reply(topPlayer.PlayerName + "'s Harvesting Level: " + topPlayer.PlayerLevel + " Harvesting Exp: " + topPlayer.PlayerExp, displayCounter == 0 ? Color.Lavender : displayCounter == 1 ? PetColors.HighQuality : displayCounter == 2 ? PetColors.MidQuality : PetColors.LowQuality);
                                     topHarvesting.Remove(topPlayer);
                                 }
                             }
@@ -175,7 +127,7 @@ namespace PetsOverhaul.Commands
                                 for (int i = topMining.Count; i > 0 && displayCounter < Main.maxPlayers; i--, displayCounter++)
                                 {
                                     TopPlayer topPlayer = topMining.Find(x => x.PlayerExp == topMining.Max(x => x.PlayerExp));
-                                    caller.Reply(topPlayer.PlayerName + "'s Mining Level: " + topPlayer.PlayerLevel + " Mining Exp: " + topPlayer.PlayerExp, displayCounter == 0 ? Color.Lavender : displayCounter == 1 ? GlobalPet.highQuality : displayCounter == 2 ? GlobalPet.midQuality : GlobalPet.lowQuality);
+                                    caller.Reply(topPlayer.PlayerName + "'s Mining Level: " + topPlayer.PlayerLevel + " Mining Exp: " + topPlayer.PlayerExp, displayCounter == 0 ? Color.Lavender : displayCounter == 1 ? PetColors.HighQuality : displayCounter == 2 ? PetColors.MidQuality : PetColors.LowQuality);
                                     topMining.Remove(topPlayer);
                                 }
                             }
@@ -198,7 +150,7 @@ namespace PetsOverhaul.Commands
                                 for (int i = topFishing.Count; i > 0 && displayCounter < Main.maxPlayers; i--, displayCounter++)
                                 {
                                     TopPlayer topPlayer = topFishing.Find(x => x.PlayerExp == topFishing.Max(x => x.PlayerExp));
-                                    caller.Reply(topPlayer.PlayerName + "'s Fishing Level: " + topPlayer.PlayerLevel + " Fishing Exp: " + topPlayer.PlayerExp, displayCounter == 0 ? Color.Lavender : displayCounter == 1 ? GlobalPet.highQuality : displayCounter == 2 ? GlobalPet.midQuality : GlobalPet.lowQuality);
+                                    caller.Reply(topPlayer.PlayerName + "'s Fishing Level: " + topPlayer.PlayerLevel + " Fishing Exp: " + topPlayer.PlayerExp, displayCounter == 0 ? Color.Lavender : displayCounter == 1 ? PetColors.HighQuality : displayCounter == 2 ? PetColors.MidQuality : PetColors.LowQuality);
                                 }
                             }
                             break;
@@ -220,7 +172,7 @@ namespace PetsOverhaul.Commands
                                 for (int i = topHarvesting.Count; i > 0 && displayCounter < Main.maxPlayers; i--, displayCounter++)
                                 {
                                     TopPlayer topPlayer = topHarvesting.Find(x => x.PlayerExp == topHarvesting.Max(x => x.PlayerExp));
-                                    caller.Reply(topPlayer.PlayerName + "'s Harvesting Level: " + topPlayer.PlayerLevel + " Harvesting Exp: " + topPlayer.PlayerExp, displayCounter == 0 ? Color.Lavender : displayCounter == 1 ? GlobalPet.highQuality : displayCounter == 2 ? GlobalPet.midQuality : GlobalPet.lowQuality);
+                                    caller.Reply(topPlayer.PlayerName + "'s Harvesting Level: " + topPlayer.PlayerLevel + " Harvesting Exp: " + topPlayer.PlayerExp, displayCounter == 0 ? Color.Lavender : displayCounter == 1 ? PetColors.HighQuality : displayCounter == 2 ? PetColors.MidQuality : PetColors.LowQuality);
                                     topHarvesting.Remove(topPlayer);
                                 }
                             }

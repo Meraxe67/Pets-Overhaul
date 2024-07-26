@@ -1,6 +1,5 @@
 using MonoMod.RuntimeDetour;
-using PetsOverhaul.ModSupport;
-using PetsOverhaul.PetEffects.Vanilla;
+using PetsOverhaul.PetEffects;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
@@ -42,10 +41,6 @@ namespace PetsOverhaul
             OnPickupActions?.Invoke(item, player);
 
             return orig(item, player);
-        }
-        public override void PostSetupContent()
-        {
-            ModManager.LoadMods();
         }
         public override void HandlePacket(BinaryReader reader, int whoAmI)
         {

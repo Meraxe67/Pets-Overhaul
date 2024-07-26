@@ -118,21 +118,21 @@ namespace PetsOverhaul.LightPets
                         .Replace("<fortBase>", baseFishFort.ToString())
                         .Replace("<fortPer>", fishFortPerRoll.ToString())
 
-                        .Replace("<currentHp>", GlobalPet.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + CurrentHealth.ToString(), healthRoll, healthMaxRoll))
-                        .Replace("<hpRoll>", GlobalPet.LightPetRarityColorConvert(healthRoll.ToString(), healthRoll, healthMaxRoll))
-                        .Replace("<hpMaxRoll>", GlobalPet.LightPetRarityColorConvert(healthMaxRoll.ToString(), healthRoll, healthMaxRoll))
+                        .Replace("<currentHp>", PetColors.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + CurrentHealth.ToString(), healthRoll, healthMaxRoll))
+                        .Replace("<hpRoll>", PetColors.LightPetRarityColorConvert(healthRoll.ToString(), healthRoll, healthMaxRoll))
+                        .Replace("<hpMaxRoll>", PetColors.LightPetRarityColorConvert(healthMaxRoll.ToString(), healthRoll, healthMaxRoll))
 
-                        .Replace("<currentExp>", GlobalPet.LightPetRarityColorConvert(Math.Round(CurrentMs * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), msRoll, msMaxRoll))
-                        .Replace("<expRoll>", GlobalPet.LightPetRarityColorConvert(msRoll.ToString(), msRoll, msMaxRoll))
-                        .Replace("<expMaxRoll>", GlobalPet.LightPetRarityColorConvert(msMaxRoll.ToString(), msRoll, msMaxRoll))
+                        .Replace("<currentExp>", PetColors.LightPetRarityColorConvert(Math.Round(CurrentMs * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), msRoll, msMaxRoll))
+                        .Replace("<expRoll>", PetColors.LightPetRarityColorConvert(msRoll.ToString(), msRoll, msMaxRoll))
+                        .Replace("<expMaxRoll>", PetColors.LightPetRarityColorConvert(msMaxRoll.ToString(), msRoll, msMaxRoll))
 
-                        .Replace("<currentFort>", GlobalPet.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + CurrentFishFort.ToString(), fishFortRoll, fishFortMaxRoll))
-                        .Replace("<fortRoll>", GlobalPet.LightPetRarityColorConvert(fishFortRoll.ToString(), fishFortRoll, fishFortMaxRoll))
-                        .Replace("<fortMaxRoll>", GlobalPet.LightPetRarityColorConvert(fishFortMaxRoll.ToString(), fishFortRoll, fishFortMaxRoll))
+                        .Replace("<currentFort>", PetColors.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + CurrentFishFort.ToString(), fishFortRoll, fishFortMaxRoll))
+                        .Replace("<fortRoll>", PetColors.LightPetRarityColorConvert(fishFortRoll.ToString(), fishFortRoll, fishFortMaxRoll))
+                        .Replace("<fortMaxRoll>", PetColors.LightPetRarityColorConvert(fishFortMaxRoll.ToString(), fishFortRoll, fishFortMaxRoll))
                         ));
             if (msRoll <= 0)
             {
-                tooltips.Add(new(Mod, "Tooltip0", "[c/" + GlobalPet.lowQuality.Hex3() + ":" + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.NotRolled") + "]"));
+                tooltips.Add(new(Mod, "Tooltip0", "[c/" + PetColors.LowQuality.Hex3() + ":" + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.NotRolled") + "]"));
             }
         }
     }

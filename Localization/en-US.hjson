@@ -195,21 +195,21 @@ Mods: {
 		PetItemTooltips: {
 			Seaweed:
 				'''
-				[c/0ea80e:Defensive Pet]
+				<class>
 				- Increases defense by +<flat>, and multiplies defense by <def>x.
 				- Received knockback is multiplied by <kbResist>x.
 				- Reduces movement speed by -<moveSpd>% and all damage by -<dmg>%.
 				'''
 			AmberMosquito:
 				'''
-				[c/96A8B0:Mining Pet]
+				<class>
 				- Mining an ore, gem, or extractable block has a <oreChance>% chance
 				to grant you a random ore or gem from its weighted table.
 				 * Less valuable drops are more common.
 				'''
 			EatersBone:
 				'''
-				[c/ccf5f5:Mobility Pet]
+				<class>
 				- Grants <moveSpd>% movement speed and <jumpSpd>% jump speed.
 				- Allows you to be able to auto jump.
 				- Increases fall damage resistance by <fallRes> blocks if:
@@ -217,7 +217,7 @@ Mods: {
 				'''
 			BoneRattle:
 				'''
-				[c/0ea80e:Defensive Pet]
+				<class>
 				- Every second you haven't taken any damage, Pet's timer goes up.
 				- Upon timer reaching <stage1Time> seconds, increases health regen by <stage1Regen>.
 				- Upon timer reaching <stage2Time> seconds, the regen is increased to <stage2Regen>.
@@ -227,7 +227,7 @@ Mods: {
 				'''
 			BabyGrinchMischiefWhistle:
 				'''
-				[c/7F9FBB:Utility and Offensive Pet]
+				<class>
 				- Slows all non-boss enemies in a <slowRange>-block radius by <slowAmount>%.
 				- Grants a permanent warmth effect, reducing cold-sourced damage.
 				- All weapons from Frost Moon gains <dmg>% damage and <crit>% crit chance.
@@ -235,7 +235,7 @@ Mods: {
 				'''
 			Nectar:
 				'''
-				[c/97C8DD:Summoner and Utility Pet]
+				<class>
 				- If you get poisoned or got inflicted with venom, heal <antidotePercent>% of max health.
 				 * Heal has a <antidoteCd> second cooldown.
 				 * Also grants immunity to both Debuffs.
@@ -247,7 +247,7 @@ Mods: {
 				'''
 			HellCake:
 				'''
-				[c/14C17C:Utility and Defensive Pet]
+				<class>
 				- Grants Lava immunity for <immuneTime> seconds.
 				- While in lava, gain following:
 				 * Flipper [i:187] effect.
@@ -257,7 +257,7 @@ Mods: {
 				'''
 			Fish:
 				'''
-				[c/10B4F5:Fishing and Utility Pet]
+				<class>
 				- Grants <fp> fishing power. This increases depending on current biome:
 				 * While in the Ocean biome, increases to <oceanFp>.
 				 * While in the Snow biome, increases to <snowFp>.
@@ -267,7 +267,7 @@ Mods: {
 				'''
 			BambooLeaf:
 				'''
-				[c/E0B130:Offensive and Harvesting Pet]
+				<class>
 				- Gain <atkSpd>% attack speed.
 				 * Increased by another <jungleAtkSpd>% while in the Jungle.
 				- Reduces your aggro value by -<aggro>.
@@ -275,7 +275,7 @@ Mods: {
 				'''
 			BoneKey:
 				'''
-				[c/8D7A40:Defensive and Offensive Pet]
+				<class>
 				- Complete immunity to whole pre-hardmode Dungeon.
 				- Gain <armorPen> armor penetration.
 				 * Increased by another <dungArmorPen> while in Dungeon.
@@ -283,14 +283,14 @@ Mods: {
 				'''
 			ToySled:
 				'''
-				[c/f6546a:Offensive Pet]
+				<class>
 				- Applies <frostburnTime>-second improved Frostburn on-hit.
 				- Applies <slowAmount>% slow for <slowTime> seconds on hit.
 				 * All values are multiplied by <frostMult> if full Frost Armor [i:684] is worn.
 				'''
 			StrangeGlowingMushroom:
 				'''
-				[c/7CEBFA:Utility and Mobility Pet]
+				<class>
 				- Hits recover buffs remaining time by <buffRecover> seconds.
 				 * Has a <cooldown> second cooldown.
 				 * Only works with Buffs.
@@ -304,7 +304,7 @@ Mods: {
 				'''
 			FullMoonSqueakyToy:
 				'''
-				[c/FA377D:Supportive and Offensive Pet]
+				<class>
 				- Multiplies your Crit chance by <critMult>x.
 				- Reduces your Crit damage by <crDmgReduction>%.
 				- Critical hits applies Mauled debuff.
@@ -315,7 +315,7 @@ Mods: {
 				'''
 			BerniePetItem:
 				'''
-				[c/14C17C:Utility and Defensive Pet]
+				<class>
 				- Immunity to all vanilla burn-type debuffs.
 				- Enemies inside the <burnRange> tile radius will have their burn-type debuffs affected.
 				- Their burn debuffs tick down 100% slower. (1 second of the debuff is gone in 2 seconds)
@@ -324,7 +324,7 @@ Mods: {
 				'''
 			UnluckyYarn:
 				'''
-				[c/1bdeff:Utility Pet]
+				<class>
 				- Increases luck by <flatLuck>.
 				- Grants luck depending on current moon cycle.
 				 * Minimum being -<minimumMoon> while its Full Moon and
@@ -333,7 +333,7 @@ Mods: {
 				'''
 			BlueEgg:
 				'''
-				[c/CDFF00:Harvesting Pet]
+				<class>
 				- Harvesting gives you a random item from its weighted table.
 				 * Plants have a <plantChance>% chance.
 				 * Rare plants have a <rarePlantChance>% chance.
@@ -344,7 +344,7 @@ Mods: {
 				'''
 			GlowTulip:
 				'''
-				[c/7CF074:Harvesting and Utility Pet]
+				<class>
 				- Gives you <harvestChance>% more plants while below Surface.
 				 * Decreased to <rarePlantChance>% for rare plants.
 				 * Gemstone trees drop <gemstoneTreeChance>% more on top of it.
@@ -352,14 +352,14 @@ Mods: {
 				'''
 			ChesterPetItem:
 				'''
-				[c/1bdeff:Utility Pet]
+				<class>
 				- Increases your Item pickup range by <pickupRange>.
 				- Increases your item placement range by <placementRange> blocks.
 				- Grants <chestDef> defense while any container is open.
 				'''
 			CompanionCube:
 				'''
-				[c/22A091:Defensive and Magic Pet]
+				<class>
 				- Recovers health equal to <manaToHealth>% of your mana usage.
 				- Recovers mana equal to <healthToMana>% of the damage you receive.
 				- If mana sickness is active, reduces your Mana potions effectiveness by <manaPotionNerf>% 
@@ -369,7 +369,7 @@ Mods: {
 				'''
 			CursedSapling:
 				'''
-				[c/8A2BE2:Summoner Pet]
+				<class>
 				- Increases max minion slots by <minionSlot>.
 				- Pumpkin Moon weapons gain <dmg>% damage.
 				 * This is increased to <ravenDmg>% for Raven Staff. [i:1802]
@@ -379,14 +379,14 @@ Mods: {
 				'''
 			DirtiestBlock:
 				'''
-				[c/96A8B0:Mining Pet]
+				<class>
 				- Mining anything [i:12] gives <any> copper coins.
 				- Mining common blocks [i:3] gives <soil> copper coins.
 				- Mining dirt [i:2] gives <dirt> copper coins.
 				'''
 			BallOfFuseWire:
 				'''
-				[c/f6546a:Offensive Pet]
+				<class>
 				- Attacks create an area of effect explosion.
 				 * Attack has <kb>x your initial knockback.
 				 * Attack has base damage of <dmg>x of the damage you dealt
@@ -396,7 +396,7 @@ Mods: {
 				'''
 			CelestialWand:
 				'''
-				[c/3399FF:Magic Pet]
+				<class>
 				- Increases your max mana by <maxMana>%.
 				- Increases your magic damage by <manaToDmg>% for every 1 non-base Mana you have.
 				- Multiplies your magic damage bonuses over 100% by <dmgPenalty>x.
@@ -406,14 +406,14 @@ Mods: {
 				'''
 			EyeSpring:
 				'''
-				[c/ccf5f5:Mobility Pet]
+				<class>
 				- Increases jump speed by <jumpBoost>%.
 				- Increases movement acceleration by <acceleration>%.
 				- Multiplies your wing ascent speed by <ascNerf>x.
 				'''
 			ExoticEasternChewToy:
 				'''
-				[c/DABE8E:Melee and Mobility Pet]
+				<class>
 				- While holding a Melee weapon grants following:
 				 * Increases melee speed by <meleeSpd>%.
 				 * Increases movement speed by <moveSpd>%.
@@ -422,7 +422,7 @@ Mods: {
 				'''
 			BedazzledNectar:
 				'''
-				[c/ccf5f5:Mobility Pet]
+				<class>
 				- If you don't have a Wing grants following:
 				 * You can now fly for <flight> seconds.
 				 * Gain immunity to fall damage.
@@ -433,7 +433,7 @@ Mods: {
 				'''
 			GlommerPetItem:
 				'''
-				[c/A250C4:Magic and Supportive Pet]
+				<class>
 				- Grants <sanityAmount>% Ability Haste to all Players in a <sanityRange>-block radius.
 				 * User also is affected.
 				- Multiplies your Maximum mana equal to your Ability Haste + 100%.
@@ -443,7 +443,7 @@ Mods: {
 				'''
 			DD2PetDragon:
 				'''
-				[c/FFB3BA:Ranged Pet]
+				<class>
 				- Multiplies arrow speed by <arrowVelo>x.
 				- Increases arrow pierce by <arrowPierce>.
 				- Multiplies your bullet speed by <bulletVelo>x.
@@ -454,7 +454,7 @@ Mods: {
 			JunimoMaxLevelText: Max Level!
 			JunimoPetItem:
 				'''
-				[c/CDFF00:Harvesting], [c/96A8B0:Mining] and [c/0382E9:Fishing Pet]
+				<class>
 				- Allows you to gain EXP for each respective class, further improving perks of this Pet.
 				- Gathering; Harvesting, Mining and Fishing items gives you money depending on items exp value.
 				- Levels are currently maxed at <maxLvl>.
@@ -470,7 +470,7 @@ Mods: {
 				'''
 			BirdieRattle:
 				'''
-				[c/ccf5f5:Mobility Pet]
+				<class>
 				- Grants fall damage immunity.
 				- Gives you a Harpy Wing with <flightTime> seconds of wing time.
 				 * Landing does not refresh your wing time.
@@ -480,7 +480,7 @@ Mods: {
 				'''
 			LizardEgg:
 				'''
-				[c/8D7A40:Offensive and Defensive Pet]
+				<class>
 				- Entering combat while below 55% health turns you into a Lihzahrd:
 				 * This lasts <transformTime> seconds.
 				 * Gain 20% movement speed, 5 defense, 10% damage.
@@ -492,7 +492,7 @@ Mods: {
 				'''
 			TartarSauce:
 				'''
-				[c/e69138:Melee Pet]
+				<class>
 				- Damaging an enemy with melee hits grants you stacks.
 				 * 2 for true melee hits, 1 for melee projectile hits.
 				 * Gaining stacks have a <cooldown> second cooldown.
@@ -505,7 +505,7 @@ Mods: {
 				'''
 			ParrotCracker:
 				'''
-				[c/f6546a:Offensive Pet]
+				<class>
 				- All projectiles by you or your Minions/Sentries have a <projChance>% chance
 				to be re-shot as a new projectile by your Parrot.
 				 * Properties of the projectile are same except with <projDamage>x of the damage. 
@@ -514,7 +514,7 @@ Mods: {
 				'''
 			PigPetItem:
 				'''
-				[c/1bdeff:Utility Pet]
+				<class>
 				- Eating a food has a <foodChance>% chance to not get consumed.
 				 * Reduced to <potionChance>% for potions.
 				- Eating foods gives you a shield that scales with stage of Well Fed.
@@ -524,7 +524,7 @@ Mods: {
 				'''
 			MudBud:
 				'''
-				[c/f6546a:Offensive Pet]
+				<class>
 				- Damaging enemies have a <chance>% chance of causing damaging spores to appear.
 				 * Spores location is somewhere near the enemy randomly and travel slightly.
 				 * Spores deal <dmg>x of the initial damage that spawned them + <flatDmg>.
@@ -532,7 +532,7 @@ Mods: {
 				'''
 			DD2PetGato:
 				'''
-				[c/8A2BE2:Summoner Pet]
+				<class>
 				- Allows sentry attacks to be able to crit.
 				 * Increases Sentry crit chance by <crit>%.
 				 * This uses your general crit bonuses.
@@ -540,7 +540,7 @@ Mods: {
 				'''
 			DogWhistle:
 				'''
-				[c/1bdeff:Utility Pet]
+				<class>
 				- Grants permanent hunter effect.
 				- Increases caught critters by <critter>%.
 				 * Decreased to <rareCritter>% for rare critters. 
@@ -550,14 +550,14 @@ Mods: {
 				'''
 			Seedling:
 				'''
-				[c/0ea80e:Defensive Pet]
+				<class>
 				- Gain <lifesteal>% lifesteal. 
 				 * Increased to <planteraSteal>% for Plantera's weapons.
 				Affected weapons: [i:1255] [i:788] [i:1178] [i:1259] [i:1155] [i:3018] [i:1157] [i:1305]
 				'''
 			SpiderEgg:
 				'''
-				[c/f6546a:Offensive Pet]
+				<class>
 				- Damaging enemies apply Poisoned for <poisonTime> seconds.
 				- Upon damaging an enemy remove their Poisoned immunity if:
 				 * Target does not have immunity to the Venom debuff.
@@ -568,7 +568,7 @@ Mods: {
 				'''
 			OrnateShadowKey:
 				'''
-				[c/1bdeff:Utility Pet]
+				<class>
 				- Increases regular enemy loot coin drops by <npcCoin>% and item drops by <npcItem>%.
 				- Increases boss enemy loot coin drops by <bossCoin>% and item drops by <bossItem>%.
 				 * Boss bags are unaffected by item drop boost.
@@ -577,7 +577,7 @@ Mods: {
 				'''
 			SharkBait:
 				'''
-				[c/716DAF:Fishing and Offensive Pet]
+				<class>
 				- Gain <fishingPower> fishing power.
 				- Deal <seaCreatureDmg>x damage to fished-up enemies and
 				receive <seaCreatureResist>x damage from all attacks of fished-up enemies.
@@ -587,27 +587,27 @@ Mods: {
 				'''
 			SpiffoPlush:
 				'''
-				[c/FFB3BA:Ranged Pet]
+				<class>
 				- Grants a <ammoReserve>% chance to not consume ammo.
 				- Ranged projectiles gain <armorPen> armor penetration vs. Zombie-type enemies.
 				- Killing any enemy has <penChance>% chance to increase its pierce by 1.
 				'''
 			MagicalPumpkinSeed:
 				'''
-				[c/CDFF00:Harvesting Pet]
+				<class>
 				- Increases all plants and alike you gather by <plant>%.
 				 * Decreased to <rarePlant>% for rare plants.
 				'''
 			EucaluptusSap:
 				'''
-				[c/ccf5f5:Mobility Pet]
+				<class>
 				- Allows player to glide.
 				- Multiplies horizontal wing speed and acceleration by <speed>x and <acceleration>x respectively.
 				- Increases horizontal wing speed and acceleration by a flat <flatIncrease>%.
 				'''
 			TikiTotem:
 				'''
-				[c/8A2BE2:Summoner Pet]
+				<class>
 				- Allows critical hits for all summon damage. 
 				 * Has -<nonWhipCrit>% chance for non-whip summon damage.
 				 * Has +<whipCrit>% chance for whip summon damage.
@@ -617,14 +617,14 @@ Mods: {
 				'''
 			LightningCarrot:
 				'''
-				[c/E39DA9:Offensive and Mobility Pet]
+				<class>
 				- Increases movement speed by <flatSpd>%, also multiplies movement speed by <multSpd>x.
 				- Increases your damage equal to <spdToDmg>% of how much bonus movement speed you have.
 				- Enemies that contacts you gets slowed by <staticAmount>% for <staticTime> seconds
 				'''
 			ZephyrFish:
 				'''
-				[c/0382E9:Fishing Pet]
+				<class>
 				- Increases your fishing power depending on the current Wind strength, 1 per <windFish> mph.
 				- Gives a <regularChance>% chance to gain +1 stack on every fish you caught, increased to <windChance>% if: 
 				 * You're in Surface level.
@@ -635,7 +635,7 @@ Mods: {
 				'''
 			EyeOfCthulhuPetItem:
 				'''
-				[c/f6546a:Offensive Pet]
+				<class>
 				- The moment you're below 50% health go into an enraged state.
 				Consume all of your defense and grants following:
 				 * Sets Dash delay of all of your dashes to 5 frames. (1/12th of a second)
@@ -649,7 +649,7 @@ Mods: {
 				'''
 			BrainOfCthulhuPetItem:
 				'''
-				[c/0ea80e:Defensive Pet]
+				<class>
 				- Grants you <lifesteal>% lifesteal, but how much you can lifesteal
 				is all dependant on a Health Pool, lifestealing decrements from the pool, 
 				and when pool is empty, [c/f8baba:you cannot lifesteal] before it has health in it again.
@@ -658,14 +658,14 @@ Mods: {
 				'''
 			EaterOfWorldsPetItem:
 				'''
-				[c/96A8B0:Mining Pet]
+				<class>
 				- Gain <miningSpeed>% mining speed for non-ore/gem blocks.
 				- Have a <multipleBreakChance>% chance to mine in a <width>x<length> block radius.
 				 * Only mines ore/gems and that are of the same type.
 				'''
 			KingSlimePetItem:
 				'''
-				[c/FF1493:Supportive Pet]
+				<class>
 				- Changes Slime Gun and Water Gun to have effects for Enemies & Players globally
 				- Slimy [i:2610]
 				 * Enemies: Deals <burnHp>% health damage if paired with a burn, (<burnCap> cap) and receive <extraKb>x kb.
@@ -676,7 +676,7 @@ Mods: {
 				'''
 			QueenBeePetItem:
 				'''
-				[c/FF1493:Supportive Pet]
+				<class>
 				- Heal <extraHeal>% more from all healing potions.
 				- Upon consuming Bottled Honey [i:1134] or Honeyfin [i:2314], help Players in a <range> block range.
 				 * Recover player's maximum health by <bottledHealth>%, or <honeyfinHealth>% respectively.
@@ -689,7 +689,7 @@ Mods: {
 				'''
 			DeerclopsPetItem:
 				'''
-				[c/0ea80e:Defensive Pet]
+				<class>
 				- Store damage you take for <tresholdTime> seconds.
 				 * Every damage is stored separately, a stored damage may get expired separate from others.
 				- If damage stored reaches more than <treshold>% of your health do following:
@@ -698,7 +698,7 @@ Mods: {
 				'''
 			SkeletronPetItem:
 				'''
-				[c/f6546a:Offensive Pet]
+				<class>
 				- All damage you take and inflict will be dealt over time.
 				- You take <recievedMult>x damage and store the damage to be dealt over time.
 				 * Receive 1/<recievedHowLong>th of all damage stored every second.
@@ -708,7 +708,7 @@ Mods: {
 				'''
 			QueenSlimePetItem:
 				'''
-				[c/FA377D:Supportive and Offensive Pet]
+				<class>
 				- Improves Sparkle Slime Balloon [i:4986] and the Endless variation of it [i:<endless>] globally.
 				 * Enemies: Applies a <slow>% slow to all enemies affected.
 				 * Players: Grants <haste>% ability haste which increases how frequent your Pet's ability can be used
@@ -717,7 +717,7 @@ Mods: {
 				'''
 			SkeletronPrimePetItem:
 				'''
-				[c/8D7A40:Defensive and Offensive Pet]
+				<class>
 				- Gain <dmg>% damage, <crit>% crit chance, and <def>x defense while you have any shield active.
 				- Gives you 5 shields. 
 				 * Shields are only available while you're at 100% health, below 100%, 75%, 50% and 25% health respectively.
@@ -727,7 +727,7 @@ Mods: {
 				'''
 			DestroyerPetItem:
 				'''
-				[c/4CA858:Mining and Defensive Pet]
+				<class>
 				- Grants <defMultIncrease>x defense.
 				- Doubles Ironskin potion's [i:292] effect, giving <ironskinDef> more defense.
 				- Increases gathered ores, gems, simply anything mining related. 
@@ -735,7 +735,7 @@ Mods: {
 				'''
 			TwinsPetItem:
 				'''
-				[c/f6546a:Offensive Pet]
+				<class>
 				- Gain benefits depending on if you're close or far away from your target.
 				- Your target being in a <closeRange> tile range causes following:
 				 * Applies Cursed Flames on your target for <cursedTime> seconds.
@@ -747,7 +747,7 @@ Mods: {
 				'''
 			EverscreamPetItem:
 				'''
-				[c/3399FF:Magic Pet]
+				<class>
 				- Multiplies your magic crit by <magicCritNerf>x.
 				- Increases maximum mana by <maxMana>.
 				- Critical magic attacks recover <missingMana>% of your missing mana + <flatMana>.
@@ -757,7 +757,7 @@ Mods: {
 				'''
 			MartianPetItem:
 				'''
-				[c/ccf5f5:Mobility Pet]
+				<class>
 				- Grants <wingMult>x maximum wing time.
 				- Increases acceleration by <acc>%.
 				- Multiplies horizontal flight speed by <speedMult>x, acceleration by <accMult>x.
@@ -765,7 +765,7 @@ Mods: {
 				'''
 			DD2OgrePetItem:
 				'''
-				[c/849B25:Melee and Defensive Pet]
+				<class>
 				- Turns you into a litteral chonky immobile tank. 
 				 * All of the effects are not active if any mount is in use.
 				- Nerfing you by:
@@ -779,7 +779,7 @@ Mods: {
 				'''
 			DukeFishronPetItem:
 				'''
-				[c/0382E9:Fishing Pet]
+				<class>
 				- Multiply your fishing power by <baseMult>x + <anglerFishingPower> per angler quest, max 1x.
 				 * Completed Angler Quests: <anglerQuests>, Current Fishing Power multiplier: <currentAnglerWithBaseMult>x
 				- Gain <flatChance>% + <fishingPowerChance>% of your fishing power as a double drop chance.
@@ -787,7 +787,7 @@ Mods: {
 				'''
 			LunaticCultistPetItem:
 				'''
-				[c/f6546a:Offensive Pet]
+				<class>
 				- Every <cooldown> seconds, hitting an enemy casts one of the 3 area of effect spells:
 				 * 6 Ice Shards that travel in a hexagonal directory, that can hit up to <icePierce> times,
 				and dealing <icePercent>% of the damage you initially dealt +<iceFlat>.
@@ -798,7 +798,7 @@ Mods: {
 				'''
 			DD2BetsyPetItem:
 				'''
-				[c/FF6BA8:Ranged and Supportive Pet]
+				<class>
 				- Damaging enemies with ranged attacks apply Queen's Damnation debuff.
 				 * Debuff is applied for <debuffTime> seconds.
 				 * Debuff stacks up to <maxStack> stacks. 
@@ -809,7 +809,7 @@ Mods: {
 				'''
 			IceQueenPetItem:
 				'''
-				[c/0ea80e:Defensive Pet]
+				<class>
 				- Instead of taking fatal damage, go in a frozen state for <frozenTombTime> seconds.
 				 * During the freeze, slow all enemies in a <range>-block radius by <slowAmount>%.
 				 * While frozen, be immune to all types of damage.
@@ -820,7 +820,7 @@ Mods: {
 				'''
 			PlanteraPetItem:
 				'''
-				[c/FFB3BA:Ranged Pet]
+				<class>
 				- Ranged hits on enemies will deal bonus damage depending
 				on their missing health percentage.
 				 * The damage it increases can go up to <maxAmount>%.
@@ -830,7 +830,7 @@ Mods: {
 				'''
 			MoonLordPetItem:
 				'''
-				[c/8D7A40:Offensive and Defensive Pet]
+				<class>
 				- Adapts to whichever class has more damage.
 				 * Selection prioritizes as follows: Melee > Ranged > Magic > Summon.
 				- Summoner: <sumRange>% whip range, <sumSpd>% whip speed, <sumDmg>% summon damage, +<sumMax> max minion and sentry.
@@ -847,7 +847,7 @@ Mods: {
 				'''
 			Carrot:
 				'''
-				[c/ccf5f5:Mobility Pet]
+				<class>
 				- Every jump that is more than halfway gives you 1 stack.
 				 * Grants <moveSpeed>% movement speed per stack.
 				 * Grants <jumpSpeed>% jump speed per stack.
@@ -1085,7 +1085,8 @@ Mods: {
 
 		Keybinds: {
 			PetTooltipHide.DisplayName: Show Pet Tooltips
-			DualSlimeTooltipSwap.DisplayName: Swap Dual Slime Pet Tooltip
+			PetTooltipSwap.DisplayName: Switch Pet Tooltip
+			UsePetAbility.DisplayName: Use Pet Ability
 		}
 	}
 }

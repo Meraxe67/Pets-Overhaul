@@ -8,6 +8,12 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <AdditionalFiles Remove="PetEffects\ThoriumMod\**" />
+    <Compile Remove="PetEffects\ThoriumMod\**" />
+    <EmbeddedResource Remove="PetEffects\ThoriumMod\**" />
+    <None Remove="PetEffects\ThoriumMod\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Buffs\ChillingFear.png" />
     <None Remove="Items\egg.png" />
     <None Remove="Items\LihzahrdWrench.png" />

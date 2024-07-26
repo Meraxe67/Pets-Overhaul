@@ -11,7 +11,7 @@ namespace PetsOverhaul.Systems
     {
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
-            return PetRegistry.PetNamesAndItems.ContainsValue(entity.type) || entity.type == ItemID.JojaCola || PetRegistry.LightPetNamesAndItems.ContainsValue(entity.type);
+            return PetItemIDs.PetNamesAndItems.ContainsValue(entity.type) || entity.type == ItemID.JojaCola || PetItemIDs.LightPetNamesAndItems.ContainsValue(entity.type);
         }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
