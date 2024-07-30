@@ -45,7 +45,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUseWithSwapCd(ItemID.EverscreamPetItem) && GlobalPet.LifestealCheck(target) && hit.Crit && Pet.timer <= 0)
             {
-                Pet.Lifesteal(Player.statManaMax2 - Player.statMana, missingManaPercent, flatRecovery, true, false);
+                Pet.PetRecovery(Player.statManaMax2 - Player.statMana, missingManaPercent, flatRecovery, true, false);
                 Pet.timer = Pet.timerMax;
             }
         }

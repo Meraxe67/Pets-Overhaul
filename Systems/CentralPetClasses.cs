@@ -28,7 +28,7 @@ namespace PetsOverhaul.Systems
         /// <summary>
         /// Modify this value if you want to reduce lifesteal & healing by Pets for any reason, such as a Mod applying an effect that reduces healings. Basically a modifier on heals.
         /// </summary>
-        public float healMultiplier = 1f; //This is still not implemented!
+        public float petHealMultiplier = 1f; //This is still not implemented!
         /// <summary>
         /// Influences the chance to increase stack of the item from your pet that doesn't fit into any other fortune category. This also increases all other fortunes with half effectiveness.
         /// </summary>
@@ -229,16 +229,18 @@ namespace PetsOverhaul.Systems
             return !npc.friendly && !npc.SpawnedFromStatue && npc.type != NPCID.TargetDummy;
         }
         /// <summary>
-        /// percentageAmount% of baseAmount is converted to healing, non converted amount can still grant +1, depending on a roll. If manaSteal is set to true, 
-        /// everything same will be done for Mana instead of Health. Example: Lifesteal(215, 0.05f) will heal you for 10 health and 75% chance to heal 11 health 
-        /// instead. It returns its actual amount before MaxHealth/LifeSteal limitations, meaning you can combine it with another Lifesteal method to set the flatIncrease to something else. Lihzahrd uses 
-        /// this with its %heallth healing alongside its regular Lifesteal. flatIncrease does not go into any calculations. Will show its actual value as recovered, 
-        /// however, it will not increase the lifeSteal field or health/mana itself more than Maximum Health/mana cap or the lifeSteal field itself if respectLifeStealCap is true.
-        /// Does not actually lifesteal if doLifesteal is set to false, so it can safely return an integer value.
+        /// Used for Healing and Mana recovery purposes. Non converted amount can still grant +1, depending on a roll. Example: Lifesteal(215, 0.05f) will heal you for 10 health and 75% chance to heal +1 more, resulting in 11 health recovery.
         /// </summary>
-        public int Lifesteal(int baseAmount, float percentageAmount, int flatIncrease = 0, bool manaSteal = false, bool respectLifeStealCap = true, bool doLifesteal = true)
+        /// <param name="baseAmount">Base amount of value to be recovered</param>
+        /// <param name="percentageAmount">% of baseAmount to be converted to recovery.</param>
+        /// <param name="flatIncrease">Amount to be included that will not go through any calculations & complications.</param>
+        /// <param name="manaSteal">Whether or not if it will recover health or mana. petHealMultiplier and Moon Leech debuff will be disabled if set to True.</param>
+        /// <param name="respectLifeStealCap">Should be set to false if this is not a Life Steal, it won't use vanilla Life steal cap and won't modify player.lifeSteal if set to false.</param>
+        /// <param name="doHeal">Should be set to false if intended to simply return a value but not do anything at all.</param>
+        /// <returns>Returns amount calculated, irrelevant to Player's health cap, or the lifeSteal cap etc.</returns>
+        public int PetRecovery(int baseAmount, float percentageAmount, int flatIncrease = 0, bool manaSteal = false, bool respectLifeStealCap = true, bool doHeal = true)
         {
-            float num = baseAmount * (Player.HasBuff(BuffID.MoonLeech) ? percentageAmount * 0.33f : percentageAmount);
+            float num = baseAmount * (manaSteal ? 1 : (petHealMultiplier * (Player.HasBuff(BuffID.MoonLeech) ? percentageAmount * 0.33f : percentageAmount)));
             int calculatedAmount = (int)num;
             if (Main.rand.NextFloat(0, 1) < num % 1)
             {
@@ -247,7 +249,7 @@ namespace PetsOverhaul.Systems
 
             calculatedAmount += flatIncrease;
             num = calculatedAmount;
-            if (calculatedAmount > 0 && doLifesteal == true)
+            if (doHeal == true && calculatedAmount > 0)
             {
                 if (manaSteal == false)
                 {

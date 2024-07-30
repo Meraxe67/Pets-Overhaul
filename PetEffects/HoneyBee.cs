@@ -43,7 +43,7 @@ namespace PetsOverhaul.PetEffects
             if (selfHeal)
             {
                 Player player = healer.Player;
-                int healAmount = (int)(player.statLifeMax2 * (isBottledHoney ? healer.bottledHealth : healer.honeyfinHealth) / 2);
+                int healAmount = (int)(player.statLifeMax2 * (isBottledHoney ? healer.bottledHealth : healer.honeyfinHealth) / 2 * healer.Pet.petHealMultiplier);
                 player.HealEffect(healAmount);
                 if (player.statLife + healAmount > player.statLifeMax2)
                 {
@@ -66,7 +66,7 @@ namespace PetsOverhaul.PetEffects
                     {
                         continue;
                     }
-                    int healAmount = (int)(player.statLifeMax2 * (isBottledHoney ? healer.bottledHealth : healer.honeyfinHealth));
+                    int healAmount = (int)(player.statLifeMax2 * (isBottledHoney ? healer.bottledHealth : healer.honeyfinHealth) * healer.Pet.petHealMultiplier);
                     player.HealEffect(healAmount);
                     if (player.statLife + healAmount > player.statLifeMax2)
                     {

@@ -50,7 +50,7 @@ namespace PetsOverhaul.PetEffects
                 {
                     if (Pet.timer <= 0)
                     {
-                        Pet.Lifesteal(Player.statLifeMax2, healthRecovery, respectLifeStealCap: false);
+                        Pet.PetRecovery(Player.statLifeMax2, healthRecovery, respectLifeStealCap: false);
                         if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
                         {
                             SoundEngine.PlaySound(SoundID.Item97 with { Pitch = 0.4f, MaxInstances = 10 });

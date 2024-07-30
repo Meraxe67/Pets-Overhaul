@@ -54,7 +54,7 @@ namespace PetsOverhaul.PetEffects
             if (Player.Distance(target.Center) < closeRange && GlobalPet.LifestealCheck(target) && Pet.PetInUseWithSwapCd(ItemID.TwinsPetItem))
             {
                 target.AddBuff(BuffID.CursedInferno, infernoTime);
-                Pet.Lifesteal(Player.statDefense * defMult * (Player.endurance + 1f), hit.Damage * defLifestealDmgMult);
+                Pet.PetRecovery(Player.statDefense * defMult * (Player.endurance + 1f), hit.Damage * defLifestealDmgMult);
 
             }
         }

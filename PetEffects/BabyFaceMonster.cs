@@ -25,6 +25,8 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUse(ItemID.BoneRattle))
             {
+                stage1regen = 3;
+                stage2regen = 9;
                 timer--;
                 if (timer < -1000)
                 {
@@ -36,6 +38,8 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUseWithSwapCd(ItemID.BoneRattle))
             {
+                stage1regen = (int)Math.Round(stage1regen * Pet.petHealMultiplier);
+                stage2regen = (int)Math.Round(stage2regen * Pet.petHealMultiplier);
                 if (timer == 0)
                 {
                     if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)

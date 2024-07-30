@@ -21,11 +21,11 @@ namespace PetsOverhaul.PetEffects
             {
                 if (proj.GetGlobalProjectile<ProjectileSourceChecks>().isPlanteraProjectile)
                 {
-                    Pet.Lifesteal(damageDone, planteraLifesteal);
+                    Pet.PetRecovery(damageDone, planteraLifesteal);
                 }
                 else
                 {
-                    Pet.Lifesteal(damageDone, regularLifesteal);
+                    Pet.PetRecovery(damageDone, regularLifesteal);
                 }
             }
         }
@@ -35,11 +35,11 @@ namespace PetsOverhaul.PetEffects
             {
                 if (item.type == ItemID.Seedler || item.type == ItemID.TheAxe)
                 {
-                    Pet.Lifesteal(damageDone, planteraLifesteal);
+                    Pet.PetRecovery(damageDone, planteraLifesteal);
                 }
                 else
                 {
-                    Pet.Lifesteal(damageDone, regularLifesteal);
+                    Pet.PetRecovery(damageDone, regularLifesteal);
                 }
             }
         }

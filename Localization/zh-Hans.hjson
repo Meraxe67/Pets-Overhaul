@@ -1,12 +1,12 @@
 Mods: {
 	PetsOverhaul: {
-		// Operators are for cases where a Language does not use them when specifying a bonus but solely uses words. Put "" instead if need them to be empty.
+		// Operators are for cases where a Language does not use them when specifying a bonus but solely uses words. Put "" instead if you need them to be empty.
 		// %: %
 		// x: x
 		// +: +
 		// -: -
 		// KeybindMissing: Keybind Not Registered
-		// JojaCola: A nature related NPC may be able to Purify this
+		// JojaCola: A nature-related NPC may be able to Purify this
 		Notice:
 			'''
 			[c/90C2AA:Pets Overhaul 2.2.7 latest changes: Portugues translation!]
@@ -85,14 +85,14 @@ Mods: {
 			// DisableAbilityCooldownLabel: Disable Ability Cooldown Display If Unused
 			/* DisableAbilityCooldownTooltip:
 				'''
-				Makes Ability Cooldown display on right bottom corner of the screen invisible
-				if current Pet does not have an ability that uses Pet Ability Timer.
+				Makes the Ability Cooldown display on the right bottom corner of the screen invisible
+				if the current Pet does not have an ability that uses the Pet Ability Timer.
 				''' */
 			// AbilityDisplayInfoLabel: Disable Base Ability Cooldown Display
 			/* AbilityDisplayInfoTooltip:
 				'''
-				Makes Ability Cooldown display on right bottom corner of the screen
-				not include the Base Cooldown of current Pet's ability timer.
+				Makes Ability Cooldown display on the right bottom corner of the screen
+				not include the Base Cooldown of the current Pet's ability timer.
 				''' */
 		}
 
@@ -128,7 +128,7 @@ Mods: {
 				'''
 				Grants <hasteBase> + <hastePer>% Ability Haste per quality which increases
 				how frequently you can use your current Pet's ability and increases 
-				<fortBase> + <fortPer> Global Fortune per quality, increasing all Mining, Harvesting and Fishing drops.
+				<fortBase> + <fortPer> Global Fortune per quality, increasing all Mining, Harvesting, and Fishing drops.
 				which works with 50% effectiveness with already classified Pets.
 				Ability Haste Bonus: <currentHaste> Quality <hasteRoll> out of <hasteMaxRoll>
 				Global Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>

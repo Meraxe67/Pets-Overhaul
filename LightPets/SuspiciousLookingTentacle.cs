@@ -54,7 +54,7 @@ namespace PetsOverhaul.LightPets
                 }
                 if (modifiers.DamageType == DamageClass.Melee && GlobalPet.LifestealCheck(target))
                 {
-                    Pet.Lifesteal(Player.statDefense * 0.1f, moonlord.CurrentHeal);
+                    Pet.PetRecovery(Player.statDefense * 0.1f, moonlord.CurrentHeal);
                 }
             }
         }

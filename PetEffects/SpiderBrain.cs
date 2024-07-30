@@ -37,16 +37,16 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUseWithSwapCd(ItemID.BrainOfCthulhuPetItem) && GlobalPet.LifestealCheck(target))
             {
-                int decreaseFromPool = Pet.Lifesteal(damageDone, lifestealAmount, doLifesteal: false);
+                int decreaseFromPool = Pet.PetRecovery(damageDone, lifestealAmount, doHeal: false);
                 if (decreaseFromPool >= lifePool)
                 {
-                    Pet.Lifesteal(lifePool, 1f);
+                    Pet.PetRecovery(lifePool, 1f);
                     lifePool = 0;
                 }
                 else
                 {
                     lifePool -= decreaseFromPool;
-                    Pet.Lifesteal(decreaseFromPool, 1f);
+                    Pet.PetRecovery(decreaseFromPool, 1f);
                 }
             }
         }
