@@ -31,17 +31,20 @@ namespace PetsOverhaul.PetEffects
                 Pet.timerMax = shieldRecovery;
             }
         }
-        private void AddDefaultShield()
+        private void AddShield()
         {
-            shieldIndex = Pet.petShield.Count - 1;
-            Pet.petShield[shieldIndex] = ((int)(Player.statLifeMax2 * shieldMult), 2);
-        }
-        private void AddShieldWithTimer()
-        {
-            Pet.timer += Pet.timerMax / 5;
-            (int shieldAmount, int shieldTimer) shield = Pet.petShield[shieldIndex];
-            shield.shieldTimer = shieldTime;
-            Pet.petShield[shieldIndex] = shield;
+            if (oldShieldCount > shieldIndex && Pet.petShield[shieldIndex].shieldAmount < lastShield)
+            {
+                Pet.timer += Pet.timerMax / 5;
+                (int shieldAmount, int shieldTimer) shield = Pet.petShield[shieldIndex];
+                shield.shieldTimer = shieldTime;
+                Pet.petShield[shieldIndex] = shield;
+            }
+            else
+            {
+                shieldIndex = Pet.petShield.Count - 1;
+                Pet.petShield[shieldIndex] = ((int)(Player.statLifeMax2 * shieldMult), 2);
+            }
         }
         public override void PostUpdateEquips()
         {
@@ -53,58 +56,23 @@ namespace PetsOverhaul.PetEffects
                 }
                 if (Pet.timer <= Pet.timerMax * 0.8f && Player.statLife <= Player.statLifeMax2 * 0.25f)
                 {
-                    if (oldShieldCount > shieldIndex && Pet.petShield[shieldIndex].shieldAmount < lastShield)
-                    {
-                        AddShieldWithTimer();
-                    }
-                    else
-                    {
-                        AddDefaultShield();
-                    }
+                    AddShield();
                 }
                 else if (Pet.timer <= Pet.timerMax * 0.6f && Player.statLife <= Player.statLifeMax2 * 0.5f)
                 {
-                    if (oldShieldCount > shieldIndex && Pet.petShield[shieldIndex].shieldAmount < lastShield)
-                    {
-                        AddShieldWithTimer();
-                    }
-                    else
-                    {
-                        AddDefaultShield();
-                    }
+                    AddShield();
                 }
                 else if (Pet.timer <= Pet.timerMax * 0.4f && Player.statLife <= Player.statLifeMax2 * 0.75f)
                 {
-                    if (oldShieldCount > shieldIndex && Pet.petShield[shieldIndex].shieldAmount < lastShield)
-                    {
-                        AddShieldWithTimer();
-                    }
-                    else
-                    {
-                        AddDefaultShield();
-                    }
+                    AddShield();
                 }
                 else if (Pet.timer <= Pet.timerMax * 0.2f && Player.statLife < Player.statLifeMax2)
                 {
-                    if (oldShieldCount > shieldIndex && Pet.petShield[shieldIndex].shieldAmount < lastShield)
-                    {
-                        AddShieldWithTimer();
-                    }
-                    else
-                    {
-                        AddDefaultShield();
-                    }
+                    AddShield();
                 }
                 else if (Pet.timer <= 0 && Player.statLife <= Player.statLifeMax2)
                 {
-                    if (oldShieldCount > shieldIndex && Pet.petShield[shieldIndex].shieldAmount < lastShield)
-                    {
-                        AddShieldWithTimer();
-                    }
-                    else
-                    {
-                        AddDefaultShield();
-                    }
+                    AddShield();
                 }
                 if (oldShieldCount > shieldIndex)
                 {
