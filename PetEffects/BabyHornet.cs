@@ -95,7 +95,7 @@ namespace PetsOverhaul.PetEffects
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
             int summonMult = 1;
-            if (hit.DamageType == DamageClass.Summon)
+            if (hit.DamageType == DamageClass.Summon || hit.DamageType == DamageClass.SummonMeleeSpeed || hit.DamageType == DamageClass.MagicSummonHybrid)
             {
                 summonMult = 2;
             }

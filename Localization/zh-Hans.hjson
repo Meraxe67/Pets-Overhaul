@@ -983,7 +983,7 @@ Mods: {
 		Keybinds: {
 			// PetTooltipHide.DisplayName: Show Pet Tooltips
 			// PetTooltipSwap.DisplayName: Switch Pet Tooltip
-			// UsePetAbility.DisplayName: Use Pet Ability
+			// UsePetAbility.DisplayName: Use Pet Ability [c/808080:(Currently Unused)]
 		}
 	}
 }
