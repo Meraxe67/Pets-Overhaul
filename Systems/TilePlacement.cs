@@ -11,7 +11,7 @@ namespace PetsOverhaul.Systems
             if (Main.netMode == NetmodeID.MultiplayerClient)
             {
                 ModPacket packet = ModContent.GetInstance<PetsOverhaul>().GetPacket();
-                packet.Write((byte)PetsOverhaul.MessageType.blockPlace);
+                packet.Write((byte)MessageType.BlockPlace);
                 packet.Write(i);
                 packet.Write(j);
                 packet.Send();
@@ -26,7 +26,7 @@ namespace PetsOverhaul.Systems
             if (Main.netMode == NetmodeID.MultiplayerClient)
             {
                 ModPacket packet = ModContent.GetInstance<PetsOverhaul>().GetPacket();
-                packet.Write((byte)PetsOverhaul.MessageType.blockReplace);
+                packet.Write((byte)MessageType.BlockReplace);
                 packet.Write(i);
                 packet.Write(j);
                 packet.Send();

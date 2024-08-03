@@ -53,48 +53,48 @@ namespace PetsOverhaul.Systems
         public static Color OffensiveClass => new(246, 84, 106);
         public static Color DefensiveClass => new(14, 168, 14);
         public static Color SupportiveClass => new(255, 20, 147);
-        public static Color ClassEnumToColor(PetEffect.PetClasses Class)
+        public static Color ClassEnumToColor(PetClasses Class)
         {
             return Class switch
             {
-                PetEffect.PetClasses.None => new(0, 0, 0),
-                PetEffect.PetClasses.Melee => MeleeClass,
-                PetEffect.PetClasses.Ranged => RangedClass,
-                PetEffect.PetClasses.Magic => MagicClass,
-                PetEffect.PetClasses.Summoner => SummonerClass,
-                PetEffect.PetClasses.Utility => UtilityClass,
-                PetEffect.PetClasses.Mobility => MobilityClass,
-                PetEffect.PetClasses.Harvesting => HarvestingClass,
-                PetEffect.PetClasses.Mining => MiningClass,
-                PetEffect.PetClasses.Fishing => FishingClass,
-                PetEffect.PetClasses.Offensive => OffensiveClass,
-                PetEffect.PetClasses.Defensive => DefensiveClass,
-                PetEffect.PetClasses.Supportive => SupportiveClass,
+                PetClasses.None => new(0, 0, 0),
+                PetClasses.Melee => MeleeClass,
+                PetClasses.Ranged => RangedClass,
+                PetClasses.Magic => MagicClass,
+                PetClasses.Summoner => SummonerClass,
+                PetClasses.Utility => UtilityClass,
+                PetClasses.Mobility => MobilityClass,
+                PetClasses.Harvesting => HarvestingClass,
+                PetClasses.Mining => MiningClass,
+                PetClasses.Fishing => FishingClass,
+                PetClasses.Offensive => OffensiveClass,
+                PetClasses.Defensive => DefensiveClass,
+                PetClasses.Supportive => SupportiveClass,
                 _ => new(0, 0, 0),
             };
         }
         /// <summary>
         /// Writes out Pet's Classes and their color mix. Works fine if only one class is given.
         /// </summary>
-        public static string ClassText(PetEffect.PetClasses Class1, PetEffect.PetClasses Class2 = PetEffect.PetClasses.None)
+        public static string ClassText(PetClasses Class1, PetClasses Class2 = PetClasses.None)
         {
             if (Class1 == Class2)
             {
-                Class2 = PetEffect.PetClasses.None;
+                Class2 = PetClasses.None;
             }
 
-            if (Class1 == PetEffect.PetClasses.None && Class2 == PetEffect.PetClasses.None)
+            if (Class1 == PetClasses.None && Class2 == PetClasses.None)
             {
                 return "No class given.";
             }
-            else if (Class1 != PetEffect.PetClasses.None && Class2 != PetEffect.PetClasses.None)
+            else if (Class1 != PetClasses.None && Class2 != PetClasses.None)
             { 
                 {
                     Color color = Color.Lerp(ClassEnumToColor(Class1), ClassEnumToColor(Class2),0.5f);
                     return $"[c/{color.Hex3()}:{Class1} and {Class2} Pet]";
                 }
             }
-            else if (Class2 == PetEffect.PetClasses.None)
+            else if (Class2 == PetClasses.None)
             {
                 return $"[c/{ClassEnumToColor(Class1).Hex3()}:{Class1} Pet]";
             }

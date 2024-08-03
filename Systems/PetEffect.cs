@@ -16,22 +16,6 @@ namespace PetsOverhaul.Systems
     /// </summary>
     public abstract class PetEffect : ModPlayer
     {
-        public enum PetClasses
-        {
-            None = 0, 
-            Melee = 1, 
-            Ranged = 2, 
-            Magic = 3, 
-            Summoner = 4, 
-            Utility = 5, 
-            Mobility = 6, 
-            Harvesting = 7, 
-            Mining = 8, 
-            Fishing = 9, 
-            Offensive = 10, 
-            Defensive = 11, 
-            Supportive = 12
-        }
         /// <summary>
         /// Accesses the GlobalPet class, which has useful methods and fields for Pet implementation.
         /// </summary>

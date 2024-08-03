@@ -30,16 +30,16 @@ namespace PetsOverhaul.PetEffects
                     {
                         if (Main.rand.NextBool(4, 100))
                         {
-                            Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), ItemID.BlueEgg);
+                            Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.HarvestingItem), ItemID.BlueEgg);
                         }
                         else
                         {
-                            Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), ItemID.RottenEgg);
+                            Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.HarvestingItem), ItemID.RottenEgg);
                         }
                     }
                     else
                     {
-                        Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), ModContent.ItemType<Egg>());
+                        Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.HarvestingItem), ModContent.ItemType<Egg>());
                     }
 
                     if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
@@ -154,7 +154,7 @@ namespace PetsOverhaul.PetEffects
                         {
                             for (int i = 0; i < ItemPet.Randomizer(chick.rarePlantChance * item.stack); i++)
                             {
-                                player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
+                                player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.HarvestingItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
                             }
                         }
                     }
@@ -165,7 +165,7 @@ namespace PetsOverhaul.PetEffects
                         {
                             for (int i = 0; i < ItemPet.Randomizer(chick.treeChance * item.stack); i++)
                             {
-                                player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
+                                player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.HarvestingItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
                             }
                         }
                     }
@@ -176,7 +176,7 @@ namespace PetsOverhaul.PetEffects
                         {
                             for (int i = 0; i < ItemPet.Randomizer(chick.plantChance * item.stack); i++)
                             {
-                                player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
+                                player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.HarvestingItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
                             }
                         }
                     }

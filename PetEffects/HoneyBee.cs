@@ -94,7 +94,7 @@ namespace PetsOverhaul.PetEffects
                 if (Main.netMode == NetmodeID.MultiplayerClient)
                 {
                     ModPacket packet = Mod.GetPacket();
-                    packet.Write((byte)PetsOverhaul.MessageType.honeyBeeHeal);
+                    packet.Write((byte)MessageType.HoneyBeeHeal);
                     packet.Write(isBottledHoney);
                     packet.Write((byte)player.whoAmI);
                     packet.Send();

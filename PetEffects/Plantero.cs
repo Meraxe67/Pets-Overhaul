@@ -36,7 +36,7 @@ namespace PetsOverhaul.PetEffects
                             projId = ProjectileID.SporeGas3;
                             break;
                     }
-                    Projectile.NewProjectile(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.petProjectile), location, velocity, projId, (int)(damageDone * damageMult) + flatDmg, knockBack, Main.myPlayer);
+                    Projectile.NewProjectile(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), location, velocity, projId, (int)(damageDone * damageMult) + flatDmg, knockBack, Main.myPlayer);
                 }
             }
         }
@@ -58,7 +58,7 @@ namespace PetsOverhaul.PetEffects
                             projId = ProjectileID.SporeGas3;
                             break;
                     }
-                    Projectile.NewProjectile(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.petProjectile), location, velocity, projId, (int)(damageDone * damageMult) + flatDmg, knockBack, Main.myPlayer);
+                    Projectile.NewProjectile(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), location, velocity, projId, (int)(damageDone * damageMult) + flatDmg, knockBack, Main.myPlayer);
                 }
             }
         }

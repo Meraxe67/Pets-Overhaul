@@ -33,7 +33,7 @@ namespace PetsOverhaul.PetEffects
         public int shieldTime = 240;
         public float dmgBoost = 1.22f;
         public int baseCounterChnc = 90;
-        public override void PostUpdate()
+        public override void ProcessTriggers(TriggersSet triggersSet)
         {
             if (Keybinds.PetTooltipSwap != null && Keybinds.PetTooltipSwap.JustPressed)
             {
@@ -60,7 +60,7 @@ namespace PetsOverhaul.PetEffects
                 .Replace("<approxWeak>", "10")
                 .Replace("<keybind>", Keybinds.PetTooltipSwap.GetAssignedKeys(GlobalPet.PlayerInputMode).Count > 0 ? Keybinds.PetTooltipSwap.GetAssignedKeys(GlobalPet.PlayerInputMode)[0] : $"[c/{Colors.RarityTrash.Hex3()}:{Language.GetTextValue("Mods.PetsOverhaul.KeybindMissing")}]")
                 .Replace("<tooltip>", Language.GetTextValue($"Mods.PetsOverhaul.PetItemTooltips.{(dualSlime.swapTooltip ? "KingSlimePetItem" : "QueenSlimePetItem")}"))
-                .Replace("<class>", PetColors.ClassText(dualSlime.PetClassPrimary, dualSlime.swapTooltip ? PetEffect.PetClasses.None : PetEffect.PetClasses.Offensive))
+                .Replace("<class>", PetColors.ClassText(dualSlime.PetClassPrimary, dualSlime.swapTooltip ? PetClasses.None : PetClasses.Offensive))
                 .Replace("<burnHp>", Math.Round(dualSlime.healthDmg * 100, 2).ToString())
                 .Replace("<burnCap>", dualSlime.burnCap.ToString())
                 .Replace("<extraKb>", dualSlime.bonusKb.ToString())

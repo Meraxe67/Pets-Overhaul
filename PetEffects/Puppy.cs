@@ -42,7 +42,7 @@ namespace PetsOverhaul.PetEffects
                     Pet.GiveCoins(ItemPet.Randomizer(rareCritterCoin * npc.rarity));
                     for (int i = 0; i < ItemPet.Randomizer(rareCatchChance); i++)
                     {
-                        Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), npc.catchItem, 1);
+                        Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.GlobalItem), npc.catchItem, 1);
                         if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
                         {
                             SoundEngine.PlaySound(SoundID.Item65 with { PitchVariance = 0.3f, MaxInstances = 5, Volume = 0.5f }, Player.position);
@@ -54,7 +54,7 @@ namespace PetsOverhaul.PetEffects
                 {
                     for (int i = 0; i < ItemPet.Randomizer(catchChance); i++)
                     {
-                        Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.globalItem), npc.catchItem, 1);
+                        Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.GlobalItem), npc.catchItem, 1);
                         if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
                         {
                             SoundEngine.PlaySound(SoundID.Item65 with { PitchVariance = 0.3f, MaxInstances = 1, Volume = 0.5f }, Player.position);

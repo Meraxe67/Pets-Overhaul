@@ -24,7 +24,7 @@ namespace PetsOverhaul.PetEffects
             if (Pet.PetInUseWithSwapCd(ItemID.ToySled))
             {
                 target.AddBuff(BuffID.Frostburn2, frostburnTime * FrostArmorMult);
-                target.GetGlobalNPC<NpcPet>().AddSlow(NpcPet.SlowId.Snowman, snowmanSlow * FrostArmorMult, slowTime * FrostArmorMult, target);
+                target.GetGlobalNPC<NpcPet>().AddSlow(PetSlowIDs.Snowman, snowmanSlow * FrostArmorMult, slowTime * FrostArmorMult, target);
             }
         }
 

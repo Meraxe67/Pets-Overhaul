@@ -29,7 +29,7 @@ namespace PetsOverhaul.PetEffects
                 {
                     for (int i = 0; i < ItemPet.Randomizer(Junimo.HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)).expAmount >= ItemPet.MinimumExpForRarePlant ? squash.squashlingRareChance : squash.squashlingCommonChance) * item.stack; i++)
                     {
-                        player.QuickSpawnItemDirect(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.harvestingItem), item.type, 1);
+                        player.QuickSpawnItemDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.HarvestingItem), item.type, 1);
                     }
                 }
             }

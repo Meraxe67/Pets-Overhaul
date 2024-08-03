@@ -92,7 +92,7 @@ namespace PetsOverhaul.PetEffects
             {
                 for (int i = 0; i < ItemPet.Randomizer(parrot.projChance); i++)
                 {
-                    Projectile.NewProjectile(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.petProjectile), projectile.position, projectile.velocity * Main.rand.NextFloat(0.8f, 1.2f), projectile.type, (int)(projectile.damage * parrot.projDamage), projectile.knockBack, projectile.owner);
+                    Projectile.NewProjectile(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), projectile.position, projectile.velocity * Main.rand.NextFloat(0.8f, 1.2f), projectile.type, (int)(projectile.damage * parrot.projDamage), projectile.knockBack, projectile.owner);
                     parrot.PlayParrotSound();
                 }
             }

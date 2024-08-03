@@ -14,14 +14,6 @@ namespace PetsOverhaul
 {
     public class PetsOverhaul : Mod
     {
-        public enum MessageType : byte
-        {
-            shieldFullAbsorb,
-            seaCreatureOnKill,
-            honeyBeeHeal,
-            blockPlace,
-            blockReplace,
-        }
         public static Action<Item, Player> OnPickupActions;
         private delegate bool orig_ItemLoaderOnPickup(Item item, Player player);
         private delegate bool hook_ItemLoaderOnPickup(orig_ItemLoaderOnPickup orig, Item item, Player player);
@@ -47,15 +39,15 @@ namespace PetsOverhaul
             MessageType msgType = (MessageType)reader.ReadByte();
             switch (msgType)
             {
-                case MessageType.shieldFullAbsorb:
+                case MessageType.ShieldFullAbsorb:
                     int damage = reader.ReadInt32();
                     GlobalPet.HandleShieldBlockMessage(reader, whoAmI, damage);
                     break;
-                case MessageType.seaCreatureOnKill:
+                case MessageType.SeaCreatureOnKill:
                     int npcId = reader.ReadInt32();
                     Junimo.RunSeaCreatureOnKill(reader, whoAmI, npcId);
                     break;
-                case MessageType.honeyBeeHeal:
+                case MessageType.HoneyBeeHeal:
                     bool bottledHoney = reader.ReadBoolean();
                     int honeyBeeWhoAmI = reader.ReadByte();
                     if (Main.netMode == NetmodeID.Server)
@@ -68,12 +60,12 @@ namespace PetsOverhaul
                     }
                     HoneyBee.HealByHoneyBee(bottledHoney, honeyBeeWhoAmI, false);
                     break;
-                case MessageType.blockPlace:
+                case MessageType.BlockPlace:
                     int xPlace = reader.ReadInt32();
                     int yPlace = reader.ReadInt32();
                     PlayerPlacedBlockList.placedBlocksByPlayer.Add(new Point16(xPlace, yPlace));
                     break;
-                case MessageType.blockReplace:
+                case MessageType.BlockReplace:
                     int xReplace = reader.ReadInt32();
                     int yReplace = reader.ReadInt32();
                     ItemPet.updateReplacedTile.Add(new Point16(xReplace, yReplace));

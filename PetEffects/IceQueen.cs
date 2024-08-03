@@ -43,7 +43,7 @@ namespace PetsOverhaul.PetEffects
                         NPC npc = Main.npc[i];
                         if (npc.active && Player.Distance(npc.Center) < queenRange)
                         {
-                            npc.GetGlobalNPC<NpcPet>().AddSlow(NpcPet.SlowId.IceQueen, slowAmount, 5, npc);
+                            npc.GetGlobalNPC<NpcPet>().AddSlow(PetSlowIDs.IceQueen, slowAmount, 5, npc);
                         }
                     }
                     for (int i = 0; i < 20 + iceQueenFrame / 15; i++)

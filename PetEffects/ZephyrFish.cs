@@ -79,7 +79,7 @@ namespace PetsOverhaul.PetEffects
             {
                 for (int i = 0; i < ItemPet.Randomizer((amplifiedFishingChance ? windChance : 0 + baseChance) * fish.stack); i++)
                 {
-                    Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySource_Pet.TypeId.fishingItem), fish.type, 1);
+                    Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.FishingItem), fish.type, 1);
                 }
             }
         }

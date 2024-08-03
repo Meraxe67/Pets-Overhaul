@@ -81,7 +81,7 @@ namespace PetsOverhaul.Systems
         /// Used to change alternating color of maximum Light Pet Rolls alongside colorVal
         /// </summary>
         private static bool colorSwitched = false;
-        public static IEntitySource GetSource_Pet(EntitySource_Pet.TypeId typeId, string context = null)
+        public static IEntitySource GetSource_Pet(EntitySourcePetIDs typeId, string context = null)
         {
             return new EntitySource_Pet
             {
@@ -119,20 +119,20 @@ namespace PetsOverhaul.Systems
         {
             if (coinAmount > 1000000)
             {
-                Player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.PlatinumCoin, coinAmount / 1000000);
+                Player.QuickSpawnItem(GetSource_Pet(EntitySourcePetIDs.GlobalItem), ItemID.PlatinumCoin, coinAmount / 1000000);
                 coinAmount %= 1000000;
             }
             if (coinAmount > 10000)
             {
-                Player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.GoldCoin, coinAmount / 10000);
+                Player.QuickSpawnItem(GetSource_Pet(EntitySourcePetIDs.GlobalItem), ItemID.GoldCoin, coinAmount / 10000);
                 coinAmount %= 10000;
             }
             if (coinAmount > 100)
             {
-                Player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.SilverCoin, coinAmount / 100);
+                Player.QuickSpawnItem(GetSource_Pet(EntitySourcePetIDs.GlobalItem), ItemID.SilverCoin, coinAmount / 100);
                 coinAmount %= 100;
             }
-            Player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.globalItem), ItemID.CopperCoin, coinAmount);
+            Player.QuickSpawnItem(GetSource_Pet(EntitySourcePetIDs.GlobalItem), ItemID.CopperCoin, coinAmount);
         }
         public override void Load()
         {
@@ -147,7 +147,7 @@ namespace PetsOverhaul.Systems
                 {
                     for (int i = 0; i < ItemPet.Randomizer(PickerPet.globalFortune * item.stack); i++)
                     {
-                        player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.globalItem), item.type, 1);
+                        player.QuickSpawnItem(GetSource_Pet(EntitySourcePetIDs.GlobalItem), item.type, 1);
                     }
                 }
 
@@ -155,7 +155,7 @@ namespace PetsOverhaul.Systems
                 {
                     for (int i = 0; i < ItemPet.Randomizer((PickerPet.globalFortune * 10 / 2 + PickerPet.harvestingFortune * 10) * item.stack, 1000); i++) //Multiplied by 10 and divided by 1000 since we divide globalFortune by 2, to get more precise numbers.
                     {
-                        player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.harvestingFortuneItem), item.type, 1);
+                        player.QuickSpawnItem(GetSource_Pet(EntitySourcePetIDs.HarvestingFortuneItem), item.type, 1);
                     }
                 }
 
@@ -163,7 +163,7 @@ namespace PetsOverhaul.Systems
                 {
                     for (int i = 0; i < ItemPet.Randomizer((PickerPet.globalFortune * 10 / 2 + PickerPet.miningFortune * 10) * item.stack, 1000); i++)
                     {
-                        player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.miningFortuneItem), item.type, 1);
+                        player.QuickSpawnItem(GetSource_Pet(EntitySourcePetIDs.MiningFortuneItem), item.type, 1);
                     }
                 }
 
@@ -171,7 +171,7 @@ namespace PetsOverhaul.Systems
                 {
                     for (int i = 0; i < ItemPet.Randomizer((PickerPet.globalFortune * 10 / 2 + PickerPet.fishingFortune) * item.stack, 1000); i++)
                     {
-                        player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.fishingFortuneItem), item.type, 1);
+                        player.QuickSpawnItem(GetSource_Pet(EntitySourcePetIDs.FishingFortuneItem), item.type, 1);
                     }
                 }
 
@@ -179,7 +179,7 @@ namespace PetsOverhaul.Systems
                 {
                     for (int i = 0; i < ItemPet.Randomizer((PickerPet.globalFortune + PickerPet.harvestingFortune) * 10 / 2 * item.stack, 1000); i++)
                     {
-                        player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.harvestingFortuneItem), item.type, 1);
+                        player.QuickSpawnItem(GetSource_Pet(EntitySourcePetIDs.HarvestingFortuneItem), item.type, 1);
                     }
                 }
 
@@ -187,7 +187,7 @@ namespace PetsOverhaul.Systems
                 {
                     for (int i = 0; i < ItemPet.Randomizer((PickerPet.globalFortune + PickerPet.miningFortune) * 10 / 2 * item.stack, 1000); i++)
                     {
-                        player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.miningFortuneItem), item.type, 1);
+                        player.QuickSpawnItem(GetSource_Pet(EntitySourcePetIDs.MiningFortuneItem), item.type, 1);
                     }
                 }
                 // Fish is below at ModifyCaughtFish()
@@ -386,7 +386,7 @@ namespace PetsOverhaul.Systems
         public static void SendShieldBlockToServer(int whoAmI, int dmgAmount)
         {
             ModPacket packet = ModContent.GetInstance<PetsOverhaul>().GetPacket();
-            packet.Write((byte)PetsOverhaul.MessageType.shieldFullAbsorb);
+            packet.Write((byte)MessageType.ShieldFullAbsorb);
             packet.Write(dmgAmount);
             packet.Write((byte)whoAmI);
             packet.Send(ignoreClient: whoAmI);
@@ -576,7 +576,7 @@ namespace PetsOverhaul.Systems
         {
             for (int i = 0; i < ItemPet.Randomizer((globalFortune + fishingFortune) * 10 / 2 * fish.stack, 1000); i++)
             {
-                Player.QuickSpawnItem(GetSource_Pet(EntitySource_Pet.TypeId.fishingFortuneItem), fish.type, 1);
+                Player.QuickSpawnItem(GetSource_Pet(EntitySourcePetIDs.FishingFortuneItem), fish.type, 1);
             }
         }
     }
@@ -676,19 +676,19 @@ namespace PetsOverhaul.Systems
 
             if (source is EntitySource_Pet petSource)
             {
-                globalDrop = petSource.ContextType == EntitySource_Pet.TypeId.globalItem;
+                globalDrop = petSource.ContextType == EntitySourcePetIDs.GlobalItem;
 
-                harvestingDrop = petSource.ContextType == EntitySource_Pet.TypeId.harvestingItem;
+                harvestingDrop = petSource.ContextType == EntitySourcePetIDs.HarvestingItem;
 
-                miningDrop = petSource.ContextType == EntitySource_Pet.TypeId.miningItem;
+                miningDrop = petSource.ContextType == EntitySourcePetIDs.MiningItem;
 
-                fishingDrop = petSource.ContextType == EntitySource_Pet.TypeId.fishingItem;
+                fishingDrop = petSource.ContextType == EntitySourcePetIDs.FishingItem;
 
-                fortuneHarvestingDrop = petSource.ContextType == EntitySource_Pet.TypeId.harvestingFortuneItem;
+                fortuneHarvestingDrop = petSource.ContextType == EntitySourcePetIDs.HarvestingFortuneItem;
 
-                fortuneMiningDrop = petSource.ContextType == EntitySource_Pet.TypeId.miningFortuneItem;
+                fortuneMiningDrop = petSource.ContextType == EntitySourcePetIDs.MiningFortuneItem;
 
-                fortuneFishingDrop = petSource.ContextType == EntitySource_Pet.TypeId.fishingFortuneItem;
+                fortuneFishingDrop = petSource.ContextType == EntitySourcePetIDs.FishingFortuneItem;
             }
             else if (source is EntitySource_TileBreak || source is EntitySource_ShakeTree)
             {
@@ -752,11 +752,7 @@ namespace PetsOverhaul.Systems
     /// </summary>
     public sealed class NpcPet : GlobalNPC
     {
-        public enum SlowId
-        {
-            Grinch = 0, Snowman = 1, QueenSlime = 2, Deerclops = 3, IceQueen = 4, PikachuStatic = 5, PhantasmalIce = 6, Misc = 7
-        }
-        public List<(SlowId, float slowAmount, int slowTime)> SlowList = new();
+        public List<(PetSlowIDs, float slowAmount, int slowTime)> SlowList = new();
         /// <summary>
         /// If you need to find out how much current cumulative slow amount is, use this.
         /// </summary>
@@ -878,7 +874,7 @@ namespace PetsOverhaul.Systems
                     SlowList.ForEach(x => SlowAmount += x.slowAmount);
                     for (int i = 0; i < SlowList.Count; i++) //List'lerde struct'lar bir nevi readonly olarak çalıştığından, değeri alıp tekrar atıyoruz
                     {
-                        (SlowId, float slowAmount, int slowTime) slow = SlowList[i];
+                        (PetSlowIDs, float slowAmount, int slowTime) slow = SlowList[i];
                         slow.slowTime--;
                         SlowList[i] = slow;
                     }
@@ -946,7 +942,7 @@ namespace PetsOverhaul.Systems
         /// <summary>
         /// Use this to add Slow to the NPC. Also checks if the NPC is a boss or a friendly npc or not.
         /// </summary>
-        public void AddSlow(SlowId slowType, float slowValue, int slowTimer, NPC npc)
+        public void AddSlow(PetSlowIDs slowType, float slowValue, int slowTimer, NPC npc)
         {
             if (npc.active && npc.buffImmune[BuffID.Confused] == false && (npc.townNPC == false || npc.isLikeATownNPC == false || npc.friendly == false) && npc.boss == false && nonBossTrueBosses[npc.type] == false)
             {
@@ -1011,7 +1007,7 @@ namespace PetsOverhaul.Systems
             {
                 isPlanteraProjectile = true;
             }
-            if (source is EntitySource_Pet { ContextType: EntitySource_Pet.TypeId.petProjectile })
+            if (source is EntitySource_Pet { ContextType: EntitySourcePetIDs.PetProjectile })
             {
                 petProj = true;
             }
