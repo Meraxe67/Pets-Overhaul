@@ -49,13 +49,17 @@ namespace PetsOverhaul.Config
         [LabelKey("$Mods.PetsOverhaul.Config.ShieldLocationLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.ShieldLocationTooltip")]
         public string ShieldLocation;
-        [LabelKey("$Mods.PetsOverhaul.Config.DisableAbilityCooldownLabel")]
-        [TooltipKey("$Mods.PetsOverhaul.Config.DisableAbilityCooldownTooltip")]
+        [LabelKey("$Mods.PetsOverhaul.Config.DisableAbilityUnusedLabel")]
+        [TooltipKey("$Mods.PetsOverhaul.Config.DisableAbilityUnusedTooltip")]
         [DefaultValue(true)]
-        public bool AbilityDisplay;
+        public bool AbilityDisplayUnused;
         [LabelKey("$Mods.PetsOverhaul.Config.AbilityDisplayInfoLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.AbilityDisplayInfoTooltip")]
         [DefaultValue(false)]
         public bool AbilityDisplayInfo;
+        [LabelKey("$Mods.PetsOverhaul.Config.AbilityDisplayInfoLabel")]
+        [TooltipKey("$Mods.PetsOverhaul.Config.AbilityDisplayInfoTooltip")]
+        [DefaultValue(false)]
+        public bool AbilityDisplayDisable;
     }
 }
