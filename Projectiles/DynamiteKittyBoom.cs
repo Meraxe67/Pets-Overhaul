@@ -2,12 +2,14 @@
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace PetsOverhaul.Projectiles
 {
     public class DynamiteKittyBoom : ModProjectile
     {
+        public override LocalizedText DisplayName => Language.GetText("Mods.PetsOverhaul.Projectiles.DynamiteKittyBoom");
         public override void SetDefaults()
         {
             Projectile.width = 200;
