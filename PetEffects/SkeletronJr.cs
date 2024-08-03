@@ -1,5 +1,7 @@
-﻿using PetsOverhaul.Config;
+﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
@@ -17,7 +19,7 @@ namespace PetsOverhaul.PetEffects
         public List<(int, int)> skeletronTakenDamage = new();
         private int timer = 0;
         public float enemyDamageIncrease = 1.2f;
-        public int playerDamageTakenSpeed = 4;
+        public float playerDamageTakenSpeed = 4f;
         public float playerTakenMult = 1f;
 
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
@@ -34,18 +36,32 @@ namespace PetsOverhaul.PetEffects
             if (skeletronTakenDamage.Count > 0 && timer >= 60)
             {
                 int totalDmg = 0;
-                skeletronTakenDamage.ForEach(x => totalDmg += x.Item2 / playerDamageTakenSpeed);
+                skeletronTakenDamage.ForEach(x => totalDmg += (int)Math.Ceiling(x.Item2 / playerDamageTakenSpeed));
                 Player.statLife -= totalDmg;
                 CombatText.NewText(Player.getRect(), CombatText.DamagedHostile, totalDmg);
                 if (Player.statLife <= 0)
                 {
-                    Player.KillMe(PlayerDeathReason.ByCustomReason(Player.name + " could not contain Skeletron's curse."), 1, 0);
+                    if (Main.rand.NextBool(20))
+                    {
+                        if (Main.rand.NextBool(2))
+                        {
+                            Player.KillMe(PlayerDeathReason.ByCustomReason("geeettttttt dunked on!!!"), 1, 0);
+                        }
+                        else
+                        {
+                            Player.KillMe(PlayerDeathReason.ByCustomReason("seems like you've had a bad time"), 1, 0);
+                        }
+                    }
+                    else
+                    {
+                        Player.KillMe(PlayerDeathReason.ByCustomReason(Player.name + " could not contain Skeletron's curse."), 1, 0);
+                    }
                 }
 
                 for (int i = 0; i < skeletronTakenDamage.Count; i++)
                 {
                     (int, int) point = skeletronTakenDamage[i];
-                    point.Item1 -= point.Item2 / playerDamageTakenSpeed;
+                    point.Item1 -= (int)Math.Ceiling(point.Item2 / playerDamageTakenSpeed);
                     skeletronTakenDamage[i] = point;
                 }
                 skeletronTakenDamage.RemoveAll(x => x.Item1 <= 0);
