@@ -2,6 +2,7 @@
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameInput;
@@ -31,7 +32,7 @@ namespace PetsOverhaul.PetEffects
         {
             for (int i = 0; i < Player.MaxBuffs; i++)
             {
-                if (Pet.burnDebuffs[Player.buffType[i]])
+                if (GlobalPet.BurnDebuffs.Contains(Player.buffType[i]))
                 {
                     Player.buffTime[i]--;
                 }
@@ -72,27 +73,30 @@ namespace PetsOverhaul.PetEffects
         public override bool InstancePerEntity => true;
         public override void UpdateLifeRegen(NPC npc, ref int damage)
         {
-            if (GlobalPet.KingSlimePetActive(out slimePrince) && npc.HasBuff(BuffID.Slimed) && (npc.HasBuff(BuffID.Burning) || npc.HasBuff(BuffID.OnFire) || npc.HasBuff(BuffID.OnFire3) || npc.HasBuff(BuffID.Frostburn) || npc.HasBuff(BuffID.CursedInferno) || npc.HasBuff(BuffID.ShadowFlame) || npc.HasBuff(BuffID.Frostburn2)))
+            void BurnAmp(Player slime)
             {
-                if (npc.lifeMax * slimePrince.GetModPlayer<SlimePrince>().healthDmg > slimePrince.GetModPlayer<SlimePrince>().burnCap)
+                for (int i = 0; i < NPC.maxBuffs; i++)
                 {
-                    npc.lifeRegen -= slimePrince.GetModPlayer<SlimePrince>().burnCap;
-                }
-                else
-                {
-                    npc.lifeRegen -= (int)(npc.lifeMax * slimePrince.GetModPlayer<SlimePrince>().healthDmg);
+                    if (GlobalPet.BurnDebuffs.Contains(npc.buffType[i]))
+                    {
+                        if (npc.lifeMax * slime.GetModPlayer<SlimePrince>().healthDmg > slime.GetModPlayer<SlimePrince>().burnCap)
+                        {
+                            npc.lifeRegen -= slime.GetModPlayer<SlimePrince>().burnCap;
+                        }
+                        else
+                        {
+                            npc.lifeRegen -= (int)(npc.lifeMax * slime.GetModPlayer<SlimePrince>().healthDmg);
+                        }
+                    }
                 }
             }
-            else if (GlobalPet.DualSlimePetActive(out slimeDual) && npc.HasBuff(BuffID.Slimed) && (npc.HasBuff(BuffID.Burning) || npc.HasBuff(BuffID.OnFire) || npc.HasBuff(BuffID.OnFire3) || npc.HasBuff(BuffID.Frostburn) || npc.HasBuff(BuffID.CursedInferno) || npc.HasBuff(BuffID.ShadowFlame) || npc.HasBuff(BuffID.Frostburn2)))
+            if (GlobalPet.KingSlimePetActive(out slimePrince) && npc.HasBuff(BuffID.Slimed))
             {
-                if (npc.lifeMax * slimeDual.GetModPlayer<DualSlime>().healthDmg > slimeDual.GetModPlayer<DualSlime>().burnCap)
-                {
-                    npc.lifeRegen -= slimeDual.GetModPlayer<DualSlime>().burnCap;
-                }
-                else
-                {
-                    npc.lifeRegen -= (int)(npc.lifeMax * slimeDual.GetModPlayer<DualSlime>().healthDmg);
-                }
+                BurnAmp(slimePrince);
+            }
+            else if (GlobalPet.DualSlimePetActive(out slimeDual) && npc.HasBuff(BuffID.Slimed))
+            {
+                BurnAmp(slimeDual);
             }
         }
         public override void ModifyHitPlayer(NPC npc, Player target, ref Player.HurtModifiers modifiers)

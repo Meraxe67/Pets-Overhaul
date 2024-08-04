@@ -43,11 +43,11 @@ namespace PetsOverhaul.PetEffects
             if (Pet.PickupChecks(item, ItemID.AmberMosquito, out ItemPet itemChck) && itemChck.oreBoost)
             {
                 AddItemsToPool();
-                if (GlobalPet.pool.Count > 0)
+                if (GlobalPet.ItemPool.Count > 0)
                 {
                     for (int i = 0; i < ItemPet.Randomizer(dino.chance * item.stack, 1000); i++)
                     {
-                        player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.MiningItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
+                        player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.MiningItem), GlobalPet.ItemPool[Main.rand.Next(GlobalPet.ItemPool.Count)], 1);
                     }
                 }
             }

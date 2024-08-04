@@ -46,13 +46,13 @@ namespace PetsOverhaul.Systems
         /// </summary>
         public int fishingFortune = 0;
 
-        public bool[] burnDebuffs = BuffID.Sets.Factory.CreateBoolSet(false, BuffID.Burning, BuffID.OnFire, BuffID.OnFire3, BuffID.Frostburn, BuffID.CursedInferno, BuffID.ShadowFlame, BuffID.Frostburn2);
+        public static List<int> BurnDebuffs = [BuffID.Burning, BuffID.OnFire, BuffID.OnFire3, BuffID.Frostburn, BuffID.CursedInferno, BuffID.ShadowFlame, BuffID.Frostburn2];
         public Color skin;
         public bool skinColorChanged = false;
         /// <summary>
         /// Is cleared at the end of PostUpdate hook. Main use is for Weighted Lists with usage of ItemWeight() Method. Retrieve a value using Main.rand.Next() for its index for Weighted list usage.
         /// </summary>
-        public static List<int> pool = new();
+        public static List<int> ItemPool = new();
 
         public List<(int shieldAmount, int shieldTimer)> petShield = new();
         public int currentShield = 0;
@@ -96,7 +96,7 @@ namespace PetsOverhaul.Systems
         {
             for (int i = 0; i < weight; i++)
             {
-                pool.Add(itemId);
+                ItemPool.Add(itemId);
             }
         }
         /// <summary>
@@ -515,9 +515,9 @@ namespace PetsOverhaul.Systems
                 }
             }
 
-            if (pool.Count > 0)
+            if (ItemPool.Count > 0)
             {
-                pool.Clear();
+                ItemPool.Clear();
             }
         }
         public override void OnEnterWorld()

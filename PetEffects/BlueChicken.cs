@@ -150,33 +150,33 @@ namespace PetsOverhaul.PetEffects
                     if (Junimo.HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)).expAmount >= ItemPet.MinimumExpForRarePlant)
                     {
                         PoolRarePlant();
-                        if (GlobalPet.pool.Count > 0)
+                        if (GlobalPet.ItemPool.Count > 0)
                         {
                             for (int i = 0; i < ItemPet.Randomizer(chick.rarePlantChance * item.stack); i++)
                             {
-                                player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.HarvestingItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
+                                player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.HarvestingItem), GlobalPet.ItemPool[Main.rand.Next(GlobalPet.ItemPool.Count)], 1);
                             }
                         }
                     }
                     else if (ItemPet.treeItem[item.type])
                     {
                         PoolTree();
-                        if (GlobalPet.pool.Count > 0)
+                        if (GlobalPet.ItemPool.Count > 0)
                         {
                             for (int i = 0; i < ItemPet.Randomizer(chick.treeChance * item.stack); i++)
                             {
-                                player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.HarvestingItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
+                                player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.HarvestingItem), GlobalPet.ItemPool[Main.rand.Next(GlobalPet.ItemPool.Count)], 1);
                             }
                         }
                     }
                     else
                     {
                         PoolPlant();
-                        if (GlobalPet.pool.Count > 0)
+                        if (GlobalPet.ItemPool.Count > 0)
                         {
                             for (int i = 0; i < ItemPet.Randomizer(chick.plantChance * item.stack); i++)
                             {
-                                player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.HarvestingItem), GlobalPet.pool[Main.rand.Next(GlobalPet.pool.Count)], 1);
+                                player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.HarvestingItem), GlobalPet.ItemPool[Main.rand.Next(GlobalPet.ItemPool.Count)], 1);
                             }
                         }
                     }

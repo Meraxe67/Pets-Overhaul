@@ -28,13 +28,37 @@ Mods: {
 				禁用此模组在进入世界时发送的通知,
 				通知可能包含最近更新的简要信息.
 				'''
-			TooltipShiftToggleLabel: 启用可切换显示的宠物/物品工具提示
-			TooltipShiftToggleTooltip:
+			// DisableTooltipToggleLabel: Disable Pet/Item tooltips being toggleable
+			/* DisableTooltipToggleTooltip:
 				'''
-				启用所有添加的宠物和物品工具提示仅在按向下
-				按键时可见.(在快捷键绑定中为向下,默认为S)
+				Disables the system where Pets Overhaul effects on Pet Item tooltips to be
+				only visible while your set Keybind is held. (You need to manually assign a keybinding)
+				''' */
+			// TooltipToggleInGame: Hold the <keybind> button to view the Pet tooltip
+			// ShieldLocationLabel: Pet Shield Location
+			/* ShieldLocationTooltip:
 				'''
-			TooltipShiftToggleInGame: 按住向下键显示宠物的工具提示
+				Changes where Pet Shield should be displayed when a Shield has been provided by your Pet.
+				Next to the Healthbar options works best with 1920x1080 Resolutions.
+				''' */
+			// DisableAbilityUnusedLabel: Disable Ability Cooldown Display If Unused
+			/* DisableAbilityUnusedTooltip:
+				'''
+				Makes the Ability Cooldown display on the right bottom corner of the screen invisible
+				if the current Pet does not have an ability that uses the Pet Ability Timer.
+				''' */
+			// AbilityDisplayInfoLabel: Disable Base Ability Cooldown Display
+			/* AbilityDisplayInfoTooltip:
+				'''
+				Makes Ability Cooldown display on the right bottom corner of the screen
+				not include the Base Cooldown of the current Pet's ability timer.
+				''' */
+			// AbilityDisplayDisableLabel: Disable Ability Cooldown Display
+			/* AbilityDisplayDisableTooltip:
+				'''
+				Disables the Ability Cooldown Display entirely, it won't be shown no matter what.
+				Anything done with other options regarding Ability Display will have no effects.
+				''' */
 			HurtSoundLabel: 禁用自定义伤害声音
 			HurtSoundTooltip:
 				'''
@@ -79,30 +103,6 @@ Mods: {
 				在减益生效期间,宠物任何与战斗相关的效果都会被禁用.
 				(由于平衡性原因,不推荐禁用)
 				'''
-			// ShieldLocationLabel: Pet Shield Location
-			/* ShieldLocationTooltip:
-				'''
-				Changes where Pet Shield should be displayed when a Shield has been provided by your Pet.
-				Next to the Healthbar options works best with 1920x1080 Resolutions.
-				''' */
-			// DisableAbilityUnusedLabel: Disable Ability Cooldown Display If Unused
-			/* DisableAbilityUnusedTooltip:
-				'''
-				Makes the Ability Cooldown display on the right bottom corner of the screen invisible
-				if the current Pet does not have an ability that uses the Pet Ability Timer.
-				''' */
-			// AbilityDisplayInfoLabel: Disable Base Ability Cooldown Display
-			/* AbilityDisplayInfoTooltip:
-				'''
-				Makes Ability Cooldown display on the right bottom corner of the screen
-				not include the Base Cooldown of the current Pet's ability timer.
-				''' */
-			// AbilityDisplayDisableLabel: Disable Ability Cooldown Display
-			/* AbilityDisplayDisableTooltip:
-				'''
-				Disables the Ability Cooldown Display entirely, it won't be shown no matter what.
-				Anything done with other options regarding Ability Display will have no effects.
-				''' */
 		}
 
 		LightPetTooltips: {

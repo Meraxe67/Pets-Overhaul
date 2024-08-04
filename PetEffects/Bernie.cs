@@ -2,6 +2,7 @@
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;
@@ -50,7 +51,7 @@ namespace PetsOverhaul.PetEffects
                         {
                             for (int a = 0; a < NPC.maxBuffs; a++)
                             {
-                                if (Pet.burnDebuffs[npc.buffType[a]])
+                                if (GlobalPet.BurnDebuffs.Contains(npc.buffType[a]))
                                 {
                                     npc.buffTime[a]++;
                                 }
@@ -59,7 +60,7 @@ namespace PetsOverhaul.PetEffects
                         }
                         for (int a = 0; a < NPC.maxBuffs; a++)
                         {
-                            if (Pet.burnDebuffs[npc.buffType[a]])
+                            if (GlobalPet.BurnDebuffs.Contains(npc.buffType[a]))
                             {
                                 EnemiesBurning++;
                                 break;

@@ -9,8 +9,8 @@ Mods: {
 		// JojaCola: A nature-related NPC may be able to Purify this
 		/* Notice:
 			'''
-			[c/90C2AA:Pets Overhaul 2.3.13 latest changes: Lots of Backend changes & Improved code quality]
-			[c/90C2AA:Please report if anything is unusual to you with the last update!]
+			[c/90C2AA:Pets Overhaul 2.3.14 latest changes: Improved Backend code & Config options]
+			[c/90C2AA:Some of your config options may have reset, make sure to check to have them set correctly!]
 			[c/b4bfc5:If you encounter any bugs, join our Discord server!]
 			[c/b4bfc5:All feedback is very much appreciated. discord.gg/KubSpqvDGE]
 			[c/b4bfc5:Use] [c/ff8234:/pet] [c/b4bfc5:to see commands for Pets Overhaul, providing you more info!]
@@ -27,23 +27,13 @@ Mods: {
 				Disables message sent by Pets Overhaul upon logging into the world.
 				Notices may contain brief information about the latest updates.
 				''' */
-			TooltipShiftToggleLabel: Habilitar que as informações de pets/items sejam alternáveis
-			TooltipShiftToggleTooltip: Habilita que todas as informações de pets e items sejam visíveis apenas quando Baixo (Tecla para baixo, geralmente S) estiver sendo pressionada
-			TooltipShiftToggleInGame: Segure o Botão para baixo para informações
-			HurtSoundLabel: Desabilitar sons de dor personalizados
-			HurtSoundTooltip: Desabilita efeitos sonoros adicionados por pets quando o jogador recebe dano.
-			DeathSoundLabel: Desabilitar sons de morte personalizados
-			DeathSoundTooltip: Desabilita sons de morte personalizados quando o jogador morre.
-			PassiveSoundLabel: Desabilitar sons passivos de pet
-			PassiveSoundTooltip: Desabilita efeitos sonoros de pet que tocam aleatóriamente sem efeitos similar à efeitos sonoros de ambiente.
-			AbilitySoundLabel: Desabilitar sons de habilidades
-			AbilitySoundTooltip: Desabilita efeitos sonoros de pet que tocam ao processar habilidades, recarga do tempo de espera, etc. (não recomendado, estes sons podem te ajudar)
-			LowCooldownSoundLabel: Desabilitar som de temporizador curto
-			LowCooldownSoundTooltip: Desabilita efeito sonoro de recarga de tempo de espera se o tempo de recarga das habilidades de pet forem menores que 1 segundo.
-			MoreDifficultLabel: Desabilitar jogador ser mais fraco
-			MoreDifficultTooltip: Desabilita o jogador causar 5% menos dano e receber 5% mais dano, que é implementado para contrariar o mod adicionar um aumento de poder
-			SwapCooldownLabel: Desabilitar tempo de recarga em troca de pet
-			SwapCooldownTooltip: Desabilita o jogador de ganhar o Debuff Pet Desatento ao trocar de pet. Prevenindo qualquer vantagem relacionada à combate de ativar durante esse tempo (Não recomendado)
+			// DisableTooltipToggleLabel: Disable Pet/Item tooltips being toggleable
+			/* DisableTooltipToggleTooltip:
+				'''
+				Disables the system where Pets Overhaul effects on Pet Item tooltips to be
+				only visible while your set Keybind is held. (You need to manually assign a keybinding)
+				''' */
+			// TooltipToggleInGame: Hold the <keybind> button to view the Pet tooltip
 			// ShieldLocationLabel: Pet Shield Location
 			/* ShieldLocationTooltip:
 				'''
@@ -68,6 +58,20 @@ Mods: {
 				Disables the Ability Cooldown Display entirely, it won't be shown no matter what.
 				Anything done with other options regarding Ability Display will have no effects.
 				''' */
+			HurtSoundLabel: Desabilitar sons de dor personalizados
+			HurtSoundTooltip: Desabilita efeitos sonoros adicionados por pets quando o jogador recebe dano.
+			DeathSoundLabel: Desabilitar sons de morte personalizados
+			DeathSoundTooltip: Desabilita sons de morte personalizados quando o jogador morre.
+			PassiveSoundLabel: Desabilitar sons passivos de pet
+			PassiveSoundTooltip: Desabilita efeitos sonoros de pet que tocam aleatóriamente sem efeitos similar à efeitos sonoros de ambiente.
+			AbilitySoundLabel: Desabilitar sons de habilidades
+			AbilitySoundTooltip: Desabilita efeitos sonoros de pet que tocam ao processar habilidades, recarga do tempo de espera, etc. (não recomendado, estes sons podem te ajudar)
+			LowCooldownSoundLabel: Desabilitar som de temporizador curto
+			LowCooldownSoundTooltip: Desabilita efeito sonoro de recarga de tempo de espera se o tempo de recarga das habilidades de pet forem menores que 1 segundo.
+			MoreDifficultLabel: Desabilitar jogador ser mais fraco
+			MoreDifficultTooltip: Desabilita o jogador causar 5% menos dano e receber 5% mais dano, que é implementado para contrariar o mod adicionar um aumento de poder
+			SwapCooldownLabel: Desabilitar tempo de recarga em troca de pet
+			SwapCooldownTooltip: Desabilita o jogador de ganhar o Debuff Pet Desatento ao trocar de pet. Prevenindo qualquer vantagem relacionada à combate de ativar durante esse tempo (Não recomendado)
 		}
 
 		LightPetTooltips: {
