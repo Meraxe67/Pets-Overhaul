@@ -17,7 +17,10 @@ Mods: {
 			'''
 
 		Config: {
-			Personalization: Personalization
+			Personalization: Pets Overhaul Settings
+			HeaderDisplay: Display Related Settings
+			HeaderSound: Sound Related Settings
+			HeaderGameplay: Gameplay Settings
 			NoticeLabel: Disable Pets Overhaul's notice
 			NoticeTooltip:
 				'''
@@ -1079,14 +1082,7 @@ Mods: {
 			PumpkingCondition: Requires the Pumpking's Head to be in your inventory.
 		}
 
-		Projectiles.DynamiteKittyBoom.DisplayName: Dynamite Kitty Boom
-
-		Configs: {
-			Personalization: {
-				DisplayName: Personalization
-				ShieldLocation.Tooltip: ""
-			}
-		}
+		Projectiles.DynamiteKittyBoom: Dynamite Kitten Explosion
 
 		Keybinds: {
 			PetTooltipHide.DisplayName: Show Pet Tooltips
