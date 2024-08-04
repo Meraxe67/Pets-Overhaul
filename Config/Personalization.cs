@@ -16,10 +16,10 @@ namespace PetsOverhaul.Config
         [DefaultValue(false)]
         public bool DisableNotice { get; set; }
 
-        [LabelKey("$Mods.PetsOverhaul.Config.TooltipShiftToggleLabel")]
-        [TooltipKey("$Mods.PetsOverhaul.Config.TooltipShiftToggleTooltip")]
+        [LabelKey("$Mods.PetsOverhaul.Config.DisableTooltipToggleLabel")]
+        [TooltipKey("$Mods.PetsOverhaul.Config.DisableTooltipToggleTooltip")]
         [DefaultValue(false)]
-        public bool DisableTooltips { get; set; }
+        public bool DisableTooltipToggle { get; set; }
 
         [OptionStrings(["On the Player, Icon on the left", "On the Player, Icon on the right", "Next to the Healthbar, Icon on the left", "Next to the Healthbar, Icon on the right"])]
         [DefaultValue("Next to the Healthbar, Icon on the right")]

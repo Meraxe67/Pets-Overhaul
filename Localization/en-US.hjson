@@ -9,8 +9,8 @@ Mods: {
 		JojaCola: A nature-related NPC may be able to Purify this
 		Notice:
 			'''
-			[c/90C2AA:Pets Overhaul 2.3.13 latest changes: Lots of Backend changes & Improved code quality]
-			[c/90C2AA:Please report if anything is unusual to you with the last update!]
+			[c/90C2AA:Pets Overhaul 2.3.14 latest changes: Improved Backend code & Config options]
+			[c/90C2AA:Some of your config options may have reset, make sure to check to have them set correctly!]
 			[c/b4bfc5:If you encounter any bugs, join our Discord server!]
 			[c/b4bfc5:All feedback is very much appreciated. discord.gg/KubSpqvDGE]
 			[c/b4bfc5:Use] [c/ff8234:/pet] [c/b4bfc5:to see commands for Pets Overhaul, providing you more info!]
@@ -21,49 +21,85 @@ Mods: {
 			HeaderDisplay: Display Related Settings
 			HeaderSound: Sound Related Settings
 			HeaderGameplay: Gameplay Settings
+
 			NoticeLabel: Disable Pets Overhaul's notice
 			NoticeTooltip:
 				'''
 				Disables message sent by Pets Overhaul upon logging into the world.
 				Notices may contain brief information about the latest updates.
 				'''
-			TooltipShiftToggleLabel: Enable Pet/Item tooltips to be toggleable
-			TooltipShiftToggleTooltip:
+
+			DisableTooltipToggleLabel: Disable Pet/Item tooltips being toggleable
+			DisableTooltipToggleTooltip:
 				'''
-				Enables all added Pet and Item tooltips to be visible only while
-				your set Keybind is held. (You need to manually assign a keybinding)
+				Disables the system where Pets Overhaul effects on Pet Item tooltips to be
+				only visible while your set Keybind is held. (You need to manually assign a keybinding)
 				'''
-			TooltipShiftToggleInGame: Hold the <keybind> button to view the Pet tooltip
+			TooltipToggleInGame: Hold the <keybind> button to view the Pet tooltip
+
+			ShieldLocationLabel: Pet Shield Location
+			ShieldLocationTooltip:
+				'''
+				Changes where Pet Shield should be displayed when a Shield has been provided by your Pet.
+				Next to the Healthbar options works best with 1920x1080 Resolutions.
+				'''
+
+			DisableAbilityUnusedLabel: Disable Ability Cooldown Display If Unused
+			DisableAbilityUnusedTooltip:
+				'''
+				Makes the Ability Cooldown display on the right bottom corner of the screen invisible
+				if the current Pet does not have an ability that uses the Pet Ability Timer.
+				'''
+
+			AbilityDisplayInfoLabel: Disable Base Ability Cooldown Display
+			AbilityDisplayInfoTooltip:
+				'''
+				Makes Ability Cooldown display on the right bottom corner of the screen
+				not include the Base Cooldown of the current Pet's ability timer.
+				'''
+
+			AbilityDisplayDisableLabel: Disable Ability Cooldown Display
+			AbilityDisplayDisableTooltip:
+				'''
+				Disables the Ability Cooldown Display entirely, it won't be shown no matter what.
+				Anything done with other options regarding Ability Display will have no effects.
+				'''
+
 			HurtSoundLabel: Disable custom hurt sounds
 			HurtSoundTooltip:
 				'''
 				Disables custom sound effects added by
 				Pets when the Player receives damage.
 				'''
+
 			DeathSoundLabel: Disable custom death sounds
 			DeathSoundTooltip:
 				'''
 				Disables custom sound effects
 				added by Pets when the Player dies.
 				'''
+
 			PassiveSoundLabel: Disable passive Pet sounds
 			PassiveSoundTooltip:
 				'''
 				Disables Pet sound effects that play passively
 				similar to vanilla's Ambient sound effects.
 				'''
+
 			AbilitySoundLabel: Disable ability sounds
 			AbilitySoundTooltip:
 				'''
 				Disables Pet sound effects that play upon ability proccing, cooldown refreshing
 				and other similar things. (not recommended, these sounds can help with your awareness.)
 				'''
+
 			LowCooldownSoundLabel: Disable short timer sound
 			LowCooldownSoundTooltip:
 				'''
 				Disables cooldown refreshing sound effect if
 				Pet's abilities cooldown is lower than 1 second.
 				'''
+
 			MoreDifficultLabel: Set Player Handicap
 			MoreDifficultTooltip:
 				'''
@@ -71,36 +107,13 @@ Mods: {
 				This is implemented due to Pets Overhaul adding extra Powercreep into the game. Min 0, Max 20%.
 				Keep it at 0 if you wish it to be disabled. It's recommended it to be around 7 to 10%.
 				'''
+
 			SwapCooldownLabel: Disable Pet Swap cooldown
 			SwapCooldownTooltip:
 				'''
 				Disables Player gaining Oblivious Pet Debuff upon swapping a Pet.
 				Which prevents any Combat-related perks from being active during the time.
 				(not recommended due to obvious balance reasons)
-				'''
-			ShieldLocationLabel: Pet Shield Location
-			ShieldLocationTooltip:
-				'''
-				Changes where Pet Shield should be displayed when a Shield has been provided by your Pet.
-				Next to the Healthbar options works best with 1920x1080 Resolutions.
-				'''
-			DisableAbilityUnusedLabel: Disable Ability Cooldown Display If Unused
-			DisableAbilityUnusedTooltip:
-				'''
-				Makes the Ability Cooldown display on the right bottom corner of the screen invisible
-				if the current Pet does not have an ability that uses the Pet Ability Timer.
-				'''
-			AbilityDisplayInfoLabel: Disable Base Ability Cooldown Display
-			AbilityDisplayInfoTooltip:
-				'''
-				Makes Ability Cooldown display on the right bottom corner of the screen
-				not include the Base Cooldown of the current Pet's ability timer.
-				'''
-			AbilityDisplayDisableLabel: Disable Ability Cooldown Display
-			AbilityDisplayDisableTooltip:
-				'''
-				Disables the Ability Cooldown Display entirely, it won't be shown no matter what.
-				Anything done with other options regarding Ability Display will have no effects.
 				'''
 		}
 
