@@ -84,31 +84,31 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-}
-public sealed class DeerclopsPetItem : GlobalItem
-{
-    public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+    public sealed class DeerclopsPetItem : GlobalItem
     {
-        return entity.type == ItemID.DeerclopsPetItem;
-    }
-
-    public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-    {
-        if (ModContent.GetInstance<Personalization>().DisableTooltipToggle == false && !Keybinds.PetTooltipHide.Current)
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
-            return;
+            return entity.type == ItemID.DeerclopsPetItem;
         }
 
-        TinyDeerclops tinyDeerclops = Main.LocalPlayer.GetModPlayer<TinyDeerclops>();
-        tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DeerclopsPetItem")
-            .Replace("<class>", PetColors.ClassText(tinyDeerclops.PetClassPrimary, tinyDeerclops.PetClassSecondary))
-                        .Replace("<treshold>", Math.Round(tinyDeerclops.healthTreshold * 100, 2).ToString())
-                        .Replace("<tresholdTime>", Math.Round(tinyDeerclops.damageStoreTime / 60f, 2).ToString())
-                        .Replace("<immunityTime>", Math.Round(tinyDeerclops.immuneTime / 60f, 2).ToString())
-                        .Replace("<slowAmount>", Math.Round(tinyDeerclops.slow * 100, 2).ToString())
-                        .Replace("<range>", Math.Round(tinyDeerclops.range / 16f, 2).ToString())
-                        .Replace("<debuffTime>", Math.Round(tinyDeerclops.applyTime / 60f, 2).ToString())
-                        .Replace("<cooldown>", Math.Round(tinyDeerclops.cooldown / 60f, 2).ToString())
-                        ));
+        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
+        {
+            if (ModContent.GetInstance<Personalization>().DisableTooltipToggle == false && !Keybinds.PetTooltipHide.Current)
+            {
+                return;
+            }
+
+            TinyDeerclops tinyDeerclops = Main.LocalPlayer.GetModPlayer<TinyDeerclops>();
+            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DeerclopsPetItem")
+                .Replace("<class>", PetColors.ClassText(tinyDeerclops.PetClassPrimary, tinyDeerclops.PetClassSecondary))
+                            .Replace("<treshold>", Math.Round(tinyDeerclops.healthTreshold * 100, 2).ToString())
+                            .Replace("<tresholdTime>", Math.Round(tinyDeerclops.damageStoreTime / 60f, 2).ToString())
+                            .Replace("<immunityTime>", Math.Round(tinyDeerclops.immuneTime / 60f, 2).ToString())
+                            .Replace("<slowAmount>", Math.Round(tinyDeerclops.slow * 100, 2).ToString())
+                            .Replace("<range>", Math.Round(tinyDeerclops.range / 16f, 2).ToString())
+                            .Replace("<debuffTime>", Math.Round(tinyDeerclops.applyTime / 60f, 2).ToString())
+                            .Replace("<cooldown>", Math.Round(tinyDeerclops.cooldown / 60f, 2).ToString())
+                            ));
+        }
     }
 }
