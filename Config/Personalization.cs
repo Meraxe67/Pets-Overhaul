@@ -16,6 +16,11 @@ namespace PetsOverhaul.Config
         [DefaultValue(false)]
         public bool DisableNotice { get; set; }
 
+        [LabelKey("$Mods.PetsOverhaul.Config.ModNoticeLabel")]
+        [TooltipKey("$Mods.PetsOverhaul.Config.ModNoticeTooltip")]
+        [DefaultValue(false)]
+        public bool DisableModNotice { get; set; }
+
         [LabelKey("$Mods.PetsOverhaul.Config.DisableTooltipToggleLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.DisableTooltipToggleTooltip")]
         [DefaultValue(true)]

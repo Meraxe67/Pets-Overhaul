@@ -16,6 +16,12 @@ Mods: {
 			目前此模组仍在不断更新,我们社区正在不断发展壮大.
 			我们希望您加入我们的社区和Discord服务器!
 			'''
+		/* CalamityDetected:
+			'''
+			It seems you're using Pets Overhaul alongside Calamity Mod without the addon!
+			You can find the addon under the name 'Pets Overhaul: Calamity Addon'
+			Adding even more unique pets & Calamity compatibility for the vanilla Pet effects!
+			''' */
 
 		Config: {
 			Personalization: 个性化设置

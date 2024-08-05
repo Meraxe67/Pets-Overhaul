@@ -527,6 +527,11 @@ namespace PetsOverhaul.Systems
             {
                 Main.NewText(Language.GetTextValue("Mods.PetsOverhaul.Notice"));
             }
+            if (ModContent.GetInstance<Personalization>().DisableModNotice == false)
+            {
+                if (ModLoader.TryGetMod("PetsOverhaulCalamityAddon", out _) == false && ModLoader.TryGetMod("CalamityMod", out _) == true)
+                Main.NewText(Language.GetTextValue("Mods.PetsOverhaul.CalamityDetected"));
+            }
         }
         public override void OnHurt(Player.HurtInfo info)
         {
