@@ -32,8 +32,8 @@ Mods: {
 				Disables message sent by Pets Overhaul upon logging into the world.
 				Notices may contain brief information about the latest updates.
 				''' */
-			// CalamityNoticeLabel: Disable notice for missing addons
-			/* CalamityNoticeTooltip:
+			// ModNoticeLabel: Disable notice for missing Mod addons
+			/* ModNoticeTooltip:
 				'''
 				Disables message sent upon logging into the world where;
 				An official addon (crossmod) of Pets Overhaul of a Mod exists but is not loaded.
@@ -83,8 +83,6 @@ Mods: {
 			MoreDifficultTooltip: Desabilita o jogador causar 5% menos dano e receber 5% mais dano, que é implementado para contrariar o mod adicionar um aumento de poder
 			SwapCooldownLabel: Desabilitar tempo de recarga em troca de pet
 			SwapCooldownTooltip: Desabilita o jogador de ganhar o Debuff Pet Desatento ao trocar de pet. Prevenindo qualquer vantagem relacionada à combate de ativar durante esse tempo (Não recomendado)
-			// ModNoticeLabel: Disable Mod Notice
-			// ModNoticeTooltip: ""
 		}
 
 		LightPetTooltips: {
