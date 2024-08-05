@@ -11,8 +11,7 @@ Mods: {
 			'''
 			[c/90C2AA:Pets Overhaul 2.3.14 latest changes: Improved Backend code & Config options]
 			[c/90C2AA:Some of your config options may have reset, make sure to check to have them set correctly!]
-			[c/b4bfc5:If you encounter any bugs, join our Discord server!]
-			[c/b4bfc5:All feedback is very much appreciated. discord.gg/KubSpqvDGE]
+			[c/b4bfc5:Join our discord server for feedback & bug reports! discord.gg/KubSpqvDGE]
 			[c/b4bfc5:Use] [c/ff8234:/pet] [c/b4bfc5:to see commands for Pets Overhaul, providing you more info!]
 			''' */
 		/* CalamityDetected:
@@ -32,6 +31,12 @@ Mods: {
 				'''
 				Disables message sent by Pets Overhaul upon logging into the world.
 				Notices may contain brief information about the latest updates.
+				''' */
+			// CalamityNoticeLabel: Disable notice for missing addons
+			/* CalamityNoticeTooltip:
+				'''
+				Disables message sent upon logging into the world where;
+				An official addon (crossmod) of Pets Overhaul of a Mod exists but is not loaded.
 				''' */
 			// DisableTooltipToggleLabel: Disable Pet/Item tooltips being toggleable
 			/* DisableTooltipToggleTooltip:
@@ -78,6 +83,8 @@ Mods: {
 			MoreDifficultTooltip: Desabilita o jogador causar 5% menos dano e receber 5% mais dano, que é implementado para contrariar o mod adicionar um aumento de poder
 			SwapCooldownLabel: Desabilitar tempo de recarga em troca de pet
 			SwapCooldownTooltip: Desabilita o jogador de ganhar o Debuff Pet Desatento ao trocar de pet. Prevenindo qualquer vantagem relacionada à combate de ativar durante esse tempo (Não recomendado)
+			// ModNoticeLabel: Disable Mod Notice
+			// ModNoticeTooltip: ""
 		}
 
 		LightPetTooltips: {

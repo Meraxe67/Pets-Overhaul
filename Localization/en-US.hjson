@@ -32,8 +32,8 @@ Mods: {
 				Disables message sent by Pets Overhaul upon logging into the world.
 				Notices may contain brief information about the latest updates.
 				'''
-			CalamityNoticeLabel: Disable notice for missing addons
-			CalamityNoticeTooltip:
+			ModNoticeLabel: Disable notice for missing Mod addons
+			ModNoticeTooltip:
 				'''
 				Disables message sent upon logging into the world where;
 				An official addon (crossmod) of Pets Overhaul of a Mod exists but is not loaded.

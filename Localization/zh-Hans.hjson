@@ -34,6 +34,12 @@ Mods: {
 				禁用此模组在进入世界时发送的通知,
 				通知可能包含最近更新的简要信息.
 				'''
+			// CalamityNoticeLabel: Disable notice for missing addons
+			/* CalamityNoticeTooltip:
+				'''
+				Disables message sent upon logging into the world where;
+				An official addon (crossmod) of Pets Overhaul of a Mod exists but is not loaded.
+				''' */
 			// DisableTooltipToggleLabel: Disable Pet/Item tooltips being toggleable
 			/* DisableTooltipToggleTooltip:
 				'''
@@ -109,6 +115,8 @@ Mods: {
 				在减益生效期间,宠物任何与战斗相关的效果都会被禁用.
 				(由于平衡性原因,不推荐禁用)
 				'''
+			// ModNoticeLabel: Disable Mod Notice
+			// ModNoticeTooltip: ""
 		}
 
 		LightPetTooltips: {
