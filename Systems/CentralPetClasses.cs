@@ -81,6 +81,21 @@ namespace PetsOverhaul.Systems
         /// Used to change alternating color of maximum Light Pet Rolls alongside colorVal
         /// </summary>
         private static bool colorSwitched = false;
+
+        //Methods etc.
+        #region
+        /// <summary>
+        /// Sets the Pet ability cooldown while taking ability haste into consideration. Recommended to use this in PreUpdate, combined with condition that expected Pet is in use.
+        /// </summary>
+        public void SetPetAbilityTimer(int cooldown)
+        {
+            if (abilityHaste < -0.9f)
+            {
+                abilityHaste = -0.9f;
+            }
+
+            timerMax = (int)(cooldown * (1 / (1 + abilityHaste)));
+        }
         public static IEntitySource GetSource_Pet(EntitySourcePetIDs typeId, string context = null)
         {
             return new EntitySource_Pet
@@ -133,10 +148,6 @@ namespace PetsOverhaul.Systems
                 coinAmount %= 100;
             }
             Player.QuickSpawnItem(GetSource_Pet(EntitySourcePetIDs.GlobalItem), ItemID.CopperCoin, coinAmount);
-        }
-        public override void Load()
-        {
-            PetsOverhaul.OnPickupActions += PreOnPickup;
         }
         public static void PreOnPickup(Item item, Player player)
         {
@@ -206,23 +217,6 @@ namespace PetsOverhaul.Systems
         public bool PetInUse(int petItemID)
         {
             return Player.miscEquips[0].type == petItemID;
-        }
-        public override void SaveData(TagCompound tag)
-        {
-            tag.Add("SkinColor", skin);
-            tag.Add("SkinColorChanged", skinColorChanged);
-        }
-        public override void LoadData(TagCompound tag)
-        {
-            if (tag.TryGet("SkinColor", out Color skinColor))
-            {
-                skin = skinColor;
-            }
-
-            if (tag.TryGet("SkinColorChanged", out bool skinChanged))
-            {
-                skinColorChanged = skinChanged;
-            }
         }
         public static bool LifestealCheck(NPC npc)
         {
@@ -339,35 +333,6 @@ namespace PetsOverhaul.Systems
             }
             return anyPlayerHasSlimePet == true;
         }
-        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
-        {
-            if (ModContent.GetInstance<Personalization>().DifficultAmount != 0)
-            {
-                modifiers.FinalDamage *= 1f - ModContent.GetInstance<Personalization>().DifficultAmount * 0.01f;
-            }
-        }
-        public override void ModifyHurt(ref Player.HurtModifiers modifiers)
-        {
-            if (ModContent.GetInstance<Personalization>().DifficultAmount != 0)
-            {
-                modifiers.FinalDamage *= 1f + ModContent.GetInstance<Personalization>().DifficultAmount * 0.01f;
-            }
-
-            modifiers.ModifyHurtInfo += (ref Player.HurtInfo info) =>
-            {
-                if (info.Damage > currentShield && currentShield > 0)
-                {
-                    CombatText.NewText(Player.Hitbox, Color.Cyan, -currentShield, true);
-                    if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
-                    {
-                        SoundEngine.PlaySound(SoundID.NPCDeath43 with { PitchVariance = 0.4f, Pitch = -0.8f, Volume = 0.2f }, Player.position);
-                    }
-
-                    info.Damage -= currentShield;
-                    shieldToBeReduced += currentShield;
-                }
-            };
-        }
         public static void HandleShieldBlockMessage(BinaryReader reader, int whoAmI, int damageAmount)
         {
             int player = reader.ReadByte();
@@ -414,6 +379,60 @@ namespace PetsOverhaul.Systems
                     SendShieldBlockToServer(Player.whoAmI, damage);
                 }
             }
+        }
+#endregion
+
+        //Overrides
+        #region 
+        public override void Load()
+        {
+            PetsOverhaul.OnPickupActions += PreOnPickup;
+        }
+        public override void SaveData(TagCompound tag)
+        {
+            tag.Add("SkinColor", skin);
+            tag.Add("SkinColorChanged", skinColorChanged);
+        }
+        public override void LoadData(TagCompound tag)
+        {
+            if (tag.TryGet("SkinColor", out Color skinColor))
+            {
+                skin = skinColor;
+            }
+
+            if (tag.TryGet("SkinColorChanged", out bool skinChanged))
+            {
+                skinColorChanged = skinChanged;
+            }
+        }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            if (ModContent.GetInstance<Personalization>().DifficultAmount != 0)
+            {
+                modifiers.FinalDamage *= 1f - ModContent.GetInstance<Personalization>().DifficultAmount * 0.01f;
+            }
+        }
+        public override void ModifyHurt(ref Player.HurtModifiers modifiers)
+        {
+            if (ModContent.GetInstance<Personalization>().DifficultAmount != 0)
+            {
+                modifiers.FinalDamage *= 1f + ModContent.GetInstance<Personalization>().DifficultAmount * 0.01f;
+            }
+
+            modifiers.ModifyHurtInfo += (ref Player.HurtInfo info) =>
+            {
+                if (info.Damage > currentShield && currentShield > 0)
+                {
+                    CombatText.NewText(Player.Hitbox, Color.Cyan, -currentShield, true);
+                    if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+                    {
+                        SoundEngine.PlaySound(SoundID.NPCDeath43 with { PitchVariance = 0.4f, Pitch = -0.8f, Volume = 0.2f }, Player.position);
+                    }
+
+                    info.Damage -= currentShield;
+                    shieldToBeReduced += currentShield;
+                }
+            };
         }
         public override bool ConsumableDodge(Player.HurtInfo info)
         {
@@ -471,12 +490,7 @@ namespace PetsOverhaul.Systems
                     SoundEngine.PlaySound(SoundID.MaxMana with { PitchVariance = 0.3f, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew }, Player.position);
                 }
             }
-            if (abilityHaste < -0.9f)
-            {
-                abilityHaste = -0.9f;
-            }
 
-            timerMax = (int)(timerMax * (1 / (1 + abilityHaste)));
             petSwapCooldown = 600;
             abilityHaste = 0;
         }
@@ -584,6 +598,7 @@ namespace PetsOverhaul.Systems
                 Player.QuickSpawnItem(GetSource_Pet(EntitySourcePetIDs.FishingFortuneItem), fish.type, 1);
             }
         }
+        #endregion
     }
     /// <summary>
     /// GlobalItem class that contains many useful booleans and methods for mainly gathering and item randomizing purposes
