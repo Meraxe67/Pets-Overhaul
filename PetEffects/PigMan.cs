@@ -25,7 +25,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUse(ItemID.PigPetItem))
             {
-                Pet.timerMax = shieldCooldown;
+                Pet.SetPetAbilityTimer(shieldCooldown);
             }
         }
     }

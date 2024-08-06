@@ -28,7 +28,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUse(ItemID.SkeletronPrimePetItem))
             {
-                Pet.timerMax = shieldRecovery;
+                Pet.SetPetAbilityTimer(shieldRecovery);
             }
         }
         private void AddShield()

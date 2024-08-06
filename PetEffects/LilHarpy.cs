@@ -22,7 +22,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUse(ItemID.BirdieRattle))
             {
-                Pet.timerMax = harpyCd;
+                Pet.SetPetAbilityTimer(harpyCd);
             }
         }
         public override void PostUpdateEquips()

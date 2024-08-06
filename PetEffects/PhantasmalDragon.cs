@@ -51,7 +51,7 @@ namespace PetsOverhaul.PetEffects
             }
             if (Pet.PetInUse(ItemID.LunaticCultistPetItem))
             {
-                Pet.timerMax = phantasmDragonCooldown;
+                Pet.SetPetAbilityTimer(phantasmDragonCooldown);
             }
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)

@@ -23,7 +23,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUse(ItemID.BallOfFuseWire))
             {
-                Pet.timerMax = cooldown;
+                Pet.SetPetAbilityTimer(cooldown);
             }
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

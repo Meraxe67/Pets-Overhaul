@@ -25,7 +25,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUse(ItemID.EverscreamPetItem))
             {
-                Pet.timerMax = cooldown;
+                Pet.SetPetAbilityTimer(cooldown);
             }
         }
         public override void PostUpdateEquips()

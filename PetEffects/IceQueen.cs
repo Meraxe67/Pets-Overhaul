@@ -29,7 +29,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUse(ItemID.IceQueenPetItem))
             {
-                Pet.timerMax = cooldown;
+                Pet.SetPetAbilityTimer(cooldown);
             }
         }
         public override void PostUpdateEquips()

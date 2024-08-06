@@ -23,7 +23,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUse(ItemID.StrangeGlowingMushroom))
             {
-                Pet.timerMax = shroomPotionCd;
+                Pet.SetPetAbilityTimer(shroomPotionCd);
             }
         }
         public override void ModifyLuck(ref float luck)

@@ -27,7 +27,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUse(ItemID.TwinsPetItem))
             {
-                Pet.timerMax = healthDmgCd;
+                Pet.SetPetAbilityTimer(healthDmgCd);
             }
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)

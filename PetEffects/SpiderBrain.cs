@@ -22,7 +22,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUse(ItemID.BrainOfCthulhuPetItem))
             {
-                Pet.timerMax = cdToAddToPool;
+                Pet.SetPetAbilityTimer(cdToAddToPool);
             }
         }
         public override void PreUpdateBuffs()

@@ -35,7 +35,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUse(ItemID.DeerclopsPetItem))
             {
-                Pet.timerMax = cooldown;
+                Pet.SetPetAbilityTimer(cooldown);
             }
         }
         public override void PostUpdateEquips()

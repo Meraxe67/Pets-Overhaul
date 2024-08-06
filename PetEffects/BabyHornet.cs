@@ -29,7 +29,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUse(ItemID.Nectar))
             {
-                Pet.timerMax = nectarCooldown;
+                Pet.SetPetAbilityTimer(nectarCooldown);
             }
         }
         public override void PreUpdateBuffs()

@@ -27,7 +27,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUse(ItemID.EyeOfCthulhuPetItem))
             {
-                Pet.timerMax = phaseCd;
+                Pet.SetPetAbilityTimer(phaseCd);
             }
 
             if (eocTimer >= -1)

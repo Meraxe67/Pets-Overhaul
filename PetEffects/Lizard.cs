@@ -42,7 +42,7 @@ namespace PetsOverhaul.PetEffects
             if (Pet.PetInUse(ItemID.LizardEgg))
             {
                 Player.skinColor = Color.YellowGreen;
-                Pet.timerMax = transformCd;
+                Pet.SetPetAbilityTimer(transformCd);
             }
         }
         public override void PostUpdateEquips()

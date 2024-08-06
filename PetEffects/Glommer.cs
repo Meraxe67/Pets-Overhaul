@@ -23,7 +23,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUse(ItemID.GlommerPetItem))
             {
-                Pet.timerMax = glommerSanityTime;
+                Pet.SetPetAbilityTimer(glommerSanityTime);
             }
         }
         public override void PostUpdateEquips()

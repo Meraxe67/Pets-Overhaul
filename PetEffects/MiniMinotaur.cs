@@ -27,7 +27,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUse(ItemID.TartarSauce))
             {
-                Pet.timerMax = minotaurCd;
+                Pet.SetPetAbilityTimer(minotaurCd);
                 oocTimer--;
                 if (oocTimer <= 0 && minotaurStack > 0)
                 {
