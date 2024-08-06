@@ -97,7 +97,7 @@ Mods: {
 			LowCooldownSoundTooltip:
 				'''
 				Disables cooldown refreshing sound effect if
-				Pet's abilities cooldown is lower than 1 second.
+				Pet's abilities cooldown is lower than 1.5 seconds.
 				'''
 			MoreDifficultLabel: Set Player Handicap
 			MoreDifficultTooltip:
@@ -1096,7 +1096,7 @@ Mods: {
 		Projectiles.DynamiteKittyBoom: Dynamite Kitten Explosion
 
 		Keybinds: {
-		UsePetAbility.DisplayName: Use Pet Ability
+			UsePetAbility.DisplayName: Use Pet Ability
 			PetTooltipHide.DisplayName: Toggle (Show) Pet Tooltips
 			PetTooltipSwap.DisplayName: Switch Pet Tooltip
 		}

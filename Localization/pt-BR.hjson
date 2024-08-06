@@ -914,9 +914,9 @@ Mods: {
 		// Projectiles.DynamiteKittyBoom: Dynamite Kitten Explosion
 
 		Keybinds: {
-			// PetTooltipHide.DisplayName: Show Pet Tooltips
+			// UsePetAbility.DisplayName: Use Pet Ability
+			// PetTooltipHide.DisplayName: Toggle (Show) Pet Tooltips
 			// PetTooltipSwap.DisplayName: Switch Pet Tooltip
-			// UsePetAbility.DisplayName: Use Pet Ability [c/808080:(Currently Unused)]
 		}
 	}
 }
