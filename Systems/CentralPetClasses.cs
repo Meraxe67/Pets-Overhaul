@@ -444,9 +444,17 @@ namespace PetsOverhaul.Systems
             }
             return base.ConsumableDodge(info);
         }
+        public override void ResetEffects()
+        {
+            fishingFortune = 0;
+            harvestingFortune = 0;
+            miningFortune = 0;
+            globalFortune = 0;
+
+            abilityHaste = 0;
+        }
         public override void PreUpdate()
         {
-
             if (Main.mouseItem.TryGetGlobalItem(out ItemPet item) && item.pickedUpBefore == false) //Player's hand slot is not being reckognized as 'inventory' in UpdateInventory() of GlobalItem, so manually updating the Hand slot
             {
                 item.pickedUpBefore = true;
@@ -468,11 +476,6 @@ namespace PetsOverhaul.Systems
 
             ColorVal += colorSwitched ? -0.01f : 0.01f;
 
-            fishingFortune = 0;
-            harvestingFortune = 0;
-            miningFortune = 0;
-            globalFortune = 0;
-
             if (Player.jump == 0)
             {
                 jumpRegistered = false;
@@ -490,9 +493,7 @@ namespace PetsOverhaul.Systems
                     SoundEngine.PlaySound(SoundID.MaxMana with { PitchVariance = 0.3f, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew }, Player.position);
                 }
             }
-
             petSwapCooldown = 600;
-            abilityHaste = 0;
         }
         public override void PostUpdate()
         {
