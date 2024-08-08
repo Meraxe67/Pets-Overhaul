@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace PetsOverhaul.Systems
@@ -29,8 +30,4 @@ namespace PetsOverhaul.Systems
         /// </summary>
         public virtual PetClasses PetClassSecondary => PetClasses.None;
     }
-    //public class LightPetRoll
-    //{
-    //    //Will be looked at later
-    //}
 }
