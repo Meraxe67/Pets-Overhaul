@@ -287,9 +287,13 @@ Mods: {
 			BambooLeaf:
 				'''
 				<class>
-				- Gain <atkSpd>% attack speed.
+				- Press Pet Ability Keybind (<keybind>) to go on Alert mode.
+				 * Increases your attack speed by <alertAs>%, movement speed by <alertMs>%.
+				 * Decreases your aggro value by <alertAggro>.
+				 * Values increased by enemies nearby within <alertRadius> blocks, up to <alertMax> enemies.
+				 * Benefits last <alertDuration> seconds and has a <alertCd> seconds cooldown.
+				- Always gain <atkSpd>% attack speed.
 				 * Increased by another <jungleAtkSpd>% while in the Jungle.
-				- Reduces your aggro value by -<aggro>.
 				- Increases Bamboo [i:4564] you harvest by <bambooChance>%.
 				'''
 			BoneKey:
