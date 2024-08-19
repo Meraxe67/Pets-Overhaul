@@ -29,7 +29,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUse(ItemID.DogWhistle) && target.active == false && target.rarity > 0 && target.CountsAsACritter == false && target.SpawnedFromStatue == false)
             {
-                Pet.GiveCoins(ItemPet.Randomizer(rareEnemyCoin * target.rarity));
+                Pet.GiveCoins(GlobalPet.Randomizer(rareEnemyCoin * target.rarity));
             }
         }
         public override void OnCatchNPC(NPC npc, Item item, bool failed)
@@ -39,8 +39,8 @@ namespace PetsOverhaul.PetEffects
             {
                 if (npc.rarity > 0)
                 {
-                    Pet.GiveCoins(ItemPet.Randomizer(rareCritterCoin * npc.rarity));
-                    for (int i = 0; i < ItemPet.Randomizer(rareCatchChance); i++)
+                    Pet.GiveCoins(GlobalPet.Randomizer(rareCritterCoin * npc.rarity));
+                    for (int i = 0; i < GlobalPet.Randomizer(rareCatchChance); i++)
                     {
                         Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.GlobalItem), npc.catchItem, 1);
                         if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
@@ -52,7 +52,7 @@ namespace PetsOverhaul.PetEffects
                 }
                 else
                 {
-                    for (int i = 0; i < ItemPet.Randomizer(catchChance); i++)
+                    for (int i = 0; i < GlobalPet.Randomizer(catchChance); i++)
                     {
                         Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.GlobalItem), npc.catchItem, 1);
                         if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)

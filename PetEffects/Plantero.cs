@@ -22,7 +22,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (proj.GetGlobalProjectile<ProjectileSourceChecks>().petProj == false && Pet.PetInUseWithSwapCd(ItemID.MudBud))
             {
-                for (int i = 0; i < ItemPet.Randomizer(spawnChance + (int)(spawnChance * Pet.abilityHaste)); i++)
+                for (int i = 0; i < GlobalPet.Randomizer(spawnChance + (int)(spawnChance * Pet.abilityHaste)); i++)
                 {
                     Vector2 location = new(target.position.X + Main.rand.NextFloat(-2f, 2f), target.position.Y + Main.rand.NextFloat(-2f, 2f));
                     Vector2 velocity = new(Main.rand.NextFloat(-1.5f, 1.5f), Main.rand.NextFloat(-1.5f, 1.5f));
@@ -44,7 +44,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUseWithSwapCd(ItemID.MudBud))
             {
-                for (int i = 0; i < ItemPet.Randomizer(spawnChance + (int)(spawnChance * Pet.abilityHaste)); i++)
+                for (int i = 0; i < GlobalPet.Randomizer(spawnChance + (int)(spawnChance * Pet.abilityHaste)); i++)
                 {
                     Vector2 location = new(target.position.X + Main.rand.NextFloat(-2f, 2f), target.position.Y + Main.rand.NextFloat(-2f, 2f));
                     Vector2 velocity = new(Main.rand.NextFloat(-1.5f, 1.5f), Main.rand.NextFloat(-1.5f, 1.5f));

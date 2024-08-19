@@ -54,7 +54,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUse(ItemID.Fish) && (fish.type == ItemID.FrostMinnow || fish.type == ItemID.AtlanticCod))
             {
-                for (int i = 0; i < ItemPet.Randomizer(snowFishChance * fish.stack); i++)
+                for (int i = 0; i < GlobalPet.Randomizer(snowFishChance * fish.stack); i++)
                 {
                     Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.FishingItem), fish.type, 1);
                 }

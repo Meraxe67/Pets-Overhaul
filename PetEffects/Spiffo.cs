@@ -27,7 +27,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUseWithSwapCd(ItemID.SpiffoPlush) && target.active == false && proj.CountsAsClass<RangedDamageClass>() && proj.penetrate >= 0)
             {
-                proj.penetrate += ItemPet.Randomizer(penetrateChance);
+                proj.penetrate += GlobalPet.Randomizer(penetrateChance);
                 proj.usesLocalNPCImmunity = true;
             }
         }

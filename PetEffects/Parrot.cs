@@ -23,7 +23,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUseWithSwapCd(ItemID.ParrotCracker))
             {
-                for (int i = 0; i < ItemPet.Randomizer(meleeChance); i++)
+                for (int i = 0; i < GlobalPet.Randomizer(meleeChance); i++)
                 {
                     target.StrikeNPC(hit with { Damage = (int)(damageDone * meleeDamage) });
                     PlayParrotSound();
@@ -35,7 +35,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUseWithSwapCd(ItemID.ParrotCracker) && (proj.minion || proj.sentry || proj.usesOwnerMeleeHitCD))
             {
-                for (int i = 0; i < ItemPet.Randomizer(meleeChance); i++)
+                for (int i = 0; i < GlobalPet.Randomizer(meleeChance); i++)
                 {
                     target.StrikeNPC(hit with { Damage = (int)(damageDone * meleeDamage) });
                     PlayParrotSound();
@@ -90,7 +90,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (projectile.usesOwnerMeleeHitCD == false && projectile.damage > 0 && ((!projectile.minion || !projectile.sentry) && source is EntitySource_ItemUse || source is EntitySource_Parent { Entity: Projectile entity } && (entity.minion || entity.sentry)) && Main.player[projectile.owner].TryGetModPlayer(out Parrot parrot) && parrot.Pet.PetInUseWithSwapCd(ItemID.ParrotCracker))
             {
-                for (int i = 0; i < ItemPet.Randomizer(parrot.projChance); i++)
+                for (int i = 0; i < GlobalPet.Randomizer(parrot.projChance); i++)
                 {
                     Projectile.NewProjectile(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), projectile.position, projectile.velocity * Main.rand.NextFloat(0.8f, 1.2f), projectile.type, (int)(projectile.damage * parrot.projDamage), projectile.knockBack, projectile.owner);
                     parrot.PlayParrotSound();

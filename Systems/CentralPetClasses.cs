@@ -128,7 +128,7 @@ namespace PetsOverhaul.Systems
             return false;
         }
         /// <summary>
-        /// Spawns coins accordingly to the given value and converts it to a higher coin tier if possible. Source of spawned coins will be globalItem. Recommended use is with ItemPet.Randomizer() to achieve more precise and 'natural' values. (100x the intended coin value)
+        /// Spawns coins accordingly to the given value and converts it to a higher coin tier if possible. Source of spawned coins will be globalItem. Recommended use is with GlobalPet.Randomizer() to achieve more precise and 'natural' values. (100x the intended coin value)
         /// </summary>
         public void GiveCoins(int coinAmount)
         {
@@ -156,7 +156,7 @@ namespace PetsOverhaul.Systems
             {
                 if (fortune.globalDrop)
                 {
-                    for (int i = 0; i < ItemPet.Randomizer(PickerPet.globalFortune * item.stack); i++)
+                    for (int i = 0; i < GlobalPet.Randomizer(PickerPet.globalFortune * item.stack); i++)
                     {
                         player.QuickSpawnItem(GetSource_Pet(EntitySourcePetIDs.GlobalItem), item.type, 1);
                     }
@@ -164,7 +164,7 @@ namespace PetsOverhaul.Systems
 
                 if (fortune.harvestingDrop)
                 {
-                    for (int i = 0; i < ItemPet.Randomizer((PickerPet.globalFortune * 10 / 2 + PickerPet.harvestingFortune * 10) * item.stack, 1000); i++) //Multiplied by 10 and divided by 1000 since we divide globalFortune by 2, to get more precise numbers.
+                    for (int i = 0; i < GlobalPet.Randomizer((PickerPet.globalFortune * 10 / 2 + PickerPet.harvestingFortune * 10) * item.stack, 1000); i++) //Multiplied by 10 and divided by 1000 since we divide globalFortune by 2, to get more precise numbers.
                     {
                         player.QuickSpawnItem(GetSource_Pet(EntitySourcePetIDs.HarvestingFortuneItem), item.type, 1);
                     }
@@ -172,7 +172,7 @@ namespace PetsOverhaul.Systems
 
                 if (fortune.miningDrop)
                 {
-                    for (int i = 0; i < ItemPet.Randomizer((PickerPet.globalFortune * 10 / 2 + PickerPet.miningFortune * 10) * item.stack, 1000); i++)
+                    for (int i = 0; i < GlobalPet.Randomizer((PickerPet.globalFortune * 10 / 2 + PickerPet.miningFortune * 10) * item.stack, 1000); i++)
                     {
                         player.QuickSpawnItem(GetSource_Pet(EntitySourcePetIDs.MiningFortuneItem), item.type, 1);
                     }
@@ -180,7 +180,7 @@ namespace PetsOverhaul.Systems
 
                 if (fortune.fishingDrop)
                 {
-                    for (int i = 0; i < ItemPet.Randomizer((PickerPet.globalFortune * 10 / 2 + PickerPet.fishingFortune) * item.stack, 1000); i++)
+                    for (int i = 0; i < GlobalPet.Randomizer((PickerPet.globalFortune * 10 / 2 + PickerPet.fishingFortune) * item.stack, 1000); i++)
                     {
                         player.QuickSpawnItem(GetSource_Pet(EntitySourcePetIDs.FishingFortuneItem), item.type, 1);
                     }
@@ -188,7 +188,7 @@ namespace PetsOverhaul.Systems
 
                 if (fortune.herbBoost)
                 {
-                    for (int i = 0; i < ItemPet.Randomizer((PickerPet.globalFortune + PickerPet.harvestingFortune) * 10 / 2 * item.stack, 1000); i++)
+                    for (int i = 0; i < GlobalPet.Randomizer((PickerPet.globalFortune + PickerPet.harvestingFortune) * 10 / 2 * item.stack, 1000); i++)
                     {
                         player.QuickSpawnItem(GetSource_Pet(EntitySourcePetIDs.HarvestingFortuneItem), item.type, 1);
                     }
@@ -196,7 +196,7 @@ namespace PetsOverhaul.Systems
 
                 if (fortune.oreBoost)
                 {
-                    for (int i = 0; i < ItemPet.Randomizer((PickerPet.globalFortune + PickerPet.miningFortune) * 10 / 2 * item.stack, 1000); i++)
+                    for (int i = 0; i < GlobalPet.Randomizer((PickerPet.globalFortune + PickerPet.miningFortune) * 10 / 2 * item.stack, 1000); i++)
                     {
                         player.QuickSpawnItem(GetSource_Pet(EntitySourcePetIDs.MiningFortuneItem), item.type, 1);
                     }
@@ -224,6 +224,26 @@ namespace PetsOverhaul.Systems
         }
 
         /// <summary>
+        /// Randomizes the given number. numToBeRandomized / randomizeTo returns how many times its 100% chance and rolls if the leftover, non-100% amount is true. Randomizer(250) returns +2 and +1 more with 50% chance.
+        /// </summary>
+        public static int Randomizer(int numToBeRandomized, int randomizeTo = 100)
+        {
+            int a = 0;
+            if (numToBeRandomized >= randomizeTo)
+            {
+                a = numToBeRandomized / randomizeTo;
+                numToBeRandomized %= randomizeTo;
+            }
+            if (Main.rand.NextBool(numToBeRandomized, randomizeTo))
+            {
+                a++;
+            }
+
+            return a;
+
+        }
+
+        /// <summary>
         /// Used for Healing and Mana recovery purposes. Non converted amount can still grant +1, depending on a roll. Example: PetRecovery(215, 0.05f) will heal you for 10 health and 75% chance to heal +1 more, resulting in 11 health recovery.
         /// </summary>
         /// <param name="baseAmount">Base amount of value to be recovered</param>
@@ -235,7 +255,7 @@ namespace PetsOverhaul.Systems
         /// <returns>Returns amount calculated, irrelevant to Player's health cap, or the lifeSteal cap etc.</returns>
         public int PetRecovery(int baseAmount, float percentageAmount, int flatIncrease = 0, bool manaSteal = false, bool isLifesteal = true, bool doHeal = true)
         {
-            float num = baseAmount * (manaSteal ? 1 : (petHealMultiplier * (isLifesteal ? (Player.HasBuff(BuffID.MoonLeech) ? (percentageAmount * 0.33f) : percentageAmount) : 1)));
+            float num = baseAmount * (manaSteal ? 1 : (petHealMultiplier * ((isLifesteal && Player.HasBuff(BuffID.MoonLeech)) ? (percentageAmount * 0.33f) : percentageAmount)));
             int calculatedAmount = (int)num;
             if (Main.rand.NextFloat(0, 1) < num % 1)
             {
@@ -595,7 +615,7 @@ namespace PetsOverhaul.Systems
         }
         public override void ModifyCaughtFish(Item fish)
         {
-            for (int i = 0; i < ItemPet.Randomizer((globalFortune + fishingFortune) * 10 / 2 * fish.stack, 1000); i++)
+            for (int i = 0; i < GlobalPet.Randomizer((globalFortune + fishingFortune) * 10 / 2 * fish.stack, 1000); i++)
             {
                 Player.QuickSpawnItem(GetSource_Pet(EntitySourcePetIDs.FishingFortuneItem), fish.type, 1);
             }
@@ -663,25 +683,6 @@ namespace PetsOverhaul.Systems
         /// </summary>
         public const int MinimumExpForRarePlant = 1000;
 
-        /// <summary>
-        /// Randomizes the given number. numToBeRandomized / randomizeTo returns how many times its 100% chance and rolls if the leftover, non-100% amount is true. Randomizer(250) returns +2 and +1 more with 50% chance.
-        /// </summary>
-        public static int Randomizer(int numToBeRandomized, int randomizeTo = 100)
-        {
-            int a = 0;
-            if (numToBeRandomized >= randomizeTo)
-            {
-                a = numToBeRandomized / randomizeTo;
-                numToBeRandomized %= randomizeTo;
-            }
-            if (Main.rand.NextBool(numToBeRandomized, randomizeTo))
-            {
-                a++;
-            }
-
-            return a;
-
-        }
         public override void UpdateInventory(Item item, Player player)
         {
             if (pickedUpBefore == false)

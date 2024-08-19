@@ -79,7 +79,7 @@ namespace PetsOverhaul.PetEffects
 
             if (Pet.PetInUseWithSwapCd(ItemID.Nectar))
             {
-                for (int i = 0; i < ItemPet.Randomizer(beeChance * summonMult); i++)
+                for (int i = 0; i < GlobalPet.Randomizer(beeChance * summonMult); i++)
                 {
                     if (Player.strongBees == true && Main.rand.NextBool(1, 3))
                     {
@@ -102,7 +102,7 @@ namespace PetsOverhaul.PetEffects
 
             if (Pet.PetInUseWithSwapCd(ItemID.Nectar) && proj.GetGlobalProjectile<ProjectileSourceChecks>().petProj == false)
             {
-                for (int i = 0; i < ItemPet.Randomizer(beeChance * summonMult); i++)
+                for (int i = 0; i < GlobalPet.Randomizer(beeChance * summonMult); i++)
                 {
                     if (Player.strongBees == true && Main.rand.NextBool(1, 3))
                     {

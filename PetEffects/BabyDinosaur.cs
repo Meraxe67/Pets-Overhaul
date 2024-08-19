@@ -45,7 +45,7 @@ namespace PetsOverhaul.PetEffects
                 AddItemsToPool();
                 if (GlobalPet.ItemPool.Count > 0)
                 {
-                    for (int i = 0; i < ItemPet.Randomizer(dino.chance * item.stack, 1000); i++)
+                    for (int i = 0; i < GlobalPet.Randomizer(dino.chance * item.stack, 1000); i++)
                     {
                         player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.MiningItem), GlobalPet.ItemPool[Main.rand.Next(GlobalPet.ItemPool.Count)], 1);
                     }

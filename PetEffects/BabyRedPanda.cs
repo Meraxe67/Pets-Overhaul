@@ -86,7 +86,7 @@ namespace PetsOverhaul.PetEffects
             BabyRedPanda panda = player.GetModPlayer<BabyRedPanda>();
             if (PickerPet.PickupChecks(item, ItemID.BambooLeaf, out ItemPet _) && item.type == ItemID.BambooBlock)
             {
-                for (int i = 0; i < ItemPet.Randomizer(panda.bambooChance * item.stack); i++)
+                for (int i = 0; i < GlobalPet.Randomizer(panda.bambooChance * item.stack); i++)
                 {
                     player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.HarvestingItem), item.type, 1);
                 }

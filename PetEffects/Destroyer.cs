@@ -39,7 +39,7 @@ namespace PetsOverhaul.PetEffects
             Destroyer dest = player.GetModPlayer<Destroyer>();
             if (PickerPet.PickupChecks(item, ItemID.DestroyerPetItem, out ItemPet itemChck) && itemChck.oreBoost)
             {
-                for (int i = 0; i < ItemPet.Randomizer((player.statDefense * dest.defItemMult + dest.flatAmount) * item.stack); i++)
+                for (int i = 0; i < GlobalPet.Randomizer((player.statDefense * dest.defItemMult + dest.flatAmount) * item.stack); i++)
                 {
                     player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.MiningItem), item.type, 1);
                 }

@@ -23,7 +23,7 @@ namespace PetsOverhaul.TownPets
         {
             if (Player.HasBuff(ModContent.BuffType<TownPetDiva>()))
             {
-                Player.GetModPlayer<GlobalPet>().GiveCoins(ItemPet.Randomizer((int)(item.GetStoreValue() * divaDisc * 1000), 1000));
+                Player.GetModPlayer<GlobalPet>().GiveCoins(GlobalPet.Randomizer((int)(item.GetStoreValue() * divaDisc * 1000), 1000));
             }
         }
     }

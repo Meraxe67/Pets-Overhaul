@@ -42,7 +42,7 @@ namespace PetsOverhaul.PetEffects
                 {
                     mimic.chanceToRollItem += (item.IsACoin ? mimic.bagCoin : mimic.bagItem) * item.stack;
                 }
-                for (int i = 0; i < ItemPet.Randomizer(mimic.chanceToRollItem); i++)
+                for (int i = 0; i < GlobalPet.Randomizer(mimic.chanceToRollItem); i++)
                 {
                     player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.GlobalItem), item.type, 1);
                 }

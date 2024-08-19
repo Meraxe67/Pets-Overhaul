@@ -152,7 +152,7 @@ namespace PetsOverhaul.PetEffects
                         PoolRarePlant();
                         if (GlobalPet.ItemPool.Count > 0)
                         {
-                            for (int i = 0; i < ItemPet.Randomizer(chick.rarePlantChance * item.stack); i++)
+                            for (int i = 0; i < GlobalPet.Randomizer(chick.rarePlantChance * item.stack); i++)
                             {
                                 player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.HarvestingItem), GlobalPet.ItemPool[Main.rand.Next(GlobalPet.ItemPool.Count)], 1);
                             }
@@ -163,7 +163,7 @@ namespace PetsOverhaul.PetEffects
                         PoolTree();
                         if (GlobalPet.ItemPool.Count > 0)
                         {
-                            for (int i = 0; i < ItemPet.Randomizer(chick.treeChance * item.stack); i++)
+                            for (int i = 0; i < GlobalPet.Randomizer(chick.treeChance * item.stack); i++)
                             {
                                 player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.HarvestingItem), GlobalPet.ItemPool[Main.rand.Next(GlobalPet.ItemPool.Count)], 1);
                             }
@@ -174,7 +174,7 @@ namespace PetsOverhaul.PetEffects
                         PoolPlant();
                         if (GlobalPet.ItemPool.Count > 0)
                         {
-                            for (int i = 0; i < ItemPet.Randomizer(chick.plantChance * item.stack); i++)
+                            for (int i = 0; i < GlobalPet.Randomizer(chick.plantChance * item.stack); i++)
                             {
                                 player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.HarvestingItem), GlobalPet.ItemPool[Main.rand.Next(GlobalPet.ItemPool.Count)], 1);
                             }

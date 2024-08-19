@@ -40,7 +40,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (GlobalPet.QueenSlimePetActive(out queenSlime) && Player.HasBuff(BuffID.GelBalloonBuff))
             {
-                hitCounter += ItemPet.Randomizer(queenSlime.GetModPlayer<SlimePrincess>().baseCounterChnc + (int)(Pet.abilityHaste * 100));
+                hitCounter += GlobalPet.Randomizer(queenSlime.GetModPlayer<SlimePrincess>().baseCounterChnc + (int)(Pet.abilityHaste * 100));
                 if (hitCounter >= 6)
                 {
                     modifiers.FinalDamage *= queenSlime.GetModPlayer<SlimePrincess>().dmgBoost;
@@ -50,7 +50,7 @@ namespace PetsOverhaul.PetEffects
             }
             else if (GlobalPet.DualSlimePetActive(out dualSlime) && Player.HasBuff(BuffID.GelBalloonBuff))
             {
-                hitCounter += ItemPet.Randomizer(dualSlime.GetModPlayer<DualSlime>().baseCounterChnc + (int)(Pet.abilityHaste * 100));
+                hitCounter += GlobalPet.Randomizer(dualSlime.GetModPlayer<DualSlime>().baseCounterChnc + (int)(Pet.abilityHaste * 100));
                 if (hitCounter >= 6)
                 {
                     modifiers.FinalDamage *= dualSlime.GetModPlayer<DualSlime>().dmgBoost;

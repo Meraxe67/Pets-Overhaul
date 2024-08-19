@@ -382,8 +382,8 @@ namespace PetsOverhaul.PetEffects
                 {
                     int value = HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)).expAmount;
                     value = value * item.stack;
-                    PickerPet.GiveCoins(ItemPet.Randomizer((int)(juni.harvestingCoin * juni.junimoHarvestingLevel * value)));
-                    value = ItemPet.Randomizer(value);
+                    PickerPet.GiveCoins(GlobalPet.Randomizer((int)(juni.harvestingCoin * juni.junimoHarvestingLevel * value)));
+                    value = GlobalPet.Randomizer(value);
                     juni.junimoHarvestingExp += value;
                     juni.popupExpHarv += value;
                     juni.popupIndexHarv = juni.PopupExp(juni.popupIndexHarv, juni.popupExpHarv, new Color(205, 255, 0));
@@ -395,8 +395,8 @@ namespace PetsOverhaul.PetEffects
                     value = index == -1
                         ? juni.defaultExps * item.stack
                         : FishingXpPerCaught[index].expAmount * item.stack;
-                    PickerPet.GiveCoins(ItemPet.Randomizer((int)(juni.fishingCoin * juni.junimoFishingLevel * value)));
-                    value = ItemPet.Randomizer(value);
+                    PickerPet.GiveCoins(GlobalPet.Randomizer((int)(juni.fishingCoin * juni.junimoFishingLevel * value)));
+                    value = GlobalPet.Randomizer(value);
                     juni.junimoFishingExp += value;
                     juni.popupExpFish += value;
                     juni.popupIndexFish = juni.PopupExp(juni.popupIndexFish, juni.popupExpFish, new Color(3, 130, 233));
@@ -407,8 +407,8 @@ namespace PetsOverhaul.PetEffects
                     int value = index == -1
                         ? juni.defaultExps * item.stack
                         : MiningXpPerBlock[index].expAmount * item.stack;
-                    PickerPet.GiveCoins(ItemPet.Randomizer((int)(juni.miningCoin * juni.junimoMiningLevel * value)));
-                    value = ItemPet.Randomizer(value);
+                    PickerPet.GiveCoins(GlobalPet.Randomizer((int)(juni.miningCoin * juni.junimoMiningLevel * value)));
+                    value = GlobalPet.Randomizer(value);
                     juni.junimoMiningExp += value;
                     juni.popupExpMining += value;
                     juni.popupIndexMining = juni.PopupExp(juni.popupIndexMining, juni.popupExpMining, new Color(150, 168, 176));
@@ -440,8 +440,8 @@ namespace PetsOverhaul.PetEffects
                 int value;
                 int index = FishingXpPerKill.IndexOf(FishingXpPerKill.Find(x => x.enemyList.Contains(npcId)));
                 value = index == -1
-                    ? ItemPet.Randomizer(defaultSeaCreatureExp)
-                    : ItemPet.Randomizer(FishingXpPerKill[index].expAmount);
+                    ? GlobalPet.Randomizer(defaultSeaCreatureExp)
+                    : GlobalPet.Randomizer(FishingXpPerKill[index].expAmount);
 
                 junimoFishingExp += value;
                 popupExpFish += value;
@@ -452,7 +452,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (anglerQuestDayCheck == false && Pet.PetInUse(ItemID.JunimoPetItem))
             {
-                int value = ItemPet.Randomizer(anglerQuestExp);
+                int value = GlobalPet.Randomizer(anglerQuestExp);
                 junimoFishingExp += value;
                 popupExpFish += value;
                 anglerQuestDayCheck = true;
@@ -467,8 +467,8 @@ namespace PetsOverhaul.PetEffects
                 int value = index == -1
                     ? defaultExps * fish.stack
                     : FishingXpPerCaught[index].expAmount * fish.stack;
-                Pet.GiveCoins(ItemPet.Randomizer((int)(fishingCoin * junimoFishingLevel * value)));
-                value = ItemPet.Randomizer(value);
+                Pet.GiveCoins(GlobalPet.Randomizer((int)(fishingCoin * junimoFishingLevel * value)));
+                value = GlobalPet.Randomizer(value);
                 junimoFishingExp += value;
                 popupExpFish += value;
                 popupIndexFish = PopupExp(popupIndexFish, popupExpFish, new Color(3, 130, 233));
