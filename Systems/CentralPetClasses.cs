@@ -222,19 +222,20 @@ namespace PetsOverhaul.Systems
         {
             return !npc.friendly && !npc.SpawnedFromStatue && npc.type != NPCID.TargetDummy;
         }
+
         /// <summary>
-        /// Used for Healing and Mana recovery purposes. Non converted amount can still grant +1, depending on a roll. Example: Lifesteal(215, 0.05f) will heal you for 10 health and 75% chance to heal +1 more, resulting in 11 health recovery.
+        /// Used for Healing and Mana recovery purposes. Non converted amount can still grant +1, depending on a roll. Example: PetRecovery(215, 0.05f) will heal you for 10 health and 75% chance to heal +1 more, resulting in 11 health recovery.
         /// </summary>
         /// <param name="baseAmount">Base amount of value to be recovered</param>
         /// <param name="percentageAmount">% of baseAmount to be converted to recovery.</param>
         /// <param name="flatIncrease">Amount to be included that will not go through any calculations & complications.</param>
         /// <param name="manaSteal">Whether or not if it will recover health or mana. petHealMultiplier and Moon Leech debuff will be disabled if set to True.</param>
-        /// <param name="respectLifeStealCap">Should be set to false if this is not a Life Steal, it won't use vanilla Life steal cap and won't modify player.lifeSteal if set to false.</param>
+        /// <param name="isLifesteal">Should be set to false if this is not a Life Steal, it won't use vanilla Life steal cap, won't be affected by Moon Leech debuff and won't modify player.lifeSteal if set to false.</param>
         /// <param name="doHeal">Should be set to false if intended to simply return a value but not do anything at all.</param>
         /// <returns>Returns amount calculated, irrelevant to Player's health cap, or the lifeSteal cap etc.</returns>
-        public int PetRecovery(int baseAmount, float percentageAmount, int flatIncrease = 0, bool manaSteal = false, bool respectLifeStealCap = true, bool doHeal = true)
+        public int PetRecovery(int baseAmount, float percentageAmount, int flatIncrease = 0, bool manaSteal = false, bool isLifesteal = true, bool doHeal = true)
         {
-            float num = baseAmount * (manaSteal ? 1 : (petHealMultiplier * (Player.HasBuff(BuffID.MoonLeech) ? percentageAmount * 0.33f : percentageAmount)));
+            float num = baseAmount * (manaSteal ? 1 : (petHealMultiplier * (isLifesteal ? (Player.HasBuff(BuffID.MoonLeech) ? (percentageAmount * 0.33f) : percentageAmount) : 1)));
             int calculatedAmount = (int)num;
             if (Main.rand.NextFloat(0, 1) < num % 1)
             {
@@ -253,7 +254,7 @@ namespace PetsOverhaul.Systems
                         calculatedAmount = Player.statLifeMax2 - Player.statLife;
                     }
 
-                    if (respectLifeStealCap == true)
+                    if (isLifesteal == true)
                     {
                         if (calculatedAmount > Player.lifeSteal)
                         {

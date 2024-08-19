@@ -61,14 +61,14 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUseWithSwapCd(ItemID.CompanionCube))
             {
-                Pet.PetRecovery(manaConsumed, manaToHealth, respectLifeStealCap: false);
+                Pet.PetRecovery(manaConsumed, manaToHealth, isLifesteal: false);
             }
         }
         public override void PostHurt(Player.HurtInfo info)
         {
             if (Pet.PetInUseWithSwapCd(ItemID.CompanionCube))
             {
-                Pet.PetRecovery(info.Damage, healthToMana, manaSteal: true, respectLifeStealCap: false);
+                Pet.PetRecovery(info.Damage, healthToMana, manaSteal: true, isLifesteal: false);
             }
         }
     }

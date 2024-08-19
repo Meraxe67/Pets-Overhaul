@@ -79,8 +79,8 @@ namespace PetsOverhaul.PetEffects
                         EnemiesBurning = 5;
                     }
 
-                    Pet.PetRecovery(burnDrain * healthDrain * EnemiesBurning, 0.005f * (Pet.abilityHaste + 1f), respectLifeStealCap: false);
-                    Pet.PetRecovery(burnDrain * manaDrain * EnemiesBurning, 0.005f * (Pet.abilityHaste + 1f), respectLifeStealCap: false, manaSteal: true);
+                    Pet.PetRecovery(burnDrain * healthDrain * EnemiesBurning, 0.005f * (Pet.abilityHaste + 1f), isLifesteal: false);
+                    Pet.PetRecovery(burnDrain * manaDrain * EnemiesBurning, 0.005f * (Pet.abilityHaste + 1f), isLifesteal: false, manaSteal: true);
                     timer = 0;
                 }
             }

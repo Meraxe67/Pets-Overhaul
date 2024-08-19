@@ -97,7 +97,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUseWithSwapCd(ItemID.LizardEgg) && steroidCount > 0 && onLizardSteroidsOrNah == true && GlobalPet.LifestealCheck(target))
             {
-                Pet.PetRecovery(damageDone, lizardLifesteal, Pet.PetRecovery(Player.statLifeMax2, lizardLifestealHealth, respectLifeStealCap: false, doHeal: false));
+                Pet.PetRecovery(damageDone, lizardLifesteal, Pet.PetRecovery(Player.statLifeMax2, lizardLifestealHealth, isLifesteal: false, doHeal: false));
                 steroidCount--;
             }
         }
