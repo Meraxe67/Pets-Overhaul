@@ -50,13 +50,6 @@ namespace PetsOverhaul.PetEffects
                 Player.moveSpeed -= moveSpd * minotaurStack;
             }
         }
-        public override void PostUpdateRunSpeeds()
-        {
-            if (Pet.PetInUseWithSwapCd(ItemID.TartarSauce) && minotaurStack > 0)
-            {
-                Player.maxRunSpeed -= moveSpd * minotaurStack * 3;
-            }
-        }
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Pet.PetInUseWithSwapCd(ItemID.TartarSauce) && GlobalPet.LifestealCheck(target) && Pet.timer <= 0 && item.CountsAsClass<MeleeDamageClass>())

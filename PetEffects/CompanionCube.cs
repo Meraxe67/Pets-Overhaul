@@ -19,7 +19,7 @@ namespace PetsOverhaul.PetEffects
         /// This is base amount for mana to health recovery before the Potion Sickness reductions.
         /// </summary>
         public float manaToHealthUpdate = 0.11f;
-        public float healthToMana = 0.2f;
+        public float healthToMana = 0.25f;
         public float manaPotionNerf = 0.17f;
         public float manaToHealthNerf = 0.03f;
         public override void PreUpdate()

@@ -14,7 +14,7 @@ namespace PetsOverhaul.PetEffects
     {
         public override PetClasses PetClassPrimary => PetClasses.Melee;
         public override PetClasses PetClassSecondary => PetClasses.Mobility;
-        public float sizeDecrease = 0.85f;
+        public float sizeDecrease = 0.88f;
         public float speedIncrease = 0.15f;
         public float meleeSpdIncrease = 0.18f;
         public float meleeDmg = 0.05f;

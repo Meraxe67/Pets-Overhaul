@@ -145,11 +145,11 @@ Mods: {
 				'''
 			FairyBell:
 				'''
-				Grants <hasteBase> + <hastePer>% Ability Haste per quality which increases
+				Grants <hasteBase> + <hastePer>% Pet Ability Haste per quality which increases
 				how frequently you can use your current Pet's ability and increases 
 				<fortBase> + <fortPer> Global Fortune per quality, increasing all Mining, Harvesting, and Fishing drops.
 				which works with 50% effectiveness with already classified Pets.
-				Ability Haste Bonus: <currentHaste> Quality <hasteRoll> out of <hasteMaxRoll>
+				Pet Ability Haste Bonus: <currentHaste> Quality <hasteRoll> out of <hasteMaxRoll>
 				Global Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
 				'''
 			CreeperEgg:
@@ -215,8 +215,8 @@ Mods: {
 			Seaweed:
 				'''
 				<class>
-				- Increases defense by +<flat>, and multiplies defense by <def>x.
-				- Received knockback is multiplied by <kbResist>x.
+				- Increases defense by +<flat>, and by <def>%.
+				- Grants <kbResist>% knockback resist.
 				- Reduces movement speed by -<moveSpd>% and all damage by -<dmg>%.
 				'''
 			AmberMosquito:
@@ -321,7 +321,7 @@ Mods: {
 				- Increases almost ALL Player stats by <intIncr>.
 				 * Damage, knockback resistance, crit chance, luck, mana, crit damage,
 				health, knockback, attack speed, defense, armor pen, fishing power, 
-				damage reduction, mana regen, jump speed, wing time, ability haste.
+				damage reduction, mana regen, jump speed, wing time, and pet ability haste.
 				- Increases movement speed by <moveSpd>%.
 				- Grants permanent Night Vision buff.
 				'''
@@ -348,11 +348,16 @@ Mods: {
 			UnluckyYarn:
 				'''
 				<class>
+				- Press Pet Ability Keybind (<keybind>) to absorb Moonlight.
+				 * Heal or take damage between <moonlightMin> and <moonlightMax> randomly.
+				 * Negative luck reduces the values, while positive luck increases them.
+				 * Can be only used during the night, has a <moonlightCd> second cooldown.
 				- Increases luck by <flatLuck>.
 				- Grants luck depending on the current moon cycle.
-				 * Minimum being -<minimumMoon> while its Full Moon and
-				maximum being +<maximumMoon> while its New Moon.
-				 * Only works while its Night
+				 * Minimum being <minimumMoon> while its Full Moon and
+				maximum being <maximumMoon> while its New Moon.
+				 * Only works while its Night. Current luck: <moonLuck>
+				- Your current total luck: <playerLuck>
 				'''
 			BlueEgg:
 				'''
@@ -457,9 +462,9 @@ Mods: {
 			GlommerPetItem:
 				'''
 				<class>
-				- Grants <sanityAmount>% Ability Haste to all Players in a <sanityRange>-block radius.
-				 * User also is affected.
-				- Multiplies your Maximum mana equal to your Ability Haste + 100%.
+				- Grants Sanity Aura buff to all Players in a <sanityRange>-block radius.
+				 * The buff grants <sanityAmount>% Pet Ability Haste.
+				- Increases your Maximum mana by <currentHaste>%. (Equal to your current pet ability haste)
 				- Recovers <manaRecover> mana every <manaRecoverCd> second.
 				 * This recovery is unaffected by any factor whatsoever.
 				- Glommer also poops [i:5395] occasionally. (It won't recover 40 health!!)
@@ -504,14 +509,15 @@ Mods: {
 			LizardEgg:
 				'''
 				<class>
-				- Entering combat while below 55% health turns you into a Lihzahrd:
-				 * This lasts <transformTime> seconds.
-				 * Gain 20% movement speed, 5 defense, 10% damage.
-				 * Amplifies your next <hitCount> hits, increasing damage by
-				<hitDmg>x of dealt damage + <hitFlat> and lifesteals <lifesteal>% of damage dealt
-				plus recovers an extra <maxHpRecovery>% of your maximum health per hit. 
-				 * This has a <transformCooldown>-second cooldown.
-				 * You will be green and make Lihzahrd noises.
+				- Press Pet Ability Keybind (<keybind>) to drop a Decoy Tail.
+				 * Upon using, lose <tailDmgTaken>% of your maximum health. (This won't take you below 1 health)
+				 * Gain invisibility frames, <tailAcc> acceleration, <tailSpd> movement speed and <tailAggro> aggro for 2 seconds.
+				 * Tail can be picked up after <tailWait> seconds to regain <tailDmgTaken>% health and refund <cooldownRefund>% of your remaining ability cooldown.
+				 * Tail will have <tailMaxHp>% of your maximum health, can be damaged by enemies, ability has a <tailCooldown> second cooldown, and stays up for half of the amount.
+				- Gain <kbResist>% knockback resistance.
+				- While below 55% health, you turn into a Lihzahrd.
+				 * Gain <def> defense, <moveSpd>% movement speed and KB Immunity.
+				 * Lose <jumpPenalty>% of your jump speed and wing time.
 				'''
 			TartarSauce:
 				'''
@@ -659,8 +665,11 @@ Mods: {
 			EyeOfCthulhuPetItem:
 				'''
 				<class>
+				- Press Pet Ability Keybind (<keybind>) to go to the 'enraged state' early.
+				 * Gain 10% of Health used to go below 50% as an extra shield for <shieldDuration> seconds.
 				- The moment you're below 50% health, go into an enraged state,
 				consuming all of your defense and granting the following:
+				 * Gain 2x of defense consumed as Shield for <shieldDuration> seconds.
 				 * Sets the Dash delay of all of your dashes to 5 frames. (1/12th of a second)
 				 * Increases damage by <defToDmg>% of the defense consumed.
 				 * Increases movement speed by <defToSpd>% of the defense consumed.
@@ -706,7 +715,7 @@ Mods: {
 				 * Give Honey buff for <bottledHoneyTime> or <honeyfinHoneyTime> seconds respectively. 
 				 * Give Honey Overdose (de)buff for 60 seconds.
 				 * Honey Overdose prevents the Player from being healed by another Honey Bee for the duration.
-				 * Honey Overdose also grants <abilityHaste>% ability haste for the duration which
+				 * Honey Overdose also grants <abilityHaste>% pet ability haste for the duration which
 				 determines how frequently the Player's pet's ability can be used.
 				 * Player with Honey Bee gets all the benefits with half effect and full duration of Honey Overdose.
 				'''
@@ -734,8 +743,8 @@ Mods: {
 				<class>
 				- Improves Sparkle Slime Balloon [i:4986] and the Endless variation of it [i:<endless>] globally.
 				 * Enemies: Applies a <slow>% slow to all enemies affected.
-				 * Players: Grants <haste>% ability haste which increases how frequently your Pet's ability can be used
-				and every hit adds 1 counter, (extra chance to add more counter with ability haste) when you reach
+				 * Players: Grants <haste>% pet ability haste which increases how frequently your Pet's ability can be used
+				and every hit adds 1 counter, (extra chance to add more counter with pet ability haste) when you reach
 				6th counter, you deal <dmgBonus>x damage and gives you <shield> shield for <shieldTime> seconds.
 				'''
 			SkeletronPrimePetItem:
@@ -781,8 +790,8 @@ Mods: {
 			MartianPetItem:
 				'''
 				<class>
-				- Grants <wingMult>x maximum wing time.
-				- Increases acceleration by <acc>%.
+				- Increases maximum wing time by <wingMult>%.
+				- Increases all acceleration by <acc>%.
 				- Multiplies horizontal flight speed by <speedMult>x, acceleration by <accMult>x.
 				- Increases horizontal flight speed and acceleration by a flat <flatSpdAcc>%.
 				'''
@@ -828,7 +837,7 @@ Mods: {
 				 * Every stack decreases the target's defense by <defDecrease>%.
 				- If any Player kills an enemy with Queen's Damnation,
 				they recover <missingHpSteal>% of their missing health per stack.
-				 * Missing health recovery doubled if the target was at maximum stacks.
+				 * Missing health recovery is increased by <maxStackIncr>% if the target was at maximum stacks.
 				'''
 			IceQueenPetItem:
 				'''
@@ -880,12 +889,22 @@ Mods: {
 		}
 
 		Buffs: {
+			SanityAura: {
+				DisplayName: Sanity Aura
+				Description:
+					'''
+					Bzzzzt...
+					A nearby Glommer is keeping your Pets sane.
+					Increases Pet Ability Haste by 30%.
+					'''
+			}
+
 			HoneyOverdose: {
 				DisplayName: Honey Overdose
 				Description:
 					'''
 					A Honey Bee has fed you too much honey already! 
-					Grants <AbilityHaste>% Ability Haste.
+					Grants <AbilityHaste>% Pet Ability Haste.
 					'''
 			}
 
@@ -977,8 +996,7 @@ Mods: {
 				DisplayName: <Name>'s Aura
 				Description:
 					'''
-					Increases Ability Haste by <MysticHaste>%
-					which reduces your Pet's ability cooldown
+					Increases Pet Ability Haste by <MysticHaste>%
 					and Global Fortune by <MysticAllExp> which increases
 					items gained by Mining, Harvesting, and Fishing and all Pets.
 					'''
@@ -1104,5 +1122,7 @@ Mods: {
 			PetTooltipHide.DisplayName: Toggle (Show) Pet Tooltips
 			PetTooltipSwap.DisplayName: Switch Pet Tooltip
 		}
+
+		NPCs.LizardTail.DisplayName: Lizard Tail
 	}
 }

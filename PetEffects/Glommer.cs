@@ -1,4 +1,5 @@
-﻿using PetsOverhaul.Config;
+﻿using PetsOverhaul.Buffs;
+using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,8 @@ namespace PetsOverhaul.PetEffects
     {
         public int glommerSanityTime = 45;
         public int glommerSanityRecover = 1;
-        public float glommerSanityAura = 0.2f;
-        public int glommerSanityRange = 4000;
+        public float glommerSanityAura = 0.3f;
+        public int glommerSanityRange = 2400;
 
         public override PetClasses PetClassPrimary => PetClasses.Magic;
         public override PetClasses PetClassSecondary => PetClasses.Supportive;
@@ -41,6 +42,7 @@ namespace PetsOverhaul.PetEffects
                     if (Player.Distance(plr.Center) < glommerSanityRange && plr.active && plr.whoAmI != 255)
                     {
                         plr.GetModPlayer<GlobalPet>().abilityHaste += glommerSanityAura;
+                        plr.AddBuff(ModContent.BuffType<SanityAura>(), 1);
                     }
                 }
                 Player.statManaMax2 += (int)(Pet.abilityHaste * Player.statManaMax2);
@@ -69,8 +71,9 @@ namespace PetsOverhaul.PetEffects
             Glommer glommer = Main.LocalPlayer.GetModPlayer<Glommer>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.GlommerPetItem")
                 .Replace("<class>", PetColors.ClassText(glommer.PetClassPrimary, glommer.PetClassSecondary))
-                        .Replace("<sanityAmount>", Math.Round(glommer.glommerSanityAura * 100, 2).ToString())
                         .Replace("<sanityRange>", Math.Round(glommer.glommerSanityRange / 16f, 2).ToString())
+                        .Replace("<sanityAmount>", Math.Round(glommer.glommerSanityAura * 100, 2).ToString())
+                        .Replace("<currentHaste>", Math.Round(glommer.Pet.abilityHaste * 100, 2).ToString())
                         .Replace("<manaRecover>", glommer.glommerSanityRecover.ToString())
                         .Replace("<manaRecoverCd>", Math.Round(glommer.glommerSanityTime / 60f, 2).ToString())
                         ));

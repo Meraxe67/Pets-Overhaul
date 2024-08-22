@@ -15,7 +15,7 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Magic;
         public float manaIncrease = 0.15f;
         public float manaMagicIncreasePer1 = 0.001f;
-        public float penaltyMult = 0.5f;
+        public float penaltyMult = 0.6f;
         public override void PostUpdateEquips()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.CelestialWand))

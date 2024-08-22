@@ -27,7 +27,7 @@ namespace PetsOverhaul.PetEffects
         public double harvestingHealthperLevel = 1.5;
         public float harvestingCoin = 0.6f;
         public float miningCoin = 0.4f;
-        public float fishingCoin = 4f;
+        public float fishingCoin = 6f;
         public int popupExpHarv = 0; //Represents current existing exp value on popup texts
         public int popupExpMining = 0;
         public int popupExpFish = 0;

@@ -1,10 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using PetsOverhaul.Config;
+using PetsOverhaul.NPCs;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent.UI;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
@@ -14,19 +18,25 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class Lizard : PetEffect
     {
-        public bool onLizardSteroidsOrNah = false;
-        public int transformCd = 3600;
-        public int transformTime = 1800;
-        private int transformTimer = 0;
-        public int maxSteroidCount = 10;
-        public int steroidCount = 10;
-        public float lizardLifesteal = 0.01f;
-        public float lizardLifestealHealth = 0.01f;
-        public float dmgMultIncrease = 1.1f;
-        public int dmgFlatIncrease = 10;
+        public float percentHpDmg = 0.1f;
+        public int buffDurations = 120;
+        private int buffTimer = 0;
+        public float tailAcc = 0.25f;
+        public float tailSpd = 0.5f;
+        public int tailAggro = -10000;
+        public int tailWait = 300;
+        public float percentHpRecover = 0.1f;
+        public float tailCdRefund = 0.5f;
+        public float tailMaxHp = 0.5f; //Uses Player's maximum health.
+        public int tailCooldown = 3600;
 
-        public override PetClasses PetClassPrimary => PetClasses.Offensive;
-        public override PetClasses PetClassSecondary => PetClasses.Defensive;
+        public float kbResist = 0.6f;
+        public float moveSpd = 0.7f;
+        public int defense = 10;
+        public float jumpMult = 0.5f;
+
+        public override PetClasses PetClassPrimary => PetClasses.Defensive;
+        public override PetClasses PetClassSecondary => PetClasses.Utility;
         public override void PreUpdate()
         {
             if (Pet.skinColorChanged == false)
@@ -39,87 +49,51 @@ namespace PetsOverhaul.PetEffects
                 Player.skinColor = Pet.skin;
                 Pet.skinColorChanged = false;
             }
-            if (Pet.PetInUse(ItemID.LizardEgg))
+            else
             {
-                Player.skinColor = Color.YellowGreen;
-                Pet.SetPetAbilityTimer(transformCd);
+                buffTimer--;
+                if (buffTimer <= 0)
+                    buffTimer = 0;
+                Pet.SetPetAbilityTimer(tailCooldown);
+                if (Player.statLife < Player.statLifeMax2 * 0.55f)
+                {
+                    Player.skinColor = Color.YellowGreen;
+                }
+            }
+        }
+        public override void ProcessTriggers(TriggersSet triggersSet)
+        {
+            if (Pet.timer <= 0 && Pet.PetInUseWithSwapCd(ItemID.LizardEgg) && Keybinds.UsePetAbility.JustPressed)
+            {
+
+                NPC.NewNPC(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetNPC),(int)Player.position.X,(int)Player.position.Y,ModContent.NPCType<LizardTail>(),ai0:Player.statLifeMax2 * tailMaxHp, ai1:tailWait, ai2:Pet.timerMax/2);
+                Pet.timer = Pet.timerMax;
             }
         }
         public override void PostUpdateEquips()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.LizardEgg))
             {
-                if (transformTimer <= 0)
+                if (buffTimer>0)
                 {
-                    onLizardSteroidsOrNah = false;
+                    Player.moveSpeed += tailSpd;
                 }
-
-                if (onLizardSteroidsOrNah == true)
+                if (Player.statLife < Player.statLifeMax2 * 0.55f)
                 {
-                    transformTimer--;
-                    Player.moveSpeed += 0.2f;
-                    Player.statDefense += 5;
-                    Player.GetDamage<GenericDamageClass>() += 0.1f;
-                }
-                if (Pet.timer == 0)
-                {
-                    AdvancedPopupRequest popupMessage = new();
-                    popupMessage.Text = "Lizard Cooldown Ready!";
-                    popupMessage.DurationInFrames = 120;
-                    popupMessage.Velocity = new Vector2(0, -7);
-                    popupMessage.Color = Color.ForestGreen;
-                    PopupText.NewText(popupMessage, Player.position);
+                    Player.moveSpeed += moveSpd;
+                    Player.statDefense += defense;
+                    Player.noKnockback = true;
+                    Player.wingTimeMax = (int)(jumpMult * Player.wingTimeMax);
+                    Player.jumpHeight = (int)(jumpMult * Player.jumpHeight);
                 }
             }
         }
-        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.LizardEgg) && Pet.timer <= 0 && Player.statLife < Player.statLifeMax2 * 0.55f)
+            if (Pet.PetInUseWithSwapCd(ItemID.LizardEgg))
             {
-                steroidCount = maxSteroidCount;
-                transformTimer = transformTime;
-                onLizardSteroidsOrNah = true;
-                AdvancedPopupRequest popupMessage = new();
-                popupMessage.Text = "Lizard genetics activated";
-                popupMessage.DurationInFrames = 120;
-                popupMessage.Velocity = new Vector2(0, -7);
-                popupMessage.Color = Color.ForestGreen;
-                PopupText.NewText(popupMessage, Player.position);
-                Pet.timer = Pet.timerMax;
+                modifiers.Knockback *= 1f-kbResist;
             }
-            if (Pet.PetInUseWithSwapCd(ItemID.LizardEgg) && steroidCount > 0 && onLizardSteroidsOrNah == true)
-            {
-                modifiers.FinalDamage *= dmgMultIncrease;
-                modifiers.FlatBonusDamage += dmgFlatIncrease;
-            }
-        }
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            if (Pet.PetInUseWithSwapCd(ItemID.LizardEgg) && steroidCount > 0 && onLizardSteroidsOrNah == true && GlobalPet.LifestealCheck(target))
-            {
-                Pet.PetRecovery(damageDone, lizardLifesteal, Pet.PetRecovery(Player.statLifeMax2, lizardLifestealHealth, isLifesteal: false, doHeal: false));
-                steroidCount--;
-            }
-        }
-        public override void PostHurt(Player.HurtInfo info)
-        {
-            if (Pet.PetInUseWithSwapCd(ItemID.LizardEgg) && Pet.timer <= 0 && Player.statLife < Player.statLifeMax2 * 0.55f)
-            {
-                steroidCount = maxSteroidCount;
-                transformTimer = transformTime;
-                onLizardSteroidsOrNah = true;
-                AdvancedPopupRequest popupMessage = new();
-                popupMessage.Text = "Lizard genetics activated";
-                popupMessage.DurationInFrames = 120;
-                popupMessage.Velocity = new Vector2(0, -7);
-                popupMessage.Color = Color.ForestGreen;
-                PopupText.NewText(popupMessage, Player.position);
-                Pet.timer = Pet.timerMax;
-            }
-        }
-        public override void UpdateDead()
-        {
-            transformTimer = 0;
         }
     }
     public sealed class LizardEgg : GlobalItem
@@ -139,13 +113,7 @@ namespace PetsOverhaul.PetEffects
             Lizard lizard = Main.LocalPlayer.GetModPlayer<Lizard>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.LizardEgg")
                 .Replace("<class>", PetColors.ClassText(lizard.PetClassPrimary, lizard.PetClassSecondary))
-                        .Replace("<transformTime>", Math.Round(lizard.transformTime / 60f, 2).ToString())
-                        .Replace("<hitCount>", lizard.maxSteroidCount.ToString())
-                        .Replace("<hitDmg>", lizard.dmgMultIncrease.ToString())
-                        .Replace("<hitFlat>", lizard.dmgFlatIncrease.ToString())
-                        .Replace("<lifesteal>", Math.Round(lizard.lizardLifesteal * 100, 2).ToString())
-                        .Replace("<maxHpRecovery>", Math.Round(lizard.lizardLifestealHealth * 100, 2).ToString())
-                        .Replace("<transformCooldown>", Math.Round(lizard.transformCd / 60f, 2).ToString())
+                .Replace("<keybind>", Keybinds.UsePetAbility.GetAssignedKeys(GlobalPet.PlayerInputMode).Count > 0 ? Keybinds.UsePetAbility.GetAssignedKeys(GlobalPet.PlayerInputMode)[0] : $"[c/{Colors.RarityTrash.Hex3()}:{Language.GetTextValue("Mods.PetsOverhaul.KeybindMissing")}]")
                         ));
         }
     }

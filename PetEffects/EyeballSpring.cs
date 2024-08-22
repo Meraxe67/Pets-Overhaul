@@ -14,25 +14,44 @@ namespace PetsOverhaul.PetEffects
     public sealed class EyeballSpring : PetEffect
     {
         public override PetClasses PetClassPrimary => PetClasses.Mobility;
-        public float acceleration = 0.04f;
+        public float acceleration = 0.15f;
         public float jumpBoost = 4.50f;
         public float ascentPenaltyMult = 0.55f;
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
+        {
+            if (Pet.PetInUseWithSwapCd(ItemID.EyeSpring))
+            {
+                Player.jumpSpeedBoost += jumpBoost;
+            }
+        }
+        public override void PostUpdateRunSpeeds()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.EyeSpring))
             {
                 if (Player.jump > 0 && Pet.jumpRegistered == false)
                 {
-                    if (ModContent.GetInstance<Personalization>().HurtSoundDisabled == false)
+                    if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
                     {
                         SoundEngine.PlaySound(SoundID.Item56 with { Volume = 0.5f, Pitch = -0.3f, PitchVariance = 0.1f }, Player.position);
                     }
 
                     Pet.jumpRegistered = true;
                 }
-                Player.runAcceleration += acceleration;
+                Player.runAcceleration *= acceleration+1f;
                 Player.jumpSpeedBoost += jumpBoost;
             }
+        }
+    }
+    public sealed class EyeballSpringWing : GlobalItem
+    {
+        public override bool InstancePerEntity => true;
+        public override void VerticalWingSpeeds(Item item, Player player, ref float ascentWhenFalling, ref float ascentWhenRising, ref float maxCanAscendMultiplier, ref float maxAscentMultiplier, ref float constantAscend)
+        {
+            if (player.TryGetModPlayer(out EyeballSpring eyeballs) && player.GetModPlayer<GlobalPet>().PetInUseWithSwapCd(ItemID.EyeSpring))
+            {
+                maxAscentMultiplier *= eyeballs.ascentPenaltyMult;
+            }
+
         }
     }
     public sealed class EyeSpring : GlobalItem
@@ -56,18 +75,6 @@ namespace PetsOverhaul.PetEffects
                         .Replace("<acceleration>", Math.Round(eyeballSpring.acceleration * 100, 2).ToString())
                         .Replace("<ascNerf>", eyeballSpring.ascentPenaltyMult.ToString())
                         ));
-        }
-    }
-    public sealed class EyeballSpringWing : GlobalItem
-    {
-        public override bool InstancePerEntity => true;
-        public override void VerticalWingSpeeds(Item item, Player player, ref float ascentWhenFalling, ref float ascentWhenRising, ref float maxCanAscendMultiplier, ref float maxAscentMultiplier, ref float constantAscend)
-        {
-            if (player.TryGetModPlayer(out EyeballSpring eyeballs) && player.GetModPlayer<GlobalPet>().PetInUseWithSwapCd(ItemID.EyeSpring))
-            {
-                maxAscentMultiplier *= eyeballs.ascentPenaltyMult;
-            }
-
         }
     }
 }

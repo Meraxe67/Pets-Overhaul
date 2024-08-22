@@ -147,11 +147,11 @@ Mods: {
 				''' */
 			/* FairyBell:
 				'''
-				Grants <hasteBase> + <hastePer>% Ability Haste per quality which increases
+				Grants <hasteBase> + <hastePer>% Pet Ability Haste per quality which increases
 				how frequently you can use your current Pet's ability and increases 
 				<fortBase> + <fortPer> Global Fortune per quality, increasing all Mining, Harvesting, and Fishing drops.
 				which works with 50% effectiveness with already classified Pets.
-				Ability Haste Bonus: <currentHaste> Quality <hasteRoll> out of <hasteMaxRoll>
+				Pet Ability Haste Bonus: <currentHaste> Quality <hasteRoll> out of <hasteMaxRoll>
 				Global Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
 				''' */
 			/* CreeperEgg:
@@ -776,6 +776,16 @@ Mods: {
 		}
 
 		Buffs: {
+			SanityAura: {
+				// DisplayName: Sanity Aura
+				/* Description:
+					'''
+					Bzzzzt...
+					A nearby Glommer is keeping your Pets sane.
+					Increases Pet Ability Haste by 30%.
+					''' */
+			}
+
 			HoneyOverdose: {
 				DisplayName: 蜂蜜齁甜
 				Description:
@@ -999,5 +1009,7 @@ Mods: {
 			// PetTooltipHide.DisplayName: Toggle (Show) Pet Tooltips
 			// PetTooltipSwap.DisplayName: Switch Pet Tooltip
 		}
+
+		// NPCs.LizardTail.DisplayName: Lizard Tail
 	}
 }

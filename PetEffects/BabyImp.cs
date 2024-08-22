@@ -24,27 +24,17 @@ namespace PetsOverhaul.PetEffects
             if (Pet.PetInUseWithSwapCd(ItemID.HellCake))
             {
                 Player.lavaMax += lavaImmune;
-                if (Main.tile[(int)(Player.Center.X / 16f), (int)((Player.Bottom.Y - 16f) / 16f)].LiquidAmount > 0 || Main.tile[(int)(Player.Right.X / 16f), (int)((Player.Bottom.Y - 16f) / 16f)].LiquidAmount > 0 || Player.lavaWet)
+                if (Collision.LavaCollision(Player.position, Player.width, Player.height))
                 {
-                    if (Main.tile[(int)(Player.Left.X / 16f), (int)((Player.Bottom.Y - 16f) / 16f)].LiquidType == LiquidID.Lava || Main.tile[(int)(Player.Right.X / 16f), (int)((Player.Bottom.Y - 16f) / 16f)].LiquidType == LiquidID.Lava || Player.lavaWet)
-                    {
-                        Player.accFlipper = true;
-                        Player.statDefense += lavaDef;
-                        Player.moveSpeed += lavaSpd;
-                    }
+                    Player.accFlipper = true;
+                    Player.statDefense += lavaDef;
+                    Player.moveSpeed += lavaSpd;
                 }
                 if (Player.HasBuff(BuffID.ObsidianSkin))
                 {
                     Player.statDefense += obbyDef;
                     Player.moveSpeed -= obbySpd;
                 }
-            }
-        }
-        public override void PostUpdateRunSpeeds()
-        {
-            if (Pet.PetInUseWithSwapCd(ItemID.HellCake) && Player.HasBuff(BuffID.ObsidianSkin))
-            {
-                Player.maxRunSpeed -= obbySpd * 3;
             }
         }
     }

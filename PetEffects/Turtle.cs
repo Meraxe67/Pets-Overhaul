@@ -14,8 +14,8 @@ namespace PetsOverhaul.PetEffects
     {
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
         public float moveSpd = 0.12f;
-        public float def = 1.11f;
-        public float kbResist = 0.25f;
+        public float def = 0.15f;
+        public float kbResist = 0.9f;
         public float dmgReduce = 0.04f;
         public int flatDef = 1;
         public override void PostUpdateEquips()
@@ -23,24 +23,16 @@ namespace PetsOverhaul.PetEffects
             if (Pet.PetInUseWithSwapCd(ItemID.Seaweed))
             {
                 Player.statDefense += flatDef;
-                Player.statDefense.FinalMultiplier *= def;
+                Player.statDefense *= def+1f;
                 Player.moveSpeed -= moveSpd;
-                Player.maxRunSpeed -= moveSpd * 3;
                 Player.GetDamage<GenericDamageClass>() -= dmgReduce;
-            }
-        }
-        public override void PostUpdateRunSpeeds()
-        {
-            if (Pet.PetInUseWithSwapCd(ItemID.Seaweed))
-            {
-                Player.maxRunSpeed -= moveSpd * 3;
             }
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
             if (Pet.PetInUseWithSwapCd(ItemID.Seaweed))
             {
-                modifiers.Knockback *= kbResist;
+                modifiers.Knockback *= 1f-kbResist;
             }
         }
     }

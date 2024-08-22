@@ -19,9 +19,8 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUseWithSwapCd(ItemID.PlanteraPetItem) && modifiers.DamageType.CountsAsClass<RangedDamageClass>())
             {
-                float multiplyDamage = 0;
-                multiplyDamage += 2 / (target.life * 1f / target.lifeMax + 1);
-                multiplyDamage += (2 / (target.life * 1f / target.lifeMax + 1) - 1) * secondMultiplier;
+                float multiplyDamage = 2 / ((float)target.life / target.lifeMax + 1);
+                multiplyDamage += (2 / ((float)target.life / target.lifeMax + 1) - 1) * secondMultiplier; 
                 modifiers.FinalDamage *= multiplyDamage;
             }
         }

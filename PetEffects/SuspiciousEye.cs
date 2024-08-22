@@ -23,6 +23,7 @@ namespace PetsOverhaul.PetEffects
         public float dmgMult = 1f;
         public float spdMult = 0.6f;
         public int eocDefenseConsume;
+        public int shieldTime = 600;
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.EyeOfCthulhuPetItem))
@@ -33,6 +34,14 @@ namespace PetsOverhaul.PetEffects
             if (eocTimer >= -1)
             {
                 eocTimer--;
+            }
+        }
+        public override void ProcessTriggers(TriggersSet triggersSet)
+        {
+            if (Pet.timer <= 0 && Player.statLife > Player.statLifeMax2 / 2 &&Pet.PetInUseWithSwapCd(ItemID.EyeOfCthulhuPetItem) && Keybinds.UsePetAbility.JustPressed)
+            {
+                int damageTaken = (int)Math.Floor((float)Player.statLife % Player.statLifeMax2 / 2);
+                Pet.petShield.Add((damageTaken / 5, shieldTime));
             }
         }
         public override void UpdateEquips()
@@ -48,14 +57,14 @@ namespace PetsOverhaul.PetEffects
                         SoundEngine.PlaySound(SoundID.ForceRoar with { PitchVariance = 0.3f }, Player.position);
                     }
 
-                    AdvancedPopupRequest popupMessage = new()
+                    PopupText.NewText(new AdvancedPopupRequest() with
                     {
                         Text = "ENRAGED!",
                         DurationInFrames = 150,
                         Velocity = new Vector2(0, -10),
                         Color = Color.DarkRed
-                    };
-                    PopupText.NewText(popupMessage, Player.position);
+                    }, Player.position);
+                    Pet.petShield.Add((Player.statDefense*2, shieldTime));
                 }
                 if (eocTimer <= phaseTime && eocTimer >= 0)
                 {
@@ -86,7 +95,13 @@ namespace PetsOverhaul.PetEffects
                         Velocity = new Vector2(0, -10),
                         Color = Color.OrangeRed
                     };
-                    PopupText.NewText(popupMessage, Player.position);
+                    PopupText.NewText(new AdvancedPopupRequest() with
+                    {
+                        Text = "Calmed Down.",
+                        DurationInFrames = 150,
+                        Velocity = new Vector2(0, -10),
+                        Color = Color.OrangeRed
+                    }, Player.position);
                 }
             }
         }

@@ -15,16 +15,22 @@ namespace PetsOverhaul.LightPets
     public sealed class JewelOfLightEffect : ModPlayer
     {
         public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Player.miscEquips[1].type == ItemID.FairyQueenPetItem && Player.miscEquips[1].TryGetGlobalItem(out JewelOfLight empress))
             {
                 Player.moveSpeed += empress.CurrentMoveSpd;
-                Player.runAcceleration += empress.CurrentAcc;
                 if (Player.equippedWings != null)
                 {
                     Player.wingTimeMax += empress.CurrentFlightTime;
                 }
+            }
+        }
+        public override void PostUpdateRunSpeeds()
+        {
+            if (Player.miscEquips[1].type == ItemID.FairyQueenPetItem && Player.miscEquips[1].TryGetGlobalItem(out JewelOfLight empress))
+            {
+                Player.runAcceleration += empress.CurrentAcc;
             }
         }
     }
@@ -42,7 +48,7 @@ namespace PetsOverhaul.LightPets
         public int wingRoll = 0;
         public int CurrentFlightTime => baseWing + wingPerRoll * wingRoll;
 
-        public float baseAcc = 0.05f;
+        public float baseAcc = 0.05f; //nerf acc amount, make this only additive acceleration
         public float accPerRoll = 0.005f;
         public int accMaxRoll = 20;
         public int accRoll = 0;

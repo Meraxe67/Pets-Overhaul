@@ -225,22 +225,26 @@ namespace PetsOverhaul.Systems
 
         /// <summary>
         /// Randomizes the given number. numToBeRandomized / randomizeTo returns how many times its 100% chance and rolls if the leftover, non-100% amount is true. Randomizer(250) returns +2 and +1 more with 50% chance.
+        /// randomizeTo is converted to positive if its negative for proper usage of Method.
         /// </summary>
         public static int Randomizer(int numToBeRandomized, int randomizeTo = 100)
         {
+            if (randomizeTo < 0)
+                randomizeTo *= -1;
+
             int a = 0;
-            if (numToBeRandomized >= randomizeTo)
+            a = numToBeRandomized / randomizeTo;
+            numToBeRandomized %= randomizeTo;
+
+            if (numToBeRandomized < 0 && Main.rand.NextBool(numToBeRandomized * -1, randomizeTo))
             {
-                a = numToBeRandomized / randomizeTo;
-                numToBeRandomized %= randomizeTo;
+                a--;
             }
-            if (Main.rand.NextBool(numToBeRandomized, randomizeTo))
+            else if (Main.rand.NextBool(numToBeRandomized, randomizeTo))
             {
                 a++;
             }
-
             return a;
-
         }
 
         /// <summary>
@@ -401,7 +405,7 @@ namespace PetsOverhaul.Systems
                 }
             }
         }
-#endregion
+        #endregion
 
         //Overrides
         #region 
@@ -566,7 +570,7 @@ namespace PetsOverhaul.Systems
             if (ModContent.GetInstance<Personalization>().DisableModNotice == false)
             {
                 if (ModLoader.TryGetMod("PetsOverhaulCalamityAddon", out _) == false && ModLoader.TryGetMod("CalamityMod", out _) == true)
-                Main.NewText(Language.GetTextValue("Mods.PetsOverhaul.CalamityDetected"));
+                    Main.NewText(Language.GetTextValue("Mods.PetsOverhaul.CalamityDetected"));
             }
         }
         public override void OnHurt(Player.HurtInfo info)

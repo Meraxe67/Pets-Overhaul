@@ -18,6 +18,7 @@
         MiningFortuneItem, 
         FishingFortuneItem, 
         PetProjectile,
+        PetNPC,
     }
     public enum PetClasses
     {

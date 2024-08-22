@@ -15,11 +15,11 @@ namespace PetsOverhaul.PetEffects
     public sealed class BlueChicken : PetEffect
     {
         public override PetClasses PetClassPrimary => PetClasses.Harvesting;
-        public int blueEggTimer = 28800;
+        public int blueEggTimer = 39600;
         public float tipsyMovespd = 0.1f;
-        public int plantChance = 25;
+        public int plantChance = 28;
         public int rarePlantChance = 50;
-        public int treeChance = 10;
+        public int treeChance = 14;
         public override void PostUpdateEquips()
         {
             if (Pet.PetInUse(ItemID.BlueEgg))
@@ -126,7 +126,7 @@ namespace PetsOverhaul.PetEffects
             GlobalPet.ItemWeight(ItemID.EucaluptusSap, 1);
             if (Main.hardMode)
             {
-                GlobalPet.ItemWeight(ItemID.Pearlwood, 200);
+                GlobalPet.ItemWeight(ItemID.Pearlwood, 250);
                 GlobalPet.ItemWeight(ItemID.Dragonfruit, 3);
                 GlobalPet.ItemWeight(ItemID.Starfruit, 3);
             }

@@ -15,6 +15,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Buffs\ChillingFear.png" />
+    <None Remove="Buffs\SanityAura.png" />
     <None Remove="Items\egg.png" />
     <None Remove="Items\LihzahrdWrench.png" />
     <None Remove="Items\MasteryShard.png" />
@@ -22,12 +23,6 @@
     <None Remove="Items\PumpkingsHead.png" />
     <None Remove="Localization\mastery_shard_sprite_sheet.png" />
     <None Remove="Localization\pt-BR.hjson" />
-    <None Remove="NPCS\ExamplePerson.png" />
-    <None Remove="NPCS\ExamplePerson_Head.png" />
-    <None Remove="NPCS\ExamplePerson_Party.png" />
-    <None Remove="NPCS\ExamplePerson_Shimmer.png" />
-    <None Remove="NPCS\ExamplePerson_Shimmer_Head.png" />
-    <None Remove="NPCS\ExamplePerson_Shimmer_Party.png" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="UI\PetShield.png" />

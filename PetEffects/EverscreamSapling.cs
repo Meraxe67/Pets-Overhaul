@@ -14,7 +14,7 @@ namespace PetsOverhaul.PetEffects
     {
         public int cooldown = 240;
         public float critMult = 0.6f;
-        public float dmgIncr = 0.3f;
+        public float dmgIncr = 0.4f;
         public float howMuchCrit = 10f;
         public float missingManaPercent = 0.12f;
         public int flatRecovery = 5;
@@ -34,10 +34,8 @@ namespace PetsOverhaul.PetEffects
             {
                 Player.statManaMax2 += manaIncrease;
                 Player.GetCritChance<MagicDamageClass>() *= critMult;
-                float currentMana = Player.statMana;
-                float maxMana = Player.statManaMax2;
-                float dmgBoost = currentMana / maxMana; //c# eğer float olduğu spesifik olarak belirtilmezse küçük sayıdan büyük sayıyı bölerken
-                Player.GetDamage<MagicDamageClass>() += dmgBoost * dmgIncr; //2 integer olarak alıp bölme işlemini 0 döndürüyor
+                float dmgBoost = (float)Player.statMana / Player.statManaMax2;
+                Player.GetDamage<MagicDamageClass>() += dmgBoost * dmgIncr;
                 Player.GetCritChance<MagicDamageClass>() += dmgBoost * howMuchCrit;
             }
         }

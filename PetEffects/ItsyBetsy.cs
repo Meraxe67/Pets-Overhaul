@@ -16,7 +16,8 @@ namespace PetsOverhaul.PetEffects
         public int debuffTime = 1200;
         public int maxStacks = 20;
         public float defReduction = 0.02f;
-        public float missingHpRecover = 0.004f;
+        public float missingHpRecover = 0.006f;
+        public float maxStackBonusRecover = 0.5f;
 
         public override PetClasses PetClassPrimary => PetClasses.Ranged;
         public override PetClasses PetClassSecondary => PetClasses.Supportive;
@@ -40,13 +41,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (target.active == false && GlobalPet.LifestealCheck(target) && target.GetGlobalNPC<NpcPet>().curseCounter > 0)
             {
-                int mult = 1;
-                if (target.GetGlobalNPC<NpcPet>().curseCounter >= maxStacks)
-                {
-                    mult = 2;
-                }
-
-                Pet.PetRecovery(Player.statLifeMax2 - Player.statLife, missingHpRecover * target.GetGlobalNPC<NpcPet>().curseCounter * mult);
+                Pet.PetRecovery(Player.statLifeMax2 - Player.statLife, missingHpRecover * target.GetGlobalNPC<NpcPet>().curseCounter * (1f+(target.GetGlobalNPC<NpcPet>().curseCounter >= maxStacks ? maxStackBonusRecover : 0)));
             }
             if (Pet.PetInUseWithSwapCd(ItemID.DD2BetsyPetItem) && hit.DamageType == DamageClass.Ranged)
             {
@@ -77,6 +72,7 @@ namespace PetsOverhaul.PetEffects
                         .Replace("<defDecrease>", Math.Round(itsyBetsy.defReduction * 100, 2).ToString())
                         .Replace("<maxStack>", itsyBetsy.maxStacks.ToString())
                         .Replace("<missingHpSteal>", Math.Round(itsyBetsy.missingHpRecover * 100, 2).ToString())
+                        .Replace("<maxStackIncr>", Math.Round(itsyBetsy.maxStackBonusRecover * 100, 2).ToString())
                         ));
         }
     }

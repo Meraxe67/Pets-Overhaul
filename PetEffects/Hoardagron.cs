@@ -16,8 +16,8 @@ namespace PetsOverhaul.PetEffects
     {
         public bool arrow = false;
         public bool specialist = false;
-        public float arrowSpd = 0.9f;
-        public float bulletSpd = 1.8f;
+        public float arrowSpd = 0.85f;
+        public float bulletSpd = 2f;
         public float specialTreshold = 0.2f;
         public float specialBossTreshold = 0.06f;
         public int arrowPen = 1;

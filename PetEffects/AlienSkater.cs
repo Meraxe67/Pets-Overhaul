@@ -3,6 +3,7 @@ using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
@@ -13,17 +14,17 @@ namespace PetsOverhaul.PetEffects
     public sealed class AlienSkater : PetEffect
     {
         public override PetClasses PetClassPrimary => PetClasses.Mobility;
-        public float accelerator = 0.15f;
-        public float wingTime = 1.25f;
+        public float accelerator = 0.60f;
+        public float wingTime = 0.25f;
         public float speedMult = 1.3f;
         public float accMult = 1.5f;
-        public float speedAccIncr = 0.9f;
-        public override void PostUpdateEquips()
+        public float speedAccIncr = 0.55f;
+        public override void PostUpdateRunSpeeds()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.MartianPetItem))
             {
-                Player.runAcceleration += accelerator;
-                Player.wingTimeMax = (int)(Player.wingTimeMax * wingTime);
+                Player.runAcceleration *= accelerator+1f;
+                Player.wingTimeMax = (int)(Player.wingTimeMax * (1f+wingTime));
             }
         }
     }
@@ -59,7 +60,7 @@ namespace PetsOverhaul.PetEffects
             AlienSkater alienSkater = Main.LocalPlayer.GetModPlayer<AlienSkater>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.MartianPetItem")
                 .Replace("<class>", PetColors.ClassText(alienSkater.PetClassPrimary, alienSkater.PetClassSecondary))
-                .Replace("<wingMult>", alienSkater.wingTime.ToString())
+                .Replace("<wingMult>", Math.Round(alienSkater.wingTime*100,2).ToString())
                 .Replace("<acc>", Math.Round(alienSkater.accelerator * 100, 2).ToString())
                 .Replace("<speedMult>", alienSkater.speedMult.ToString())
                 .Replace("<accMult>", alienSkater.accMult.ToString())

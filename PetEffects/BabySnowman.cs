@@ -13,7 +13,7 @@ namespace PetsOverhaul.PetEffects
     public sealed class BabySnowman : PetEffect
     {
         public int frostburnTime = 300;
-        public float snowmanSlow = 0.2f;
+        public float snowmanSlow = 0.25f;
         public int slowTime = 180;
         public int frostMult = 5;
         public int FrostArmorMult => Player.armor[0].type == ItemID.FrostHelmet && Player.armor[1].type == ItemID.FrostBreastplate && Player.armor[2].type == ItemID.FrostLeggings ? frostMult : 1;
