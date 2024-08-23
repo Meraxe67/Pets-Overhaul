@@ -8,25 +8,20 @@ using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Utilities;
 
 namespace PetsOverhaul.NPCs
 {
-    /// <summary>
-    /// This file shows off a critter npc. The unique thing about critters is how you can catch them with a bug net.
-    /// The important bits are: Main.npcCatchable, NPC.catchItem, and Item.makeNPC.
-    /// We will also show off adding an item to an existing RecipeGroup (see ExampleRecipes.AddRecipeGroups).
-    /// Additionally, this example shows an involved IL edit.
-    /// </summary>
     public class LizardTail : ModNPC
     {
         public int waitTime = 0;
         public int lifespan = 0;
         public override void SetDefaults()
         {
-            NPC.width = 12;
-            NPC.height = 10;
+            NPC.width = 50;
+            NPC.height = 50;
             NPC.damage = 0;
             NPC.defense = 0;
             NPC.lifeMax = 1;
@@ -34,7 +29,7 @@ namespace PetsOverhaul.NPCs
             NPC.DeathSound = SoundID.NPCDeath1;
             NPC.friendly = true;
             NPC.dontTakeDamageFromHostiles = false;
-
+            NPC.knockBackResist = 0.1f;
             NPC.aiStyle = -1;
         }
         public override void HitEffect(NPC.HitInfo hit)
@@ -55,6 +50,8 @@ namespace PetsOverhaul.NPCs
                     }
                 }
                 Gore.NewGore(NPC.GetSource_Death(), NPC.position, Main.rand.NextVector2Circular(2f, 2f), 259, NPC.scale);
+                Gore.NewGore(NPC.GetSource_Death(), NPC.position, Main.rand.NextVector2Circular(2f, 2f), 259, NPC.scale);
+                Gore.NewGore(NPC.GetSource_Death(), NPC.position, Main.rand.NextVector2Circular(2f, 2f), 261, NPC.scale);
             }
         }
         public override void OnSpawn(IEntitySource source)
@@ -74,6 +71,13 @@ namespace PetsOverhaul.NPCs
             NPC.active = false;
             SoundEngine.PlaySound(SoundID.NPCDeath1, NPC.position);
         }
+        public override Color? GetAlpha(Color drawColor)
+        {
+            int alpha = lifespan / 6 + 1;
+            if (alpha > 255)
+                alpha = 255;
+            return drawColor with { A = (byte)alpha };
+        }
 
         public override void AI()
         {
@@ -85,8 +89,9 @@ namespace PetsOverhaul.NPCs
             }
             if (waitTime <= 0)
             {
+                Lighting.AddLight(NPC.position, Color.GreenYellow.ToVector3() * (lifespan / 400f) * Main.mouseTextColor * 0.0255f);
                 Player player = Main.player[NPC.FindClosestPlayer()];
-                if (player.isNearNPC(Type))
+                if (NPC.Distance(player.position) < 50)
                 {
                     Lizard lizard = player.GetModPlayer<Lizard>();
                     lizard.Pet.PetRecovery(player.statLifeMax2, lizard.percentHpRecover, isLifesteal: false);

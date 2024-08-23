@@ -19,6 +19,7 @@
         FishingFortuneItem, 
         PetProjectile,
         PetNPC,
+        PetMisc,
     }
     public enum PetClasses
     {
@@ -47,4 +48,5 @@
         PhantasmalIce, 
         Misc,
     }
+
 }

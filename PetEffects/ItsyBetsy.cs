@@ -16,7 +16,7 @@ namespace PetsOverhaul.PetEffects
         public int debuffTime = 1200;
         public int maxStacks = 20;
         public float defReduction = 0.02f;
-        public float missingHpRecover = 0.006f;
+        public float missingHpRecover = 0.007f;
         public float maxStackBonusRecover = 0.5f;
 
         public override PetClasses PetClassPrimary => PetClasses.Ranged;

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Localization;
 
 namespace PetsOverhaul.Systems
 {
@@ -91,16 +92,16 @@ namespace PetsOverhaul.Systems
             { 
                 {
                     Color color = Color.Lerp(ClassEnumToColor(Class1), ClassEnumToColor(Class2),0.5f);
-                    return $"[c/{color.Hex3()}:{Class1} and {Class2} Pet]";
+                    return $"[c/{color.Hex3()}:{Language.GetTextValue("Mods.PetsOverhaul.Classes." + Class1)} and {Class2} Pet]";
                 }
             }
             else if (Class2 == PetClasses.None)
             {
-                return $"[c/{ClassEnumToColor(Class1).Hex3()}:{Class1} Pet]";
+                return $"[c/{ClassEnumToColor(Class1).Hex3()}:{Language.GetTextValue("Mods.PetsOverhaul.Classes." + Class1)} Pet]";
             }
             else
             {
-                return $"[c/{ClassEnumToColor(Class2).Hex3()}:{Class2} Pet]";
+                return $"[c/{ClassEnumToColor(Class2).Hex3()}:{Language.GetTextValue("Mods.PetsOverhaul.Classes." + Class2)} Pet]";
             }
         }
     }

@@ -18,7 +18,7 @@ namespace PetsOverhaul.TownPets
         public float divaDisc = 0.005f;
         public float mysticHaste = 0.02f;
         public float nerdBuildSpeed = 1.05f;
-        public float oldKbResist = 0.95f;
+        public float oldKbResist = 0.05f;
         public float nerdLightScale = 0.2f;
 
         public int GlobalFort = 2;
@@ -40,7 +40,7 @@ namespace PetsOverhaul.TownPets
                 divaDisc = 0.015f;
                 mysticHaste = 0.06f;
                 nerdBuildSpeed = 1.3f;
-                oldKbResist = 0.85f;
+                oldKbResist = 0.15f;
                 nerdLightScale = 1.1f;
 
                 FishFort = 12;
@@ -61,7 +61,7 @@ namespace PetsOverhaul.TownPets
                 divaDisc = 0.01f;
                 mysticHaste = 0.04f;
                 nerdBuildSpeed = 1.2f;
-                oldKbResist = 0.90f;
+                oldKbResist = 0.1f;
                 nerdLightScale = 0.5f;
 
                 FishFort = 8;
@@ -82,7 +82,7 @@ namespace PetsOverhaul.TownPets
                 divaDisc = 0.005f;
                 mysticHaste = 0.02f;
                 nerdBuildSpeed = 1.1f;
-                oldKbResist = 0.95f;
+                oldKbResist = 0.05f;
                 nerdLightScale = 0.2f;
 
                 GlobalFort = 2;

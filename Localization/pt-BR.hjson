@@ -21,6 +21,22 @@ Mods: {
 			Adding even more unique pets & Calamity compatibility for the vanilla Pet effects!
 			''' */
 
+		Classes: {
+			// None: None
+			// Melee: Melee
+			// Ranged: Ranged
+			// Magic: Magic
+			// Summoner: Summoner
+			// Utility: Utility
+			// Mobility: Mobility
+			// Harvesting: Harvesting
+			// Mining: Mining
+			// Fishing: Fishing
+			// Offensive: Offensive
+			// Defensive: Defensive
+			// Supportive: Supportive
+		}
+
 		Config: {
 			Personalization: Personalização
 			// HeaderDisplay: Display Related Settings
@@ -720,6 +736,38 @@ Mods: {
 				À Distância: <armorPen> penetração á distância, <rangedCrit>% de crítico à distância, <rangedDmg>% de dano à distância
 				Corpo a Corpo: <dr>% de redução de dano, <meleeSpd>% de velocidade corpo a corpo, <meleeDmg>% dano corpo a corpo, +<def> defesa
 				'''
+			/* MeleeTooltip:
+				'''
+				- Melee Bonuses:
+				 * Increases damage reduction by <dr>%.
+				 * Increases melee speed by <meleeSpd>%.
+				 * Increases melee damage by <meleeDmg>%.
+				 * Increases defense by <def>.
+				''' */
+			/* RangedTooltip:
+				'''
+				- Ranged Bonuses:
+				 * Increases ranged armor penetration by <armorPen>.
+				 * Increases ranged crit chance by <rangedCrit>%.
+				 * Increases ranged crit damage by <rangedCritDmg>%.
+				 * Increases ranged damage by <rangedDmg>.
+				''' */
+			/* MagicTooltip:
+				'''
+				- Magic Bonuses:
+				 * Increases maximum mana by <mana>.
+				 * Decreases mana costs by <manaCost>%.
+				 * Increases magic crit chance by <magicCrit>%.
+				 * Increases magic damage by <magicDmg>.
+				''' */
+			/* SummonerTooltip:
+				'''
+				- Summoner Bonuses:
+				 * Increases whip range by <sumRange>%.
+				 * Increases whip speed by <sumSpd>%.
+				 * Increases maximum minions by <sumMax>.
+				 * Increases maximum sentries by <sumMax>.
+				''' */
 			ResplendentDessert:
 				'''
 				[c/FA377D:Pet Ofensivo e Suporte]
@@ -858,6 +906,18 @@ Mods: {
 					Aumenta o Nascimento de inimigos em <SurlySpawn>%
 					e dá o efeito de Vela Sombria
 					'''
+			}
+
+			EocPetEnrage: {
+				// DisplayName: ENRAGED!
+				/* Description:
+					'''
+					You're currently ENRAGED! All you can think of is bloodshed!
+					Your defense is set to 0, and your dashes have almost no cooldown.
+					Current Damage Boost: <dmg>%
+					Current Movement Speed Boost: <speed>%
+					Current Crit Chance Boost: <crit>%
+					''' */
 			}
 		}
 

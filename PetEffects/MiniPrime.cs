@@ -16,7 +16,7 @@ namespace PetsOverhaul.PetEffects
         public float dmgIncrease = 0.07f;
         public int critIncrease = 7;
         public float defIncrease = 1.15f;
-        public float shieldMult = 0.06f;
+        public float shieldMult = 0.05f;
         public int shieldTime = 300;
         private int lastShield = 0;
         private int shieldIndex = 0;

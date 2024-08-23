@@ -53,7 +53,7 @@ namespace PetsOverhaul.PetEffects
                 {
                     modifiers.SetCrit();
                 }
-                else if (target.life < (int)(target.lifeMax * specialTreshold))
+                else if (target.life < (int)(target.lifeMax * specialTreshold)) //Speciallere daha büyük scale TODO
                 {
                     modifiers.SetCrit();
                 }
@@ -71,12 +71,17 @@ namespace PetsOverhaul.PetEffects
                 Hoardagron player = Main.player[projectile.owner].GetModPlayer<Hoardagron>();
                 if (player.Pet.PetInUseWithSwapCd(ItemID.DD2PetDragon))
                 {
+                    special = player.specialist;
+                    if (player.specialist)
+                    {
+
+                    }
                     if (player.arrow && projectile.penetrate >= 0)
                     {
-                        projectile.penetrate += player.arrowPen;
+                        projectile.localNPCHitCooldown = 10;
                         projectile.usesLocalNPCImmunity = true;
+                        projectile.penetrate += player.arrowPen;
                     }
-                    special = player.specialist;
                 }
             }
         }

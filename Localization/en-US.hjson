@@ -21,6 +21,22 @@ Mods: {
 			Adding even more unique pets & Calamity compatibility for the vanilla Pet effects!
 			'''
 
+		Classes: {
+			None: None
+			Melee: Melee
+			Ranged: Ranged
+			Magic: Magic
+			Summoner: Summoner
+			Utility: Utility
+			Mobility: Mobility
+			Harvesting: Harvesting
+			Mining: Mining
+			Fishing: Fishing
+			Offensive: Offensive
+			Defensive: Defensive
+			Supportive: Supportive
+		}
+
 		Config: {
 			Personalization: Settings
 			HeaderDisplay: Display Related Settings
@@ -509,15 +525,16 @@ Mods: {
 			LizardEgg:
 				'''
 				<class>
-				- Press Pet Ability Keybind (<keybind>) to drop a Decoy Tail.
-				 * Upon using, lose <tailDmgTaken>% of your maximum health. (This won't take you below 1 health)
-				 * Gain invisibility frames, <tailAcc> acceleration, <tailSpd> movement speed and <tailAggro> aggro for 2 seconds.
-				 * Tail can be picked up after <tailWait> seconds to regain <tailDmgTaken>% health and refund <cooldownRefund>% of your remaining ability cooldown.
-				 * Tail will have <tailMaxHp>% of your maximum health, can be damaged by enemies, ability has a <tailCooldown> second cooldown, and stays up for half of the amount.
+				- Press Pet Ability Keybind (<keybind>) to get out of a danger by dropping a Decoy Tail.
+				 * Upon using, lose <tailDmgTaken>% of your maximum health. This damage cannot be lethal.
+				 * Gain invisibility frames, <tailAcc>% acceleration, <tailSpd>% movement speed and -<tailAggro> aggro for <buffDuration> seconds.
+				 * Tail can be picked up after <tailWait> seconds to regain <tailRecover>% health and refund <cdRefund>% of your remaining ability cooldown.
+				 * Tail will have <tailMaxHp>% of your maximum health and can be damaged by enemies.
+				 * Ability has a <tailCooldown> second cooldown, and can stay alive up to half of the amount.
 				- Gain <kbResist>% knockback resistance.
 				- While below 55% health, you turn into a Lihzahrd.
-				 * Gain <def> defense, <moveSpd>% movement speed and KB Immunity.
-				 * Lose <jumpPenalty>% of your jump speed and wing time.
+				 * Gain <def> defense, <moveSpd>% movement speed and Knockback Immunity.
+				 * Lose <jumpPenalty>% of your jump length and wing time.
 				'''
 			TartarSauce:
 				'''
@@ -667,8 +684,8 @@ Mods: {
 				<class>
 				- Press Pet Ability Keybind (<keybind>) to go to the 'enraged state' early.
 				 * Gain 10% of Health used to go below 50% as an extra shield for <shieldDuration> seconds.
-				- The moment you're below 50% health, go into an enraged state,
-				consuming all of your defense and granting the following:
+				- The moment you're below 50% health and in combat for at least <outOfCombat> seconds,
+				go into an enraged state, consuming all of your defense and granting the following:
 				 * Gain 2x of defense consumed as Shield for <shieldDuration> seconds.
 				 * Sets the Dash delay of all of your dashes to 5 frames. (1/12th of a second)
 				 * Increases damage by <defToDmg>% of the defense consumed.
@@ -857,18 +874,47 @@ Mods: {
 				on their missing health percentage.
 				 * The damage it increases can go up to <maxAmount>%.
 				 * Damage increase goes up non-linearly, the lower health is, the more the damage boost is.
-				 * For our beloved interested mathematicians the formula is as follows:
-				FinalDamage *= 2 / (target's current health * 1f / target's max health + 1)
 				'''
 			MoonLordPetItem:
 				'''
 				<class>
-				- Adapts to whichever class has more damage.
-				 * Selection prioritizes as follows: Melee > Ranged > Magic > Summon.
-				- Summoner: <sumRange>% whip range, <sumSpd>% whip speed, <sumDmg>% summon damage, +<sumMax> max minion and sentry.
-				- Magic: <mana> mana, <manaCost>% lowered mana cost, <magicCrit>% magic crit, <magicDmg>% magic damage.
-				- Ranged: <armorPen> ranged armor pen, <rangedCrit>% ranged crit, <rangedDmg>% ranged damage.
-				- Melee: <dr>% damage reduction, <meleeSpd>% melee speed, <meleeDmg>% melee damage, +<def> defense.
+				- Adapts to whichever class has more damage. Current Class: <currentClass>
+				 * If there are equal values, perk selection priority is as follows:
+				 * Melee -> Ranged -> Magic -> Summoner.
+				- Press <keybind> to swap the current tooltip.
+				<tooltip>
+				'''
+			MeleeTooltip:
+				'''
+				- Melee Bonuses:
+				 * Increases damage reduction by <dr>%.
+				 * Increases melee speed by <meleeSpd>%.
+				 * Increases melee damage by <meleeDmg>%.
+				 * Increases defense by <def>.
+				'''
+			RangedTooltip:
+				'''
+				- Ranged Bonuses:
+				 * Increases ranged armor penetration by <armorPen>.
+				 * Increases ranged crit chance by <rangedCrit>%.
+				 * Increases ranged crit damage by <rangedCritDmg>%.
+				 * Increases ranged damage by <rangedDmg>.
+				'''
+			MagicTooltip:
+				'''
+				- Magic Bonuses:
+				 * Increases maximum mana by <mana>.
+				 * Decreases mana costs by <manaCost>%.
+				 * Increases magic crit chance by <magicCrit>%.
+				 * Increases magic damage by <magicDmg>.
+				'''
+			SummonerTooltip:
+				'''
+				- Summoner Bonuses:
+				 * Increases whip range by <sumRange>%.
+				 * Increases whip speed by <sumSpd>%.
+				 * Increases maximum minions by <sumMax>.
+				 * Increases maximum sentries by <sumMax>.
 				'''
 			ResplendentDessert:
 				'''
@@ -1027,8 +1073,8 @@ Mods: {
 				DisplayName: <Name>'s Aura
 				Description:
 					'''
-					Increases Defense by +<OldDef>, multiplies
-					incoming knockback by <OldKb>x and increases
+					Increases Defense by +<OldDef>, increases
+					knockback resist by <OldKb>% and increases
 					Harvesting Fortune by +<OldHarvesting>, which increases
 					items gained by harvesting, fully effective with 
 					items that are sourced from your Pets.
@@ -1051,6 +1097,18 @@ Mods: {
 					'''
 					Increases enemy spawn rate by <SurlySpawn>%
 					And grants shadow candle effect
+					'''
+			}
+
+			EocPetEnrage: {
+				DisplayName: ENRAGED!
+				Description:
+					'''
+					You're currently ENRAGED! All you can think of is bloodshed!
+					Your defense is set to 0, and your dashes have almost no cooldown.
+					Current Damage Boost: <dmg>%
+					Current Movement Speed Boost: <speed>%
+					Current Crit Chance Boost: <crit>%
 					'''
 			}
 		}

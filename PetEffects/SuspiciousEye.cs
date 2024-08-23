@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using PetsOverhaul.Buffs;
 using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
 using System;
@@ -22,13 +23,17 @@ namespace PetsOverhaul.PetEffects
         public float critMult = 0.2f;
         public float dmgMult = 1f;
         public float spdMult = 0.6f;
-        public int eocDefenseConsume;
+        public int eocDefenseConsume = 0;
         public int shieldTime = 600;
+        private int inCombatTimer = -1;
+        public int inCombatTime = 300;
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.EyeOfCthulhuPetItem))
             {
                 Pet.SetPetAbilityTimer(phaseCd);
+                if (inCombatTimer >= -1)
+                    inCombatTimer--;
             }
 
             if (eocTimer >= -1)
@@ -38,17 +43,25 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (Pet.timer <= 0 && Player.statLife > Player.statLifeMax2 / 2 &&Pet.PetInUseWithSwapCd(ItemID.EyeOfCthulhuPetItem) && Keybinds.UsePetAbility.JustPressed)
+            if (Pet.timer <= 0 && Pet.PetInUseWithSwapCd(ItemID.EyeOfCthulhuPetItem) && Keybinds.UsePetAbility.JustPressed)
             {
-                int damageTaken = (int)Math.Floor((float)Player.statLife % Player.statLifeMax2 / 2);
-                Pet.petShield.Add((damageTaken / 5, shieldTime));
+                if (Player.statLife > Player.statLifeMax2 / 2)
+                {
+                    int damageTaken = (int)Math.Floor((float)Player.statLife % (Player.statLifeMax2 / 2));
+                    if (damageTaken == 0)
+                        damageTaken = Player.statLifeMax2 / 2;
+                    Player.Hurt(PlayerDeathReason.ByCustomReason("If you're seeing this death message, report it at our discord or steam page."), damageTaken, 0, quiet: true, scalingArmorPenetration: 1f);
+                    Pet.petShield.Add((damageTaken / 5, shieldTime));
+                }
+                else
+                    inCombatTimer = inCombatTime;
             }
         }
         public override void UpdateEquips()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.EyeOfCthulhuPetItem))
             {
-                if (Player.statLife < Player.statLifeMax2 / 2 && Pet.timer <= 0)
+                if (inCombatTimer >= 0 && Player.statLife <= Player.statLifeMax2 / 2 && Pet.timer <= 0)
                 {
                     eocTimer = phaseTime;
                     Pet.timer = Pet.timerMax;
@@ -56,6 +69,11 @@ namespace PetsOverhaul.PetEffects
                     {
                         SoundEngine.PlaySound(SoundID.ForceRoar with { PitchVariance = 0.3f }, Player.position);
                     }
+
+                    Gore.NewGore(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetMisc), Player.position, Main.rand.NextVector2Circular(2f, 2f), 8, 0.5f);
+                    Gore.NewGore(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetMisc), Player.position, Main.rand.NextVector2Circular(2f, 2f), 8, 0.5f);
+                    Gore.NewGore(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetMisc), Player.position, Main.rand.NextVector2Circular(2f, 2f), 9, 0.5f);
+                    Gore.NewGore(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetMisc), Player.position, Main.rand.NextVector2Circular(2f, 2f), 9, 0.5f);
 
                     PopupText.NewText(new AdvancedPopupRequest() with
                     {
@@ -65,6 +83,7 @@ namespace PetsOverhaul.PetEffects
                         Color = Color.DarkRed
                     }, Player.position);
                     Pet.petShield.Add((Player.statDefense*2, shieldTime));
+                    Player.AddBuff(ModContent.BuffType<EocPetEnrage>(),phaseTime);
                 }
                 if (eocTimer <= phaseTime && eocTimer >= 0)
                 {
@@ -88,13 +107,6 @@ namespace PetsOverhaul.PetEffects
                 }
                 else if (eocTimer == 0)
                 {
-                    AdvancedPopupRequest popupMessage = new()
-                    {
-                        Text = "Calmed Down.",
-                        DurationInFrames = 150,
-                        Velocity = new Vector2(0, -10),
-                        Color = Color.OrangeRed
-                    };
                     PopupText.NewText(new AdvancedPopupRequest() with
                     {
                         Text = "Calmed Down.",
@@ -108,6 +120,21 @@ namespace PetsOverhaul.PetEffects
         public override void UpdateDead()
         {
             eocTimer = 0;
+            inCombatTimer = 0;
+        }
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (Pet.PetInUse(ItemID.EyeOfCthulhuPetItem))
+            {
+                inCombatTimer = inCombatTime;
+            }
+        }
+        public override void OnHurt(Player.HurtInfo info)
+        {
+            if (Pet.PetInUse(ItemID.EyeOfCthulhuPetItem))
+            {
+                inCombatTimer = inCombatTime;
+            }
         }
     }
     public sealed class EyeOfCthulhuPetItem : GlobalItem
@@ -127,11 +154,14 @@ namespace PetsOverhaul.PetEffects
             SuspiciousEye suspiciousEye = Main.LocalPlayer.GetModPlayer<SuspiciousEye>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EyeOfCthulhuPetItem")
                 .Replace("<class>", PetColors.ClassText(suspiciousEye.PetClassPrimary, suspiciousEye.PetClassSecondary))
-                        .Replace("<defToDmg>", Math.Round(suspiciousEye.dmgMult * 100, 2).ToString())
-                        .Replace("<defToSpd>", Math.Round(suspiciousEye.spdMult * 100, 2).ToString())
-                        .Replace("<defToCrit>", Math.Round(suspiciousEye.critMult * 100, 2).ToString())
-                        .Replace("<enrageLength>", Math.Round(suspiciousEye.phaseTime / 60f, 2).ToString())
-                        .Replace("<enrageCd>", Math.Round(suspiciousEye.phaseCd / 60f, 2).ToString())
+                .Replace("<keybind>", Keybinds.UsePetAbility.GetAssignedKeys(GlobalPet.PlayerInputMode).Count > 0 ? Keybinds.UsePetAbility.GetAssignedKeys(GlobalPet.PlayerInputMode)[0] : $"[c/{Colors.RarityTrash.Hex3()}:{Language.GetTextValue("Mods.PetsOverhaul.KeybindMissing")}]")
+                .Replace("<shieldDuration>", Math.Round(suspiciousEye.shieldTime / 60f, 2).ToString())
+                .Replace("<outOfCombat>", Math.Round(suspiciousEye.inCombatTime / 60f, 2).ToString())
+                .Replace("<defToDmg>", Math.Round(suspiciousEye.dmgMult * 100, 2).ToString())
+                .Replace("<defToSpd>", Math.Round(suspiciousEye.spdMult * 100, 2).ToString())
+                .Replace("<defToCrit>", Math.Round(suspiciousEye.critMult * 100, 2).ToString())
+                .Replace("<enrageLength>", Math.Round(suspiciousEye.phaseTime / 60f, 2).ToString())
+                .Replace("<enrageCd>", Math.Round(suspiciousEye.phaseCd / 60f, 2).ToString())
                         ));
         }
     }

@@ -28,7 +28,7 @@ namespace PetsOverhaul.TownPets
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
-            modifiers.Knockback *= oldKbResist;
+            modifiers.Knockback *= 1f- oldKbResist;
         }
     }
 }
