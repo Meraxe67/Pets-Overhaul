@@ -13,8 +13,8 @@ namespace PetsOverhaul.PetEffects
     public sealed class SpiderBrain : PetEffect
     {
         public int lifePool = 0;
-        public float lifePoolMaxPerc = 0.2f;
-        public int cdToAddToPool = 66;
+        public float lifePoolMaxPerc = 0.3f;
+        public int cdToAddToPool = 120;
         public float lifestealAmount = 0.035f;
 
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
@@ -71,6 +71,7 @@ namespace PetsOverhaul.PetEffects
                         .Replace("<lifesteal>", Math.Round(spiderBrain.lifestealAmount * 100, 2).ToString())
                         .Replace("<maxPool>", Math.Round(spiderBrain.lifePoolMaxPerc * 100, 2).ToString())
                         .Replace("<healthRecovery>", Math.Round(spiderBrain.cdToAddToPool / 60f, 2).ToString())
+                        .Replace("<pool>", spiderBrain.lifePool.ToString())
                         ));
         }
     }

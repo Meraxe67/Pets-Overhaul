@@ -11,7 +11,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class PropellerGato : PetEffect
     {
-        public int bonusCritChance = 10;
+        public int bonusCritChance = 15;
         public int turretIncrease = 1;
 
         public override PetClasses PetClassPrimary => PetClasses.Summoner;

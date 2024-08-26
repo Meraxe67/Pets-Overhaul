@@ -13,11 +13,11 @@ namespace PetsOverhaul.PetEffects
     {
         public override PetClasses PetClassPrimary => PetClasses.Utility;
         public int npcCoin = 15;
-        public int npcItem = 6;
-        public int bossCoin = 7;
+        public int npcItem = 8;
+        public int bossCoin = 10;
         public int bossItem = 5;
-        public int bagCoin = 5;
-        public int bagItem = 4;
+        public int bagCoin = 10;
+        public int bagItem = 5;
         private int chanceToRollItem = 0;
         public override void Load()
         {

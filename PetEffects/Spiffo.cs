@@ -13,7 +13,7 @@ namespace PetsOverhaul.PetEffects
     {
         public int ammoReserveChance = 20;
         public int zombieArmorPen = 6;
-        public int penetrateChance = 50;
+        public int penetrateChance = 75;
 
         public override PetClasses PetClassPrimary => PetClasses.Ranged;
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
@@ -28,7 +28,11 @@ namespace PetsOverhaul.PetEffects
             if (Pet.PetInUseWithSwapCd(ItemID.SpiffoPlush) && target.active == false && proj.CountsAsClass<RangedDamageClass>() && proj.penetrate >= 0)
             {
                 proj.penetrate += GlobalPet.Randomizer(penetrateChance);
-                proj.usesLocalNPCImmunity = true;
+                if (proj.usesLocalNPCImmunity == false)
+                {
+                    proj.usesLocalNPCImmunity = true;
+                    proj.localNPCHitCooldown = 10;
+                }
             }
         }
         public override bool CanConsumeAmmo(Item weapon, Item ammo)

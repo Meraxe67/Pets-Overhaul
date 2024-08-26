@@ -29,17 +29,17 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUseWithSwapCd(ItemID.BirdieRattle))
             {
-
                 if (Pet.timer == 0)
                 {
                     cooldownStarted = false;
                     harpyFlight = fuelMax;
-                    AdvancedPopupRequest popupMessage = new();
-                    popupMessage.Text = "Cooldown Refreshed!";
-                    popupMessage.DurationInFrames = 120;
-                    popupMessage.Velocity = new Vector2(0, -7);
-                    popupMessage.Color = Color.CornflowerBlue;
-                    PopupText.NewText(popupMessage, Player.position);
+                    PopupText.NewText(new AdvancedPopupRequest() with
+                    {
+                        Text = "Cooldown Refreshed!",
+                        DurationInFrames = 120,
+                        Velocity = new Vector2(0, -7),
+                        Color = Color.CornflowerBlue,
+                    }, Player.position);
                 }
                 if (Player.equippedWings == null)
                 {

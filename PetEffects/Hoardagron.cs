@@ -16,8 +16,8 @@ namespace PetsOverhaul.PetEffects
     {
         public bool arrow = false;
         public bool specialist = false;
-        public float arrowSpd = 0.85f;
-        public float bulletSpd = 2f;
+        public float arrowSpd = 0.8f;
+        public float bulletSpd = 2.25f;
         public float specialTreshold = 0.2f;
         public float specialBossTreshold = 0.06f;
         public int arrowPen = 1;
@@ -53,7 +53,7 @@ namespace PetsOverhaul.PetEffects
                 {
                     modifiers.SetCrit();
                 }
-                else if (target.life < (int)(target.lifeMax * specialTreshold)) //Speciallere daha büyük scale TODO
+                else if (target.life < (int)(target.lifeMax * specialTreshold))
                 {
                     modifiers.SetCrit();
                 }
@@ -72,15 +72,14 @@ namespace PetsOverhaul.PetEffects
                 if (player.Pet.PetInUseWithSwapCd(ItemID.DD2PetDragon))
                 {
                     special = player.specialist;
-                    if (player.specialist)
-                    {
-
-                    }
                     if (player.arrow && projectile.penetrate >= 0)
                     {
-                        projectile.localNPCHitCooldown = 10;
-                        projectile.usesLocalNPCImmunity = true;
                         projectile.penetrate += player.arrowPen;
+                        if (projectile.usesLocalNPCImmunity == false)
+                        {
+                            projectile.usesLocalNPCImmunity = true;
+                            projectile.localNPCHitCooldown = 10;
+                        }
                     }
                 }
             }

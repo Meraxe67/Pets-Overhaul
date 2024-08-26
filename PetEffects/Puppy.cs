@@ -17,7 +17,7 @@ namespace PetsOverhaul.PetEffects
         public int catchChance = 65;
         public int rareCatchChance = 15;
         public int rareCritterCoin = 25000;
-        public int rareEnemyCoin = 40000;
+        public int rareEnemyCoin = 70000;
         public override void UpdateEquips()
         {
             if (Pet.PetInUse(ItemID.DogWhistle))

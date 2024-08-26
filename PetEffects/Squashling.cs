@@ -14,7 +14,7 @@ namespace PetsOverhaul.PetEffects
     {
         public override PetClasses PetClassPrimary => PetClasses.Harvesting;
         public int squashlingCommonChance = 50;
-        public int squashlingRareChance = 10;
+        public int squashlingRareChance = 20;
         public override void Load()
         {
             PetsOverhaul.OnPickupActions += PreOnPickup;

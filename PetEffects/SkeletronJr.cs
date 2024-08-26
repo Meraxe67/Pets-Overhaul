@@ -83,7 +83,6 @@ namespace PetsOverhaul.PetEffects
                 {
                     Player.SetImmuneTimeForAllTypes(Player.longInvince ? 80 : 40);
                 }
-
                 return true;
             }
             return base.ConsumableDodge(info);

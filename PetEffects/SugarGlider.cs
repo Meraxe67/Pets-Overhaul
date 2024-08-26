@@ -17,16 +17,13 @@ namespace PetsOverhaul.PetEffects
         public float accSpeedRaise = 0.1f;
 
         public override PetClasses PetClassPrimary => PetClasses.Mobility;
-        public override void PostUpdateEquips()
+        public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.EucaluptusSap))
+            if (Player.equippedWings == null && Player.velocity.Y > 0 && Pet.PetInUseWithSwapCd(ItemID.EucaluptusSap) && triggersSet.Jump)
             {
-                if (Player.equippedWings == null)
-                {
-                    Player.wings = 1;
-                    Player.wingsLogic = 1;
-                    Player.wingTimeMax = 1;
-                }
+                Player.velocity.Y *= 0.5f;
+                Main.NewText(Player.fallStart);
+                Main.NewText(Player.fallStart2);
             }
         }
     }

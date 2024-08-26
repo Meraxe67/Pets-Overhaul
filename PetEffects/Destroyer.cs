@@ -15,7 +15,7 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassSecondary => PetClasses.Defensive;
         public override PetClasses PetClassPrimary => PetClasses.Mining;
         public int ironskinBonusDef = 8;
-        public float flatDefMult = 1.22f;
+        public float flatDefMult = 0.22f;
         public float defItemMult = 0.5f;
         public int flatAmount = 10;
         public override void PostUpdateEquips()
@@ -26,7 +26,7 @@ namespace PetsOverhaul.PetEffects
                 {
                     Player.statDefense += ironskinBonusDef;
                 }
-                Player.statDefense.FinalMultiplier *= flatDefMult;
+                Player.statDefense *= 1f + flatDefMult;
             }
         }
         public override void Load()
@@ -65,7 +65,7 @@ namespace PetsOverhaul.PetEffects
                 .Replace("<class>", PetColors.ClassText(destroyer.PetClassPrimary, destroyer.PetClassSecondary))
                         .Replace("<defMultChance>", Math.Round(destroyer.defItemMult * 100, 2).ToString())
                         .Replace("<flatAmount>", destroyer.flatAmount.ToString())
-                        .Replace("<defMultIncrease>", destroyer.flatDefMult.ToString())
+                        .Replace("<defMultIncrease>", Math.Round(destroyer.flatDefMult * 100, 2).ToString())
                         .Replace("<ironskinDef>", destroyer.ironskinBonusDef.ToString())
                         ));
         }

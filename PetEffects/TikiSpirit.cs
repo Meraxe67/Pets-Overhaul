@@ -12,8 +12,8 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class TikiSpirit : PetEffect
     {
-        public int whipCritBonus = 10;
-        public int nonWhipCrit = 8;
+        public int whipCritBonus = 13;
+        public int nonWhipCrit = 8; //Negative
         public float atkSpdToDmgConversion = 0.30f;
         public float atkSpdToRangeConversion = 0.15f;
 
