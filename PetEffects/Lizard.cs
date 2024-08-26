@@ -128,7 +128,7 @@ namespace PetsOverhaul.PetEffects
             Lizard lizard = Main.LocalPlayer.GetModPlayer<Lizard>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.LizardEgg")
                     .Replace("<class>", PetColors.ClassText(lizard.PetClassPrimary, lizard.PetClassSecondary))
-                    .Replace("<keybind>", Keybinds.UsePetAbility.GetAssignedKeys(GlobalPet.PlayerInputMode).Count > 0 ? Keybinds.UsePetAbility.GetAssignedKeys(GlobalPet.PlayerInputMode)[0] : $"[c/{Colors.RarityTrash.Hex3()}:{Language.GetTextValue("Mods.PetsOverhaul.KeybindMissing")}]")
+                    .Replace("<keybind>", PetColors.KeybindText(Keybinds.UsePetAbility))
                     .Replace("<tailDmgTaken>", Math.Round(lizard.percentHpDmg * 100, 2).ToString())
                     .Replace("<tailAcc>", Math.Round(lizard.tailAcc * 100, 2).ToString())
                     .Replace("<tailSpd>", Math.Round(lizard.tailSpd * 100, 2).ToString())

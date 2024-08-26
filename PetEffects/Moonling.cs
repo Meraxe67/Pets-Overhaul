@@ -142,7 +142,7 @@ namespace PetsOverhaul.PetEffects
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.MoonLordPetItem")
                 .Replace("<class>", PetColors.ClassText(moonling.PetClassPrimary, moonling.PetClassSecondary))
                 .Replace("<currentClass>", currentClass)
-                .Replace("<keybind>", Keybinds.PetTooltipSwap.GetAssignedKeys(GlobalPet.PlayerInputMode).Count > 0 ? Keybinds.PetTooltipSwap.GetAssignedKeys(GlobalPet.PlayerInputMode)[0] : $"[c/{Colors.RarityTrash.Hex3()}:{Language.GetTextValue("Mods.PetsOverhaul.KeybindMissing")}]")
+                .Replace("<keybind>", PetColors.KeybindText(Keybinds.PetTooltipSwap))
                 .Replace("<tooltip>", tooltip)
                         ));
         }

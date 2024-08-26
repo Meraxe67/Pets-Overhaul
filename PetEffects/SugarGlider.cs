@@ -15,15 +15,14 @@ namespace PetsOverhaul.PetEffects
         public float speedMult = 1.1f;
         public float accMult = 1.2f;
         public float accSpeedRaise = 0.1f;
-
+        public float glideSpeedMult = 0.25f;
         public override PetClasses PetClassPrimary => PetClasses.Mobility;
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
             if (Player.equippedWings == null && Player.velocity.Y > 0 && Pet.PetInUseWithSwapCd(ItemID.EucaluptusSap) && triggersSet.Jump)
             {
-                Player.velocity.Y *= 0.5f;
-                Main.NewText(Player.fallStart);
-                Main.NewText(Player.fallStart2);
+                Player.maxFallSpeed *= 0.25f;
+                Player.fallStart = (int)((double)Player.position.Y / 16.0);
             }
         }
     }
@@ -58,6 +57,7 @@ namespace PetsOverhaul.PetEffects
             SugarGlider sugarGlider = Main.LocalPlayer.GetModPlayer<SugarGlider>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EucaluptusSap")
                 .Replace("<class>", PetColors.ClassText(sugarGlider.PetClassPrimary, sugarGlider.PetClassSecondary))
+                .Replace("<glide>", sugarGlider.glideSpeedMult.ToString())
                         .Replace("<speed>", sugarGlider.speedMult.ToString())
                         .Replace("<acceleration>", sugarGlider.accMult.ToString())
                         .Replace("<flatIncrease>", Math.Round(sugarGlider.accSpeedRaise * 100, 2).ToString())

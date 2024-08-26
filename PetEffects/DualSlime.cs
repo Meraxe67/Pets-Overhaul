@@ -58,7 +58,7 @@ namespace PetsOverhaul.PetEffects
             DualSlime dualSlime = Main.LocalPlayer.GetModPlayer<DualSlime>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ResplendentDessert")
                 .Replace("<approxWeak>", "10")
-                .Replace("<keybind>", Keybinds.PetTooltipSwap.GetAssignedKeys(GlobalPet.PlayerInputMode).Count > 0 ? Keybinds.PetTooltipSwap.GetAssignedKeys(GlobalPet.PlayerInputMode)[0] : $"[c/{Colors.RarityTrash.Hex3()}:{Language.GetTextValue("Mods.PetsOverhaul.KeybindMissing")}]")
+                .Replace("<keybind>", PetColors.KeybindText(Keybinds.PetTooltipSwap))
                 .Replace("<tooltip>", Language.GetTextValue($"Mods.PetsOverhaul.PetItemTooltips.{(dualSlime.swapTooltip ? "KingSlimePetItem" : "QueenSlimePetItem")}"))
                 .Replace("<class>", PetColors.ClassText(dualSlime.PetClassPrimary, dualSlime.swapTooltip ? PetClasses.None : PetClasses.Offensive))
                 .Replace("<burnHp>", Math.Round(dualSlime.healthDmg * 100, 2).ToString())

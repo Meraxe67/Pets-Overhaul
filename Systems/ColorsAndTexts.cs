@@ -1,11 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace PetsOverhaul.Systems
 {
+
     /// <summary>
-    /// Class that contains colors used withnin tooltips etc. in Pets Overhaul.
+    /// <see langword="class"/> that contains many useful <see langword="method"/>'s for better tooltip and string usage.
     /// </summary>
     public class PetColors
     {
@@ -103,6 +105,15 @@ namespace PetsOverhaul.Systems
             {
                 return $"[c/{ClassEnumToColor(Class2).Hex3()}:{Language.GetTextValue("Mods.PetsOverhaul.Classes." + Class2)} Pet]";
             }
+        }
+        /// <summary>
+        /// Returns the 'Keybind missing' text if given Keybind is not assigned, and the Keybind's current value if it is.
+        /// </summary>
+        /// <param name="keybind"></param>
+        /// <returns></returns>
+        public static string KeybindText(ModKeybind keybind)
+        {
+             return keybind.GetAssignedKeys(GlobalPet.PlayerInputMode).Count > 0 ? keybind.GetAssignedKeys(GlobalPet.PlayerInputMode)[0] : $"[c/{LowQuality.Hex3()}:{Language.GetTextValue("Mods.PetsOverhaul.KeybindMissing")}]";
         }
     }
 }
