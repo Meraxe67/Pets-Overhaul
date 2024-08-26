@@ -1,8 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
 using PetsOverhaul.PetEffects;
 using PetsOverhaul.Systems;
 using System;
+using System.Runtime.CompilerServices;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -18,10 +20,17 @@ namespace PetsOverhaul.NPCs
     {
         public int waitTime = 0;
         public int lifespan = 0;
+        public int frameTimer = 0;
+        public int nextFrame = 5;
+        public int amountOfFrames = 7;
+        public override void SetStaticDefaults()
+        {
+            Main.npcFrameCount[Type] = amountOfFrames;
+        }
         public override void SetDefaults()
         {
-            NPC.width = 50;
-            NPC.height = 50;
+            NPC.width = 18;
+            NPC.height = 18;
             NPC.damage = 0;
             NPC.defense = 0;
             NPC.lifeMax = 1;
@@ -29,8 +38,15 @@ namespace PetsOverhaul.NPCs
             NPC.DeathSound = SoundID.NPCDeath1;
             NPC.friendly = true;
             NPC.dontTakeDamageFromHostiles = false;
-            NPC.knockBackResist = 0.1f;
+            NPC.knockBackResist = 0.05f;
             NPC.aiStyle = -1;
+            NPC.scale = 2f;
+        }
+        public override void FindFrame(int frameHeight)
+        {
+            NPC.frame.Y += frameTimer % nextFrame == 0 ? 18 : 0;
+            if (frameTimer == 0)
+                NPC.frame.Y = 0;
         }
         public override void HitEffect(NPC.HitInfo hit)
         {
@@ -50,8 +66,6 @@ namespace PetsOverhaul.NPCs
                     }
                 }
                 Gore.NewGore(NPC.GetSource_Death(), NPC.position, Main.rand.NextVector2Circular(2f, 2f), 259, NPC.scale);
-                Gore.NewGore(NPC.GetSource_Death(), NPC.position, Main.rand.NextVector2Circular(2f, 2f), 259, NPC.scale);
-                Gore.NewGore(NPC.GetSource_Death(), NPC.position, Main.rand.NextVector2Circular(2f, 2f), 261, NPC.scale);
             }
         }
         public override void OnSpawn(IEntitySource source)
@@ -83,6 +97,10 @@ namespace PetsOverhaul.NPCs
         {
             waitTime--;
             lifespan--;
+            frameTimer++;
+            if (frameTimer >= amountOfFrames*nextFrame)
+                frameTimer = 0;
+            
             if (lifespan <= 0)
             {
                 Kill();
