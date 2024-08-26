@@ -117,6 +117,13 @@ Mods: {
 				如果宠物能力的冷却时间低于1秒,
 				则禁用此能力的冷却刷新音效.
 				'''
+			// LowCooldownTresholdLabel: Short ability timer disable Treshold
+			/* LowCooldownTresholdTooltip:
+				'''
+				Sets the treshold for disabling short pet ability cooldowns
+				playing sounds upon refreshing, in Frames. (60 frames = 1 second)
+				Changing this has no effect if "Disable short ability timer sound" is disabled.
+				''' */
 			MoreDifficultLabel: 平衡游戏伤害
 			MoreDifficultTooltip:
 				'''

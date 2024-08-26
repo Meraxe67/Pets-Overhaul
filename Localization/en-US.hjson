@@ -86,34 +86,29 @@ Mods: {
 				Anything done with other options regarding Ability Display will have no effects.
 				'''
 			HurtSoundLabel: Disable custom hurt sounds
-			HurtSoundTooltip:
-				'''
-				Disables custom sound effects added by
-				Pets when the Player receives damage.
-				'''
+			HurtSoundTooltip: Disables custom sound effects added by Pets when the Player receives damage.
 			DeathSoundLabel: Disable custom death sounds
-			DeathSoundTooltip:
-				'''
-				Disables custom sound effects
-				added by Pets when the Player dies.
-				'''
+			DeathSoundTooltip: Disables custom sound effects added by Pets when the Player dies.
 			PassiveSoundLabel: Disable passive Pet sounds
-			PassiveSoundTooltip:
-				'''
-				Disables Pet sound effects that play passively
-				similar to vanilla's Ambient sound effects.
-				'''
+			PassiveSoundTooltip: Disables Pet sound effects that play passively similar to vanilla's Ambient sound effects.
 			AbilitySoundLabel: Disable ability sounds
 			AbilitySoundTooltip:
 				'''
 				Disables Pet sound effects that play upon ability proccing, cooldown refreshing
 				and other similar things. (not recommended, these sounds can help with your awareness.)
 				'''
-			LowCooldownSoundLabel: Disable short timer sound
+			LowCooldownSoundLabel: Disable short ability timer sound
 			LowCooldownSoundTooltip:
 				'''
-				Disables cooldown refreshing sound effect if
-				Pet's abilities cooldown is lower than 1.5 seconds.
+				Disables Pet ability cooldown refreshing sound effect if;
+				Pet's abilities cooldown is lower than the set amount by the Treshold option.
+				'''
+			LowCooldownTresholdLabel: Short ability timer disable Treshold
+			LowCooldownTresholdTooltip:
+				'''
+				Sets the treshold for disabling short pet ability cooldowns
+				playing sounds upon refreshing, in Frames. (60 frames = 1 second)
+				Changing this has no effect if "Disable short ability timer sound" is disabled.
 				'''
 			MoreDifficultLabel: Set Player Handicap
 			MoreDifficultTooltip:
@@ -491,9 +486,7 @@ Mods: {
 				- Multiplies arrow speed by <arrowVelo>x.
 				- Increases arrow pierce by <arrowPierce>.
 				- Multiplies your bullet speed by <bulletVelo>x.
-				- Your specialist ranged weapons will crit
-				enemies below <treshold>% health all of the time.
-				 * Treshold decreased down to <bossTreshold>% for bosses.
+				- Multiplies size of your Specialist weapons by <treshold>x.
 				'''
 			JunimoMaxLevelText: Max Level!
 			JunimoPetItem:
@@ -571,10 +564,10 @@ Mods: {
 			MudBud:
 				'''
 				<class>
-				- Damaging enemies have a <chance>% chance of causing damaging spores to appear.
+				- Damaging enemies have a <chance>% chance of causing big damaging spores to appear.
 				 * Spores location is somewhere near the enemy randomly and travels slightly.
 				 * Spores deal <dmg>x of the initial damage that spawned them + <flatDmg>.
-				 * Spores have a <kb> knockback.
+				 * Spores have a <kb> knockback and can hit up to <pen> times before they dissapear.
 				'''
 			DD2PetGato:
 				'''
@@ -597,6 +590,7 @@ Mods: {
 			Seedling:
 				'''
 				<class>
+				- Multiplies damage you deal by <dmgPenalty>x.
 				- Gain <lifesteal>% lifesteal. 
 				 * Increased to <planteraSteal>% for Plantera's weapons.
 				Affected weapons: [i:1255] [i:788] [i:1178] [i:1259] [i:1155] [i:3018] [i:1157] [i:1305]
@@ -704,6 +698,7 @@ Mods: {
 				and when the pool is empty, [c/f8baba:you cannot lifesteal] before it has health in it again.
 				 * Maximum amount pool contains is equal to <maxPool>% of your max health.
 				 * Pool recovers +1 health every <healthRecovery> second.
+				- Current amount of health in the pool that can be recovered: <pool>
 				'''
 			EaterOfWorldsPetItem:
 				'''
@@ -777,7 +772,7 @@ Mods: {
 			DestroyerPetItem:
 				'''
 				<class>
-				- Grants <defMultIncrease>x defense.
+				- Grants <defMultIncrease>% more defense.
 				- Doubles Ironskin potion's [i:292] effect, giving <ironskinDef> more defense.
 				- Increases gathered ores, gems, or simply anything mining-related. 
 				 * Amount it increases is equal to <defMultChance>% of your defense + <flatAmount>%.

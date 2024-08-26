@@ -513,7 +513,7 @@ namespace PetsOverhaul.Systems
 
             if (timer == 0)
             {
-                if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false && (ModContent.GetInstance<Personalization>().LowCooldownSoundDisabled && timerMax > 90 || ModContent.GetInstance<Personalization>().LowCooldownSoundDisabled == false))
+                if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false && (ModContent.GetInstance<Personalization>().LowCooldownSoundDisabled && timerMax > ModContent.GetInstance<Personalization>().LowCooldownTreshold || ModContent.GetInstance<Personalization>().LowCooldownSoundDisabled == false))
                 {
                     SoundEngine.PlaySound(SoundID.MaxMana with { PitchVariance = 0.3f, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew }, Player.position);
                 }

@@ -95,6 +95,13 @@ Mods: {
 			AbilitySoundTooltip: Desabilita efeitos sonoros de pet que tocam ao processar habilidades, recarga do tempo de espera, etc. (não recomendado, estes sons podem te ajudar)
 			LowCooldownSoundLabel: Desabilitar som de temporizador curto
 			LowCooldownSoundTooltip: Desabilita efeito sonoro de recarga de tempo de espera se o tempo de recarga das habilidades de pet forem menores que 1 segundo.
+			// LowCooldownTresholdLabel: Short ability timer disable Treshold
+			/* LowCooldownTresholdTooltip:
+				'''
+				Sets the treshold for disabling short pet ability cooldowns
+				playing sounds upon refreshing, in Frames. (60 frames = 1 second)
+				Changing this has no effect if "Disable short ability timer sound" is disabled.
+				''' */
 			MoreDifficultLabel: Desabilitar jogador ser mais fraco
 			MoreDifficultTooltip: Desabilita o jogador causar 5% menos dano e receber 5% mais dano, que é implementado para contrariar o mod adicionar um aumento de poder
 			SwapCooldownLabel: Desabilitar tempo de recarga em troca de pet

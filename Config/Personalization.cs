@@ -1,5 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using Terraria.Localization;
+using Terraria.ModLoader;
 using Terraria.ModLoader.Config;
 
 namespace PetsOverhaul.Config
@@ -8,6 +11,7 @@ namespace PetsOverhaul.Config
     { //Remember most are 'disablers', may be a bit confusing.
         public override LocalizedText DisplayName => Language.GetText("Mods.PetsOverhaul.Config.Personalization");
         public override ConfigScope Mode => ConfigScope.ClientSide;
+        //Display
         #region
         [Header("$Mods.PetsOverhaul.Config.HeaderDisplay")]
 
@@ -47,7 +51,7 @@ namespace PetsOverhaul.Config
         [DefaultValue(false)]
         public bool AbilityDisplayDisable { get; set; }
         #endregion
-
+        //Sounds
         #region
         [Header("$Mods.PetsOverhaul.Config.HeaderSound")]
 
@@ -75,8 +79,14 @@ namespace PetsOverhaul.Config
         [TooltipKey("$Mods.PetsOverhaul.Config.LowCooldownSoundTooltip")]
         [DefaultValue(true)]
         public bool LowCooldownSoundDisabled { get; set; }
-        #endregion
 
+        [LabelKey("$Mods.PetsOverhaul.Config.LowCooldownTresholdLabel")]
+        [TooltipKey("$Mods.PetsOverhaul.Config.LowCooldownTresholdTooltip")]
+        [Range(30,600)]
+        [DefaultValue(150)]
+        public int LowCooldownTreshold { get; set; }
+        #endregion
+        //Gameplay
         #region
         [Header("$Mods.PetsOverhaul.Config.HeaderGameplay")]
 
@@ -85,6 +95,7 @@ namespace PetsOverhaul.Config
         [LabelKey("$Mods.PetsOverhaul.Config.MoreDifficultLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.MoreDifficultTooltip")]
         [DefaultValue(0)]
+        [DrawTicks]
         public int DifficultAmount { get; set; }
 
         [LabelKey("$Mods.PetsOverhaul.Config.SwapCooldownLabel")]
