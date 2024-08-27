@@ -489,6 +489,9 @@ Mods: {
 				- Multiplies size of your Specialist weapons by <treshold>x.
 				'''
 			JunimoMaxLevelText: Max Level!
+			JunimoMaxed: Maxed
+			JunimoUp: Up
+			JunimoLevel: Junimo <class> level <upOrMax>!
 			JunimoPetItem:
 				'''
 				<class>

@@ -426,6 +426,9 @@ Mods: {
 				<treshold>% de vida todas as vezes, diminui para <bossTreshold>% para chefes
 				'''
 			// JunimoMaxLevelText: Max Level!
+			// JunimoMaxed: Maxed
+			// JunimoUp: Up
+			// JunimoLevel: Junimo <class> level <upOrMax>!
 			JunimoPetItem:
 				'''
 				[c/CDFF00:Pet de Coleta], [c/96A8B0:Mineração] e [c/0382E9:Pesca]
