@@ -110,6 +110,16 @@ Mods: {
 
 		LightPetTooltips: {
 			// NotRolled: Qualities are rolled when the item is in the inventory for the first time!
+			// OutOf: out of
+			// Quality: Quality:
+			/* CreeperEgg:
+				'''
+				Grants <sum> Summon Damage per quality, <melee> Melee Damage per quality
+				and <atkSpd> Melee and Whip Attack Speed per quality
+				Summon Damage Bonus: <sumLine>
+				Melee Damage Bonus: <meleeLine>
+				Melee/Whip Speed Bonus: <atkSpdLine>
+				''' */
 			/* ShadowOrb:
 				'''
 				Grants <manaBase> + <manaPer> Mana Per Quality, <expBase> + <expPer>% Movement Speed per quality
@@ -144,14 +154,6 @@ Mods: {
 				which works with 50% effectiveness with already classified Pets.
 				Pet Ability Haste Bonus: <currentHaste> Quality <hasteRoll> out of <hasteMaxRoll>
 				Global Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
-				''' */
-			/* CreeperEgg:
-				'''
-				Grants <sumBase> + <sumPer>% per quality Summon damage, <meleeBase> + <meleePer>% per quality Melee damage
-				and <atkSpdBase> + <atkSpdPer>% per quality Melee attack speed, affecting whips.
-				Summon Damage Bonus: <currentSum> Quality <sumRoll> out of <sumMaxRoll>
-				Melee Damage Bonus: <currentMelee> Quality <meleeRoll> out of <meleeMaxRoll>
-				Melee/Whip Speed Bonus: <currentAtkSpd> Quality <atkSpdRoll> out of <atkSpdMaxRoll>
 				''' */
 			/* WispInABottle:
 				'''

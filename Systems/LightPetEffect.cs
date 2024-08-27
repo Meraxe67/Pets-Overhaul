@@ -47,10 +47,18 @@ namespace PetsOverhaul.Systems
                 CurrentRoll = Main.rand.Next(MaxRoll) + 1;
             }
         }
-        public override string ToString()
+        /// <summary>
+        /// Returns the stat's current value with its + or %, localized 'Quality' text, and its current quality, localized 'out of' text next to it and the Max roll this stat can achieve. And correctly colors them.
+        /// </summary>
+        public string StatSummaryLine()
         {
-            return PetColors.LightPetRarityColorConvert(isInt ? (Language.GetTextValue("Mods.PetsOverhaul.+") + CurrentStatInt.ToString()) : (Math.Round(CurrentStatFloat * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%")), CurrentRoll, MaxRoll) +
-                Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.Quality") + PetColors.LightPetRarityColorConvert(CurrentRoll.ToString(), CurrentRoll, MaxRoll) + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.OutOf") + PetColors.LightPetRarityColorConvert(MaxRoll.ToString(), CurrentRoll, MaxRoll);
+            return PetColors.LightPetRarityColorConvert(isInt ? (Language.GetTextValue("Mods.PetsOverhaul.+") + CurrentStatInt.ToString()) : (Math.Round(CurrentStatFloat * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%")), CurrentRoll, MaxRoll) + " " +
+                Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.Quality") + " " + PetColors.LightPetRarityColorConvert(CurrentRoll.ToString(), CurrentRoll, MaxRoll) + " " + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.OutOf") + " " + PetColors.LightPetRarityColorConvert(MaxRoll.ToString(), CurrentRoll, MaxRoll);
+        }
+        public string BaseAndPerQuality()
+        {
+            return (BaseStat == 0 ? "" : (Math.Round(BaseStat * 100, 2).ToString() + " " + Language.GetTextValue("Mods.PetsOverhaul.+"))) + " " + Math.Round(StatPerRoll * 100, 2).ToString()
+                + (isInt ? "" : Language.GetTextValue("Mods.PetsOverhaul.%"));
         }
     }
 }
