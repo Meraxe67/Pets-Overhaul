@@ -101,7 +101,7 @@ namespace PetsOverhaul.PetEffects
 
             Hoardagron hoardagron = Main.LocalPlayer.GetModPlayer<Hoardagron>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DD2PetDragon")
-                .Replace("<class>", PetColors.ClassText(hoardagron.PetClassPrimary, hoardagron.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(hoardagron.PetClassPrimary, hoardagron.PetClassSecondary))
                         .Replace("<arrowVelo>", hoardagron.arrowSpd.ToString())
                         .Replace("<arrowPierce>", hoardagron.arrowPen.ToString())
                         .Replace("<bulletVelo>", hoardagron.bulletSpd.ToString())

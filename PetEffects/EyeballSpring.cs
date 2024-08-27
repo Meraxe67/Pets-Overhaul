@@ -70,7 +70,7 @@ namespace PetsOverhaul.PetEffects
 
             EyeballSpring eyeballSpring = Main.LocalPlayer.GetModPlayer<EyeballSpring>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EyeSpring")
-                .Replace("<class>", PetColors.ClassText(eyeballSpring.PetClassPrimary, eyeballSpring.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(eyeballSpring.PetClassPrimary, eyeballSpring.PetClassSecondary))
                         .Replace("<jumpBoost>", Math.Round(eyeballSpring.jumpBoost * 100, 2).ToString())
                         .Replace("<acceleration>", Math.Round(eyeballSpring.acceleration * 100, 2).ToString())
                         .Replace("<ascNerf>", eyeballSpring.ascentPenaltyMult.ToString())

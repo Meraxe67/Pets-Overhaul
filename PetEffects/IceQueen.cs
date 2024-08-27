@@ -135,7 +135,7 @@ namespace PetsOverhaul.PetEffects
 
             IceQueen iceQueen = Main.LocalPlayer.GetModPlayer<IceQueen>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.IceQueenPetItem")
-                .Replace("<class>", PetColors.ClassText(iceQueen.PetClassPrimary, iceQueen.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(iceQueen.PetClassPrimary, iceQueen.PetClassSecondary))
                         .Replace("<frozenTombTime>", Math.Round(iceQueen.tombTime / 60f, 2).ToString())
                         .Replace("<range>", Math.Round(iceQueen.queenRange / 16f, 2).ToString())
                         .Replace("<slowAmount>", Math.Round(iceQueen.slowAmount * 100, 2).ToString())

@@ -81,7 +81,7 @@ namespace PetsOverhaul.PetEffects
 
             Puppy puppy = Main.LocalPlayer.GetModPlayer<Puppy>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DogWhistle")
-                .Replace("<class>", PetColors.ClassText(puppy.PetClassPrimary, puppy.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(puppy.PetClassPrimary, puppy.PetClassSecondary))
                 .Replace("<critter>", puppy.catchChance.ToString())
                 .Replace("<rareCritter>", puppy.rareCatchChance.ToString())
                 .Replace("<rareCritterCoin>", Math.Round(puppy.rareCritterCoin / 100f, 2).ToString())

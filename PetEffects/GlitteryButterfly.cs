@@ -58,7 +58,7 @@ namespace PetsOverhaul.PetEffects
 
             GlitteryButterfly glitteryButterfly = Main.LocalPlayer.GetModPlayer<GlitteryButterfly>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BedazzledNectar")
-                .Replace("<class>", PetColors.ClassText(glitteryButterfly.PetClassPrimary, glitteryButterfly.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(glitteryButterfly.PetClassPrimary, glitteryButterfly.PetClassSecondary))
                         .Replace("<flight>", Math.Round(glitteryButterfly.wingTime / 60f, 2).ToString())
                         .Replace("<bonusFlight>", Math.Round(glitteryButterfly.bonusTimeIfExisting / 60f, 2).ToString())
                         .Replace("<healthNerf>", Math.Round(glitteryButterfly.healthPenalty * 100, 2).ToString())

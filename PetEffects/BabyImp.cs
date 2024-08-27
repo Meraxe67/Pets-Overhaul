@@ -54,7 +54,7 @@ namespace PetsOverhaul.PetEffects
 
             BabyImp babyImp = Main.LocalPlayer.GetModPlayer<BabyImp>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.HellCake")
-                .Replace("<class>", PetColors.ClassText(babyImp.PetClassPrimary, babyImp.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(babyImp.PetClassPrimary, babyImp.PetClassSecondary))
                 .Replace("<immuneTime>", Math.Round(babyImp.lavaImmune / 60f, 2).ToString())
                 .Replace("<lavaDef>", babyImp.lavaDef.ToString())
                 .Replace("<lavaSpd>", Math.Round(babyImp.lavaSpd * 100, 2).ToString())

@@ -105,7 +105,7 @@ namespace PetsOverhaul.PetEffects
 
             MiniPrime miniPrime = Main.LocalPlayer.GetModPlayer<MiniPrime>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.SkeletronPrimePetItem")
-                .Replace("<class>", PetColors.ClassText(miniPrime.PetClassPrimary, miniPrime.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(miniPrime.PetClassPrimary, miniPrime.PetClassSecondary))
                         .Replace("<shieldMaxHealthAmount>", Math.Round(miniPrime.shieldMult * 100, 2).ToString())
                         .Replace("<shieldCooldown>", Math.Round(miniPrime.shieldRecovery / 300f, 2).ToString())
                         .Replace("<dmg>", Math.Round(miniPrime.dmgIncrease * 100, 2).ToString())

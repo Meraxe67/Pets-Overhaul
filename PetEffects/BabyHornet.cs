@@ -132,7 +132,7 @@ namespace PetsOverhaul.PetEffects
 
             BabyHornet babyHornet = Main.LocalPlayer.GetModPlayer<BabyHornet>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.Nectar")
-                .Replace("<class>", PetColors.ClassText(babyHornet.PetClassPrimary, babyHornet.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(babyHornet.PetClassPrimary, babyHornet.PetClassSecondary))
                 .Replace("<antidotePercent>", Math.Round(babyHornet.healthRecovery * 100, 2).ToString())
                 .Replace("<antidoteCd>", Math.Round(babyHornet.nectarCooldown / 60f, 2).ToString())
                 .Replace("<moveSpd>", Math.Round(babyHornet.moveSpdIncr * 100, 2).ToString())

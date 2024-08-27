@@ -88,7 +88,7 @@ namespace PetsOverhaul.PetEffects
 
             CompanionCube companionCube = Main.LocalPlayer.GetModPlayer<CompanionCube>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.CompanionCube")
-                .Replace("<class>", PetColors.ClassText(companionCube.PetClassPrimary, companionCube.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(companionCube.PetClassPrimary, companionCube.PetClassSecondary))
                         .Replace("<manaToHealth>", Math.Round(companionCube.manaToHealth * 100, 2).ToString())
                         .Replace("<healthToMana>", Math.Round(companionCube.healthToMana * 100, 2).ToString())
                         .Replace("<manaPotionNerf>", Math.Round(companionCube.manaPotionNerf * 100, 2).ToString())

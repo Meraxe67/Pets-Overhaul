@@ -103,7 +103,7 @@ namespace PetsOverhaul.PetEffects
 
             MiniMinotaur miniMinotaur = Main.LocalPlayer.GetModPlayer<MiniMinotaur>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.TartarSauce")
-                .Replace("<class>", PetColors.ClassText(miniMinotaur.PetClassPrimary, miniMinotaur.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(miniMinotaur.PetClassPrimary, miniMinotaur.PetClassSecondary))
                         .Replace("<cooldown>", Math.Round(miniMinotaur.minotaurCd / 60f, 2).ToString())
                         .Replace("<maxStack>", miniMinotaur.maxStack.ToString())
                         .Replace("<maxDef>", Math.Round(miniMinotaur.defMult * 100 * miniMinotaur.maxStack, 2).ToString())

@@ -133,16 +133,16 @@ namespace PetsOverhaul.PetEffects
                 _ => "",
             };
 
-            string currentClass = (moonling.HighestDamage == player.GetDamage<MeleeDamageClass>()) ? PetColors.ClassText(PetClasses.Melee) :
-            (moonling.HighestDamage == player.GetDamage<RangedDamageClass>()) ? PetColors.ClassText(PetClasses.Ranged) :
-            (moonling.HighestDamage == player.GetDamage<MagicDamageClass>()) ? PetColors.ClassText(PetClasses.Magic) :
-            (moonling.HighestDamage == player.GetDamage<SummonDamageClass>()) ? PetColors.ClassText(PetClasses.Summoner) :
-            PetColors.ClassText(PetClasses.None);
+            string currentClass = (moonling.HighestDamage == player.GetDamage<MeleeDamageClass>()) ? PetTextsColors.ClassText(PetClasses.Melee) :
+            (moonling.HighestDamage == player.GetDamage<RangedDamageClass>()) ? PetTextsColors.ClassText(PetClasses.Ranged) :
+            (moonling.HighestDamage == player.GetDamage<MagicDamageClass>()) ? PetTextsColors.ClassText(PetClasses.Magic) :
+            (moonling.HighestDamage == player.GetDamage<SummonDamageClass>()) ? PetTextsColors.ClassText(PetClasses.Summoner) :
+            PetTextsColors.ClassText(PetClasses.None);
 
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.MoonLordPetItem")
-                .Replace("<class>", PetColors.ClassText(moonling.PetClassPrimary, moonling.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(moonling.PetClassPrimary, moonling.PetClassSecondary))
                 .Replace("<currentClass>", currentClass)
-                .Replace("<keybind>", PetColors.KeybindText(Keybinds.PetTooltipSwap))
+                .Replace("<keybind>", PetTextsColors.KeybindText(Keybinds.PetTooltipSwap))
                 .Replace("<tooltip>", tooltip)
                         ));
         }

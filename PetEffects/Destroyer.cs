@@ -62,7 +62,7 @@ namespace PetsOverhaul.PetEffects
 
             Destroyer destroyer = Main.LocalPlayer.GetModPlayer<Destroyer>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DestroyerPetItem")
-                .Replace("<class>", PetColors.ClassText(destroyer.PetClassPrimary, destroyer.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(destroyer.PetClassPrimary, destroyer.PetClassSecondary))
                         .Replace("<defMultChance>", Math.Round(destroyer.defItemMult * 100, 2).ToString())
                         .Replace("<flatAmount>", destroyer.flatAmount.ToString())
                         .Replace("<defMultIncrease>", Math.Round(destroyer.flatDefMult * 100, 2).ToString())

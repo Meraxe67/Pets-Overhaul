@@ -100,7 +100,7 @@ namespace PetsOverhaul.PetEffects
 
             ZephyrFish zephyrFish = Main.LocalPlayer.GetModPlayer<ZephyrFish>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ZephyrFish")
-                .Replace("<class>", PetColors.ClassText(zephyrFish.PetClassPrimary, zephyrFish.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(zephyrFish.PetClassPrimary, zephyrFish.PetClassSecondary))
                         .Replace("<windFish>", Math.Round(zephyrFish.speedMult / 8f, 2).ToString())
                         .Replace("<regularChance>", zephyrFish.baseChance.ToString())
                         .Replace("<windChance>", zephyrFish.windChance.ToString())

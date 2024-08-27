@@ -62,7 +62,7 @@ namespace PetsOverhaul.PetEffects
 
             CavelingGardener cavelingGardener = Main.LocalPlayer.GetModPlayer<CavelingGardener>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.GlowTulip")
-                .Replace("<class>", PetColors.ClassText(cavelingGardener.PetClassPrimary, cavelingGardener.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(cavelingGardener.PetClassPrimary, cavelingGardener.PetClassSecondary))
                 .Replace("<harvestChance>", cavelingGardener.cavelingRegularPlantChance.ToString())
                 .Replace("<rarePlantChance>", cavelingGardener.cavelingRarePlantChance.ToString())
                 .Replace("<gemstoneTreeChance>", cavelingGardener.cavelingGemTreeChance.ToString())

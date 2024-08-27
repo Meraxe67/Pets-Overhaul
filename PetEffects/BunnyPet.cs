@@ -63,7 +63,7 @@ namespace PetsOverhaul.PetEffects
 
             CarrotBunny carrotBunny = Main.LocalPlayer.GetModPlayer<CarrotBunny>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.Carrot")
-                .Replace("<class>", PetColors.ClassText(carrotBunny.PetClassPrimary, carrotBunny.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(carrotBunny.PetClassPrimary, carrotBunny.PetClassSecondary))
                 .Replace("<moveSpeed>", Math.Round(carrotBunny.spdPerStk * 100, 2).ToString())
                 .Replace("<jumpSpeed>", Math.Round(carrotBunny.jumpPerStk * 100, 2).ToString())
             ));

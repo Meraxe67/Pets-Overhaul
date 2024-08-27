@@ -114,7 +114,7 @@ namespace PetsOverhaul.PetEffects
 
             Parrot parrot = Main.LocalPlayer.GetModPlayer<Parrot>();
             tooltips.Add(new TooltipLine(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ParrotCracker")
-                .Replace("<class>", PetColors.ClassText(parrot.PetClassPrimary, parrot.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(parrot.PetClassPrimary, parrot.PetClassSecondary))
                 .Replace("<projChance>", parrot.projChance.ToString())
                 .Replace("<projDamage>", parrot.projDamage.ToString())
                 .Replace("<meleeChance>", parrot.meleeChance.ToString())

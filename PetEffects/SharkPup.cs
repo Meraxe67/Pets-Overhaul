@@ -93,7 +93,7 @@ namespace PetsOverhaul.PetEffects
 
             SharkPup sharkPup = Main.LocalPlayer.GetModPlayer<SharkPup>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.SharkBait")
-                .Replace("<class>", PetColors.ClassText(sharkPup.PetClassPrimary, sharkPup.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(sharkPup.PetClassPrimary, sharkPup.PetClassSecondary))
                         .Replace("<fishingPower>", sharkPup.fishingPow.ToString())
                         .Replace("<seaCreatureDmg>", sharkPup.seaCreatureDamage.ToString())
                         .Replace("<seaCreatureResist>", sharkPup.seaCreatureResist.ToString())

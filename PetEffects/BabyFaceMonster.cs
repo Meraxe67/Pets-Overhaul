@@ -99,7 +99,7 @@ namespace PetsOverhaul.PetEffects
 
             BabyFaceMonster babyFaceMonster = Main.LocalPlayer.GetModPlayer<BabyFaceMonster>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BoneRattle")
-                .Replace("<class>", PetColors.ClassText(babyFaceMonster.PetClassPrimary, babyFaceMonster.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(babyFaceMonster.PetClassPrimary, babyFaceMonster.PetClassSecondary))
                 .Replace("<stage1Time>", Math.Round((babyFaceMonster.stage2time - babyFaceMonster.stage1time) / 60f, 2).ToString())
                 .Replace("<stage2Time>", Math.Round(babyFaceMonster.stage2time / 60f, 2).ToString())
                 .Replace("<stage1Regen>", babyFaceMonster.stage1regen.ToString())

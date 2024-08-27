@@ -119,7 +119,7 @@ namespace PetsOverhaul.PetEffects
 
             HoneyBee honeyBee = Main.LocalPlayer.GetModPlayer<HoneyBee>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.QueenBeePetItem")
-                .Replace("<class>", PetColors.ClassText(honeyBee.PetClassPrimary, honeyBee.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(honeyBee.PetClassPrimary, honeyBee.PetClassSecondary))
                        .Replace("<extraHeal>", Math.Round(honeyBee.selfPotionIncrease * 100, 2).ToString())
                        .Replace("<range>", Math.Round(honeyBee.range / 16f, 2).ToString())
                        .Replace("<bottledHealth>", Math.Round(honeyBee.bottledHealth * 100, 2).ToString())

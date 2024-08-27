@@ -66,7 +66,7 @@ namespace PetsOverhaul.PetEffects
 
             CursedSapling cursedSapling = Main.LocalPlayer.GetModPlayer<CursedSapling>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.CursedSapling")
-                .Replace("<class>", PetColors.ClassText(cursedSapling.PetClassPrimary, cursedSapling.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(cursedSapling.PetClassPrimary, cursedSapling.PetClassSecondary))
                         .Replace("<minionSlot>", cursedSapling.maxMinion.ToString())
                         .Replace("<dmg>", Math.Round(cursedSapling.pumpkinWeaponDmg * 100, 2).ToString())
                         .Replace("<ravenDmg>", Math.Round(cursedSapling.ravenDmg * 100, 2).ToString())

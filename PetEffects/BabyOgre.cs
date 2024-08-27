@@ -140,7 +140,7 @@ namespace PetsOverhaul.PetEffects
 
             BabyOgre babyOgre = Main.LocalPlayer.GetModPlayer<BabyOgre>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DD2OgrePetItem")
-                .Replace("<class>", PetColors.ClassText(babyOgre.PetClassPrimary, babyOgre.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(babyOgre.PetClassPrimary, babyOgre.PetClassSecondary))
                 .Replace("<moveSpdNerf>", babyOgre.movespdNerf.ToString())
                 .Replace("<atkSpdNerf>", babyOgre.atkSpdMult.ToString())
                 .Replace("<dmgNerf>", Math.Round(babyOgre.nonMeleedmg * 100, 2).ToString())

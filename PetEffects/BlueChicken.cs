@@ -200,7 +200,7 @@ namespace PetsOverhaul.PetEffects
 
             BlueChicken blueChicken = Main.LocalPlayer.GetModPlayer<BlueChicken>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BlueEgg")
-                .Replace("<class>", PetColors.ClassText(blueChicken.PetClassPrimary, blueChicken.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(blueChicken.PetClassPrimary, blueChicken.PetClassSecondary))
                 .Replace("<plantChance>", blueChicken.plantChance.ToString())
                 .Replace("<rarePlantChance>", blueChicken.rarePlantChance.ToString())
                 .Replace("<choppableChance>", blueChicken.treeChance.ToString())

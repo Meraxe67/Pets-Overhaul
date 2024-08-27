@@ -109,8 +109,8 @@ namespace PetsOverhaul.PetEffects
 
             BabyRedPanda babyRedPanda = Main.LocalPlayer.GetModPlayer<BabyRedPanda>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BambooLeaf")
-                .Replace("<class>", PetColors.ClassText(babyRedPanda.PetClassPrimary, babyRedPanda.PetClassSecondary))
-                .Replace("<keybind>", PetColors.KeybindText(Keybinds.UsePetAbility))
+                .Replace("<class>", PetTextsColors.ClassText(babyRedPanda.PetClassPrimary, babyRedPanda.PetClassSecondary))
+                .Replace("<keybind>", PetTextsColors.KeybindText(Keybinds.UsePetAbility))
                 .Replace("<alertAs>", Math.Round(babyRedPanda.alertAs * 100, 2).ToString())
                 .Replace("<alertMs>", Math.Round(babyRedPanda.alertMs * 100, 2).ToString())
                 .Replace("<alertAggro>", babyRedPanda.alertAggro.ToString())

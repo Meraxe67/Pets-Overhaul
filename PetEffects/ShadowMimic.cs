@@ -65,7 +65,7 @@ namespace PetsOverhaul.PetEffects
 
             ShadowMimic shadowMimic = Main.LocalPlayer.GetModPlayer<ShadowMimic>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.OrnateShadowKey")
-                .Replace("<class>", PetColors.ClassText(shadowMimic.PetClassPrimary, shadowMimic.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(shadowMimic.PetClassPrimary, shadowMimic.PetClassSecondary))
                         .Replace("<npcCoin>", shadowMimic.npcCoin.ToString())
                         .Replace("<npcItem>", shadowMimic.npcItem.ToString())
                         .Replace("<bossCoin>", shadowMimic.bossCoin.ToString())

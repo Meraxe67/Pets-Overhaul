@@ -93,7 +93,7 @@ namespace PetsOverhaul.LightPets
                         ));
             if (AttackSpeed.CurrentRoll <= 0)
             {
-                tooltips.Add(new(Mod, "Tooltip0", PetColors.RollMissingText()));
+                tooltips.Add(new(Mod, "Tooltip0", PetTextsColors.RollMissingText()));
             }
         }
     }

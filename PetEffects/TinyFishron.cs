@@ -79,7 +79,7 @@ namespace PetsOverhaul.PetEffects
 
             TinyFishron tinyFishron = Main.LocalPlayer.GetModPlayer<TinyFishron>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DukeFishronPetItem")
-                .Replace("<class>", PetColors.ClassText(tinyFishron.PetClassPrimary, tinyFishron.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(tinyFishron.PetClassPrimary, tinyFishron.PetClassSecondary))
                         .Replace("<baseMult>", tinyFishron.fishingPowerPenalty.ToString())
                         .Replace("<anglerFishingPower>", tinyFishron.fpPerQuest.ToString())
                         .Replace("<flatChance>", tinyFishron.stackChance.ToString())

@@ -158,7 +158,7 @@ namespace PetsOverhaul.PetEffects
 
             SkeletronJr skeletronJr = Main.LocalPlayer.GetModPlayer<SkeletronJr>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.SkeletronPetItem")
-                .Replace("<class>", PetColors.ClassText(skeletronJr.PetClassPrimary, skeletronJr.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(skeletronJr.PetClassPrimary, skeletronJr.PetClassSecondary))
                         .Replace("<recievedMult>", skeletronJr.playerTakenMult.ToString())
                         .Replace("<recievedHowLong>", skeletronJr.playerDamageTakenSpeed.ToString())
                         .Replace("<dealtMult>", skeletronJr.enemyDamageIncrease.ToString())

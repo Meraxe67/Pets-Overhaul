@@ -55,7 +55,7 @@ namespace PetsOverhaul.PetEffects
 
             Chester chester = Main.LocalPlayer.GetModPlayer<Chester>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ChesterPetItem")
-                .Replace("<class>", PetColors.ClassText(chester.PetClassPrimary, chester.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(chester.PetClassPrimary, chester.PetClassSecondary))
                 .Replace("<pickupRange>", Math.Round(chester.suckingUpRange / 16f, 2).ToString())
                 .Replace("<placementRange>", chester.placementRange.ToString())
                 .Replace("<chestDef>", chester.chestOpenDef.ToString())

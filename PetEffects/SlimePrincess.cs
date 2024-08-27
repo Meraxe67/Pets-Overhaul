@@ -77,7 +77,7 @@ namespace PetsOverhaul.PetEffects
 
             SlimePrincess slimePrincess = Main.LocalPlayer.GetModPlayer<SlimePrincess>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.QueenSlimePetItem")
-                .Replace("<class>", PetColors.ClassText(slimePrincess.PetClassPrimary, slimePrincess.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(slimePrincess.PetClassPrimary, slimePrincess.PetClassSecondary))
                         .Replace("<slow>", Math.Round(slimePrincess.slow * 100, 2).ToString())
                         .Replace("<haste>", Math.Round(slimePrincess.haste * 100, 2).ToString())
                         .Replace("<dmgBonus>", slimePrincess.dmgBoost.ToString())

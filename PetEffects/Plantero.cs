@@ -79,7 +79,7 @@ namespace PetsOverhaul.PetEffects
 
             Plantero plantero = Main.LocalPlayer.GetModPlayer<Plantero>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.MudBud")
-                .Replace("<class>", PetColors.ClassText(plantero.PetClassPrimary, plantero.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(plantero.PetClassPrimary, plantero.PetClassSecondary))
                         .Replace("<chance>", plantero.spawnChance.ToString())
                         .Replace("<dmg>", plantero.damageMult.ToString())
                         .Replace("<flatDmg>", plantero.flatDmg.ToString())

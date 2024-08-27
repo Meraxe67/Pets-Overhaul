@@ -125,21 +125,21 @@ namespace PetsOverhaul.LightPets
                         .Replace("<luckBase>", baseLuck.ToString())
                         .Replace("<luckPer>", luckPerRoll.ToString())
 
-                        .Replace("<currentAtkSpd>", PetColors.LightPetRarityColorConvert(Math.Round(CurrentAtkSpd * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), atkSpdRoll, atkSpdMaxRoll))
-                        .Replace("<atkSpdRoll>", PetColors.LightPetRarityColorConvert(atkSpdRoll.ToString(), atkSpdRoll, atkSpdMaxRoll))
-                        .Replace("<atkSpdMaxRoll>", PetColors.LightPetRarityColorConvert(atkSpdMaxRoll.ToString(), atkSpdRoll, atkSpdMaxRoll))
+                        .Replace("<currentAtkSpd>", PetTextsColors.LightPetRarityColorConvert(Math.Round(CurrentAtkSpd * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), atkSpdRoll, atkSpdMaxRoll))
+                        .Replace("<atkSpdRoll>", PetTextsColors.LightPetRarityColorConvert(atkSpdRoll.ToString(), atkSpdRoll, atkSpdMaxRoll))
+                        .Replace("<atkSpdMaxRoll>", PetTextsColors.LightPetRarityColorConvert(atkSpdMaxRoll.ToString(), atkSpdRoll, atkSpdMaxRoll))
 
-                        .Replace("<currentExp>", PetColors.LightPetRarityColorConvert(CurrentHarvFort.ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), harvFortRoll, harvFortMaxRoll))
-                        .Replace("<expRoll>", PetColors.LightPetRarityColorConvert(harvFortRoll.ToString(), harvFortRoll, harvFortMaxRoll))
-                        .Replace("<expMaxRoll>", PetColors.LightPetRarityColorConvert(harvFortMaxRoll.ToString(), harvFortRoll, harvFortMaxRoll))
+                        .Replace("<currentExp>", PetTextsColors.LightPetRarityColorConvert(CurrentHarvFort.ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), harvFortRoll, harvFortMaxRoll))
+                        .Replace("<expRoll>", PetTextsColors.LightPetRarityColorConvert(harvFortRoll.ToString(), harvFortRoll, harvFortMaxRoll))
+                        .Replace("<expMaxRoll>", PetTextsColors.LightPetRarityColorConvert(harvFortMaxRoll.ToString(), harvFortRoll, harvFortMaxRoll))
 
-                        .Replace("<currentLuck>", PetColors.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + Math.Round(CurrentLuck, 2).ToString(), luckRoll, luckMaxRoll))
-                        .Replace("<luckRoll>", PetColors.LightPetRarityColorConvert(luckRoll.ToString(), luckRoll, luckMaxRoll))
-                        .Replace("<luckMaxRoll>", PetColors.LightPetRarityColorConvert(luckMaxRoll.ToString(), luckRoll, luckMaxRoll))
+                        .Replace("<currentLuck>", PetTextsColors.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + Math.Round(CurrentLuck, 2).ToString(), luckRoll, luckMaxRoll))
+                        .Replace("<luckRoll>", PetTextsColors.LightPetRarityColorConvert(luckRoll.ToString(), luckRoll, luckMaxRoll))
+                        .Replace("<luckMaxRoll>", PetTextsColors.LightPetRarityColorConvert(luckMaxRoll.ToString(), luckRoll, luckMaxRoll))
                         ));
             if (luckRoll <= 0)
             {
-                tooltips.Add(new(Mod, "Tooltip0", "[c/" + PetColors.LowQuality.Hex3() + ":" + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.NotRolled") + "]"));
+                tooltips.Add(new(Mod, "Tooltip0", "[c/" + PetTextsColors.LowQuality.Hex3() + ":" + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.NotRolled") + "]"));
             }
         }
     }

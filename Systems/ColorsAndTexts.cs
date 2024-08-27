@@ -7,9 +7,9 @@ namespace PetsOverhaul.Systems
 {
 
     /// <summary>
-    /// <see langword="class"/> that contains many useful <see langword="method"/>'s for better tooltip and string usage.
+    /// <see langword="class"/> that contains many useful <see langword="method"/>'s for better tooltip and string usage, alongside including colors used by Pets Overhaul.
     /// </summary>
-    public class PetColors
+    public class PetTextsColors
     {
         /// <summary>
         /// Converts given text to be corresponding color of Light Pet quality values
@@ -114,6 +114,10 @@ namespace PetsOverhaul.Systems
         public static string KeybindText(ModKeybind keybind)
         {
              return keybind.GetAssignedKeys(GlobalPet.PlayerInputMode).Count > 0 ? keybind.GetAssignedKeys(GlobalPet.PlayerInputMode)[0] : $"[c/{LowQuality.Hex3()}:{Language.GetTextValue("Mods.PetsOverhaul.KeybindMissing")}]";
+        }
+        public static string RollMissingText()
+        {
+            return "[c/" + LowQuality.Hex3() + ":" + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.NotRolled") + "]";
         }
     }
 }

@@ -67,7 +67,7 @@ namespace PetsOverhaul.PetEffects
 
             SpiderBrain spiderBrain = Main.LocalPlayer.GetModPlayer<SpiderBrain>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BrainOfCthulhuPetItem")
-                .Replace("<class>", PetColors.ClassText(spiderBrain.PetClassPrimary, spiderBrain.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(spiderBrain.PetClassPrimary, spiderBrain.PetClassSecondary))
                         .Replace("<lifesteal>", Math.Round(spiderBrain.lifestealAmount * 100, 2).ToString())
                         .Replace("<maxPool>", Math.Round(spiderBrain.lifePoolMaxPerc * 100, 2).ToString())
                         .Replace("<healthRecovery>", Math.Round(spiderBrain.cdToAddToPool / 60f, 2).ToString())

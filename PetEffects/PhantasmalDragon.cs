@@ -180,7 +180,7 @@ namespace PetsOverhaul.PetEffects
 
             PhantasmalDragon phantasmalDragon = Main.LocalPlayer.GetModPlayer<PhantasmalDragon>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.LunaticCultistPetItem")
-                .Replace("<class>", PetColors.ClassText(phantasmalDragon.PetClassPrimary, phantasmalDragon.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(phantasmalDragon.PetClassPrimary, phantasmalDragon.PetClassSecondary))
                        .Replace("<cooldown>", Math.Round(phantasmalDragon.phantasmDragonCooldown / 60f, 2).ToString())
                        .Replace("<icePierce>", phantasmalDragon.icePierce.ToString())
                        .Replace("<icePercent>", Math.Round(phantasmalDragon.iceMult * 100, 2).ToString())

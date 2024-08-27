@@ -69,7 +69,7 @@ namespace PetsOverhaul.PetEffects
 
             BabyDinosaur babyDinosaur = Main.LocalPlayer.GetModPlayer<BabyDinosaur>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.AmberMosquito")
-                .Replace("<class>", PetColors.ClassText(babyDinosaur.PetClassPrimary, babyDinosaur.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(babyDinosaur.PetClassPrimary, babyDinosaur.PetClassSecondary))
                 .Replace("<oreChance>", Math.Round(babyDinosaur.chance / 10f, 2).ToString())
             ));
         }

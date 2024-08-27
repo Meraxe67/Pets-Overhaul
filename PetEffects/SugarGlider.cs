@@ -56,7 +56,7 @@ namespace PetsOverhaul.PetEffects
 
             SugarGlider sugarGlider = Main.LocalPlayer.GetModPlayer<SugarGlider>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EucaluptusSap")
-                .Replace("<class>", PetColors.ClassText(sugarGlider.PetClassPrimary, sugarGlider.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(sugarGlider.PetClassPrimary, sugarGlider.PetClassSecondary))
                 .Replace("<glide>", sugarGlider.glideSpeedMult.ToString())
                         .Replace("<speed>", sugarGlider.speedMult.ToString())
                         .Replace("<acceleration>", sugarGlider.accMult.ToString())

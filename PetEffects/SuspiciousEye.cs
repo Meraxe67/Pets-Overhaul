@@ -154,8 +154,8 @@ namespace PetsOverhaul.PetEffects
 
             SuspiciousEye suspiciousEye = Main.LocalPlayer.GetModPlayer<SuspiciousEye>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EyeOfCthulhuPetItem")
-                .Replace("<class>", PetColors.ClassText(suspiciousEye.PetClassPrimary, suspiciousEye.PetClassSecondary))
-                .Replace("<keybind>", PetColors.KeybindText(Keybinds.UsePetAbility))
+                .Replace("<class>", PetTextsColors.ClassText(suspiciousEye.PetClassPrimary, suspiciousEye.PetClassSecondary))
+                .Replace("<keybind>", PetTextsColors.KeybindText(Keybinds.UsePetAbility))
                 .Replace("<shieldDuration>", Math.Round(suspiciousEye.shieldTime / 60f, 2).ToString())
                 .Replace("<outOfCombat>", Math.Round(suspiciousEye.inCombatTime / 60f, 2).ToString())
                 .Replace("<defToDmg>", Math.Round(suspiciousEye.dmgMult * 100, 2).ToString())

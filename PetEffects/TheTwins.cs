@@ -75,7 +75,7 @@ namespace PetsOverhaul.PetEffects
 
             TheTwins theTwins = Main.LocalPlayer.GetModPlayer<TheTwins>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.TwinsPetItem")
-                .Replace("<class>", PetColors.ClassText(theTwins.PetClassPrimary, theTwins.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(theTwins.PetClassPrimary, theTwins.PetClassSecondary))
                         .Replace("<closeRange>", Math.Round(theTwins.closeRange / 16f, 2).ToString())
                         .Replace("<cursedTime>", Math.Round(theTwins.infernoTime / 60f, 2).ToString())
                         .Replace("<defLifesteal>", theTwins.defMult.ToString())

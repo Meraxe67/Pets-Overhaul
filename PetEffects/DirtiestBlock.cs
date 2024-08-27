@@ -57,7 +57,7 @@ namespace PetsOverhaul.PetEffects
 
             DirtiestBlock dirtiestBlock = Main.LocalPlayer.GetModPlayer<DirtiestBlock>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DirtiestBlock")
-                .Replace("<class>", PetColors.ClassText(dirtiestBlock.PetClassPrimary, dirtiestBlock.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(dirtiestBlock.PetClassPrimary, dirtiestBlock.PetClassSecondary))
                         .Replace("<any>", (dirtiestBlock.everythingCoin / 100).ToString())
                         .Replace("<soil>", (dirtiestBlock.soilCoin / 100).ToString())
                         .Replace("<dirt>", (dirtiestBlock.dirtCoin / 100).ToString())

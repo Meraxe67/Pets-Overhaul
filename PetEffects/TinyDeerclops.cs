@@ -100,7 +100,7 @@ namespace PetsOverhaul.PetEffects
 
             TinyDeerclops tinyDeerclops = Main.LocalPlayer.GetModPlayer<TinyDeerclops>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DeerclopsPetItem")
-                .Replace("<class>", PetColors.ClassText(tinyDeerclops.PetClassPrimary, tinyDeerclops.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(tinyDeerclops.PetClassPrimary, tinyDeerclops.PetClassSecondary))
                             .Replace("<treshold>", Math.Round(tinyDeerclops.healthTreshold * 100, 2).ToString())
                             .Replace("<tresholdTime>", Math.Round(tinyDeerclops.damageStoreTime / 60f, 2).ToString())
                             .Replace("<immunityTime>", Math.Round(tinyDeerclops.immuneTime / 60f, 2).ToString())

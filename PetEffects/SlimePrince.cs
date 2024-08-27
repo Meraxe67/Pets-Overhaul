@@ -195,7 +195,7 @@ namespace PetsOverhaul.PetEffects
 
             SlimePrince slimePrince = Main.LocalPlayer.GetModPlayer<SlimePrince>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.KingSlimePetItem")
-                .Replace("<class>", PetColors.ClassText(slimePrince.PetClassPrimary, slimePrince.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(slimePrince.PetClassPrimary, slimePrince.PetClassSecondary))
                         .Replace("<burnHp>", Math.Round(slimePrince.healthDmg * 100, 2).ToString())
                         .Replace("<burnCap>", slimePrince.burnCap.ToString())
                         .Replace("<extraKb>", slimePrince.bonusKb.ToString())

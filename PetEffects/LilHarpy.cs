@@ -80,7 +80,7 @@ namespace PetsOverhaul.PetEffects
 
             LilHarpy lilHarpy = Main.LocalPlayer.GetModPlayer<LilHarpy>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BirdieRattle")
-                .Replace("<class>", PetColors.ClassText(lilHarpy.PetClassPrimary, lilHarpy.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(lilHarpy.PetClassPrimary, lilHarpy.PetClassSecondary))
                         .Replace("<flightTime>", Math.Round(lilHarpy.fuelMax / 60f, 2).ToString())
                         .Replace("<cooldown>", Math.Round(lilHarpy.harpyCd / 60f, 2).ToString())
                         ));

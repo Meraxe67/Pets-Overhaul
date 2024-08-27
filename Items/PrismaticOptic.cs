@@ -25,7 +25,7 @@ namespace PetsOverhaul.Items
         }
         public override void PostUpdate()
         {
-            Lighting.AddLight(Item.Center, PetColors.MaxQuality.ToVector3() * 0.7f);
+            Lighting.AddLight(Item.Center, PetTextsColors.MaxQuality.ToVector3() * 0.7f);
         }
     }
 }

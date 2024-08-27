@@ -51,7 +51,7 @@ namespace PetsOverhaul.PetEffects
 
             Squashling squashling = Main.LocalPlayer.GetModPlayer<Squashling>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.MagicalPumpkinSeed")
-                .Replace("<class>", PetColors.ClassText(squashling.PetClassPrimary, squashling.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(squashling.PetClassPrimary, squashling.PetClassSecondary))
                         .Replace("<plant>", squashling.squashlingCommonChance.ToString())
                         .Replace("<rarePlant>", squashling.squashlingRareChance.ToString())
                         ));

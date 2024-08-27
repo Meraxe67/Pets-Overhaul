@@ -91,7 +91,7 @@ namespace PetsOverhaul.PetEffects
 
             Turtle turtle = Main.LocalPlayer.GetModPlayer<Turtle>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.Seaweed")
-                .Replace("<class>", PetColors.ClassText(turtle.PetClassPrimary, turtle.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(turtle.PetClassPrimary, turtle.PetClassSecondary))
                         .Replace("<def>", turtle.def.ToString())
                         .Replace("<kbResist>", Math.Round(turtle.kbResist*100,2).ToString())
                         .Replace("<flat>", turtle.flatDef.ToString())

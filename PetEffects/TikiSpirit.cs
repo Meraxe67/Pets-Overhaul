@@ -82,7 +82,7 @@ namespace PetsOverhaul.PetEffects
 
             TikiSpirit tikiSpirit = Main.LocalPlayer.GetModPlayer<TikiSpirit>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.TikiTotem")
-                .Replace("<class>", PetColors.ClassText(tikiSpirit.PetClassPrimary, tikiSpirit.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(tikiSpirit.PetClassPrimary, tikiSpirit.PetClassSecondary))
                        .Replace("<atkSpdToDmg>", Math.Round(tikiSpirit.atkSpdToDmgConversion * 100, 2).ToString())
                        .Replace("<atkSpdToRange>", Math.Round(tikiSpirit.atkSpdToRangeConversion * 100, 2).ToString())
                        .Replace("<nonWhipCrit>", tikiSpirit.nonWhipCrit.ToString())

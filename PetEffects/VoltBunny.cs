@@ -58,7 +58,7 @@ namespace PetsOverhaul.PetEffects
 
             VoltBunny voltBunny = Main.LocalPlayer.GetModPlayer<VoltBunny>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.LightningCarrot")
-                .Replace("<class>", PetColors.ClassText(voltBunny.PetClassPrimary, voltBunny.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(voltBunny.PetClassPrimary, voltBunny.PetClassSecondary))
                        .Replace("<flatSpd>", Math.Round(voltBunny.movespdFlat * 100, 2).ToString())
                        .Replace("<multSpd>", voltBunny.movespdMult.ToString())
                        .Replace("<spdToDmg>", Math.Round(voltBunny.movespdToDmg * 100, 2).ToString())

@@ -84,7 +84,7 @@ namespace PetsOverhaul.PetEffects
 
             BabyWerewolf babyWerewolf = Main.LocalPlayer.GetModPlayer<BabyWerewolf>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.FullMoonSqueakyToy")
-                .Replace("<class>", PetColors.ClassText(babyWerewolf.PetClassPrimary, babyWerewolf.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(babyWerewolf.PetClassPrimary, babyWerewolf.PetClassSecondary))
                 .Replace("<critMult>", babyWerewolf.critChance.ToString())
                 .Replace("<crDmgReduction>", Math.Round(babyWerewolf.critDmgReduction * 100, 2).ToString())
                 .Replace("<maxStacks>", babyWerewolf.maxStacks.ToString())

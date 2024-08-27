@@ -90,7 +90,7 @@ namespace PetsOverhaul.PetEffects
 
             EaterOfWorms eaterOfWorms = Main.LocalPlayer.GetModPlayer<EaterOfWorms>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EaterOfWorldsPetItem")
-                .Replace("<class>", PetColors.ClassText(eaterOfWorms.PetClassPrimary, eaterOfWorms.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(eaterOfWorms.PetClassPrimary, eaterOfWorms.PetClassSecondary))
                        .Replace("<miningSpeed>", Math.Round(eaterOfWorms.nonOreSpeed * 100, 2).ToString())
                        .Replace("<multipleBreakChance>", eaterOfWorms.tileBreakSpreadChance.ToString())
                        .Replace("<width>", eaterOfWorms.tileBreakXSpread.ToString())

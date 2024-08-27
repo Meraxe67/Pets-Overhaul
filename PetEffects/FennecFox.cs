@@ -54,7 +54,7 @@ namespace PetsOverhaul.PetEffects
 
             FennecFox fennecFox = Main.LocalPlayer.GetModPlayer<FennecFox>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ExoticEasternChewToy")
-                .Replace("<class>", PetColors.ClassText(fennecFox.PetClassPrimary, fennecFox.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(fennecFox.PetClassPrimary, fennecFox.PetClassSecondary))
                         .Replace("<meleeSpd>", Math.Round(fennecFox.meleeSpdIncrease * 100, 2).ToString())
                         .Replace("<moveSpd>", Math.Round(fennecFox.speedIncrease * 100, 2).ToString())
                         .Replace("<sizeNerf>", fennecFox.sizeDecrease.ToString())

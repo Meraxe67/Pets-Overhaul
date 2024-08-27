@@ -88,7 +88,7 @@ namespace PetsOverhaul.PetEffects
 
             Pigman pigman = Main.LocalPlayer.GetModPlayer<Pigman>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.PigPetItem")
-                .Replace("<class>", PetColors.ClassText(pigman.PetClassPrimary, pigman.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(pigman.PetClassPrimary, pigman.PetClassSecondary))
                        .Replace("<foodChance>", pigman.foodChance.ToString())
                        .Replace("<potionChance>", pigman.potionChance.ToString())
                        .Replace("<shield1>", pigman.tier1Shield.ToString())

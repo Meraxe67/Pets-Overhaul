@@ -57,7 +57,7 @@ namespace PetsOverhaul.PetEffects
 
             PropellerGato propellerGato = Main.LocalPlayer.GetModPlayer<PropellerGato>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DD2PetGato")
-                .Replace("<class>", PetColors.ClassText(propellerGato.PetClassPrimary, propellerGato.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(propellerGato.PetClassPrimary, propellerGato.PetClassSecondary))
                         .Replace("<crit>", propellerGato.bonusCritChance.ToString())
                         .Replace("<maxSentry>", propellerGato.turretIncrease.ToString())
                         ));

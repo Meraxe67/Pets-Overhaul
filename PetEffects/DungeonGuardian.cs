@@ -59,7 +59,7 @@ namespace PetsOverhaul.PetEffects
 
             DungeonGuardian dungeonGuardian = Main.LocalPlayer.GetModPlayer<DungeonGuardian>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BoneKey")
-                .Replace("<class>", PetColors.ClassText(dungeonGuardian.PetClassPrimary, dungeonGuardian.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(dungeonGuardian.PetClassPrimary, dungeonGuardian.PetClassSecondary))
                         .Replace("<armorPen>", dungeonGuardian.armorPen.ToString())
                         .Replace("<dungArmorPen>", dungeonGuardian.dungArmorPenBonus.ToString())
                         .Replace("<dungRegen>", dungeonGuardian.lifeRegen.ToString())

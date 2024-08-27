@@ -136,8 +136,8 @@ namespace PetsOverhaul.PetEffects
 
             BlackCat blackCat = Main.LocalPlayer.GetModPlayer<BlackCat>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.UnluckyYarn")
-                .Replace("<class>", PetColors.ClassText(blackCat.PetClassPrimary, blackCat.PetClassSecondary))
-                .Replace("<keybind>", PetColors.KeybindText(Keybinds.UsePetAbility))
+                .Replace("<class>", PetTextsColors.ClassText(blackCat.PetClassPrimary, blackCat.PetClassSecondary))
+                .Replace("<keybind>", PetTextsColors.KeybindText(Keybinds.UsePetAbility))
                 .Replace("<moonlightMin>", blackCat.moonlightLowest.ToString())
                 .Replace("<moonlightMax>", blackCat.moonlightHighest.ToString())
                 .Replace("<moonlightCd>", Math.Round(blackCat.moonlightCd/60f,2).ToString())

@@ -77,7 +77,7 @@ namespace PetsOverhaul.PetEffects
 
             BabyPenguin babyPenguin = Main.LocalPlayer.GetModPlayer<BabyPenguin>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.Fish")
-                .Replace("<class>", PetColors.ClassText(babyPenguin.PetClassPrimary, babyPenguin.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(babyPenguin.PetClassPrimary, babyPenguin.PetClassSecondary))
                 .Replace("<fp>", babyPenguin.regularFish.ToString())
                 .Replace("<oceanFp>", babyPenguin.oceanFish.ToString())
                 .Replace("<snowFp>", babyPenguin.snowFish.ToString())

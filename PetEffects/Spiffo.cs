@@ -58,7 +58,7 @@ namespace PetsOverhaul.PetEffects
 
             Spiffo spiffo = Main.LocalPlayer.GetModPlayer<Spiffo>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.SpiffoPlush")
-                .Replace("<class>", PetColors.ClassText(spiffo.PetClassPrimary, spiffo.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(spiffo.PetClassPrimary, spiffo.PetClassSecondary))
                         .Replace("<ammoReserve>", spiffo.ammoReserveChance.ToString())
                         .Replace("<armorPen>", spiffo.zombieArmorPen.ToString())
                         .Replace("<penChance>", spiffo.penetrateChance.ToString())

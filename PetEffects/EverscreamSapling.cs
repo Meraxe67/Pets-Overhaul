@@ -64,7 +64,7 @@ namespace PetsOverhaul.PetEffects
 
             EverscreamSapling everscreamSapling = Main.LocalPlayer.GetModPlayer<EverscreamSapling>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EverscreamPetItem")
-                .Replace("<class>", PetColors.ClassText(everscreamSapling.PetClassPrimary, everscreamSapling.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(everscreamSapling.PetClassPrimary, everscreamSapling.PetClassSecondary))
                         .Replace("<magicCritNerf>", everscreamSapling.critMult.ToString())
                         .Replace("<maxMana>", everscreamSapling.manaIncrease.ToString())
                         .Replace("<missingMana>", Math.Round(everscreamSapling.missingManaPercent * 100, 2).ToString())
