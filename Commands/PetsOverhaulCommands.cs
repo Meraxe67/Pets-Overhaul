@@ -40,7 +40,7 @@ namespace PetsOverhaul.Commands
                     caller.Reply("[c/90C2AA:List of Pets Overhaul commands:] (commands are not case sensitive)\n" +
                     "/pet fortune, /pet fortunestat, /pet fortunestats - Displays your current fortune stats and explains their functionality.\n" +
                     "/pet vanity, /pet vanitypet - Explains how to use a 'vanity' Pet.\n" +
-                    "/pet junimoscoreboard, /pet junimoleaderboard - Displays Top 3 Online Players with highest exp counts for all 3 skills of Junimo. Only returns your EXP & level values if you're in singleplayer.\n" +
+                    "/pet junimo, /pet junimoscoreboard, /pet junimoleaderboard - Displays Top 3 Online Players with highest exp counts for all 3 skills of Junimo. Only returns your EXP & level values if you're in singleplayer.\n" +
                     "/pet {mining|fishing|harvesting}scoreboard, /pet {mining|fishing|harvesting}leaderboard - Displays limitless amount of Online Players with highest chosen skill's exp counts from Junimo's 3 skills.\n" +
                     "/pet faq, /pet question - Displays frequently asked questions regarding Pets Overhaul.\n", Color.Gray);
                     break;
@@ -64,7 +64,7 @@ namespace PetsOverhaul.Commands
                                 "\nStep 2: Disable the currently equipped Pet's visibility from little eye next to the Pet Slot." +
                                 "\nStep 3: 'Use' the Pet you want to be visible via the Pet Item from your inventory. Done!");
                             break;
-                        case "junimoscoreboard" or "junimoleaderboard":
+                        case "junimo" or "junimoscoreboard" or "junimoleaderboard":
                             if (Main.netMode == NetmodeID.SinglePlayer)
                             {
                                 Junimo junimoLvls = caller.Player.GetModPlayer<Junimo>();
@@ -157,7 +157,7 @@ namespace PetsOverhaul.Commands
                         case "harvestingscoreboard" or "harvestingleaderboard":
                             if (Main.netMode == NetmodeID.SinglePlayer)
                             {
-                                caller.Reply("Please use this command on Multiplayer! If you want to see your Junimo Skills, use /pet junimoscoreboard or /pet junimoleaderboard");
+                                caller.Reply("Please use this command on Multiplayer! If you want to see your Junimo Skills, use /pet junimo, /pet junimoscoreboard or /pet junimoleaderboard");
                             }
                             else
                             {
@@ -193,7 +193,7 @@ namespace PetsOverhaul.Commands
                             caller.Reply("Given argument was invalid, here is list of Pets Overhaul commands: (commands are not case sensitive)", Color.Red);
                             caller.Reply("/pet fortune, /pet fortunestat, /pet fortunestats - Displays your current fortune stats and explains their functionality.\n" +
                     "/pet vanity, /pet vanitypet - Explains how to use a 'vanity' Pet.\n" +
-                    "/pet junimoscoreboard, /pet junimoleaderboard - Displays Top 3 Online Players with highest exp counts for all 3 skills of Junimo. Only returns your EXP & level values if you're in singleplayer.\n" +
+                    "/pet junimo, /pet junimoscoreboard, /pet junimoleaderboard - Displays Top 3 Online Players with highest exp counts for all 3 skills of Junimo. Only returns your EXP & level values if you're in singleplayer.\n" +
                     "/pet {mining|fishing|harvesting}scoreboard, /pet {mining|fishing|harvesting}leaderboard - Displays limitless amount of Online Players with highest chosen skill's exp counts from Junimo's 3 skills.\n" +
                     "/pet faq, /pet question - Displays frequently asked questions regarding Pets Overhaul.\n", Color.Gray);
                             break;
@@ -204,7 +204,7 @@ namespace PetsOverhaul.Commands
                     caller.Reply("Only one argument was expected, make sure you're not using spaces for an argument. List of Pets Overhaul commands: (commands are not case sensitive)", Color.Red);
                     caller.Reply("/pet fortune, /pet fortunestat, /pet fortunestats - Displays your current fortune stats and explains their functionality.\n" +
                     "/pet vanity, /pet vanitypet - Explains how to use a 'vanity' Pet.\n" +
-                    "/pet junimoscoreboard, /pet junimoleaderboard - Displays Top 3 Online Players with highest exp counts for all 3 skills of Junimo. Only returns your EXP & level values if you're in singleplayer.\n" +
+                    "/pet junimo, /pet junimoscoreboard, /pet junimoleaderboard - Displays Top 3 Online Players with highest exp counts for all 3 skills of Junimo. Only returns your EXP & level values if you're in singleplayer.\n" +
                     "/pet {mining|fishing|harvesting}scoreboard, /pet {mining|fishing|harvesting}leaderboard - Displays limitless amount of Online Players with highest chosen skill's exp counts from Junimo's 3 skills.\n" +
                     "/pet faq, /pet question - Displays frequently asked questions regarding Pets Overhaul.\n", Color.Gray);
                     break;
