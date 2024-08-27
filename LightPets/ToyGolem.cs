@@ -122,7 +122,7 @@ namespace PetsOverhaul.LightPets
                         .Replace("<regenRoll>", PetColors.LightPetRarityColorConvert(regenRoll.ToString(), regenRoll, regenMaxRoll))
                         .Replace("<regenMaxRoll>", PetColors.LightPetRarityColorConvert(regenMaxRoll.ToString(), regenRoll, regenMaxRoll))
 
-                        .Replace("<currentExp>", PetColors.LightPetRarityColorConvert(CurrentMana.ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), manaRoll, manaMaxRoll))
+                        .Replace("<currentExp>", PetColors.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + CurrentMana.ToString(), manaRoll, manaMaxRoll))
                         .Replace("<expRoll>", PetColors.LightPetRarityColorConvert(manaRoll.ToString(), manaRoll, manaMaxRoll))
                         .Replace("<expMaxRoll>", PetColors.LightPetRarityColorConvert(manaMaxRoll.ToString(), manaRoll, manaMaxRoll))
 
