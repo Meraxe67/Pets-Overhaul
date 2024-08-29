@@ -138,89 +138,88 @@ Mods: {
 				Melee Damage Bonus: <meleeLine>
 				Melee/Whip Speed Bonus: <atkSpdLine>
 				'''
-			ShadowOrb:
-				'''
-				Grants <manaBase> + <manaPer> Mana Per Quality, <expBase> + <expPer>% Movement Speed per quality
-				<fortBase> + <fortPer> Harvesting Fortune per quality, increasing your Harvesting drops.
-				Mana Bonus: <currentMana> Quality <manaRoll> out of <manaMaxRoll>
-				Movement Speed Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
-				Harvesting Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
-				'''
 			CrimsonHeart:
 				'''
-				Grants <hpBase> + <hpPer> Health Per Quality, <expBase> + <expPer>% Movement Speed per quality
-				<fortBase> + <fortPer> Fishing Fortune per quality, increasing your Fishing drops.
-				Health Bonus: <currentHp> Quality <hpRoll> out of <hpMaxRoll>
-				Movement Speed Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
-				Fishing Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
+				Grants <hp> Health Per Quality, <ms> Movement Speed per quality
+				<fortune> Fishing Fortune per quality, increasing your Fishing drops.
+				Health Bonus: <hpLine>
+				Movement Speed Bonus: <msLine>
+				Fishing Fortune Bonus: <fortuneLine>
 				'''
-			MagicLantern:
+							FairyBell:
 				'''
-				Grants <defPer> Defense per quality and <defMultBase> + <defMultPer> per quality percentage defense increase.
-				<expBase> + <expPer>% Damage Reduction per quality
-				and <fortBase> + <fortPer> Mining Fortune per quality, increasing your Mining drops.
-				Defense Bonus: <currentDef> Quality <defRoll> out of <defMaxRoll>
-				Percentage Defense Bonus: <currentDefMult> Quality <defMultRoll> out of <defMultMaxRoll>
-				Damage Reduction Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
-				Mining Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
-				'''
-			FairyBell:
-				'''
-				Grants <hasteBase> + <hastePer>% Pet Ability Haste per quality which increases
+				Grants <haste> Pet Ability Haste per quality which increases
 				how frequently you can use your current Pet's ability and increases 
-				<fortBase> + <fortPer> Global Fortune per quality, increasing all Mining, Harvesting, and Fishing drops.
+				<fortune> Global Fortune per quality, increasing all Mining, Harvesting, and Fishing drops.
 				which works with 50% effectiveness with already classified Pets.
-				Pet Ability Haste Bonus: <currentHaste> Quality <hasteRoll> out of <hasteMaxRoll>
-				Global Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
+				Pet Ability Haste Bonus: <hasteLine>
+				Global Fortune Bonus: <fortuneLine>
 				'''
-			WispInABottle:
+							JackOLantern:
 				'''
-				Grants <magicBase> + <magicPer>% per quality Magic damage, <rangedBase> + <rangedPer>% per quality Ranged damage.
-				Increases the traveling speed of Magic and Ranged projectiles by <projSpdBase> + <projSpdPer>% per quality.
-				Increases the damage of Projectiles that are from your active pet by <petProjBase> + <petProjPer>% per quality.
-				Magic Damage Bonus: <currentMagic> Quality <magicRoll> out of <magicMaxRoll>
-				Ranged Damage Bonus: <currentRanged> Quality <rangedRoll> out of <rangedMaxRoll>
-				Magic/Ranged Projectile Speed Bonus: <currentProjSpd> Quality <projSpdRoll> out of <projSpdMaxRoll>
-				Pet Projectile Damage Bonus: <currentPetProj> Quality <petProjRoll> out of <petProjMaxRoll>
+				Grants <atkSpd> Attack Speed Per Quality, <luck> Luck per quality
+				and <fortune> Harvesting Fortune per quality
+				Attack Speed Bonus: <atkSpdLine>
+				Luck Bonus: <luckLine>
+				Harvesting Fortune Bonus: <fortuneLine>
 				'''
-			JackOLantern:
+							JewelOfLight:
 				'''
-				Grants <atkSpdBase> + <atkSpdPer>% Attack Speed Per Quality, <luckBase> + <luckPer> Luck per quality
-				and <expBase> + <expPer>% Harvesting Fortune per quality
-				Attack Speed Bonus: <currentAtkSpd> Quality <atkSpdRoll> out of <atkSpdMaxRoll>
-				Luck Bonus: <currentLuck> Quality <luckRoll> out of <luckMaxRoll>
-				Harvesting Fortune Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
+				Grants <moveSpd> Movement Speed Per Quality, <wingTime> seconds Wing Time per quality,
+				and <acceleration> Acceleration per quality.
+				Movement Speed Bonus: <moveSpdLine>
+				Wing-Time Bonus: <wingTimeLine>
+				Acceleration Bonus: <accelerationLine>
 				'''
-			ToyGolem:
+							MagicLantern:
 				'''
-				Grants <regenBase> + <regenPer> Life Regen Per Quality, <healthBase> + <healthPer>% bonus maximum health per quality,
-				and <expBase> + <expPer> Mana Regen per quality.
-				Life Regen Bonus: <currentRegen> Quality <regenRoll> out of <regenMaxRoll>
-				Health Percentage Bonus: <currentHealth> Quality <healthRoll> out of <healthMaxRoll>
-				Mana Regen Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
+				Grants <dr> Damage Reduction per quality, <fortune> Mining Fortune per quality, 
+				increasing your Mining drops, <def> Defense per quality and <defPercent> Defense per quality.
+				Damage Reduction Bonus: <drLine>
+				Defense Bonus: <defLine>
+				Percentage Defense Bonus: <defPercentLine>
+				Mining Fortune Bonus: <fortuneLine>
 				'''
-			JewelOfLight:
+			ShadowOrb:
 				'''
-				Grants <moveSpdBase> + <moveSpdPer>% Movement Speed Per Quality, <wingBase> + <wingPer> seconds wing time per quality,
-				and <expBase> + <expPer>% Acceleration per quality.
-				Movement Speed Bonus: <currentMoveSpd> Quality <moveSpdRoll> out of <moveSpdMaxRoll>
-				Wing-Time Bonus: <currentWing> Quality <wingRoll> out of <wingMaxRoll>
-				Acceleration Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
+				Grants <mana> Mana Per Quality, <ms> Movement Speed per quality
+				<fortune> Harvesting Fortune per quality, increasing your Harvesting drops.
+				Mana Bonus: <manaLine>
+				Movement Speed Bonus: <msLine>
+				Harvesting Fortune Bonus: <fortuneLine>
 				'''
 			SuspiciousLookingTentacle:
 				'''
-				Increases Defense by <defPer> per quality. Current: <currentDef> Quality <defRoll> out of <defMax>
-				Movement Speed by <msPer>% per quality. Current: <currentMs> Quality <msRoll> out of <msMax>
-				All Damage by <dmgPer>% per quality. Current: <currentDmg> Quality <dmgRoll> out of <dmgMax>
-				Crit Chance by <critPer>% per quality. Current: <currentCrit> Quality <critRoll> out of <critMax>
-				Ranged % Armor Pen by <penPer>% per quality. Current: <currentPen> Quality <penRoll> out of <penMax>
-				Ranged Crit Damage by <crDmgPer>% per quality. Current: <currentCrDmg> Quality <crDmgRoll> out of <crDmgMax>
-				Max Minion Slots by +<minPer> per quality. Current: <currentMin> Quality <minRoll> out of <minMax>
-				Whip Range by <whipPer>% per quality. Current: <currentWhip> Quality <whipRoll> out of <whipMax>
-				Mana Potion Effectiveness by <potPer>% per quality. Current: <currentPot> Quality <potRoll> out of <potMax>
-				Maximum Mana by +<manaPer> per quality. Current: <currentMana> Quality <manaRoll> out of <manaMax>
-				Melee Size by <sizePer>% per quality. Current: <currentSize> Quality <sizeRoll> out of <sizeMax>
-				<healPer>% lifesteal per quality with <healAmount> (10% of your defense) on Melee Hits. Current: <currentHeal> Quality <healRoll> out of <healMax>
+				Increases Defense by <def> per quality. Current: <defLine>,
+				Movement Speed by <ms> per quality. Current: <msLine>,
+				All Damage by <dmg> per quality. Current: <dmgLine>,
+				Crit Chance by <crit> per quality. Current: <critLine>,
+				Ranged % Armor Pen by <rangedPen> per quality. Current: <rangedPenLine>,
+				Ranged Crit Damage by <rangedCritDmg> per quality. Current: <rangedCritDmgLine>,
+				Max Minion Slots by <minion> per quality. Current: <minionLine>,
+				Whip Range by <whip> per quality. Current: <whipLine>,
+				Mana Potion Effectiveness by <manaPotion> per quality. Current: <manaPotionLine>,
+				Maximum Mana by <mana> per quality. Current: <manaLine>,
+				Melee Size by <size> per quality. Current: <sizeLine> and
+				<lifesteal> lifesteal per quality with <healAmount> (10% of your defense) on Melee Hits. Current: <lifestealLine>
+				'''
+			ToyGolem:
+				'''
+				Grants <lifeRegen> Life Regen Per Quality, <healthPercent> Health per quality,
+				and <manaRegen> Mana Regen per quality.
+				Life Regen Bonus: <lifeRegenLine>
+				Health Percentage Bonus: <healthPercentLine>
+				Mana Regen Bonus: <manaRegenLine>
+				'''
+			WispInABottle:
+				'''
+				Grants <magic> Magic Damage per quality, <ranged> Ranged Damage per quality.
+				Increases the traveling speed of Magic and Ranged projectiles by <velocity> per quality.
+				Increases the damage of Projectiles that are from your active pet by <petProj> per quality.
+				Magic Damage Bonus: <magicLine>
+				Ranged Damage Bonus: <rangedLine>
+				Magic/Ranged Projectile Speed Bonus: <velocityLine>
+				Pet Projectile Damage Bonus: <petProjLine>
 				'''
 		}
 

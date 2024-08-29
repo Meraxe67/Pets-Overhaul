@@ -156,7 +156,7 @@ Mods: {
 				'''
 				Grants <manaBase> + <manaPer> Mana Per Quality, <expBase> + <expPer>% Movement Speed per quality
 				<fortBase> + <fortPer> Harvesting Fortune per quality, increasing your Harvesting drops.
-				Mana Bonus: <currentMana> Quality <manaRoll> out of <manaMaxRoll>
+				Mana Bonus: <currentMana> Quality <Mana.CurrentRoll> out of <manaMaxRoll>
 				Movement Speed Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				Harvesting Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
 				''' */
@@ -173,8 +173,8 @@ Mods: {
 				Grants <defPer> Defense per quality and <defMultBase> + <defMultPer> per quality percentage defense increase.
 				<expBase> + <expPer>% Damage Reduction per quality
 				and <fortBase> + <fortPer> Mining Fortune per quality, increasing your Mining drops.
-				Defense Bonus: <currentDef> Quality <defRoll> out of <defMaxRoll>
-				Percentage Defense Bonus: <currentDefMult> Quality <defMultRoll> out of <defMultMaxRoll>
+				Defense Bonus: <currentDef> Quality <Defense.CurrentRoll> out of <defMaxRoll>
+				Percentage Defense Bonus: <currentDefMult> Quality <DefensePercent.CurrentRoll> out of <defMultMaxRoll>
 				Damage Reduction Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				Mining Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
 				''' */
@@ -184,7 +184,7 @@ Mods: {
 				how frequently you can use your current Pet's ability and increases 
 				<fortBase> + <fortPer> Global Fortune per quality, increasing all Mining, Harvesting, and Fishing drops.
 				which works with 50% effectiveness with already classified Pets.
-				Pet Ability Haste Bonus: <currentHaste> Quality <hasteRoll> out of <hasteMaxRoll>
+				Pet Ability Haste Bonus: <currentHaste> Quality <AbilityHaste.CurrentRoll> out of <hasteMaxRoll>
 				Global Fortune Bonus: <currentFort> Quality <fortRoll> out of <fortMaxRoll>
 				''' */
 			/* WispInABottle:
@@ -201,40 +201,40 @@ Mods: {
 				'''
 				Grants <atkSpdBase> + <atkSpdPer>% Attack Speed Per Quality, <luckBase> + <luckPer> Luck per quality
 				and <expBase> + <expPer>% Harvesting Fortune per quality
-				Attack Speed Bonus: <currentAtkSpd> Quality <atkSpdRoll> out of <atkSpdMaxRoll>
-				Luck Bonus: <currentLuck> Quality <luckRoll> out of <luckMaxRoll>
+				Attack Speed Bonus: <currentAtkSpd> Quality <AttackSpeed.CurrentRoll> out of <atkSpdMaxRoll>
+				Luck Bonus: <currentLuck> Quality <Luck.CurrentRoll> out of <luckMaxRoll>
 				Harvesting Fortune Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				''' */
 			/* ToyGolem:
 				'''
 				Grants <regenBase> + <regenPer> Life Regen Per Quality, <healthBase> + <healthPer>% bonus maximum health per quality,
 				and <expBase> + <expPer> Mana Regen per quality.
-				Life Regen Bonus: <currentRegen> Quality <regenRoll> out of <regenMaxRoll>
-				Health Percentage Bonus: <currentHealth> Quality <healthRoll> out of <healthMaxRoll>
+				Life Regen Bonus: <currentRegen> Quality <HealthRegen.CurrentRoll> out of <regenMaxRoll>
+				Health Percentage Bonus: <currentHealth> Quality <Health.CurrentRoll> out of <healthMaxRoll>
 				Mana Regen Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				''' */
 			/* JewelOfLight:
 				'''
 				Grants <moveSpdBase> + <moveSpdPer>% Movement Speed Per Quality, <wingBase> + <wingPer> seconds wing time per quality,
 				and <expBase> + <expPer>% Acceleration per quality.
-				Movement Speed Bonus: <currentMoveSpd> Quality <moveSpdRoll> out of <moveSpdMaxRoll>
-				Wing-Time Bonus: <currentWing> Quality <wingRoll> out of <wingMaxRoll>
+				Movement Speed Bonus: <currentMoveSpd> Quality <MovementSpeed.CurrentRoll> out of <moveSpdMaxRoll>
+				Wing-Time Bonus: <currentWing> Quality <WingTime.CurrentRoll> out of <wingMaxRoll>
 				Acceleration Bonus: <currentExp> Quality <expRoll> out of <expMaxRoll>
 				''' */
 			/* SuspiciousLookingTentacle:
 				'''
-				Increases Defense by <defPer> per quality. Current: <currentDef> Quality <defRoll> out of <defMax>
-				Movement Speed by <msPer>% per quality. Current: <currentMs> Quality <msRoll> out of <msMax>
-				All Damage by <dmgPer>% per quality. Current: <currentDmg> Quality <dmgRoll> out of <dmgMax>
-				Crit Chance by <critPer>% per quality. Current: <currentCrit> Quality <critRoll> out of <critMax>
-				Ranged % Armor Pen by <penPer>% per quality. Current: <currentPen> Quality <penRoll> out of <penMax>
-				Ranged Crit Damage by <crDmgPer>% per quality. Current: <currentCrDmg> Quality <crDmgRoll> out of <crDmgMax>
-				Max Minion Slots by +<minPer> per quality. Current: <currentMin> Quality <minRoll> out of <minMax>
-				Whip Range by <whipPer>% per quality. Current: <currentWhip> Quality <whipRoll> out of <whipMax>
-				Mana Potion Effectiveness by <potPer>% per quality. Current: <currentPot> Quality <potRoll> out of <potMax>
-				Maximum Mana by +<manaPer> per quality. Current: <currentMana> Quality <manaRoll> out of <manaMax>
-				Melee Size by <sizePer>% per quality. Current: <currentSize> Quality <sizeRoll> out of <sizeMax>
-				<healPer>% lifesteal per quality with <healAmount> (10% of your defense) on Melee Hits. Current: <currentHeal> Quality <healRoll> out of <healMax>
+				Increases Defense by <defPer> per quality. Current: <currentDef> Quality <Defense.CurrentRoll> out of <defMax>
+				Movement Speed by <msPer>% per quality. Current: <currentMs> Quality <MovementSpeed.CurrentRoll> out of <msMax>
+				All Damage by <dmgPer>% per quality. Current: <currentDmg> Quality <DamageAll.CurrentRoll> out of <dmgMax>
+				Crit Chance by <critPer>% per quality. Current: <currentCrit> Quality <CritChanceAll.CurrentRoll> out of <critMax>
+				Ranged % Armor Pen by <penPer>% per quality. Current: <currentPen> Quality <RangedPercentPenetration.CurrentRoll> out of <penMax>
+				Ranged Crit Damage by <crDmgPer>% per quality. Current: <currentCrDmg> Quality <RangedCritDamage.CurrentRoll> out of <crDmgMax>
+				Max Minion Slots by +<minPer> per quality. Current: <currentMin> Quality <MinionSlot.CurrentRoll> out of <minMax>
+				Whip Range by <whipPer>% per quality. Current: <currentWhip> Quality <WhipRange.CurrentRoll> out of <whipMax>
+				Mana Potion Effectiveness by <potPer>% per quality. Current: <currentPot> Quality <ManaPotionIncrease.CurrentRoll> out of <potMax>
+				Maximum Mana by +<manaPer> per quality. Current: <currentMana> Quality <Mana.CurrentRoll> out of <manaMax>
+				Melee Size by <sizePer>% per quality. Current: <currentSize> Quality <MeleeSize.CurrentRoll> out of <sizeMax>
+				<healPer>% lifesteal per quality with <healAmount> (10% of your defense) on Melee Hits. Current: <currentHeal> Quality <MeleeLifesteal.CurrentRoll> out of <healMax>
 				''' */
 		}
 
