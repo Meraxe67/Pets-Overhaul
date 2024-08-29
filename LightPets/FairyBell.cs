@@ -12,32 +12,21 @@ using Terraria.ModLoader.IO;
 
 namespace PetsOverhaul.LightPets
 {
-    public sealed class FairyBellEffect : ModPlayer
+    public sealed class FairyBellEffect : LightPetEffect
     {
-        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
-            if (Player.miscEquips[1].type == ItemID.FairyBell && Player.miscEquips[1].TryGetGlobalItem(out FairyBell fairyBell))
+            if (Player.miscEquips[1].TryGetGlobalItem(out FairyBell fairyBell))
             {
-                Pet.abilityHaste += fairyBell.CurrentHaste;
-                Pet.globalFortune += fairyBell.CurrentGlobalFort;
+                Pet.abilityHaste += fairyBell.AbilityHaste.CurrentStatFloat;
+                Pet.globalFortune += fairyBell.GlobalFortune.CurrentStatInt;
             }
         }
     }
     public sealed class FairyBell : GlobalItem
     {
-        public float baseHaste = 0.1f;
-        public float hastePerRoll = 0.01f;
-        public int hasteMaxRoll = 15;
-        public int hasteRoll = 0;
-        public float CurrentHaste => baseHaste + hastePerRoll * hasteRoll;
-
-        public int baseGlobalFort = 5;
-        public int globalFortPerRoll = 1;
-        public int globalFortMaxRoll = 20;
-        public int globalFortRoll = 0;
-        public int CurrentGlobalFort => baseGlobalFort + globalFortPerRoll * globalFortRoll;
-
+        public LightPetStat AbilityHaste = new(15,0.01f,0.1f);
+        public LightPetStat GlobalFortune = new(20,1,5);
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
@@ -45,41 +34,34 @@ namespace PetsOverhaul.LightPets
         }
         public override void UpdateInventory(Item item, Player player)
         {
-            if (hasteRoll <= 0)
-            {
-                hasteRoll = Main.rand.Next(hasteMaxRoll) + 1;
-            }
-
-            if (globalFortRoll <= 0)
-            {
-                globalFortRoll = Main.rand.Next(globalFortMaxRoll) + 1;
-            }
+            AbilityHaste.SetRoll();
+            GlobalFortune.SetRoll();
         }
         public override void NetSend(Item item, BinaryWriter writer)
         {
-            writer.Write((byte)hasteRoll);
-            writer.Write((byte)globalFortRoll);
+            writer.Write((byte)AbilityHaste.CurrentRoll);
+            writer.Write((byte)GlobalFortune.CurrentRoll);
         }
         public override void NetReceive(Item item, BinaryReader reader)
         {
-            hasteRoll = reader.ReadByte();
-            globalFortRoll = reader.ReadByte();
+            AbilityHaste.CurrentRoll = reader.ReadByte();
+            GlobalFortune.CurrentRoll = reader.ReadByte();
         }
         public override void SaveData(Item item, TagCompound tag)
         {
-            tag.Add("FairyHaste", hasteRoll);
-            tag.Add("FairyFort", globalFortRoll);
+            tag.Add("FairyHaste", AbilityHaste.CurrentRoll);
+            tag.Add("FairyFort", GlobalFortune.CurrentRoll);
         }
         public override void LoadData(Item item, TagCompound tag)
         {
             if (tag.TryGet("FairyHaste", out int haste))
             {
-                hasteRoll = haste;
+                AbilityHaste.CurrentRoll = haste;
             }
 
             if (tag.TryGet("FairyFort", out int fort))
             {
-                globalFortRoll = fort;
+                GlobalFortune.CurrentRoll = fort;
             }
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
@@ -90,24 +72,15 @@ namespace PetsOverhaul.LightPets
             }
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.FairyBell")
 
-                        .Replace("<hasteBase>", Math.Round(baseHaste * 100, 2).ToString())
-                        .Replace("<hastePer>", Math.Round(hastePerRoll * 100, 2).ToString())
+                        .Replace("<haste>", AbilityHaste.BaseAndPerQuality())
+                        .Replace("<fortune>", GlobalFortune.BaseAndPerQuality())
 
-                        .Replace("<fortBase>", baseGlobalFort.ToString())
-                        .Replace("<fortPer>", globalFortPerRoll.ToString())
-
-                        .Replace("<currentHaste>", PetTextsColors.LightPetRarityColorConvert(Math.Round(CurrentHaste * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), hasteRoll, hasteMaxRoll))
-                        .Replace("<hasteRoll>", PetTextsColors.LightPetRarityColorConvert(hasteRoll.ToString(), hasteRoll, hasteMaxRoll))
-                        .Replace("<hasteMaxRoll>", PetTextsColors.LightPetRarityColorConvert(hasteMaxRoll.ToString(), hasteRoll, hasteMaxRoll))
-
-                        .Replace("<currentFort>", PetTextsColors.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + CurrentGlobalFort.ToString(), globalFortRoll, globalFortMaxRoll))
-                        .Replace("<fortRoll>", PetTextsColors.LightPetRarityColorConvert(globalFortRoll.ToString(), globalFortRoll, globalFortMaxRoll))
-                        .Replace("<fortMaxRoll>", PetTextsColors.LightPetRarityColorConvert(globalFortMaxRoll.ToString(), globalFortRoll, globalFortMaxRoll))
-
+                        .Replace("<hasteLine>", AbilityHaste.StatSummaryLine())
+                        .Replace("<fortuneLine>", GlobalFortune.StatSummaryLine())
                         ));
-            if (globalFortRoll <= 0)
+            if (GlobalFortune.CurrentRoll <= 0)
             {
-                tooltips.Add(new(Mod, "Tooltip0", "[c/" + PetTextsColors.LowQuality.Hex3() + ":" + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.NotRolled") + "]"));
+                tooltips.Add(new(Mod, "Tooltip0", PetTextsColors.RollMissingText()));
             }
         }
     }

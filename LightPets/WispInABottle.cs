@@ -13,58 +13,37 @@ using Terraria.ModLoader.IO;
 
 namespace PetsOverhaul.LightPets
 {
-    public sealed class WispInABottleEffect : ModPlayer
+    public sealed class WispInABottleEffect : LightPetEffect
     {
-        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
-            if (Player.miscEquips[1].type == ItemID.WispinaBottle && Player.miscEquips[1].TryGetGlobalItem(out WispInABottle wispInABottle))
+            if (Player.miscEquips[1].TryGetGlobalItem(out WispInABottle wispInABottle))
             {
-                Player.GetDamage<MagicDamageClass>() += wispInABottle.CurrentMagicDmg;
-                Player.GetDamage<RangedDamageClass>() += wispInABottle.CurrentRangedDmg;
+                Player.GetDamage<MagicDamageClass>() += wispInABottle.MagicDamage.CurrentStatFloat;
+                Player.GetDamage<RangedDamageClass>() += wispInABottle.RangedDamage.CurrentStatFloat;
             }
         }
         public override void ModifyShootStats(Item item, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
-            if (Player.miscEquips[1].type == ItemID.WispinaBottle && Player.miscEquips[1].TryGetGlobalItem(out WispInABottle wispInABottle) && (item.DamageType == DamageClass.Magic || item.DamageType == DamageClass.Ranged))
+            if (Player.miscEquips[1].TryGetGlobalItem(out WispInABottle wispInABottle) && (item.DamageType == DamageClass.Magic || item.DamageType == DamageClass.Ranged))
             {
-                velocity *= wispInABottle.CurrentProjSpd + 1;
+                velocity *= wispInABottle.ProjectileVelocity.CurrentStatFloat + 1;
             }
         }
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (Player.miscEquips[1].type == ItemID.WispinaBottle && Player.miscEquips[1].TryGetGlobalItem(out WispInABottle wispInABottle) && proj.TryGetGlobalProjectile(out ProjectileSourceChecks check) && check.petProj)
+            if (Player.miscEquips[1].TryGetGlobalItem(out WispInABottle wispInABottle) && proj.TryGetGlobalProjectile(out ProjectileSourceChecks check) && check.petProj)
             {
-                modifiers.FinalDamage *= 1 + wispInABottle.CurrentPetProjectileDamage;
+                modifiers.FinalDamage *= 1 + wispInABottle.PetProjectileDamage.CurrentStatFloat;
             }
         }
     }
     public sealed class WispInABottle : GlobalItem
     {
-        public float baseMagic = 0.04f;
-        public float magicPerRoll = 0.0045f;
-        public int magicMaxRoll = 20;
-        public int magicRoll = 0;
-        public float CurrentMagicDmg => baseMagic + magicPerRoll * magicRoll;
-
-        public float baseRanged = 0.04f;
-        public float rangedPerRoll = 0.0045f;
-        public int rangedMaxRoll = 20;
-        public int rangedRoll = 0;
-        public float CurrentRangedDmg => baseRanged + rangedPerRoll * rangedRoll;
-
-        public float baseProjSpd = 0.05f;
-        public float projSpdPerRoll = 0.01f;
-        public int projSpdMaxRoll = 12;
-        public int projSpdRoll = 0;
-        public float CurrentProjSpd => baseProjSpd + projSpdPerRoll * projSpdRoll;
-
-        public float baseProjPet = 0.075f;
-        public float projPetPerRoll = 0.008f;
-        public int projPetMaxRoll = 25;
-        public int projPetRoll = 0;
-        public float CurrentPetProjectileDamage => baseProjPet + projPetPerRoll * projPetRoll;
-
+        public LightPetStat MagicDamage = new(20,0.0045f,0.04f);
+        public LightPetStat RangedDamage = new(20, 0.0045f,0.04f);
+        public LightPetStat ProjectileVelocity = new(12,0.01f,0.05f);
+        public LightPetStat PetProjectileDamage = new(25,0.008f,0.075f);
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
@@ -72,67 +51,52 @@ namespace PetsOverhaul.LightPets
         }
         public override void UpdateInventory(Item item, Player player)
         {
-            if (magicRoll <= 0)
-            {
-                magicRoll = Main.rand.Next(magicMaxRoll) + 1;
-            }
-
-            if (rangedRoll <= 0)
-            {
-                rangedRoll = Main.rand.Next(rangedMaxRoll) + 1;
-            }
-
-            if (projSpdRoll <= 0)
-            {
-                projSpdRoll = Main.rand.Next(projSpdMaxRoll) + 1;
-            }
-
-            if (projPetRoll <= 0)
-            {
-                projPetRoll = Main.rand.Next(projPetMaxRoll) + 1;
-            }
+            MagicDamage.SetRoll();
+            RangedDamage.SetRoll();
+            ProjectileVelocity.SetRoll();
+            PetProjectileDamage.SetRoll();
         }
         public override void NetSend(Item item, BinaryWriter writer)
         {
-            writer.Write((byte)magicRoll);
-            writer.Write((byte)rangedRoll);
-            writer.Write((byte)projSpdRoll);
-            writer.Write((byte)projPetRoll);
+            writer.Write((byte)MagicDamage.CurrentRoll);
+            writer.Write((byte)RangedDamage.CurrentRoll);
+            writer.Write((byte)ProjectileVelocity.CurrentRoll);
+            writer.Write((byte)PetProjectileDamage.CurrentRoll);
         }
         public override void NetReceive(Item item, BinaryReader reader)
         {
-            magicRoll = reader.ReadByte();
-            rangedRoll = reader.ReadByte();
-            projSpdRoll = reader.ReadByte();
-            projPetRoll = reader.ReadByte();
+            MagicDamage.CurrentRoll = reader.ReadByte();
+            RangedDamage.CurrentRoll = reader.ReadByte();
+            ProjectileVelocity.CurrentRoll = reader.ReadByte();
+            PetProjectileDamage.CurrentRoll = reader.ReadByte();
         }
         public override void SaveData(Item item, TagCompound tag)
         {
-            tag.Add("WispMagic", magicRoll);
-            tag.Add("WispRanged", rangedRoll);
-            tag.Add("WispProjSpd", projSpdRoll);
-            tag.Add("WispProjPet", projPetRoll);
+            tag.Add("WispMagic", MagicDamage.CurrentRoll);
+            tag.Add("WispRanged", RangedDamage.CurrentRoll);
+            tag.Add("WispProjSpd", ProjectileVelocity.CurrentRoll);
+            tag.Add("WispProjPet", PetProjectileDamage.CurrentRoll);
         }
         public override void LoadData(Item item, TagCompound tag)
         {
             if (tag.TryGet("WispMagic", out int magic))
             {
-                magicRoll = magic;
+                MagicDamage.CurrentRoll = magic;
             }
 
             if (tag.TryGet("WispRanged", out int ranged))
             {
-                rangedRoll = ranged;
+                RangedDamage.CurrentRoll = ranged;
             }
 
             if (tag.TryGet("WispProjSpd", out int projSpd))
             {
-                projSpdRoll = projSpd;
+                ProjectileVelocity.CurrentRoll = projSpd;
             }
 
             if (tag.TryGet("WispProjPet", out int petProj))
             {
-                projPetRoll = petProj;
+                PetProjectileDamage.CurrentRoll = petProj;
             }
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
@@ -143,37 +107,19 @@ namespace PetsOverhaul.LightPets
             }
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.WispInABottle")
 
-                        .Replace("<magicBase>", Math.Round(baseMagic * 100, 2).ToString())
-                        .Replace("<magicPer>", Math.Round(magicPerRoll * 100, 2).ToString())
+                        .Replace("<magic>",MagicDamage.BaseAndPerQuality())
+                        .Replace("<ranged>", RangedDamage.BaseAndPerQuality())
+                        .Replace("<velocity>", ProjectileVelocity.BaseAndPerQuality())
+                        .Replace("<petProj>", PetProjectileDamage.BaseAndPerQuality())
 
-                        .Replace("<rangedBase>", Math.Round(baseRanged * 100, 2).ToString())
-                        .Replace("<rangedPer>", Math.Round(rangedPerRoll * 100, 2).ToString())
-
-                        .Replace("<projSpdBase>", Math.Round(baseProjSpd * 100, 2).ToString())
-                        .Replace("<projSpdPer>", Math.Round(projSpdPerRoll * 100, 2).ToString())
-
-                        .Replace("<petProjBase>", Math.Round(baseProjPet * 100, 2).ToString())
-                        .Replace("<petProjPer>", Math.Round(projPetPerRoll * 100, 2).ToString())
-
-                        .Replace("<currentMagic>", PetTextsColors.LightPetRarityColorConvert(Math.Round(CurrentMagicDmg * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), magicRoll, magicMaxRoll))
-                        .Replace("<magicRoll>", PetTextsColors.LightPetRarityColorConvert(magicRoll.ToString(), magicRoll, magicMaxRoll))
-                        .Replace("<magicMaxRoll>", PetTextsColors.LightPetRarityColorConvert(magicMaxRoll.ToString(), magicRoll, magicMaxRoll))
-
-                        .Replace("<currentRanged>", PetTextsColors.LightPetRarityColorConvert(Math.Round(CurrentRangedDmg * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), rangedRoll, rangedMaxRoll))
-                        .Replace("<rangedRoll>", PetTextsColors.LightPetRarityColorConvert(rangedRoll.ToString(), rangedRoll, rangedMaxRoll))
-                        .Replace("<rangedMaxRoll>", PetTextsColors.LightPetRarityColorConvert(rangedMaxRoll.ToString(), rangedRoll, rangedMaxRoll))
-
-                        .Replace("<currentProjSpd>", PetTextsColors.LightPetRarityColorConvert(Math.Round(CurrentProjSpd * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), projSpdRoll, projSpdMaxRoll))
-                        .Replace("<projSpdRoll>", PetTextsColors.LightPetRarityColorConvert(projSpdRoll.ToString(), projSpdRoll, projSpdMaxRoll))
-                        .Replace("<projSpdMaxRoll>", PetTextsColors.LightPetRarityColorConvert(projSpdMaxRoll.ToString(), projSpdRoll, projSpdMaxRoll))
-
-                        .Replace("<currentPetProj>", PetTextsColors.LightPetRarityColorConvert(Math.Round(CurrentPetProjectileDamage * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), projPetRoll, projPetMaxRoll))
-                        .Replace("<petProjRoll>", PetTextsColors.LightPetRarityColorConvert(projPetRoll.ToString(), projPetRoll, projPetMaxRoll))
-                        .Replace("<petProjMaxRoll>", PetTextsColors.LightPetRarityColorConvert(projPetMaxRoll.ToString(), projPetRoll, projPetMaxRoll))
+                        .Replace("<magicLine>", MagicDamage.StatSummaryLine())
+                        .Replace("<rangedLine>", RangedDamage.StatSummaryLine())
+                        .Replace("<velocityLine>", ProjectileVelocity.StatSummaryLine())
+                        .Replace("<petProjLine>", PetProjectileDamage.StatSummaryLine())
                         ));
-            if (magicRoll <= 0)
+            if (MagicDamage.CurrentRoll <= 0)
             {
-                tooltips.Add(new(Mod, "Tooltip0", "[c/" + PetTextsColors.LowQuality.Hex3() + ":" + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.NotRolled") + "]"));
+                tooltips.Add(new(Mod, "Tooltip0", PetTextsColors.RollMissingText()));
             }
         }
     }

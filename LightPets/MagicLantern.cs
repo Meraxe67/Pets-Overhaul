@@ -12,44 +12,25 @@ using Terraria.ModLoader.IO;
 
 namespace PetsOverhaul.LightPets
 {
-    public sealed class MagicLanternEffect : ModPlayer
+    public sealed class MagicLanternEffect : LightPetEffect
     {
-        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
-            if (Player.miscEquips[1].type == ItemID.MagicLantern && Player.miscEquips[1].TryGetGlobalItem(out MagicLantern magicLantern))
+            if (Player.miscEquips[1].TryGetGlobalItem(out MagicLantern magicLantern))
             {
-                Player.statDefense += magicLantern.CurrentDef;
-                Player.statDefense *= magicLantern.CurrentDefMult + 1f;
-                Player.endurance += magicLantern.CurrentDr;
-                Pet.miningFortune += magicLantern.CurrentMiningFort;
+                Player.statDefense += magicLantern.Defense.CurrentStatInt;
+                Player.statDefense *= magicLantern.DefensePercent.CurrentStatFloat + 1f;
+                Player.endurance += magicLantern.DamageReduction.CurrentStatFloat;
+                Pet.miningFortune += magicLantern.MiningFortune.CurrentStatInt;
             }
         }
     }
     public sealed class MagicLantern : GlobalItem
     {
-        public int defPerRoll = 1;
-        public int defMaxRoll = 3;
-        public int defRoll = 0;
-        public int CurrentDef => defPerRoll * defRoll;
-
-        public float defMultBase = 0.02f;
-        public float defMultPerRoll = 0.002f;
-        public int defMultMaxRoll = 20;
-        public int defMultRoll = 0;
-        public float CurrentDefMult => defMultBase + defMultPerRoll * defMultRoll;
-
-        public float baseDr = 0.01f;
-        public float drPerRoll = 0.002f;
-        public int drMaxRoll = 15;
-        public int drRoll = 0;
-        public float CurrentDr => baseDr + drPerRoll * drRoll;
-
-        public int baseMiningFort = 5;
-        public int miningFortPerRoll = 1;
-        public int miningFortMaxRoll = 15;
-        public int miningFortRoll = 0;
-        public int CurrentMiningFort => baseMiningFort + miningFortPerRoll * miningFortRoll;
+        public LightPetStat Defense = new(3, 1);
+        public LightPetStat DefensePercent = new(20, 0.002f, 0.02f);
+        public LightPetStat DamageReduction = new(15, 0.002f, 0.01f);
+        public LightPetStat MiningFortune = new(15, 1, 5);
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
@@ -57,67 +38,52 @@ namespace PetsOverhaul.LightPets
         }
         public override void UpdateInventory(Item item, Player player)
         {
-            if (defRoll <= 0)
-            {
-                defRoll = Main.rand.Next(defMaxRoll) + 1;
-            }
-
-            if (defMultRoll <= 0)
-            {
-                defMultRoll = Main.rand.Next(defMultMaxRoll) + 1;
-            }
-
-            if (drRoll <= 0)
-            {
-                drRoll = Main.rand.Next(drMaxRoll) + 1;
-            }
-
-            if (miningFortRoll <= 0)
-            {
-                miningFortRoll = Main.rand.Next(miningFortMaxRoll) + 1;
-            }
+            Defense.SetRoll();
+            DefensePercent.SetRoll();
+            DamageReduction.SetRoll();
+            MiningFortune.SetRoll();
         }
         public override void NetSend(Item item, BinaryWriter writer)
         {
-            writer.Write((byte)defRoll);
-            writer.Write((byte)defMultRoll);
-            writer.Write((byte)drRoll);
-            writer.Write((byte)miningFortRoll);
+            writer.Write((byte)Defense.CurrentRoll);
+            writer.Write((byte)DefensePercent.CurrentRoll);
+            writer.Write((byte)DamageReduction.CurrentRoll);
+            writer.Write((byte)MiningFortune.CurrentRoll);
         }
         public override void NetReceive(Item item, BinaryReader reader)
         {
-            defRoll = reader.ReadByte();
-            defMultRoll = reader.ReadByte();
-            drRoll = reader.ReadByte();
-            miningFortRoll = reader.ReadByte();
+            Defense.CurrentRoll = reader.ReadByte();
+            DefensePercent.CurrentRoll = reader.ReadByte();
+            DamageReduction.CurrentRoll = reader.ReadByte();
+            MiningFortune.CurrentRoll = reader.ReadByte();
         }
         public override void SaveData(Item item, TagCompound tag)
         {
-            tag.Add("LanternDef", defRoll);
-            tag.Add("LanternMult", defMultRoll);
-            tag.Add("LanternExp", drRoll);
-            tag.Add("LanternFort", miningFortRoll);
+            tag.Add("LanternDef", Defense.CurrentRoll);
+            tag.Add("LanternMult", DefensePercent.CurrentRoll);
+            tag.Add("LanternExp", DamageReduction.CurrentRoll);
+            tag.Add("LanternFort", MiningFortune.CurrentRoll);
         }
         public override void LoadData(Item item, TagCompound tag)
         {
             if (tag.TryGet("LanternDef", out int def))
             {
-                defRoll = def;
+                Defense.CurrentRoll = def;
             }
 
             if (tag.TryGet("LanternMult", out int perc))
             {
-                defMultRoll = perc;
+                DefensePercent.CurrentRoll = perc;
             }
 
             if (tag.TryGet("LanternExp", out int exp))
             {
-                drRoll = exp;
+                DamageReduction.CurrentRoll = exp;
             }
 
-            if (tag.TryGet("EmpressFort", out int fort))
+            if (tag.TryGet("LanternFort", out int fort))
             {
-                miningFortRoll = fort;
+                MiningFortune.CurrentRoll = fort;
             }
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
@@ -128,36 +94,19 @@ namespace PetsOverhaul.LightPets
             }
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.MagicLantern")
 
-                        .Replace("<defPer>", defPerRoll.ToString())
+                        .Replace("<dr>", DamageReduction.BaseAndPerQuality())
+                        .Replace("<fortune>", MiningFortune.BaseAndPerQuality())
+                        .Replace("<def>", Defense.BaseAndPerQuality())
+                        .Replace("<defPercent>", DefensePercent.BaseAndPerQuality())
 
-                        .Replace("<defMultBase>", Math.Round(defMultBase * 100, 2).ToString())
-                        .Replace("<defMultPer>", Math.Round(defMultPerRoll * 100, 2).ToString())
-
-                        .Replace("<expBase>", Math.Round(baseDr * 100, 2).ToString())
-                        .Replace("<expPer>", Math.Round(drPerRoll * 100, 2).ToString())
-
-                        .Replace("<fortBase>", baseMiningFort.ToString())
-                        .Replace("<fortPer>", miningFortPerRoll.ToString())
-
-                        .Replace("<currentDef>", PetTextsColors.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + CurrentDef.ToString(), defRoll, defMaxRoll))
-                        .Replace("<defRoll>", PetTextsColors.LightPetRarityColorConvert(defRoll.ToString(), defRoll, defMaxRoll))
-                        .Replace("<defMaxRoll>", PetTextsColors.LightPetRarityColorConvert(defMaxRoll.ToString(), defRoll, defMaxRoll))
-
-                        .Replace("<currentDefMult>", PetTextsColors.LightPetRarityColorConvert(Math.Round(CurrentDefMult * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), defMultRoll, defMultMaxRoll))
-                        .Replace("<defMultRoll>", PetTextsColors.LightPetRarityColorConvert(defMultRoll.ToString(), defMultRoll, defMultMaxRoll))
-                        .Replace("<defMultMaxRoll>", PetTextsColors.LightPetRarityColorConvert(defMultMaxRoll.ToString(), defMultRoll, defMultMaxRoll))
-
-                        .Replace("<currentExp>", PetTextsColors.LightPetRarityColorConvert(Math.Round(CurrentDr * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), drRoll, drMaxRoll))
-                        .Replace("<expRoll>", PetTextsColors.LightPetRarityColorConvert(drRoll.ToString(), drRoll, drMaxRoll))
-                        .Replace("<expMaxRoll>", PetTextsColors.LightPetRarityColorConvert(drMaxRoll.ToString(), drRoll, drMaxRoll))
-
-                        .Replace("<currentFort>", PetTextsColors.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + CurrentMiningFort.ToString(), miningFortRoll, miningFortMaxRoll))
-                        .Replace("<fortRoll>", PetTextsColors.LightPetRarityColorConvert(miningFortRoll.ToString(), miningFortRoll, miningFortMaxRoll))
-                        .Replace("<fortMaxRoll>", PetTextsColors.LightPetRarityColorConvert(miningFortMaxRoll.ToString(), miningFortRoll, miningFortMaxRoll))
+                        .Replace("<drLine>", DamageReduction.StatSummaryLine())
+                        .Replace("<fortuneLine>", MiningFortune.StatSummaryLine())
+                        .Replace("<defLine>", Defense.StatSummaryLine())
+                        .Replace("<defPercentLine>", DefensePercent.StatSummaryLine())
                         ));
-            if (defRoll <= 0)
+            if (Defense.CurrentRoll <= 0)
             {
-                tooltips.Add(new(Mod, "Tooltip0", "[c/" + PetTextsColors.LowQuality.Hex3() + ":" + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.NotRolled") + "]"));
+                tooltips.Add(new(Mod, "Tooltip0", PetTextsColors.RollMissingText()));
             }
         }
     }

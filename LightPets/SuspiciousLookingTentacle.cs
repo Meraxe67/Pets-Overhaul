@@ -12,114 +12,66 @@ using Terraria.ModLoader.IO;
 
 namespace PetsOverhaul.LightPets
 {
-    public sealed class SuspiciousLookingTentacleEffect : ModPlayer
+    public sealed class SuspiciousLookingTentacleEffect : LightPetEffect
     {
-        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
-            if (Player.miscEquips[1].type == ItemID.SuspiciousLookingTentacle && Player.miscEquips[1].TryGetGlobalItem(out SuspiciousLookingTentacle moonlord))
+            if (Player.miscEquips[1].TryGetGlobalItem(out SuspiciousLookingTentacle moonlord))
             {
-                Player.statDefense += moonlord.CurrentDef;
-                Player.moveSpeed += moonlord.CurrentMs;
-                Player.GetDamage<GenericDamageClass>() += moonlord.CurrentDmg;
-                Player.GetCritChance<GenericDamageClass>() += moonlord.CurrentCrit;
-                Player.maxMinions += (int)Math.Round(moonlord.CurrentMinSlot);
-                Player.whipRangeMultiplier += moonlord.CurrentWhip;
-                Player.statManaMax2 += moonlord.CurrentMana;
+                Player.statDefense += moonlord.Defense.CurrentStatInt;
+                Player.moveSpeed += moonlord.MovementSpeed.CurrentStatFloat;
+                Player.GetDamage<GenericDamageClass>() += moonlord.DamageAll.CurrentStatFloat;
+                Player.GetCritChance<GenericDamageClass>() += moonlord.CritChanceAll.CurrentStatFloat;
+                Player.maxMinions += (int)Math.Round(moonlord.MinionSlot.CurrentStatFloat);
+                Player.whipRangeMultiplier += moonlord.WhipRange.CurrentStatFloat;
+                Player.statManaMax2 += moonlord.Mana.CurrentStatInt;
 
             }
         }
         public override void GetHealMana(Item item, bool quickHeal, ref int healValue)
         {
-            if (Player.miscEquips[1].type == ItemID.SuspiciousLookingTentacle && Player.miscEquips[1].TryGetGlobalItem(out SuspiciousLookingTentacle moonlord))
+            if (Player.miscEquips[1].TryGetGlobalItem(out SuspiciousLookingTentacle moonlord))
             {
-                healValue += (int)(moonlord.CurrentPot * healValue);
+                healValue += (int)(moonlord.ManaPotionIncrease.CurrentStatFloat * healValue);
             }
         }
         public override void ModifyItemScale(Item item, ref float scale)
         {
-            if (Player.miscEquips[1].type == ItemID.SuspiciousLookingTentacle && Player.miscEquips[1].TryGetGlobalItem(out SuspiciousLookingTentacle moonlord))
+            if (Player.miscEquips[1].TryGetGlobalItem(out SuspiciousLookingTentacle moonlord))
             {
-                scale += moonlord.CurrentSize;
+                scale += moonlord.MeleeSize.CurrentStatFloat;
             }
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (Player.miscEquips[1].type == ItemID.SuspiciousLookingTentacle && Player.miscEquips[1].TryGetGlobalItem(out SuspiciousLookingTentacle moonlord))
+            if (Player.miscEquips[1].TryGetGlobalItem(out SuspiciousLookingTentacle moonlord))
             {
                 if (modifiers.DamageType == DamageClass.Ranged)
                 {
-                    modifiers.ScalingArmorPenetration += moonlord.CurrentPen;
-                    modifiers.CritDamage += moonlord.CurrentCrDmg;
+                    modifiers.ScalingArmorPenetration += moonlord.RangedPercentPenetration.CurrentStatFloat;
+                    modifiers.CritDamage += moonlord.RangedCritDamage.CurrentStatFloat;
                 }
                 if (modifiers.DamageType == DamageClass.Melee && GlobalPet.LifestealCheck(target))
                 {
-                    Pet.PetRecovery(Player.statDefense * 0.1f, moonlord.CurrentHeal);
+                    Pet.PetRecovery(Player.statDefense * 0.1f, moonlord.MeleeLifesteal.CurrentStatFloat);
                 }
             }
         }
     }
     public sealed class SuspiciousLookingTentacle : GlobalItem
     {
-        public int CurrentDef => defPer * defRoll;
-        public int defPer = 1;
-        public int defRoll = 0;
-        public int defMax = 5;
-
-        public float CurrentMs => msPer * msRoll;
-        public float msPer = 0.004f;
-        public int msRoll = 0;
-        public int msMax = 20;
-
-        public float CurrentDmg => dmgPer * dmgRoll;
-        public float dmgPer = 0.0025f;
-        public int dmgRoll = 0;
-        public int dmgMax = 20;
-
-        public float CurrentCrit => critPer * critRoll;
-        public float critPer = 0.25f;
-        public int critRoll = 0;
-        public int critMax = 20;
-
-        public float CurrentPen => penPer * penRoll;
-        public float penPer = 0.03f;
-        public int penRoll = 0;
-        public int penMax = 5;
-
-        public float CurrentCrDmg => crDmgPer * crDmgRoll;
-        public float crDmgPer = 0.01f;
-        public int crDmgRoll = 0;
-        public int crDmgMax = 5;
-
-        public float CurrentMinSlot => minPer * minRoll;
-        public float minPer = 0.2f;
-        public int minRoll = 0;
-        public int minMax = 5;
-
-        public float CurrentWhip => whipPer * whipRoll;
-        public float whipPer = 0.02f;
-        public int whipRoll = 0;
-        public int whipMax = 5;
-
-        public float CurrentSize => sizePer * sizeRoll;
-        public float sizePer = 0.04f;
-        public int sizeRoll = 0;
-        public int sizeMax = 5;
-
-        public float CurrentHeal => healPer * healRoll;
-        public float healPer = 0.03f;
-        public int healRoll = 0;
-        public int healMax = 5;
-
-        public float CurrentPot => potPer * potRoll;
-        public float potPer = 0.05f;
-        public int potRoll = 0;
-        public int potMax = 5;
-
-        public int CurrentMana => manaPer * manaRoll;
-        public int manaPer = 15;
-        public int manaRoll = 0;
-        public int manaMax = 5;
+        public LightPetStat Defense = new(5,1);
+        public LightPetStat MovementSpeed  = new(20,0.004f);
+        public LightPetStat DamageAll = new(20,0.0025f);
+        public LightPetStat CritChanceAll = new(20,0.25f);
+        public LightPetStat RangedPercentPenetration = new(5,0.03f);
+        public LightPetStat RangedCritDamage = new(5,0.01f);
+        public LightPetStat MinionSlot = new(5, 0.2f);
+        public LightPetStat WhipRange = new(5,0.02f);
+        public LightPetStat ManaPotionIncrease = new(5, 0.05f);
+        public LightPetStat Mana = new(5, 15);
+        public LightPetStat MeleeSize = new(5,0.04f);
+        public LightPetStat MeleeLifesteal = new(5,0.03f);
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
@@ -127,171 +79,124 @@ namespace PetsOverhaul.LightPets
         }
         public override void UpdateInventory(Item item, Player player)
         {
-            if (crDmgRoll <= 0)
-            {
-                crDmgRoll = Main.rand.Next(crDmgMax) + 1;
-            }
-
-            if (critRoll <= 0)
-            {
-                critRoll = Main.rand.Next(critMax) + 1;
-            }
-
-            if (defRoll <= 0)
-            {
-                defRoll = Main.rand.Next(defMax) + 1;
-            }
-
-            if (dmgRoll <= 0)
-            {
-                dmgRoll = Main.rand.Next(dmgMax) + 1;
-            }
-
-            if (healRoll <= 0)
-            {
-                healRoll = Main.rand.Next(healMax) + 1;
-            }
-
-            if (manaRoll <= 0)
-            {
-                manaRoll = Main.rand.Next(manaMax) + 1;
-            }
-
-            if (minRoll <= 0)
-            {
-                minRoll = Main.rand.Next(minMax) + 1;
-            }
-
-            if (msRoll <= 0)
-            {
-                msRoll = Main.rand.Next(msMax) + 1;
-            }
-
-            if (penRoll <= 0)
-            {
-                penRoll = Main.rand.Next(penMax) + 1;
-            }
-
-            if (potRoll <= 0)
-            {
-                potRoll = Main.rand.Next(potMax) + 1;
-            }
-
-            if (sizeRoll <= 0)
-            {
-                sizeRoll = Main.rand.Next(sizeMax) + 1;
-            }
-
-            if (whipRoll <= 0)
-            {
-                whipRoll = Main.rand.Next(whipMax) + 1;
-            }
+            Defense.SetRoll();
+            MovementSpeed.SetRoll();
+            DamageAll.SetRoll();
+            CritChanceAll.SetRoll();
+            RangedPercentPenetration.SetRoll();
+            RangedCritDamage.SetRoll();
+            MinionSlot.SetRoll();
+            WhipRange.SetRoll();
+            ManaPotionIncrease.SetRoll();
+            Mana.SetRoll();
+            MeleeSize.SetRoll();
+            MeleeLifesteal.SetRoll();
         }
         public override void NetSend(Item item, BinaryWriter writer)
         {
-            writer.Write((byte)crDmgRoll);
-            writer.Write((byte)critRoll);
-            writer.Write((byte)defRoll);
-            writer.Write((byte)dmgRoll);
-            writer.Write((byte)healRoll);
-            writer.Write((byte)manaRoll);
-            writer.Write((byte)minRoll);
-            writer.Write((byte)msRoll);
-            writer.Write((byte)penRoll);
-            writer.Write((byte)potRoll);
-            writer.Write((byte)sizeRoll);
-            writer.Write((byte)whipRoll);
+            writer.Write((byte)RangedCritDamage.CurrentRoll);
+            writer.Write((byte)CritChanceAll.CurrentRoll);
+            writer.Write((byte)Defense.CurrentRoll);
+            writer.Write((byte)DamageAll.CurrentRoll);
+            writer.Write((byte)MeleeLifesteal.CurrentRoll);
+            writer.Write((byte)Mana.CurrentRoll);
+            writer.Write((byte)MinionSlot.CurrentRoll);
+            writer.Write((byte)MovementSpeed.CurrentRoll);
+            writer.Write((byte)RangedPercentPenetration.CurrentRoll);
+            writer.Write((byte)ManaPotionIncrease.CurrentRoll);
+            writer.Write((byte)MeleeSize.CurrentRoll);
+            writer.Write((byte)WhipRange.CurrentRoll);
         }
         public override void NetReceive(Item item, BinaryReader reader)
         {
-            crDmgRoll = reader.ReadByte();
-            critRoll = reader.ReadByte();
-            defRoll = reader.ReadByte();
-            dmgRoll = reader.ReadByte();
-            healRoll = reader.ReadByte();
-            manaRoll = reader.ReadByte();
-            minRoll = reader.ReadByte();
-            msRoll = reader.ReadByte();
-            penRoll = reader.ReadByte();
-            potRoll = reader.ReadByte();
-            sizeRoll = reader.ReadByte();
-            whipRoll = reader.ReadByte();
+            RangedCritDamage.CurrentRoll = reader.ReadByte();
+            CritChanceAll.CurrentRoll = reader.ReadByte();
+            Defense.CurrentRoll = reader.ReadByte();
+            DamageAll.CurrentRoll = reader.ReadByte();
+            MeleeLifesteal.CurrentRoll = reader.ReadByte();
+            Mana.CurrentRoll = reader.ReadByte();
+            MinionSlot.CurrentRoll = reader.ReadByte();
+            MovementSpeed.CurrentRoll = reader.ReadByte();
+            RangedPercentPenetration.CurrentRoll = reader.ReadByte();
+            ManaPotionIncrease.CurrentRoll = reader.ReadByte();
+            MeleeSize.CurrentRoll = reader.ReadByte();
+            WhipRange.CurrentRoll = reader.ReadByte();
         }
         public override void SaveData(Item item, TagCompound tag)
         {
-            tag.Add("MlCrDmg", crDmgRoll);
-            tag.Add("MlCrit", critRoll);
-            tag.Add("MlDef", defRoll);
-            tag.Add("MlDmg", dmgRoll);
-            tag.Add("MlHeal", healRoll);
-            tag.Add("MlMana", manaRoll);
-            tag.Add("MlMin", minRoll);
-            tag.Add("MlMs", msRoll);
-            tag.Add("MlPen", penRoll);
-            tag.Add("MlPot", potRoll);
-            tag.Add("MlSize", sizeRoll);
-            tag.Add("MlWhip", whipRoll);
+            tag.Add("MlCrDmg", RangedCritDamage.CurrentRoll);
+            tag.Add("MlCrit", CritChanceAll.CurrentRoll);
+            tag.Add("MlDef", Defense.CurrentRoll);
+            tag.Add("MlDmg", DamageAll.CurrentRoll);
+            tag.Add("MlHeal", MeleeLifesteal.CurrentRoll);
+            tag.Add("MlMana", Mana.CurrentRoll);
+            tag.Add("MlMin", MinionSlot.CurrentRoll);
+            tag.Add("MlMs", MovementSpeed.CurrentRoll);
+            tag.Add("MlPen", RangedPercentPenetration.CurrentRoll);
+            tag.Add("MlPot", ManaPotionIncrease.CurrentRoll);
+            tag.Add("MlSize", MeleeSize.CurrentRoll);
+            tag.Add("MlWhip", WhipRange.CurrentRoll);
         }
         public override void LoadData(Item item, TagCompound tag)
         {
             if (tag.TryGet("MlCrDmg", out int crDmg))
             {
-                crDmgRoll = crDmg;
+                RangedCritDamage.CurrentRoll = crDmg;
             }
 
             if (tag.TryGet("MlCrit", out int crChance))
             {
-                critRoll = crChance;
+                CritChanceAll.CurrentRoll = crChance;
             }
 
             if (tag.TryGet("MlDef", out int def))
             {
-                defRoll = def;
+                Defense.CurrentRoll = def;
             }
 
             if (tag.TryGet("MlDmg", out int dmg))
             {
-                dmgRoll = dmg;
+                DamageAll.CurrentRoll = dmg;
             }
 
             if (tag.TryGet("MlHeal", out int heal))
             {
-                healRoll = heal;
+                MeleeLifesteal.CurrentRoll = heal;
             }
 
             if (tag.TryGet("MlMana", out int mana))
             {
-                manaRoll = mana;
+                Mana.CurrentRoll = mana;
             }
 
             if (tag.TryGet("MlMin", out int minion))
             {
-                minRoll = minion;
+                MinionSlot.CurrentRoll = minion;
             }
 
             if (tag.TryGet("MlMs", out int moveSpd))
             {
-                msRoll = moveSpd;
+                MovementSpeed.CurrentRoll = moveSpd;
             }
 
             if (tag.TryGet("MlPen", out int pen))
             {
-                penRoll = pen;
+                RangedPercentPenetration.CurrentRoll = pen;
             }
 
             if (tag.TryGet("MlPot", out int pot))
             {
-                potRoll = pot;
+                ManaPotionIncrease.CurrentRoll = pot;
             }
 
             if (tag.TryGet("MlSize", out int size))
             {
-                sizeRoll = size;
+                MeleeSize.CurrentRoll = size;
             }
 
             if (tag.TryGet("MlWhip", out int whip))
             {
-                whipRoll = whip;
+                WhipRange.CurrentRoll = whip;
             }
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
@@ -302,71 +207,46 @@ namespace PetsOverhaul.LightPets
             }
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.SuspiciousLookingTentacle")
 
-                        .Replace("<crDmgPer>", Math.Round(crDmgPer * 100, 2).ToString())
-                        .Replace("<currentCrDmg>", PetTextsColors.LightPetRarityColorConvert(Math.Round(CurrentCrDmg * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), crDmgRoll, crDmgMax))
-                        .Replace("<crDmgRoll>", PetTextsColors.LightPetRarityColorConvert(crDmgRoll.ToString(), crDmgRoll, crDmgMax))
-                        .Replace("<crDmgMax>", PetTextsColors.LightPetRarityColorConvert(crDmgMax.ToString(), crDmgRoll, crDmgMax))
+                        .Replace("<def>",Defense.BaseAndPerQuality())
+                        .Replace("<defLine>", Defense.StatSummaryLine())
 
-                        .Replace("<critPer>", Math.Round(critPer, 2).ToString())
-                        .Replace("<currentCrit>", PetTextsColors.LightPetRarityColorConvert(Math.Round(CurrentCrit, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), critRoll, critMax))
-                        .Replace("<critRoll>", PetTextsColors.LightPetRarityColorConvert(critRoll.ToString(), critRoll, critMax))
-                        .Replace("<critMax>", PetTextsColors.LightPetRarityColorConvert(critMax.ToString(), critRoll, critMax))
+                        .Replace("<ms>", MovementSpeed.BaseAndPerQuality())
+                        .Replace("<msLine>", MovementSpeed.StatSummaryLine())
 
-                        .Replace("<defPer>", defPer.ToString())
-                        .Replace("<currentDef>", PetTextsColors.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + CurrentDef.ToString(), defRoll, defMax))
-                        .Replace("<defRoll>", PetTextsColors.LightPetRarityColorConvert(defRoll.ToString(), defRoll, defMax))
-                        .Replace("<defMax>", PetTextsColors.LightPetRarityColorConvert(defMax.ToString(), defRoll, defMax))
+                        .Replace("<dmg>", DamageAll.BaseAndPerQuality())
+                        .Replace("<dmgLine>", DamageAll.StatSummaryLine())
 
-                        .Replace("<dmgPer>", Math.Round(dmgPer * 100, 2).ToString())
-                        .Replace("<currentDmg>", PetTextsColors.LightPetRarityColorConvert(Math.Round(CurrentDmg * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), dmgRoll, dmgMax))
-                        .Replace("<dmgRoll>", PetTextsColors.LightPetRarityColorConvert(dmgRoll.ToString(), dmgRoll, dmgMax))
-                        .Replace("<dmgMax>", PetTextsColors.LightPetRarityColorConvert(dmgMax.ToString(), dmgRoll, dmgMax))
+                        .Replace("<crit>", CritChanceAll.BaseAndPerQuality())
+                        .Replace("<critLine>", CritChanceAll.StatSummaryLine())
 
-                        .Replace("<healPer>", Math.Round(healPer * 100, 2).ToString())
-                        .Replace("<healAmount>", (Main.LocalPlayer.statDefense * 0.1f).ToString())
-                        .Replace("<currentHeal>", PetTextsColors.LightPetRarityColorConvert(Math.Round(CurrentHeal * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), healRoll, healMax))
-                        .Replace("<healRoll>", PetTextsColors.LightPetRarityColorConvert(healRoll.ToString(), healRoll, healMax))
-                        .Replace("<healMax>", PetTextsColors.LightPetRarityColorConvert(healMax.ToString(), healRoll, healMax))
+                        .Replace("<rangedPen>", RangedPercentPenetration.BaseAndPerQuality())
+                        .Replace("<rangedPenLine>", RangedPercentPenetration.StatSummaryLine())
 
-                        .Replace("<manaPer>", manaPer.ToString())
-                        .Replace("<currentMana>", PetTextsColors.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + CurrentMana.ToString(), manaRoll, manaMax))
-                        .Replace("<manaRoll>", PetTextsColors.LightPetRarityColorConvert(manaRoll.ToString(), manaRoll, manaMax))
-                        .Replace("<manaMax>", PetTextsColors.LightPetRarityColorConvert(manaMax.ToString(), manaRoll, manaMax))
+                        .Replace("<rangedCritDmg>", RangedCritDamage.BaseAndPerQuality())
+                        .Replace("<rangedCritDmg>", RangedCritDamage.StatSummaryLine())
 
-                        .Replace("<minPer>", minPer.ToString())
-                        .Replace("<currentMin>", PetTextsColors.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + CurrentMinSlot.ToString(), minRoll, minMax))
-                        .Replace("<minRoll>", PetTextsColors.LightPetRarityColorConvert(minRoll.ToString(), minRoll, minMax))
-                        .Replace("<minMax>", PetTextsColors.LightPetRarityColorConvert(minMax.ToString(), minRoll, minMax))
+                        .Replace("<minion>", MinionSlot.BaseAndPerQuality())
+                        .Replace("<minionLine>", MinionSlot.StatSummaryLine())
 
-                        .Replace("<msPer>", Math.Round(msPer * 100, 2).ToString())
-                        .Replace("<currentMs>", PetTextsColors.LightPetRarityColorConvert(Math.Round(CurrentMs * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), msRoll, msMax))
-                        .Replace("<msRoll>", PetTextsColors.LightPetRarityColorConvert(msRoll.ToString(), msRoll, msMax))
-                        .Replace("<msMax>", PetTextsColors.LightPetRarityColorConvert(msMax.ToString(), msRoll, msMax))
+                        .Replace("<whip>", WhipRange.BaseAndPerQuality())
+                        .Replace("<whipLine>", WhipRange.StatSummaryLine())
 
-                        .Replace("<penPer>", Math.Round(penPer * 100, 2).ToString())
-                        .Replace("<currentPen>", PetTextsColors.LightPetRarityColorConvert(Math.Round(CurrentPen * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), penRoll, penMax))
-                        .Replace("<penRoll>", PetTextsColors.LightPetRarityColorConvert(penRoll.ToString(), penRoll, penMax))
-                        .Replace("<penMax>", PetTextsColors.LightPetRarityColorConvert(penMax.ToString(), penRoll, penMax))
+                        .Replace("<manaPotion>", ManaPotionIncrease.BaseAndPerQuality())
+                        .Replace("<manaPotionLine>", ManaPotionIncrease.StatSummaryLine())
 
-                        .Replace("<potPer>", Math.Round(potPer * 100, 2).ToString())
-                        .Replace("<currentPot>", PetTextsColors.LightPetRarityColorConvert(Math.Round(CurrentPot * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), potRoll, potMax))
-                        .Replace("<potRoll>", PetTextsColors.LightPetRarityColorConvert(potRoll.ToString(), potRoll, potMax))
-                        .Replace("<potMax>", PetTextsColors.LightPetRarityColorConvert(potMax.ToString(), potRoll, potMax))
+                        .Replace("<mana>", Mana.BaseAndPerQuality())
+                        .Replace("<manaLine>", Mana.StatSummaryLine())
 
-                        .Replace("<sizePer>", Math.Round(sizePer * 100, 2).ToString())
-                        .Replace("<currentSize>", PetTextsColors.LightPetRarityColorConvert(Math.Round(CurrentSize * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), sizeRoll, sizeMax))
-                        .Replace("<sizeRoll>", PetTextsColors.LightPetRarityColorConvert(sizeRoll.ToString(), sizeRoll, sizeMax))
-                        .Replace("<sizeMax>", PetTextsColors.LightPetRarityColorConvert(sizeMax.ToString(), sizeRoll, sizeMax))
+                        .Replace("<size>", MeleeSize.BaseAndPerQuality())
+                        .Replace("<sizeLine>", MeleeSize.StatSummaryLine())
 
-                        .Replace("<whipPer>", Math.Round(whipPer * 100, 2).ToString())
-                        .Replace("<currentWhip>", PetTextsColors.LightPetRarityColorConvert(Math.Round(CurrentWhip * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), whipRoll, whipMax))
-                        .Replace("<whipRoll>", PetTextsColors.LightPetRarityColorConvert(whipRoll.ToString(), whipRoll, whipMax))
-                        .Replace("<whipMax>", PetTextsColors.LightPetRarityColorConvert(whipMax.ToString(), whipRoll, whipMax))
-
+                        .Replace("<lifesteal>", MeleeLifesteal.BaseAndPerQuality())
+                        .Replace("<lifestealLine>", MeleeLifesteal.StatSummaryLine())
+                        .Replace("<healAmount>", (int)(Main.LocalPlayer.statDefense*0.1f).ToString())
                         ));
-            if (critRoll <= 0)
+            if (CritChanceAll.CurrentRoll <= 0)
             {
-                tooltips.Add(new(Mod, "Tooltip0", "[c/" + PetTextsColors.LowQuality.Hex3() + ":" + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.NotRolled") + "]"));
+                tooltips.Add(new(Mod, "Tooltip0", PetTextsColors.RollMissingText()));
             }
         }
     }

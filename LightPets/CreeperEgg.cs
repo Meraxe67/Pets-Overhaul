@@ -16,7 +16,7 @@ namespace PetsOverhaul.LightPets
     {
         public override void PostUpdateEquips()
         {
-            if (Player.miscEquips[1].type == ItemID.DD2PetGhost && Player.miscEquips[1].TryGetGlobalItem(out CreeperEgg creeperEgg))
+            if (Player.miscEquips[1].TryGetGlobalItem(out CreeperEgg creeperEgg))
             {
                 Player.GetDamage<SummonDamageClass>() += creeperEgg.SummonDamage.CurrentStatFloat;
                 Player.GetDamage<MeleeDamageClass>() += creeperEgg.MeleeDamage.CurrentStatFloat;

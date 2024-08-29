@@ -12,45 +12,30 @@ using Terraria.ModLoader.IO;
 
 namespace PetsOverhaul.LightPets
 {
-    public sealed class JackOLanternEffect : ModPlayer
+    public sealed class JackOLanternEffect : LightPetEffect
     {
-        public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
         public override void PostUpdateEquips()
         {
-            if (Player.miscEquips[1].type == ItemID.PumpkingPetItem && Player.miscEquips[1].TryGetGlobalItem(out JackOLantern jackOLantern))
+            if (Player.miscEquips[1].TryGetGlobalItem(out JackOLantern jackOLantern))
             {
-                Player.GetAttackSpeed<GenericDamageClass>() += jackOLantern.CurrentAtkSpd;
-                Pet.harvestingFortune += jackOLantern.CurrentHarvFort;
+                Player.GetAttackSpeed<GenericDamageClass>() += jackOLantern.AttackSpeed.CurrentStatFloat;
+                Pet.harvestingFortune += jackOLantern.HarvestingFortune.CurrentStatInt;
             }
         }
         public override void ModifyLuck(ref float luck)
         {
-            if (Player.miscEquips[1].type == ItemID.PumpkingPetItem && Player.miscEquips[1].TryGetGlobalItem(out JackOLantern jackOLantern))
+            if (Player.miscEquips[1].TryGetGlobalItem(out JackOLantern jackOLantern))
             {
-                luck += jackOLantern.CurrentLuck;
+                luck += jackOLantern.Luck.CurrentStatFloat;
             }
 
         }
     }
     public sealed class JackOLantern : GlobalItem
     {
-        public float baseAtkSpd = 0.04f;
-        public float atkSpdPerRoll = 0.003f;
-        public int atkSpdMaxRoll = 30;
-        public int atkSpdRoll = 0;
-        public float CurrentAtkSpd => baseAtkSpd + atkSpdPerRoll * atkSpdRoll;
-
-        public float baseLuck = 0.03f;
-        public float luckPerRoll = 0.01f;
-        public int luckMaxRoll = 15;
-        public int luckRoll = 0;
-        public float CurrentLuck => baseLuck + luckPerRoll * luckRoll;
-
-        public int baseHarvFort = 10;
-        public int harvFortPerRoll = 1;
-        public int harvFortMaxRoll = 20;
-        public int harvFortRoll = 0;
-        public int CurrentHarvFort => baseHarvFort + harvFortPerRoll * harvFortRoll;
+        public LightPetStat AttackSpeed = new(30,0.003f,0.04f);
+        public LightPetStat Luck = new(15,0.01f,0.03f);
+        public LightPetStat HarvestingFortune = new(20,1,10);
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
@@ -58,54 +43,43 @@ namespace PetsOverhaul.LightPets
         }
         public override void UpdateInventory(Item item, Player player)
         {
-            if (atkSpdRoll <= 0)
-            {
-                atkSpdRoll = Main.rand.Next(atkSpdMaxRoll) + 1;
-            }
-
-            if (harvFortRoll <= 0)
-            {
-                harvFortRoll = Main.rand.Next(harvFortMaxRoll) + 1;
-            }
-
-            if (luckRoll <= 0)
-            {
-                luckRoll = Main.rand.Next(luckMaxRoll) + 1;
-            }
+            AttackSpeed.SetRoll();
+            Luck.SetRoll();
+            HarvestingFortune.SetRoll();
         }
         public override void NetSend(Item item, BinaryWriter writer)
         {
-            writer.Write((byte)atkSpdRoll);
-            writer.Write((byte)harvFortRoll);
-            writer.Write((byte)luckRoll);
+            writer.Write((byte)AttackSpeed.CurrentRoll);
+            writer.Write((byte)HarvestingFortune.CurrentRoll);
+            writer.Write((byte)Luck.CurrentRoll);
         }
         public override void NetReceive(Item item, BinaryReader reader)
         {
-            atkSpdRoll = reader.ReadByte();
-            harvFortRoll = reader.ReadByte();
-            luckRoll = reader.ReadByte();
+            AttackSpeed.CurrentRoll = reader.ReadByte();
+            HarvestingFortune.CurrentRoll = reader.ReadByte();
+            Luck.CurrentRoll = reader.ReadByte();
         }
         public override void SaveData(Item item, TagCompound tag)
         {
-            tag.Add("PumpkinAtkSpd", atkSpdRoll);
-            tag.Add("PumpkinLuck", luckRoll);
-            tag.Add("PumpkinExp", harvFortRoll);
+            tag.Add("PumpkinAtkSpd", AttackSpeed.CurrentRoll);
+            tag.Add("PumpkinLuck", Luck.CurrentRoll);
+            tag.Add("PumpkinExp", HarvestingFortune.CurrentRoll);
         }
         public override void LoadData(Item item, TagCompound tag)
         {
             if (tag.TryGet("PumpkinAtkSpd", out int aSpd))
             {
-                atkSpdRoll = aSpd;
+                AttackSpeed.CurrentRoll = aSpd;
             }
 
             if (tag.TryGet("PumpkinLuck", out int luck))
             {
-                luckRoll = luck;
+                Luck.CurrentRoll = luck;
             }
 
             if (tag.TryGet("PumpkinExp", out int exp))
             {
-                harvFortRoll = exp;
+                HarvestingFortune.CurrentRoll = exp;
             }
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
@@ -116,30 +90,17 @@ namespace PetsOverhaul.LightPets
             }
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.JackOLantern")
 
-                        .Replace("<atkSpdBase>", Math.Round(baseAtkSpd * 100, 2).ToString())
-                        .Replace("<atkSpdPer>", Math.Round(atkSpdPerRoll * 100, 2).ToString())
+                        .Replace("<atkSpd>", AttackSpeed.BaseAndPerQuality())
+                        .Replace("<luck>", Luck.BaseAndPerQuality())
+                        .Replace("<fortune>", HarvestingFortune.BaseAndPerQuality())
 
-                        .Replace("<expBase>", baseHarvFort.ToString())
-                        .Replace("<expPer>", harvFortPerRoll.ToString())
-
-                        .Replace("<luckBase>", baseLuck.ToString())
-                        .Replace("<luckPer>", luckPerRoll.ToString())
-
-                        .Replace("<currentAtkSpd>", PetTextsColors.LightPetRarityColorConvert(Math.Round(CurrentAtkSpd * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), atkSpdRoll, atkSpdMaxRoll))
-                        .Replace("<atkSpdRoll>", PetTextsColors.LightPetRarityColorConvert(atkSpdRoll.ToString(), atkSpdRoll, atkSpdMaxRoll))
-                        .Replace("<atkSpdMaxRoll>", PetTextsColors.LightPetRarityColorConvert(atkSpdMaxRoll.ToString(), atkSpdRoll, atkSpdMaxRoll))
-
-                        .Replace("<currentExp>", PetTextsColors.LightPetRarityColorConvert(CurrentHarvFort.ToString() + Language.GetTextValue("Mods.PetsOverhaul.%"), harvFortRoll, harvFortMaxRoll))
-                        .Replace("<expRoll>", PetTextsColors.LightPetRarityColorConvert(harvFortRoll.ToString(), harvFortRoll, harvFortMaxRoll))
-                        .Replace("<expMaxRoll>", PetTextsColors.LightPetRarityColorConvert(harvFortMaxRoll.ToString(), harvFortRoll, harvFortMaxRoll))
-
-                        .Replace("<currentLuck>", PetTextsColors.LightPetRarityColorConvert(Language.GetTextValue("Mods.PetsOverhaul.+") + Math.Round(CurrentLuck, 2).ToString(), luckRoll, luckMaxRoll))
-                        .Replace("<luckRoll>", PetTextsColors.LightPetRarityColorConvert(luckRoll.ToString(), luckRoll, luckMaxRoll))
-                        .Replace("<luckMaxRoll>", PetTextsColors.LightPetRarityColorConvert(luckMaxRoll.ToString(), luckRoll, luckMaxRoll))
+                        .Replace("<atkSpdLine>", AttackSpeed.StatSummaryLine())
+                        .Replace("<luckLine>", Luck.StatSummaryLine())
+                        .Replace("<fortuneLine>", HarvestingFortune.StatSummaryLine())
                         ));
-            if (luckRoll <= 0)
+            if (Luck.CurrentRoll <= 0)
             {
-                tooltips.Add(new(Mod, "Tooltip0", "[c/" + PetTextsColors.LowQuality.Hex3() + ":" + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.NotRolled") + "]"));
+                tooltips.Add(new(Mod, "Tooltip0", PetTextsColors.RollMissingText()));
             }
         }
     }
