@@ -227,9 +227,13 @@ Mods: {
 			Seaweed:
 				'''
 				<class>
+				- Press Pet Ability Keybind <keybind> to Harden your Turtle's shell.
+				 * Next <hitCount> hits taken within <shellDuration> seconds are modified.
+				 * Hits deal <reducedDmg>% less damage and deal no knockback.
+				 * <reflect>% of pre-mitigation damage taken is reflected back to the attacker.
 				- Increases defense by +<flat>, and by <def>%.
 				- Grants <kbResist>% knockback resist.
-				- Reduces movement speed by -<moveSpd>% and all damage by -<dmg>%.
+				- Reduces movement speed by <moveSpd>% and all damage by <dmg>%.
 				'''
 			AmberMosquito:
 				'''
