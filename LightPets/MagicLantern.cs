@@ -28,7 +28,7 @@ namespace PetsOverhaul.LightPets
     public sealed class MagicLantern : GlobalItem
     {
         public LightPetStat Defense = new(3, 1);
-        public LightPetStat DefensePercent = new(20, 0.002f, 0.02f);
+        public LightPetStat DefensePercent = new(20, 0.002f, 0.015f);
         public LightPetStat DamageReduction = new(15, 0.002f, 0.01f);
         public LightPetStat MiningFortune = new(15, 1, 5);
         public override bool InstancePerEntity => true;

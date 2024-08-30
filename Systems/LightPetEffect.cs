@@ -55,10 +55,29 @@ namespace PetsOverhaul.Systems
             return PetTextsColors.LightPetRarityColorConvert(isInt ? (Language.GetTextValue("Mods.PetsOverhaul.+") + CurrentStatInt.ToString()) : (Math.Round(CurrentStatFloat * 100, 2).ToString() + Language.GetTextValue("Mods.PetsOverhaul.%")), CurrentRoll, MaxRoll) + " " +
                 Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.Quality") + " " + PetTextsColors.LightPetRarityColorConvert(CurrentRoll.ToString(), CurrentRoll, MaxRoll) + " " + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.OutOf") + " " + PetTextsColors.LightPetRarityColorConvert(MaxRoll.ToString(), CurrentRoll, MaxRoll);
         }
+        /// <summary>
+        /// Use this overload if Summary line is intended to show the current stat differently than what StatSummaryLine() does.
+        /// </summary>
+        public string StatSummaryLine(string currentStat)
+        {
+            return PetTextsColors.LightPetRarityColorConvert(currentStat, CurrentRoll, MaxRoll) + " " + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.Quality") + " " + 
+                PetTextsColors.LightPetRarityColorConvert(CurrentRoll.ToString(), CurrentRoll, MaxRoll) + " " + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.OutOf") + " " + PetTextsColors.LightPetRarityColorConvert(MaxRoll.ToString(), CurrentRoll, MaxRoll);
+        }
+        /// <summary>
+        /// Returns the stat's Base and Per Roll stats, alongside required spacings, multiplication and operators.
+        /// </summary>
         public string BaseAndPerQuality()
         {
-            return (BaseStat == 0 ? "" : (Math.Round(BaseStat * 100, 2).ToString() + " " + Language.GetTextValue("Mods.PetsOverhaul.+"))) + " " + Math.Round(StatPerRoll * 100, 2).ToString()
+            int mult = isInt ? 1 : 100;
+            return (BaseStat == 0 ? "" : (Math.Round(BaseStat * mult, 2).ToString() + " " + Language.GetTextValue("Mods.PetsOverhaul.+") + " ")) + Math.Round(StatPerRoll * mult, 2).ToString()
                 + (isInt ? "" : Language.GetTextValue("Mods.PetsOverhaul.%"));
+        }
+        /// <summary>
+        /// Use this overload if displayed values are intended to be displayed in a different way than BaseAndPerQuality().
+        /// </summary>
+        public string BaseAndPerQuality(string perRoll, string baseRoll = "")
+        {
+            return (BaseStat == 0 ? "" : (baseRoll + " " + Language.GetTextValue("Mods.PetsOverhaul.+") + " ")) + perRoll;
         }
     }
 }

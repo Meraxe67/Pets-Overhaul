@@ -25,7 +25,7 @@ namespace PetsOverhaul.LightPets
     }
     public sealed class FairyBell : GlobalItem
     {
-        public LightPetStat AbilityHaste = new(15,0.01f,0.1f);
+        public LightPetStat AbilityHaste = new(15,0.012f,0.1f);
         public LightPetStat GlobalFortune = new(20,1,5);
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)

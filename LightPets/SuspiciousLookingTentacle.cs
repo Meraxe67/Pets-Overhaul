@@ -21,8 +21,7 @@ namespace PetsOverhaul.LightPets
                 Player.statDefense += moonlord.Defense.CurrentStatInt;
                 Player.moveSpeed += moonlord.MovementSpeed.CurrentStatFloat;
                 Player.GetDamage<GenericDamageClass>() += moonlord.DamageAll.CurrentStatFloat;
-                Player.GetCritChance<GenericDamageClass>() += moonlord.CritChanceAll.CurrentStatFloat;
-                Player.maxMinions += (int)Math.Round(moonlord.MinionSlot.CurrentStatFloat);
+                Player.GetCritChance<GenericDamageClass>() += moonlord.CritChanceAll.CurrentStatFloat*100;
                 Player.whipRangeMultiplier += moonlord.WhipRange.CurrentStatFloat;
                 Player.statManaMax2 += moonlord.Mana.CurrentStatInt;
 
@@ -51,6 +50,10 @@ namespace PetsOverhaul.LightPets
                     modifiers.ScalingArmorPenetration += moonlord.RangedPercentPenetration.CurrentStatFloat;
                     modifiers.CritDamage += moonlord.RangedCritDamage.CurrentStatFloat;
                 }
+                if (modifiers.DamageType == DamageClass.Summon)
+                {
+                    modifiers.ArmorPenetration += moonlord.SummonerFlatPenetration.CurrentStatInt;
+                }
                 if (modifiers.DamageType == DamageClass.Melee && GlobalPet.LifestealCheck(target))
                 {
                     Pet.PetRecovery(Player.statDefense * 0.1f, moonlord.MeleeLifesteal.CurrentStatFloat);
@@ -63,13 +66,13 @@ namespace PetsOverhaul.LightPets
         public LightPetStat Defense = new(5,1);
         public LightPetStat MovementSpeed  = new(20,0.004f);
         public LightPetStat DamageAll = new(20,0.0025f);
-        public LightPetStat CritChanceAll = new(20,0.25f);
-        public LightPetStat RangedPercentPenetration = new(5,0.03f);
-        public LightPetStat RangedCritDamage = new(5,0.01f);
-        public LightPetStat MinionSlot = new(5, 0.2f);
-        public LightPetStat WhipRange = new(5,0.02f);
+        public LightPetStat CritChanceAll = new(20,0.0025f);
+        public LightPetStat RangedPercentPenetration = new(5,0.025f);
+        public LightPetStat RangedCritDamage = new(5,0.008f);
+        public LightPetStat SummonerFlatPenetration = new(5, 3);
+        public LightPetStat WhipRange = new(5,0.03f);
         public LightPetStat ManaPotionIncrease = new(5, 0.05f);
-        public LightPetStat Mana = new(5, 15);
+        public LightPetStat Mana = new(5, 12);
         public LightPetStat MeleeSize = new(5,0.04f);
         public LightPetStat MeleeLifesteal = new(5,0.03f);
         public override bool InstancePerEntity => true;
@@ -85,7 +88,7 @@ namespace PetsOverhaul.LightPets
             CritChanceAll.SetRoll();
             RangedPercentPenetration.SetRoll();
             RangedCritDamage.SetRoll();
-            MinionSlot.SetRoll();
+            SummonerFlatPenetration.SetRoll();
             WhipRange.SetRoll();
             ManaPotionIncrease.SetRoll();
             Mana.SetRoll();
@@ -100,7 +103,7 @@ namespace PetsOverhaul.LightPets
             writer.Write((byte)DamageAll.CurrentRoll);
             writer.Write((byte)MeleeLifesteal.CurrentRoll);
             writer.Write((byte)Mana.CurrentRoll);
-            writer.Write((byte)MinionSlot.CurrentRoll);
+            writer.Write((byte)SummonerFlatPenetration.CurrentRoll);
             writer.Write((byte)MovementSpeed.CurrentRoll);
             writer.Write((byte)RangedPercentPenetration.CurrentRoll);
             writer.Write((byte)ManaPotionIncrease.CurrentRoll);
@@ -115,7 +118,7 @@ namespace PetsOverhaul.LightPets
             DamageAll.CurrentRoll = reader.ReadByte();
             MeleeLifesteal.CurrentRoll = reader.ReadByte();
             Mana.CurrentRoll = reader.ReadByte();
-            MinionSlot.CurrentRoll = reader.ReadByte();
+            SummonerFlatPenetration.CurrentRoll = reader.ReadByte();
             MovementSpeed.CurrentRoll = reader.ReadByte();
             RangedPercentPenetration.CurrentRoll = reader.ReadByte();
             ManaPotionIncrease.CurrentRoll = reader.ReadByte();
@@ -130,7 +133,7 @@ namespace PetsOverhaul.LightPets
             tag.Add("MlDmg", DamageAll.CurrentRoll);
             tag.Add("MlHeal", MeleeLifesteal.CurrentRoll);
             tag.Add("MlMana", Mana.CurrentRoll);
-            tag.Add("MlMin", MinionSlot.CurrentRoll);
+            tag.Add("MlMin", SummonerFlatPenetration.CurrentRoll);
             tag.Add("MlMs", MovementSpeed.CurrentRoll);
             tag.Add("MlPen", RangedPercentPenetration.CurrentRoll);
             tag.Add("MlPot", ManaPotionIncrease.CurrentRoll);
@@ -169,9 +172,9 @@ namespace PetsOverhaul.LightPets
                 Mana.CurrentRoll = mana;
             }
 
-            if (tag.TryGet("MlMin", out int minion))
+            if (tag.TryGet("MlMin", out int sumPen))
             {
-                MinionSlot.CurrentRoll = minion;
+                SummonerFlatPenetration.CurrentRoll = sumPen;
             }
 
             if (tag.TryGet("MlMs", out int moveSpd))
@@ -207,7 +210,7 @@ namespace PetsOverhaul.LightPets
             }
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.SuspiciousLookingTentacle")
 
-                        .Replace("<def>",Defense.BaseAndPerQuality())
+                        .Replace("<def>", Defense.BaseAndPerQuality())
                         .Replace("<defLine>", Defense.StatSummaryLine())
 
                         .Replace("<ms>", MovementSpeed.BaseAndPerQuality())
@@ -223,10 +226,10 @@ namespace PetsOverhaul.LightPets
                         .Replace("<rangedPenLine>", RangedPercentPenetration.StatSummaryLine())
 
                         .Replace("<rangedCritDmg>", RangedCritDamage.BaseAndPerQuality())
-                        .Replace("<rangedCritDmg>", RangedCritDamage.StatSummaryLine())
+                        .Replace("<rangedCritDmgLine>", RangedCritDamage.StatSummaryLine())
 
-                        .Replace("<minion>", MinionSlot.BaseAndPerQuality())
-                        .Replace("<minionLine>", MinionSlot.StatSummaryLine())
+                        .Replace("<summonerPen>", SummonerFlatPenetration.BaseAndPerQuality())
+                        .Replace("<summonerPenLine>", SummonerFlatPenetration.StatSummaryLine())
 
                         .Replace("<whip>", WhipRange.BaseAndPerQuality())
                         .Replace("<whipLine>", WhipRange.StatSummaryLine())
@@ -242,7 +245,7 @@ namespace PetsOverhaul.LightPets
 
                         .Replace("<lifesteal>", MeleeLifesteal.BaseAndPerQuality())
                         .Replace("<lifestealLine>", MeleeLifesteal.StatSummaryLine())
-                        .Replace("<healAmount>", (int)(Main.LocalPlayer.statDefense*0.1f).ToString())
+                        .Replace("<healAmount>",(Main.LocalPlayer.statDefense * 0.1f).ToString())
                         ));
             if (CritChanceAll.CurrentRoll <= 0)
             {

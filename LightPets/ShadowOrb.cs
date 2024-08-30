@@ -87,9 +87,9 @@ namespace PetsOverhaul.LightPets
                         .Replace("<ms>", MovementSpeed.BaseAndPerQuality())
                         .Replace("<fortune>", HarvestingFortune.BaseAndPerQuality())
 
-                        .Replace("<mana>", Mana.StatSummaryLine())
-                        .Replace("<ms>", MovementSpeed.StatSummaryLine())
-                        .Replace("<fortune>", HarvestingFortune.StatSummaryLine())
+                        .Replace("<manaLine>", Mana.StatSummaryLine())
+                        .Replace("<msLine>", MovementSpeed.StatSummaryLine())
+                        .Replace("<fortuneLine>", HarvestingFortune.StatSummaryLine())
                         ));
             if (Mana.CurrentRoll <= 0)
             {

@@ -31,13 +31,13 @@ namespace PetsOverhaul.LightPets
             {
                 Player.runAcceleration += empress.Acceleration.CurrentStatFloat;
             }
-        } 
+        }
     }
     public sealed class JewelOfLight : GlobalItem
     {
-        public LightPetStat MovementSpeed = new(8,0.015f,0.07f);
-        public LightPetStat WingTime = new(15,6,30);
-        public LightPetStat Acceleration = new(20,0.005f,0.05f);
+        public LightPetStat MovementSpeed = new(8, 0.015f, 0.07f);
+        public LightPetStat WingTime = new(15, 6, 30);
+        public LightPetStat Acceleration = new(20, 0.0015f, 0.04f);
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
@@ -93,11 +93,11 @@ namespace PetsOverhaul.LightPets
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.JewelOfLight")
 
                         .Replace("<moveSpd>", MovementSpeed.BaseAndPerQuality())
-                        .Replace("<wingTime>", WingTime.BaseAndPerQuality())
+                        .Replace("<wingTime>", WingTime.BaseAndPerQuality(Math.Round(WingTime.StatPerRoll / 60f, 2).ToString(), Math.Round(WingTime.BaseStat / 60f, 2).ToString()))
                         .Replace("<acceleration>", Acceleration.BaseAndPerQuality())
 
                         .Replace("<moveSpdLine>", MovementSpeed.StatSummaryLine())
-                        .Replace("<wingTimeLine>", WingTime.StatSummaryLine())
+                        .Replace("<wingTimeLine>", WingTime.StatSummaryLine(Math.Round(WingTime.CurrentStatInt / 60f, 2).ToString()))
                         .Replace("<accelerationLine>", Acceleration.StatSummaryLine())
                         ));
             if (WingTime.CurrentRoll <= 0)

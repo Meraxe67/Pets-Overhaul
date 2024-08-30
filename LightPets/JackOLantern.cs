@@ -91,11 +91,11 @@ namespace PetsOverhaul.LightPets
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.JackOLantern")
 
                         .Replace("<atkSpd>", AttackSpeed.BaseAndPerQuality())
-                        .Replace("<luck>", Luck.BaseAndPerQuality())
+                        .Replace("<luck>", Luck.BaseAndPerQuality(Luck.StatPerRoll.ToString(),Luck.BaseStat.ToString()))
                         .Replace("<fortune>", HarvestingFortune.BaseAndPerQuality())
 
                         .Replace("<atkSpdLine>", AttackSpeed.StatSummaryLine())
-                        .Replace("<luckLine>", Luck.StatSummaryLine())
+                        .Replace("<luckLine>", Luck.StatSummaryLine(Math.Round(Luck.CurrentStatFloat,2).ToString()))
                         .Replace("<fortuneLine>", HarvestingFortune.StatSummaryLine())
                         ));
             if (Luck.CurrentRoll <= 0)

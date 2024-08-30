@@ -140,13 +140,13 @@ Mods: {
 				'''
 			CrimsonHeart:
 				'''
-				Grants <hp> Health Per Quality, <ms> Movement Speed per quality
+				Grants <hp> Health per quality, <ms> Movement Speed per quality
 				<fortune> Fishing Fortune per quality, increasing your Fishing drops.
 				Health Bonus: <hpLine>
 				Movement Speed Bonus: <msLine>
 				Fishing Fortune Bonus: <fortuneLine>
 				'''
-							FairyBell:
+			FairyBell:
 				'''
 				Grants <haste> Pet Ability Haste per quality which increases
 				how frequently you can use your current Pet's ability and increases 
@@ -155,23 +155,23 @@ Mods: {
 				Pet Ability Haste Bonus: <hasteLine>
 				Global Fortune Bonus: <fortuneLine>
 				'''
-							JackOLantern:
+			JackOLantern:
 				'''
-				Grants <atkSpd> Attack Speed Per Quality, <luck> Luck per quality
+				Grants <atkSpd> Attack Speed per quality, <luck> Luck per quality
 				and <fortune> Harvesting Fortune per quality
 				Attack Speed Bonus: <atkSpdLine>
 				Luck Bonus: <luckLine>
 				Harvesting Fortune Bonus: <fortuneLine>
 				'''
-							JewelOfLight:
+			JewelOfLight:
 				'''
-				Grants <moveSpd> Movement Speed Per Quality, <wingTime> seconds Wing Time per quality,
+				Grants <moveSpd> Movement Speed per quality, <wingTime> seconds Wing Time per quality,
 				and <acceleration> Acceleration per quality.
 				Movement Speed Bonus: <moveSpdLine>
 				Wing-Time Bonus: <wingTimeLine>
 				Acceleration Bonus: <accelerationLine>
 				'''
-							MagicLantern:
+			MagicLantern:
 				'''
 				Grants <dr> Damage Reduction per quality, <fortune> Mining Fortune per quality, 
 				increasing your Mining drops, <def> Defense per quality and <defPercent> Defense per quality.
@@ -182,7 +182,7 @@ Mods: {
 				'''
 			ShadowOrb:
 				'''
-				Grants <mana> Mana Per Quality, <ms> Movement Speed per quality
+				Grants <mana> Mana per quality, <ms> Movement Speed per quality
 				<fortune> Harvesting Fortune per quality, increasing your Harvesting drops.
 				Mana Bonus: <manaLine>
 				Movement Speed Bonus: <msLine>
@@ -196,7 +196,7 @@ Mods: {
 				Crit Chance by <crit> per quality. Current: <critLine>,
 				Ranged % Armor Pen by <rangedPen> per quality. Current: <rangedPenLine>,
 				Ranged Crit Damage by <rangedCritDmg> per quality. Current: <rangedCritDmgLine>,
-				Max Minion Slots by <minion> per quality. Current: <minionLine>,
+				Summoner Flat Armor Pen by <summonerPen> per quality. Current: <summonerPenLine>,
 				Whip Range by <whip> per quality. Current: <whipLine>,
 				Mana Potion Effectiveness by <manaPotion> per quality. Current: <manaPotionLine>,
 				Maximum Mana by <mana> per quality. Current: <manaLine>,
@@ -205,7 +205,7 @@ Mods: {
 				'''
 			ToyGolem:
 				'''
-				Grants <lifeRegen> Life Regen Per Quality, <healthPercent> Health per quality,
+				Grants <lifeRegen> Life Regen per quality, <healthPercent> Health per quality,
 				and <manaRegen> Mana Regen per quality.
 				Life Regen Bonus: <lifeRegenLine>
 				Health Percentage Bonus: <healthPercentLine>
@@ -899,7 +899,7 @@ Mods: {
 				 * Increases ranged armor penetration by <armorPen>.
 				 * Increases ranged crit chance by <rangedCrit>%.
 				 * Increases ranged crit damage by <rangedCritDmg>%.
-				 * Increases ranged damage by <rangedDmg>.
+				 * Increases ranged damage by <rangedDmg>%.
 				'''
 			MagicTooltip:
 				'''
@@ -907,7 +907,7 @@ Mods: {
 				 * Increases maximum mana by <mana>.
 				 * Decreases mana costs by <manaCost>%.
 				 * Increases magic crit chance by <magicCrit>%.
-				 * Increases magic damage by <magicDmg>.
+				 * Increases magic damage by <magicDmg>%.
 				'''
 			SummonerTooltip:
 				'''
