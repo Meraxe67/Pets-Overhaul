@@ -39,6 +39,60 @@ Mods: {
 			// Supportive: Supportive
 		}
 
+		Commands: {
+			/* Help:
+				'''
+				[c/90C2AA:List of Pets Overhaul commands:] (commands are not case sensitive)
+				/pet fortune, /pet fortunestat, /pet fortunestats - Displays your current fortune stats and explains their functionality.
+				/pet vanity, /pet vanitypet - Explains how to use a 'vanity' Pet.
+				/pet junimo, /pet junimoscoreboard, /pet junimoleaderboard - Displays Top 3 Online Players with highest exp counts for all 3 skills of Junimo. Only returns your EXP & level values if you're in singleplayer.
+				/pet {mining|fishing|harvesting}scoreboard, /pet {mining|fishing|harvesting}leaderboard - Displays limitless amount of Online Players with highest chosen skill's exp counts from Junimo's 3 skills.
+				/pet faq, /pet question - Displays frequently asked questions regarding Pets Overhaul.
+							
+				''' */
+			/* FAQ:
+				'''
+				Q: Will there be crossmod content? & Is Pets Overhaul compatible with X mod?
+				A: Currently Calamity Addon is out with the name: "Pets Overhaul: Calamity Addon"! Next in plans is the Thorium Mod!
+				Q: Any way of increasing rolls of Light Pets?
+				A: Currently, no. There may be a feature added in future and is planned to have use of high rolls, so its advised to keep your max rolls.
+				Q: How do I get X Pet?
+				A: Refer to Wikis to figure how to obtain a certain Pet, vanilla Wiki can be a good helper with this.
+				Q: Why am I randomly getting fishes, crates etc. in my inventory?
+				A: 99% due to your autofishing mod catching fishes procs your Fishing Fortune. (refer to /pet fortune for more info)
+				Q: Why is my Pet effects not working? & How do Pet Effects become activated?
+				A: Make sure the Pet effects you want to take in place are in the Pet slot, which locates in 'Equipment' section, on top of your Helmet slot.		
+				''' */
+			/* FortuneInfo:
+				'''
+				"All fortune stats increase amount of items obtained in said category of items. (Ex. Ores = Mining Fortune)
+				         \nThey work with 100% effectiveness for items gained by Pets of same Class, 50% for items gained through non-pet means.
+				         \nFor example: If you have 100 Harvesting Fortune, gathering 3 Dayblooms by hand and +2 with Magical Pumpkin Seed (Squashling Pet)
+				         \nWill result in 1.5 (item gained through non-pet means, 50% effective) + 2 (item gained through Pet perk, 100% effective) more Daybloom.
+				''' */
+			/* FortuneCurrent:
+				'''
+				[c/90C2AA:Global Fortune] - While working with 100% effectiveness on non-classified Pet Items,
+				         works with 50% effectiveness with everything else. Your Current Global Fortune: <global>
+				         [c/96A8B0:Mining Fortune] - Ores, gems etc. Your Current Mining Fortune: <mining>
+				         [c/0382E9:Fishing Fortune] - Fishes, crates etc. Your Current Fishing Fortune: <fishing>
+				         [c/CDFF00:Harvesting Fortune] - Herbs, plants, trees etc. Your Current Harvesting Fortune: <harvesting>
+				''' */
+			/* VanityPet:
+				'''
+				Step 1: Equip the pet you don't want to be visible, but want its effects active in your Pet Slot.
+				         Step 2: Disable the currently equipped Pet's visibility from little eye next to the Pet Slot.
+				         Step 3: 'Use' the Pet you want to be visible via the Pet Item from your inventory. Done!
+									
+				''' */
+			// ArgumentInvalid: Given argument was invalid, here is list of Pets Overhaul commands: (commands are not case sensitive)
+			// OneArgument: Only one argument was expected, make sure you're not using spaces for an argument. List of Pets Overhaul commands: (commands are not case sensitive)
+			// UseInMultiplayer: Please use this command on Multiplayer! If you want to see your Junimo Skills, use /pet junimo, /pet junimoscoreboard or /pet junimoleaderboard
+			// SinglePlayerJunimo: "[c/<color>:Your Junimo <class> Level: <level> Your Junimo <class> EXP: <exp>]"
+			// LeaderboardList: "[c/<color>:List of Players with highest Junimo <class> EXP:]"
+			// PlayerRankings: <player>'s <class> Level: <level> <class> Exp: <exp>
+		}
+
 		Config: {
 			Personalization: 个性化设置
 			// HeaderDisplay: Display Related Settings

@@ -119,5 +119,9 @@ namespace PetsOverhaul.Systems
         {
             return "[c/" + LowQuality.Hex3() + ":" + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.NotRolled") + "]";
         }
+        public static string PetClassLocalized(PetClasses petClass)
+        {
+            return Language.GetTextValue("Mods.PetsOverhaul.Classes." + petClass.ToString());
+        }
     }
 }
