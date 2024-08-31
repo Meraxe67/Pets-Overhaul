@@ -1,7 +1,9 @@
-﻿using PetsOverhaul.Config;
+﻿using PetsOverhaul.Buffs;
+using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
@@ -34,13 +36,24 @@ namespace PetsOverhaul.PetEffects
                 Player.npcTypeNoAggro[NPCID.WaterSphere] = true;
                 if (Player.ZoneDungeon == true)
                 {
-                    Player.AddImmuneTime(ImmunityCooldownID.TileContactDamage, 1);
-                    Player.buffImmune[BuffID.Bleeding] = true;
                     Player.GetArmorPenetration<GenericDamageClass>() += dungArmorPenBonus;
                     Player.lifeRegen += lifeRegen;
                 }
                 Player.GetArmorPenetration<GenericDamageClass>() += armorPen;
             }
+        }
+        public override void Load()
+        {
+            On_Collision.CanTileHurt += PreventSpikesHurt;
+        }
+        private static bool PreventSpikesHurt(On_Collision.orig_CanTileHurt orig, ushort type, int i, int j, Player player)
+        {
+            bool hurt = orig(type, i, j, player);
+            if (type == TileID.Spikes && player.ZoneDungeon && player.miscEquips[0].type == ItemID.BoneKey && player.HasBuff(ModContent.BuffType<ObliviousPet>()) == false)
+            {
+                hurt = false;
+            }
+            return hurt;
         }
     }
     public sealed class BoneKey : GlobalItem
