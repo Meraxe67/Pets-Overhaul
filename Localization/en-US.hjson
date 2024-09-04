@@ -277,17 +277,6 @@ Mods: {
 		}
 
 		PetItemTooltips: {
-			Seaweed:
-				'''
-				<class>
-				- Press Pet Ability Keybind <keybind> to Harden your Turtle's shell.
-				 * Next <hitCount> hits taken within <shellDuration> seconds are modified.
-				 * Hits deal <reducedDmg>% less damage and deal no knockback.
-				 * <reflect>% of pre-mitigation damage taken is reflected back to the attacker.
-				- Increases defense by +<flat>, and by <def>%.
-				- Grants <kbResist>% knockback resist.
-				- Reduces movement speed by <moveSpd>% and all damage by <dmg>%.
-				'''
 			AmberMosquito:
 				'''
 				<class>
@@ -718,6 +707,17 @@ Mods: {
 				 * Increases summon damage by <atkSpdToDmg>% of whip attack speed.
 				 * Increases whip range by <atkSpdToRange>% of whip attack speed.
 				'''
+			Seaweed:
+				'''
+				<class>
+				- Press Pet Ability Keybind <keybind> to Harden your Turtle's shell.
+				 * Next <hitCount> hits taken within <shellDuration> seconds are modified.
+				 * Hits deal <reducedDmg>% less damage and deal no knockback.
+				 * <reflect>% of pre-mitigation damage taken is reflected back to the attacker.
+				- Increases defense by <def>%.
+				- Grants <kbResist>% knockback resist.
+				- Reduces movement speed by <moveSpd>%.
+				'''
 			LightningCarrot:
 				'''
 				<class>
@@ -809,6 +809,7 @@ Mods: {
 				- All damage you take and inflict will be dealt with over time.
 				- You take <recievedMult>x damage and store the damage to be dealt with over time.
 				 * Receive 1/<recievedHowLong>th of all damage stored every second.
+				 * It will count as you dodged the initial attack, taking no knockback.
 				- Enemies take <dealtMult>x damage and store the damage to be dealt with over time.
 				 * They receive stored damage over 4 seconds.
 				- If the enemy can die to your hit without the DOT, they instantly get executed.
@@ -1169,9 +1170,26 @@ Mods: {
 					Current Crit Chance Boost: <crit>%
 					'''
 			}
+
+			HardenedShell: {
+				DisplayName: Turtle Shell Hardened!
+				Description:
+					'''
+					Your Turtle currently hardened its shell.
+					Incoming hits do less damage, do no knockback
+					and will be reflected back to attacker.
+					Remaining amount of hits: <hit>
+					'''
+			}
 		}
 
 		Items: {
+			GlommersGoop: {
+				DisplayName: Glommer's Goop
+				Tooltip: '''"Weird bug make weird poop."'''
+				Mana: Consumes 50 sanity. (Mana in Terraria world.)
+			}
+
 			EndlessBalloonSack: {
 				DisplayName: Endless Balloon Sack
 				Tooltip: Filled with Party Girl's whole bathtub

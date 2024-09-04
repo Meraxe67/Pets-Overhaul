@@ -15,8 +15,7 @@ namespace PetsOverhaul.PetEffects
     {
         public override PetClasses PetClassSecondary => PetClasses.Defensive;
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
-        public int armorPen = 5;
-        public int dungArmorPenBonus = 3;
+        public int armorPen = 10;
         public int lifeRegen = 8;
         public override void PostUpdateEquips()
         {
@@ -36,7 +35,6 @@ namespace PetsOverhaul.PetEffects
                 Player.npcTypeNoAggro[NPCID.WaterSphere] = true;
                 if (Player.ZoneDungeon == true)
                 {
-                    Player.GetArmorPenetration<GenericDamageClass>() += dungArmorPenBonus;
                     Player.lifeRegen += lifeRegen;
                 }
                 Player.GetArmorPenetration<GenericDamageClass>() += armorPen;
@@ -74,7 +72,6 @@ namespace PetsOverhaul.PetEffects
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BoneKey")
                 .Replace("<class>", PetTextsColors.ClassText(dungeonGuardian.PetClassPrimary, dungeonGuardian.PetClassSecondary))
                         .Replace("<armorPen>", dungeonGuardian.armorPen.ToString())
-                        .Replace("<dungArmorPen>", dungeonGuardian.dungArmorPenBonus.ToString())
                         .Replace("<dungRegen>", dungeonGuardian.lifeRegen.ToString())
                         ));
         }

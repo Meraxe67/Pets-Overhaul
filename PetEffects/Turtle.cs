@@ -1,4 +1,5 @@
-﻿using PetsOverhaul.Config;
+﻿using PetsOverhaul.Buffs;
+using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
@@ -16,17 +17,15 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
         public float moveSpd = 0.12f;
         public float def = 0.11f;
-        public float kbResist = 0.75f;
-        public float dmgReduce = 0.04f;
-        public int flatDef = 1;
+        public float kbResist = 0.55f;
 
         private int timer = 0;
-        private int currentStacks = 0;
+        internal int currentStacks = 0;
         public int shellHardenDuration = 900;
-        public int shellHardenStacks = 5;
+        public int shellHardenStacks = 7;
         public int shellHardenCd = 2100;
         public float dmgReduceShellHarden = 0.08f;
-        public float dmgReflect = 0.5f;
+        public float dmgReflect = 0.7f;
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.Seaweed))
@@ -44,10 +43,8 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUseWithSwapCd(ItemID.Seaweed))
             {
-                Player.statDefense += flatDef;
                 Player.statDefense *= def+1f;
                 Player.moveSpeed -= moveSpd;
-                Player.GetDamage<GenericDamageClass>() -= dmgReduce;
             }
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
@@ -84,6 +81,7 @@ namespace PetsOverhaul.PetEffects
                 timer = shellHardenDuration;
                 currentStacks = shellHardenStacks;
                 Pet.timer = Pet.timerMax;
+                Player.AddBuff(ModContent.BuffType<HardenedShell>(), shellHardenDuration);
             }
         }
     }
@@ -111,9 +109,7 @@ namespace PetsOverhaul.PetEffects
                 .Replace("<reflect>", Math.Round(turtle.dmgReflect*100,2).ToString())
                         .Replace("<def>", Math.Round(turtle.def*100,2).ToString())
                         .Replace("<kbResist>", Math.Round(turtle.kbResist*100,2).ToString())
-                        .Replace("<flat>", turtle.flatDef.ToString())
                         .Replace("<moveSpd>", Math.Round(turtle.moveSpd * 100, 2).ToString())
-                        .Replace("<dmg>", Math.Round(turtle.dmgReduce * 100, 2).ToString())
                         ));
         }
     }
