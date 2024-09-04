@@ -259,7 +259,7 @@ namespace PetsOverhaul.Systems
         /// <returns>Returns amount calculated, irrelevant to Player's health cap, or the lifeSteal cap etc.</returns>
         public int PetRecovery(int baseAmount, float percentageAmount, int flatIncrease = 0, bool manaSteal = false, bool isLifesteal = true, bool doHeal = true)
         {
-            float num = baseAmount * (manaSteal ? 1 : (petHealMultiplier * ((isLifesteal && Player.HasBuff(BuffID.MoonLeech)) ? (percentageAmount * 0.33f) : percentageAmount)));
+            float num = baseAmount * (manaSteal ? percentageAmount : (petHealMultiplier * ((isLifesteal && Player.HasBuff(BuffID.MoonLeech)) ? (percentageAmount * 0.33f) : percentageAmount)));
             int calculatedAmount = (int)num;
             if (Main.rand.NextFloat(0, 1) < num % 1)
             {
@@ -443,7 +443,6 @@ namespace PetsOverhaul.Systems
             {
                 modifiers.FinalDamage *= 1f + ModContent.GetInstance<Personalization>().DifficultAmount * 0.01f;
             }
-
             modifiers.ModifyHurtInfo += (ref Player.HurtInfo info) =>
             {
                 if (info.Damage > currentShield && currentShield > 0)
@@ -458,6 +457,18 @@ namespace PetsOverhaul.Systems
                     shieldToBeReduced += currentShield;
                 }
             };
+            if (ModContent.GetInstance<Personalization>().HurtSoundDisabled == false && Player.GetModPlayer<PetSounds>().PetItemIdToHurtSound.ContainsKey(Player.miscEquips[0].type))
+            {
+                modifiers.DisableSound();
+            }
+
+        }
+        public override void OnHurt(Player.HurtInfo info)
+        {
+            if (ModContent.GetInstance<Personalization>().HurtSoundDisabled == false)
+            {
+                Player.GetModPlayer<PetSounds>().PlayHurtSoundFromItemId(Player.miscEquips[0].type);
+            }
         }
         public override bool ConsumableDodge(Player.HurtInfo info)
         {
@@ -573,12 +584,14 @@ namespace PetsOverhaul.Systems
                     Main.NewText(Language.GetTextValue("Mods.PetsOverhaul.CalamityDetected"));
             }
         }
-        public override void OnHurt(Player.HurtInfo info)
+        public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
         {
-            if (ModContent.GetInstance<Personalization>().HurtSoundDisabled == false)
+            if (ModContent.GetInstance<Personalization>().DeathSoundDisabled == false)
             {
-                info.SoundDisabled = Player.GetModPlayer<PetSounds>().PlayHurtSoundFromItemId(Player.miscEquips[0].type) != ReLogic.Utilities.SlotId.Invalid;
+                playSound = Player.GetModPlayer<PetSounds>().PlayKillSoundFromItemId(Player.miscEquips[0].type) == ReLogic.Utilities.SlotId.Invalid;
             }
+
+            return base.PreKill(damage, hitDirection, pvp, ref playSound, ref genGore, ref damageSource);
         }
         public override void UpdateEquips()
         {
@@ -607,15 +620,6 @@ namespace PetsOverhaul.Systems
         {
             timer = -1;
             petShield.Clear();
-        }
-        public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
-        {
-            if (ModContent.GetInstance<Personalization>().DeathSoundDisabled == false)
-            {
-                playSound = Player.GetModPlayer<PetSounds>().PlayKillSoundFromItemId(Player.miscEquips[0].type) == ReLogic.Utilities.SlotId.Invalid;
-            }
-
-            return base.PreKill(damage, hitDirection, pvp, ref playSound, ref genGore, ref damageSource);
         }
         public override void ModifyCaughtFish(Item fish)
         {
