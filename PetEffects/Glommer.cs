@@ -1,5 +1,6 @@
 ﻿using PetsOverhaul.Buffs;
 using PetsOverhaul.Config;
+using PetsOverhaul.Items;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUse(ItemID.GlommerPetItem) && Main.rand.NextBool(18000))
             {
-                Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.GlobalItem), ItemID.PoopBlock);
+                Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.GlobalItem), ModContent.ItemType<GlommersGoop>());
             }
 
             if (Pet.PetInUseWithSwapCd(ItemID.GlommerPetItem))
