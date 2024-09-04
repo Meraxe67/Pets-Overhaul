@@ -8,22 +8,13 @@ namespace PetsOverhaul.Systems
     {
         public static void MasterPetCraft(int result, int itemToPairWithMasteryShard)
         {
-            Recipe.Create(result).
-            AddIngredient(ModContent.ItemType<MasteryShard>()).
-            AddIngredient(itemToPairWithMasteryShard).
-            Register();
+            Recipe.Create(result)
+            .AddIngredient(ModContent.ItemType<MasteryShard>())
+            .AddIngredient(itemToPairWithMasteryShard)
+            .Register();
         }
         public override void AddRecipes()
         {
-            Recipe.Create(ItemID.ShadowOrb)
-               .AddIngredient(ItemID.ShadowScale, 12)
-               .AddTile(TileID.Anvils)
-               .Register();
-            Recipe.Create(ItemID.CrimsonHeart)
-               .AddIngredient(ItemID.TissueSample, 12)
-               .AddTile(TileID.Anvils)
-               .Register();
-
             MasterPetCraft(ItemID.KingSlimePetItem, ItemID.KingSlimeTrophy);
             MasterPetCraft(ItemID.EyeOfCthulhuPetItem, ItemID.EyeofCthulhuTrophy);
             MasterPetCraft(ItemID.EaterOfWorldsPetItem, ItemID.EaterofWorldsTrophy);
@@ -49,6 +40,15 @@ namespace PetsOverhaul.Systems
             MasterPetCraft(ModContent.ItemType<LihzahrdWrench>(), ItemID.GolemTrophy);
             MasterPetCraft(ModContent.ItemType<PrismaticOptic>(), ItemID.FairyQueenTrophy);
             MasterPetCraft(ModContent.ItemType<PumpkingsHead>(), ItemID.PumpkingTrophy);
+
+            Recipe.Create(ItemID.ShadowOrb)
+                .AddIngredient(ItemID.ShadowScale, 12)
+                .AddTile(TileID.Anvils)
+                .Register();
+            Recipe.Create(ItemID.CrimsonHeart)
+                .AddIngredient(ItemID.TissueSample, 12)
+                .AddTile(TileID.Anvils)
+                .Register();
 
             Recipe.Create(ItemID.GolemPetItem)
                 .AddIngredient(ItemID.LunarTabletFragment, 10)

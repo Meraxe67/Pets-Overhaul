@@ -16,9 +16,9 @@ namespace PetsOverhaul.Items
         }
         public override void AddRecipes()
         {
-            Recipe recipe = Recipe.Create(ModContent.ItemType<EndlessBalloonSack>());
-            recipe.AddIngredient(ItemID.GelBalloon, 10);
-            recipe.Register();
+            Recipe.Create(ModContent.ItemType<EndlessBalloonSack>())
+                .AddIngredient(ItemID.GelBalloon, 10)
+                .Register();
         }
     }
 }

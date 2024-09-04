@@ -6,6 +6,10 @@ namespace PetsOverhaul.Items
 {
     public class Egg : ModItem
     {
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 99;
+        }
         public override void SetDefaults()
         {
             Item.CloneDefaults(ItemID.RottenEgg);
@@ -15,9 +19,11 @@ namespace PetsOverhaul.Items
         }
         public override void AddRecipes()
         {
-            Recipe recipe = Recipe.Create(ItemID.FriedEgg);
-            recipe.AddIngredient(ModContent.ItemType<Egg>(), 3);
-            recipe.Register();
+            Recipe.Create(ItemID.FriedEgg)
+                .AddIngredient(ModContent.ItemType<Egg>(), 3)
+                .AddTile(TileID.Furnaces)
+                .AddTile(TileID.CookingPots)
+                .Register();
         }
     }
 }

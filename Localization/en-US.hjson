@@ -525,7 +525,8 @@ Mods: {
 				- Increases your Maximum mana by <currentHaste>%. (Equal to your current pet ability haste)
 				- Recovers <manaRecover> mana every <manaRecoverCd> second.
 				 * This recovery is unaffected by any factor whatsoever.
-				- Glommer also poops [i:5395] occasionally. (It won't recover 40 health!!)
+				- You may also get Glommer's Goop ([i:<goop>]) occasionally.
+				 * Useful for lighting things up & fertilizing! Probably shouldn't eat it.
 				'''
 			DD2PetDragon:
 				'''

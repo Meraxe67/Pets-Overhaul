@@ -77,6 +77,7 @@ namespace PetsOverhaul.PetEffects
                         .Replace("<currentHaste>", Math.Round(glommer.Pet.abilityHaste * 100, 2).ToString())
                         .Replace("<manaRecover>", glommer.glommerSanityRecover.ToString())
                         .Replace("<manaRecoverCd>", Math.Round(glommer.glommerSanityTime / 60f, 2).ToString())
+                        .Replace("<goop>",ModContent.ItemType<GlommersGoop>().ToString())
                         ));
         }
     }

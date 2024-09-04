@@ -9,6 +9,10 @@ namespace PetsOverhaul.Items
 {
     public class GlommersGoop : ModItem
     {
+        public override void SetStaticDefaults()
+        {
+            Item.ResearchUnlockCount = 10;
+        }
         public override void SetDefaults()
         {
             Item.healLife = 40;
