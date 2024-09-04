@@ -208,7 +208,16 @@ namespace PetsOverhaul.Systems
                         PitchVariance = 0.5f, Volume = 0.5f
                     }
                 }
-            },
+            }, {
+                ItemID.BerniePetItem,
+                    new SoundStyle[] {
+                        SoundID.DSTMaleHurt with {
+                            PitchVariance = 0.3f
+                        }, SoundID.DSTFemaleHurt with {
+                            PitchVariance = 0.3f
+                        }
+                    }
+                }
         };
         public Dictionary<int, SoundStyle[]> PetItemIdToAmbientSound = new Dictionary<int, SoundStyle[]>() {
             {
@@ -327,9 +336,9 @@ namespace PetsOverhaul.Systems
             {
                 itemsHurtSound = PetItemIdToHurtSound[itemId][Main.rand.Next(PetItemIdToHurtSound[itemId].Length)];
             }
-            else if (itemId == ItemID.BerniePetItem)
+            if (itemId == ItemID.BerniePetItem)
             {
-                itemsHurtSound = Player.Male == true ? (SoundID.DSTMaleHurt with { PitchVariance = 0.2f }) : (SoundID.DSTFemaleHurt with { PitchVariance = 0.2f });
+                itemsHurtSound = PetItemIdToHurtSound[itemId][Player.Male == true ? 0 : 1];
             }
 
             return itemsHurtSound == SoundID.MenuClose ? ReLogic.Utilities.SlotId.Invalid : SoundEngine.PlaySound(itemsHurtSound, Player.Center);
