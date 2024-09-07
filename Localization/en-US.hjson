@@ -715,6 +715,7 @@ Mods: {
 				 * Next <hitCount> hits taken within <shellDuration> seconds are modified.
 				 * Hits deal <reducedDmg>% less damage and deal no knockback.
 				 * <reflect>% of pre-mitigation damage taken is reflected back to the attacker.
+				 * Reflection damage is reduced to <projReflect>% for damage taken by a Projectile.
 				- Increases defense by <def>%.
 				- Grants <kbResist>% knockback resist.
 				- Reduces movement speed by <moveSpd>%.

@@ -1025,6 +1025,7 @@ namespace PetsOverhaul.Systems
         public bool isPlanteraProjectile = false;
         public bool petProj = false;
         public bool isFromSentry = false;
+        public int sourceNpcId = 0;
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
             isPlanteraProjectile = false;
@@ -1045,6 +1046,10 @@ namespace PetsOverhaul.Systems
             if (source is EntitySource_Parent parent2 && parent2.Entity is Projectile proj2 && proj2.sentry)
             {
                 isFromSentry = true;
+            }
+            if (source is EntitySource_Parent parent3 && parent3.Entity is NPC npc)
+            {
+                sourceNpcId = npc.whoAmI;
             }
         }
     }

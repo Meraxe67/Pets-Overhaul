@@ -4,6 +4,7 @@ using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
@@ -22,10 +23,11 @@ namespace PetsOverhaul.PetEffects
         private int timer = 0;
         internal int currentStacks = 0;
         public int shellHardenDuration = 900;
-        public int shellHardenStacks = 7;
+        public int shellHardenStacks = 6;
         public int shellHardenCd = 2100;
-        public float dmgReduceShellHarden = 0.08f;
-        public float dmgReflect = 0.7f;
+        public float dmgReduceShellHarden = 0.07f;
+        public float dmgReflect = 1.1f;
+        public float dmgReflectProjectile = 0.6f;
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.Seaweed))
@@ -64,12 +66,22 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUseWithSwapCd(ItemID.Seaweed) && currentStacks > 0)
             {
-                if (info.DamageSource.TryGetCausingEntity(out Entity entity) && entity is NPC npc && npc.active == true && npc.immortal == false)
+                if (info.DamageSource.TryGetCausingEntity(out Entity entity))
                 {
-                    NPC.HitInfo hit = new NPC.HitInfo() with { Crit = false, Damage = (int)(info.SourceDamage * dmgReflect), DamageType = DamageClass.Generic, HitDirection = npc.direction, Knockback = 1f };
-                    npc.StrikeNPC(hit);
-                    if (Main.netMode != NetmodeID.SinglePlayer)
-                        NetMessage.SendStrikeNPC(npc, hit);
+                    NPC.HitInfo hit = new NPC.HitInfo() with { Crit = false, DamageType = DamageClass.Generic, HitDirection = info.HitDirection, Knockback = 1f };
+                    if (entity is Projectile projectile && projectile.TryGetGlobalProjectile<ProjectileSourceChecks>(out ProjectileSourceChecks proj))
+                    {
+                        NPC npc = Main.npc[proj.sourceNpcId];
+                        npc.StrikeNPC(hit with { Damage = (int)(info.SourceDamage * dmgReflectProjectile) });
+                        if (Main.netMode != NetmodeID.SinglePlayer)
+                            NetMessage.SendStrikeNPC(npc, hit);
+                    }
+                    else if (entity is NPC npc && npc.active == true && npc.immortal == false)
+                    {
+                        npc.StrikeNPC(hit with { Damage = (int)(info.SourceDamage * dmgReflect) });
+                        if (Main.netMode != NetmodeID.SinglePlayer)
+                            NetMessage.SendStrikeNPC(npc, hit);
+                    }
                 }
                 currentStacks--;
             }
@@ -107,6 +119,7 @@ namespace PetsOverhaul.PetEffects
                 .Replace("<shellDuration>", Math.Round(turtle.shellHardenDuration/60f,2).ToString())
                 .Replace("<reducedDmg>", Math.Round(turtle.dmgReduceShellHarden*100,2).ToString())
                 .Replace("<reflect>", Math.Round(turtle.dmgReflect*100,2).ToString())
+                .Replace("<projReflect>", Math.Round(turtle.dmgReflectProjectile * 100, 2).ToString())
                         .Replace("<def>", Math.Round(turtle.def*100,2).ToString())
                         .Replace("<kbResist>", Math.Round(turtle.kbResist*100,2).ToString())
                         .Replace("<moveSpd>", Math.Round(turtle.moveSpd * 100, 2).ToString())
