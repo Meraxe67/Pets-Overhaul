@@ -1,10 +1,8 @@
 ﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
-using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -25,8 +23,8 @@ namespace PetsOverhaul.LightPets
     }
     public sealed class FairyBell : GlobalItem
     {
-        public LightPetStat AbilityHaste = new(15,0.012f,0.1f);
-        public LightPetStat GlobalFortune = new(20,1,5);
+        public LightPetStat AbilityHaste = new(15, 0.012f, 0.1f);
+        public LightPetStat GlobalFortune = new(20, 1, 5);
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {

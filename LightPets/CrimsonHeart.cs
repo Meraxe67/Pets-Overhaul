@@ -1,10 +1,8 @@
 ﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
-using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -26,9 +24,9 @@ namespace PetsOverhaul.LightPets
     }
     public sealed class CrimsonHeart : GlobalItem
     {
-        public LightPetStat Health = new(10,1,10);
-        public LightPetStat MovementSpeed = new(15,0.005f,0.025f);
-        public LightPetStat FishingFortune = new(15,1,5);
+        public LightPetStat Health = new(10, 1, 10);
+        public LightPetStat MovementSpeed = new(15, 0.005f, 0.025f);
+        public LightPetStat FishingFortune = new(15, 1, 5);
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
@@ -85,7 +83,7 @@ namespace PetsOverhaul.LightPets
 
                         .Replace("<hp>", Health.BaseAndPerQuality())
                         .Replace("<ms>", MovementSpeed.BaseAndPerQuality())
-                        .Replace("<fortune>",FishingFortune.BaseAndPerQuality())
+                        .Replace("<fortune>", FishingFortune.BaseAndPerQuality())
 
                         .Replace("<hpLine>", Health.StatSummaryLine())
                         .Replace("<msLine>", MovementSpeed.StatSummaryLine())

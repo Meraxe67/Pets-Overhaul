@@ -1,5 +1,4 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using PetsOverhaul.Config;
+﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
@@ -32,10 +31,10 @@ namespace PetsOverhaul.PetEffects
         public int defense = 10;
         public StatModifier HighestDamage
         {
-            get 
+            get
             {
                 StatModifier[] stats = { Player.GetDamage<MeleeDamageClass>(), Player.GetDamage<RangedDamageClass>(), Player.GetDamage<MagicDamageClass>(), Player.GetDamage<SummonDamageClass>() };
-                return stats.MaxBy(x => x.Additive); 
+                return stats.MaxBy(x => x.Additive);
             }
             set { }
         }

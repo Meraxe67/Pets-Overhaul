@@ -1,18 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using MonoMod.Cil;
 using PetsOverhaul.PetEffects;
 using PetsOverhaul.Systems;
-using System;
-using System.Runtime.CompilerServices;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
-using Terraria.GameContent.Bestiary;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
-using Terraria.ModLoader.Utilities;
 
 namespace PetsOverhaul.NPCs
 {
@@ -98,9 +91,9 @@ namespace PetsOverhaul.NPCs
             waitTime--;
             lifespan--;
             frameTimer++;
-            if (frameTimer >= amountOfFrames*nextFrame)
+            if (frameTimer >= amountOfFrames * nextFrame)
                 frameTimer = 0;
-            
+
             if (lifespan <= 0)
             {
                 Kill();

@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
-using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -33,9 +32,9 @@ namespace PetsOverhaul.LightPets
     }
     public sealed class JackOLantern : GlobalItem
     {
-        public LightPetStat AttackSpeed = new(30,0.003f,0.04f);
-        public LightPetStat Luck = new(15,0.01f,0.03f);
-        public LightPetStat HarvestingFortune = new(20,1,10);
+        public LightPetStat AttackSpeed = new(30, 0.003f, 0.04f);
+        public LightPetStat Luck = new(15, 0.01f, 0.03f);
+        public LightPetStat HarvestingFortune = new(20, 1, 10);
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
@@ -91,11 +90,11 @@ namespace PetsOverhaul.LightPets
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.JackOLantern")
 
                         .Replace("<atkSpd>", AttackSpeed.BaseAndPerQuality())
-                        .Replace("<luck>", Luck.BaseAndPerQuality(Luck.StatPerRoll.ToString(),Luck.BaseStat.ToString()))
+                        .Replace("<luck>", Luck.BaseAndPerQuality(Luck.StatPerRoll.ToString(), Luck.BaseStat.ToString()))
                         .Replace("<fortune>", HarvestingFortune.BaseAndPerQuality())
 
                         .Replace("<atkSpdLine>", AttackSpeed.StatSummaryLine())
-                        .Replace("<luckLine>", Luck.StatSummaryLine(Math.Round(Luck.CurrentStatFloat,2).ToString()))
+                        .Replace("<luckLine>", Luck.StatSummaryLine(Math.Round(Luck.CurrentStatFloat, 2).ToString()))
                         .Replace("<fortuneLine>", HarvestingFortune.StatSummaryLine())
                         ));
             if (Luck.CurrentRoll <= 0)

@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
-using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -21,7 +20,7 @@ namespace PetsOverhaul.LightPets
                 Player.statDefense += moonlord.Defense.CurrentStatInt;
                 Player.moveSpeed += moonlord.MovementSpeed.CurrentStatFloat;
                 Player.GetDamage<GenericDamageClass>() += moonlord.DamageAll.CurrentStatFloat;
-                Player.GetCritChance<GenericDamageClass>() += moonlord.CritChanceAll.CurrentStatFloat*100;
+                Player.GetCritChance<GenericDamageClass>() += moonlord.CritChanceAll.CurrentStatFloat * 100;
                 Player.whipRangeMultiplier += moonlord.WhipRange.CurrentStatFloat;
                 Player.statManaMax2 += moonlord.Mana.CurrentStatInt;
 
@@ -63,18 +62,18 @@ namespace PetsOverhaul.LightPets
     }
     public sealed class SuspiciousLookingTentacle : GlobalItem
     {
-        public LightPetStat Defense = new(5,1);
-        public LightPetStat MovementSpeed  = new(20,0.004f);
-        public LightPetStat DamageAll = new(20,0.0025f);
-        public LightPetStat CritChanceAll = new(20,0.0025f);
-        public LightPetStat RangedPercentPenetration = new(5,0.025f);
-        public LightPetStat RangedCritDamage = new(5,0.008f);
+        public LightPetStat Defense = new(5, 1);
+        public LightPetStat MovementSpeed = new(20, 0.004f);
+        public LightPetStat DamageAll = new(20, 0.0025f);
+        public LightPetStat CritChanceAll = new(20, 0.0025f);
+        public LightPetStat RangedPercentPenetration = new(5, 0.025f);
+        public LightPetStat RangedCritDamage = new(5, 0.008f);
         public LightPetStat SummonerFlatPenetration = new(5, 3);
-        public LightPetStat WhipRange = new(5,0.03f);
+        public LightPetStat WhipRange = new(5, 0.03f);
         public LightPetStat ManaPotionIncrease = new(5, 0.05f);
         public LightPetStat Mana = new(5, 12);
-        public LightPetStat MeleeSize = new(5,0.04f);
-        public LightPetStat MeleeLifesteal = new(5,0.03f);
+        public LightPetStat MeleeSize = new(5, 0.04f);
+        public LightPetStat MeleeLifesteal = new(5, 0.03f);
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
@@ -245,7 +244,7 @@ namespace PetsOverhaul.LightPets
 
                         .Replace("<lifesteal>", MeleeLifesteal.BaseAndPerQuality())
                         .Replace("<lifestealLine>", MeleeLifesteal.StatSummaryLine())
-                        .Replace("<healAmount>",(Main.LocalPlayer.statDefense * 0.1f).ToString())
+                        .Replace("<healAmount>", (Main.LocalPlayer.statDefense * 0.1f).ToString())
                         ));
             if (CritChanceAll.CurrentRoll <= 0)
             {

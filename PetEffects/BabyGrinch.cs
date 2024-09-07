@@ -3,7 +3,6 @@ using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -72,7 +71,7 @@ namespace PetsOverhaul.PetEffects
 
             BabyGrinch babyGrinch = Main.LocalPlayer.GetModPlayer<BabyGrinch>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BabyGrinchMischiefWhistle")
-                .Replace("<class>", PetTextsColors.ClassText(babyGrinch.PetClassPrimary,babyGrinch.PetClassSecondary))
+                .Replace("<class>", PetTextsColors.ClassText(babyGrinch.PetClassPrimary, babyGrinch.PetClassSecondary))
                 .Replace("<slowAmount>", Math.Round(babyGrinch.grinchSlow * 100, 2).ToString())
                 .Replace("<slowRange>", Math.Round(babyGrinch.grinchRange / 16f, 2).ToString())
                 .Replace("<dmg>", Math.Round(babyGrinch.winterDmg * 100, 2).ToString())

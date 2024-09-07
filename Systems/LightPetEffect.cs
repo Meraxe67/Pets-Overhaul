@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -60,7 +56,7 @@ namespace PetsOverhaul.Systems
         /// </summary>
         public string StatSummaryLine(string currentStat)
         {
-            return PetTextsColors.LightPetRarityColorConvert(currentStat, CurrentRoll, MaxRoll) + " " + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.Quality") + " " + 
+            return PetTextsColors.LightPetRarityColorConvert(currentStat, CurrentRoll, MaxRoll) + " " + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.Quality") + " " +
                 PetTextsColors.LightPetRarityColorConvert(CurrentRoll.ToString(), CurrentRoll, MaxRoll) + " " + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.OutOf") + " " + PetTextsColors.LightPetRarityColorConvert(MaxRoll.ToString(), CurrentRoll, MaxRoll);
         }
         /// <summary>

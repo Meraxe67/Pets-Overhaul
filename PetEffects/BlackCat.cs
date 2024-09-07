@@ -79,7 +79,7 @@ namespace PetsOverhaul.PetEffects
             {
                 SoundEngine.PlaySound(SoundID.Item29 with { PitchRange = (-1f, -0.8f) }, Player.position);
                 int moonlightRoll = Main.rand.Next(moonlightLowest, moonlightHighest + 1);
-                moonlightRoll = GlobalPet.Randomizer((int)(moonlightRoll * (Player.luck + 1)*100));
+                moonlightRoll = GlobalPet.Randomizer((int)(moonlightRoll * (Player.luck + 1) * 100));
                 if (moonlightRoll == 0)
                 {
                     moonlightRoll = Main.rand.NextBool() ? -1 : 1;
@@ -108,11 +108,11 @@ namespace PetsOverhaul.PetEffects
                         default:
                             break;
                     }
-                    Player.Hurt(reason, moonlightRoll, 0, dodgeable: false, knockback: 0,scalingArmorPenetration:1f);
+                    Player.Hurt(reason, moonlightRoll, 0, dodgeable: false, knockback: 0, scalingArmorPenetration: 1f);
                 }
                 else
                 {
-                    
+
                     Pet.PetRecovery(moonlightRoll, 1f, isLifesteal: false);
                 }
                 Pet.timer = Pet.timerMax;
@@ -140,12 +140,12 @@ namespace PetsOverhaul.PetEffects
                 .Replace("<keybind>", PetTextsColors.KeybindText(Keybinds.UsePetAbility))
                 .Replace("<moonlightMin>", blackCat.moonlightLowest.ToString())
                 .Replace("<moonlightMax>", blackCat.moonlightHighest.ToString())
-                .Replace("<moonlightCd>", Math.Round(blackCat.moonlightCd/60f,2).ToString())
+                .Replace("<moonlightCd>", Math.Round(blackCat.moonlightCd / 60f, 2).ToString())
                 .Replace("<flatLuck>", blackCat.luckFlat.ToString())
                 .Replace("<minimumMoon>", blackCat.luckMoonLowest.ToString())
                 .Replace("<maximumMoon>", blackCat.luckMoonHighest.ToString())
                 .Replace("<moonLuck>", Math.Round(blackCat.currentMoonLuck, 2).ToString())
-                .Replace("<playerLuck>", Math.Round(blackCat.Player.luck,2).ToString())
+                .Replace("<playerLuck>", Math.Round(blackCat.Player.luck, 2).ToString())
             ));
         }
     }

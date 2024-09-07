@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using PetsOverhaul.Buffs;
 using PetsOverhaul.Config;
 using PetsOverhaul.Items;
 using PetsOverhaul.Systems;
@@ -9,7 +8,6 @@ using System.IO;
 using System.Linq;
 using Terraria;
 using Terraria.Audio;
-using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;

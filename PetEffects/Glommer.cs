@@ -5,7 +5,6 @@ using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -77,7 +76,7 @@ namespace PetsOverhaul.PetEffects
                         .Replace("<currentHaste>", Math.Round(glommer.Pet.abilityHaste * 100, 2).ToString())
                         .Replace("<manaRecover>", glommer.glommerSanityRecover.ToString())
                         .Replace("<manaRecoverCd>", Math.Round(glommer.glommerSanityTime / 60f, 2).ToString())
-                        .Replace("<goop>",ModContent.ItemType<GlommersGoop>().ToString())
+                        .Replace("<goop>", ModContent.ItemType<GlommersGoop>().ToString())
                         ));
         }
     }

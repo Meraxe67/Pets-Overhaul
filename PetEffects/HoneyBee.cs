@@ -4,7 +4,6 @@ using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -54,7 +53,7 @@ namespace PetsOverhaul.PetEffects
                     player.statLife += healAmount;
                 }
                 player.AddBuff(BuffID.Honey, (isBottledHoney ? healer.bottledHoneyBuff : healer.honeyfinHoneyBuff) / 2);
-                player.AddBuff(ModContent.BuffType<HoneyOverdose>(),healer.honeyOverdoseTime);
+                player.AddBuff(ModContent.BuffType<HoneyOverdose>(), healer.honeyOverdoseTime);
                 player.GetModPlayer<HoneyBee>().currentAbilityHasteBonus = healer.abilityHaste;
             }
             else

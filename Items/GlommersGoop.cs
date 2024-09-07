@@ -1,5 +1,4 @@
-﻿using PetsOverhaul.Systems;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -27,7 +26,7 @@ namespace PetsOverhaul.Items
             Item.useTurn = true;
             Item.UseSound = SoundID.Frog;
             Item.maxStack = Item.CommonMaxStack;
-            Item.value = Item.buyPrice(copper:50);
+            Item.value = Item.buyPrice(copper: 50);
             Item.useAnimation = 17;
             Item.useTime = 17;
             Item.useStyle = ItemUseStyleID.EatFood;
@@ -61,7 +60,7 @@ namespace PetsOverhaul.Items
         }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
-            tooltips.Insert(2,new(Mod, "UseMana", Language.GetTextValue("Mods.PetsOverhaul.Items.GlommersGoop.Mana")));
+            tooltips.Insert(2, new(Mod, "UseMana", Language.GetTextValue("Mods.PetsOverhaul.Items.GlommersGoop.Mana")));
         }
     }
 }

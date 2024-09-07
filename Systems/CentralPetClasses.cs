@@ -2,6 +2,8 @@
 using PetsOverhaul.Buffs;
 using PetsOverhaul.Config;
 using PetsOverhaul.Items;
+using PetsOverhaul.PetEffects;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,13 +11,11 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;
+using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
-using Terraria.GameInput;
-using System;
-using PetsOverhaul.PetEffects;
 
 namespace PetsOverhaul.Systems
 {
@@ -1016,40 +1016,6 @@ namespace PetsOverhaul.Systems
                     Dust dust = Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.Pixie, Main.rand.NextFloat(0f, 0.6f), Main.rand.NextFloat(-1f, 2f), 150, default, Main.rand.NextFloat(0.5f, 0.7f));
                     dust.velocity *= 0.2f;
                 }
-            }
-        }
-    }
-    public sealed class ProjectileSourceChecks : GlobalProjectile
-    {
-        public override bool InstancePerEntity => true;
-        public bool isPlanteraProjectile = false;
-        public bool petProj = false;
-        public bool isFromSentry = false;
-        public int sourceNpcId = 0;
-        public override void OnSpawn(Projectile projectile, IEntitySource source)
-        {
-            isPlanteraProjectile = false;
-            petProj = false;
-            isFromSentry = false;
-            if (source is EntitySource_ItemUse item && (item.Item.type == ItemID.VenusMagnum || item.Item.type == ItemID.NettleBurst || item.Item.type == ItemID.LeafBlower || item.Item.type == ItemID.FlowerPow || item.Item.type == ItemID.WaspGun || item.Item.type == ItemID.Seedler || item.Item.type == ItemID.GrenadeLauncher))
-            {
-                isPlanteraProjectile = true;
-            }
-            else if (source is EntitySource_Parent parent && parent.Entity is Projectile proj && (proj.type == ProjectileID.Pygmy || proj.type == ProjectileID.Pygmy2 || proj.type == ProjectileID.Pygmy3 || proj.type == ProjectileID.Pygmy4 || proj.type == ProjectileID.FlowerPow || proj.type == ProjectileID.SeedlerNut))
-            {
-                isPlanteraProjectile = true;
-            }
-            if (source is EntitySource_Pet { ContextType: EntitySourcePetIDs.PetProjectile })
-            {
-                petProj = true;
-            }
-            if (source is EntitySource_Parent parent2 && parent2.Entity is Projectile proj2 && proj2.sentry)
-            {
-                isFromSentry = true;
-            }
-            if (source is EntitySource_Parent parent3 && parent3.Entity is NPC npc)
-            {
-                sourceNpcId = npc.whoAmI;
             }
         }
     }

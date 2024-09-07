@@ -83,8 +83,8 @@ namespace PetsOverhaul.PetEffects
                         Velocity = new Vector2(0, -10),
                         Color = Color.DarkRed
                     }, Player.position);
-                    Pet.petShield.Add((Player.statDefense*2, shieldTime));
-                    Player.AddBuff(ModContent.BuffType<EocPetEnrage>(),phaseTime);
+                    Pet.petShield.Add((Player.statDefense * 2, shieldTime));
+                    Player.AddBuff(ModContent.BuffType<EocPetEnrage>(), phaseTime);
                 }
                 if (eocTimer <= phaseTime && eocTimer >= 0)
                 {

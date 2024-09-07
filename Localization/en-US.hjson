@@ -811,7 +811,7 @@ Mods: {
 				- All damage you take and inflict will be dealt with over time.
 				- You take <recievedMult>x damage and store the damage to be dealt with over time.
 				 * Receive 1/<recievedHowLong>th of all damage stored every second.
-				 * It will count as you dodged the initial attack, taking no knockback.
+				 * It will count as you dodged the initial attack, so you take no knockback.
 				- Enemies take <dealtMult>x damage and store the damage to be dealt with over time.
 				 * They receive stored damage over 4 seconds.
 				- If the enemy can die to your hit without the DOT, they instantly get executed.

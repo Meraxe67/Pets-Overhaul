@@ -1,13 +1,4 @@
-﻿using Microsoft.CodeAnalysis.Classification;
-using PetsOverhaul.Config;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria;
-using Terraria.Localization;
+﻿using Terraria;
 using Terraria.ModLoader;
 
 namespace PetsOverhaul.Systems

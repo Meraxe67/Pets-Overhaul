@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace PetsOverhaul.Buffs
 {
-    public class Mauled : ModBuff
+    public class Mauled : ModBuff //DrawEffects in NpcPet class
     {
         public int stacks = 0;
         public override void SetStaticDefaults()

@@ -1,5 +1,4 @@
 ﻿using PetsOverhaul.PetEffects;
-using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -9,7 +8,7 @@ namespace PetsOverhaul.Buffs
     /// <summary>
     /// This buff is for display & awareness only, has nothing to do with the effects itselves.
     /// </summary>
-    public sealed class HardenedShell : ModBuff 
+    public sealed class HardenedShell : ModBuff
     {
         public override void Update(Player player, ref int buffIndex)
         {

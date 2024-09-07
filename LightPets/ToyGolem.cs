@@ -1,10 +1,8 @@
 ﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
-using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -26,9 +24,9 @@ namespace PetsOverhaul.LightPets
     }
     public sealed class ToyGolem : GlobalItem
     {
-        public LightPetStat HealthRegen = new(4,1,-1);
+        public LightPetStat HealthRegen = new(4, 1, -1);
         public LightPetStat PercentHealth = new(35, 0.0025f, 0.025f);
-        public LightPetStat ManaRegen = new(20,5,30);
+        public LightPetStat ManaRegen = new(20, 5, 30);
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
@@ -82,7 +80,7 @@ namespace PetsOverhaul.LightPets
                 return;
             }
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.ToyGolem")
-    
+
                         .Replace("<lifeRegen>", HealthRegen.BaseAndPerQuality())
                         .Replace("<healthPercent>", PercentHealth.BaseAndPerQuality())
                         .Replace("<manaRegen>", ManaRegen.BaseAndPerQuality())

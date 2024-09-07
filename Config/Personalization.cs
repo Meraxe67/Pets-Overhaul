@@ -1,8 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using Terraria.Localization;
-using Terraria.ModLoader;
 using Terraria.ModLoader.Config;
 
 namespace PetsOverhaul.Config
@@ -82,7 +80,7 @@ namespace PetsOverhaul.Config
 
         [LabelKey("$Mods.PetsOverhaul.Config.LowCooldownTresholdLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.LowCooldownTresholdTooltip")]
-        [Range(30,600)]
+        [Range(30, 600)]
         [DefaultValue(150)]
         public int LowCooldownTreshold { get; set; }
         #endregion

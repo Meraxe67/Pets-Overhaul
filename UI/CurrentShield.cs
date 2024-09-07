@@ -1,15 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Terraria.UI;
-using Terraria;
-using Terraria.ModLoader;
-using System.Collections.Generic;
-using ReLogic.Graphics;
-using Terraria.GameContent;
-using PetsOverhaul.Systems;
 using PetsOverhaul.Config;
-using Terraria.ModLoader.UI;
-using Terraria.GameContent.UI.ResourceSets;
+using PetsOverhaul.Systems;
+using ReLogic.Graphics;
+using System.Collections.Generic;
+using Terraria;
+using Terraria.GameContent;
+using Terraria.ModLoader;
+using Terraria.UI;
 namespace PetsOverhaul.UI
 {
     class CurrentShield : UIElement
@@ -26,14 +24,14 @@ namespace PetsOverhaul.UI
                 ShieldLoc = ShieldSetting == "On the Player, Icon on the left" ? (new Vector2(Main.screenWidth - 70, Main.screenHeight - 110) / 2f) :
                     ShieldSetting == "On the Player, Icon on the right" ? (new Vector2(Main.screenWidth - 10, Main.screenHeight - 110) / 2f) :
                     ShieldSetting == "Next to the Healthbar, Icon on the left" ? new Vector2(Main.screenWidth * 0.81f - 35, Main.screenHeight * 0.03f - 5) :
-                    new Vector2(Main.screenWidth * 0.81f -5, Main.screenHeight * 0.03f - 5);
+                    new Vector2(Main.screenWidth * 0.81f - 5, Main.screenHeight * 0.03f - 5);
 
                 ValueLoc = ShieldSetting == "On the Player, Icon on the left" ? (new Vector2(Main.screenWidth, Main.screenHeight - 100) / 2f) :
                     ShieldSetting == "On the Player, Icon on the right" ? (new Vector2(Main.screenWidth - 60, Main.screenHeight - 100) / 2f) :
                     ShieldSetting == "Next to the Healthbar, Icon on the left" ? new Vector2(Main.screenWidth * 0.81f, Main.screenHeight * 0.03f) :
                     new Vector2(Main.screenWidth * 0.81f - 30, Main.screenHeight * 0.03f);
                 spriteBatch.Draw((Texture2D)ModContent.Request<Texture2D>("PetsOverhaul/UI/PetShield"), ShieldLoc, color);
-                spriteBatch.DrawString(FontAssets.MouseText.Value, CurrentShieldVal.ToString(), new Vector2(ValueLoc.X +2,ValueLoc.Y), Color.Black);
+                spriteBatch.DrawString(FontAssets.MouseText.Value, CurrentShieldVal.ToString(), new Vector2(ValueLoc.X + 2, ValueLoc.Y), Color.Black);
                 spriteBatch.DrawString(FontAssets.MouseText.Value, CurrentShieldVal.ToString(), ValueLoc, color);
             }
         }

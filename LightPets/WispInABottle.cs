@@ -1,11 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using PetsOverhaul.Config;
+using PetsOverhaul.Projectiles;
 using PetsOverhaul.Systems;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
-using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -40,10 +39,10 @@ namespace PetsOverhaul.LightPets
     }
     public sealed class WispInABottle : GlobalItem
     {
-        public LightPetStat MagicDamage = new(20,0.0045f,0.04f);
-        public LightPetStat RangedDamage = new(20, 0.0045f,0.04f);
-        public LightPetStat ProjectileVelocity = new(12,0.01f,0.05f);
-        public LightPetStat PetProjectileDamage = new(25,0.008f,0.075f);
+        public LightPetStat MagicDamage = new(20, 0.0045f, 0.04f);
+        public LightPetStat RangedDamage = new(20, 0.0045f, 0.04f);
+        public LightPetStat ProjectileVelocity = new(12, 0.01f, 0.05f);
+        public LightPetStat PetProjectileDamage = new(25, 0.008f, 0.075f);
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
@@ -107,7 +106,7 @@ namespace PetsOverhaul.LightPets
             }
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.WispInABottle")
 
-                        .Replace("<magic>",MagicDamage.BaseAndPerQuality())
+                        .Replace("<magic>", MagicDamage.BaseAndPerQuality())
                         .Replace("<ranged>", RangedDamage.BaseAndPerQuality())
                         .Replace("<velocity>", ProjectileVelocity.BaseAndPerQuality())
                         .Replace("<petProj>", PetProjectileDamage.BaseAndPerQuality())

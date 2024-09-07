@@ -1,11 +1,9 @@
 ﻿using PetsOverhaul.Config;
-using PetsOverhaul.PetEffects;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
-using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;

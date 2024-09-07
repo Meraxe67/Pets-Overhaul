@@ -1,10 +1,8 @@
 ﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
-using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -26,9 +24,9 @@ namespace PetsOverhaul.LightPets
     }
     public sealed class ShadowOrb : GlobalItem
     {
-        public LightPetStat Mana = new(10,2,20);
-        public LightPetStat MovementSpeed = new(15,0.005f,0.025f);
-        public LightPetStat HarvestingFortune = new(15,1,5);
+        public LightPetStat Mana = new(10, 2, 20);
+        public LightPetStat MovementSpeed = new(15, 0.005f, 0.025f);
+        public LightPetStat HarvestingFortune = new(15, 1, 5);
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {

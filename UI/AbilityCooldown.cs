@@ -1,16 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Terraria.UI;
-using Terraria;
-using Terraria.ModLoader;
-using System.Collections.Generic;
-using ReLogic.Graphics;
-using Terraria.GameContent;
-using PetsOverhaul.Systems;
 using PetsOverhaul.Config;
-using Terraria.ModLoader.UI;
-using Terraria.GameContent.UI.ResourceSets;
+using PetsOverhaul.Systems;
+using ReLogic.Graphics;
 using System;
+using System.Collections.Generic;
+using Terraria;
+using Terraria.GameContent;
+using Terraria.ModLoader;
+using Terraria.UI;
 namespace PetsOverhaul.UI
 {
     class AbilityCooldown : UIElement
@@ -20,7 +18,7 @@ namespace PetsOverhaul.UI
         int BaseCooldown => Main.LocalPlayer.GetModPlayer<GlobalPet>().timerMax;
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (ModContent.GetInstance<Personalization>().AbilityDisplayDisable == false && Main.playerInventory == false &&(ModContent.GetInstance<Personalization>().AbilityDisplayUnused == false || BaseCooldown > 0))
+            if (ModContent.GetInstance<Personalization>().AbilityDisplayDisable == false && Main.playerInventory == false && (ModContent.GetInstance<Personalization>().AbilityDisplayUnused == false || BaseCooldown > 0))
             {
                 if (ModContent.GetInstance<Personalization>().AbilityDisplayInfo == false)
                 {

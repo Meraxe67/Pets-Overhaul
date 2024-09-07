@@ -58,8 +58,8 @@ namespace PetsOverhaul.Commands
                             if (Main.netMode == NetmodeID.SinglePlayer)
                             {
                                 Junimo junimoLvls = caller.Player.GetModPlayer<Junimo>();
-                                caller.Reply(Language.GetTextValue("Mods.PetsOverhaul.Commands.SinglePlayerJunimo").Replace("<color>",PetTextsColors.ClassEnumToColor(PetClasses.Mining).Hex3())
-                                    .Replace("<class>", PetTextsColors.PetClassLocalized(PetClasses.Mining)).Replace("<level>",junimoLvls.junimoMiningLevel.ToString()).Replace("<exp>",junimoLvls.junimoMiningExp.ToString()));
+                                caller.Reply(Language.GetTextValue("Mods.PetsOverhaul.Commands.SinglePlayerJunimo").Replace("<color>", PetTextsColors.ClassEnumToColor(PetClasses.Mining).Hex3())
+                                    .Replace("<class>", PetTextsColors.PetClassLocalized(PetClasses.Mining)).Replace("<level>", junimoLvls.junimoMiningLevel.ToString()).Replace("<exp>", junimoLvls.junimoMiningExp.ToString()));
 
                                 caller.Reply(Language.GetTextValue("Mods.PetsOverhaul.Commands.SinglePlayerJunimo").Replace("<color>", PetTextsColors.ClassEnumToColor(PetClasses.Fishing).Hex3())
                                     .Replace("<class>", PetTextsColors.PetClassLocalized(PetClasses.Fishing)).Replace("<level>", junimoLvls.junimoFishingLevel.ToString()).Replace("<exp>", junimoLvls.junimoFishingExp.ToString()));
@@ -82,12 +82,12 @@ namespace PetsOverhaul.Commands
                                 int displayCounter = 0;
 
                                 caller.Reply(Language.GetTextValue("Mods.PetsOverhaul.Commands.LeaderboardList")
-                                    .Replace("<color>",PetTextsColors.ClassEnumToColor(PetClasses.Mining).Hex3()).Replace("<class>", PetTextsColors.PetClassLocalized(PetClasses.Mining)));
+                                    .Replace("<color>", PetTextsColors.ClassEnumToColor(PetClasses.Mining).Hex3()).Replace("<class>", PetTextsColors.PetClassLocalized(PetClasses.Mining)));
                                 for (int i = topMining.Count; i > 0 && displayCounter < 3; i--, displayCounter++)
                                 {
                                     TopPlayer topPlayer = topMining.Find(x => x.PlayerExp == topMining.Max(x => x.PlayerExp));
-                                    caller.Reply(Language.GetTextValue("Mods.PetsOverhaul.Commands.PlayerRankings").Replace("<player>",topPlayer.PlayerName)
-                                        .Replace("<class>",PetTextsColors.PetClassLocalized(PetClasses.Mining)).Replace("<level>",topPlayer.PlayerLevel.ToString()).Replace("<exp>",topPlayer.PlayerExp.ToString()),
+                                    caller.Reply(Language.GetTextValue("Mods.PetsOverhaul.Commands.PlayerRankings").Replace("<player>", topPlayer.PlayerName)
+                                        .Replace("<class>", PetTextsColors.PetClassLocalized(PetClasses.Mining)).Replace("<level>", topPlayer.PlayerLevel.ToString()).Replace("<exp>", topPlayer.PlayerExp.ToString()),
                                         displayCounter == 0 ? Color.Lavender : displayCounter == 1 ? PetTextsColors.HighQuality : displayCounter == 2 ? PetTextsColors.MidQuality : PetTextsColors.LowQuality);
                                     topMining.Remove(topPlayer);
                                 }

@@ -10,13 +10,13 @@
     }
     public enum EntitySourcePetIDs
     {
-        GlobalItem, 
-        HarvestingItem, 
-        MiningItem, 
+        GlobalItem,
+        HarvestingItem,
+        MiningItem,
         FishingItem,
-        HarvestingFortuneItem, 
-        MiningFortuneItem, 
-        FishingFortuneItem, 
+        HarvestingFortuneItem,
+        MiningFortuneItem,
+        FishingFortuneItem,
         PetProjectile,
         PetNPC,
         PetMisc,
@@ -40,12 +40,12 @@
     public enum PetSlowIDs
     {
         Grinch,
-        Snowman, 
-        QueenSlime, 
-        Deerclops, 
-        IceQueen, 
-        PikachuStatic, 
-        PhantasmalIce, 
+        Snowman,
+        QueenSlime,
+        Deerclops,
+        IceQueen,
+        PikachuStatic,
+        PhantasmalIce,
         Misc,
     }
 

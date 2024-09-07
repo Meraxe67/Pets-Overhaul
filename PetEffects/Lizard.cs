@@ -4,11 +4,8 @@ using PetsOverhaul.NPCs;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Terraria;
-using Terraria.Audio;
 using Terraria.DataStructures;
-using Terraria.GameContent.UI;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
@@ -70,7 +67,7 @@ namespace PetsOverhaul.PetEffects
                 {
                     Player.statLife = dmg + 1;
                 }
-                Player.Hurt(new Player.HurtInfo() with { Damage = dmg, Dodgeable = false, Knockback = 0, DamageSource = PlayerDeathReason.ByCustomReason("If you're seeing this death message, report it through our discord or steam page.")});
+                Player.Hurt(new Player.HurtInfo() with { Damage = dmg, Dodgeable = false, Knockback = 0, DamageSource = PlayerDeathReason.ByCustomReason("If you're seeing this death message, report it through our discord or steam page.") });
                 NPC.NewNPC(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetNPC), (int)Player.position.X, (int)Player.position.Y, ModContent.NPCType<LizardTail>(), ai0: Player.statLifeMax2 * tailMaxHp, ai1: (int)(tailWait * (1 / (1 + Pet.abilityHaste))), ai2: Pet.timerMax / 2);
                 Pet.timer = Pet.timerMax;
                 buffTimer = buffDurations;

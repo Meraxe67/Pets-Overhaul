@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace PetsOverhaul.Buffs
 {
-    public class QueensDamnation : ModBuff
+    public class QueensDamnation : ModBuff //DrawEffects in NpcPet class
     {
         public int stacks = 0;
         public override void SetStaticDefaults()

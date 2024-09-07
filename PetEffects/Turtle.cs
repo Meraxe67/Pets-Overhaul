@@ -1,15 +1,14 @@
 ﻿using PetsOverhaul.Buffs;
 using PetsOverhaul.Config;
+using PetsOverhaul.Projectiles;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using Terraria.WorldBuilding;
 
 namespace PetsOverhaul.PetEffects
 {
@@ -45,7 +44,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUseWithSwapCd(ItemID.Seaweed))
             {
-                Player.statDefense *= def+1f;
+                Player.statDefense *= def + 1f;
                 Player.moveSpeed -= moveSpd;
             }
         }
@@ -59,7 +58,7 @@ namespace PetsOverhaul.PetEffects
                     modifiers.FinalDamage *= 1f - dmgReduceShellHarden;
                     return;
                 }
-                modifiers.Knockback *= 1f-kbResist;
+                modifiers.Knockback *= 1f - kbResist;
             }
         }
         public override void OnHurt(Player.HurtInfo info)
@@ -116,12 +115,12 @@ namespace PetsOverhaul.PetEffects
                 .Replace("<class>", PetTextsColors.ClassText(turtle.PetClassPrimary, turtle.PetClassSecondary))
                 .Replace("<keybind>", PetTextsColors.KeybindText(Keybinds.UsePetAbility))
                 .Replace("<hitCount>", turtle.shellHardenStacks.ToString())
-                .Replace("<shellDuration>", Math.Round(turtle.shellHardenDuration/60f,2).ToString())
-                .Replace("<reducedDmg>", Math.Round(turtle.dmgReduceShellHarden*100,2).ToString())
-                .Replace("<reflect>", Math.Round(turtle.dmgReflect*100,2).ToString())
+                .Replace("<shellDuration>", Math.Round(turtle.shellHardenDuration / 60f, 2).ToString())
+                .Replace("<reducedDmg>", Math.Round(turtle.dmgReduceShellHarden * 100, 2).ToString())
+                .Replace("<reflect>", Math.Round(turtle.dmgReflect * 100, 2).ToString())
                 .Replace("<projReflect>", Math.Round(turtle.dmgReflectProjectile * 100, 2).ToString())
-                        .Replace("<def>", Math.Round(turtle.def*100,2).ToString())
-                        .Replace("<kbResist>", Math.Round(turtle.kbResist*100,2).ToString())
+                        .Replace("<def>", Math.Round(turtle.def * 100, 2).ToString())
+                        .Replace("<kbResist>", Math.Round(turtle.kbResist * 100, 2).ToString())
                         .Replace("<moveSpd>", Math.Round(turtle.moveSpd * 100, 2).ToString())
                         ));
         }

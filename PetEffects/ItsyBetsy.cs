@@ -4,7 +4,6 @@ using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -41,7 +40,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (target.active == false && GlobalPet.LifestealCheck(target) && target.GetGlobalNPC<NpcPet>().curseCounter > 0)
             {
-                Pet.PetRecovery(Player.statLifeMax2 - Player.statLife, missingHpRecover * target.GetGlobalNPC<NpcPet>().curseCounter * (1f+(target.GetGlobalNPC<NpcPet>().curseCounter >= maxStacks ? maxStackBonusRecover : 0)));
+                Pet.PetRecovery(Player.statLifeMax2 - Player.statLife, missingHpRecover * target.GetGlobalNPC<NpcPet>().curseCounter * (1f + (target.GetGlobalNPC<NpcPet>().curseCounter >= maxStacks ? maxStackBonusRecover : 0)));
             }
             if (Pet.PetInUseWithSwapCd(ItemID.DD2BetsyPetItem) && hit.DamageType == DamageClass.Ranged)
             {

@@ -1,8 +1,5 @@
-﻿using Terraria.Localization;
+﻿using Microsoft.Xna.Framework.Input;
 using Terraria.ModLoader;
-using Terraria.ModLoader.IO;
-using Microsoft.Xna.Framework.Input;
-using System.Runtime.Loader;
 
 namespace PetsOverhaul.Systems
 {
