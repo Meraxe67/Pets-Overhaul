@@ -4,13 +4,11 @@ using PetsOverhaul.Items;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ModLoader.IO;
 
 namespace PetsOverhaul.NPCs
 {
@@ -161,34 +159,22 @@ namespace PetsOverhaul.NPCs
         {
             if (npc.active)
             {
-                if (Main.netMode != NetmodeID.Server)
+                CurrentSlowAmount = 0;
+
+                if (SlowList.Count > 0)
                 {
-                    CurrentSlowAmount = 0;
+                    SlowList.ForEach(x => CurrentSlowAmount += x.SlowAmount);
 
-                    if (SlowList.Count > 0)
+                    for (int i = 0; i < SlowList.Count; i++) //Since Structs in Lists acts as Readonly, we re-assign the values to the index to decrement the timer.
                     {
-                        SlowList.ForEach(x => CurrentSlowAmount += x.SlowAmount);
-
-                        if (Main.netMode == NetmodeID.MultiplayerClient)
-                        {
-                            ModPacket packet = ModContent.GetInstance<PetsOverhaul>().GetPacket();
-                            packet.Write((byte)MessageType.PetSlow);
-                            packet.Write((byte)npc.whoAmI);
-                            packet.Write(CurrentSlowAmount);
-                            packet.Send();
-                        }
-
-                        for (int i = 0; i < SlowList.Count; i++) //Since Structs in Lists acts as Readonly, we re-assign the values to the index to decrement the timer.
-                        {
-                            PetSlow slow = SlowList[i];
-                            slow.SlowTime--;
-                            SlowList[i] = slow;
-                        }
-                        int indexToRemove = SlowList.FindIndex(x => x.SlowTime <= 0);
-                        if (indexToRemove != -1)
-                        {
-                            SlowList.RemoveAt(indexToRemove);
-                        }
+                        PetSlow slow = SlowList[i];
+                        slow.SlowTime--;
+                        SlowList[i] = slow;
+                    }
+                    int indexToRemove = SlowList.FindIndex(x => x.SlowTime <= 0);
+                    if (indexToRemove != -1)
+                    {
+                        SlowList.RemoveAt(indexToRemove);
                     }
                 }
                 if (CurrentSlowAmount > 0)
@@ -200,7 +186,7 @@ namespace PetsOverhaul.NPCs
         /// <summary>
         /// Does not slow an npc's vertical speed if they are affected by gravity, but does so if they arent. Due to the formula, you may use a positive number for slowAmount freely and as much as you want, it almost will never completely stop an enemy. Negative values however, easily can get out of hand and cause unwanted effects. Due to that, a cap of -0.9f exists for negative values, which 10x's the speed.
         /// </summary>
-        private void Slow(NPC npc, float slow)
+        internal void Slow(NPC npc, float slow)
         {
             if (slow < -0.9f)
             {
@@ -223,16 +209,40 @@ namespace PetsOverhaul.NPCs
             {
                 npc.velocity *= 1 / (1 + slow);
                 VeloChangedFlying = true;
-            }   
+            }
             else
             {
                 VeloChangedFlying = false;
             }
         }
+
         /// <summary>
-        /// Use this to add Slow to an NPC. Also checks if the NPC is a boss or a friendly npc or not.
+        /// Use this to add Slow to an NPC. It will send proper messages to the Server, and Server will sync all Clients to match their Slow Lists for consistent slow mechanics.
         /// </summary>
-        static public void AddSlow(PetSlow petSlow, NPC npc)
+        public static void AddSlow(PetSlow petSlow, NPC npc)
+        {
+            if (Main.netMode == NetmodeID.MultiplayerClient)
+            {
+                int npcArrayId = Math.Clamp(npc.whoAmI, byte.MinValue, byte.MaxValue);
+                int slowId = Math.Clamp(petSlow.SlowId, sbyte.MinValue, sbyte.MaxValue);
+                ModPacket packet = ModContent.GetInstance<PetsOverhaul>().GetPacket();
+                packet.Write((byte)MessageType.PetSlow);
+                packet.Write((byte)npcArrayId);
+                packet.Write(petSlow.SlowAmount);
+                packet.Write(petSlow.SlowTime);
+                packet.Write((sbyte)slowId);
+                packet.Send();
+            }
+            if (Main.netMode == NetmodeID.SinglePlayer)
+            {
+                AddToSlowList(petSlow, npc);
+            }
+        }
+
+        /// <summary>
+        /// Actually adds to the Slow List of an NPC to slow them. Does the proper boss/friendly checks and replaces weak Slows existing in the List. This DOES NOT Sync with server & other clients, always use AddSlow() rather than this, unless you know what you're doing.
+        /// </summary>
+        internal static void AddToSlowList(PetSlow petSlow, NPC npc)
         {
             if (npc.active && (npc.townNPC == false || npc.isLikeATownNPC == false || npc.friendly == false) && npc.boss == false && nonBossTrueBosses[npc.type] == false && npc.TryGetGlobalNPC<NpcPet>(out NpcPet npcPet))
             {

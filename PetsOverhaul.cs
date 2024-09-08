@@ -74,10 +74,21 @@ namespace PetsOverhaul
                     break;
                 case MessageType.PetSlow:
                     NPC npc = Main.npc[reader.ReadByte()];
-                    float slow = reader.ReadSingle();
-                    if (npc.active && npc.TryGetGlobalNPC(out NpcPet result))
+                    float slowAmount = reader.ReadSingle();
+                    int slowTime = reader.ReadInt32();
+                    sbyte slowId = reader.ReadSByte();
+                    NpcPet.PetSlow slow = new(slowAmount, slowTime, slowId);
+                    if (npc.active)
+                        NpcPet.AddToSlowList(slow, npc);
+                    if (Main.netMode == NetmodeID.Server)
                     {
-                        result.CurrentSlowAmount = slow;
+                        ModPacket packet = GetPacket();
+                        packet.Write((byte)MessageType.PetSlow);
+                        packet.Write((byte)npc.whoAmI);
+                        packet.Write(slowAmount);
+                        packet.Write(slowTime);
+                        packet.Write(slowId);
+                        packet.Send();
                     }
                     break;
                 default: throw new ArgumentOutOfRangeException(nameof(msgType));
