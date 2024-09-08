@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using PetsOverhaul.Config;
+using PetsOverhaul.NPCs;
 using PetsOverhaul.Projectiles;
 using PetsOverhaul.Systems;
 using System;
@@ -67,7 +68,7 @@ namespace PetsOverhaul.PetEffects
                         Main.projectile[ice].tileCollide = false;
                         Main.projectile[ice].netImportant = true;
                         Main.projectile[ice].penetrate = icePierce;
-                        target.GetGlobalNPC<NpcPet>().AddSlow(PetSlowIDs.PhantasmalIce, iceSlowAmount, iceSlowTime, target);
+                        NpcPet.AddSlow(new NpcPet.PetSlow(iceSlowAmount, iceSlowTime, PetSlowIDs.PhantasmalIce), target);
                         iceIndex = ice;
                         break;
                     case 1:
@@ -108,7 +109,7 @@ namespace PetsOverhaul.PetEffects
             }
             if (Pet.PetInUseWithSwapCd(ItemID.LunaticCultistPetItem) && proj.whoAmI == iceIndex && proj.GetGlobalProjectile<ProjectileSourceChecks>().petProj)
             {
-                target.GetGlobalNPC<NpcPet>().AddSlow(PetSlowIDs.PhantasmalIce, iceSlowAmount * nerfOnNonPrimary, iceSlowTime, target);
+                NpcPet.AddSlow(new NpcPet.PetSlow(iceSlowAmount * nerfOnNonPrimary, iceSlowTime, PetSlowIDs.PhantasmalIce), target);
             }
 
         }

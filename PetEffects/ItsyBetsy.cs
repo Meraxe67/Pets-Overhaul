@@ -1,5 +1,6 @@
 ﻿using PetsOverhaul.Buffs;
 using PetsOverhaul.Config;
+using PetsOverhaul.NPCs;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿using PetsOverhaul.Systems;
+﻿using PetsOverhaul.NPCs;
 using Terraria;
 using Terraria.ModLoader;
 

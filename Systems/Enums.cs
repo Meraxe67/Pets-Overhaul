@@ -7,6 +7,7 @@
         HoneyBeeHeal,
         BlockPlace,
         BlockReplace,
+        PetSlow,
     }
     public enum EntitySourcePetIDs
     {
@@ -37,16 +38,4 @@
         Defensive,
         Supportive,
     }
-    public enum PetSlowIDs
-    {
-        Grinch,
-        Snowman,
-        QueenSlime,
-        Deerclops,
-        IceQueen,
-        PikachuStatic,
-        PhantasmalIce,
-        Misc,
-    }
-
 }

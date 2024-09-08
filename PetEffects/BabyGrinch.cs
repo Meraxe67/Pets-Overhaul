@@ -1,4 +1,5 @@
 ﻿using PetsOverhaul.Config;
+using PetsOverhaul.NPCs;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
@@ -48,8 +49,7 @@ namespace PetsOverhaul.PetEffects
                     NPC npc = Main.npc[i];
                     if (npc.active && Player.Distance(npc.Center) < grinchRange)
                     {
-                        npc.GetGlobalNPC<NpcPet>().AddSlow(PetSlowIDs.Grinch, grinchSlow, 1, npc);
-
+                        NpcPet.AddSlow(new NpcPet.PetSlow(grinchSlow, 1, PetSlowIDs.Grinch), npc);
                     }
                 }
             }

@@ -1,4 +1,5 @@
 ﻿using PetsOverhaul.Config;
+using PetsOverhaul.Items;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;

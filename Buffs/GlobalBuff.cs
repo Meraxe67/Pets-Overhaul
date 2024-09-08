@@ -1,4 +1,5 @@
-﻿using PetsOverhaul.PetEffects;
+﻿using PetsOverhaul.NPCs;
+using PetsOverhaul.PetEffects;
 using PetsOverhaul.Systems;
 using Terraria;
 using Terraria.ID;
@@ -6,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace PetsOverhaul.Buffs
 {
-    public class GlobalBuffClass : GlobalBuff
+    public class PetGlobalBuff : GlobalBuff
     {
         public override void SetStaticDefaults()
         {
@@ -18,11 +19,11 @@ namespace PetsOverhaul.Buffs
         {
             if (type == BuffID.GelBalloonBuff && GlobalPet.QueenSlimePetActive(out Player queenSlime))
             {
-                npc.GetGlobalNPC<NpcPet>().AddSlow(PetSlowIDs.QueenSlime, queenSlime.GetModPlayer<SlimePrincess>().slow, 1, npc);
+                NpcPet.AddSlow(new NpcPet.PetSlow(queenSlime.GetModPlayer<SlimePrincess>().slow, 1, PetSlowIDs.QueenSlime), npc);
             }
             else if (type == BuffID.GelBalloonBuff && GlobalPet.DualSlimePetActive(out Player dualSlime))
             {
-                npc.GetGlobalNPC<NpcPet>().AddSlow(PetSlowIDs.QueenSlime, dualSlime.GetModPlayer<DualSlime>().slow, 1, npc);
+                NpcPet.AddSlow(new NpcPet.PetSlow(dualSlime.GetModPlayer<DualSlime>().slow, 1, PetSlowIDs.QueenSlime), npc);
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using PetsOverhaul.Config;
+using PetsOverhaul.NPCs;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
@@ -33,44 +34,41 @@ namespace PetsOverhaul.PetEffects
         }
         public override void PostUpdateEquips()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.IceQueenPetItem))
+            if (Pet.PetInUseWithSwapCd(ItemID.IceQueenPetItem) && frozenTomb == true)
             {
-                if (frozenTomb == true)
+                for (int i = 0; i < Main.maxNPCs; i++)
                 {
-                    for (int i = 0; i < Main.maxNPCs; i++)
+                    NPC npc = Main.npc[i];
+                    if (npc.active && Player.Distance(npc.Center) < queenRange)
                     {
-                        NPC npc = Main.npc[i];
-                        if (npc.active && Player.Distance(npc.Center) < queenRange)
-                        {
-                            npc.GetGlobalNPC<NpcPet>().AddSlow(PetSlowIDs.IceQueen, slowAmount, 5, npc);
-                        }
-                    }
-                    for (int i = 0; i < 20 + iceQueenFrame / 15; i++)
-                    {
-                        Dust dust = Dust.NewDustPerfect(Player.position + Main.rand.NextVector2Circular(queenRange, queenRange), DustID.SnowflakeIce, Vector2.Zero, newColor: Color.Aquamarine);
-                        dust.noGravity = true;
-                    }
-                    if (iceQueenFrame % 30 == 0 && ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
-                    {
-                        if (Main.rand.NextBool())
-                        {
-                            SoundEngine.PlaySound(SoundID.Item48 with { PitchVariance = 0.3f, Volume = 0.8f }, Player.position + Main.rand.NextVector2Circular(queenRange, queenRange));
-                        }
-                        else
-                        {
-                            SoundEngine.PlaySound(SoundID.Item49 with { PitchVariance = 0.3f, Volume = 0.8f }, Player.position + Main.rand.NextVector2Circular(queenRange, queenRange));
-                        }
-                    }
-                    iceQueenFrame++;
-                    Player.buffImmune[BuffID.Frozen] = false;
-                    Player.AddBuff(BuffID.Frozen, 1);
-                    Player.SetImmuneTimeForAllTypes(1);
-                    if (iceQueenFrame % 3 == 0)
-                    {
-                        Player.statLife++;
+                        NpcPet.AddSlow(new NpcPet.PetSlow(slowAmount, 1, PetSlowIDs.IceQueen), npc);
                     }
                 }
-                if (iceQueenFrame >= tombTime && frozenTomb == true)
+                for (int i = 0; i < 20 + iceQueenFrame / 15; i++)
+                {
+                    Dust dust = Dust.NewDustPerfect(Player.position + Main.rand.NextVector2Circular(queenRange, queenRange), DustID.SnowflakeIce, Vector2.Zero);
+                    dust.noGravity = true;
+                }
+                if (iceQueenFrame % 30 == 0 && ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+                {
+                    if (Main.rand.NextBool())
+                    {
+                        SoundEngine.PlaySound(SoundID.Item48 with { PitchVariance = 0.3f, Volume = 0.8f }, Player.position + Main.rand.NextVector2Circular(queenRange, queenRange));
+                    }
+                    else
+                    {
+                        SoundEngine.PlaySound(SoundID.Item49 with { PitchVariance = 0.3f, Volume = 0.8f }, Player.position + Main.rand.NextVector2Circular(queenRange, queenRange));
+                    }
+                }
+                iceQueenFrame++;
+                Player.buffImmune[BuffID.Frozen] = false;
+                Player.AddBuff(BuffID.Frozen, 1);
+                Player.SetImmuneTimeForAllTypes(1);
+                if (iceQueenFrame % 3 == 0)
+                {
+                    Player.statLife++;
+                }
+                if (iceQueenFrame >= tombTime)
                 {
                     for (int i = 0; i < Main.maxNPCs; i++)
                     {

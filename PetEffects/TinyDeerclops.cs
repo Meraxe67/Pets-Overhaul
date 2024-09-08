@@ -1,4 +1,5 @@
 ﻿using PetsOverhaul.Config;
+using PetsOverhaul.NPCs;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
@@ -64,7 +65,7 @@ namespace PetsOverhaul.PetEffects
                             NPC npc = Main.npc[i];
                             if (npc.active && Player.Distance(npc.Center) < range)
                             {
-                                npc.GetGlobalNPC<NpcPet>().AddSlow(PetSlowIDs.Deerclops, slow, applyTime, npc);
+                                NpcPet.AddSlow(new NpcPet.PetSlow(slow, applyTime, PetSlowIDs.Deerclops), npc);
                                 if (npc.active && (npc.townNPC == false || npc.isLikeATownNPC == false || npc.friendly == false) && (npc.boss == false || NpcPet.nonBossTrueBosses[npc.type] == false))
                                 {
                                     npc.AddBuff(BuffID.Confused, applyTime);

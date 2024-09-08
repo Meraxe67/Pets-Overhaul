@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using PetsOverhaul.Config;
+using PetsOverhaul.Items;
 using PetsOverhaul.Systems;
 using System.Collections.Generic;
 using System.Linq;

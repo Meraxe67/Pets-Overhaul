@@ -1,4 +1,5 @@
 ﻿using PetsOverhaul.Config;
+using PetsOverhaul.NPCs;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
@@ -23,10 +24,9 @@ namespace PetsOverhaul.PetEffects
             if (Pet.PetInUseWithSwapCd(ItemID.ToySled))
             {
                 target.AddBuff(BuffID.Frostburn2, frostburnTime * FrostArmorMult);
-                target.GetGlobalNPC<NpcPet>().AddSlow(PetSlowIDs.Snowman, snowmanSlow * FrostArmorMult, slowTime * FrostArmorMult, target);
+                NpcPet.AddSlow(new NpcPet.PetSlow(snowmanSlow, slowTime, PetSlowIDs.Snowman), target);
             }
         }
-
     }
     public sealed class ToySled : GlobalItem
     {

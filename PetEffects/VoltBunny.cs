@@ -1,4 +1,5 @@
 ﻿using PetsOverhaul.Config;
+using PetsOverhaul.NPCs;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
@@ -30,14 +31,11 @@ namespace PetsOverhaul.PetEffects
                 }
             }
         }
-    }
-    public sealed class EnemyHittingVoltBunny : GlobalNPC
-    {
-        public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
+        public override void OnHurt(Player.HurtInfo info)
         {
-            if (target.GetModPlayer<GlobalPet>().PetInUseWithSwapCd(ItemID.LightningCarrot) && npc.TryGetGlobalNPC(out NpcPet npcPet))
+            if (Pet.PetInUseWithSwapCd(ItemID.LightningCarrot) && info.DamageSource.TryGetCausingEntity(out Entity entity) && entity is NPC npc)
             {
-                npcPet.AddSlow(PetSlowIDs.PikachuStatic, target.GetModPlayer<VoltBunny>().staticParalysis, target.GetModPlayer<VoltBunny>().staticLength, npc);
+                NpcPet.AddSlow(new NpcPet.PetSlow(staticParalysis, staticLength, PetSlowIDs.VoltBunny), npc);
             }
         }
     }
