@@ -1,4 +1,6 @@
 using MonoMod.RuntimeDetour;
+using PetsOverhaul.Items;
+using PetsOverhaul.NPCs;
 using PetsOverhaul.PetEffects;
 using PetsOverhaul.Systems;
 using System;
@@ -69,6 +71,14 @@ namespace PetsOverhaul
                     int xReplace = reader.ReadInt32();
                     int yReplace = reader.ReadInt32();
                     ItemPet.updateReplacedTile.Add(new Point16(xReplace, yReplace));
+                    break;
+                case MessageType.PetSlow:
+                    NPC npc = Main.npc[reader.ReadByte()];
+                    float slow = reader.ReadSingle();
+                    if (npc.active && npc.TryGetGlobalNPC(out NpcPet result))
+                    {
+                        result.CurrentSlowAmount = slow;
+                    }
                     break;
                 default: throw new ArgumentOutOfRangeException(nameof(msgType));
             }
