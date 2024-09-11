@@ -68,16 +68,18 @@ namespace PetsOverhaul.PetEffects
                 if (info.DamageSource.TryGetCausingEntity(out Entity entity))
                 {
                     NPC.HitInfo hit = new NPC.HitInfo() with { Crit = false, DamageType = DamageClass.Generic, HitDirection = info.HitDirection, Knockback = 1f };
+                    int damageTaken = info.SourceDamage > Player.statLife ? Player.statLife : info.SourceDamage; //Caps the Reflect's base damage to Player's current HP.
+
                     if (entity is Projectile projectile && projectile.TryGetGlobalProjectile<ProjectileSourceChecks>(out ProjectileSourceChecks proj))
                     {
                         NPC npc = Main.npc[proj.sourceNpcId];
-                        npc.StrikeNPC(hit with { Damage = (int)(info.SourceDamage * dmgReflectProjectile) });
+                        npc.StrikeNPC(hit with { Damage = (int)(damageTaken * dmgReflectProjectile) });
                         if (Main.netMode != NetmodeID.SinglePlayer)
                             NetMessage.SendStrikeNPC(npc, hit);
                     }
                     else if (entity is NPC npc && npc.active == true && npc.immortal == false)
                     {
-                        npc.StrikeNPC(hit with { Damage = (int)(info.SourceDamage * dmgReflect) });
+                        npc.StrikeNPC(hit with { Damage = (int)(damageTaken * dmgReflect) });
                         if (Main.netMode != NetmodeID.SinglePlayer)
                             NetMessage.SendStrikeNPC(npc, hit);
                     }
