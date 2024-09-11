@@ -270,6 +270,15 @@ namespace PetsOverhaul.NPCs
         }
         public override void DrawEffects(NPC npc, ref Color drawColor)
         {
+            if (CurrentSlowAmount > 0)
+            {
+                drawColor = Color.DarkTurquoise with { A = 225 };
+                for (int i = 0; i < GlobalPet.Randomizer((int)(20 * CurrentSlowAmount)); i++)
+                {
+                    Dust dust = Dust.NewDustDirect(npc.position, npc.width, npc.height, 101, Alpha: 100, Scale: Main.rand.NextFloat(0.7f, 1.1f));
+                    dust.noGravity = true;
+                }
+            }
             if (npc.HasBuff(ModContent.BuffType<Mauled>()))
             {
                 for (int i = 0; i < maulCounter; i++)

@@ -36,7 +36,7 @@ namespace PetsOverhaul.LightPets
     {
         public LightPetStat MovementSpeed = new(8, 0.015f, 0.07f);
         public LightPetStat WingTime = new(15, 6, 30);
-        public LightPetStat Acceleration = new(20, 0.0015f, 0.04f);
+        public LightPetStat Acceleration = new(20, 0.0012f, 0.02f);
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
