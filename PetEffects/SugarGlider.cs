@@ -19,7 +19,7 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Mobility;
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (Player.equippedWings == null && Player.velocity.Y > 0 && Pet.PetInUseWithSwapCd(ItemID.EucaluptusSap) && triggersSet.Jump)
+            if (Player.velocity.Y > 0 && Pet.PetInUseWithSwapCd(ItemID.EucaluptusSap) && triggersSet.Jump)
             {
                 Player.maxFallSpeed *= 0.25f;
                 Player.fallStart = (int)((double)Player.position.Y / 16.0);

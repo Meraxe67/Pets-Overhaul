@@ -695,6 +695,7 @@ Mods: {
 				- Allows you to glide while holding your jump key.
 				 * Achieves this by multiplying your maximum Y speed you can get by <glide>x.
 				 * Does not grant fall damage immunity, but gliding resets your fall damage.
+				 * Can be used alongside Wings, providing even more gliding power.
 				- Multiplies horizontal wing speed and acceleration by <speed>x and <acceleration>x respectively.
 				- Increases horizontal wing speed and acceleration by a flat <flatIncrease>%.
 				'''
