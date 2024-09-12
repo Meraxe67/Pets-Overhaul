@@ -69,9 +69,10 @@ namespace PetsOverhaul.PetEffects
             Sapling sapling = Main.LocalPlayer.GetModPlayer<Sapling>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.Seedling")
                 .Replace("<class>", PetTextsColors.ClassText(sapling.PetClassPrimary, sapling.PetClassSecondary))
-                        .Replace("<lifesteal>", Math.Round(sapling.regularLifesteal * 100, 2).ToString())
-                        .Replace("<planteraSteal>", Math.Round(sapling.planteraLifesteal * 100, 2).ToString())
-                        ));
+                .Replace("<dmgPenalty>", sapling.damagePenalty.ToString())
+                .Replace("<lifesteal>", Math.Round(sapling.regularLifesteal * 100, 2).ToString())
+                .Replace("<planteraSteal>", Math.Round(sapling.planteraLifesteal * 100, 2).ToString())
+                ));
         }
     }
 }
