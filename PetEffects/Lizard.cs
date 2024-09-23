@@ -60,7 +60,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (Pet.timer <= 0 && Pet.PetInUseWithSwapCd(ItemID.LizardEgg) && Keybinds.UsePetAbility.JustPressed)
+            if (Pet.AbilityPressCheck() && Pet.PetInUseWithSwapCd(ItemID.LizardEgg))
             {
                 int dmg = (int)(Player.statLifeMax2 * percentHpDmg);
                 if (Player.statLife < dmg)

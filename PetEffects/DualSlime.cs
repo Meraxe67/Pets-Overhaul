@@ -11,7 +11,7 @@ using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects
 {
-    public sealed class DualSlime : PetEffect
+    public sealed class DualSlime : PetEffect //Pet will be reworked post 3.0 update
     {
         public bool swapTooltip = false;
         public override PetClasses PetClassPrimary => PetClasses.Supportive;
@@ -35,7 +35,7 @@ namespace PetsOverhaul.PetEffects
         public int baseCounterChnc = 90;
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (Keybinds.PetTooltipSwap != null && Keybinds.PetTooltipSwap.JustPressed)
+            if (Keybinds.PetTooltipSwap.JustPressed)
             {
                 swapTooltip = !swapTooltip;
             }

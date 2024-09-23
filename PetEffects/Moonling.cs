@@ -76,7 +76,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (Keybinds.PetTooltipSwap != null && Keybinds.PetTooltipSwap.JustPressed)
+            if (Keybinds.PetTooltipSwap.JustPressed)
             {
                 currentTooltip++;
                 if (currentTooltip > 3)

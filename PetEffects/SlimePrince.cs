@@ -1,16 +1,19 @@
-﻿using PetsOverhaul.Config;
+﻿using Microsoft.Xna.Framework;
+using PetsOverhaul.Buffs;
+using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects
 {
-    public sealed class SlimePrince : PetEffect
+    public sealed class SlimePrince : PetEffect //Pet will be reworked post 3.0 update
     {
         public float wetSpeed = 0.10f;
         public float wetDmg = 0.08f;
@@ -36,6 +39,7 @@ namespace PetsOverhaul.PetEffects
                 }
             }
         }
+
         public override void PostUpdateEquips()
         {
             if (GlobalPet.KingSlimePetActive(out slimePrince) && Player.HasBuff(BuffID.Wet))

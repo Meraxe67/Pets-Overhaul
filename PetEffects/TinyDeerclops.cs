@@ -43,7 +43,7 @@ namespace PetsOverhaul.PetEffects
             {
                 if (deerclopsTakenDamage.Count > 0)
                 {
-                    for (int i = 0; i < deerclopsTakenDamage.Count; i++) //List'lerde struct'lar bir nevi readonly olarak çalıştığından, değeri alıp tekrar atıyoruz
+                    for (int i = 0; i < deerclopsTakenDamage.Count; i++) //Pet will be reworked Post 3.0 update
                     {
                         (int storedDamage, int timer) value = deerclopsTakenDamage[i];
                         value.timer--;

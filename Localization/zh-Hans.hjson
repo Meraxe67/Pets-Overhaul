@@ -810,7 +810,7 @@ Mods: {
 			/* DragonIce:
 				'''
 				- Icicle Mist
-				 * Spawns a Ice Mist Ball on your cursor, it travels towards a random direction,
+				 * Spawns a Ice Mist on your cursor, it travels towards a random direction,
 				spawning Icicle Shards along the way it travels, traveling through blocks.
 				 * Ball and Shards both deal <damage> general damage to enemies hit.
 				 * Enemies hit by them gets slowed by <slowAmount>% for <slowTime> seconds.

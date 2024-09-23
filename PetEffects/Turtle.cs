@@ -89,7 +89,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (Pet.timer <= 0 && Pet.PetInUseWithSwapCd(ItemID.Seaweed) && Keybinds.UsePetAbility.JustPressed)
+            if (Pet.AbilityPressCheck() && Pet.PetInUseWithSwapCd(ItemID.Seaweed))
             {
                 timer = shellHardenDuration;
                 currentStacks = shellHardenStacks;

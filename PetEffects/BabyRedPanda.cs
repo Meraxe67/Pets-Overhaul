@@ -56,7 +56,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (Pet.timer <= 0 && Pet.PetInUseWithSwapCd(ItemID.BambooLeaf) && Keybinds.UsePetAbility.JustPressed)
+            if (Pet.AbilityPressCheck() && Pet.PetInUseWithSwapCd(ItemID.BambooLeaf))
             {
                 SoundEngine.PlaySound(SoundID.Item37 with { Pitch = 1f }, Player.position);
                 EmoteBubble.MakePlayerEmote(Player, EmoteID.EmotionAlert);

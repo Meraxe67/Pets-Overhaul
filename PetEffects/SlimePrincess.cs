@@ -10,7 +10,7 @@ using Terraria.ModLoader;
 
 namespace PetsOverhaul.PetEffects
 {
-    public sealed class SlimePrincess : PetEffect
+    public sealed class SlimePrincess : PetEffect //Pet will be reworked post 3.0 update
     {
         public float slow = 0.65f;
         public float haste = 0.3f;
