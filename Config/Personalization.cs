@@ -100,6 +100,11 @@ namespace PetsOverhaul.Config
         [TooltipKey("$Mods.PetsOverhaul.Config.SwapCooldownTooltip")]
         [DefaultValue(false)]
         public bool SwapCooldown { get; set; }
+
+        [LabelKey("$Mods.PetsOverhaul.Config.PhantasmalDragonShootLabel")]
+        [TooltipKey("$Mods.PetsOverhaul.Config.PhantasmalDragonShootTooltip")]
+        [DefaultValue(true)]
+        public bool PhantasmalDragonVolleyFromMouth { get; set; }
         #endregion
 
     }

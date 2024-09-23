@@ -42,7 +42,6 @@ namespace PetsOverhaul.PetEffects
         public int fireVolleyFrames = 90;
         public int fireBurnTime = 180;
         public float fireKnockback = 3.8f;
-
         public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {
             if (Pet.PetInUse(ItemID.LunaticCultistPetItem))
@@ -58,7 +57,20 @@ namespace PetsOverhaul.PetEffects
                             Dust.NewDust(Player.position, Player.width, Player.height, DustID.Electric, Alpha: 220, Scale: 0.9f);
                             break;
                         case 2: //Fire
-                            Dust.NewDust(Player.position, Player.width, Player.height, DustID.Torch, Alpha: 220);
+                            Vector2 pos = Player.position;
+                            int width = Player.width;
+                            int height = Player.height;
+                            if (ModContent.GetInstance<Personalization>().PhantasmalDragonVolleyFromMouth == false)
+                                foreach (var projectile in Main.ActiveProjectiles)
+                                {
+                                    if (projectile is Projectile proj && proj.owner == Player.whoAmI && proj.type == ProjectileID.LunaticCultistPet)
+                                    {
+                                        pos = proj.Center;
+                                        width = proj.width; 
+                                        height = proj.height;
+                                    }
+                                }
+                            Dust.NewDust(pos, width, height, DustID.Torch, Alpha: 220);
                             break;
                         default:
                             break;
@@ -73,13 +85,14 @@ namespace PetsOverhaul.PetEffects
                 if (fireVolley > 0 && fireVolley % fireVolleyEveryFrame == 0)
                 {
                     Vector2 location = Player.Center;
-                    foreach (var projectile in Main.ActiveProjectiles)
-                    {
-                        if (projectile is Projectile proj && proj.owner == Player.whoAmI && proj.type == ProjectileID.LunaticCultistPet)
+                    if (ModContent.GetInstance<Personalization>().PhantasmalDragonVolleyFromMouth == false)
+                        foreach (var projectile in Main.ActiveProjectiles)
                         {
-                            location = proj.Center;
+                            if (projectile is Projectile proj && proj.owner == Player.whoAmI && proj.type == ProjectileID.LunaticCultistPet)
+                            {
+                                location = proj.Center;
+                            }
                         }
-                    }
                     Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile, "Phantasmal"), location, new Vector2(Main.MouseWorld.X - location.X - Main.rand.NextFloat(3f, -3f), Main.MouseWorld.Y - location.Y - Main.rand.NextFloat(6f, 7f)), ProjectileID.CultistBossFireBall, Damage(fireBase), fireKnockback, Player.whoAmI);
                 }
                 Pet.SetPetAbilityTimer(phantasmDragonCooldown);
@@ -439,7 +452,8 @@ namespace PetsOverhaul.PetEffects
                 .Replace("<fireballDuration>", Math.Round(phantasmalDragon.fireVolleyFrames / 60f, 2).ToString())
                 .Replace("<fireDmg>", phantasmalDragon.fireBase.ToString())
                 .Replace("<kb>", phantasmalDragon.fireKnockback.ToString())
-                .Replace("<burnSeconds>", Math.Round(phantasmalDragon.fireBurnTime / 60f, 2).ToString()),
+                .Replace("<burnSeconds>", Math.Round(phantasmalDragon.fireBurnTime / 60f, 2).ToString())
+                .Replace("<enabled>", ModContent.GetInstance<Personalization>().PhantasmalDragonVolleyFromMouth ? "Disabled" : "Enabled"),
                 _ => "Cannot Find current ability.",
             };
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.LunaticCultistPetItem")

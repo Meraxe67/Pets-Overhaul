@@ -191,6 +191,12 @@ Mods: {
 				在减益生效期间,宠物任何与战斗相关的效果都会被禁用.
 				(由于平衡性原因,不推荐禁用)
 				'''
+			// PhantasmalDragonShootLabel: Disable Phantasmal Dragon Fire Volley Spell coming from the Dragon
+			/* PhantasmalDragonShootTooltip:
+				'''
+				Disables Phantasmal Dragon's 3rd spell, Fireball Volley to be casted from
+				Dragon's Mouth (The Dragon Pet that follows you), rather than from the Player.
+				''' */
 		}
 
 		LightPetTooltips: {
@@ -829,6 +835,8 @@ Mods: {
 				 * Starts shooting Fireballs towards your cursor <fireballAmount> times within <fireballDuration> seconds.
 				 * Fireballs explode upon impact with anything, dealing <fireDmg> general damage and <kb> knockback.
 				 * Hit enemies gets applied with Daybreak debuff for <burnSeconds> seconds.
+				 * Enabling/Disabling Phantasmal Dragon Fireball Volley from Dragon config option can allow this for 
+				 Fireballs to be casted from Dragon's mouth, rather than from the Player. Currently: <enabled>
 				''' */
 			DD2BetsyPetItem:
 				'''
