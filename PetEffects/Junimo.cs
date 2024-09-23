@@ -419,7 +419,7 @@ namespace PetsOverhaul.PetEffects
             if (Pet.PetInUseWithSwapCd(ItemID.JunimoPetItem))
             {
                 Player.endurance += junimoMiningLevel * miningResistPerLevel;
-                Player.GetDamage<GenericDamageClass>() *= 1f + junimoFishingLevel * fishingDamagePerLevel;
+                Player.GetDamage<GenericDamageClass>() += junimoFishingLevel * fishingDamagePerLevel;
                 Player.statLifeMax2 += (int)(harvestingHealthperLevel * junimoHarvestingLevel);
             }
         }

@@ -12,7 +12,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class TheTwins : PetEffect
     {
-        public int healthDmgCd = 42;
+        public int healthDmgCd = 48;
         public int closeRange = 112;
         public int longRange = 560;
         public float defLifestealDmgMult = 0.0001f;

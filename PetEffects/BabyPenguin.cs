@@ -51,7 +51,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ModifyCaughtFish(Item fish)
         {
-            if (Pet.PetInUse(ItemID.Fish) && (fish.type == ItemID.FrostMinnow || fish.type == ItemID.AtlanticCod))
+            if (Pet.PetInUse(ItemID.Fish) && (fish.type == ItemID.FrostMinnow || fish.type == ItemID.AtlanticCod || fish.type == ItemID.FrostDaggerfish || fish.type == ItemID.FrozenCrate || fish.type == ItemID.FrozenCrateHard))
             {
                 for (int i = 0; i < GlobalPet.Randomizer(snowFishChance * fish.stack); i++)
                 {

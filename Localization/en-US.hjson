@@ -693,6 +693,8 @@ Mods: {
 				<class>
 				- Increases all plants and alike you gather by <plant>%.
 				 * Decreased to <rarePlant>% for rare plants.
+				- Grants <health> maximum health and <harvFort> Harvesting Fortune
+				for every Pumpkin Armor piece is worn. Current worn pieces: <pumpkinPieceAmount>
 				'''
 			EucaluptusSap:
 				'''
