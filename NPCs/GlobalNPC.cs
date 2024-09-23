@@ -4,6 +4,7 @@ using PetsOverhaul.Items;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;
@@ -270,13 +271,27 @@ namespace PetsOverhaul.NPCs
         }
         public override void DrawEffects(NPC npc, ref Color drawColor)
         {
-            if (CurrentSlowAmount > 0)
+            if (CurrentSlowAmount > 0) 
             {
-                drawColor = Color.DarkTurquoise with { A = 225 };
-                for (int i = 0; i < GlobalPet.Randomizer((int)(20 * CurrentSlowAmount)); i++)
+                int dustChance = GlobalPet.Randomizer((int)(1000 / CurrentSlowAmount));
+                if (dustChance <= 0)
+                    dustChance = 1;
+                bool spawnDust = Main.rand.NextBool(dustChance); //We use random chance to spawn a dust, the chance for gets narrowed down the more slow there is.
+                if (SlowList.Exists(x => PetSlowIDs.ElectricBasedSlows.Contains(x.SlowId)))
                 {
-                    Dust dust = Dust.NewDustDirect(npc.position, npc.width, npc.height, 101, Alpha: 100, Scale: Main.rand.NextFloat(0.7f, 1.1f));
-                    dust.noGravity = true;
+                    drawColor = Color.PaleTurquoise with { A = 225 };
+
+                    if (spawnDust)
+                    Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.Electric, Alpha: 100, Scale: Main.rand.NextFloat(0.7f, 1.1f))
+                    .noGravity = true;
+                }
+                if (SlowList.Exists(x => PetSlowIDs.ColdBasedSlows.Contains(x.SlowId)))
+                {
+                    drawColor = Color.DarkTurquoise with { A = 225 };
+
+                    if (spawnDust)
+                    Dust.NewDustDirect(npc.position, npc.width, npc.height, 101, Alpha: 100, Scale: Main.rand.NextFloat(0.7f, 1.1f))
+                    .noGravity = true;
                 }
             }
             if (npc.HasBuff(ModContent.BuffType<Mauled>()))
@@ -305,7 +320,7 @@ namespace PetsOverhaul.NPCs
     /// <summary>
     /// Class that contains PetSlowID's, where same slow ID does not overlap with itself, and a slow with greater slow & better remaining time will override the obsolete one.
     /// </summary>
-    public class PetSlowIDs //
+    public class PetSlowIDs
     {
         /// <summary>
         /// Slows with ID lower than 0 won't be overriden by itself by any means and can have multiples of the same ID this way.
@@ -318,5 +333,11 @@ namespace PetsOverhaul.NPCs
         public const int IceQueen = 4;
         public const int VoltBunny = 5;
         public const int PhantasmalIce = 6;
+        public const int PhantasmalLightning = 7;
+        /// <summary>
+        /// Slows in this array will produce lightning spark dusts rather than icy water dusts on the slowed npc.
+        /// </summary>
+        public static int[] ElectricBasedSlows = { VoltBunny, PhantasmalLightning };
+        public static int[] ColdBasedSlows = { Grinch, Snowman, Deerclops, IceQueen, PhantasmalIce, QueenSlime }; //Queen will be removed from here, and a new 'slime slow' will be added later
     }
 }

@@ -510,12 +510,11 @@ Mods: {
 				'''
 				<class>
 				- If you don't have a Wing grants following:
-				 * You can now fly for <flight> seconds.
+				 * You can now fly with Butterfly Wings for <flight> seconds.
 				 * Gain immunity to fall damage.
 				 * Lose <healthNerf>% of your max health.
 				- If you already have a Wing grants following:
-				 * Increases maximum flight time by <bonusFlight> seconds.
-				 * Only increased by <flight> seconds if current wings are Fledgling Wings. [i:4978]
+				 * Increases flight time by <flight> + <percFlight>% of your current Wing Time.
 				'''
 			GlommerPetItem:
 				'''
@@ -899,13 +898,33 @@ Mods: {
 			LunaticCultistPetItem:
 				'''
 				<class>
-				- Every <cooldown> seconds, hitting an enemy casts one of the 3 area of effect spells:
-				 * 6 Ice Shards that travel in a hexagonal directory, that can hit up to <icePierce> times,
-				and dealing <icePercent>% of the damage you initially dealt +<iceFlat>.
-				 * Ice Attacks applies slow by <iceSlow>%, <iceMainSlow>% on main target for <iceSlowTime> seconds.
-				 * 5 Light Spheres around your target, that can hit up to <lightPierce> times, 
-				 and dealing <lightPercent>% of the damage you initially dealt +<lightFlat>.
-				 * 4 Fireballs on top of your target which deals <firePercent>% of the damage you initially dealt +<fireFlat>.
+				- Press your Ability Switch Keybind (<switchKeybind>) to switch between spells.
+				- Press your Pet Ability Keybind (<keybind>) to use your current spell.
+				 * All abilities has the same <cooldown> seconds cooldown.
+				<tooltip>
+				'''
+			DragonIce:
+				'''
+				- Icicle Mist
+				 * Spawns a Ice Mist on your cursor, it travels towards a random direction,
+				spawning Icicle Shards along the way it travels, traveling through blocks.
+				 * Ball and Shards both deal <damage> general damage to enemies hit.
+				 * Enemies hit by them gets slowed by <slowAmount>% for <slowTime> seconds.
+				'''
+			DragonLightning:
+				'''
+				- Lightning Orb
+				 * Spawns a Lightning Orb on your cursor, which gradually sends out Lightning Strikes
+				towards where your cursor is at, both continiously striking enemies that contacts them.
+				 * Orb deals <orbDmg> general damage with <orbPen> armor pen, also applying a <orbSlow>% slow briefly.
+				 * Strikes deal <strikeDmg> general damage with <strikePen> armor pen, also applying a <strikeSlow>% slow briefly.
+				'''
+			DragonFire:
+				'''
+				- Fireball Volley
+				 * Starts shooting Fireballs towards your cursor <fireballAmount> times within <fireballDuration> seconds.
+				 * Fireballs explode upon impact with anything, dealing <fireDmg> general damage and <kb> knockback.
+				 * Hit enemies gets applied with Daybreak debuff for <burnSeconds> seconds.
 				'''
 			DD2BetsyPetItem:
 				'''
@@ -1258,6 +1277,7 @@ Mods: {
 			UsePetAbility.DisplayName: Use Pet Ability
 			PetTooltipHide.DisplayName: Toggle (Show) Pet Tooltips
 			PetTooltipSwap.DisplayName: Switch Pet Tooltip
+			PetAbilitySwitch.DisplayName: Pet Ability Switch
 		}
 
 		NPCs.LizardTail.DisplayName: Lizard Tail

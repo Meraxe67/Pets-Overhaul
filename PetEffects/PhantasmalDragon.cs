@@ -23,14 +23,69 @@ namespace PetsOverhaul.PetEffects
     public sealed class PhantasmalDragon : PetEffect
     {
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
-        public int phantasmDragonCooldown = 120;
-        public int iceBase = 400;
-        public int lightningBase = 300;
+        public int phantasmDragonCooldown = 480;
+        public int currentAbility = 0;
+
+        public int iceBase = 300;
+        public float iceSlow = 1.5f;
+        public int iceSlowDuration = 1200;
+
+        public int lightningOrbBase = 60;
+        public int lightningStrikeDivide = 2;
+        public int lightningStrikePen = 50; //Orb uses half of Pen aswell
+        public float lightningSlow = 10f; //Strike is half
+        public int lightningSlowDuration = 10;
+
+        public int fireBase = 200;
+        private int fireVolley = 0;
+        public int fireVolleyEveryFrame = 15;
+        public int fireVolleyFrames = 90;
+        public int fireBurnTime = 180;
+        public float fireKnockback = 3.8f;
+
+        public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
+        {
+            if (Pet.PetInUse(ItemID.LunaticCultistPetItem))
+            {
+                if (Main.rand.NextBool(15))
+                {
+                    switch (currentAbility)
+                    {
+                        case 0: //Ice
+                            Dust.NewDust(Player.position, Player.width, Player.height, DustID.SnowflakeIce, Alpha: 220, Scale: 0.7f);
+                            break;
+                        case 1: //Lightning
+                            Dust.NewDust(Player.position, Player.width, Player.height, DustID.Electric, Alpha: 220, Scale: 0.9f);
+                            break;
+                        case 2: //Fire
+                            Dust.NewDust(Player.position, Player.width, Player.height, DustID.Torch, Alpha: 220);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.LunaticCultistPetItem))
             {
+                if (fireVolley > 0 && fireVolley % fireVolleyEveryFrame == 0)
+                {
+                    Vector2 location = Player.Center;
+                    foreach (var projectile in Main.ActiveProjectiles)
+                    {
+                        if (projectile is Projectile proj && proj.owner == Player.whoAmI && proj.type == ProjectileID.LunaticCultistPet)
+                        {
+                            location = proj.Center;
+                        }
+                    }
+                    Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile, "Phantasmal"), location, new Vector2(Main.MouseWorld.X - location.X - Main.rand.NextFloat(3f, -3f), Main.MouseWorld.Y - location.Y - Main.rand.NextFloat(6f, 7f)), ProjectileID.CultistBossFireBall, Damage(fireBase), fireKnockback, Player.whoAmI);
+                }
                 Pet.SetPetAbilityTimer(phantasmDragonCooldown);
+                fireVolley--;
+                if (fireVolley < 0)
+                    fireVolley = 0;
             }
         }
         public int Damage(int dmg)
@@ -39,10 +94,16 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.LunaticCultistPetItem) && Pet.timer <= 0 && Keybinds.UsePetAbility.JustPressed)
+            if (Pet.PetInUse(ItemID.LunaticCultistPetItem) && Keybinds.PetAbilitySwitch.JustPressed)
+            {
+                currentAbility++;
+                if (currentAbility > 2)
+                    currentAbility = 0;
+            }
+            if (Pet.PetInUseWithSwapCd(ItemID.LunaticCultistPetItem) && Pet.AbilityPressCheck())
             {
                 Pet.timer = Pet.timerMax;
-                switch (Main.rand.Next(2))
+                switch (currentAbility)
                 {
                     case 0: //Ice
                         Vector2 velocity = Main.rand.NextVector2Circular(5f, 5f);
@@ -59,8 +120,11 @@ namespace PetsOverhaul.PetEffects
                             .netUpdate = true;
                         break;
                     case 1: //Lightning
-                        Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile, "Phantasmal"), Main.MouseWorld, Vector2.Zero, ProjectileID.CultistBossLightningOrb, Damage(lightningBase), 0, Player.whoAmI, 0f)
+                        Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile, "Phantasmal"), Main.MouseWorld, Vector2.Zero, ProjectileID.CultistBossLightningOrb, Damage(lightningOrbBase), 0, Player.whoAmI, 0f)
                             .netUpdate = true;
+                        break;
+                    case 2: //Fire
+                        fireVolley = fireVolleyFrames;
                         break;
                     default:
                         break;
@@ -78,6 +142,44 @@ namespace PetsOverhaul.PetEffects
                 (source is EntitySource_Parent parent && parent.Entity is Projectile proj && proj.TryGetGlobalProjectile(out LunaticCultistFriendlyProjectiles result) && result.fromPhantasmalPet))
             {
                 fromPhantasmalPet = true;
+                PhantasmalDragon dragon = Main.player[projectile.owner].GetModPlayer<PhantasmalDragon>();
+                if (projectile.type == ProjectileID.CultistBossLightningOrb)
+                {
+                    projectile.penetrate = -1;
+                    projectile.ArmorPenetration += dragon.lightningStrikePen / dragon.lightningStrikeDivide;
+                    projectile.usesLocalNPCImmunity = true;
+                    projectile.localNPCHitCooldown = 10;
+                }
+                if (projectile.type == ProjectileID.CultistBossLightningOrbArc)
+                {
+                    projectile.penetrate = -1;
+                    projectile.ArmorPenetration += dragon.lightningStrikePen;
+                    projectile.usesLocalNPCImmunity = true;
+                    projectile.localNPCHitCooldown = 20;
+                }
+            }
+        }
+        public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (fromPhantasmalPet)
+            {
+                PhantasmalDragon dragon = Main.player[projectile.owner].GetModPlayer<PhantasmalDragon>();
+                if (projectile.type == ProjectileID.CultistBossIceMist)
+                {
+                    NpcPet.AddSlow(new NpcPet.PetSlow(dragon.iceSlow, dragon.iceSlowDuration, PetSlowIDs.PhantasmalIce), target);
+                }
+                else if (projectile.type == ProjectileID.CultistBossLightningOrb)
+                {
+                    NpcPet.AddSlow(new NpcPet.PetSlow(dragon.lightningSlow, dragon.lightningSlowDuration, PetSlowIDs.PhantasmalLightning), target);
+                }
+                else if (projectile.type == ProjectileID.CultistBossLightningOrbArc)
+                {
+                    NpcPet.AddSlow(new NpcPet.PetSlow(dragon.lightningSlow / dragon.lightningStrikeDivide, dragon.lightningSlowDuration, PetSlowIDs.PhantasmalLightning), target);
+                }
+                else if (projectile.type == ProjectileID.CultistBossFireBall)
+                {
+                    target.AddBuff(BuffID.Daybreak, dragon.fireBurnTime);
+                }
             }
         }
         public override void PostAI(Projectile projectile)
@@ -92,10 +194,6 @@ namespace PetsOverhaul.PetEffects
                 projectile.friendly = true;
                 projectile.hostile = false;
                 projectile.netUpdate = true;
-                if (projectile.type == ProjectileID.CultistBossLightningOrbArc || projectile.type == ProjectileID.CultistBossLightningOrb)
-                {
-                    projectile.penetrate = -1;
-                }
             }
         }
         public override bool PreAI(Projectile projectile)
@@ -129,39 +227,12 @@ namespace PetsOverhaul.PetEffects
                         }
                     }
                     projectile.ai[0]++;
-                    if (projectile.ai[0] % 30f == 0f && projectile.ai[0] < 180f)
+                    if (projectile.ai[0] % 30f == 0f && projectile.ai[0] < 180f) //Removed the code regarding targeting the player.
                     {
-                        int[] array3 = new int[5];
-                        Vector2[] array4 = (Vector2[])(object)new Vector2[5];
-                        int num808 = 0;
-                        float num809 = 2000f;
-                        for (int num811 = 0; num811 < 255; num811++)
-                        {
-                            if (!Main.player[num811].active || Main.player[num811].dead)
-                            {
-                                continue;
-                            }
-                            Vector2 center6 = Main.MouseWorld; //Changed Main.player[num811].Center to Main.MouseWorld
-                            float num812 = Vector2.Distance(center6, projectile.Center);
-                            if (num812 < num809 && Collision.CanHit(projectile.Center, 1, 1, center6, 1, 1))
-                            {
-                                array3[num808] = num811;
-                                array4[num808] = center6;
-                                int num388 = num808 + 1;
-                                num808 = num388;
-                                if (num388 >= array4.Length)
-                                {
-                                    break;
-                                }
-                            }
-                        }
-                        for (int num813 = 0; num813 < num808; num813++)
-                        {
-                            Vector2 vector162 = array4[num813] - projectile.Center;
-                            float ai = Main.rand.Next(100);
-                            Vector2 vector163 = Vector2.Normalize(vector162.RotatedByRandom(0.7853981852531433)) * 7f;
-                            Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center.X, projectile.Center.Y, vector163.X, vector163.Y, ProjectileID.CultistBossLightningOrbArc, projectile.damage, 0f, projectile.owner, vector162.ToRotation(), ai); //Changed ID for readability and the WhoAmI to .owner
-                        }
+                        Vector2 vector162 = Main.MouseWorld - projectile.Center; //Directly uses Mouse position for velocity.
+                        float ai = Main.rand.Next(100);
+                        Vector2 vector163 = Vector2.Normalize(vector162.RotatedByRandom(0.7853981852531433)) * 7f;
+                        Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center.X, projectile.Center.Y, vector163.X, vector163.Y, ProjectileID.CultistBossLightningOrbArc, projectile.damage / Main.player[projectile.owner].GetModPlayer<PhantasmalDragon>().lightningStrikeDivide, 0f, projectile.owner, vector162.ToRotation(), ai); //Changed ID for readability and the WhoAmI to .owner
                     }
                     Lighting.AddLight(projectile.Center, 0.4f, 0.85f, 0.9f);
                     if (++projectile.frameCounter >= 4)
@@ -187,12 +258,12 @@ namespace PetsOverhaul.PetEffects
                         {
                             num815 = 0.5f;
                         }
-                        Vector2 spinningpoint56 = new Vector2((float)(-projectile.width) * 0.2f * projectile.scale, 0f);
+                        Vector2 spinningpoint56 = new Vector2((float)-projectile.width * 0.2f * projectile.scale, 0f);
                         double radians43 = num815 * ((float)Math.PI * 2f);
-                        val4 = default(Vector2);
+                        val4 = default;
                         Vector2 spinningpoint57 = Utils.RotatedBy(spinningpoint56, radians43, val4);
                         double radians44 = projectile.velocity.ToRotation();
-                        val4 = default(Vector2);
+                        val4 = default;
                         Vector2 vector164 = spinningpoint57.RotatedBy(radians44, val4);
                         int num816 = Dust.NewDust(projectile.Center - Vector2.One * 5f, 10, 10, 226, (0f - projectile.velocity.X) / 3f, (0f - projectile.velocity.Y) / 3f, 150, Color.Transparent, 0.7f);
                         Main.dust[num816].position = projectile.Center + vector164;
@@ -210,12 +281,12 @@ namespace PetsOverhaul.PetEffects
                         {
                             num818 = 0.5f;
                         }
-                        Vector2 spinningpoint58 = new Vector2((float)(-projectile.width) * 0.6f * projectile.scale, 0f);
+                        Vector2 spinningpoint58 = new Vector2((float)-projectile.width * 0.6f * projectile.scale, 0f);
                         double radians45 = num818 * ((float)Math.PI * 2f);
-                        val4 = default(Vector2);
+                        val4 = default;
                         Vector2 spinningpoint59 = Utils.RotatedBy(spinningpoint58, radians45, val4);
                         double radians46 = projectile.velocity.ToRotation();
-                        val4 = default(Vector2);
+                        val4 = default;
                         Vector2 vector165 = spinningpoint59.RotatedBy(radians46, val4);
                         int num819 = Dust.NewDust(projectile.Center - Vector2.One * 5f, 10, 10, 226, (0f - projectile.velocity.X) / 3f, (0f - projectile.velocity.Y) / 3f, 150, Color.Transparent, 0.7f);
                         Main.dust[num819].velocity = Vector2.Zero;
@@ -249,7 +320,7 @@ namespace PetsOverhaul.PetEffects
                         }
                         if (Main.rand.Next(projectile.extraUpdates) == 0)
                         {
-                            Vector2 vector166 = default(Vector2);
+                            Vector2 vector166 = default;
                             for (int num822 = 0; num822 < 2; num822++)
                             {
                                 float num823 = projectile.rotation + ((Main.rand.Next(2) == 1) ? (-1f) : 1f) * ((float)Math.PI / 2f);
@@ -349,11 +420,34 @@ namespace PetsOverhaul.PetEffects
             {
                 return;
             }
-
             PhantasmalDragon phantasmalDragon = Main.LocalPlayer.GetModPlayer<PhantasmalDragon>();
+            string currentAbilityTooltip = phantasmalDragon.currentAbility switch
+            {
+                0 => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DragonIce") //Ice
+                .Replace("<damage>", phantasmalDragon.iceBase.ToString())
+                .Replace("<slowAmount>", Math.Round(phantasmalDragon.iceSlow * 100, 2).ToString())
+                .Replace("<slowTime>", Math.Round(phantasmalDragon.iceSlowDuration / 60f, 2).ToString()),
+                1 => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DragonLightning") //Lightning, slow time not included in tooltip, a bit unnecessary info its 0.166 of a second
+                .Replace("<orbDmg>", phantasmalDragon.lightningOrbBase.ToString())
+                .Replace("<orbPen>", (phantasmalDragon.lightningStrikePen / phantasmalDragon.lightningStrikeDivide).ToString())
+                .Replace("<orbSlow>", Math.Round(phantasmalDragon.lightningSlow * 100, 2).ToString())
+                .Replace("<strikeDmg>", (phantasmalDragon.lightningOrbBase / phantasmalDragon.lightningStrikeDivide).ToString())
+                .Replace("<strikePen>", phantasmalDragon.lightningStrikePen.ToString())
+                .Replace("<strikeSlow>", Math.Round(phantasmalDragon.lightningSlow / phantasmalDragon.lightningStrikeDivide * 100, 2).ToString()),
+                2 => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DragonFire") //Fireball
+                .Replace("<fireballAmount>", (phantasmalDragon.fireVolleyFrames / phantasmalDragon.fireVolleyEveryFrame).ToString())
+                .Replace("<fireballDuration>", Math.Round(phantasmalDragon.fireVolleyFrames / 60f, 2).ToString())
+                .Replace("<fireDmg>", phantasmalDragon.fireBase.ToString())
+                .Replace("<kb>", phantasmalDragon.fireKnockback.ToString())
+                .Replace("<burnSeconds>", Math.Round(phantasmalDragon.fireBurnTime / 60f, 2).ToString()),
+                _ => "Cannot Find current ability.",
+            };
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.LunaticCultistPetItem")
                 .Replace("<class>", PetTextsColors.ClassText(phantasmalDragon.PetClassPrimary, phantasmalDragon.PetClassSecondary))
+                .Replace("<switchKeybind>", PetTextsColors.KeybindText(Keybinds.PetAbilitySwitch))
+                .Replace("<keybind>", PetTextsColors.KeybindText(Keybinds.UsePetAbility))
                        .Replace("<cooldown>", Math.Round(phantasmalDragon.phantasmDragonCooldown / 60f, 2).ToString())
+                       .Replace("<tooltip>", currentAbilityTooltip)
                        ));
         }
     }

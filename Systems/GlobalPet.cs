@@ -219,7 +219,10 @@ namespace PetsOverhaul.Systems
         {
             return !npc.friendly && !npc.SpawnedFromStatue && npc.type != NPCID.TargetDummy;
         }
-
+        public bool AbilityPressCheck()
+        {
+            return Player.dead == false && timer <= 0 && Keybinds.UsePetAbility.JustPressed;
+        }
         /// <summary>
         /// Randomizes the given number. numToBeRandomized / randomizeTo returns how many times its 100% chance and rolls if the leftover, non-100% amount is true. Randomizer(250) returns +2 and +1 more with 50% chance.
         /// randomizeTo is converted to positive if its negative for proper usage of Method.

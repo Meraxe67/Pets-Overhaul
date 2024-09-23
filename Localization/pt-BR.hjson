@@ -769,6 +769,29 @@ Mods: {
 				<lightPercent>% do seu dano +<lightFlat> que pode acertar até <lightPierce> inimigos, 4 Bolas de Fogo acima do seu
 				alvo que viaja aleatóriamente causando <firePercent>% do seu dano +<fireFlat>
 				'''
+			/* DragonIce:
+				'''
+				- Icicle Mist
+				 * Spawns a Ice Mist Ball on your cursor, it travels towards a random direction,
+				spawning Icicle Shards along the way it travels, traveling through blocks.
+				 * Ball and Shards both deal <damage> general damage to enemies hit.
+				 * Enemies hit by them gets slowed by <slowAmount>% for <slowTime> seconds.
+				''' */
+			/* DragonLightning:
+				'''
+				- Lightning Orb
+				 * Spawns a Lightning Orb on your cursor, which gradually sends out Lightning Strikes
+				towards where your cursor is at, both continiously striking enemies that contacts them.
+				 * Orb deals <orbDmg> general damage with <orbPen> armor pen, also applying a <orbSlow>% slow briefly.
+				 * Strikes deal <strikeDmg> general damage with <strikePen> armor pen, also applying a <strikeSlow>% slow briefly.
+				''' */
+			/* DragonFire:
+				'''
+				- Fireball Volley
+				 * Starts shooting Fireballs towards your cursor <fireballAmount> times within <fireballDuration> seconds.
+				 * Fireballs explode upon impact with anything, dealing <fireDmg> general damage and <kb> knockback.
+				 * Hit enemies gets applied with Daybreak debuff for <burnSeconds> seconds.
+				''' */
 			DD2BetsyPetItem:
 				'''
 				[c/FF6BA8:Pet Atirador e Suporte]
@@ -1068,6 +1091,7 @@ Mods: {
 			// UsePetAbility.DisplayName: Use Pet Ability
 			// PetTooltipHide.DisplayName: Toggle (Show) Pet Tooltips
 			// PetTooltipSwap.DisplayName: Switch Pet Tooltip
+			// PetAbilitySwitch.DisplayName: Pet Ability Switch
 		}
 
 		// NPCs.LizardTail.DisplayName: Lizard Tail
