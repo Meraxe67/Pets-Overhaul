@@ -15,7 +15,7 @@ namespace PetsOverhaul.PetEffects
     {
         public float powerPerQuest = 0.004f;
         public float maxQuestPower = 0.4f;
-        public int baseChance = 40;
+        public int baseChance = 30;
         public int windChance = 120;
         public int speedMult = 20;
         public bool amplifiedFishingChance { get; internal set; }
