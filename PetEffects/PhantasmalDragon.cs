@@ -113,7 +113,7 @@ namespace PetsOverhaul.PetEffects
                 if (currentAbility > 2)
                     currentAbility = 0;
             }
-            if (Pet.PetInUseWithSwapCd(ItemID.LunaticCultistPetItem) && Pet.AbilityPressCheck())
+            if (Pet.AbilityPressCheck() && Pet.PetInUseWithSwapCd(ItemID.LunaticCultistPetItem))
             {
                 Pet.timer = Pet.timerMax;
                 switch (currentAbility)
@@ -142,6 +142,17 @@ namespace PetsOverhaul.PetEffects
                     default:
                         break;
                 }
+            }
+        }
+        public override void SaveData(TagCompound tag)
+        {
+            tag.Add("CurrentSpell", currentAbility);
+        }
+        public override void LoadData(TagCompound tag)
+        {
+            if (tag.TryGet("CurrentSpell", out int spell))
+            {
+                currentAbility = spell;
             }
         }
     }

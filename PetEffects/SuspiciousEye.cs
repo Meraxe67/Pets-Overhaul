@@ -44,7 +44,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (Pet.timer <= 0 && Pet.PetInUseWithSwapCd(ItemID.EyeOfCthulhuPetItem) && Keybinds.UsePetAbility.JustPressed)
+            if (Pet.AbilityPressCheck() && Pet.PetInUseWithSwapCd(ItemID.EyeOfCthulhuPetItem))
             {
                 if (Player.statLife > Player.statLifeMax2 / 2)
                 {

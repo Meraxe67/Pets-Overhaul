@@ -8,6 +8,7 @@ using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace PetsOverhaul.PetEffects
 {
@@ -88,6 +89,17 @@ namespace PetsOverhaul.PetEffects
             if (Pet.PetInUseWithSwapCd(ItemID.MoonLordPetItem) && modifiers.DamageType == DamageClass.Ranged && HighestDamage == Player.GetDamage<RangedDamageClass>())
             {
                 modifiers.CritDamage += rangedCrDmg;
+            }
+        }
+        public override void SaveData(TagCompound tag)
+        {
+            tag.Add("CurrentTooltip", currentTooltip);
+        }
+        public override void LoadData(TagCompound tag)
+        {
+            if (tag.TryGet("CurrentTooltip", out int tooltip))
+            {
+                currentTooltip = tooltip;
             }
         }
     }

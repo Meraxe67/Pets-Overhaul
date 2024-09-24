@@ -75,7 +75,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (Main.dayTime == false && Pet.timer <= 0 && Pet.PetInUseWithSwapCd(ItemID.UnluckyYarn) && Keybinds.UsePetAbility.JustPressed)
+            if (Main.dayTime == false && Pet.AbilityPressCheck() && Pet.PetInUseWithSwapCd(ItemID.UnluckyYarn))
             {
                 SoundEngine.PlaySound(SoundID.Item29 with { PitchRange = (-1f, -0.8f) }, Player.position);
                 int moonlightRoll = Main.rand.Next(moonlightLowest, moonlightHighest + 1);
@@ -112,7 +112,6 @@ namespace PetsOverhaul.PetEffects
                 }
                 else
                 {
-
                     Pet.PetRecovery(moonlightRoll, 1f, isLifesteal: false);
                 }
                 Pet.timer = Pet.timerMax;
