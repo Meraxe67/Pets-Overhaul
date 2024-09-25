@@ -847,7 +847,7 @@ Mods: {
 				'''
 				<class>
 				- Grants <defMultIncrease>% more defense.
-				- Doubles Ironskin potion's [i:292] effect, giving <ironskinDef> more defense.
+				- If you have Ironskin [i:292] effect, gain <ironskinDef> defense and <miningFortune> Mining Fortune.
 				- Increases gathered ores, gems, or simply anything mining-related. 
 				 * Amount it increases is equal to <defMultChance>% of your defense + <flatAmount>%.
 				'''

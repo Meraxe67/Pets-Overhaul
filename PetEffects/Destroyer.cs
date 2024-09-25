@@ -15,9 +15,10 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassSecondary => PetClasses.Defensive;
         public override PetClasses PetClassPrimary => PetClasses.Mining;
         public int ironskinBonusDef = 8;
-        public float flatDefMult = 0.22f;
+        public float flatDefMult = 0.15f;
         public float defItemMult = 0.5f;
         public int flatAmount = 10;
+        public int miningFort = 10;
         public override void PostUpdateEquips()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.DestroyerPetItem))
@@ -25,6 +26,7 @@ namespace PetsOverhaul.PetEffects
                 if (Player.HasBuff(BuffID.Ironskin))
                 {
                     Player.statDefense += ironskinBonusDef;
+                    Pet.miningFortune += miningFort;
                 }
                 Player.statDefense *= 1f + flatDefMult;
             }
@@ -67,6 +69,7 @@ namespace PetsOverhaul.PetEffects
                         .Replace("<flatAmount>", destroyer.flatAmount.ToString())
                         .Replace("<defMultIncrease>", Math.Round(destroyer.flatDefMult * 100, 2).ToString())
                         .Replace("<ironskinDef>", destroyer.ironskinBonusDef.ToString())
+                        .Replace("<miningFortune>",destroyer.miningFort.ToString())
                         ));
         }
     }
