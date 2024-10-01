@@ -22,7 +22,7 @@ namespace PetsOverhaul.PetEffects
 
         public override PetClasses PetClassPrimary => PetClasses.Supportive;
         public override PetClasses PetClassSecondary => PetClasses.Offensive;
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUse(ItemID.FullMoonSqueakyToy) && Main.moonPhase == 0)
             {

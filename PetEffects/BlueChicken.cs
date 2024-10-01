@@ -19,7 +19,7 @@ namespace PetsOverhaul.PetEffects
         public int plantChance = 28;
         public int rarePlantChance = 50;
         public int treeChance = 14;
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUse(ItemID.BlueEgg))
             {

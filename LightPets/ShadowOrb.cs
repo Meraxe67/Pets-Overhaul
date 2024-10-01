@@ -12,7 +12,7 @@ namespace PetsOverhaul.LightPets
 {
     public sealed class ShadowOrbEffect : LightPetEffect
     {
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Player.miscEquips[1].TryGetGlobalItem(out ShadowOrb shadowOrb))
             {

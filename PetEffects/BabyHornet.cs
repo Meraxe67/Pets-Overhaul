@@ -41,7 +41,7 @@ namespace PetsOverhaul.PetEffects
                 Player.buffImmune[BuffID.Venom] = false;
             }
         }
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.Nectar))
             {

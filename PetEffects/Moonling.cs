@@ -42,7 +42,7 @@ namespace PetsOverhaul.PetEffects
         public int currentTooltip = 0; //0=Melee 1=Ranged 2=Magic 3=Summoner
 
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.MoonLordPetItem))
             {

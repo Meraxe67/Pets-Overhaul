@@ -15,7 +15,7 @@ namespace PetsOverhaul.PetEffects
         public float moveSpd = 0.10f;
         public float jumpSpd = 0.5f;
         public int fallDamageTile = 20;
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.EatersBone))
             {

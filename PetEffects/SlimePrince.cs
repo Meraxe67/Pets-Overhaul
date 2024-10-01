@@ -40,7 +40,7 @@ namespace PetsOverhaul.PetEffects
             }
         }
 
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (GlobalPet.KingSlimePetActive(out slimePrince) && Player.HasBuff(BuffID.Wet))
             {

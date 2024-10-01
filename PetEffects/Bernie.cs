@@ -27,7 +27,7 @@ namespace PetsOverhaul.PetEffects
                 timer++; //this is separate from normal Pet timers
             }
         }
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.BerniePetItem))
             {

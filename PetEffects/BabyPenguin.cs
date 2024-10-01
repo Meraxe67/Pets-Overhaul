@@ -18,7 +18,7 @@ namespace PetsOverhaul.PetEffects
         public int regularFish = 5;
         public float chillingMultiplier = 0.45f;
         public int snowFishChance = 100;
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUse(ItemID.Fish))
             {

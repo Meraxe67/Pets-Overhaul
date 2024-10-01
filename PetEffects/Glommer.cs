@@ -27,7 +27,7 @@ namespace PetsOverhaul.PetEffects
                 Pet.SetPetAbilityTimer(glommerSanityTime);
             }
         }
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUse(ItemID.GlommerPetItem) && Main.rand.NextBool(18000))
             {

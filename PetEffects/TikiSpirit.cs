@@ -17,7 +17,7 @@ namespace PetsOverhaul.PetEffects
         public float atkSpdToRangeConversion = 0.15f;
 
         public override PetClasses PetClassPrimary => PetClasses.Summoner;
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.TikiTotem))
             {

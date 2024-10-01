@@ -19,7 +19,7 @@ namespace PetsOverhaul.PetEffects
         public int staticLength = 45;
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
         public override PetClasses PetClassSecondary => PetClasses.Mobility;
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.LightningCarrot))
             {

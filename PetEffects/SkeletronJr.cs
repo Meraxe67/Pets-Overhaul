@@ -29,7 +29,7 @@ namespace PetsOverhaul.PetEffects
                 timer = 10000;
             }
         }
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (skeletronTakenDamage.Count > 0 && timer >= 60)
             {

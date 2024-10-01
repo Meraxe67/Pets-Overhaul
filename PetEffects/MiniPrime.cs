@@ -45,7 +45,7 @@ namespace PetsOverhaul.PetEffects
                 Pet.petShield[shieldIndex] = ((int)(Player.statLifeMax2 * shieldMult), 2);
             }
         }
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.SkeletronPrimePetItem))
             {

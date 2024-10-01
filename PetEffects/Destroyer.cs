@@ -19,7 +19,7 @@ namespace PetsOverhaul.PetEffects
         public float defItemMult = 0.5f;
         public int flatAmount = 10;
         public int miningFort = 10;
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.DestroyerPetItem))
             {

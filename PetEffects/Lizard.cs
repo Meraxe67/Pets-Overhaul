@@ -73,7 +73,7 @@ namespace PetsOverhaul.PetEffects
                 buffTimer = buffDurations;
             }
         }
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.LizardEgg))
             {

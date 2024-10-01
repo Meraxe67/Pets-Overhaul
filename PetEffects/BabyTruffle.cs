@@ -32,7 +32,7 @@ namespace PetsOverhaul.PetEffects
                 luck += increaseFloat;
             }
         }
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.StrangeGlowingMushroom))
             {

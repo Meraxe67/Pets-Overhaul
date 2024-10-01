@@ -24,7 +24,7 @@ namespace PetsOverhaul.PetEffects
         public float verticalMult = 0.7f;
         public float trueMeleeMultipliers = 2.75f;
 
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Main.masterMode == true)
             {
@@ -54,12 +54,6 @@ namespace PetsOverhaul.PetEffects
                 Player.wingTimeMax /= 2;
                 Player.noKnockback = true;
                 Player.statLifeMax2 += (int)(healthIncrease * Player.statLifeMax2);
-            }
-        }
-        public override void PostUpdateMiscEffects()
-        {
-            if (Pet.PetInUseWithSwapCd(ItemID.DD2OgrePetItem) && Player.mount.Active == false)
-            {
                 Player.moveSpeed *= movespdNerf;
             }
         }

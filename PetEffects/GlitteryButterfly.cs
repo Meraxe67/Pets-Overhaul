@@ -15,7 +15,7 @@ namespace PetsOverhaul.PetEffects
         public int wingTime = 45;
         public float currentWingPercIncr = 0.5f;
         public float healthPenalty = 0.15f;
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.BedazzledNectar))
             {

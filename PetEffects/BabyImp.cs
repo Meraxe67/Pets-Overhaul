@@ -18,7 +18,7 @@ namespace PetsOverhaul.PetEffects
         public float lavaSpd = 0.15f;
         public int obbyDef = 8;
         public float obbySpd = 0.08f;
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.HellCake))
             {

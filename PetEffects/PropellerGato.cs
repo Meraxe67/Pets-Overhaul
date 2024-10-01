@@ -15,7 +15,7 @@ namespace PetsOverhaul.PetEffects
         public int turretIncrease = 1;
 
         public override PetClasses PetClassPrimary => PetClasses.Summoner;
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.DD2PetGato))
             {

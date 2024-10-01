@@ -17,7 +17,7 @@ namespace PetsOverhaul.PetEffects
         public int bunnyStack = 0;
         public float jumpPerStk = 0.02f;
         public float spdPerStk = 0.005f;
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.Carrot))
             {

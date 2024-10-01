@@ -29,7 +29,7 @@ namespace PetsOverhaul.PetEffects
                 healValue += (int)(healValue * selfPotionIncrease);
             }
         }
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Player.HasBuff(ModContent.BuffType<HoneyOverdose>()))
             {

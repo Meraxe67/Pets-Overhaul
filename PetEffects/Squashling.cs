@@ -22,7 +22,7 @@ namespace PetsOverhaul.PetEffects
         {
             PetsOverhaul.OnPickupActions += PreOnPickup;
         }
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUse(ItemID.MagicalPumpkinSeed))
             {

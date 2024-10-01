@@ -20,7 +20,7 @@ namespace PetsOverhaul.PetEffects
         public int speedMult = 20;
         public bool amplifiedFishingChance { get; internal set; }
         public override PetClasses PetClassPrimary => PetClasses.Fishing;
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUse(ItemID.ZephyrFish))
             {

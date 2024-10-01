@@ -19,7 +19,7 @@ namespace PetsOverhaul.TownPets
                 }
             }
         }
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Player.HasBuff(ModContent.BuffType<TownPetMystic>()))
             {

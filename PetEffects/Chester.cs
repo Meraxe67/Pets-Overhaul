@@ -15,7 +15,7 @@ namespace PetsOverhaul.PetEffects
         public int placementRange = 2;
         public int chestOpenDef = 10;
         public int suckingUpRange = 80;
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUse(ItemID.ChesterPetItem))
             {

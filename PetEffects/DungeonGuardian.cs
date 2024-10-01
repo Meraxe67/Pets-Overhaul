@@ -15,7 +15,7 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
         public int armorPen = 10;
         public int lifeRegen = 8;
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.BoneKey))
             {

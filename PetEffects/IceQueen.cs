@@ -32,7 +32,7 @@ namespace PetsOverhaul.PetEffects
                 Pet.SetPetAbilityTimer(cooldown);
             }
         }
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.IceQueenPetItem) && frozenTomb == true)
             {

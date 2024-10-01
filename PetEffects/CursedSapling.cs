@@ -31,7 +31,7 @@ namespace PetsOverhaul.PetEffects
                 }
             }
         }
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.CursedSapling))
             {

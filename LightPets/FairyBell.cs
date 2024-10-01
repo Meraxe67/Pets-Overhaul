@@ -12,7 +12,7 @@ namespace PetsOverhaul.LightPets
 {
     public sealed class FairyBellEffect : LightPetEffect
     {
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Player.miscEquips[1].TryGetGlobalItem(out FairyBell fairyBell))
             {
