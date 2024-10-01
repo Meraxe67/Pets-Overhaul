@@ -89,18 +89,18 @@ namespace PetsOverhaul.PetEffects
                         Color = Color.DarkRed
                     }, Player.position);
 
-                    Pet.petShield.Add(((int)((eocShieldEquipped ? eocShieldMult : shieldMult) * (Player.statDefense + Player.endurance * 100)), shieldTime));
+                    Pet.petShield.Add(((int)((eocShieldEquipped ? eocShieldMult : shieldMult) * (Player.statDefense + Math.Round(Player.endurance * 100))), shieldTime));
                     Player.AddBuff(ModContent.BuffType<EocPetEnrage>(), phaseTime);
                 }
                 if (eocTimer <= phaseTime && eocTimer >= 0)
                 {
                     if (Player.statLife > Player.statLifeMax2 / 2)
-                    {
+                    {   
                         Player.statLife = Player.statLifeMax2 / 2;
                     }
                     ragePoints = 0;
                     ragePoints += Player.statDefense;
-                    ragePoints += (int)(Player.endurance * 100);
+                    ragePoints += (int)Math.Round(Player.endurance * 100);
                     Player.statDefense *= 0;
                     Player.endurance *= 0;
                     Player.GetDamage<GenericDamageClass>() += ragePoints * dmgMult / 100;
