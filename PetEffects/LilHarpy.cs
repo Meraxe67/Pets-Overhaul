@@ -13,8 +13,8 @@ namespace PetsOverhaul.PetEffects
     public sealed class LilHarpy : PetEffect
     {
         public int harpyCd = 780;
-        public int fuelMax = 180;
-        public int harpyFlight = 180;
+        public int fuelMax = 150;
+        public int harpyFlight = 150;
         private bool cooldownStarted;
         public override PetClasses PetClassPrimary => PetClasses.Mobility;
         public override void PreUpdate()
@@ -24,27 +24,20 @@ namespace PetsOverhaul.PetEffects
                 Pet.SetPetAbilityTimer(harpyCd);
             }
         }
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
+            if (Pet.timer == 0)
+            {
+                cooldownStarted = false;
+                harpyFlight = fuelMax;
+            }
             if (Pet.PetInUseWithSwapCd(ItemID.BirdieRattle))
             {
-                if (Pet.timer == 0)
-                {
-                    cooldownStarted = false;
-                    harpyFlight = fuelMax;
-                    PopupText.NewText(new AdvancedPopupRequest() with
-                    {
-                        Text = "Cooldown Refreshed!",
-                        DurationInFrames = 120,
-                        Velocity = new Vector2(0, -7),
-                        Color = Color.CornflowerBlue,
-                    }, Player.position);
-                }
                 if (Player.equippedWings == null)
                 {
-                    if (harpyFlight == 180 && Player.wingTime == 0)
+                    if (harpyFlight == fuelMax && Player.wingTime == 0)
                     {
-                        Player.wingTime = 180;
+                        Player.wingTime = fuelMax;
                     }
                     if (harpyFlight > 0)
                     {
