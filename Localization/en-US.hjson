@@ -750,18 +750,18 @@ Mods: {
 				'''
 				<class>
 				- Press Pet Ability Keybind (<keybind>) to go to the 'enraged state' early.
-				 * Gain 10% of Health used to go below 50% as an extra shield for <shieldDuration> seconds.
+				 * Gain <forcedEnrageMult>% of Health used to go below 50% as an extra shield for <shieldDuration> seconds.
 				- The moment you're below 50% health and in combat for at least <outOfCombat> seconds,
-				go into an enraged state, consuming all of your defense and granting the following:
-				 * Gain 2x of defense consumed as Shield for <shieldDuration> seconds.
-				 * Sets the Dash delay of all of your dashes to 5 frames. (1/12th of a second)
-				 * Increases damage by <defToDmg>% of the defense consumed.
-				 * Increases movement speed by <defToSpd>% of the defense consumed.
-				 * Increases crit chance by <defToCrit>% of the defense consumed.
+				go into enrage, consuming all of your defense and damage reduction to Rage points.
+				 * Gain <shieldMult>x of rage points as a Shield for <shieldDuration> seconds.
+				 * Shield multiplier increased to <eocShieldMult>x when Shield of Cthulhu is equipped.
+				 * If your Shield of Cthulhu dash delay is higher than <frameReduction> frames, sets it to <frameReduction>.
+				 * Increases damage by <defToDmg>% of the rage points.
+				 * Increases movement speed by <defToSpd>% of the rage points.
+				 * Increases crit chance by <defToCrit>% of the rage points.
 				 * [c/f8baba:You cannot go over 50% of your maximum health while enraged.]
-				 * [c/f8baba:Your defense is set to 0 for the whole time.]
-				 * Enrage lasts <enrageLength> seconds.
-				 * Its <enrageCd> second cooldown begins as soon as u are enraged.
+				 * [c/f8baba:Your defense and damage reduction is set to 0 for the whole time.]
+				 * Enrage lasts <enrageLength> seconds and has a <enrageCd> second cooldown.
 				'''
 			BrainOfCthulhuPetItem:
 				'''
@@ -1196,7 +1196,8 @@ Mods: {
 				Description:
 					'''
 					You're currently ENRAGED! All you can think of is bloodshed!
-					Your defense is set to 0, and your dashes have almost no cooldown.
+					Your defense and DR is set to 0, and your Shield of Cthulhu is quicker.
+					Current Rage Points: <rage>
 					Current Damage Boost: <dmg>%
 					Current Movement Speed Boost: <speed>%
 					Current Crit Chance Boost: <crit>%

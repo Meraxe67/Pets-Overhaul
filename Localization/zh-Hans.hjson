@@ -1090,7 +1090,8 @@ Mods: {
 				/* Description:
 					'''
 					You're currently ENRAGED! All you can think of is bloodshed!
-					Your defense is set to 0, and your dashes have almost no cooldown.
+					Your defense and DR is set to 0, and your Shield of Cthulhu is quicker.
+					Current Rage Points: <rage>
 					Current Damage Boost: <dmg>%
 					Current Movement Speed Boost: <speed>%
 					Current Crit Chance Boost: <crit>%

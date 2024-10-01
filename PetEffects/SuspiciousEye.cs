@@ -2,6 +2,7 @@
 using PetsOverhaul.Buffs;
 using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
+using PetsOverhaul.TownPets;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -20,14 +21,19 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassSecondary => PetClasses.Utility;
         public int phaseCd = 9000;
         public int phaseTime = 1800;
-        private int eocTimer = 0;
-        public float critMult = 0.2f;
-        public float dmgMult = 1f;
-        public float spdMult = 0.6f;
-        public int eocDefenseConsume = 0;
+        public int eocTimer = 0;
+        public float critMult = 0.18f;
+        public float dmgMult = 0.9f;
+        public float spdMult = 0.5f;
+        public int ragePoints = 0;
         public int shieldTime = 600;
         private int inCombatTimer = -1;
         public int inCombatTime = 300;
+        public float shieldMult = 0.5f;
+        public float eocShieldMult = 1f;
+        public bool eocShieldEquipped = false;
+        public int dashFrameReduce = 10;
+        public float forcedEnrageShield = 0.1f;
         public override void PreUpdate()
         {
             if (Pet.PetInUse(ItemID.EyeOfCthulhuPetItem))
@@ -51,14 +57,14 @@ namespace PetsOverhaul.PetEffects
                     int damageTaken = (int)Math.Floor((float)Player.statLife % (Player.statLifeMax2 / 2));
                     if (damageTaken == 0)
                         damageTaken = Player.statLifeMax2 / 2;
-                    Player.Hurt(PlayerDeathReason.ByCustomReason("If you're seeing this death message, report it at our discord or steam page."), damageTaken, 0, quiet: true, scalingArmorPenetration: 1f);
-                    Pet.petShield.Add((damageTaken / 5, shieldTime));
+                    Player.Hurt(new Player.HurtInfo() with { Damage = damageTaken, Dodgeable = false, Knockback = 0, DamageSource = PlayerDeathReason.ByCustomReason("If you're seeing this death message, report it through our discord or steam page.") });
+                    Pet.petShield.Add(((int)(damageTaken * forcedEnrageShield), shieldTime));
                 }
                 else
                     inCombatTimer = inCombatTime;
             }
         }
-        public override void UpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.EyeOfCthulhuPetItem))
             {
@@ -75,7 +81,6 @@ namespace PetsOverhaul.PetEffects
                     Gore.NewGore(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetMisc), Player.position, Main.rand.NextVector2Circular(2f, 2f), 8, 0.5f);
                     Gore.NewGore(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetMisc), Player.position, Main.rand.NextVector2Circular(2f, 2f), 9, 0.5f);
                     Gore.NewGore(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetMisc), Player.position, Main.rand.NextVector2Circular(2f, 2f), 9, 0.5f);
-
                     PopupText.NewText(new AdvancedPopupRequest() with
                     {
                         Text = "ENRAGED!",
@@ -83,7 +88,8 @@ namespace PetsOverhaul.PetEffects
                         Velocity = new Vector2(0, -10),
                         Color = Color.DarkRed
                     }, Player.position);
-                    Pet.petShield.Add((Player.statDefense * 2, shieldTime));
+
+                    Pet.petShield.Add(((int)((eocShieldEquipped ? eocShieldMult : shieldMult) * (Player.statDefense + Player.endurance * 100)), shieldTime));
                     Player.AddBuff(ModContent.BuffType<EocPetEnrage>(), phaseTime);
                 }
                 if (eocTimer <= phaseTime && eocTimer >= 0)
@@ -92,18 +98,17 @@ namespace PetsOverhaul.PetEffects
                     {
                         Player.statLife = Player.statLifeMax2 / 2;
                     }
-                    if (eocDefenseConsume <= 0)
-                    {
-                        eocDefenseConsume = Player.statDefense;
-                    }
+                    ragePoints = 0;
+                    ragePoints += Player.statDefense;
+                    ragePoints += (int)(Player.endurance * 100);
                     Player.statDefense *= 0;
-                    Player.GetDamage<GenericDamageClass>() += eocDefenseConsume * dmgMult / 100;
-                    Player.moveSpeed += eocDefenseConsume * spdMult / 100;
-                    Player.GetCritChance<GenericDamageClass>() += eocDefenseConsume * critMult;
-                    if (Player.dashDelay > 5)
+                    Player.endurance *= 0;
+                    Player.GetDamage<GenericDamageClass>() += ragePoints * dmgMult / 100;
+                    Player.moveSpeed += ragePoints * spdMult / 100;
+                    Player.GetCritChance<GenericDamageClass>() += ragePoints * critMult;
+                    if (eocShieldEquipped && Player.dashType == DashID.ShieldOfCthulhu && Player.dashDelay > dashFrameReduce)
                     {
-                        Player.dashDelay = 5;
-                        Player.eocDash = 5;
+                        Player.dashDelay = dashFrameReduce;
                     }
                 }
                 else if (eocTimer == 0)
@@ -115,13 +120,16 @@ namespace PetsOverhaul.PetEffects
                         Velocity = new Vector2(0, -10),
                         Color = Color.OrangeRed
                     }, Player.position);
+                    ragePoints = 0;
                 }
+                eocShieldEquipped = false;
             }
         }
         public override void UpdateDead()
         {
             eocTimer = 0;
             inCombatTimer = 0;
+            ragePoints = 0;
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -136,6 +144,17 @@ namespace PetsOverhaul.PetEffects
             {
                 inCombatTimer = inCombatTime;
             }
+        }
+    }
+    public class ShieldOfCthulhuCheck : GlobalItem
+    {
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        {
+            return entity.type == ItemID.EoCShield;
+        }
+        public override void UpdateEquip(Item item, Player player)
+        {
+            player.GetModPlayer<SuspiciousEye>().eocShieldEquipped = true;
         }
     }
     public sealed class EyeOfCthulhuPetItem : GlobalItem
@@ -156,7 +175,11 @@ namespace PetsOverhaul.PetEffects
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EyeOfCthulhuPetItem")
                 .Replace("<class>", PetTextsColors.ClassText(suspiciousEye.PetClassPrimary, suspiciousEye.PetClassSecondary))
                 .Replace("<keybind>", PetTextsColors.KeybindText(Keybinds.UsePetAbility))
+                .Replace("<forcedEnrageMult>", Math.Round(suspiciousEye.forcedEnrageShield * 100, 2).ToString())
                 .Replace("<shieldDuration>", Math.Round(suspiciousEye.shieldTime / 60f, 2).ToString())
+                .Replace("<frameReduction>", suspiciousEye.dashFrameReduce.ToString())
+                .Replace("<shieldMult>", suspiciousEye.shieldMult.ToString())
+                .Replace("<eocShieldMult>", suspiciousEye.eocShieldMult.ToString())
                 .Replace("<outOfCombat>", Math.Round(suspiciousEye.inCombatTime / 60f, 2).ToString())
                 .Replace("<defToDmg>", Math.Round(suspiciousEye.dmgMult * 100, 2).ToString())
                 .Replace("<defToSpd>", Math.Round(suspiciousEye.spdMult * 100, 2).ToString())

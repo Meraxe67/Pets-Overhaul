@@ -10,6 +10,7 @@ namespace PetsOverhaul.Buffs
     {
         public override void SetStaticDefaults()
         {
+            Main.buffNoSave[Type] = true;
             Main.debuff[Type] = true;
             BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;
         }
@@ -26,9 +27,10 @@ namespace PetsOverhaul.Buffs
             SuspiciousEye sus = Main.LocalPlayer.GetModPlayer<SuspiciousEye>();
             rare = 0;
             tip = Lang.GetBuffDescription(ModContent.BuffType<EocPetEnrage>())
-                .Replace("<dmg>", Math.Round(sus.dmgMult * sus.eocDefenseConsume, 2).ToString())
-                .Replace("<speed>", Math.Round(sus.spdMult * sus.eocDefenseConsume, 2).ToString())
-                .Replace("<crit>", Math.Round(sus.critMult * sus.eocDefenseConsume, 2).ToString());
+                .Replace("<rage>", sus.ragePoints.ToString())
+                .Replace("<dmg>", Math.Round(sus.dmgMult * sus.ragePoints, 2).ToString())
+                .Replace("<speed>", Math.Round(sus.spdMult * sus.ragePoints, 2).ToString())
+                .Replace("<crit>", Math.Round(sus.critMult * sus.ragePoints, 2).ToString());
         }
     }
 }
