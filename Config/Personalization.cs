@@ -28,7 +28,7 @@ namespace PetsOverhaul.Config
         [DefaultValue(true)]
         public bool DisableTooltipToggle { get; set; }
 
-        [OptionStrings(["On the Player, Icon on the left", "On the Player, Icon on the right", "Next to the Healthbar, Icon on the left", "Next to the Healthbar, Icon on the right"])]
+        [OptionStrings([Language.GetTextValue("Mods.PetsOverhaul.Config.PlayerLeft"), Language.GetTextValue("Mods.PetsOverhaul.Config.PlayerRight"), Language.GetTextValue("Mods.PetsOverhaul.Config.HealthBarLeft"), Language.GetTextValue("Mods.PetsOverhaul.Config.HealthBarRight")])]
         [DefaultValue("Next to the Healthbar, Icon on the right")]
         [LabelKey("$Mods.PetsOverhaul.Config.ShieldLocationLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.ShieldLocationTooltip")]
