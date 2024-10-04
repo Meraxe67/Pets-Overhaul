@@ -13,7 +13,7 @@ namespace PetsOverhaul.UI
 {
     class AbilityCooldown : UIElement
     {
-        Color color = Main.MouseTextColorReal;
+        Color color => Main.MouseTextColorReal;
         int RemainingCooldown => Main.LocalPlayer.GetModPlayer<GlobalPet>().timer;
         int BaseCooldown => Main.LocalPlayer.GetModPlayer<GlobalPet>().timerMax;
         public override void Draw(SpriteBatch spriteBatch)

@@ -217,7 +217,7 @@ namespace PetsOverhaul.Systems
         }
         public static bool LifestealCheck(NPC npc)
         {
-            return !npc.friendly && !npc.SpawnedFromStatue && npc.type != NPCID.TargetDummy;
+            return !npc.friendly && !npc.SpawnedFromStatue && npc.type != NPCID.TargetDummy && npc.canGhostHeal;
         }
         public bool AbilityPressCheck()
         {

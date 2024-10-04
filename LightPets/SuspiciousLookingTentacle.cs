@@ -23,7 +23,7 @@ namespace PetsOverhaul.LightPets
                 Player.GetCritChance<GenericDamageClass>() += moonlord.CritChanceAll.CurrentStatFloat * 100;
                 Player.whipRangeMultiplier += moonlord.WhipRange.CurrentStatFloat;
                 Player.statManaMax2 += moonlord.Mana.CurrentStatInt;
-
+                Player.GetKnockback<MeleeDamageClass>() += moonlord.MeleeKnockback.CurrentStatFloat;
             }
         }
         public override void GetHealMana(Item item, bool quickHeal, ref int healValue)
@@ -53,10 +53,6 @@ namespace PetsOverhaul.LightPets
                 {
                     modifiers.ArmorPenetration += moonlord.SummonerFlatPenetration.CurrentStatInt;
                 }
-                if (modifiers.DamageType == DamageClass.Melee && GlobalPet.LifestealCheck(target))
-                {
-                    Pet.PetRecovery(Player.statDefense * 0.1f, moonlord.MeleeLifesteal.CurrentStatFloat);
-                }
             }
         }
     }
@@ -73,7 +69,7 @@ namespace PetsOverhaul.LightPets
         public LightPetStat ManaPotionIncrease = new(5, 0.05f);
         public LightPetStat Mana = new(5, 12);
         public LightPetStat MeleeSize = new(5, 0.04f);
-        public LightPetStat MeleeLifesteal = new(5, 0.03f);
+        public LightPetStat MeleeKnockback = new(5, 0.12f);
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
@@ -92,7 +88,7 @@ namespace PetsOverhaul.LightPets
             ManaPotionIncrease.SetRoll();
             Mana.SetRoll();
             MeleeSize.SetRoll();
-            MeleeLifesteal.SetRoll();
+            MeleeKnockback.SetRoll();
         }
         public override void NetSend(Item item, BinaryWriter writer)
         {
@@ -100,7 +96,7 @@ namespace PetsOverhaul.LightPets
             writer.Write((byte)CritChanceAll.CurrentRoll);
             writer.Write((byte)Defense.CurrentRoll);
             writer.Write((byte)DamageAll.CurrentRoll);
-            writer.Write((byte)MeleeLifesteal.CurrentRoll);
+            writer.Write((byte)MeleeKnockback.CurrentRoll);
             writer.Write((byte)Mana.CurrentRoll);
             writer.Write((byte)SummonerFlatPenetration.CurrentRoll);
             writer.Write((byte)MovementSpeed.CurrentRoll);
@@ -115,7 +111,7 @@ namespace PetsOverhaul.LightPets
             CritChanceAll.CurrentRoll = reader.ReadByte();
             Defense.CurrentRoll = reader.ReadByte();
             DamageAll.CurrentRoll = reader.ReadByte();
-            MeleeLifesteal.CurrentRoll = reader.ReadByte();
+            MeleeKnockback.CurrentRoll = reader.ReadByte();
             Mana.CurrentRoll = reader.ReadByte();
             SummonerFlatPenetration.CurrentRoll = reader.ReadByte();
             MovementSpeed.CurrentRoll = reader.ReadByte();
@@ -130,7 +126,7 @@ namespace PetsOverhaul.LightPets
             tag.Add("MlCrit", CritChanceAll.CurrentRoll);
             tag.Add("MlDef", Defense.CurrentRoll);
             tag.Add("MlDmg", DamageAll.CurrentRoll);
-            tag.Add("MlHeal", MeleeLifesteal.CurrentRoll);
+            tag.Add("MlHeal", MeleeKnockback.CurrentRoll); //used to be lifesteal
             tag.Add("MlMana", Mana.CurrentRoll);
             tag.Add("MlMin", SummonerFlatPenetration.CurrentRoll);
             tag.Add("MlMs", MovementSpeed.CurrentRoll);
@@ -161,9 +157,9 @@ namespace PetsOverhaul.LightPets
                 DamageAll.CurrentRoll = dmg;
             }
 
-            if (tag.TryGet("MlHeal", out int heal))
+            if (tag.TryGet("MlHeal", out int kb))
             {
-                MeleeLifesteal.CurrentRoll = heal;
+                MeleeKnockback.CurrentRoll = kb;
             }
 
             if (tag.TryGet("MlMana", out int mana))
@@ -242,9 +238,8 @@ namespace PetsOverhaul.LightPets
                         .Replace("<size>", MeleeSize.BaseAndPerQuality())
                         .Replace("<sizeLine>", MeleeSize.StatSummaryLine())
 
-                        .Replace("<lifesteal>", MeleeLifesteal.BaseAndPerQuality())
-                        .Replace("<lifestealLine>", MeleeLifesteal.StatSummaryLine())
-                        .Replace("<healAmount>", (Main.LocalPlayer.statDefense * 0.1f).ToString())
+                        .Replace("<knockback>", MeleeKnockback.BaseAndPerQuality())
+                        .Replace("<knockbackLine>", MeleeKnockback.StatSummaryLine())
                         ));
             if (CritChanceAll.CurrentRoll <= 0)
             {
