@@ -131,7 +131,7 @@ namespace PetsOverhaul.Items
             }
             else if (source is EntitySource_Loot lootSource && lootSource.Entity is NPC npc)
             {
-                if (npc.boss == true || NpcPet.nonBossTrueBosses.Contains(npc.type))
+                if (npc.boss == true || NpcPet.NonBossTrueBosses.Contains(npc.type))
                 {
                     itemFromBoss = true;
                 }

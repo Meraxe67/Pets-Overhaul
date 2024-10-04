@@ -67,7 +67,7 @@ namespace PetsOverhaul.PetEffects
                             if (npc.active && Player.Distance(npc.Center) < range)
                             {
                                 NpcPet.AddSlow(new NpcPet.PetSlow(slow, applyTime, PetSlowIDs.Deerclops), npc);
-                                if (npc.active && (npc.townNPC == false || npc.isLikeATownNPC == false || npc.friendly == false) && (npc.boss == false || NpcPet.nonBossTrueBosses.Contains(npc.type) == false))
+                                if (npc.active && (npc.townNPC == false || npc.isLikeATownNPC == false || npc.friendly == false) && (npc.boss == false || NpcPet.NonBossTrueBosses.Contains(npc.type) == false))
                                 {
                                     npc.AddBuff(BuffID.Confused, applyTime);
                                 }

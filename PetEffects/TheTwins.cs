@@ -37,7 +37,7 @@ namespace PetsOverhaul.PetEffects
             {
                 if (Player.Distance(target.Center) > longRange && Pet.timer <= 0)
                 {
-                    if (target.boss == false || NpcPet.nonBossTrueBosses.Contains(target.type) == false)
+                    if (target.boss == false || NpcPet.NonBossTrueBosses.Contains(target.type) == false)
                     {
                         modifiers.FlatBonusDamage += (int)(target.lifeMax * regularEnemyHpDmg);
                     }
