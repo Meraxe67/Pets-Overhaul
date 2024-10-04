@@ -3,6 +3,7 @@ using PetsOverhaul.NPCs;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -66,7 +67,7 @@ namespace PetsOverhaul.PetEffects
                             if (npc.active && Player.Distance(npc.Center) < range)
                             {
                                 NpcPet.AddSlow(new NpcPet.PetSlow(slow, applyTime, PetSlowIDs.Deerclops), npc);
-                                if (npc.active && (npc.townNPC == false || npc.isLikeATownNPC == false || npc.friendly == false) && (npc.boss == false || NpcPet.nonBossTrueBosses[npc.type] == false))
+                                if (npc.active && (npc.townNPC == false || npc.isLikeATownNPC == false || npc.friendly == false) && (npc.boss == false || NpcPet.nonBossTrueBosses.Contains(npc.type) == false))
                                 {
                                     npc.AddBuff(BuffID.Confused, applyTime);
                                 }

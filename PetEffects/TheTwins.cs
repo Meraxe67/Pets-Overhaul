@@ -3,6 +3,7 @@ using PetsOverhaul.NPCs;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -36,7 +37,7 @@ namespace PetsOverhaul.PetEffects
             {
                 if (Player.Distance(target.Center) > longRange && Pet.timer <= 0)
                 {
-                    if (target.boss == false || NpcPet.nonBossTrueBosses[target.type] == false)
+                    if (target.boss == false || NpcPet.nonBossTrueBosses.Contains(target.type) == false)
                     {
                         modifiers.FlatBonusDamage += (int)(target.lifeMax * regularEnemyHpDmg);
                     }

@@ -40,7 +40,7 @@ namespace PetsOverhaul.NPCs
         /// <summary>
         /// Contains all Vanilla bosses that does not return npc.boss = true
         /// </summary>
-        public static bool[] nonBossTrueBosses = NPCID.Sets.Factory.CreateBoolSet(false, NPCID.TheDestroyer, NPCID.TheDestroyerBody, NPCID.TheDestroyerTail, NPCID.EaterofWorldsBody, NPCID.EaterofWorldsTail, NPCID.EaterofWorldsHead, NPCID.LunarTowerSolar, NPCID.LunarTowerNebula, NPCID.LunarTowerStardust, NPCID.LunarTowerVortex, NPCID.TorchGod, NPCID.Retinazer, NPCID.Spazmatism);
+        public static int[] nonBossTrueBosses = { NPCID.TheDestroyer, NPCID.TheDestroyerBody, NPCID.TheDestroyerTail, NPCID.EaterofWorldsBody, NPCID.EaterofWorldsTail, NPCID.EaterofWorldsHead, NPCID.LunarTowerSolar, NPCID.LunarTowerNebula, NPCID.LunarTowerStardust, NPCID.LunarTowerVortex, NPCID.TorchGod, NPCID.Retinazer, NPCID.Spazmatism };
         public Vector2 FlyingVelo { get; internal set; }
         public float GroundVelo { get; internal set; }
         public bool VeloChangedFlying { get; internal set; }
@@ -245,7 +245,7 @@ namespace PetsOverhaul.NPCs
         /// </summary>
         internal static void AddToSlowList(PetSlow petSlow, NPC npc)
         {
-            if (npc.active && (npc.townNPC == false || npc.isLikeATownNPC == false || npc.friendly == false) && npc.boss == false && nonBossTrueBosses[npc.type] == false && npc.TryGetGlobalNPC<NpcPet>(out NpcPet npcPet))
+            if (npc.active && (npc.townNPC == false || npc.isLikeATownNPC == false || npc.friendly == false) && npc.boss == false && nonBossTrueBosses.Contains(npc.type) == false && npc.TryGetGlobalNPC<NpcPet>(out NpcPet npcPet))
             {
                 if (petSlow.SlowId <= -1)
                 {

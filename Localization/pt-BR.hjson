@@ -122,7 +122,7 @@ Mods: {
 			/* ShieldLocationTooltip:
 				'''
 				Changes where Pet Shield should be displayed when a Shield has been provided by your Pet.
-				Next to the Healthbar options works best with 1920x1080 Resolutions.
+				Healthbar options works best with 1920x1080 Resolutions. Editing this value by external means may cause errors.
 				''' */
 			// DisableAbilityUnusedLabel: Disable Ability Cooldown Display If Unused
 			/* DisableAbilityUnusedTooltip:
