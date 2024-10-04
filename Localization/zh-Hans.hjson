@@ -94,6 +94,10 @@ Mods: {
 
 		Config: {
 			Personalization: 个性化设置
+			// PlayerLeft: On the Player, Icon on the left
+			// PlayerRight: On the Player, Icon on the right
+			// HealthBarLeft: Next to the Healthbar, Icon on the left
+			// HealthBarRight: Next to the Healthbar, Icon on the right
 			// HeaderDisplay: Display Related Settings
 			// HeaderSound: Sound Related Settings
 			// HeaderGameplay: Gameplay Settings
@@ -274,7 +278,7 @@ Mods: {
 				Mana Potion Effectiveness by <manaPotion> per quality. Current: <manaPotionLine>,
 				Maximum Mana by <mana> per quality. Current: <manaLine>,
 				Melee Size by <size> per quality. Current: <sizeLine> and
-				<lifesteal> lifesteal per quality with <healAmount> (10% of your defense) on Melee Hits. Current: <lifestealLine>
+				Melee Knockback by <knockback> per quality. Current: <knockbackLine>
 				''' */
 			/* ToyGolem:
 				'''
@@ -1185,5 +1189,6 @@ Mods: {
 		}
 
 		// NPCs.LizardTail.DisplayName: Lizard Tail
+		// Configs.ShieldPosition.Tooltip: ""
 	}
 }

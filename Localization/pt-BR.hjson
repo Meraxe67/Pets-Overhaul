@@ -9,7 +9,7 @@ Mods: {
 		// JojaCola: A nature-related NPC may be able to Purify this
 		/* Notice:
 			'''
-			[c/90C2AA:Pets Overhaul 2.3.14 latest changes: Improved Backend code & Config options]
+			[c/90C2AA:Pets Overhaul 3.0 latest changes: Calamity Addon release, Major system improvements, major fixes, lots of balance changes]
 			[c/90C2AA:Some of your config options may have reset, make sure to check to have them set correctly!]
 			[c/b4bfc5:Join our discord server for feedback & bug reports! discord.gg/KubSpqvDGE]
 			[c/b4bfc5:Use] [c/ff8234:/pet] [c/b4bfc5:to see commands for Pets Overhaul, providing you more info!]
@@ -92,6 +92,10 @@ Mods: {
 
 		Config: {
 			Personalization: Personalização
+			// PlayerLeft: On the Player, Icon on the left
+			// PlayerRight: On the Player, Icon on the right
+			// HealthBarLeft: Next to the Healthbar, Icon on the left
+			// HealthBarRight: Next to the Healthbar, Icon on the right
 			// HeaderDisplay: Display Related Settings
 			// HeaderSound: Sound Related Settings
 			// HeaderGameplay: Gameplay Settings
@@ -242,7 +246,7 @@ Mods: {
 				Mana Potion Effectiveness by <manaPotion> per quality. Current: <manaPotionLine>,
 				Maximum Mana by <mana> per quality. Current: <manaLine>,
 				Melee Size by <size> per quality. Current: <sizeLine> and
-				<lifesteal> lifesteal per quality with <healAmount> (10% of your defense) on Melee Hits. Current: <lifestealLine>
+				Melee Knockback by <knockback> per quality. Current: <knockbackLine>
 				''' */
 			/* ToyGolem:
 				'''
@@ -1104,5 +1108,6 @@ Mods: {
 		}
 
 		// NPCs.LizardTail.DisplayName: Lizard Tail
+		// Configs.ShieldPosition.Tooltip: ""
 	}
 }

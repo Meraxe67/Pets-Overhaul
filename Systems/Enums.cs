@@ -1,4 +1,6 @@
-﻿namespace PetsOverhaul.Systems
+﻿using Terraria.ModLoader.Config;
+
+namespace PetsOverhaul.Systems
 {
     public enum MessageType : byte
     {
@@ -37,5 +39,16 @@
         Offensive,
         Defensive,
         Supportive,
+    }
+    public enum ShieldPosition
+    {
+        [LabelKey("$Mods.PetsOverhaul.Config.PlayerLeft")]
+        PlayerLeft,
+        [LabelKey("$Mods.PetsOverhaul.Config.PlayerRight")]
+        PlayerRight,
+        [LabelKey("$Mods.PetsOverhaul.Config.HealthBarLeft")]
+        HealthBarLeft,
+        [LabelKey("$Mods.PetsOverhaul.Config.HealthBarRight")]
+        HealthBarRight,
     }
 }

@@ -14,21 +14,21 @@ namespace PetsOverhaul.UI
     {
         Color color = Main.MouseTextColorReal;
         int CurrentShieldVal => Main.LocalPlayer.GetModPlayer<GlobalPet>().currentShield;
-        string ShieldSetting => ModContent.GetInstance<Personalization>().ShieldLocation;
+        ShieldPosition ShieldSetting => ModContent.GetInstance<Personalization>().ShieldLocation;
         Vector2 ShieldLoc;
         Vector2 ValueLoc;
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (CurrentShieldVal > 0)
             {
-                ShieldLoc = ShieldSetting == "On the Player, Icon on the left" ? (new Vector2(Main.screenWidth - 70, Main.screenHeight - 110) / 2f) :
-                    ShieldSetting == "On the Player, Icon on the right" ? (new Vector2(Main.screenWidth - 10, Main.screenHeight - 110) / 2f) :
-                    ShieldSetting == "Next to the Healthbar, Icon on the left" ? new Vector2(Main.screenWidth * 0.81f - 35, Main.screenHeight * 0.03f - 5) :
+                ShieldLoc = ShieldSetting == ShieldPosition.PlayerLeft ? (new Vector2(Main.screenWidth - 70, Main.screenHeight - 110) / 2f) :
+                    ShieldSetting == ShieldPosition.PlayerRight ? (new Vector2(Main.screenWidth - 10, Main.screenHeight - 110) / 2f) :
+                    ShieldSetting == ShieldPosition.HealthBarLeft ? new Vector2(Main.screenWidth * 0.81f - 35, Main.screenHeight * 0.03f - 5) :
                     new Vector2(Main.screenWidth * 0.81f - 5, Main.screenHeight * 0.03f - 5);
 
-                ValueLoc = ShieldSetting == "On the Player, Icon on the left" ? (new Vector2(Main.screenWidth, Main.screenHeight - 100) / 2f) :
-                    ShieldSetting == "On the Player, Icon on the right" ? (new Vector2(Main.screenWidth - 60, Main.screenHeight - 100) / 2f) :
-                    ShieldSetting == "Next to the Healthbar, Icon on the left" ? new Vector2(Main.screenWidth * 0.81f, Main.screenHeight * 0.03f) :
+                ValueLoc = ShieldSetting == ShieldPosition.PlayerLeft ? (new Vector2(Main.screenWidth, Main.screenHeight - 100) / 2f) :
+                    ShieldSetting == ShieldPosition.PlayerRight ? (new Vector2(Main.screenWidth - 60, Main.screenHeight - 100) / 2f) :
+                    ShieldSetting == ShieldPosition.HealthBarLeft ? new Vector2(Main.screenWidth * 0.81f, Main.screenHeight * 0.03f) :
                     new Vector2(Main.screenWidth * 0.81f - 30, Main.screenHeight * 0.03f);
                 spriteBatch.Draw((Texture2D)ModContent.Request<Texture2D>("PetsOverhaul/UI/PetShield"), ShieldLoc, color);
                 spriteBatch.DrawString(FontAssets.MouseText.Value, CurrentShieldVal.ToString(), new Vector2(ValueLoc.X + 2, ValueLoc.Y), Color.Black);
