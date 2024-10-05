@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -8,31 +9,27 @@ using Terraria.ModLoader;
 namespace PetsOverhaul.Projectiles
 {
     /// <summary>
-    /// ai[0] determines size, ai[1] determines penetration value and ai[2] determines armor penetration of Projectile.
+    /// ai[0] determines size. Sound not included, play your own sound before creating projectile however you want.
     /// </summary>
-    public class PetExplosion : ModProjectile
+    public class PetExplosion : ModProjectile //I cannot figure why, shortswords does not seem to be able to hit a target hit by it with this same or any frame in near time. Possible problem with other weapons too?
     {
         public override LocalizedText DisplayName => Language.GetText("Mods.PetsOverhaul.Projectiles.PetExplosion");
         public override void SetDefaults()
         {
+            Projectile.height = 1;
+            Projectile.width = 1;
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.DamageType = DamageClass.Generic;
-            Projectile.timeLeft = 2;
+            Projectile.timeLeft = 1;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
             Projectile.usesIDStaticNPCImmunity = true;
-            Projectile.idStaticNPCHitCooldown = 15;
+            Projectile.idStaticNPCHitCooldown = 1;
         }
-        public override void OnSpawn(IEntitySource source)
+        public override void OnSpawn(IEntitySource source) 
         {
-            Projectile.width = (int)Projectile.ai[0];
-            Projectile.height = (int)Projectile.ai[0];
-            Projectile.OriginalArmorPenetration = (int)Projectile.ai[2];
-            if (Projectile.ai[1] > 0)
-            Projectile.penetrate = (int)Projectile.ai[1];
-
-            SoundEngine.PlaySound(SoundID.Item14);
+            Projectile.Resize((int)Projectile.ai[0], (int)Projectile.ai[0]);
             for (int i = 0; i < Projectile.ai[0] * 0.075f; i++)
             {
                 Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Smoke, 0f, 0f, 20, default, Main.rand.NextFloat(1.7f, 2f));

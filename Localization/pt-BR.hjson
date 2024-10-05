@@ -1098,7 +1098,7 @@ Mods: {
 			// PumpkingCondition: Requires the Pumpking's Head to be in your inventory.
 		}
 
-		// Projectiles.DynamiteKittyBoom: Dynamite Kitten Explosion
+		// Projectiles.PetExplosion: Explosion by a Pet
 
 		Keybinds: {
 			// UsePetAbility.DisplayName: Use Pet Ability

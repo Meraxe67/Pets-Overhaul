@@ -4,6 +4,7 @@ using PetsOverhaul.Projectiles;
 using PetsOverhaul.Systems;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -16,6 +17,7 @@ namespace PetsOverhaul.PetEffects
         public float damageMult = 0.6f;
         public float kbMult = 1.7f;
         public int armorPen = 15;
+        public int explosionSize = 200;
 
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
         public override void PreUpdate()
@@ -29,8 +31,12 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUseWithSwapCd(ItemID.BallOfFuseWire) && Pet.timer <= 0)
             {
-                int boom = Projectile.NewProjectile(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Vector2.Zero, ModContent.ProjectileType<DynamiteKittyBoom>(), (int)(damageDone * damageMult), hit.Knockback * kbMult, Main.myPlayer);
-                Main.projectile[boom].ArmorPenetration = armorPen;
+                Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Vector2.Zero, ModContent.ProjectileType<PetExplosion>(), (int)(damageDone * damageMult), hit.Knockback * kbMult, Player.whoAmI, explosionSize)
+                    .OriginalArmorPenetration += armorPen;
+                if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+                {
+                    SoundEngine.PlaySound(SoundID.Item14,target.Center);
+                }
                 Pet.timer = Pet.timerMax;
             }
         }
@@ -55,6 +61,7 @@ namespace PetsOverhaul.PetEffects
                         .Replace("<kb>", dynamiteKitten.kbMult.ToString())
                         .Replace("<dmg>", dynamiteKitten.damageMult.ToString())
                         .Replace("<armorPen>", dynamiteKitten.armorPen.ToString())
+                        .Replace("<size>", dynamiteKitten.explosionSize.ToString())
                         ));
         }
     }

@@ -485,9 +485,9 @@ Mods: {
 				<class>
 				- Attacks create an area of effect explosion.
 				 * Attack has <kb>x your initial knockback.
-				 * Attack has base damage of <dmg>x of the damage you dealt
-				 * Attack can crit with your crit chance.
+				 * Attack has base damage of <dmg>x of the damage you dealt.
 				 * Attack has <armorPen> base armor penetration.
+				 * Explosion has a <size> by <size> radius.
 				 * This has a 2-second cooldown to be re-casted.
 				'''
 			CelestialWand:
@@ -1286,7 +1286,7 @@ Mods: {
 			PumpkingCondition: Requires the Pumpking's Head to be in your inventory.
 		}
 
-		Projectiles.DynamiteKittyBoom: Dynamite Kitten Explosion
+		Projectiles.PetExplosion: Explosion by a Pet
 
 		Keybinds: {
 			UsePetAbility.DisplayName: Use Pet Ability
