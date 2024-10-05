@@ -58,7 +58,7 @@ namespace PetsOverhaul.NPCs
                         dust.scale = 0.7f * NPC.scale;
                     }
                 }
-                Gore.NewGore(NPC.GetSource_Death(), NPC.position, Main.rand.NextVector2Circular(2f, 2f), 259, NPC.scale);
+                Gore.NewGore(NPC.GetSource_Death(), NPC.Center, Main.rand.NextVector2Circular(2f, 2f), 259, NPC.scale);
             }
         }
         public override void OnSpawn(IEntitySource source)
@@ -76,7 +76,7 @@ namespace PetsOverhaul.NPCs
             NPC.life = 0;
             NPC.HitEffect();
             NPC.active = false;
-            SoundEngine.PlaySound(SoundID.NPCDeath1, NPC.position);
+            SoundEngine.PlaySound(SoundID.NPCDeath1, NPC.Center);
         }
         public override Color? GetAlpha(Color drawColor)
         {
@@ -100,9 +100,9 @@ namespace PetsOverhaul.NPCs
             }
             if (waitTime <= 0)
             {
-                Lighting.AddLight(NPC.position, Color.GreenYellow.ToVector3() * (lifespan / 400f) * Main.mouseTextColor * 0.0255f);
+                Lighting.AddLight(NPC.Center, Color.GreenYellow.ToVector3() * (lifespan / 400f) * Main.mouseTextColor * 0.0255f);
                 Player player = Main.player[NPC.FindClosestPlayer()];
-                if (NPC.Distance(player.position) < 50)
+                if (NPC.Distance(player.Center) < 35)
                 {
                     Lizard lizard = player.GetModPlayer<Lizard>();
                     lizard.Pet.PetRecovery(player.statLifeMax2, lizard.percentHpRecover, isLifesteal: false);

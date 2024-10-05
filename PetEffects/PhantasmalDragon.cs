@@ -229,7 +229,7 @@ namespace PetsOverhaul.PetEffects
                 {
                     if (projectile.localAI[1] == 0f)
                     {
-                        SoundEngine.PlaySound(in SoundID.Item121, projectile.position);
+                        SoundEngine.PlaySound(in SoundID.Item121, projectile.Center);
                         projectile.localAI[1] = 1f;
                     }
                     if (projectile.ai[0] < 180f)

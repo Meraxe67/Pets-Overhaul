@@ -26,7 +26,7 @@ namespace PetsOverhaul.PetEffects
                 {
                     if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
                     {
-                        SoundEngine.PlaySound(SoundID.Item56 with { Volume = 0.5f, Pitch = 0.2f, PitchVariance = 0.3f }, Player.position);
+                        SoundEngine.PlaySound(SoundID.Item56 with { Volume = 0.5f, Pitch = 0.2f, PitchVariance = 0.3f }, Player.Center);
                     }
 
                     bunnyStack++;

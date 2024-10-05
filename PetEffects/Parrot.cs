@@ -77,9 +77,9 @@ namespace PetsOverhaul.PetEffects
                         };
                         break;
                 }
-                SoundEngine.PlaySound(in style, Player.position);
+                SoundEngine.PlaySound(in style, Player.Center);
             }
-        }
+        }   
     }
     public sealed class ParrotExtraProjectile : GlobalProjectile
     {
@@ -91,7 +91,7 @@ namespace PetsOverhaul.PetEffects
             {
                 for (int i = 0; i < GlobalPet.Randomizer(parrot.projChance); i++)
                 {
-                    Projectile.NewProjectile(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), projectile.position, projectile.velocity * Main.rand.NextFloat(0.8f, 1.2f), projectile.type, (int)(projectile.damage * parrot.projDamage), projectile.knockBack, projectile.owner);
+                    Projectile.NewProjectile(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), projectile.Center, projectile.velocity * Main.rand.NextFloat(0.8f, 1.2f), projectile.type, (int)(projectile.damage * parrot.projDamage), projectile.knockBack, projectile.owner);
                     parrot.PlayParrotSound();
                 }
             }

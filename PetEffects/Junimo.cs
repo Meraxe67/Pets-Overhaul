@@ -515,14 +515,14 @@ namespace PetsOverhaul.PetEffects
                 junimoHarvestingLevel++;
                 if (soundOff == false)
                 {
-                    SoundEngine.PlaySound(SoundID.Item35 with { PitchVariance = 0.2f, Pitch = 0.5f }, Player.position);
+                    SoundEngine.PlaySound(SoundID.Item35 with { PitchVariance = 0.2f, Pitch = 0.5f }, Player.Center);
                 }
 
                 popupMessage.Color = new Color(205, 255, 0);
                 popupMessage.Text = Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.JunimoLevel")
                     .Replace("<class>", Language.GetTextValue($"Mods.PetsOverhaul.Classes.Harvesting"))
                     .Replace("<upOrMax>", junimoHarvestingLevel >= maxLvls ? Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.JunimoMaxed") : Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.JunimoUp"));
-                PopupText.NewText(popupMessage, Player.position);
+                PopupText.NewText(popupMessage, Player.Center);
             }
             if (junimoMiningLevel < maxLvls && junimoMiningExp >= junimoMiningLevelsToXp[junimoMiningLevel])
             {
@@ -533,14 +533,14 @@ namespace PetsOverhaul.PetEffects
                     {
                         PitchVariance = 0.2f,
                         Pitch = 0.5f
-                    }, Player.position);
+                    }, Player.Center);
                 }
 
                 popupMessage.Color = new Color(150, 168, 176);
                 popupMessage.Text = Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.JunimoLevel")
                     .Replace("<class>", Language.GetTextValue($"Mods.PetsOverhaul.Classes.Mining"))
                     .Replace("<upOrMax>", junimoHarvestingLevel >= maxLvls ? Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.JunimoMaxed") : Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.JunimoUp"));
-                PopupText.NewText(popupMessage, Player.position);
+                PopupText.NewText(popupMessage, Player.Center);
             }
 
             if (junimoFishingLevel < maxLvls && junimoFishingExp >= junimoFishingLevelsToXp[junimoFishingLevel])
@@ -552,14 +552,14 @@ namespace PetsOverhaul.PetEffects
                     {
                         PitchVariance = 0.2f,
                         Pitch = 0.5f
-                    }, Player.position);
+                    }, Player.Center);
                 }
 
                 popupMessage.Color = new Color(3, 130, 233);
                 popupMessage.Text = Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.JunimoLevel")
                     .Replace("<class>", Language.GetTextValue($"Mods.PetsOverhaul.Classes.Fishing"))
                     .Replace("<upOrMax>", junimoHarvestingLevel >= maxLvls ? Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.JunimoMaxed") : Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.JunimoUp"));
-                PopupText.NewText(popupMessage, Player.position);
+                PopupText.NewText(popupMessage, Player.Center);
             }
         }
         public override void SaveData(TagCompound tag)

@@ -1,4 +1,5 @@
-﻿using PetsOverhaul.Config;
+﻿using Microsoft.Xna.Framework;
+using PetsOverhaul.Config;
 using PetsOverhaul.Items;
 using PetsOverhaul.Systems;
 using System;
@@ -62,11 +63,11 @@ namespace PetsOverhaul.PetEffects
                                 Player.PickTile(X, Y, 5000);
                                 if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
                                 {
-                                    SoundEngine.PlaySound(SoundID.WormDig with { PitchVariance = 0.4f }, Player.position);
+                                    SoundEngine.PlaySound(SoundID.WormDig with { PitchVariance = 0.4f }, new Vector2(X,Y));
                                 }
                             }
                         }
-                    }
+                    }   
                 }
                 prevX = Main.SmartCursorShowing ? Main.SmartCursorX : Player.tileTargetX;
                 prevY = Main.SmartCursorShowing ? Main.SmartCursorY : Player.tileTargetY;

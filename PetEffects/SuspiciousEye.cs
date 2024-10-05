@@ -74,20 +74,20 @@ namespace PetsOverhaul.PetEffects
                     Pet.timer = Pet.timerMax;
                     if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
                     {
-                        SoundEngine.PlaySound(SoundID.ForceRoar with { PitchVariance = 0.3f }, Player.position);
-                    }
+                        SoundEngine.PlaySound(SoundID.ForceRoar with { PitchVariance = 0.3f }, Player.Center);
+                    }   
 
-                    Gore.NewGore(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetMisc), Player.position, Main.rand.NextVector2Circular(2f, 2f), 8, 0.5f);
-                    Gore.NewGore(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetMisc), Player.position, Main.rand.NextVector2Circular(2f, 2f), 8, 0.5f);
-                    Gore.NewGore(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetMisc), Player.position, Main.rand.NextVector2Circular(2f, 2f), 9, 0.5f);
-                    Gore.NewGore(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetMisc), Player.position, Main.rand.NextVector2Circular(2f, 2f), 9, 0.5f);
+                    Gore.NewGore(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetMisc), Player.Center, Main.rand.NextVector2Circular(2f, 2f), 8, 0.5f);
+                    Gore.NewGore(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetMisc), Player.Center, Main.rand.NextVector2Circular(2f, 2f), 8, 0.5f);
+                    Gore.NewGore(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetMisc), Player.Center, Main.rand.NextVector2Circular(2f, 2f), 9, 0.5f);
+                    Gore.NewGore(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetMisc), Player.Center, Main.rand.NextVector2Circular(2f, 2f), 9, 0.5f);
                     PopupText.NewText(new AdvancedPopupRequest() with
                     {
                         Text = "ENRAGED!",
                         DurationInFrames = 150,
                         Velocity = new Vector2(0, -10),
                         Color = Color.DarkRed
-                    }, Player.position);
+                    }, Player.Center);
 
                     Pet.petShield.Add(((int)((eocShieldEquipped ? eocShieldMult : shieldMult) * (Player.statDefense + Math.Round(Player.endurance * 100))), shieldTime));
                     Player.AddBuff(ModContent.BuffType<EocPetEnrage>(), phaseTime);
@@ -119,7 +119,7 @@ namespace PetsOverhaul.PetEffects
                         DurationInFrames = 150,
                         Velocity = new Vector2(0, -10),
                         Color = Color.OrangeRed
-                    }, Player.position);
+                    }, Player.Center);
                     ragePoints = 0;
                 }
                 eocShieldEquipped = false;

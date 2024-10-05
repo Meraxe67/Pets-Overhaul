@@ -77,7 +77,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Main.dayTime == false && Pet.AbilityPressCheck() && Pet.PetInUseWithSwapCd(ItemID.UnluckyYarn))
             {
-                SoundEngine.PlaySound(SoundID.Item29 with { PitchRange = (-1f, -0.8f) }, Player.position);
+                SoundEngine.PlaySound(SoundID.Item29 with { PitchRange = (-1f, -0.8f) }, Player.Center);
                 int moonlightRoll = Main.rand.Next(moonlightLowest, moonlightHighest + 1);
                 moonlightRoll = GlobalPet.Randomizer((int)(moonlightRoll * (Player.luck + 1) * 100));
                 if (moonlightRoll == 0)

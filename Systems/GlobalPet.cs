@@ -386,7 +386,7 @@ namespace PetsOverhaul.Systems
             CombatText.NewText(Player.Hitbox, Color.Cyan, -damage, true);
             if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
             {
-                SoundEngine.PlaySound(SoundID.NPCDeath43 with { PitchVariance = 0.4f, Pitch = -0.8f, Volume = 0.2f }, Player.position);
+                SoundEngine.PlaySound(SoundID.NPCDeath43 with { PitchVariance = 0.4f, Pitch = -0.8f, Volume = 0.2f }, Player.Center);
             }
             if (damage <= 1)
             {
@@ -450,7 +450,7 @@ namespace PetsOverhaul.Systems
                     CombatText.NewText(Player.Hitbox, Color.Cyan, -currentShield, true);
                     if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
                     {
-                        SoundEngine.PlaySound(SoundID.NPCDeath43 with { PitchVariance = 0.4f, Pitch = -0.8f, Volume = 0.2f }, Player.position);
+                        SoundEngine.PlaySound(SoundID.NPCDeath43 with { PitchVariance = 0.4f, Pitch = -0.8f, Volume = 0.2f }, Player.Center);
                     }
 
                     info.Damage -= currentShield;
@@ -526,7 +526,7 @@ namespace PetsOverhaul.Systems
             {
                 if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false && (ModContent.GetInstance<Personalization>().LowCooldownSoundDisabled && timerMax > ModContent.GetInstance<Personalization>().LowCooldownTreshold || ModContent.GetInstance<Personalization>().LowCooldownSoundDisabled == false))
                 {
-                    SoundEngine.PlaySound(SoundID.MaxMana with { PitchVariance = 0.3f, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew }, Player.position);
+                    SoundEngine.PlaySound(SoundID.MaxMana with { PitchVariance = 0.3f, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew }, Player.Center);
                 }
             }
             petSwapCooldown = 600;

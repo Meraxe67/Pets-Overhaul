@@ -61,11 +61,11 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUse(ItemID.ZephyrFish))
             {
-                if (Main.windSpeedCurrent > 0.2f && (attempt.heightLevel == 0 || attempt.heightLevel == 1) && attempt.X > Player.position.X / 16)
+                if (Main.windSpeedCurrent > 0.2f && (attempt.heightLevel == 0 || attempt.heightLevel == 1) && attempt.X > Player.Center.X / 16)
                 {
                     amplifiedFishingChance = true;
                 }
-                else if (Main.windSpeedCurrent < -0.2f && (attempt.heightLevel == 0 || attempt.heightLevel == 1) && attempt.X < Player.position.X / 16)
+                else if (Main.windSpeedCurrent < -0.2f && (attempt.heightLevel == 0 || attempt.heightLevel == 1) && attempt.X < Player.Center.X / 16)
                 {
                     amplifiedFishingChance = true;
                 }

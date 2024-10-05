@@ -43,7 +43,7 @@ namespace PetsOverhaul.PetEffects
 
                     if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
                     {
-                        SoundEngine.PlaySound(SoundID.NPCDeath3 with { PitchVariance = 0.1f, Pitch = 0.9f }, Player.position);
+                        SoundEngine.PlaySound(SoundID.NPCDeath3 with { PitchVariance = 0.1f, Pitch = 0.9f }, Player.Center);
                     }
                 }
             }

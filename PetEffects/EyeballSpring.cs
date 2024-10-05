@@ -31,7 +31,7 @@ namespace PetsOverhaul.PetEffects
                 {
                     if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
                     {
-                        SoundEngine.PlaySound(SoundID.Item56 with { Volume = 0.5f, Pitch = -0.3f, PitchVariance = 0.1f }, Player.position);
+                        SoundEngine.PlaySound(SoundID.Item56 with { Volume = 0.5f, Pitch = -0.3f, PitchVariance = 0.1f }, Player.Center);
                     }
 
                     Pet.jumpRegistered = true;

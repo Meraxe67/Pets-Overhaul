@@ -58,7 +58,7 @@ namespace PetsOverhaul.PetEffects
                         Pet.timer = Pet.timerMax;
                         if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
                         {
-                            SoundEngine.PlaySound(SoundID.DeerclopsScream with { PitchVariance = 0.4f, MaxInstances = 5 }, Player.position);
+                            SoundEngine.PlaySound(SoundID.DeerclopsScream with { PitchVariance = 0.4f, MaxInstances = 5 }, Player.Center);
                         }
 
                         for (int i = 0; i < Main.maxNPCs; i++)

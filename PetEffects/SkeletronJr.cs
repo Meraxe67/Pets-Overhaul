@@ -71,7 +71,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUseWithSwapCd(ItemID.SkeletronPetItem))
             {
-                SoundEngine.PlaySound(SoundID.NPCHit2 with { PitchVariance = 0.05f, Pitch = 0.1f }, Player.position);
+                SoundEngine.PlaySound(SoundID.NPCHit2 with { PitchVariance = 0.05f, Pitch = 0.1f }, Player.Center);
                 skeletronTakenDamage.Add((info.Damage, info.Damage));
                 if (info.Damage <= 1)
                 {

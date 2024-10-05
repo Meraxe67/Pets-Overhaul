@@ -46,18 +46,18 @@ namespace PetsOverhaul.PetEffects
                 }
                 for (int i = 0; i < 20 + iceQueenFrame / 15; i++)
                 {
-                    Dust dust = Dust.NewDustPerfect(Player.position + Main.rand.NextVector2Circular(queenRange, queenRange), DustID.SnowflakeIce, Vector2.Zero);
+                    Dust dust = Dust.NewDustPerfect(Player.Center + Main.rand.NextVector2Circular(queenRange, queenRange), DustID.SnowflakeIce, Vector2.Zero);
                     dust.noGravity = true;
                 }
                 if (iceQueenFrame % 30 == 0 && ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
                 {
                     if (Main.rand.NextBool())
                     {
-                        SoundEngine.PlaySound(SoundID.Item48 with { PitchVariance = 0.3f, Volume = 0.8f }, Player.position + Main.rand.NextVector2Circular(queenRange, queenRange));
+                        SoundEngine.PlaySound(SoundID.Item48 with { PitchVariance = 0.3f, Volume = 0.8f }, Player.Center + Main.rand.NextVector2Circular(queenRange, queenRange));
                     }
                     else
                     {
-                        SoundEngine.PlaySound(SoundID.Item49 with { PitchVariance = 0.3f, Volume = 0.8f }, Player.position + Main.rand.NextVector2Circular(queenRange, queenRange));
+                        SoundEngine.PlaySound(SoundID.Item49 with { PitchVariance = 0.3f, Volume = 0.8f }, Player.Center + Main.rand.NextVector2Circular(queenRange, queenRange));
                     }
                 }
                 iceQueenFrame++;
@@ -86,7 +86,7 @@ namespace PetsOverhaul.PetEffects
                     }
                     if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
                     {
-                        SoundEngine.PlaySound(SoundID.Shatter with { PitchVariance = 0.2f }, Player.position);
+                        SoundEngine.PlaySound(SoundID.Shatter with { PitchVariance = 0.2f }, Player.Center);
                     }
                     Player.HealEffect(100);
                     Player.immune = false;
@@ -102,7 +102,7 @@ namespace PetsOverhaul.PetEffects
             {
                 if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
                 {
-                    SoundEngine.PlaySound(SoundID.Item30 with { PitchVariance = 0.5f, MaxInstances = 5, Pitch = -0.5f }, Player.position);
+                    SoundEngine.PlaySound(SoundID.Item30 with { PitchVariance = 0.5f, MaxInstances = 5, Pitch = -0.5f }, Player.Center);  
                 }
 
                 frozenTomb = true;

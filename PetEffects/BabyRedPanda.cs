@@ -58,7 +58,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.AbilityPressCheck() && Pet.PetInUseWithSwapCd(ItemID.BambooLeaf))
             {
-                SoundEngine.PlaySound(SoundID.Item37 with { Pitch = 1f }, Player.position);
+                SoundEngine.PlaySound(SoundID.Item37 with { Pitch = 1f }, Player.Center);
                 EmoteBubble.MakePlayerEmote(Player, EmoteID.EmotionAlert);
                 alertEnemies = 1;
                 for (int i = 0; i < Main.maxNPCs; i++)
