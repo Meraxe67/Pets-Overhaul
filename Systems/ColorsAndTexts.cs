@@ -94,16 +94,16 @@ namespace PetsOverhaul.Systems
             {
                 {
                     Color color = Color.Lerp(ClassEnumToColor(Class1), ClassEnumToColor(Class2), 0.5f);
-                    return $"[c/{color.Hex3()}:{Language.GetTextValue("Mods.PetsOverhaul.Classes." + Class1)} and {Class2} Pet]";
+                    return $"[c/{color.Hex3()}:{Language.GetTextValue("Mods.PetsOverhaul.Classes." + Class1)} {Language.GetTextValue("Mods.PetsOverhaul.And")} {Language.GetTextValue("Mods.PetsOverhaul.Classes." + Class2)} {Language.GetTextValue("Mods.PetsOverhaul.Pet")}]";
                 }
             }
             else if (Class2 == PetClasses.None)
             {
-                return $"[c/{ClassEnumToColor(Class1).Hex3()}:{Language.GetTextValue("Mods.PetsOverhaul.Classes." + Class1)} Pet]";
+                return $"[c/{ClassEnumToColor(Class1).Hex3()}:{Language.GetTextValue("Mods.PetsOverhaul.Classes." + Class1)} {Language.GetTextValue("Mods.PetsOverhaul.Pet")}]";
             }
             else
             {
-                return $"[c/{ClassEnumToColor(Class2).Hex3()}:{Language.GetTextValue("Mods.PetsOverhaul.Classes." + Class2)} Pet]";
+                return $"[c/{ClassEnumToColor(Class2).Hex3()}:{Language.GetTextValue("Mods.PetsOverhaul.Classes." + Class2)} {Language.GetTextValue("Mods.PetsOverhaul.Pet")}]";
             }
         }
         /// <summary>
