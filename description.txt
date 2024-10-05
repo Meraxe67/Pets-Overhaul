@@ -20,6 +20,7 @@ To give direct feedback, report bugs, to give suggestions or to learn more about
 https://discord.gg/KubSpqvDGE
 
 Icon and all artwork made by: Furqi
-Chinese Translation by: Celestepic
-Brazillian Portuguese Translation by: Starite_Fusion
+Russian Translation by: Teokai
+Chinese Translation by: Celestepic (currently heavily outdated)
+Brazillian Portuguese Translation by: Starite_Fusion (currently heavily outdated)
 and thanks to WaffleDevs, Andro951 and tModLoader community for helping/contributing to the code!

@@ -24,6 +24,7 @@
     <None Remove="Items\PumpkingsHead.png" />
     <None Remove="Localization\mastery_shard_sprite_sheet.png" />
     <None Remove="Localization\pt-BR.hjson" />
+    <None Remove="Localization\ru-RU.hjson" />
     <None Remove="NPCs\LizardTail.png" />
     <None Remove="Projectiles\PetExplosion.png" />
   </ItemGroup>
