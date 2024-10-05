@@ -44,7 +44,7 @@ namespace PetsOverhaul.PetEffects
 
         public void PlayParrotSound()
         {
-            if (!ModContent.GetInstance<Personalization>().AbilitySoundDisabled)
+            if (!ModContent.GetInstance<Personalization>().AbilitySoundEnabled)
             {
                 SoundStyle style = default;
                 switch (Main.rand.Next(3))
@@ -106,7 +106,7 @@ namespace PetsOverhaul.PetEffects
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().DisableTooltipToggle == false && !Keybinds.PetTooltipHide.Current)
+            if (ModContent.GetInstance<Personalization>().EnableTooltipToggle && !Keybinds.PetTooltipHide.Current)
             {
                 return;
             }

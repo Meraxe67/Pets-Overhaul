@@ -18,9 +18,9 @@ namespace PetsOverhaul.UI
         int BaseCooldown => Main.LocalPlayer.GetModPlayer<GlobalPet>().timerMax;
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (ModContent.GetInstance<Personalization>().AbilityDisplayDisable == false && Main.playerInventory == false && (ModContent.GetInstance<Personalization>().AbilityDisplayUnused == false || BaseCooldown > 0))
+            if (ModContent.GetInstance<Personalization>().ShowAbilityDisplay && Main.playerInventory == false && (ModContent.GetInstance<Personalization>().AbilityDisplayUnused || BaseCooldown > 0))
             {
-                if (ModContent.GetInstance<Personalization>().AbilityDisplayInfo == false)
+                if (ModContent.GetInstance<Personalization>().AbilityDisplayInfo)
                 {
                     spriteBatch.DrawString(FontAssets.MouseText.Value, "Base Pet Ability Cooldown:\n" + (BaseCooldown == 0 ? "Current Pet has no Ability Cooldown!" : Math.Round((float)BaseCooldown / 60, 1).ToString() + " second" + (BaseCooldown > 60 ? "s" : "")), new Vector2(Main.screenWidth - 348, Main.screenHeight - 220), Color.Black, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.0f);
                     spriteBatch.DrawString(FontAssets.MouseText.Value, "Base Pet Ability Cooldown:\n" + (BaseCooldown == 0 ? "Current Pet has no Ability Cooldown!" : Math.Round((float)BaseCooldown / 60, 1).ToString() + " second" + (BaseCooldown > 60 ? "s" : "")), new Vector2(Main.screenWidth - 350, Main.screenHeight - 220), color, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.0f);

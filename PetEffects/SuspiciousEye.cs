@@ -72,7 +72,7 @@ namespace PetsOverhaul.PetEffects
                 {
                     eocTimer = phaseTime;
                     Pet.timer = Pet.timerMax;
-                    if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+                    if (ModContent.GetInstance<Personalization>().AbilitySoundEnabled)
                     {
                         SoundEngine.PlaySound(SoundID.ForceRoar with { PitchVariance = 0.3f }, Player.Center);
                     }   
@@ -166,7 +166,7 @@ namespace PetsOverhaul.PetEffects
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().DisableTooltipToggle == false && !Keybinds.PetTooltipHide.Current)
+            if (ModContent.GetInstance<Personalization>().EnableTooltipToggle && !Keybinds.PetTooltipHide.Current)
             {
                 return;
             }

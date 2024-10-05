@@ -33,7 +33,7 @@ namespace PetsOverhaul.PetEffects
             {
                 Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Vector2.Zero, ModContent.ProjectileType<PetExplosion>(), (int)(damageDone * damageMult), hit.Knockback * kbMult, Player.whoAmI, explosionSize)
                     .OriginalArmorPenetration += armorPen;
-                if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+                if (ModContent.GetInstance<Personalization>().AbilitySoundEnabled)
                 {
                     SoundEngine.PlaySound(SoundID.Item14,target.Center);
                 }
@@ -50,7 +50,7 @@ namespace PetsOverhaul.PetEffects
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().DisableTooltipToggle == false && !Keybinds.PetTooltipHide.Current)
+            if (ModContent.GetInstance<Personalization>().EnableTooltipToggle && !Keybinds.PetTooltipHide.Current)
             {
                 return;
             }

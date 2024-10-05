@@ -42,7 +42,7 @@ namespace PetsOverhaul.PetEffects
                     for (int i = 0; i < GlobalPet.Randomizer(rareCatchChance); i++)
                     {
                         Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.GlobalItem), npc.catchItem, 1);
-                        if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+                        if (ModContent.GetInstance<Personalization>().AbilitySoundEnabled)
                         {
                             SoundEngine.PlaySound(SoundID.Item65 with { PitchVariance = 0.3f, MaxInstances = 5, Volume = 0.5f }, Player.Center);
                         }
@@ -54,7 +54,7 @@ namespace PetsOverhaul.PetEffects
                     for (int i = 0; i < GlobalPet.Randomizer(catchChance); i++)
                     {
                         Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.GlobalItem), npc.catchItem, 1);
-                        if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+                        if (ModContent.GetInstance<Personalization>().AbilitySoundEnabled)
                         {
                             SoundEngine.PlaySound(SoundID.Item65 with { PitchVariance = 0.3f, MaxInstances = 1, Volume = 0.5f }, Player.Center);
                         }
@@ -73,7 +73,7 @@ namespace PetsOverhaul.PetEffects
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().DisableTooltipToggle == false && !Keybinds.PetTooltipHide.Current)
+            if (ModContent.GetInstance<Personalization>().EnableTooltipToggle && !Keybinds.PetTooltipHide.Current)
             {
                 return;
             }

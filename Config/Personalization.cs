@@ -18,18 +18,18 @@ namespace PetsOverhaul.Config
 
         [LabelKey("$Mods.PetsOverhaul.Config.NoticeLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.NoticeTooltip")]
-        [DefaultValue(false)]
-        public bool DisableNotice { get; set; }
+        [DefaultValue(true)]
+        public bool EnableNotice { get; set; }
 
         [LabelKey("$Mods.PetsOverhaul.Config.ModNoticeLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.ModNoticeTooltip")]
-        [DefaultValue(false)]
-        public bool DisableModNotice { get; set; }
+        [DefaultValue(true)]
+        public bool EnableModNotice { get; set; }
 
         [LabelKey("$Mods.PetsOverhaul.Config.DisableTooltipToggleLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.DisableTooltipToggleTooltip")]
-        [DefaultValue(true)]
-        public bool DisableTooltipToggle { get; set; }
+        [DefaultValue(false)]
+        public bool EnableTooltipToggle { get; set; }
 
         [DefaultValue(ShieldPosition.HealthBarRight)]
         [LabelKey("$Mods.PetsOverhaul.Config.ShieldLocationLabel")]
@@ -39,18 +39,18 @@ namespace PetsOverhaul.Config
 
         [LabelKey("$Mods.PetsOverhaul.Config.DisableAbilityUnusedLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.DisableAbilityUnusedTooltip")]
-        [DefaultValue(true)]
+        [DefaultValue(false)]
         public bool AbilityDisplayUnused { get; set; }
 
         [LabelKey("$Mods.PetsOverhaul.Config.AbilityDisplayInfoLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.AbilityDisplayInfoTooltip")]
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         public bool AbilityDisplayInfo { get; set; }
 
         [LabelKey("$Mods.PetsOverhaul.Config.AbilityDisplayDisableLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.AbilityDisplayDisableTooltip")]
-        [DefaultValue(false)]
-        public bool AbilityDisplayDisable { get; set; }
+        [DefaultValue(true)]
+        public bool ShowAbilityDisplay { get; set; }
         #endregion
         //Sounds
         #region
@@ -58,28 +58,28 @@ namespace PetsOverhaul.Config
 
         [LabelKey("$Mods.PetsOverhaul.Config.HurtSoundLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.HurtSoundTooltip")]
-        [DefaultValue(false)]
-        public bool HurtSoundDisabled { get; set; }
+        [DefaultValue(true)]
+        public bool HurtSoundEnabled { get; set; }
 
         [LabelKey("$Mods.PetsOverhaul.Config.DeathSoundLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.DeathSoundTooltip")]
-        [DefaultValue(false)]
-        public bool DeathSoundDisabled { get; set; }
+        [DefaultValue(true)]
+        public bool DeathSoundEnabled { get; set; }
 
         [LabelKey("$Mods.PetsOverhaul.Config.PassiveSoundLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.PassiveSoundTooltip")]
-        [DefaultValue(false)]
-        public bool PassiveSoundDisabled { get; set; }
+        [DefaultValue(true)]
+        public bool PassiveSoundEnabled { get; set; }
 
         [LabelKey("$Mods.PetsOverhaul.Config.AbilitySoundLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.AbilitySoundTooltip")]
-        [DefaultValue(false)]
-        public bool AbilitySoundDisabled { get; set; }
+        [DefaultValue(true)]
+        public bool AbilitySoundEnabled { get; set; }
 
         [LabelKey("$Mods.PetsOverhaul.Config.LowCooldownSoundLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.LowCooldownSoundTooltip")]
-        [DefaultValue(true)]
-        public bool LowCooldownSoundDisabled { get; set; }
+        [DefaultValue(false)]
+        public bool LowCooldownSoundEnabled { get; set; }
 
         [LabelKey("$Mods.PetsOverhaul.Config.LowCooldownTresholdLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.LowCooldownTresholdTooltip")]
@@ -101,12 +101,12 @@ namespace PetsOverhaul.Config
 
         [LabelKey("$Mods.PetsOverhaul.Config.SwapCooldownLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.SwapCooldownTooltip")]
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         public bool SwapCooldown { get; set; }
 
         [LabelKey("$Mods.PetsOverhaul.Config.PhantasmalDragonShootLabel")]
         [TooltipKey("$Mods.PetsOverhaul.Config.PhantasmalDragonShootTooltip")]
-        [DefaultValue(true)]
+        [DefaultValue(false)]
         public bool PhantasmalDragonVolleyFromMouth { get; set; }
         #endregion
 

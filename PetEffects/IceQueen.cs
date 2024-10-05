@@ -49,7 +49,7 @@ namespace PetsOverhaul.PetEffects
                     Dust dust = Dust.NewDustPerfect(Player.Center + Main.rand.NextVector2Circular(queenRange, queenRange), DustID.SnowflakeIce, Vector2.Zero);
                     dust.noGravity = true;
                 }
-                if (iceQueenFrame % 30 == 0 && ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+                if (iceQueenFrame % 30 == 0 && ModContent.GetInstance<Personalization>().AbilitySoundEnabled)
                 {
                     if (Main.rand.NextBool())
                     {
@@ -84,7 +84,7 @@ namespace PetsOverhaul.PetEffects
                             npc.SimpleStrikeNPC(freezeDamage, 1, Main.rand.NextBool(crit, 100), 0, DamageClass.Generic);
                         }
                     }
-                    if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+                    if (ModContent.GetInstance<Personalization>().AbilitySoundEnabled)
                     {
                         SoundEngine.PlaySound(SoundID.Shatter with { PitchVariance = 0.2f }, Player.Center);
                     }
@@ -100,7 +100,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUseWithSwapCd(ItemID.IceQueenPetItem) && Pet.timer <= 0)
             {
-                if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+                if (ModContent.GetInstance<Personalization>().AbilitySoundEnabled)
                 {
                     SoundEngine.PlaySound(SoundID.Item30 with { PitchVariance = 0.5f, MaxInstances = 5, Pitch = -0.5f }, Player.Center);  
                 }
@@ -125,7 +125,7 @@ namespace PetsOverhaul.PetEffects
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().DisableTooltipToggle == false && !Keybinds.PetTooltipHide.Current)
+            if (ModContent.GetInstance<Personalization>().EnableTooltipToggle && !Keybinds.PetTooltipHide.Current)
             {
                 return;
             }

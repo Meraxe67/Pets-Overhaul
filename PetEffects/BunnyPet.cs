@@ -24,7 +24,7 @@ namespace PetsOverhaul.PetEffects
                 bunnyTimer--;
                 if (Player.jump < Player.jumpHeight / 2 && Player.jump != 0 && Pet.jumpRegistered == false)
                 {
-                    if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+                    if (ModContent.GetInstance<Personalization>().AbilitySoundEnabled)
                     {
                         SoundEngine.PlaySound(SoundID.Item56 with { Volume = 0.5f, Pitch = 0.2f, PitchVariance = 0.3f }, Player.Center);
                     }
@@ -55,7 +55,7 @@ namespace PetsOverhaul.PetEffects
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().DisableTooltipToggle == false && !Keybinds.PetTooltipHide.Current)
+            if (ModContent.GetInstance<Personalization>().EnableTooltipToggle && !Keybinds.PetTooltipHide.Current)
             {
                 return;
             }

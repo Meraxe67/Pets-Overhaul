@@ -56,7 +56,7 @@ namespace PetsOverhaul.PetEffects
                     if (totalDamage > Player.statLifeMax2 * healthTreshold && Pet.timer <= 0)
                     {
                         Pet.timer = Pet.timerMax;
-                        if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+                        if (ModContent.GetInstance<Personalization>().AbilitySoundEnabled)
                         {
                             SoundEngine.PlaySound(SoundID.DeerclopsScream with { PitchVariance = 0.4f, MaxInstances = 5 }, Player.Center);
                         }
@@ -93,7 +93,7 @@ namespace PetsOverhaul.PetEffects
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().DisableTooltipToggle == false && !Keybinds.PetTooltipHide.Current)
+            if (ModContent.GetInstance<Personalization>().EnableTooltipToggle && !Keybinds.PetTooltipHide.Current)
             {
                 return;
             }

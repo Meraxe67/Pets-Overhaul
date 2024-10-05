@@ -51,7 +51,7 @@ namespace PetsOverhaul.PetEffects
                     if (Pet.timer <= 0)
                     {
                         Pet.PetRecovery(Player.statLifeMax2, healthRecovery, isLifesteal: false);
-                        if (ModContent.GetInstance<Personalization>().AbilitySoundDisabled == false)
+                        if (ModContent.GetInstance<Personalization>().AbilitySoundEnabled)
                         {
                             SoundEngine.PlaySound(SoundID.Item97 with { Pitch = 0.4f, MaxInstances = 10 });
                         }
@@ -125,7 +125,7 @@ namespace PetsOverhaul.PetEffects
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().DisableTooltipToggle == false && !Keybinds.PetTooltipHide.Current)
+            if (ModContent.GetInstance<Personalization>().EnableTooltipToggle && !Keybinds.PetTooltipHide.Current)
             {
                 return;
             }

@@ -60,7 +60,7 @@ namespace PetsOverhaul.PetEffects
                             Vector2 pos = Player.position;
                             int width = Player.width;
                             int height = Player.height;
-                            if (ModContent.GetInstance<Personalization>().PhantasmalDragonVolleyFromMouth == false)
+                            if (ModContent.GetInstance<Personalization>().PhantasmalDragonVolleyFromMouth)
                                 foreach (var projectile in Main.ActiveProjectiles)
                                 {
                                     if (projectile is Projectile proj && proj.owner == Player.whoAmI && proj.type == ProjectileID.LunaticCultistPet)
@@ -85,7 +85,7 @@ namespace PetsOverhaul.PetEffects
                 if (fireVolley > 0 && fireVolley % fireVolleyEveryFrame == 0)
                 {
                     Vector2 location = Player.Center;
-                    if (ModContent.GetInstance<Personalization>().PhantasmalDragonVolleyFromMouth == false)
+                    if (ModContent.GetInstance<Personalization>().PhantasmalDragonVolleyFromMouth)
                         foreach (var projectile in Main.ActiveProjectiles)
                         {
                             if (projectile is Projectile proj && proj.owner == Player.whoAmI && proj.type == ProjectileID.LunaticCultistPet)
@@ -440,7 +440,7 @@ namespace PetsOverhaul.PetEffects
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().DisableTooltipToggle == false && !Keybinds.PetTooltipHide.Current)
+            if (ModContent.GetInstance<Personalization>().EnableTooltipToggle && !Keybinds.PetTooltipHide.Current)
             {
                 return;
             }
@@ -464,7 +464,7 @@ namespace PetsOverhaul.PetEffects
                 .Replace("<fireDmg>", phantasmalDragon.fireBase.ToString())
                 .Replace("<kb>", phantasmalDragon.fireKnockback.ToString())
                 .Replace("<burnSeconds>", Math.Round(phantasmalDragon.fireBurnTime / 60f, 2).ToString())
-                .Replace("<enabled>", ModContent.GetInstance<Personalization>().PhantasmalDragonVolleyFromMouth ? "Disabled" : "Enabled"),
+                .Replace("<enabled>", ModContent.GetInstance<Personalization>().PhantasmalDragonVolleyFromMouth ? "Enabled" : "Disabled"),
                 _ => "Cannot Find current ability.",
             };
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.LunaticCultistPetItem")

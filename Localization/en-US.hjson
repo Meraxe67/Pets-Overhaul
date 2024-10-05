@@ -102,22 +102,22 @@ Mods: {
 			HeaderDisplay: Display Related Settings
 			HeaderSound: Sound Related Settings
 			HeaderGameplay: Gameplay Settings
-			NoticeLabel: Disable Pets Overhaul's notice
+			NoticeLabel: Enable Pets Overhaul's notice
 			NoticeTooltip:
 				'''
-				Disables message sent by Pets Overhaul upon logging into the world.
+				Enables message sent by Pets Overhaul upon logging into the world.
 				Notices may contain brief information about the latest updates.
 				'''
-			ModNoticeLabel: Disable notice for missing Mod addons
+			ModNoticeLabel: Enable notice for missing Mod addons
 			ModNoticeTooltip:
 				'''
-				Disables message sent upon logging into the world where;
+				Enable message sent upon logging into the world where;
 				An official addon (crossmod) of Pets Overhaul of a Mod exists but is not loaded.
 				'''
-			DisableTooltipToggleLabel: Disable Pet/Item tooltips being toggleable
+			DisableTooltipToggleLabel: Enable Pet/Item tooltips being toggleable
 			DisableTooltipToggleTooltip:
 				'''
-				Disables the system where Pets Overhaul effects on Pet Item tooltips to be
+				Enables the system where Pets Overhaul effects on Pet Item tooltips to be
 				only visible while your set Keybind is held. (You need to manually assign a keybinding)
 				'''
 			TooltipToggleInGame: Hold the <keybind> button to view the Pet tooltip
@@ -127,48 +127,48 @@ Mods: {
 				Changes where Pet Shield should be displayed when a Shield has been provided by your Pet.
 				Healthbar options works best with 1920x1080 Resolutions. Editing this value by external means may cause errors.
 				'''
-			DisableAbilityUnusedLabel: Disable Ability Cooldown Display If Unused
+			DisableAbilityUnusedLabel: Enable Ability Cooldown Display If Unused
 			DisableAbilityUnusedTooltip:
 				'''
-				Makes the Ability Cooldown display on the right bottom corner of the screen invisible
+				Makes the Ability Cooldown display on the right bottom corner of the screen visible
 				if the current Pet does not have an ability that uses the Pet Ability Timer.
 				'''
-			AbilityDisplayInfoLabel: Disable Base Ability Cooldown Display
+			AbilityDisplayInfoLabel: Enable Base Ability Cooldown Display
 			AbilityDisplayInfoTooltip:
 				'''
 				Makes Ability Cooldown display on the right bottom corner of the screen
-				not include the Base Cooldown of the current Pet's ability timer.
+				include the Base Cooldown of the current Pet's ability timer.
 				'''
-			AbilityDisplayDisableLabel: Disable Ability Cooldown Display
+			AbilityDisplayDisableLabel: Enable Ability Cooldown Display
 			AbilityDisplayDisableTooltip:
 				'''
-				Disables the Ability Cooldown Display entirely, it won't be shown no matter what.
-				Anything done with other options regarding Ability Display will have no effects.
+				Enables the Ability Cooldown Display. If this option is turned off,
+				the display will be forced to be not shown, no matter other options regarding it.
 				'''
-			HurtSoundLabel: Disable custom hurt sounds
-			HurtSoundTooltip: Disables custom sound effects added by Pets when the Player receives damage.
-			DeathSoundLabel: Disable custom death sounds
-			DeathSoundTooltip: Disables custom sound effects added by Pets when the Player dies.
-			PassiveSoundLabel: Disable passive Pet sounds
-			PassiveSoundTooltip: Disables Pet sound effects that play passively similar to vanilla's Ambient sound effects.
-			AbilitySoundLabel: Disable ability sounds
+			HurtSoundLabel: Enable custom hurt sounds
+			HurtSoundTooltip: Enables custom sound effects added by Pets when the Player receives damage.
+			DeathSoundLabel: Enable custom death sounds
+			DeathSoundTooltip: Enables custom sound effects added by Pets when the Player dies.
+			PassiveSoundLabel: Enable passive Pet sounds
+			PassiveSoundTooltip: Enables Pet sound effects that play passively similar to vanilla's Ambient sound effects.
+			AbilitySoundLabel: Enable ability sounds
 			AbilitySoundTooltip:
 				'''
-				Disables Pet sound effects that play upon ability proccing, cooldown refreshing
-				and other similar things. (not recommended, these sounds can help with your awareness.)
+				Enables Pet sound effects that play upon ability proccing, cooldown refreshing
+				and other similar things. (not recommended to turn off, these sounds can help with your awareness.)
 				'''
-			LowCooldownSoundLabel: Disable short ability timer sound
+			LowCooldownSoundLabel: Enable short ability timer sound
 			LowCooldownSoundTooltip:
 				'''
-				Disables Pet ability cooldown refreshing sound effect if;
-				Pet's abilities cooldown is lower than the set amount by the Treshold option.
+				Enables Pet ability cooldown refreshing sound even if they are below the Treshold option.
+				Have this at off if you don't want to hear cooldown refresh sound effect if its below the Treshold.
 				'''
 			LowCooldownTresholdLabel: Short ability timer disable Treshold
 			LowCooldownTresholdTooltip:
 				'''
 				Sets the treshold for disabling short pet ability cooldowns
 				playing sounds upon refreshing, in Frames. (60 frames = 1 second)
-				Changing this has no effect if "Disable short ability timer sound" is disabled.
+				Changing this has no effect if "Enable short ability timer sound" is enabled.
 				'''
 			MoreDifficultLabel: Set Player Handicap
 			MoreDifficultTooltip:
@@ -177,17 +177,17 @@ Mods: {
 				This is implemented due to Pets Overhaul adding extra Powercreep into the game. Min 0, Max 20%.
 				Keep it at 0 if you wish it to be disabled. It's recommended it to be around 7 to 10%.
 				'''
-			SwapCooldownLabel: Disable Pet Swap cooldown
+			SwapCooldownLabel: Enable Pet Swap cooldown
 			SwapCooldownTooltip:
 				'''
-				Disables Player gaining Oblivious Pet Debuff upon swapping a Pet.
+				Enables Player gaining Oblivious Pet Debuff upon swapping a Pet.
 				Which prevents any Combat-related perks from being active during the time.
-				(not recommended due to obvious balance reasons)
+				(Recommended to keep this on due to obvious balancing reasons.)
 				'''
-			PhantasmalDragonShootLabel: Disable Phantasmal Dragon Fire Volley Spell coming from the Dragon
+			PhantasmalDragonShootLabel: Enable Phantasmal Dragon Fire Volley Spell coming from the Dragon
 			PhantasmalDragonShootTooltip:
 				'''
-				Disables Phantasmal Dragon's 3rd spell, Fireball Volley to be casted from
+				Enables Phantasmal Dragon's 3rd spell, Fireball Volley to be casted from
 				Dragon's Mouth (The Dragon Pet that follows you), rather than from the Player.
 				'''
 		}
