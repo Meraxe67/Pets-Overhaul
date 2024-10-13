@@ -48,15 +48,15 @@ namespace PetsOverhaul.Systems
         public static Color RangedClass => new(255, 179, 186);
         public static Color MagicClass => new(51, 153, 255);
         public static Color SummonerClass => new(138, 43, 226);
-        public static Color UtilityClass => new(27, 222, 255);
+        public static Color UtilityClass => new(107, 65, 14);
         public static Color MobilityClass => new(204, 245, 245);
         public static Color HarvestingClass => new(205, 225, 0);
         public static Color MiningClass => new(150, 168, 176);
-        public static Color FishingClass => new(3, 130, 233);
+        public static Color FishingClass => new(27, 222, 255);
         public static Color OffensiveClass => new(246, 84, 106);
         public static Color DefensiveClass => new(14, 168, 14);
-        public static Color SupportiveClass => new(255, 20, 147);
-        public static Color RogueClass => new(255, 87, 51); //This is a temporary addition for Calamity addon, Classes will use Int rather than enum post 3.0.
+        public static Color SupportiveClass => new(242, 82, 169);
+        public static Color RogueClass => new(255, 233, 36); //This is a temporary addition for Calamity addon, Classes will use Int rather than enum post 3.0.
         public static Color ClassEnumToColor(PetClasses Class) //Todo, will be a dictionary so easily addable from outside sources, ex. an addon.
         {
             return Class switch
