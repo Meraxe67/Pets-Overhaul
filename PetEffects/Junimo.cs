@@ -509,11 +509,11 @@ namespace PetsOverhaul.PetEffects
                 Velocity = new Vector2(Main.rand.NextFloat(-3, 3), Main.rand.NextFloat(-15, -10))
             };
 
-            bool soundOff = ModContent.GetInstance<Personalization>().AbilitySoundEnabled;
+            bool soundOn = ModContent.GetInstance<Personalization>().AbilitySoundEnabled;
             if (junimoHarvestingLevel < maxLvls && junimoHarvestingExp >= junimoHarvestingLevelsToXp[junimoHarvestingLevel])
             {
                 junimoHarvestingLevel++;
-                if (soundOff == false)
+                if (soundOn)
                 {
                     SoundEngine.PlaySound(SoundID.Item35 with { PitchVariance = 0.2f, Pitch = 0.5f }, Player.Center);
                 }
@@ -527,7 +527,7 @@ namespace PetsOverhaul.PetEffects
             if (junimoMiningLevel < maxLvls && junimoMiningExp >= junimoMiningLevelsToXp[junimoMiningLevel])
             {
                 junimoMiningLevel++;
-                if (soundOff == false)
+                if (soundOn)
                 {
                     SoundEngine.PlaySound(SoundID.Item35 with
                     {
@@ -546,7 +546,7 @@ namespace PetsOverhaul.PetEffects
             if (junimoFishingLevel < maxLvls && junimoFishingExp >= junimoFishingLevelsToXp[junimoFishingLevel])
             {
                 junimoFishingLevel++;
-                if (soundOff == false)
+                if (soundOn)
                 {
                     SoundEngine.PlaySound(SoundID.Item35 with
                     {
