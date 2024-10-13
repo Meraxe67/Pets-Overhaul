@@ -56,7 +56,8 @@ namespace PetsOverhaul.Systems
         public static Color OffensiveClass => new(246, 84, 106);
         public static Color DefensiveClass => new(14, 168, 14);
         public static Color SupportiveClass => new(255, 20, 147);
-        public static Color ClassEnumToColor(PetClasses Class)
+        public static Color RogueClass => new(255, 87, 51); //This is a temporary addition for Calamity addon, Classes will use Int rather than enum post 3.0.
+        public static Color ClassEnumToColor(PetClasses Class) //Todo, will be a dictionary so easily addable from outside sources, ex. an addon.
         {
             return Class switch
             {
@@ -73,6 +74,7 @@ namespace PetsOverhaul.Systems
                 PetClasses.Offensive => OffensiveClass,
                 PetClasses.Defensive => DefensiveClass,
                 PetClasses.Supportive => SupportiveClass,
+                PetClasses.Rogue => RogueClass, //This is a temporary addition for Calamity addon, Classes will use Int rather than enum post 3.0.
                 _ => new(0, 0, 0),
             };
         }

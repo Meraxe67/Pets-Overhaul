@@ -246,6 +246,25 @@ namespace PetsOverhaul.Systems
             }
             return a;
         }
+        /// <summary>
+        /// Sets active of oldest Main.combatText to false.
+        /// </summary>
+        /// <returns>Index of removed combatText.</returns>
+        public static int RemoveOldestCombatText()
+        {
+            int textLife = 6000;
+            int textToRemove = 100;
+            for (int i = 0; i < Main.maxCombatText; i++)
+            {
+                if (Main.combatText[i].lifeTime < textLife)
+                {
+                    textLife = Main.combatText[i].lifeTime;
+                    textToRemove = i;
+                }
+            }
+            Main.combatText[textToRemove].active = false;
+            return textToRemove;
+        }
 
         /// <summary>
         /// Used for Healing and Mana recovery purposes. Non converted amount can still grant +1, depending on a roll. Example: PetRecovery(215, 0.05f) will heal you for 10 health and 75% chance to heal +1 more, resulting in 11 health recovery.

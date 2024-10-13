@@ -13,6 +13,7 @@ Mods: {
 			'''
 			[c/90C2AA:Pets Overhaul 3.0 latest changes: Calamity Addon release, Major system improvements, major fixes, lots of balance changes]
 			[c/90C2AA:Some of your config options may have reset, make sure to check to have them set correctly!]
+			[c/90C2AA:Added full Russian localization! By: *your name*]
 			[c/b4bfc5:Join our discord server for feedback & bug reports! discord.gg/KubSpqvDGE]
 			[c/b4bfc5:Use] [c/ff8234:/pet] [c/b4bfc5:to see commands for Pets Overhaul, providing you more info!]
 			''' */
@@ -37,6 +38,7 @@ Mods: {
 			// Offensive: Offensive
 			// Defensive: Defensive
 			// Supportive: Supportive
+			// Rogue: Rogue
 		}
 
 		Commands: {
@@ -101,22 +103,22 @@ Mods: {
 			// HeaderDisplay: Display Related Settings
 			// HeaderSound: Sound Related Settings
 			// HeaderGameplay: Gameplay Settings
-			// NoticeLabel: Disable Pets Overhaul's notice
+			// NoticeLabel: Enable Pets Overhaul's notice
 			/* NoticeTooltip:
 				'''
-				Disables message sent by Pets Overhaul upon logging into the world.
+				Enables message sent by Pets Overhaul upon logging into the world.
 				Notices may contain brief information about the latest updates.
 				''' */
-			// ModNoticeLabel: Disable notice for missing Mod addons
+			// ModNoticeLabel: Enable notice for missing Mod addons
 			/* ModNoticeTooltip:
 				'''
-				Disables message sent upon logging into the world where;
+				Enable message sent upon logging into the world where;
 				An official addon (crossmod) of Pets Overhaul of a Mod exists but is not loaded.
 				''' */
-			// DisableTooltipToggleLabel: Disable Pet/Item tooltips being toggleable
+			// DisableTooltipToggleLabel: Enable Pet/Item tooltips being toggleable
 			/* DisableTooltipToggleTooltip:
 				'''
-				Disables the system where Pets Overhaul effects on Pet Item tooltips to be
+				Enables the system where Pets Overhaul effects on Pet Item tooltips to be
 				only visible while your set Keybind is held. (You need to manually assign a keybinding)
 				''' */
 			// TooltipToggleInGame: Hold the <keybind> button to view the Pet tooltip
@@ -126,23 +128,23 @@ Mods: {
 				Changes where Pet Shield should be displayed when a Shield has been provided by your Pet.
 				Healthbar options works best with 1920x1080 Resolutions. Editing this value by external means may cause errors.
 				''' */
-			// DisableAbilityUnusedLabel: Disable Ability Cooldown Display If Unused
+			// DisableAbilityUnusedLabel: Enable Ability Cooldown Display If Unused
 			/* DisableAbilityUnusedTooltip:
 				'''
-				Makes the Ability Cooldown display on the right bottom corner of the screen invisible
+				Makes the Ability Cooldown display on the right bottom corner of the screen visible
 				if the current Pet does not have an ability that uses the Pet Ability Timer.
 				''' */
-			// AbilityDisplayInfoLabel: Disable Base Ability Cooldown Display
+			// AbilityDisplayInfoLabel: Enable Base Ability Cooldown Display
 			/* AbilityDisplayInfoTooltip:
 				'''
 				Makes Ability Cooldown display on the right bottom corner of the screen
-				not include the Base Cooldown of the current Pet's ability timer.
+				include the Base Cooldown of the current Pet's ability timer.
 				''' */
-			// AbilityDisplayDisableLabel: Disable Ability Cooldown Display
+			// AbilityDisplayDisableLabel: Enable Ability Cooldown Display
 			/* AbilityDisplayDisableTooltip:
 				'''
-				Disables the Ability Cooldown Display entirely, it won't be shown no matter what.
-				Anything done with other options regarding Ability Display will have no effects.
+				Enables the Ability Cooldown Display. If this option is turned off,
+				the display will be forced to be not shown, no matter other options regarding it.
 				''' */
 			HurtSoundLabel: Desabilitar sons de dor personalizados
 			HurtSoundTooltip: Desabilita efeitos sonoros adicionados por pets quando o jogador recebe dano.
@@ -159,16 +161,16 @@ Mods: {
 				'''
 				Sets the treshold for disabling short pet ability cooldowns
 				playing sounds upon refreshing, in Frames. (60 frames = 1 second)
-				Changing this has no effect if "Disable short ability timer sound" is disabled.
+				Changing this has no effect if "Enable short ability timer sound" is enabled.
 				''' */
 			MoreDifficultLabel: Desabilitar jogador ser mais fraco
 			MoreDifficultTooltip: Desabilita o jogador causar 5% menos dano e receber 5% mais dano, que é implementado para contrariar o mod adicionar um aumento de poder
 			SwapCooldownLabel: Desabilitar tempo de recarga em troca de pet
 			SwapCooldownTooltip: Desabilita o jogador de ganhar o Debuff Pet Desatento ao trocar de pet. Prevenindo qualquer vantagem relacionada à combate de ativar durante esse tempo (Não recomendado)
-			// PhantasmalDragonShootLabel: Disable Phantasmal Dragon Fire Volley Spell coming from the Dragon
+			// PhantasmalDragonShootLabel: Enable Phantasmal Dragon Fire Volley Spell coming from the Dragon
 			/* PhantasmalDragonShootTooltip:
 				'''
-				Disables Phantasmal Dragon's 3rd spell, Fireball Volley to be casted from
+				Enables Phantasmal Dragon's 3rd spell, Fireball Volley to be casted from
 				Dragon's Mouth (The Dragon Pet that follows you), rather than from the Player.
 				''' */
 		}

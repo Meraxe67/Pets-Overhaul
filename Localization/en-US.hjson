@@ -38,6 +38,7 @@ Mods: {
 			Offensive: Offensive
 			Defensive: Defensive
 			Supportive: Supportive
+			Rogue: Rogue
 		}
 
 		Commands: {
