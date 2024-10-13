@@ -547,7 +547,9 @@ Mods: {
 				- Multiplies arrow speed by <arrowVelo>x.
 				- Increases arrow pierce by <arrowPierce>.
 				- Multiplies your bullet speed by <bulletVelo>x.
-				- Multiplies size of your Specialist weapons by <treshold>x.
+				- Your specialist ranged weapons will crit
+				enemies below <treshold>% health all the time.
+				 * Treshold decreases down to <bossTreshold>% for bosses.
 				'''
 			JunimoMaxLevelText: Max Level!
 			JunimoMaxed: Maxed
@@ -557,17 +559,14 @@ Mods: {
 				'''
 				<class>
 				- Allows you to gain EXP for each respective class, further improving the perks of this Pet.
-				- Gathering; Harvesting, Mining, and Fishing items gives you money depending on the item's exp value.
-				- Levels are maxed at <maxLvl>.
-				[c/CDFF00:Harvesting]
-				Current level: <harvestLevel> Experience needed for next level: <harvestNext> Current total experience: [c/CDFF00:<harvestCurrent>]
-				- Gain <harvestingProfit> times exp value of items as copper coins and gain <flatHealth> maximum health.
-				[c/96A8B0:Mining]
-				Current level: <miningLevel> Experience needed for next level: <miningNext> Current total experience: [c/96A8B0:<miningCurrent>]
-				- Gain <miningProfit> times exp value of items as copper coins and gain <bonusReduction>% damage reduction.
-				[c/0382E9:Fishing]
-				Current level: <fishingLevel> Experience needed for next level: <fishingNext> Current total experience: [c/0382E9:<fishingCurrent>]
-				- Gain <fishingProfit> times exp value of items as copper coins and gain <bonusDamage>% damage boost.
+				 * Gathering any of the Harvesting, Mining, and Fishing items gives you money depending on the
+				item's exp value, and levels are maxed at level <maxLvl>.
+				- <harvesting> Current level: <harvestLevel> Experience needed for next level: <harvestNext> Current total experience: [c/CDFF00:<harvestCurrent>]
+				 * Gain <harvestingProfit> times exp value of items as copper coins and gain <flatHealth> maximum health.
+				- <mining> Current level: <miningLevel> Experience needed for next level: <miningNext> Current total experience: [c/96A8B0:<miningCurrent>]
+				 * Gain <miningProfit> times exp value of items as copper coins and gain <bonusReduction>% damage reduction.
+				- <fishing> Current level: <fishingLevel> Experience needed for next level: <fishingNext> Current total experience: [c/0382E9:<fishingCurrent>]
+				 * Gain <fishingProfit> times exp value of items as copper coins and gain <bonusDamage>% damage boost.
 				'''
 			BirdieRattle:
 				'''

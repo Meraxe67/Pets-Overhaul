@@ -668,6 +668,9 @@ namespace PetsOverhaul.PetEffects
                         .Replace("<fishingLevel>", $"[c/{PetTextsColors.ClassEnumToColor(PetClasses.Fishing).Hex3()}:{junimo.junimoFishingLevel}]")
                         .Replace("<fishingNext>", $"[c/{PetTextsColors.ClassEnumToColor(PetClasses.Fishing).Hex3()}:{(junimo.junimoFishingLevel >= junimo.maxLvls ? Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.JunimoMaxLevelText") : (junimo.junimoFishingLevelsToXp[junimo.junimoFishingLevel] - junimo.junimoFishingExp).ToString())}]")
                         .Replace("<fishingCurrent>", junimo.junimoFishingExp.ToString())
+                        .Replace("<harvesting>", $"[c/{PetTextsColors.ClassEnumToColor(PetClasses.Harvesting).Hex3()}:{PetTextsColors.PetClassLocalized(PetClasses.Harvesting)}]")
+                        .Replace("<mining>", $"[c/{PetTextsColors.ClassEnumToColor(PetClasses.Mining).Hex3()}:{PetTextsColors.PetClassLocalized(PetClasses.Mining)}]")
+                        .Replace("<fishing>", $"[c/{PetTextsColors.ClassEnumToColor(PetClasses.Fishing).Hex3()}:{PetTextsColors.PetClassLocalized(PetClasses.Fishing)}]")
                         ));
         }
     }

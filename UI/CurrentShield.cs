@@ -12,7 +12,7 @@ namespace PetsOverhaul.UI
 {
     class CurrentShield : UIElement
     {
-        Color color = Main.MouseTextColorReal;
+        Color color => Main.MouseTextColorReal;
         int CurrentShieldVal => Main.LocalPlayer.GetModPlayer<GlobalPet>().currentShield;
         ShieldPosition ShieldSetting => ModContent.GetInstance<Personalization>().ShieldLocation;
         Vector2 ShieldLoc;
