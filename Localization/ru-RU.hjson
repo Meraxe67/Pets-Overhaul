@@ -430,6 +430,11 @@ Mods: {
 				  * Работает только ночью. Текущая удача: <moonLuck>
 				- Ваша текущая общая удача: <playerLuck>
 				'''
+			// BlackCatDeath1: <name> walked under a ladder.
+			// BlackCatDeath2: <name> now knows that: 'The Moon does not make its own light �moonlight� is actually reflected sunlight.
+			// BlackCatDeath3: <name>'s superstitious beliefs turned out to be real.
+			// BlackCatDeath4: <name> was unlucky.
+			// BlackCatDeath5: <name>'s Black Cat did bring bad luck afterall.
 			BlueEgg:
 				'''
 				<class>
@@ -771,6 +776,8 @@ Mods: {
 				  * [c/f8baba:Ваша защита и снижение урона будут равны 0 всё это время.]
 				  * Ярость длится <enrageLength> секунд и имеет перезарядку в <enrageCd> секунд.
 				'''
+			// EocEnrage: ENRAGED!
+			// EocCalm: Calmed Down.
 			BrainOfCthulhuPetItem:
 				'''
 				<class>
@@ -832,6 +839,10 @@ Mods: {
 				- Если враг может умереть от вашего удара без эффекта ДОТ (урон со временем), он будет мгновенно убит.
 
 				'''
+			// SkeletronDeath1: <name> could not contain Skeletron's curse.
+			// SkeletronDeath2: <name> went through a painful, slow death.
+			// SkeletronDeath3: geeettttttt dunked on!!!
+			// SkeletronDeath4: seems like you've had a bad time ;)
 			QueenSlimePetItem:
 				'''
 				<class>
@@ -1283,12 +1294,6 @@ Mods: {
 					бесконечно создавать питомца Светильник Джека.
 					'''
 			}
-		}
-
-		Condition: {
-			GolemCondition: Требуется наличие Ключа Ящщера в инвентаре.
-			EmpressCondition: Требуется наличие Призматической оптики в инвентаре.
-			PumpkingCondition: Требуется наличие головы Тыквокороля в инвентаре.
 		}
 
 		// Projectiles.PetExplosion: Explosion by a Pet

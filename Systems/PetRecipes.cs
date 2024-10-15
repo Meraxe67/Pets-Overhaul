@@ -52,18 +52,18 @@ namespace PetsOverhaul.Systems
 
             Recipe.Create(ItemID.GolemPetItem)
                 .AddIngredient(ItemID.LunarTabletFragment, 10)
-                .AddCondition(new Condition("Mods.PetsOverhaul.Condition.GolemCondition", () => Main.LocalPlayer.HasItemInInventoryOrOpenVoidBag(ModContent.ItemType<LihzahrdWrench>())))
+                .AddCondition(Condition.PlayerCarriesItem(ModContent.ItemType<LihzahrdWrench>()))
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
             Recipe.Create(ItemID.FairyQueenPetItem)
                 .AddIngredient(ItemID.SoulofFlight, 15)
-                .AddCondition(new Condition("Mods.PetsOverhaul.Condition.EmpressCondition", () => Main.LocalPlayer.HasItemInInventoryOrOpenVoidBag(ModContent.ItemType<PrismaticOptic>())))
+                .AddCondition(Condition.PlayerCarriesItem(ModContent.ItemType<PrismaticOptic>()))
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
             Recipe.Create(ItemID.PumpkingPetItem)
                 .AddIngredient(ItemID.Pumpkin, 75)
                 .AddIngredient(ItemID.SpookyWood, 25)
-                .AddCondition(new Condition("Mods.PetsOverhaul.Condition.PumpkingCondition", () => Main.LocalPlayer.HasItemInInventoryOrOpenVoidBag(ModContent.ItemType<PumpkingsHead>())))
+                .AddCondition(Condition.PlayerCarriesItem(ModContent.ItemType<PumpkingsHead>()))
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
         }

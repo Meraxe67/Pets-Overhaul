@@ -431,11 +431,11 @@ Mods: {
 				 * Only works while its Night. Current luck: <moonLuck>
 				- Your current total luck: <playerLuck>
 				'''
-				BlackCatDeath1: <name> walked under a ladder.
-				BlackCatDeath2: <name> now knows that: 'The Moon does not make its own light ”moonlight” is actually reflected sunlight.
-				BlackCatDeath3: <name>'s superstitious beliefs turned out to be real.
-				BlackCatDeath4: <name> was unlucky.
-				BlackCatDeath5: <name>'s Black Cat did bring bad luck afterall.
+			BlackCatDeath1: <name> walked under a ladder.
+			BlackCatDeath2: <name> now knows that: 'The Moon does not make its own light ï¿½moonlightï¿½ is actually reflected sunlight.
+			BlackCatDeath3: <name>'s superstitious beliefs turned out to be real.
+			BlackCatDeath4: <name> was unlucky.
+			BlackCatDeath5: <name>'s Black Cat did bring bad luck afterall.
 			BlueEgg:
 				'''
 				<class>
@@ -775,8 +775,8 @@ Mods: {
 				 * [c/f8baba:Your defense and damage reduction is set to 0 for the whole time.]
 				 * Enrage lasts <enrageLength> seconds and has a <enrageCd> second cooldown.
 				'''
-				EocEnrage: ENRAGED!
-				EocCalm: Calmed Down.
+			EocEnrage: ENRAGED!
+			EocCalm: Calmed Down.
 			BrainOfCthulhuPetItem:
 				'''
 				<class>
@@ -838,10 +838,10 @@ Mods: {
 				 * They receive stored damage over 4 seconds.
 				- If the enemy can die to your hit without the DOT, they instantly get executed.
 				'''
-				SkeletronDeath1: <name> could not contain Skeletron's curse.
-				SkeletronDeath2: <name> went through a painful, slow death.
-				SkeletronDeath3: geeettttttt dunked on!!!
-				SkeletronDeath4: seems like you've had a bad time ;)
+			SkeletronDeath1: <name> could not contain Skeletron's curse.
+			SkeletronDeath2: <name> went through a painful, slow death.
+			SkeletronDeath3: geeettttttt dunked on!!!
+			SkeletronDeath4: seems like you've had a bad time ;)
 			QueenSlimePetItem:
 				'''
 				<class>
@@ -1292,12 +1292,6 @@ Mods: {
 					crafting of Jack O'Lantern Pet infinitely.
 					'''
 			}
-		}
-
-		Condition: {
-			GolemCondition: Requires a Lihzahrd Wrench to be in your inventory.
-			EmpressCondition: Requires a Prismatic Optic to be in your inventory.
-			PumpkingCondition: Requires the Pumpking's Head to be in your inventory.
 		}
 
 		Projectiles.PetExplosion: Explosion by a Pet

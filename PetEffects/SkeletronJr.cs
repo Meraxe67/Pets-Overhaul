@@ -60,7 +60,7 @@ namespace PetsOverhaul.PetEffects
                             reason = reason.Replace("<name>", Player.name);
                             break;
                     }
-                    Player.KillMe(PlayerDeathReason.ByCustomReason(reason, 1, 0));
+                    Player.KillMe(PlayerDeathReason.ByCustomReason(reason), 1, 0);
                 }
 
                 for (int i = 0; i < skeletronTakenDamage.Count; i++)

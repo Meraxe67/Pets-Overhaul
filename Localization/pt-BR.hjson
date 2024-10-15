@@ -383,6 +383,11 @@ Mods: {
 				dependendo na fase da lua durante a noite,
 				Mais alto durante Lua Nova, Mais baixo durante a Lua Cheia
 				'''
+			// BlackCatDeath1: <name> walked under a ladder.
+			// BlackCatDeath2: <name> now knows that: 'The Moon does not make its own light �moonlight� is actually reflected sunlight.
+			// BlackCatDeath3: <name>'s superstitious beliefs turned out to be real.
+			// BlackCatDeath4: <name> was unlucky.
+			// BlackCatDeath5: <name>'s Black Cat did bring bad luck afterall.
 			BlueEgg:
 				'''
 				[c/CDFF00:Pet de Coleta]
@@ -663,6 +668,8 @@ Mods: {
 				isso dura <enrageLength> segundos, não consegue ir àcima de 50% de vida enquanto com raiva
 				o tempo de <enrageCd> minutos de resfriamento começam assim que estiver com raiva
 				'''
+			// EocEnrage: ENRAGED!
+			// EocCalm: Calmed Down.
 			BrainOfCthulhuPetItem:
 				'''
 				[c/0ea80e:Pet Defensivo]
@@ -711,6 +718,10 @@ Mods: {
 				<dealtMult>% do dano por 4 segundos
 				Inimigos que podem morrer por seu ataque são executados.
 				'''
+			// SkeletronDeath1: <name> could not contain Skeletron's curse.
+			// SkeletronDeath2: <name> went through a painful, slow death.
+			// SkeletronDeath3: geeettttttt dunked on!!!
+			// SkeletronDeath4: seems like you've had a bad time ;)
 			QueenSlimePetItem:
 				'''
 				[c/FA377D:Pet Ofensivo e Suporte]
@@ -1094,12 +1105,6 @@ Mods: {
 					crafting of Jack O'Lantern Pet infinitely.
 					''' */
 			}
-		}
-
-		Condition: {
-			// GolemCondition: Requires a Lihzahrd Wrench to be in your inventory.
-			// EmpressCondition: Requires a Prismatic Optic to be in your inventory.
-			// PumpkingCondition: Requires the Pumpking's Head to be in your inventory.
 		}
 
 		// Projectiles.PetExplosion: Explosion by a Pet

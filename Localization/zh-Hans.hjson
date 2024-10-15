@@ -410,6 +410,11 @@ Mods: {
 				运气提高<flatLuck>点并随着月相浮动,最低-<minimumMoon>,最高+<maximumMoon>.
 				浮动数值取决于今天的月相,最高的是新月,最低的是满月.
 				'''
+			// BlackCatDeath1: <name> walked under a ladder.
+			// BlackCatDeath2: <name> now knows that: 'The Moon does not make its own light �moonlight� is actually reflected sunlight.
+			// BlackCatDeath3: <name>'s superstitious beliefs turned out to be real.
+			// BlackCatDeath4: <name> was unlucky.
+			// BlackCatDeath5: <name>'s Black Cat did bring bad luck afterall.
 			BlueEgg:
 				'''
 				[c/CDFF00:采集型宠物]
@@ -691,6 +696,8 @@ Mods: {
 				愤怒状态持续<enrageLength>秒,此时生命值无法超过生命上限的50%.
 				一进入愤怒状态,<enrageCd>分钟的冷却时间就开始计时.
 				'''
+			// EocEnrage: ENRAGED!
+			// EocCalm: Calmed Down.
 			BrainOfCthulhuPetItem:
 				'''
 				[c/0ea80e:防御型宠物]
@@ -745,6 +752,10 @@ Mods: {
 				敌人攻击你能造成<dealtMult>倍伤害,伤害分散在4秒缓慢生效.
 				如果你的持续伤害能够杀死敌人,其立即被处决.
 				'''
+			// SkeletronDeath1: <name> could not contain Skeletron's curse.
+			// SkeletronDeath2: <name> went through a painful, slow death.
+			// SkeletronDeath3: geeettttttt dunked on!!!
+			// SkeletronDeath4: seems like you've had a bad time ;)
 			QueenSlimePetItem:
 				'''
 				[c/FA377D:辅助攻击型宠物]
@@ -1173,12 +1184,6 @@ Mods: {
 					crafting of Jack O'Lantern Pet infinitely.
 					''' */
 			}
-		}
-
-		Condition: {
-			// GolemCondition: Requires a Lihzahrd Wrench to be in your inventory.
-			// EmpressCondition: Requires a Prismatic Optic to be in your inventory.
-			// PumpkingCondition: Requires the Pumpking's Head to be in your inventory.
 		}
 
 		// Projectiles.PetExplosion: Explosion by a Pet
