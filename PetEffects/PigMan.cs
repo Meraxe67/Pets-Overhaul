@@ -16,9 +16,9 @@ namespace PetsOverhaul.PetEffects
         public int potionChance = 10;
         public int shieldCooldown = 420;
         public int tier1Shield = 10;
-        public int tier2Shield = 15;
-        public int tier3Shield = 20;
-        public int shieldTime = 1800;
+        public int tier2Shield = 20;
+        public int tier3Shield = 30;
+        public int shieldTime = 1650;
 
         public override void PreUpdate()
         {
@@ -41,19 +41,20 @@ namespace PetsOverhaul.PetEffects
                 {
                     if (Pet.timer <= 0 && Pet.PetInUseWithSwapCd(ItemID.PigPetItem))
                     {
+                        int extraShieldTime = item.buffTime / 60;
                         if (item.buffType == BuffID.WellFed)
                         {
-                            Pet.petShield.Add((pig.tier1Shield, pig.shieldTime));
+                            Pet.petShield.Add((pig.tier1Shield, pig.shieldTime + extraShieldTime));
                         }
 
                         if (item.buffType == BuffID.WellFed2)
                         {
-                            Pet.petShield.Add((pig.tier2Shield, pig.shieldTime));
+                            Pet.petShield.Add((pig.tier2Shield, pig.shieldTime + extraShieldTime));
                         }
 
                         if (item.buffType == BuffID.WellFed3)
                         {
-                            Pet.petShield.Add((pig.tier3Shield, pig.shieldTime));
+                            Pet.petShield.Add((pig.tier3Shield, pig.shieldTime + extraShieldTime));
                         }
 
                         Pet.timer = Pet.timerMax;
