@@ -87,28 +87,29 @@ namespace PetsOverhaul.PetEffects
                 if (moonlightRoll < 0)
                 {
                     moonlightRoll *= -1;
-                    PlayerDeathReason reason = new();
+                    string reason;
                     switch (Main.rand.Next(5))
                     {
                         case 0:
-                            reason = PlayerDeathReason.ByCustomReason(Player.name + " walked under a ladder.");
+                            reason = Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BlackCatDeath1");
                             break;
                         case 1:
-                            reason = PlayerDeathReason.ByCustomReason(Player.name + " now knows that: 'The Moon does not make its own light ”moonlight” is actually reflected sunlight.'");
+                            reason = Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BlackCatDeath2");
                             break;
                         case 2:
-                            reason = PlayerDeathReason.ByCustomReason(Player.name + "'s superstitious beliefs turned out to be real.");
+                            reason = Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BlackCatDeath3");
                             break;
                         case 3:
-                            reason = PlayerDeathReason.ByCustomReason(Player.name + " was unlucky.");
+                            reason = Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BlackCatDeath4");
                             break;
                         case 4:
-                            reason = PlayerDeathReason.ByCustomReason(Player.name + "'s Black Cat did bring bad luck afterall.");
+                            reason = Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BlackCatDeath5");
                             break;
                         default:
+                            reason = Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BlackCatDeath1");
                             break;
                     }
-                    Player.Hurt(reason, moonlightRoll, 0, dodgeable: false, knockback: 0, scalingArmorPenetration: 1f);
+                    Player.Hurt(PlayerDeathReason.ByCustomReason(reason.Replace("<name>",Player.name)), moonlightRoll, 0, dodgeable: false, knockback: 0, scalingArmorPenetration: 1f);
                 }
                 else
                 {

@@ -39,21 +39,28 @@ namespace PetsOverhaul.PetEffects
                 CombatText.NewText(Player.getRect(), CombatText.DamagedHostile, totalDmg);
                 if (Player.statLife <= 0)
                 {
-                    if (Main.rand.NextBool(20))
+                    string reason;
+                    switch (Main.rand.Next(20))
                     {
-                        if (Main.rand.NextBool(2))
-                        {
-                            Player.KillMe(PlayerDeathReason.ByCustomReason("geeettttttt dunked on!!!"), 1, 0);
-                        }
-                        else
-                        {
-                            Player.KillMe(PlayerDeathReason.ByCustomReason("seems like you've had a bad time"), 1, 0);
-                        }
+                        case 0:
+                            reason = Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.SkeletronDeath3");
+                            break;
+                        case 1:
+                            reason = Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.SkeletronDeath4");
+                            break;
+                        default:
+                            if (Main.rand.NextBool())
+                            {
+                                reason = Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.SkeletronDeath1");
+                            }
+                            else
+                            {
+                                reason = Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.SkeletronDeath2");
+                            }
+                            reason = reason.Replace("<name>", Player.name);
+                            break;
                     }
-                    else
-                    {
-                        Player.KillMe(PlayerDeathReason.ByCustomReason(Player.name + " could not contain Skeletron's curse."), 1, 0);
-                    }
+                    Player.KillMe(PlayerDeathReason.ByCustomReason(reason, 1, 0));
                 }
 
                 for (int i = 0; i < skeletronTakenDamage.Count; i++)

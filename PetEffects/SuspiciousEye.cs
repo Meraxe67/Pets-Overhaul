@@ -83,7 +83,7 @@ namespace PetsOverhaul.PetEffects
                     Gore.NewGore(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetMisc), Player.Center, Main.rand.NextVector2Circular(2f, 2f), 9, 0.5f);
                     PopupText.NewText(new AdvancedPopupRequest() with
                     {
-                        Text = "ENRAGED!",
+                        Text = Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EocEnrage"),
                         DurationInFrames = 150,
                         Velocity = new Vector2(0, -10),
                         Color = Color.DarkRed
@@ -115,7 +115,7 @@ namespace PetsOverhaul.PetEffects
                 {
                     PopupText.NewText(new AdvancedPopupRequest() with
                     {
-                        Text = "Calmed Down.",
+                        Text = Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EocCalm"),
                         DurationInFrames = 150,
                         Velocity = new Vector2(0, -10),
                         Color = Color.OrangeRed
