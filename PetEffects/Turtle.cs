@@ -107,7 +107,7 @@ namespace PetsOverhaul.PetEffects
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().EnableTooltipToggle && !Keybinds.PetTooltipHide.Current)
+            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
             {
                 return;
             }
@@ -115,7 +115,7 @@ namespace PetsOverhaul.PetEffects
             Turtle turtle = Main.LocalPlayer.GetModPlayer<Turtle>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.Seaweed")
                 .Replace("<class>", PetTextsColors.ClassText(turtle.PetClassPrimary, turtle.PetClassSecondary))
-                .Replace("<keybind>", PetTextsColors.KeybindText(Keybinds.UsePetAbility))
+                .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility))
                 .Replace("<hitCount>", turtle.shellHardenStacks.ToString())
                 .Replace("<shellDuration>", Math.Round(turtle.shellHardenDuration / 60f, 2).ToString())
                 .Replace("<reducedDmg>", Math.Round(turtle.dmgReduceShellHarden * 100, 2).ToString())

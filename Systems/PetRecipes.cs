@@ -4,7 +4,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 namespace PetsOverhaul.Systems
 {
-    public class Recipes : ModSystem
+    public class PetRecipes : ModSystem
     {
         public static void MasterPetCraft(int result, int itemToPairWithMasteryShard)
         {

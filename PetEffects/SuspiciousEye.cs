@@ -72,7 +72,7 @@ namespace PetsOverhaul.PetEffects
                 {
                     eocTimer = phaseTime;
                     Pet.timer = Pet.timerMax;
-                    if (ModContent.GetInstance<Personalization>().AbilitySoundEnabled)
+                    if (ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled)
                     {
                         SoundEngine.PlaySound(SoundID.ForceRoar with { PitchVariance = 0.3f }, Player.Center);
                     }   
@@ -166,7 +166,7 @@ namespace PetsOverhaul.PetEffects
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().EnableTooltipToggle && !Keybinds.PetTooltipHide.Current)
+            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
             {
                 return;
             }
@@ -174,7 +174,7 @@ namespace PetsOverhaul.PetEffects
             SuspiciousEye suspiciousEye = Main.LocalPlayer.GetModPlayer<SuspiciousEye>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EyeOfCthulhuPetItem")
                 .Replace("<class>", PetTextsColors.ClassText(suspiciousEye.PetClassPrimary, suspiciousEye.PetClassSecondary))
-                .Replace("<keybind>", PetTextsColors.KeybindText(Keybinds.UsePetAbility))
+                .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility))
                 .Replace("<forcedEnrageMult>", Math.Round(suspiciousEye.forcedEnrageShield * 100, 2).ToString())
                 .Replace("<shieldDuration>", Math.Round(suspiciousEye.shieldTime / 60f, 2).ToString())
                 .Replace("<frameReduction>", suspiciousEye.dashFrameReduce.ToString())

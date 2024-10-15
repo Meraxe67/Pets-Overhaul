@@ -8,7 +8,7 @@ using Terraria.ModLoader.Config;
 
 namespace PetsOverhaul.Config
 {
-    public class Personalization : ModConfig
+    public class PetPersonalization : ModConfig
     { //Remember most are 'disablers', may be a bit confusing.
         public override LocalizedText DisplayName => Language.GetText("Mods.PetsOverhaul.Config.Personalization");
         public override ConfigScope Mode => ConfigScope.ClientSide;

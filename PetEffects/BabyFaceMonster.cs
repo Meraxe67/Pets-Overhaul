@@ -41,14 +41,14 @@ namespace PetsOverhaul.PetEffects
                 stage2regen = (int)Math.Round(stage2regen * Pet.petHealMultiplier);
                 if (timer == 0)
                 {
-                    if (ModContent.GetInstance<Personalization>().AbilitySoundEnabled)
+                    if (ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled)
                     {
                         SoundEngine.PlaySound(SoundID.Zombie21 with { Pitch = -0.7f, PitchVariance = 0.3f, Volume = 0.75f }, Player.Center);
                     }
                 }
                 if (timer == (int)(stage1time * (1 / (1 + Pet.abilityHaste))))
                 {
-                    if (ModContent.GetInstance<Personalization>().AbilitySoundEnabled)
+                    if (ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled)
                     {
                         SoundEngine.PlaySound(new SoundStyle(SoundID.DD2_DrakinShot.SoundPath + "0") with { Pitch = -0.7f, PitchVariance = 0.3f, Volume = 0.75f }, Player.Center);
                     }
@@ -91,7 +91,7 @@ namespace PetsOverhaul.PetEffects
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().EnableTooltipToggle && !Keybinds.PetTooltipHide.Current)
+            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
             {
                 return;
             }

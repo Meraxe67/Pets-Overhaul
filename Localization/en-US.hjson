@@ -621,7 +621,7 @@ Mods: {
 				 * Reduced to <potionChance>% for potions.
 				- Eating foods gives you a shield that scales with the stage of Well Fed.
 				 * <shield1>/<shield2>/<shield3> shield respectively for every Well Fed stage.
-				 * Shield persists for <shieldTime> seconds.
+				 * Shield persists for <shieldTime> seconds + 1 second per consumed food's Well Fed duration.
 				 * This has a <cooldown> seconds cooldown.
 				'''
 			MudBud:

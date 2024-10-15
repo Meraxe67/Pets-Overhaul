@@ -14,7 +14,7 @@ namespace PetsOverhaul.UI
     {
         Color color => Main.MouseTextColorReal;
         int CurrentShieldVal => Main.LocalPlayer.GetModPlayer<GlobalPet>().currentShield;
-        ShieldPosition ShieldSetting => ModContent.GetInstance<Personalization>().ShieldLocation;
+        ShieldPosition ShieldSetting => ModContent.GetInstance<PetPersonalization>().ShieldLocation;
         Vector2 ShieldLoc;
         Vector2 ValueLoc;
         public override void Draw(SpriteBatch spriteBatch)

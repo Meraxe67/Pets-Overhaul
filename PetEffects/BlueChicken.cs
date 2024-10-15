@@ -41,7 +41,7 @@ namespace PetsOverhaul.PetEffects
                         Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.HarvestingItem), ModContent.ItemType<Egg>());
                     }
 
-                    if (ModContent.GetInstance<Personalization>().AbilitySoundEnabled)
+                    if (ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled)
                     {
                         SoundEngine.PlaySound(SoundID.NPCDeath3 with { PitchVariance = 0.1f, Pitch = 0.9f }, Player.Center);
                     }
@@ -192,7 +192,7 @@ namespace PetsOverhaul.PetEffects
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().EnableTooltipToggle && !Keybinds.PetTooltipHide.Current)
+            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
             {
                 return;
             }

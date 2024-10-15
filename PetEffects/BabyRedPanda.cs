@@ -103,7 +103,7 @@ namespace PetsOverhaul.PetEffects
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().EnableTooltipToggle && !Keybinds.PetTooltipHide.Current)
+            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
             {
                 return;
             }
@@ -111,7 +111,7 @@ namespace PetsOverhaul.PetEffects
             BabyRedPanda babyRedPanda = Main.LocalPlayer.GetModPlayer<BabyRedPanda>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BambooLeaf")
                 .Replace("<class>", PetTextsColors.ClassText(babyRedPanda.PetClassPrimary, babyRedPanda.PetClassSecondary))
-                .Replace("<keybind>", PetTextsColors.KeybindText(Keybinds.UsePetAbility))
+                .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility))
                 .Replace("<alertAs>", Math.Round(babyRedPanda.alertAs * 100, 2).ToString())
                 .Replace("<alertMs>", Math.Round(babyRedPanda.alertMs * 100, 2).ToString())
                 .Replace("<alertAggro>", babyRedPanda.alertAggro.ToString())

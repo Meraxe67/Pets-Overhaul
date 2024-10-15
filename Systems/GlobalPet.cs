@@ -238,7 +238,7 @@ namespace PetsOverhaul.Systems
         }
         public bool AbilityPressCheck()
         {
-            return Player.dead == false && timer <= 0 && Keybinds.UsePetAbility.JustPressed;
+            return Player.dead == false && timer <= 0 && PetKeybinds.UsePetAbility.JustPressed;
         }
         /// <summary>
         /// Randomizes the given number. numToBeRandomized / randomizeTo returns how many times its 100% chance and rolls if the leftover, non-100% amount is true. Randomizer(250) returns +2 and +1 more with 50% chance.
@@ -420,7 +420,7 @@ namespace PetsOverhaul.Systems
         public void ShieldFullBlockEffect(int damage)
         {
             CombatText.NewText(Player.Hitbox, Color.Cyan, -damage, true);
-            if (ModContent.GetInstance<Personalization>().AbilitySoundEnabled)
+            if (ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled)
             {
                 SoundEngine.PlaySound(SoundID.NPCDeath43 with { PitchVariance = 0.4f, Pitch = -0.8f, Volume = 0.2f }, Player.Center);
             }
@@ -468,23 +468,23 @@ namespace PetsOverhaul.Systems
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (ModContent.GetInstance<Personalization>().DifficultAmount != 0)
+            if (ModContent.GetInstance<PetPersonalization>().DifficultAmount != 0)
             {
-                modifiers.FinalDamage *= 1f - ModContent.GetInstance<Personalization>().DifficultAmount * 0.01f;
+                modifiers.FinalDamage *= 1f - ModContent.GetInstance<PetPersonalization>().DifficultAmount * 0.01f;
             }
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
-            if (ModContent.GetInstance<Personalization>().DifficultAmount != 0)
+            if (ModContent.GetInstance<PetPersonalization>().DifficultAmount != 0)
             {
-                modifiers.FinalDamage *= 1f + ModContent.GetInstance<Personalization>().DifficultAmount * 0.01f;
+                modifiers.FinalDamage *= 1f + ModContent.GetInstance<PetPersonalization>().DifficultAmount * 0.01f;
             }
             modifiers.ModifyHurtInfo += (ref Player.HurtInfo info) =>
             {
                 if (info.Damage > currentShield && currentShield > 0)
                 {
                     CombatText.NewText(Player.Hitbox, Color.Cyan, -currentShield, true);
-                    if (ModContent.GetInstance<Personalization>().AbilitySoundEnabled)
+                    if (ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled)
                     {
                         SoundEngine.PlaySound(SoundID.NPCDeath43 with { PitchVariance = 0.4f, Pitch = -0.8f, Volume = 0.2f }, Player.Center);
                     }
@@ -493,7 +493,7 @@ namespace PetsOverhaul.Systems
                     shieldToBeReduced += currentShield;
                 }
             };
-            if (ModContent.GetInstance<Personalization>().HurtSoundEnabled && Player.GetModPlayer<PetSounds>().PetItemIdToHurtSound.ContainsKey(Player.miscEquips[0].type))
+            if (ModContent.GetInstance<PetPersonalization>().HurtSoundEnabled && Player.GetModPlayer<PetSounds>().PetItemIdToHurtSound.ContainsKey(Player.miscEquips[0].type))
             {
                 modifiers.DisableSound();
             }
@@ -501,7 +501,7 @@ namespace PetsOverhaul.Systems
         }
         public override void OnHurt(Player.HurtInfo info)
         {
-            if (ModContent.GetInstance<Personalization>().HurtSoundEnabled)
+            if (ModContent.GetInstance<PetPersonalization>().HurtSoundEnabled)
             {
                 Player.GetModPlayer<PetSounds>().PlayHurtSoundFromItemId(Player.miscEquips[0].type);
             }
@@ -560,7 +560,7 @@ namespace PetsOverhaul.Systems
 
             if (timer == 0)
             {
-                if (ModContent.GetInstance<Personalization>().AbilitySoundEnabled && (ModContent.GetInstance<Personalization>().LowCooldownSoundEnabled == false && timerMax > ModContent.GetInstance<Personalization>().LowCooldownTreshold || ModContent.GetInstance<Personalization>().LowCooldownSoundEnabled))
+                if (ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled && (ModContent.GetInstance<PetPersonalization>().LowCooldownSoundEnabled == false && timerMax > ModContent.GetInstance<PetPersonalization>().LowCooldownTreshold || ModContent.GetInstance<PetPersonalization>().LowCooldownSoundEnabled))
                 {
                     SoundEngine.PlaySound(SoundID.MaxMana with { PitchVariance = 0.3f, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew }, Player.Center);
                 }
@@ -610,11 +610,11 @@ namespace PetsOverhaul.Systems
         public override void OnEnterWorld()
         {
             previousPetItem = Player.miscEquips[0].type;
-            if (ModContent.GetInstance<Personalization>().EnableNotice)
+            if (ModContent.GetInstance<PetPersonalization>().EnableNotice)
             {
                 Main.NewText(Language.GetTextValue("Mods.PetsOverhaul.Notice"));
             }
-            if (ModContent.GetInstance<Personalization>().EnableModNotice)
+            if (ModContent.GetInstance<PetPersonalization>().EnableModNotice)
             {
                 if (ModLoader.TryGetMod("PetsOverhaulCalamityAddon", out _) == false && ModLoader.TryGetMod("CalamityMod", out _) == true)
                     Main.NewText(Language.GetTextValue("Mods.PetsOverhaul.CalamityDetected"));
@@ -622,7 +622,7 @@ namespace PetsOverhaul.Systems
         }
         public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
         {
-            if (ModContent.GetInstance<Personalization>().DeathSoundEnabled)
+            if (ModContent.GetInstance<PetPersonalization>().DeathSoundEnabled)
             {
                 playSound = Player.GetModPlayer<PetSounds>().PlayKillSoundFromItemId(Player.miscEquips[0].type) == ReLogic.Utilities.SlotId.Invalid;
             }
@@ -640,14 +640,14 @@ namespace PetsOverhaul.Systems
             if (previousPetItem != Player.miscEquips[0].type)
             {
                 timerMax = 0;
-                if (ModContent.GetInstance<Personalization>().SwapCooldown)
+                if (ModContent.GetInstance<PetPersonalization>().SwapCooldown)
                 {
                     Player.AddBuff(ModContent.BuffType<ObliviousPet>(), petSwapCooldown);
                 }
 
                 previousPetItem = Player.miscEquips[0].type;
             }
-            if (ModContent.GetInstance<Personalization>().PassiveSoundEnabled && Main.rand.NextBool(3600))
+            if (ModContent.GetInstance<PetPersonalization>().PassiveSoundEnabled && Main.rand.NextBool(3600))
             {
                 Player.GetModPlayer<PetSounds>().PlayAmbientSoundFromItemId(Player.miscEquips[0].type);
             }

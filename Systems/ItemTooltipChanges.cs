@@ -19,10 +19,10 @@ namespace PetsOverhaul.Systems
             {
                 tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.JojaCola")));
             }
-            else if (ModContent.GetInstance<Personalization>().EnableTooltipToggle && Keybinds.PetTooltipHide != null && !Keybinds.PetTooltipHide.Current)
+            else if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && PetKeybinds.PetTooltipHide != null && !PetKeybinds.PetTooltipHide.Current)
             {
                 tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.Config.TooltipToggleInGame")
-                    .Replace("<keybind>", PetTextsColors.KeybindText(Keybinds.PetTooltipHide))));
+                    .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.PetTooltipHide))));
             }
         }
     }

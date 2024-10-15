@@ -117,7 +117,7 @@ namespace PetsOverhaul.PetEffects
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().EnableTooltipToggle && !Keybinds.PetTooltipHide.Current)
+            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
             {
                 return;
             }
@@ -125,7 +125,7 @@ namespace PetsOverhaul.PetEffects
             Lizard lizard = Main.LocalPlayer.GetModPlayer<Lizard>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.LizardEgg")
                     .Replace("<class>", PetTextsColors.ClassText(lizard.PetClassPrimary, lizard.PetClassSecondary))
-                    .Replace("<keybind>", PetTextsColors.KeybindText(Keybinds.UsePetAbility))
+                    .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility))
                     .Replace("<tailDmgTaken>", Math.Round(lizard.percentHpDmg * 100, 2).ToString())
                     .Replace("<tailAcc>", Math.Round(lizard.tailAcc * 100, 2).ToString())
                     .Replace("<tailSpd>", Math.Round(lizard.tailSpd * 100, 2).ToString())

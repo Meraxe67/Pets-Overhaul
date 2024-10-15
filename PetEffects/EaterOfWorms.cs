@@ -61,7 +61,7 @@ namespace PetsOverhaul.PetEffects
                             if (Player.HasEnoughPickPowerToHurtTile(X, Y))
                             {
                                 Player.PickTile(X, Y, 5000);
-                                if (ModContent.GetInstance<Personalization>().AbilitySoundEnabled)
+                                if (ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled)
                                 {
                                     SoundEngine.PlaySound(SoundID.WormDig with { PitchVariance = 0.4f }, new Vector2(X,Y));
                                 }
@@ -84,7 +84,7 @@ namespace PetsOverhaul.PetEffects
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().EnableTooltipToggle && !Keybinds.PetTooltipHide.Current)
+            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
             {
                 return;
             }

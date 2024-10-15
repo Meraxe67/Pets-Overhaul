@@ -77,7 +77,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (Keybinds.PetTooltipSwap.JustPressed)
+            if (PetKeybinds.PetTooltipSwap.JustPressed)
             {
                 currentTooltip++;
                 if (currentTooltip > 3)
@@ -112,7 +112,7 @@ namespace PetsOverhaul.PetEffects
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().EnableTooltipToggle && !Keybinds.PetTooltipHide.Current)
+            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
             {
                 return;
             }
@@ -153,7 +153,7 @@ namespace PetsOverhaul.PetEffects
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.MoonLordPetItem")
                 .Replace("<class>", PetTextsColors.ClassText(moonling.PetClassPrimary, moonling.PetClassSecondary))
                 .Replace("<currentClass>", currentClass)
-                .Replace("<keybind>", PetTextsColors.KeybindText(Keybinds.PetTooltipSwap))
+                .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.PetTooltipSwap))
                 .Replace("<tooltip>", tooltip)
                         ));
         }

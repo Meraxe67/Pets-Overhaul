@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace PetsOverhaul.Systems
 {
-    public class Keybinds : ModSystem
+    public class PetKeybinds : ModSystem
     {
         public static ModKeybind UsePetAbility { get; private set; }
         public static ModKeybind PetTooltipSwap { get; private set; }

@@ -509,7 +509,7 @@ namespace PetsOverhaul.PetEffects
                 Velocity = new Vector2(Main.rand.NextFloat(-3, 3), Main.rand.NextFloat(-15, -10))
             };
 
-            bool soundOn = ModContent.GetInstance<Personalization>().AbilitySoundEnabled;
+            bool soundOn = ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled;
             if (junimoHarvestingLevel < maxLvls && junimoHarvestingExp >= junimoHarvestingLevelsToXp[junimoHarvestingLevel])
             {
                 junimoHarvestingLevel++;
@@ -644,7 +644,7 @@ namespace PetsOverhaul.PetEffects
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ModContent.GetInstance<Personalization>().EnableTooltipToggle && !Keybinds.PetTooltipHide.Current)
+            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
             {
                 return;
             }
