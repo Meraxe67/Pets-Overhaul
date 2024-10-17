@@ -13,6 +13,7 @@ namespace PetsOverhaul.Projectiles
         public bool petProj = false;
         public bool isFromSentry = false;
         public int sourceNpcId = 0;
+        public Item itemProjIsFrom = null;
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
             isPlanteraProjectile = false;
@@ -37,6 +38,14 @@ namespace PetsOverhaul.Projectiles
             if (source is EntitySource_Parent parent3 && parent3.Entity is NPC npc)
             {
                 sourceNpcId = npc.whoAmI;
+            }
+            if (source is EntitySource_ItemUse item2)
+            {
+                itemProjIsFrom = item2.Item;
+            }
+            else if (source is EntitySource_Parent parent4 && parent4.Entity is Projectile proj3 && proj3.TryGetGlobalProjectile(out ProjectileSourceChecks sourceChecks) && sourceChecks.itemProjIsFrom is not null)
+            {
+                itemProjIsFrom = sourceChecks.itemProjIsFrom;
             }
         }
     }
