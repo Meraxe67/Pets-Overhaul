@@ -352,7 +352,7 @@ Mods: {
 				- Grants <fp> fishing power. This increases depending on the current biome:
 				 * While in the Ocean biome, increases to <oceanFp>.
 				 * While in the Snow biome, increases to <snowFp>.
-				- Increases all caught Frost Minnows [i:2306] and Atlantic Cods [i:2299] by <catchChance>%.
+				- Increases all vanilla Ice biome spesific fishing catches by <catchChance>%.
 				- Grants Flipper [i:187] effect while in snow and ocean biome.
 				- Multiplies Chilled debuff's duration by <chilledMult>x.
 				'''
