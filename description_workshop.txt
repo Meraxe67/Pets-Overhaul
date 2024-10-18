@@ -22,7 +22,8 @@ To give direct feedback, report bugs, to give suggestions or to learn more about
 https://discord.gg/KubSpqvDGE
 
 All Icons and Artwork done by: [url=https://steamcommunity.com/id/IsThatFurqi]Furqi[/url]
-Russian Translation done by: [url=https://steamcommunity.com/id/teokai/[/url]]
+Russian Translation done by: [url=https://steamcommunity.com/id/teokai/]Teokai[/url]]
+Brazillian Portuguese Translation by: [url=https://steamcommunity.com/id/Erstarisk/]Erstarisk[/url]]
 Chinese Translation done by: [url=https://steamcommunity.com/id/Celestepic/]Celestepic[/url]
-Brazilian Portuguese Translation done by: [url=https://steamcommunity.com/profiles/76561198818085801]Starite_Fusion[/url]
+Previous Brazilian Portuguese Translation done by: [url=https://steamcommunity.com/profiles/76561198818085801]Starite_Fusion[/url]
 and thanks to [url=https://steamcommunity.com/id/WaffleDevs]WaffleDevs[/url], [url=https://steamcommunity.com/id/andro951]Andro951[/url] and the tModLoader community for helping/contributing to the code!

@@ -21,6 +21,7 @@ https://discord.gg/KubSpqvDGE
 
 Icon and all artwork made by: Furqi
 Russian Translation by: Teokai
+Brazillian Portuguese Translation by: Erstarisk
 Chinese Translation by: Celestepic (currently heavily outdated)
-Brazillian Portuguese Translation by: Starite_Fusion (currently heavily outdated)
+Previous Brazillian Portuguese Translation by: Starite_Fusion
 and thanks to WaffleDevs, Andro951 and tModLoader community for helping/contributing to the code!
