@@ -13,16 +13,16 @@ Mods: {
 			'''
 			[c/90C2AA:Mudanças atuais no Pets Overhaul 3.0: Lançamento de Addon para Calamity, Melhorias no sistema principal, muitos consertos de bugs, várias mudanças no balanceamento]
 			[c/90C2AA:Algumas das suas opções de configuração podem ter sido resetadas, verifique-as para deixar tudo funcionando do seu jeito!]
-			[c/90C2AA:Adicionado tradução Russa completa! Por: Teokai]
+			[c/90C2AA:Adicionado tradução Russa completa! Por: Teokai, Adicionado tradução Português Brasileiro completo! Por: Erstarisk]
 			[c/b4bfc5:Entre no nosso discord para feedback e reportar problemas! discord.gg/KubSpqvDGE]
 			[c/b4bfc5:Use] [c/ff8234:/pet] [c/b4bfc5:para ver mais comandos do Pets Overhaul, lhe dando mais informações!]
-			''' 
+			'''
 		CalamityDetected:
 			'''
 			Parece que você está usando Pets Overhaul junto com o mod Calamity sem o addon!
 			Você pode encontrar o addon pelo nome 'Pets Overhaul: Calamity Addon'
 			Adicionando ainda mais pets únicos e compatibilidade com Calamity para efeitos novos nos pets!
-			''' 
+			'''
 
 		Classes: {
 			None: Nenhum
@@ -51,7 +51,7 @@ Mods: {
 				/pet {mining|fishing|harvesting}scoreboard, /pet {mining|fishing|harvesting}leaderboard -> 
 				Mostra uma quantidade ilimitada de jogadores online com as maiores contagens de Exp na habilidade escolhida entre as 3 habilidades de Junimo.
 				/pet faq, /pet question -> Mostra perguntas frequentemente perguntadas sobre o Pets Overhaul.
-				''' 
+				'''
 			FAQ:
 				'''
 				Q: Haverá conteúdo entre mods? & O Pets Overhaul é compatível com o mod X?
@@ -64,14 +64,14 @@ Mods: {
 				A: 99% das vezes, é um mod de auto-pesca fisgando peixes para sua Fortuna em Pesca. (use /pet fortune para saber mais sobre)
 				Q: Por que os efeitos do meu Pet não funcionam? E como os Efeitos de Pet são ativados?
 				A: Tenha certeza que os Efeitos do Pet que você quer, estejam no Pet equipado no slot exclusivo de Pet na categoria de Equipamento, encima do slot de Capacete
-				''' 
+				'''
 			FortuneInfo:
 				'''
 				Todos os estatus de fortuna aumentam a quantidade de itens obtidos na categoria de itens mencionada. (Ex. Minérios = Fortuna de Mineração)
 				Eles funcionam com 100% de eficácia para itens ganhos por Pets da mesma Classe, 50% para itens ganhos por meios que não sejam de pets.
 				Por exemplo: Se você tiver 100 de Fortuna de Colheita, coletando 3 Nascer do Dia manualmente e +2 com a Semente de Abóbora Mágica (Pet Abóbora)
 				Resultará em 1,5 (item ganho por meios que não são de pets, 50% eficaz) + 2 (item ganho através do bônus do Pet, 100% eficaz) a mais de Nascer do Dia.)
-				''' 
+				'''
 			FortuneCurrent:
 				'''
 				[c/90C2AA:Global Fortune] - Enquanto funcionando com 100% de eficácia em items de Pet não-classificados,
@@ -79,77 +79,75 @@ Mods: {
 				[c/96A8B0:Mining Fortune] - Minérios, gemas etc. Sua Fortuna em Mineração atual: <mining>
 				[c/0382E9:Fishing Fortune] - Peixes, caixotes etc. Sua Fortuna em Pescar atual: <fishing> 
 				[c/CDFF00:Harvesting Fortune] - Ervas, plantas, árvores etc. Sua Fortuna em Colheita atual: <harvesting> 
-				''' 
+				'''
 			VanityPet:
 				'''
 				1° Passo: Equipe o pet que você não quer visível, mas quer os seus efeitos ativos no slot de Pet. 
 				2° Passo: Desabilite a visibilidade do Pet atualmente equipado no icone de olho no slot do Pet.
 				3° Passo: 'Use' o Pet que você quer que fique visível pelo seu item no inventário e pronto!
-				''' 
-			 ArgumentInvalid: O argumento enviado foi invalido, aqui está a lista de comandos do Pet Overhaul: (comandos não são sensíveis a maiúsculas e minúsculas)
-			 OneArgument: Apenas um argumento era esperado, tenha certeza que você não está usando espaços no argumento. 
-			Lista de comandos do Pet Overhaul: (comandos não são sensíveis a maiúsculas e minúsculas)
-			 UseInMultiplayer: Por favor, use esse comando no Multiplayer! 
-			Se você quer ver as habilidades do seu Junimo. use /pet junimo, /pet junimoscoreboard ou /pet junimoleaderboard
-			 SinglePlayerJunimo: "[c/<color>:O nível de <class> do seu Junimo: <level> A experiência da <class> do seu Junimo: <exp>]"
-			 LeaderboardList: "[c/<color>:Lista de Jogadores com mais XP de <class> do Junimo:]"
-			 PlayerRankings: Nível de <class> de <player>: <level>, Exp de <class>: <exp>
+				'''
+			ArgumentInvalid: O argumento enviado foi invalido, aqui está a lista de comandos do Pet Overhaul: (comandos não são sensíveis a maiúsculas e minúsculas)
+			OneArgument: Apenas um argumento era esperado, tenha certeza que você não está usando espaços no argumento. Lista de comandos do Pet Overhaul: (comandos não são sensíveis a maiúsculas e minúsculas)
+			UseInMultiplayer: Por favor, use esse comando no Multiplayer! Se você quer ver as habilidades do seu Junimo. use /pet junimo, /pet junimoscoreboard ou /pet junimoleaderboard
+			SinglePlayerJunimo: "[c/<color>:O nível de <class> do seu Junimo: <level> A experiência da <class> do seu Junimo: <exp>]"
+			LeaderboardList: "[c/<color>:Lista de Jogadores com mais XP de <class> do Junimo:]"
+			PlayerRankings: Nível de <class> de <player>: <level>, Exp de <class>: <exp>
 		}
 
 		Config: {
 			Personalization: Personalização
-			 PlayerLeft: No Jogador, Ícone na Esquerda
-			 PlayerRight: No Jogador, Ícone na Direita
-			 HealthBarLeft: Perto da Barra de Vida, Ícone na Esquerda
-			 HealthBarRight: Perto da Barra de Vida, Ícone na Direita
-			 HeaderDisplay: Mostre Configurações Relacionadas
-			 HeaderSound: Configurações de Audio Relacionadas
-			 HeaderGameplay: Configurações de Jogatina
-			 NoticeLabel: Ativar aviso do Pets Overhaul
+			PlayerLeft: No Jogador, Ícone na Esquerda
+			PlayerRight: No Jogador, Ícone na Direita
+			HealthBarLeft: Perto da Barra de Vida, Ícone na Esquerda
+			HealthBarRight: Perto da Barra de Vida, Ícone na Direita
+			HeaderDisplay: Mostre Configurações Relacionadas
+			HeaderSound: Configurações de Audio Relacionadas
+			HeaderGameplay: Configurações de Jogatina
+			NoticeLabel: Ativar aviso do Pets Overhaul
 			NoticeTooltip:
 				'''
 				Habilitar mensagens enviadas pelo Pet Overhaul quando entrar no mundo.
 				Avisos talvez possuem informações sobre as ultimas atualizações
-				''' 
-			 ModNoticeLabel: Ativar aviso para addon de Mods não encontrados
+				'''
+			ModNoticeLabel: Ativar aviso para addon de Mods não encontrados
 			ModNoticeTooltip:
 				'''
 				Habilitar mensagens enviadas ao entrar no mundo quando;
 				Um addon oficial (Conteúdo entre mods) do Pets Overhaul de outro Mod existe, mas não foi ativado.
-				''' 
-			 DisableTooltipToggleLabel: Habilitar dicas de ferramentas de Pet/Item como alternáveis
+				'''
+			DisableTooltipToggleLabel: Habilitar dicas de ferramentas de Pet/Item como alternáveis
 			DisableTooltipToggleTooltip:
 				'''
 				Habilitar um sistema onde as dicas sobre os efeitos em Pets do Pet Overhaul
 				apenas fiquem visíveis quando uma tecla registrada por você seja pressionada.
 				(Você precisa manualmente registrar uma tecla de atalho)
-				''' 
-			 TooltipToggleInGame: Pressione e segure a tecla <keybind> para ver as dicas sobre o Pet
-			 ShieldLocationLabel: Localização do Escudo de Pet
+				'''
+			TooltipToggleInGame: Pressione e segure a tecla <keybind> para ver as dicas sobre o Pet
+			ShieldLocationLabel: Localização do Escudo de Pet
 			ShieldLocationTooltip:
 				'''
 				Muda onde o Escudo de Pet deve ser visível quando um Pet tem efeitos de Escudo.
 				Opções da Barra de Vida funcionam melhor em monitores com resolução Full HD (1920x1080).
 				Mudar esse valor por meios externos pode causar problemas e erros.
-				''' 
-			 DisableAbilityUnusedLabel: Ativar Exibição do Tempo de Recarga da Habilidade se Não For Usada.
+				'''
+			DisableAbilityUnusedLabel: Ativar Exibição do Tempo de Recarga da Habilidade se Não For Usada.
 			DisableAbilityUnusedTooltip:
 				'''
 				Faz a Exibição do Tempo de Recarga da Habilidade aparecer no canto inferior direito da tela
 				se o Pet atual não tiver uma habilidade que usa o Temporizador da Habilidade do Pet.
-				''' 
-			 AbilityDisplayInfoLabel: Ativar Exibição do Tempo de Recarga da Habilidade Base
+				'''
+			AbilityDisplayInfoLabel: Ativar Exibição do Tempo de Recarga da Habilidade Base
 			AbilityDisplayInfoTooltip:
 				'''
 				Faz a Exibição do Tempo de Recarga da Habilidade aparecer no canto inferior direito da tela
 				incluir o Tempo de Recarga Base do temporizador do Pet atual.
-				''' 
-			 AbilityDisplayDisableLabel: Ativar Exibição do Tempo de Recarga da Habilidade
+				'''
+			AbilityDisplayDisableLabel: Ativar Exibição do Tempo de Recarga da Habilidade
 			AbilityDisplayDisableTooltip:
 				'''
 				Habilita a Exibição do Tempo de Recarga da Habilidade. Se essa opção está desativada,
 				a exibição será forçada a não ocorrer, independente de outras opções relacionada a essa.
-				''' 
+				'''
 			HurtSoundLabel: Desabilitar sons de dor personalizados
 			HurtSoundTooltip: Desabilita efeitos sonoros adicionados por pets quando o jogador recebe dano.
 			DeathSoundLabel: Desabilitar sons de morte personalizados
@@ -160,29 +158,29 @@ Mods: {
 			AbilitySoundTooltip: Desabilita efeitos sonoros de pet que tocam ao processar habilidades, recarga do tempo de espera, etc. (não recomendado, estes sons podem te ajudar)
 			LowCooldownSoundLabel: Desabilitar som de temporizador curto
 			LowCooldownSoundTooltip: Desabilita efeito sonoro de recarga de tempo de espera se o tempo de recarga das habilidades de pet forem menores que 1 segundo.
-			 LowCooldownTresholdLabel: Desabilitar Limite do temporizador da habilidade curta
+			LowCooldownTresholdLabel: Desabilitar Limite do temporizador da habilidade curta
 			LowCooldownTresholdTooltip:
 				'''
 				Define o limite para desabilitar os tempos de recarga curtos das habilidades dos pets.
 				reproduzindo sons ao atualizar, em Quadros. (60 quadros = 1 segundo)
 				Alterar isso não tem efeito se "Habilitar som do temporizador de habilidade curta" estiver ativado.
-				''' 
+				'''
 			MoreDifficultLabel: Desabilitar jogador ser mais fraco
 			MoreDifficultTooltip: Desabilita o jogador causar 5% menos dano e receber 5% mais dano, que é implementado para contrariar o mod adicionar um aumento de poder
 			SwapCooldownLabel: Desabilitar tempo de recarga em troca de pet
 			SwapCooldownTooltip: Desabilita o jogador de ganhar o Debuff Pet Desatento ao trocar de pet. Prevenindo qualquer vantagem relacionada à combate de ativar durante esse tempo (Não recomendado)
-			 PhantasmalDragonShootLabel: Habilitar o feitiço de Rajada de Fogo do Dragão Fantasmal vindo do Dragão.
+			PhantasmalDragonShootLabel: Habilitar o feitiço de Rajada de Fogo do Dragão Fantasmal vindo do Dragão.
 			PhantasmalDragonShootTooltip:
 				'''
 				Habilita o 3º feitiço do Dragão Fantasmal, Rajada de Bolas de Fogo, para ser lançado da
 				boca do Dragão (O Pet Dragão que te segue), em vez de do Jogador.
-				''' 
+				'''
 		}
 
 		LightPetTooltips: {
-			 NotRolled: As qualidades são Sorteadas quando o item está no inventário pela primeira vez!
-			 OutOf: de
-			 Quality: Qualidade:
+			NotRolled: As qualidades são Sorteadas quando o item está no inventário pela primeira vez!
+			OutOf: de
+			Quality: Qualidade:
 			CreeperEgg:
 				'''
 				Concede <sum> de Dano de Invocação por qualidade, <melee> de Dano Corpo a Corpo por qualidade
@@ -190,7 +188,7 @@ Mods: {
 				Bonus de Dano de Invocação: <sumLine>
 				Bonus de Dano Corpo a Corpo: <meleeLine>
 				Bonus de Velocidade Corpo a Corpo/Chicote: <atkSpdLine>
-				''' 
+				'''
 			CrimsonHeart:
 				'''
 				Concede <hp> de Vida por qualidade, <ms> de Velocidade de Movimento por qualidade
@@ -198,7 +196,7 @@ Mods: {
 				Bonus de Vida: <hpLine>
 				Bonus de Velocidade de Movimento: <msLine>
 				Bonus de Fortuna de Pesca: <fortuneLine>
-				''' 
+				'''
 			FairyBell:
 				'''
 				Concede <haste> de Agilidade da Habilidade do Pet por qualidade, o que aumenta
@@ -207,7 +205,7 @@ Mods: {
 				o que funciona com 50% de eficácia com Pets já classificados.
 				Bonus de Agilidade da Habilidade do Pet: <hasteLine>
 				Bonus Global de Fortuna: <fortuneLine>
-				''' 
+				'''
 			JackOLantern:
 				'''
 				Concede <atkSpd> de Velocidade de Ataque por qualidade, <luck> de Sorte por qualidade
@@ -215,7 +213,7 @@ Mods: {
 				Bonus de Velocidade de Ataque: <atkSpdLine>
 				Bonus de Sorte: <luckLine>
 				Bonus de Fortuna em Colheita: <fortuneLine>
-				''' 
+				'''
 			JewelOfLight:
 				'''
 				Concede <moveSpd> de Velocidade de Movimento por qualidade, <wingTime> segundos de Tempo de Voo por qualidade
@@ -223,7 +221,7 @@ Mods: {
 				Bonus de Velocidade de Movimento: <moveSpdLine>
 				Bonus de Tempo de Voo: <wingTimeLine>
 				Bonus de Aceleração: <accelerationLine>
-				''' 
+				'''
 			MagicLantern:
 				'''
 				Concede <dr> de Redução de Dano por qualidade, <fortune> de Fortuna de Mineração por qualidade,
@@ -232,7 +230,7 @@ Mods: {
 				Bonus de Defesa: <defLine>
 				Bonus de Porcentagem de Defesa: <defPercentLine>
 				Bonus de Fortuna em Mineração: <fortuneLine>
-				''' 
+				'''
 			ShadowOrb:
 				'''
 				Concede <mana> de Mana por qualidade, <ms> de Velocidade de Movimento por qualidade,
@@ -240,7 +238,7 @@ Mods: {
 				Bonus de Mana: <manaLine>
 				Bonus de Velocidade de Movimento: <msLine>
 				Bonus de Fortuna de Colheita: <fortuneLine>
-				''' 
+				'''
 			SuspiciousLookingTentacle:
 				'''
 				Aumenta Defesa em <def> por qualidade. Atual: <defLine>,
@@ -255,7 +253,7 @@ Mods: {
 				Mana Máxima em <mana> por qualidade. Atual: <manaLine>,
 				Tamanho de Armas Físicas em <size> por qualidade. Atual: <sizeLine> and
 				Recuo de Armas Físicas em <knockback> por qualidade. Atual: <knockbackLine>
-				''' 
+				'''
 			ToyGolem:
 				'''
 				Concede <lifeRegen> de Regeneração de Vida por qualidade, <healthPercent> de Vida por qualidade,
@@ -263,7 +261,7 @@ Mods: {
 				Bonus de Regeneração de Vida: <lifeRegenLine>
 				Bonus de Vida: <healthPercentLine>
 				Bonus de Regeneração de Mana: <manaRegenLine>
-				''' 
+				'''
 			WispInABottle:
 				'''
 				Concede <magic> de Dano Mágico por qualidade, <ranged> de Dano de Armas à Distância por qualidade.
@@ -273,7 +271,7 @@ Mods: {
 				Bonus de Dano de Armas à Distância: <rangedLine>
 				Bonus de Velocidade de Projéteis de dano Mágico/À Distância: <velocityLine>
 				Bonus de dano de Projéteis por Pet : <petProjLine>
-				''' 
+				'''
 		}
 
 		PetItemTooltips: {
@@ -418,11 +416,11 @@ Mods: {
 				 * Funciona apenas durante a Noite. Sorte atual: <moonLuck>
 				- Sua sorte total atual: <playerLuck>
 				'''
-			 BlackCatDeath1: <name> andou por baixo de uma escada.
-			 BlackCatDeath2: <name> agora sabe que: 'A Lua não reproduz luz por si própria, o Brilho da Lua é na verdade a Luz do Sol sendo refletida.
-			 BlackCatDeath3: As crenças supersticiosas de <name> acabaram se revelando reais.
-			 BlackCatDeath4: <name> não teve sorte.
-			 BlackCatDeath5: O Gato Preto de <name> trouxe má sorte, afinal.
+			BlackCatDeath1: <name> andou por baixo de uma escada.
+			BlackCatDeath2: <name> agora sabe que: 'A Lua não reproduz luz por si própria, o Brilho da Lua é na verdade a Luz do Sol sendo refletida.
+			BlackCatDeath3: As crenças supersticiosas de <name> acabaram se revelando reais.
+			BlackCatDeath4: <name> não teve sorte.
+			BlackCatDeath5: O Gato Preto de <name> trouxe má sorte, afinal.
 			BlueEgg:
 				'''
 				<class>
@@ -762,8 +760,8 @@ Mods: {
 				 * [c/f8baba:Sua defesa e redução de dano são definidos como 0 durante todo o tempo.]
 				 * A fúria dura <enrageLength> segundos e tem um cooldown de <enrageCd> segundos.
 				'''
-			 EocEnrage: ENFURECIDO!
-			 EocCalm: Aliviado.
+			EocEnrage: ENFURECIDO!
+			EocCalm: Aliviado.
 			BrainOfCthulhuPetItem:
 				'''
 				<class>
@@ -823,12 +821,12 @@ Mods: {
 				 * Isso contará como se você tivesse desviado do ataque inicial, então você não sofre recuo.
 				- Inimigos recebem <dealtMult>x dano e armazenam o dano para ser causado ao longo do tempo.
 				 * Eles recebem o dano armazenado ao longo de 4 segundos.
-				- Se o inimigo pode morrer com seu golpe sem o dano ao longo do tempo, ele é instantaneamente executado.
+				- Se seu golpe causa mais dano que a vida restante de um inimigo, ele é instantaneamente executado.
 				'''
-			 SkeletronDeath1: <name> não pôde conter a maldição do Esqueletron
-			 SkeletronDeath2: <name> faleceu de uma forma bem lenta e dolorosa
-			 SkeletronDeath3: eeeeeeeeee é cesta!!!
-			 SkeletronDeath4: parece que você teve um tempo ruim ;)
+			SkeletronDeath1: <name> não pôde conter a maldição do Esqueletron
+			SkeletronDeath2: <name> faleceu de uma forma bem lenta e dolorosa
+			SkeletronDeath3: eeeeeeeeee é cesta!!!
+			SkeletronDeath4: parece que você teve um tempo ruim ;)
 			QueenSlimePetItem:
 				'''
 				<class>
@@ -923,7 +921,7 @@ Mods: {
 				 gerando Fragmentos de Gelo ao longo do caminho, atravessando blocos.
 				 * Tanto a Bola quanto os Fragmentos causam <damage> de dano geral aos inimigos atingidos.
 				 *  Inimigos atingidos por eles são desacelerados em <slowAmount>% por <slowTime> segundos.
-				''' 
+				'''
 			DragonLightning:
 				'''
 				- Orbe de Ravio
@@ -933,7 +931,7 @@ Mods: {
 				 aplicando também uma desaceleração de <orbSlow>% brevemente.
 				 * Os Raios causam <strikeDmg> de dano geral com <strikePen> de penetração de armadura,
 				 aplicando também uma desaceleração de <strikeSlow>% brevemente.
-				''' 
+				'''
 			DragonFire:
 				'''
 				- Rajada de Bolas de Fogo
@@ -942,7 +940,7 @@ Mods: {
 				 * Inimigos atingidos recebem o efeito 'Queimado pelo Sol' por <burnSeconds> segundos.
 				 * Habilitar/Desabilitar a Rajada de Bolas de Fogo do Dragão Fantasmal na opção de configuração do Dragão pode permitir que
 				 essas Bolas de Fogo sejam lançadas da boca do Dragão, em vez de do Jogador. Atualmente: <enabled>)
-				''' 
+				'''
 			DD2BetsyPetItem:
 				'''
 				<class>
@@ -990,7 +988,7 @@ Mods: {
 				 * Aumenta velocidade de ataque físico em <meleeSpd>%.
 				 * Aumenta dano físico em <meleeDmg>%.
 				 * Aumenta defesa em <def>.
-				''' 
+				'''
 			RangedTooltip:
 				'''
 				- Bonus de Armas a Distância:
@@ -998,7 +996,7 @@ Mods: {
 				 * Aumenta chance crítica de armas a distância em <rangedCrit>%.
 				 * Aumenta dano crítico de armas a distância em <rangedCritDmg>%.
 				 * Aumenta dano de armas a distância em <rangedDmg>%.
-				''' 
+				'''
 			MagicTooltip:
 				'''
 				- Bonus de Magia:
@@ -1006,7 +1004,7 @@ Mods: {
 				 * Diminui o uso de mana em <manaCost>%.
 				 * Aumenta a chance crítica de dano mágico em <magicCrit>%.
 				 * Aumenta dano mágico em <magicDmg>%.
-				''' 
+				'''
 			SummonerTooltip:
 				'''
 				- Bonus de Invocação:
@@ -1014,7 +1012,7 @@ Mods: {
 				 * Aumenta velocidade de ataque de chicotes em <sumSpd>%.
 				 * Aumenta o número máximo de lacaios em <sumMax>.
 				 * Aumenta o número máximo de torres em <sumMax>.
-				''' 
+				'''
 			ResplendentDessert:
 				'''
 				- É a combinação das habilidades dos Pets Príncipe e Princesa Slime, sendo um pouco mais fracas.
@@ -1035,13 +1033,13 @@ Mods: {
 
 		Buffs: {
 			SanityAura: {
-				 DisplayName: Aura de Sanidade
+				DisplayName: Aura de Sanidade
 				Description:
 					'''
 					Bzzzzt...
 					Um Glommer nas proximidades está mantendo seus Pets sãos.
 					Aumenta a Agilidade da Habilidade do Pet em 30%.
-					''' 
+					'''
 			}
 
 			HoneyOverdose: {
@@ -1159,7 +1157,7 @@ Mods: {
 			}
 
 			EocPetEnrage: {
-				 DisplayName: ENFURECIDO!
+				DisplayName: ENFURECIDO!
 				Description:
 					'''
 					Você está atualmente ENFURECIDO! Tudo o que consegue pensar é em derramamento de sangue!
@@ -1168,26 +1166,26 @@ Mods: {
 					Impulso de Dano Atual: <dmg>%
 					Impulso de Velocidade de Movimento Atual: <speed>%
 					Impulso de Chance Crítica Atual: <crit>%
-					''' 
+					'''
 			}
 
 			HardenedShell: {
-				 DisplayName: Casco de Tartaruga Endurecida!
+				DisplayName: Casco de Tartaruga Endurecida!
 				Description:
 					'''
 					Sua Tartaruga atualmente endureceu sua casca.
 					Ataques recebidos dão menos dano, nenhum recuo
 					e vão ser refletidos de volta para o agressor.
 					Número restante de golpes recebidos: <hit>
-					''' 
+					'''
 			}
 		}
 
 		Items: {
 			GlommersGoop: {
-				 DisplayName: Gosma de Glommer
-				 Tooltip: '''"Inseto estranho faz coco estranho."'''
-				 Mana: Consome 50 de sanidade. (Mana no mundo do Terraria.)
+				DisplayName: Gosma de Glommer
+				Tooltip: '''"Inseto estranho faz coco estranho."'''
+				Mana: Consome 50 de sanidade. (Mana no mundo do Terraria.)
 			}
 
 			EndlessBalloonSack: {
@@ -1215,44 +1213,44 @@ Mods: {
 			}
 
 			LihzahrdWrench: {
-				 DisplayName: Chave Inglesa Lagharto
+				DisplayName: Chave Inglesa Lagharto
 				Tooltip:
 					'''
 					Deixe isso em seu inventário ou na Bolsa do Vazio para permitir
 					a criação do Pet Golem de Brinquedo infinitamente.
-					''' 
+					'''
 			}
 
 			PrismaticOptic: {
-				 DisplayName: Óptica Prismática
+				DisplayName: Óptica Prismática
 				Tooltip:
 					'''
 					Deixe isso em seu inventário ou na Bolsa do Vazio para permitir
 					a criação do Pet Princesa Fada infinitamente.
-					''' 
+					'''
 			}
 
 			PumpkingsHead: {
-				 DisplayName: Cabeça do Reibóbora
+				DisplayName: Cabeça do Reibóbora
 				Tooltip:
 					'''
 					A colheita deste ano parece ser abundante.
 					Deixe isso em seu inventário ou na Bolsa do Vazio para permitir
 					a criação do Pet de Abóbora do Dia das Bruxas infinitamente.
-					''' 
+					'''
 			}
 		}
 
-		 Projectiles.PetExplosion: Pet Explosão por um Pet
+		Projectiles.PetExplosion: Pet Explosão por um Pet
 
 		Keybinds: {
-			 UsePetAbility.DisplayName: Usar Habilidade de Pet
-			 PetTooltipHide.DisplayName: Alternar (Mostrar) Dicas do Pet
-			 PetTooltipSwap.DisplayName: Trocar Dica do Pet
-			 PetAbilitySwitch.DisplayName: Alternar Habilidade do Pet
+			UsePetAbility.DisplayName: Usar Habilidade de Pet
+			PetTooltipHide.DisplayName: Alternar (Mostrar) Dicas do Pet
+			PetTooltipSwap.DisplayName: Trocar Dica do Pet
+			PetAbilitySwitch.DisplayName: Alternar Habilidade do Pet
 		}
 
-		 NPCs.LizardTail.DisplayName: Rabo de Lagarto
-		 Configs.ShieldPosition.Tooltip: ""
+		NPCs.LizardTail.DisplayName: Rabo de Lagarto
+		Configs.ShieldPosition.Tooltip: ""
 	}
 }
