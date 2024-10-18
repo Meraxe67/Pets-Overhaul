@@ -40,7 +40,7 @@ namespace PetsOverhaul.NPCs
         /// <summary>
         /// Contains all Vanilla bosses that does not return npc.boss = true
         /// </summary>
-        public static List<int> NonBossTrueBosses = [ NPCID.TheDestroyer, NPCID.TheDestroyerBody, NPCID.TheDestroyerTail, NPCID.EaterofWorldsBody, NPCID.EaterofWorldsTail, NPCID.EaterofWorldsHead, NPCID.LunarTowerSolar, NPCID.LunarTowerNebula, NPCID.LunarTowerStardust, NPCID.LunarTowerVortex, NPCID.TorchGod, NPCID.Retinazer, NPCID.Spazmatism ];
+        public static List<int> NonBossTrueBosses = [NPCID.TheDestroyer, NPCID.TheDestroyerBody, NPCID.TheDestroyerTail, NPCID.EaterofWorldsBody, NPCID.EaterofWorldsTail, NPCID.EaterofWorldsHead, NPCID.LunarTowerSolar, NPCID.LunarTowerNebula, NPCID.LunarTowerStardust, NPCID.LunarTowerVortex, NPCID.TorchGod, NPCID.Retinazer, NPCID.Spazmatism];
         public Vector2 FlyingVelo { get; internal set; }
         public float GroundVelo { get; internal set; }
         public bool VeloChangedFlying { get; internal set; }
@@ -120,41 +120,46 @@ namespace PetsOverhaul.NPCs
                 seaCreature = false;
             }
         }
-        public override bool PreAI(NPC npc)
+        public override void Load()
         {
-            if (npc.active)
+            PetsOverhaul.BeforeNPCPreAI += UpdateSlows;
+        }
+        public static void UpdateSlows(NPC npc)
+        {
+            if (npc.active && npc.TryGetGlobalNPC(out NpcPet npcPet))
             {
-                if (VeloChangedGround == true)
+                if (npcPet.VeloChangedGround == true)
                 {
-                    npc.velocity.X = GroundVelo;
-                    VeloChangedGround2 = true;
+                    npc.velocity.X = npcPet.GroundVelo;
+
+                    npcPet.VeloChangedGround2 = true;
                 }
                 else
                 {
-                    VeloChangedGround2 = false;
+                    npcPet.VeloChangedGround2 = false;
                 }
 
-                if (VeloChangedGround2 == false)
+                if (npcPet.VeloChangedGround2 == false)
                 {
-                    GroundVelo = npc.velocity.X;
+                    npcPet.GroundVelo = npc.velocity.X;
                 }
 
-                if (VeloChangedFlying == true)
+                if (npcPet.VeloChangedFlying == true)
                 {
-                    npc.velocity = FlyingVelo;
-                    VeloChangedFlying2 = true;
+                    npc.velocity = npcPet.FlyingVelo;
+
+                    npcPet.VeloChangedFlying2 = true;
                 }
                 else
                 {
-                    VeloChangedFlying2 = false;
+                    npcPet.VeloChangedFlying2 = false;
                 }
 
-                if (VeloChangedFlying2 == false)
+                if (npcPet.VeloChangedFlying2 == false)
                 {
-                    FlyingVelo = npc.velocity;
+                    npcPet.FlyingVelo = npc.velocity;
                 }
             }
-            return base.PreAI(npc);
         }
         public override void PostAI(NPC npc)
         {
@@ -182,6 +187,7 @@ namespace PetsOverhaul.NPCs
                 {
                     Slow(npc, CurrentSlowAmount);
                 }
+
             }
         }
         /// <summary>
@@ -271,7 +277,7 @@ namespace PetsOverhaul.NPCs
         }
         public override void DrawEffects(NPC npc, ref Color drawColor)
         {
-            if (CurrentSlowAmount > 0) 
+            if (CurrentSlowAmount > 0)
             {
                 int dustChance = GlobalPet.Randomizer((int)(1000 / CurrentSlowAmount));
                 if (dustChance <= 0)
@@ -282,16 +288,16 @@ namespace PetsOverhaul.NPCs
                     drawColor = Color.PaleTurquoise with { A = 225 };
 
                     if (spawnDust)
-                    Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.Electric, Alpha: 100, Scale: Main.rand.NextFloat(0.7f, 1.1f))
-                    .noGravity = true;
+                        Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.Electric, Alpha: 100, Scale: Main.rand.NextFloat(0.7f, 1.1f))
+                        .noGravity = true;
                 }
                 if (SlowList.Exists(x => PetSlowIDs.ColdBasedSlows.Contains(x.SlowId)))
                 {
                     drawColor = Color.DarkTurquoise with { A = 225 };
 
                     if (spawnDust)
-                    Dust.NewDustDirect(npc.position, npc.width, npc.height, 101, Alpha: 100, Scale: Main.rand.NextFloat(0.7f, 1.1f))
-                    .noGravity = true;
+                        Dust.NewDustDirect(npc.position, npc.width, npc.height, 101, Alpha: 100, Scale: Main.rand.NextFloat(0.7f, 1.1f))
+                        .noGravity = true;
                 }
             }
             if (npc.HasBuff(ModContent.BuffType<Mauled>()))
