@@ -69,7 +69,7 @@ namespace PetsOverhaul.PetEffects
                         .Replace("<flatAmount>", destroyer.flatAmount.ToString())
                         .Replace("<defMultIncrease>", Math.Round(destroyer.flatDefMult * 100, 2).ToString())
                         .Replace("<ironskinDef>", destroyer.ironskinBonusDef.ToString())
-                        .Replace("<miningFortune>",destroyer.miningFort.ToString())
+                        .Replace("<miningFortune>", destroyer.miningFort.ToString())
                         ));
         }
     }

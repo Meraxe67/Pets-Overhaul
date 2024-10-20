@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.Audio;
+﻿using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
@@ -27,7 +25,7 @@ namespace PetsOverhaul.Projectiles
             Projectile.usesIDStaticNPCImmunity = true;
             Projectile.idStaticNPCHitCooldown = 1;
         }
-        public override void OnSpawn(IEntitySource source) 
+        public override void OnSpawn(IEntitySource source)
         {
             Projectile.Resize((int)Projectile.ai[0], (int)Projectile.ai[0]);
             for (int i = 0; i < Projectile.ai[0] * 0.075f; i++)

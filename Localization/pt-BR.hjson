@@ -182,6 +182,7 @@ Mods: {
 			NotRolled: As qualidades são Sorteadas quando o item está no inventário pela primeira vez!
 			OutOf: de
 			Quality: Qualidade:
+			// Per: per quality
 			CreeperEgg:
 				'''
 				Concede <sum> de Dano de Invocação por qualidade, <melee> de Dano Corpo a Corpo por qualidade

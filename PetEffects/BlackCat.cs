@@ -109,7 +109,7 @@ namespace PetsOverhaul.PetEffects
                             reason = Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BlackCatDeath1");
                             break;
                     }
-                    Player.Hurt(PlayerDeathReason.ByCustomReason(reason.Replace("<name>",Player.name)), moonlightRoll, 0, dodgeable: false, knockback: 0, scalingArmorPenetration: 1f);
+                    Player.Hurt(PlayerDeathReason.ByCustomReason(reason.Replace("<name>", Player.name)), moonlightRoll, 0, dodgeable: false, knockback: 0, scalingArmorPenetration: 1f);
                 }
                 else
                 {

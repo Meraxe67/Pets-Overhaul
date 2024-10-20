@@ -66,14 +66,14 @@ namespace PetsOverhaul.Systems
         {
             int mult = isInt ? 1 : 100;
             return (BaseStat == 0 ? "" : (Math.Round(BaseStat * mult, 2).ToString() + " " + Language.GetTextValue("Mods.PetsOverhaul.+") + " ")) + Math.Round(StatPerRoll * mult, 2).ToString()
-                + (isInt ? "" : Language.GetTextValue("Mods.PetsOverhaul.%")) + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.Per");
+                + (isInt ? "" : Language.GetTextValue("Mods.PetsOverhaul.%")) + " " + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.Per");
         }
         /// <summary>
         /// Use this overload if displayed values are intended to be displayed in a different way than BaseAndPerQuality().
         /// </summary>
         public string BaseAndPerQuality(string perRoll, string baseRoll = "")
         {
-            return (BaseStat == 0 ? "" : (baseRoll + " " + Language.GetTextValue("Mods.PetsOverhaul.+") + " ")) + perRoll + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.Per");
+            return (BaseStat == 0 ? "" : (baseRoll + " " + Language.GetTextValue("Mods.PetsOverhaul.+") + " ")) + perRoll + " " + Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.Per");
         }
     }
 }

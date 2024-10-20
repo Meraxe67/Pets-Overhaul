@@ -79,7 +79,7 @@ namespace PetsOverhaul.PetEffects
                 }
                 SoundEngine.PlaySound(in style, Player.Center);
             }
-        }   
+        }
     }
     public sealed class ParrotExtraProjectile : GlobalProjectile
     {

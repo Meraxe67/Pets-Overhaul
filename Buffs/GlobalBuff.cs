@@ -38,16 +38,16 @@ namespace PetsOverhaul.Buffs
                     case 0:
                         drawParams.DrawColor = Microsoft.Xna.Framework.Color.DeepSkyBlue;
                         break;
-                        case 1:
+                    case 1:
                         drawParams.DrawColor = Microsoft.Xna.Framework.Color.PaleTurquoise;
                         break;
-                        case 2:
+                    case 2:
                         drawParams.DrawColor = Microsoft.Xna.Framework.Color.Coral;
                         break;
-                        default:
+                    default:
                         break;
                 }
-                
+
             }
             return true;
         }

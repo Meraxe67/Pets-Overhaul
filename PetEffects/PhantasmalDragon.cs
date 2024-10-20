@@ -1,13 +1,9 @@
-﻿using Microsoft.Build.Evaluation;
-using Microsoft.CodeAnalysis;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using PetsOverhaul.Config;
 using PetsOverhaul.NPCs;
-using PetsOverhaul.Projectiles;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -66,7 +62,7 @@ namespace PetsOverhaul.PetEffects
                                     if (projectile is Projectile proj && proj.owner == Player.whoAmI && proj.type == ProjectileID.LunaticCultistPet)
                                     {
                                         pos = proj.Center;
-                                        width = proj.width; 
+                                        width = proj.width;
                                         height = proj.height;
                                     }
                                 }

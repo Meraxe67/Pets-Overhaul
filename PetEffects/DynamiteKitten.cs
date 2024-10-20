@@ -35,7 +35,7 @@ namespace PetsOverhaul.PetEffects
                     .OriginalArmorPenetration += armorPen;
                 if (ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled)
                 {
-                    SoundEngine.PlaySound(SoundID.Item14,target.Center);
+                    SoundEngine.PlaySound(SoundID.Item14, target.Center);
                 }
                 Pet.timer = Pet.timerMax;
             }

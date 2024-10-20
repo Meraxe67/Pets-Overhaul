@@ -67,7 +67,7 @@ namespace PetsOverhaul.PetEffects
                         .Replace("<rarePlant>", squashling.squashlingRareChance.ToString())
                         .Replace("<health>", squashling.pumpkinArmorBonusHp.ToString())
                         .Replace("<harvFort>", squashling.pumpkinArmorBonusHarvestingFortune.ToString())
-                        .Replace("<pumpkinPieceAmount>",squashling.wornPumpkinAmount.ToString())
+                        .Replace("<pumpkinPieceAmount>", squashling.wornPumpkinAmount.ToString())
                         ));
         }
     }

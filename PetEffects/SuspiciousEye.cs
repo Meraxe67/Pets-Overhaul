@@ -2,7 +2,6 @@
 using PetsOverhaul.Buffs;
 using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using PetsOverhaul.TownPets;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -76,7 +75,7 @@ namespace PetsOverhaul.PetEffects
                     if (ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled)
                     {
                         SoundEngine.PlaySound(SoundID.ForceRoar with { PitchVariance = 0.3f }, Player.Center);
-                    }   
+                    }
 
                     Gore.NewGore(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetMisc), Player.Center, Main.rand.NextVector2Circular(2f, 2f), 8, 0.5f);
                     Gore.NewGore(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetMisc), Player.Center, Main.rand.NextVector2Circular(2f, 2f), 8, 0.5f);
@@ -96,7 +95,7 @@ namespace PetsOverhaul.PetEffects
                 if (eocTimer <= phaseTime && eocTimer >= 0)
                 {
                     if (Player.statLife > Player.statLifeMax2 / 2)
-                    {   
+                    {
                         Player.statLife = Player.statLifeMax2 / 2;
                     }
                     ragePoints = 0;
