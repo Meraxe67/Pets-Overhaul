@@ -13,13 +13,13 @@ Key Mechanics
 - A leveling System with your Junimo Pet for your Harvesting (gathering of Plants, trees etc.), Mining (gathering of ores, finding valuable gems and things like Life Crystals etc.) and Fishing (catching Fishes, doing angler quests and killing Fished up enemies) tasks!
 - New Mastery Shard item, dropping from select bosses only once per world! (5 in total) Allowing you to craft any Master Mode Pet or Light Pet Crafting item in a non-Master Mode world!
 
-Pets Overhaul currently supports Simplified Chinese (by: Celestepic) and Brazilian Portuguese (by: Starite_Fusion) besides English for localization options.
+Pets Overhaul currently supports Russian (By: Teokai), Brazilian Portuguese (By: Erstarisk, Previous: Starite_Fusion) and Simplified Chinese (By: Celestepic, currently heavily outdated) besides English for localization options.
 If you'd like to contribute to localization by making a non-existing one or improving an existing one, contact endiepearls on Discord or any Moderation team member of Pets Overhaul on our Discord server!
 
 To give direct feedback, report bugs, to give suggestions or to learn more about the mod, join our Discord!
 https://discord.gg/KubSpqvDGE
 
-Icon and all artwork made by: Furqi
+Mod Trailer video, all icons and artwork made by: Furqi
 Russian Translation by: Teokai
 Brazillian Portuguese Translation by: Erstarisk
 Chinese Translation by: Celestepic (currently heavily outdated)

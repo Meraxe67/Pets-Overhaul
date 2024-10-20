@@ -41,22 +41,20 @@ namespace PetsOverhaul.PetEffects
                 {
                     if (Pet.timer <= 0 && Pet.PetInUseWithSwapCd(ItemID.PigPetItem))
                     {
-                        int extraShieldTime = item.buffTime / 60;
+                        int shieldAmount = 0;
                         if (item.buffType == BuffID.WellFed)
                         {
-                            Pet.petShield.Add((pig.tier1Shield, pig.shieldTime + extraShieldTime));
+                            shieldAmount = pig.tier1Shield;
                         }
-
-                        if (item.buffType == BuffID.WellFed2)
+                        else if (item.buffType == BuffID.WellFed2)
                         {
-                            Pet.petShield.Add((pig.tier2Shield, pig.shieldTime + extraShieldTime));
+                            shieldAmount = pig.tier2Shield;
                         }
-
-                        if (item.buffType == BuffID.WellFed3)
+                        else if (item.buffType == BuffID.WellFed3)
                         {
-                            Pet.petShield.Add((pig.tier3Shield, pig.shieldTime + extraShieldTime));
+                            shieldAmount = pig.tier3Shield;
                         }
-
+                        Pet.AddShield(shieldAmount, pig.shieldTime + item.buffTime / 60);
                         Pet.timer = Pet.timerMax;
                     }
                     if (Main.rand.NextBool(pig.foodChance, 100))

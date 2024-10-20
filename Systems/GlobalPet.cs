@@ -23,9 +23,13 @@ namespace PetsOverhaul.Systems
     {
         public static InputMode PlayerInputMode => PlayerInput.CurrentProfile.InputModes.ContainsKey(InputMode.Keyboard) ? InputMode.Keyboard : InputMode.XBoxGamepad;
         /// <summary>
-        /// Modify this value if you want to reduce lifesteal & healing by Pets for any reason, such as a Mod applying an effect that reduces healings. Basically a modifier on heals.
+        /// Modify this value if you want to reduce or increase lifesteal & healing by Pets for any reason, such as a Mod applying an effect that reduces healings. Basically a modifier on heals from Pets. Used in PetRecovery().
         /// </summary>
-        public float petHealMultiplier = 1f; //This is still not implemented!
+        public float petHealMultiplier = 1f;
+        /// <summary>
+        /// Modify this value if you want to reduce or increase shields applied by Pets for any reason, such as increasing Shield gain with a condition. Basically a modifier on shields coming from Pets. Used in AddShield().
+        /// </summary>
+        public float petShieldMultiplier = 1f;
         /// <summary>
         /// Influences the chance to increase stack of the item from your pet that doesn't fit into any other fortune category. This also increases all other fortunes with half effectiveness.
         /// </summary>
@@ -282,7 +286,22 @@ namespace PetsOverhaul.Systems
             Main.combatText[textToRemove].active = false;
             return textToRemove;
         }
-
+        /// <summary>
+        /// Adds to petShield list and applies petShieldMultiplier. Does not allow for values lower than 1 to be added.
+        /// </summary>
+        /// <param name="shieldAmount">Pet Shield to be added to Player.</param>
+        /// <param name="shieldDuration">Duration of this individual Shield on the Player.</param>
+        /// <returns>Value of the added shield, -1 if failed to add.</returns>
+        public int AddShield(int shieldAmount, int shieldDuration)
+        {
+            int shield = (int)(shieldAmount * petShieldMultiplier);
+            if (shield > 0 && shieldDuration > 0)
+            {
+                petShield.Add((shieldAmount, shieldDuration));
+                return shield;
+            }
+            return -1;
+        }
         /// <summary>
         /// Used for Healing and Mana recovery purposes. Non converted amount can still grant +1, depending on a roll. Example: PetRecovery(215, 0.05f) will heal you for 10 health and 75% chance to heal +1 more, resulting in 11 health recovery.
         /// </summary>
@@ -524,6 +543,8 @@ namespace PetsOverhaul.Systems
             globalFortune = 0;
 
             abilityHaste = 0;
+            petHealMultiplier = 1f;
+            petShieldMultiplier = 1f;
         }
         public override void PreUpdate()
         {

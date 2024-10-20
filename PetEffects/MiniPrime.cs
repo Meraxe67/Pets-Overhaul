@@ -30,7 +30,7 @@ namespace PetsOverhaul.PetEffects
                 Pet.SetPetAbilityTimer(shieldRecovery);
             }
         }
-        private void AddShield()
+        private void AddShield() //did not touch this guys shields, was an absolute nightmare to fix it (can be looked into later)
         {
             if (oldShieldCount > shieldIndex && Pet.petShield[shieldIndex].shieldAmount < lastShield)
             {

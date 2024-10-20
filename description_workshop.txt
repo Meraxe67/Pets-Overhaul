@@ -15,13 +15,13 @@ Key Mechanics
 [*] New Mastery Shard item, dropping from select bosses only once per world! (5 in total) Allowing you to craft any Master Mode Pet or Light Pet Crafting item in a non-Master Mode world!
 [/list]
 
-Pets Overhaul currently supports Simplified Chinese (by: Celestepic) and Brazilian Portuguese (by: Starite_Fusion) besides English for localization options.
+Pets Overhaul currently supports Russian (By: Teokai), Brazilian Portuguese (By: Erstarisk, Previous: Starite_Fusion) and Simplified Chinese (By: Celestepic, currently heavily outdated) besides English for localization options.
 If you'd like to contribute to localization by making a non-existing one or improving an existing one, contact endiepearls on Discord or any Moderation team member of Pets Overhaul on our Discord server!
 
 To give direct feedback, report bugs, to give suggestions or to learn more about the mod, join our Discord!
 https://discord.gg/KubSpqvDGE
 
-All Icons and Artwork done by: [url=https://steamcommunity.com/id/IsThatFurqi]Furqi[/url]
+Mod Trailer video, all Icons and Artwork done by: [url=https://steamcommunity.com/id/IsThatFurqi]Furqi[/url]
 Russian Translation done by: [url=https://steamcommunity.com/id/teokai/]Teokai[/url]]
 Brazillian Portuguese Translation by: [url=https://steamcommunity.com/id/Erstarisk/]Erstarisk[/url]]
 Chinese Translation done by: [url=https://steamcommunity.com/id/Celestepic/]Celestepic[/url]

@@ -58,7 +58,8 @@ namespace PetsOverhaul.PetEffects
                     if (damageTaken == 0)
                         damageTaken = Player.statLifeMax2 / 2;
                     Player.Hurt(new Player.HurtInfo() with { Damage = damageTaken, Dodgeable = false, Knockback = 0, DamageSource = PlayerDeathReason.ByCustomReason("If you're seeing this death message, report it through our discord or steam page.") });
-                    Pet.petShield.Add(((int)(damageTaken * forcedEnrageShield), shieldTime));
+                    Pet.AddShield((int)(damageTaken * forcedEnrageShield), shieldTime);
+
                 }
                 else
                     inCombatTimer = inCombatTime;
@@ -89,7 +90,7 @@ namespace PetsOverhaul.PetEffects
                         Color = Color.DarkRed
                     }, Player.Center);
 
-                    Pet.petShield.Add(((int)((eocShieldEquipped ? eocShieldMult : shieldMult) * (Player.statDefense + Math.Round(Player.endurance * 100))), shieldTime));
+                    Pet.AddShield((int)((eocShieldEquipped ? eocShieldMult : shieldMult) * (Player.statDefense + Math.Round(Player.endurance * 100))), shieldTime);
                     Player.AddBuff(ModContent.BuffType<EocPetEnrage>(), phaseTime);
                 }
                 if (eocTimer <= phaseTime && eocTimer >= 0)

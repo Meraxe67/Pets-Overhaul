@@ -43,7 +43,7 @@ namespace PetsOverhaul.PetEffects
                 if (hitCounter >= 6)
                 {
                     modifiers.FinalDamage *= queenSlime.GetModPlayer<SlimePrincess>().dmgBoost;
-                    Pet.petShield.Add((queenSlime.GetModPlayer<SlimePrincess>().shield, queenSlime.GetModPlayer<SlimePrincess>().shieldTime));
+                    Pet.AddShield(queenSlime.GetModPlayer<SlimePrincess>().shield, queenSlime.GetModPlayer<SlimePrincess>().shieldTime);
                     hitCounter -= 6;
                 }
             }
@@ -53,7 +53,7 @@ namespace PetsOverhaul.PetEffects
                 if (hitCounter >= 6)
                 {
                     modifiers.FinalDamage *= dualSlime.GetModPlayer<DualSlime>().dmgBoost;
-                    Pet.petShield.Add((queenSlime.GetModPlayer<DualSlime>().shield, queenSlime.GetModPlayer<DualSlime>().shieldTime));
+                    Pet.AddShield(dualSlime.GetModPlayer<DualSlime>().shield, dualSlime.GetModPlayer<DualSlime>().shieldTime);
 
                     hitCounter -= 6;
                 }
