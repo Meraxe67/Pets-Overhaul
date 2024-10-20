@@ -13,8 +13,8 @@ Mods: {
 			'''
 			[c/90C2AA:Последние изменения в Pets Overhaul 3.0: выпуск дополнения для Calamity, глобальные системные изменения, крупные исправления, множество изменений баланса]
 			[c/90C2AA:Некоторые из ваших настроек могли сброситься, обязательно проверьте их и настройте правильно!]
-			[c/90C2AA:Добавлена полная русская локализация! Автор: Teokai, Added fully up-to-date Brazillian Portuguese localization! By: Erstarisk]
-			[c/90C2AA:Improved Mod Icon, and added new Mod Trailer video & channel! All done by: Furqi]
+			[c/90C2AA:Добавлена полная русская локализация! Автор: Teokai. Обновлена бразильская локализация! Автор: Erstarisk]
+			[c/90C2AA:Улучшена иконка мода, опубликован трейлер обновления на канале мода! Сделано Furqi]
 			[c/b4bfc5:Присоединяйтесь к нашему серверу Discord для отзывов и сообщений об ошибках! discord.gg/KubSpqvDGE]
 			[c/b4bfc5:Используйте] [c/ff8234:/pet] [c/b4bfc5:чтобы увидеть команды для Pets Overhaul и получить больше информации!]
 			'''
@@ -39,7 +39,7 @@ Mods: {
 			Offensive: Атакующий
 			Defensive: Защищающий
 			Supportive: Поддерживающий
-			// Rogue: Rogue
+			Rogue: Разбойничий
 		}
 
 		Commands: {
@@ -198,7 +198,7 @@ Mods: {
 			NotRolled: Качество определяется при первом добавлении предмета в инвентарь!
 			OutOf: из
 			Quality: Качество:
-			// Per: per quality
+			Per: за качество
 			CreeperEgg:
 				'''
 				Даёт <sum> урона призыва за каждое качество, <melee> урона в ближнем бою за каждое качество
@@ -432,11 +432,11 @@ Mods: {
 				  * Работает только ночью. Текущая удача: <moonLuck>
 				- Ваша текущая общая удача: <playerLuck>
 				'''
-			// BlackCatDeath1: <name> walked under a ladder.
-			// BlackCatDeath2: <name> now knows that: 'The Moon does not make its own light �moonlight� is actually reflected sunlight.
-			// BlackCatDeath3: <name>'s superstitious beliefs turned out to be real.
-			// BlackCatDeath4: <name> was unlucky.
-			// BlackCatDeath5: <name>'s Black Cat did bring bad luck afterall.
+			BlackCatDeath1: <name> прошёл(шла) под лестницей.
+			BlackCatDeath2: <name> теперь знает: "Луна не излучает собственный свет, лунный свет — это отражённый солнечный свет."
+			BlackCatDeath3: Суеверия <name> оказались правдой.
+			BlackCatDeath4: <name> не повезло.
+			BlackCatDeath5: Чёрный кот <name> всё же принёс несчастье.
 			BlueEgg:
 				'''
 				<class>
@@ -778,8 +778,8 @@ Mods: {
 				  * [c/f8baba:Ваша защита и снижение урона будут равны 0 всё это время.]
 				  * Ярость длится <enrageLength> секунд и имеет перезарядку в <enrageCd> секунд.
 				'''
-			// EocEnrage: ENRAGED!
-			// EocCalm: Calmed Down.
+			EocEnrage: В ярости!
+			EocCalm: Успокоился.
 			BrainOfCthulhuPetItem:
 				'''
 				<class>
@@ -841,10 +841,10 @@ Mods: {
 				- Если враг может умереть от вашего удара без эффекта ДОТ (урон со временем), он будет мгновенно убит.
 
 				'''
-			// SkeletronDeath1: <name> could not contain Skeletron's curse.
-			// SkeletronDeath2: <name> went through a painful, slow death.
-			// SkeletronDeath3: geeettttttt dunked on!!!
-			// SkeletronDeath4: seems like you've had a bad time ;)
+			SkeletronDeath1: <name> не смог(ла) справиться с проклятием Скелетрона.
+			SkeletronDeath2: <name> пережил(а) мучительную, медленную смерть.
+			SkeletronDeath3: пооооооолучил(а) по заслугам!!!
+			SkeletronDeath4: похоже, тебе не повезло ;)
 			QueenSlimePetItem:
 				'''
 				<class>
@@ -933,31 +933,31 @@ Mods: {
 				  * Все способности имеют одинаковое время перезарядки: <cooldown> секунд.
 				<tooltip>
 				'''
-			/* DragonIce:
+			DragonIce:
 				'''
-				- Icicle Mist
-				 * Spawns a Ice Mist on your cursor, it travels towards a random direction,
-				spawning Icicle Shards along the way it travels, traveling through blocks.
-				 * Ball and Shards both deal <damage> general damage to enemies hit.
-				 * Enemies hit by them gets slowed by <slowAmount>% for <slowTime> seconds.
-				''' */
-			/* DragonLightning:
+				- Ледяной туман
+				  * Призывает ледяной туман на вашем курсоре, который движется в случайном направлении,
+				    создавая ледяные осколки на своём пути. Проходит сквозь блоки.
+				  * Туман и осколки наносят <damage> урон врагам, которых касаются.
+				  * Враги, попавшие под воздействие, замедляются на <slowAmount>% на <slowTime> секунд.
 				'''
-				- Lightning Orb
-				 * Spawns a Lightning Orb on your cursor, which gradually sends out Lightning Strikes
-				towards where your cursor is at, both continiously striking enemies that contacts them.
-				 * Orb deals <orbDmg> general damage with <orbPen> armor pen, also applying a <orbSlow>% slow briefly.
-				 * Strikes deal <strikeDmg> general damage with <strikePen> armor pen, also applying a <strikeSlow>% slow briefly.
-				''' */
-			/* DragonFire:
+			DragonLightning:
 				'''
-				- Fireball Volley
-				 * Starts shooting Fireballs towards your cursor <fireballAmount> times within <fireballDuration> seconds.
-				 * Fireballs explode upon impact with anything, dealing <fireDmg> general damage and <kb> knockback.
-				 * Hit enemies gets applied with Daybreak debuff for <burnSeconds> seconds.
-				 * Enabling/Disabling Phantasmal Dragon Fireball Volley from Dragon config option can allow this for 
-				 Fireballs to be casted from Dragon's mouth, rather than from the Player. Currently: <enabled>
-				''' */
+				- Шар молний
+				  * Призывает шар молний на вашем курсоре, который постепенно выпускает молнии
+				    в направлении вашего курсора, непрерывно поражая врагов, которые с ними соприкасаются.
+				  * Шар наносит <orbDmg> общий урон с пробитием брони <orbPen>, а также кратковременно замедляет на <orbSlow>%.
+				  * Удары молний наносят <strikeDmg> урон с пробитием брони <strikePen>, также кратковременно замедляют на <strikeSlow>%.
+				'''
+			DragonFire:
+				'''
+				- Залп огненных шаров
+				  * Стреляет огненными шарами в направлении вашего курсора <fireballAmount> раз в течение <fireballDuration> секунд.
+				  * Огненные шары взрываются при ударе, нанося <fireDmg> урона и <kb> отбрасывание.
+				  * Попавшие враги получают дебафф "Дневной свет" на <burnSeconds> секунд.
+				  * Включение/выключение функции залпа огненных шаров фантомного дракона в настройках дракона позволяет огненным шарам
+				    вылетать из пасти дракона, а не от игрока. В настоящее время: <enabled>.
+				'''
 			DD2BetsyPetItem:
 				'''
 				<class>
@@ -994,38 +994,38 @@ Mods: {
 				- Нажмите <keybind>, чтобы переключить текущее описание.
 				<tooltip>
 				'''
-			/* MeleeTooltip:
+			MeleeTooltip:
 				'''
-				- Melee Bonuses:
-				 * Increases damage reduction by <dr>%.
-				 * Increases melee speed by <meleeSpd>%.
-				 * Increases melee damage by <meleeDmg>%.
-				 * Increases defense by <def>.
-				''' */
-			/* RangedTooltip:
+				- Бонусы ближнего боя:
+				  * Увеличивает снижение урона на <dr>%.
+				  * Увеличивает скорость ближнего боя на <meleeSpd>%.
+				  * Увеличивает урон ближнего боя на <meleeDmg>%.
+			       * Увеличивает защиту на <def>.
 				'''
-				- Ranged Bonuses:
-				 * Increases ranged armor penetration by <armorPen>.
-				 * Increases ranged crit chance by <rangedCrit>%.
-				 * Increases ranged crit damage by <rangedCritDmg>%.
-				 * Increases ranged damage by <rangedDmg>%.
-				''' */
-			/* MagicTooltip:
+			RangedTooltip:
 				'''
-				- Magic Bonuses:
-				 * Increases maximum mana by <mana>.
-				 * Decreases mana costs by <manaCost>%.
-				 * Increases magic crit chance by <magicCrit>%.
-				 * Increases magic damage by <magicDmg>%.
-				''' */
-			/* SummonerTooltip:
+				- Бонусы дальнего боя:
+				  * Увеличивает пробитие брони на <armorPen>.
+				  * Увеличивает шанс критического урона дальнего боя на <rangedCrit>%.
+				  * Увеличивает критический урон дальнего боя на <rangedCritDmg>%.
+				  * Увеличивает урон дальнего боя на <rangedDmg>%.
 				'''
-				- Summoner Bonuses:
-				 * Increases whip range by <sumRange>%.
-				 * Increases whip speed by <sumSpd>%.
-				 * Increases maximum minions by <sumMax>.
-				 * Increases maximum sentries by <sumMax>.
-				''' */
+			MagicTooltip:
+				'''
+				- Бонусы магии:
+				  * Увеличивает максимальный запас маны на <mana>.
+				  * Уменьшает затраты маны на <manaCost>%.
+				  * Увеличивает шанс критического урона магией на <magicCrit>%.
+				  * Увеличивает магический урон на <magicDmg>%.
+				'''
+			SummonerTooltip:
+				'''
+				- Бонусы призывателя:
+				  * Увеличивает дальность хлыста на <sumRange>%.
+				  * Увеличивает скорость хлыста на <sumSpd>%.
+			  	  * Увеличивает максимальное количество прислужников на <sumMax>.
+				  * Увеличивает максимальное количество часовых на <sumMax>.
+				'''
 			ResplendentDessert:
 				'''
 				- Это сочетание способностей питомцев Принца и Принцессы Слизи, но немного слабее.
@@ -1046,13 +1046,13 @@ Mods: {
 
 		Buffs: {
 			SanityAura: {
-				// DisplayName: Sanity Aura
-				/* Description:
+				DisplayName: Аура рассудка
+				Description:
 					'''
-					Bzzzzt...
-					A nearby Glommer is keeping your Pets sane.
-					Increases Pet Ability Haste by 30%.
-					''' */
+					Бззззт...
+					Ближайший Гломмер помогает вашим питомцам сохранять рассудок.
+					Увеличивает скорость способностей питомцев на 30%.
+					'''
 			}
 
 			HoneyOverdose: {
@@ -1214,35 +1214,35 @@ Mods: {
 			}
 
 			EocPetEnrage: {
-				// DisplayName: ENRAGED!
-				/* Description:
+				DisplayName: В ярости!
+				Description:
 					'''
-					You're currently ENRAGED! All you can think of is bloodshed!
-					Your defense and DR is set to 0, and your Shield of Cthulhu is quicker.
-					Current Rage Points: <rage>
-					Current Damage Boost: <dmg>%
-					Current Movement Speed Boost: <speed>%
-					Current Crit Chance Boost: <crit>%
-					''' */
+					Вы в ЯРОСТИ! Всё, о чём вы можете думать — это кровопролитие!
+					Ваша защита и снижение урона равны 0, а ваш Щит Ктулху стал быстрее.
+					Текущие очки ярости: <rage>
+					Текущая прибавка к урону: <dmg>%
+					Текущая прибавка к скорости передвижения: <speed>%
+					Текущая прибавка к шансу критического удара: <crit>%
+					'''
 			}
 
 			HardenedShell: {
-				// DisplayName: Turtle Shell Hardened!
-				/* Description:
+				DisplayName: Панцирь черепахи закален!
+				Description:
 					'''
-					Your Turtle currently hardened its shell.
-					Incoming hits do less damage, do no knockback
-					and will be reflected back to attacker.
-					Remaining amount of hits: <hit>
-					''' */
+					Ваша черепаха закалила свой панцирь.
+					Входящие удары наносят меньше урона, не вызывают отбрасывания
+					и будут отражены обратно на атакующего.
+					Осталось ударов: <hit>
+					'''
 			}
 		}
 
 		Items: {
 			GlommersGoop: {
-				// DisplayName: Glommer's Goop
-				// Tooltip: '''"Weird bug make weird poop."'''
-				// Mana: Consumes 50 sanity. (Mana in Terraria world.)
+				DisplayName: Слизь Гломмера
+				Tooltip: '''"Странный жук делает странные какашки."'''
+				Mana: Тратит 50 рассудка. (В мире Terraria — мана.)
 			}
 
 			EndlessBalloonSack: {
@@ -1298,16 +1298,17 @@ Mods: {
 			}
 		}
 
-		// Projectiles.PetExplosion: Explosion by a Pet
+		Projectiles.PetExplosion: Взрыв, вызванный питомцем
 
 		Keybinds: {
 			UsePetAbility.DisplayName: Использовать способность питомца
 			PetTooltipHide.DisplayName: Переключить отображение описаний питомцев
 			PetTooltipSwap.DisplayName: Переключить описание питомца
-			// PetAbilitySwitch.DisplayName: Pet Ability Switch
+			PetAbilitySwitch.DisplayName: Переключение способности питомца
 		}
 
-		// NPCs.LizardTail.DisplayName: Lizard Tail
-		// Configs.ShieldPosition.Tooltip: ""
+		NPCs.LizardTail.DisplayName: Хвост ящерицы
+		Configs.ShieldPosition.Tooltip: ""
 	}
 }
+
