@@ -291,13 +291,18 @@ namespace PetsOverhaul.Systems
         /// </summary>
         /// <param name="shieldAmount">Pet Shield to be added to Player.</param>
         /// <param name="shieldDuration">Duration of this individual Shield on the Player.</param>
+        /// <param name="applyPetShieldMult">Set to false to prevent from petShieldMultiplier from being applied..</param>
         /// <returns>Value of the added shield, -1 if failed to add.</returns>
-        public int AddShield(int shieldAmount, int shieldDuration)
+        public int AddShield(int shieldAmount, int shieldDuration, bool applyPetShieldMult = true)
         {
-            int shield = (int)(shieldAmount * petShieldMultiplier);
+            int shield = shieldAmount;
+            if (applyPetShieldMult)
+            {
+                shield = (int)(shield * petShieldMultiplier);
+            }
             if (shield > 0 && shieldDuration > 0)
             {
-                petShield.Add((shieldAmount, shieldDuration));
+                petShield.Add((shield, shieldDuration));
                 return shield;
             }
             return -1;
