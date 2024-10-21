@@ -83,11 +83,11 @@ namespace PetsOverhaul.PetEffects
                 {
                     if (Player.strongBees == true && Main.rand.NextBool(1, 3))
                     {
-                        Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Main.rand.NextVector2Circular(10f, 10f), ProjectileID.GiantBee, beeDmg * 2, beeKb * 2, Player.whoAmI);
+                        Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Main.rand.NextVector2CircularEdge(7f, 7f), ProjectileID.GiantBee, beeDmg * 2, beeKb * 2, Player.whoAmI);
                     }
                     else
                     {
-                        Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Main.rand.NextVector2Circular(10f, 10f), ProjectileID.Bee, beeDmg, beeKb, Player.whoAmI);
+                        Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Main.rand.NextVector2CircularEdge(7f, 7f), ProjectileID.Bee, beeDmg, beeKb, Player.whoAmI);
                     }
                 }
             }
@@ -106,11 +106,11 @@ namespace PetsOverhaul.PetEffects
                 {
                     if (Player.strongBees == true && Main.rand.NextBool(1, 3))
                     {
-                        Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Main.rand.NextVector2Circular(10f, 10f), ProjectileID.GiantBee, beeDmg * 2, beeKb * 2, Player.whoAmI);
+                        Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Main.rand.NextVector2CircularEdge(7f, 7f), ProjectileID.GiantBee, beeDmg * 2, beeKb * 2, Player.whoAmI);
                     }
                     else
                     {
-                        Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Main.rand.NextVector2Circular(10f, 10f), ProjectileID.Bee, beeDmg, beeKb, Player.whoAmI);
+                        Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Main.rand.NextVector2CircularEdge(7f, 7f), ProjectileID.Bee, beeDmg, beeKb, Player.whoAmI);
                     }
                 }
             }

@@ -115,16 +115,7 @@ namespace PetsOverhaul.PetEffects
                 switch (currentAbility)
                 {
                     case 0: //Ice
-                        Vector2 velocity = Main.rand.NextVector2Circular(5f, 5f);
-                        int damage = Main.DamageVar(Player.GetTotalDamage<GenericDamageClass>().ApplyTo(iceBase), Player.luck); //ai 88
-                        if (velocity.X >= 0)
-                            velocity.X = Math.Clamp(velocity.X, 3f, 5f);
-                        else if (velocity.X <= 0)
-                            velocity.X = Math.Clamp(velocity.X, -5f, -3f);
-                        if (velocity.Y >= 0)
-                            velocity.Y = Math.Clamp(velocity.Y, 3f, 5f);
-                        else if (velocity.Y <= 0)
-                            velocity.Y = Math.Clamp(velocity.Y, -5f, -3f);
+                        Vector2 velocity = Main.rand.NextVector2CircularEdge(4f, 4f);
                         Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile, "Phantasmal"), Main.MouseWorld, velocity, ProjectileID.CultistBossIceMist, Damage(iceBase), 0, Player.whoAmI, 0f, 1f)
                             .netUpdate = true;
                         break;
