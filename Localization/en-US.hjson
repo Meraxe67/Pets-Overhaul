@@ -50,46 +50,46 @@ Mods: {
 				/pet vanity, /pet vanitypet -> Explains how to use a 'vanity' Pet.
 				/pet junimo, /pet junimoscoreboard, /pet junimoleaderboard -> Displays Top 3 Online Players with highest exp counts for all 3 skills of Junimo.
 				/pet {mining|fishing|harvesting}scoreboard, /pet {mining|fishing|harvesting}leaderboard -> 
-				Displays limitless amount of Online Players with highest chosen skill's exp counts from Junimo's 3 skills.
+				Displays a limitless amount of Online Players with the highest chosen skill's exp counts from Junimo's 3 skills.
 				/pet faq, /pet question -> Displays frequently asked questions regarding Pets Overhaul.
 				'''
 			FAQ:
 				'''
 				Q: Will there be crossmod content? & Is Pets Overhaul compatible with X mod?
-				A: Currently Calamity Addon is out with the name: 'Pets Overhaul: Calamity Addon'! Next in plans is the Thorium Mod!
-				Q: Any way of increasing rolls of Light Pets?
-				A: Currently, no. There may be a feature added in future and is planned to have use of high rolls, so its advised to keep your max rolls.
+				A: Currently Calamity Addon is out with the name: 'Pets Overhaul: Calamity Addon'! Next in the plans is the Thorium Mod!
+				Q: Is there any way of increasing rolls of Light Pets?
+				A: Currently, no. There may be a feature added in the future and it is planned to have use of high rolls, so it's advised to keep your max rolls.
 				Q: How do I get X Pet?
-				A: Refer to Wikis or an in game tool to figure how to obtain a certain Pet, vanilla Wiki can be a useful tool for this.
-				Q: Why am I randomly getting fishes, crates etc. in my inventory?
+				A: Refer to Wikis or an in-game tool to figure out how to obtain a certain Pet, vanilla Wiki can be a useful tool for this.
+				Q: Why am I randomly getting fishes, crates, etc. in my inventory?
 				A: 99% due to your autofishing mod catching fishes procs your Fishing Fortune. (refer to /pet fortune for more info)
-				Q: Why is my Pet effects not working? & How do Pet Effects become activated?
-				A: Make sure the Pet effects you want to take in place are in the Pet slot, which locates in 'Equipment' section, on top of your Helmet slot.
+				Q: Why is my Pet Effects not working? & How do Pet Effects become activated?
+				A: Make sure the Pet effects you want to take in place are in the Pet slot, which is located in the 'Equipment' section, on top of your Helmet slot.
 				'''
 			FortuneInfo:
 				'''
-				All fortune stats increase amount of items obtained in said category of items. (Ex. Ores = Mining Fortune)
-				They work with 100% effectiveness for items gained by Pets of same Class, 50% for items gained through non-pet means.
-				For example: If you have 100 Harvesting Fortune, gathering 3 Dayblooms by hand and +2 with Magical Pumpkin Seed (Squashling Pet)
-				Will result in 1.5 (item gained through non-pet means, 50% effective) + 2 (item gained through Pet perk, 100% effective) more Daybloom.
+				All fortune stats increase the amount of items obtained in said category of items. (Ex. Ores = Mining Fortune)
+				They work with 100% effectiveness for items gained by Pets of the same Class, and 50% for items gained through non-pet means.
+				For example: If you have 100 Harvesting Fortune, gather 3 Dayblooms by hand and +2 with Magical Pumpkin Seed (Squashling Pet)
+				This will result in 1.5 (item gained through non-pet means, 50% effective) + 2 (item gained through Pet perk, 100% effective) more Daybloom.
 				'''
 			FortuneCurrent:
 				'''
 				[c/90C2AA:Global Fortune] - While working with 100% effectiveness on non-classified Pet Items,
 				works with 50% effectiveness with everything else. Your Current Global Fortune: <global>
-				[c/96A8B0:Mining Fortune] - Ores, gems etc. Your Current Mining Fortune: <mining>
-				[c/0382E9:Fishing Fortune] - Fishes, crates etc. Your Current Fishing Fortune: <fishing>
-				[c/CDFF00:Harvesting Fortune] - Herbs, plants, trees etc. Your Current Harvesting Fortune: <harvesting>
+				[c/96A8B0:Mining Fortune] - Ores, gems, etc. Your Current Mining Fortune: <mining>
+				[c/0382E9:Fishing Fortune] - Fishes, crates, etc. Your Current Fishing Fortune: <fishing>
+				[c/CDFF00:Harvesting Fortune] - Herbs, plants, trees, etc. Your Current Harvesting Fortune: <harvesting>
 				'''
 			VanityPet:
 				'''
 				Step 1: Equip the pet you don't want to be visible, but want its effects active in your Pet Slot.
-				Step 2: Disable the currently equipped Pet's visibility from little eye next to the Pet Slot.
+				Step 2: Disable the currently equipped Pet's visibility from Little Eye next to the Pet Slot.
 				Step 3: 'Use' the Pet you want to be visible via the Pet Item from your inventory. Done!
 				'''
-			ArgumentInvalid: Given argument was invalid, here is list of Pets Overhaul commands: (commands are not case sensitive)
+			ArgumentInvalid: The given argument was invalid, here is a list of Pets Overhaul commands: (commands are not case sensitive)
 			OneArgument: Only one argument was expected, make sure you're not using spaces for an argument. List of Pets Overhaul commands: (commands are not case sensitive)
-			UseInMultiplayer: Please use this command on Multiplayer! If you want to see your Junimo Skills, use /pet junimo, /pet junimoscoreboard or /pet junimoleaderboard
+			UseInMultiplayer: Please use this command on Multiplayer! If you want to see your Junimo Skills, use /pet junimo, /pet junimoscoreboard, or /pet junimoleaderboard
 			SinglePlayerJunimo: "[c/<color>:Your Junimo <class> Level: <level> Your Junimo <class> EXP: <exp>]"
 			LeaderboardList: "[c/<color>:List of Players with highest Junimo <class> EXP:]"
 			PlayerRankings: <player>'s <class> Level: <level> <class> Exp: <exp>
@@ -102,12 +102,12 @@ Mods: {
 			HealthBarLeft: Next to the Healthbar, Icon on the left
 			HealthBarRight: Next to the Healthbar, Icon on the right
 			HeaderDisplay: Display Related Settings
-			HeaderSound: Sound Related Settings
+			HeaderSound: Sound-Related Settings
 			HeaderGameplay: Gameplay Settings
 			NoticeLabel: Enable Pets Overhaul's notice
 			NoticeTooltip:
 				'''
-				Enables message sent by Pets Overhaul upon logging into the world.
+				Enables messages sent by Pets Overhaul upon logging into the world.
 				Notices may contain brief information about the latest updates.
 				'''
 			ModNoticeLabel: Enable notice for missing Mod addons
@@ -116,18 +116,18 @@ Mods: {
 				Enable message sent upon logging into the world where;
 				An official addon (crossmod) of Pets Overhaul of a Mod exists but is not loaded.
 				'''
-			DisableTooltipToggleLabel: Enable Pet/Item tooltips being toggleable
+			DisableTooltipToggleLabel: Enable Pet/Item tooltips to be toggleable
 			DisableTooltipToggleTooltip:
 				'''
 				Enables the system where Pets Overhaul effects on Pet Item tooltips to be
-				only visible while your set Keybind is held. (You need to manually assign a keybinding)
+				only visible while your set Keybind is held. (You need to assign a keybinding manually)
 				'''
 			TooltipToggleInGame: Hold the <keybind> button to view the Pet tooltip
 			ShieldLocationLabel: Pet Shield Location
 			ShieldLocationTooltip:
 				'''
 				Changes where Pet Shield should be displayed when a Shield has been provided by your Pet.
-				Healthbar options works best with 1920x1080 Resolutions. Editing this value by external means may cause errors.
+				Healthbar options work best with 1920x1080 Resolutions. Editing this value by external means may cause errors.
 				'''
 			DisableAbilityUnusedLabel: Enable Ability Cooldown Display If Unused
 			DisableAbilityUnusedTooltip:
@@ -145,7 +145,7 @@ Mods: {
 			AbilityDisplayDisableTooltip:
 				'''
 				Enables the Ability Cooldown Display. If this option is turned off,
-				the display will be forced to be not shown, no matter other options regarding it.
+				the display will be forced to be not shown, no matter what other options regarding it.
 				'''
 			HurtSoundLabel: Enable custom hurt sounds
 			HurtSoundTooltip: Enables custom sound effects added by Pets when the Player receives damage.
@@ -162,13 +162,13 @@ Mods: {
 			LowCooldownSoundLabel: Enable short ability timer sound
 			LowCooldownSoundTooltip:
 				'''
-				Enables Pet ability cooldown refreshing sound even if they are below the Treshold option.
-				Have this at off if you don't want to hear cooldown refresh sound effect if its below the Treshold.
+				Enables Pet ability cooldown refreshing sound even if they are below the Threshold option.
+				Have this off if you don't want to hear the cooldown refresh sound effect if it is below the threshold.
 				'''
-			LowCooldownTresholdLabel: Short ability timer disable Treshold
+			LowCooldownTresholdLabel: Short ability timer disable Threshold
 			LowCooldownTresholdTooltip:
 				'''
-				Sets the treshold for disabling short pet ability cooldowns
+				Sets the threshold for disabling short pet ability cooldowns
 				playing sounds upon refreshing, in Frames. (60 frames = 1 second)
 				Changing this has no effect if "Enable short ability timer sound" is enabled.
 				'''
@@ -182,14 +182,14 @@ Mods: {
 			SwapCooldownLabel: Enable Pet Swap cooldown
 			SwapCooldownTooltip:
 				'''
-				Enables Player gaining Oblivious Pet Debuff upon swapping a Pet.
+				Enables Player to gain Oblivious Pet Debuff upon swapping a Pet.
 				Which prevents any Combat-related perks from being active during the time.
 				(Recommended to keep this on due to obvious balancing reasons.)
 				'''
 			PhantasmalDragonShootLabel: Enable Phantasmal Dragon Fire Volley Spell coming from the Dragon
 			PhantasmalDragonShootTooltip:
 				'''
-				Enables Phantasmal Dragon's 3rd spell, Fireball Volley to be casted from
+				Enables Phantasmal Dragon's 3rd spell, Fireball Volley to be cast from
 				Dragon's Mouth (The Dragon Pet that follows you), rather than from the Player.
 				'''
 		}
@@ -352,7 +352,7 @@ Mods: {
 				- Grants <fp> fishing power. This increases depending on the current biome:
 				 * While in the Ocean biome, increases to <oceanFp>.
 				 * While in the Snow biome, increases to <snowFp>.
-				- Increases all vanilla Ice biome spesific fishing catches by <catchChance>%.
+				- Increases all vanilla Ice biome-specific fishing catches by <catchChance>%.
 				- Grants Flipper [i:187] effect while in snow and ocean biome.
 				- Multiplies Chilled debuff's duration by <chilledMult>x.
 				'''
@@ -372,7 +372,7 @@ Mods: {
 				'''
 				<class>
 				- Complete immunity to the whole pre-hardmode Dungeon.
-				 * Including being immune to Spikes spesifically while in Dungeon.
+				 * Including being immune to Spikes specifically while in Dungeon.
 				- Gain <armorPen> flat armor penetration.
 				- Gain <dungRegen> life regen while in Dungeon.
 				'''
@@ -423,19 +423,19 @@ Mods: {
 				- Press Pet Ability Keybind (<keybind>) to absorb Moonlight.
 				 * Heal or take damage between <moonlightMin> and <moonlightMax> randomly.
 				 * Negative luck reduces the values, while positive luck increases them.
-				 * Can be only used during the night, has a <moonlightCd> second cooldown.
+				 * Can be only used during the night, and has a <moonlightCd> second cooldown.
 				- Increases luck by <flatLuck>.
 				- Grants luck depending on the current moon cycle.
 				 * Minimum being <minimumMoon> while its Full Moon and
-				maximum being <maximumMoon> while its New Moon.
-				 * Only works while its Night. Current luck: <moonLuck>
+				maximum being <maximumMoon> while it's a New Moon.
+				 * Only works while it's Night. Current luck: <moonLuck>
 				- Your current total luck: <playerLuck>
 				'''
 			BlackCatDeath1: <name> walked under a ladder.
-			BlackCatDeath2: <name> now knows that: 'The Moon does not make its own light �moonlight� is actually reflected sunlight.
+			BlackCatDeath2: <name> now knows that: 'The Moon does not make its own light moonlight is actually reflected sunlight.
 			BlackCatDeath3: <name>'s superstitious beliefs turned out to be real.
 			BlackCatDeath4: <name> was unlucky.
-			BlackCatDeath5: <name>'s Black Cat did bring bad luck afterall.
+			BlackCatDeath5: <name>'s Black Cat did bring bad luck after all.
 			BlueEgg:
 				'''
 				<class>
@@ -494,7 +494,7 @@ Mods: {
 				<class>
 				- Attacks create an area of effect explosion.
 				 * Attack has <kb>x your initial knockback.
-				 * Attack has base damage of <dmg>x of the damage you dealt.
+				 * Attack has a base damage of <dmg>x of the damage you dealt.
 				 * Attack has <armorPen> base armor penetration.
 				 * Explosion has a <size> by <size> radius.
 				 * This has a 2-second cooldown to be re-casted.
@@ -586,7 +586,7 @@ Mods: {
 			LizardEgg:
 				'''
 				<class>
-				- Press Pet Ability Keybind (<keybind>) to get out of a danger by dropping a Decoy Tail.
+				- Press Pet Ability Keybind (<keybind>) to get out of danger by dropping a Decoy Tail.
 				 * Upon using, lose <tailDmgTaken>% of your maximum health. This damage cannot be lethal.
 				 * Gain invisibility frames, <tailAcc>% acceleration, <tailSpd>% movement speed and -<tailAggro> aggro for <buffDuration> seconds.
 				 * Tail can be picked up after <tailWait> seconds to regain <tailRecover>% health and refund <cdRefund>% of your remaining ability cooldown.
@@ -635,7 +635,7 @@ Mods: {
 				- Damaging enemies have a <chance>% chance of causing big damaging spores to appear.
 				 * Spores location is somewhere near the enemy randomly and travels slightly.
 				 * Spores deal <dmg>x of the initial damage that spawned them + <flatDmg>.
-				 * Spores have a <kb> knockback and can hit up to <pen> times before they dissapear.
+				 * Spores have a <kb> knockback and can hit up to <pen> times before they disappear.
 				'''
 			DD2PetGato:
 				'''
@@ -712,7 +712,7 @@ Mods: {
 				'''
 				<class>
 				- Allows you to glide while holding your jump key.
-				 * Achieves this by multiplying your maximum Y speed you can get by <glide>x.
+				 * Achieves this by multiplying the maximum Y speed you can get by <glide>x.
 				 * Does not grant fall damage immunity, but gliding resets your fall damage.
 				 * Can be used alongside Wings, providing even more gliding power.
 				- Multiplies horizontal wing speed and acceleration by <speed>x and <acceleration>x respectively.
@@ -734,7 +734,7 @@ Mods: {
 				- Press Pet Ability Keybind <keybind> to Harden your Turtle's shell.
 				 * Next <hitCount> hits taken within <shellDuration> seconds are modified.
 				 * Hits deal <reducedDmg>% less damage and deal no knockback.
-				 * <reflect>% of pre-mitigation damage taken is reflected back to the attacker.
+				 * <reflect>% of pre-mitigation damage taken is reflected to the attacker.
 				 * Reflection damage is reduced to <projReflect>% for damage taken by a Projectile.
 				- Increases defense by <def>%.
 				- Grants <kbResist>% knockback resist.
@@ -932,7 +932,7 @@ Mods: {
 			DragonIce:
 				'''
 				- Icicle Mist
-				 * Spawns a Ice Mist on your cursor, it travels towards a random direction,
+				 * Spawns an Ice Mist on your cursor, it travels in a random direction,
 				spawning Icicle Shards along the way it travels, traveling through blocks.
 				 * Ball and Shards both deal <damage> general damage to enemies hit.
 				 * Enemies hit by them gets slowed by <slowAmount>% for <slowTime> seconds.
@@ -941,7 +941,7 @@ Mods: {
 				'''
 				- Lightning Orb
 				 * Spawns a Lightning Orb on your cursor, which gradually sends out Lightning Strikes
-				towards where your cursor is at, both continiously striking enemies that contacts them.
+				towards where your cursor is, both continuously striking enemies that contact them.
 				 * Orb deals <orbDmg> general damage with <orbPen> armor pen, also applying a <orbSlow>% slow briefly.
 				 * Strikes deal <strikeDmg> general damage with <strikePen> armor pen, also applying a <strikeSlow>% slow briefly.
 				'''
@@ -950,9 +950,9 @@ Mods: {
 				- Fireball Volley
 				 * Starts shooting Fireballs towards your cursor <fireballAmount> times within <fireballDuration> seconds.
 				 * Fireballs explode upon impact with anything, dealing <fireDmg> general damage and <kb> knockback.
-				 * Hit enemies gets applied with Daybreak debuff for <burnSeconds> seconds.
-				 * Enabling/Disabling Phantasmal Dragon Fireball Volley from Dragon config option can allow this for 
-				 Fireballs to be casted from Dragon's mouth, rather than from the Player. Currently: <enabled>
+				 * Hit enemies get applied with Daybreak debuff for <burnSeconds> seconds.
+				 * Enabling/Disabling Phantasmal Dragon Fireball Volley from the Dragon config option can allow for 
+				 Fireballs to be cast from the Dragon's mouth, rather than from the Player. Currently: <enabled>
 				'''
 			DD2BetsyPetItem:
 				'''
@@ -963,7 +963,7 @@ Mods: {
 				 * Every stack decreases the target's defense by <defDecrease>%.
 				- If any Player kills an enemy with Queen's Damnation,
 				they recover <missingHpSteal>% of their missing health per stack.
-				 * Missing health recovery is increased by <maxStackIncr>% if the target was at maximum stacks.
+				 * Missing health recovery is increased by <maxStackIncr>% if the target is at maximum stacks.
 				'''
 			IceQueenPetItem:
 				'''
@@ -1214,7 +1214,7 @@ Mods: {
 				Description:
 					'''
 					You're currently ENRAGED! All you can think of is bloodshed!
-					Your defense and DR is set to 0, and your Shield of Cthulhu is quicker.
+					Your defense and DR are set to 0, and your Shield of Cthulhu is quicker.
 					Current Rage Points: <rage>
 					Current Damage Boost: <dmg>%
 					Current Movement Speed Boost: <speed>%
@@ -1227,9 +1227,9 @@ Mods: {
 				Description:
 					'''
 					Your Turtle currently hardened its shell.
-					Incoming hits do less damage, do no knockback
-					and will be reflected back to attacker.
-					Remaining amount of hits: <hit>
+					Incoming hits do less damage, do no knockback,
+					and will be reflected to the attacker.
+					The remaining amount of hits: <hit>
 					'''
 			}
 		}

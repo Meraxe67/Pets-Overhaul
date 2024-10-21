@@ -25,6 +25,8 @@ namespace PetsOverhaul.PetEffects
             if (Pet.PetInUse(ItemID.BerniePetItem))
             {
                 timer++; //this is separate from normal Pet timers
+                if (timer > 1000)
+                    timer = 1000;
             }
         }
         public override void PostUpdateMiscEffects()
