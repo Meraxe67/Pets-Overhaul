@@ -40,8 +40,8 @@ namespace PetsOverhaul.PetEffects
         public int defaultExps = 100;
         public int junimoHarvestingLevel = 1;
         public int junimoHarvestingExp = 0;
-        public int[] junimoHarvestingLevelsToXp = new int[]
-        {
+        public int[] junimoHarvestingLevelsToXp =
+        [
 0,
 100,
 214,
@@ -92,11 +92,11 @@ namespace PetsOverhaul.PetEffects
 69835,
 73417,
 77031,
-        };
+        ];
 
         public int junimoMiningLevel = 1;
         public int junimoMiningExp = 0;
-        public int[] junimoMiningLevelsToXp = new int[] {
+        public int[] junimoMiningLevelsToXp = [
 0,
 90,
 193,
@@ -148,11 +148,11 @@ namespace PetsOverhaul.PetEffects
 66113,
 69365,
 
-        };
+        ];
 
         public int junimoFishingLevel = 1;
         public int junimoFishingExp = 0;
-        public int[] junimoFishingLevelsToXp = new int[] {
+        public int[] junimoFishingLevelsToXp = [
             0,
 10,
 21,
@@ -203,48 +203,49 @@ namespace PetsOverhaul.PetEffects
 4274,
 4483,
 4693,
-        };
+        ];
 
         /// <summary>
         /// Remember to insert the expAmount as *100 from intended amount, eg. 2.5 exp should be written as 250.
         /// </summary>
         public static List<(int expAmount, int[] oreList)> MiningXpPerBlock = new()
         {
-            { (90, new int[] { ItemID.Obsidian, ItemID.SiltBlock, ItemID.SlushBlock, ItemID.DesertFossil }) },
-            { (250, new int[] { ItemID.CopperOre, ItemID.TinOre }) },
-            { (325, new int[] { ItemID.IronOre, ItemID.LeadOre, ItemID.Amethyst }) },
-            { (400, new int[] { ItemID.SilverOre, ItemID.TungstenOre, ItemID.Topaz, ItemID.Sapphire, ItemID.Meteorite }) },
-            { (475, new int[] { ItemID.GoldOre, ItemID.PlatinumOre, ItemID.Emerald, ItemID.Ruby, ItemID.Hellstone }) },
-            { (550, new int[] { ItemID.CrimtaneOre, ItemID.DemoniteOre, ItemID.Diamond, ItemID.Amber }) },
-            { (750, new int[] { ItemID.CobaltOre, ItemID.PalladiumOre }) },
-            { (900, new int[] { ItemID.MythrilOre, ItemID.OrichalcumOre }) },
-            { (1050, new int[] { ItemID.AdamantiteOre, ItemID.TitaniumOre, ItemID.CrystalShard }) },
-            { (1200, new int[] { ItemID.ChlorophyteOre }) },
-            { (1300, new int[] { ItemID.LunarOre }) },
-            { (2500, new int[] { ItemID.LifeCrystal }) },
-            { (12500, new int[] { ItemID.QueenSlimeCrystal }) },
-            { (100000, new int[] { ItemID.DirtiestBlock }) }
+            { (90, [ItemID.Obsidian, ItemID.SiltBlock, ItemID.SlushBlock, ItemID.DesertFossil ]) },
+            { (250, [ItemID.CopperOre, ItemID.TinOre ]) },
+            { (325, [ItemID.IronOre, ItemID.LeadOre, ItemID.Amethyst ]) },
+            { (400, [ItemID.SilverOre, ItemID.TungstenOre, ItemID.Topaz, ItemID.Sapphire, ItemID.Meteorite]) },
+            { (475, [ItemID.GoldOre, ItemID.PlatinumOre, ItemID.Emerald, ItemID.Ruby, ItemID.Hellstone ]) },
+            { (550, [ItemID.CrimtaneOre, ItemID.DemoniteOre, ItemID.Diamond, ItemID.Amber ]) },
+            { (750, [ItemID.CobaltOre, ItemID.PalladiumOre ]) },
+            { (900, [ItemID.MythrilOre, ItemID.OrichalcumOre ]) },
+            { (1050, [ItemID.AdamantiteOre, ItemID.TitaniumOre, ItemID.CrystalShard ]) },
+            { (1200, [ItemID.ChlorophyteOre ]) },
+            { (1300, [ItemID.LunarOre ]) },
+            { (2500, [ItemID.LifeCrystal ]) },
+            { (12500, [ItemID.QueenSlimeCrystal ]) },
+            { (100000, [ItemID.DirtiestBlock ]) }
         };
         /// <summary>
         /// Remember to insert the expAmount as *100 from intended amount, eg. 2.5 exp should be written as 250.
         /// </summary>
         public static List<(int expAmount, int[] plantList)> HarvestingXpPerGathered = new()
         {
-            { (69, new int[] { ItemID.RottenEgg }) },
-            { (110, new int[] { ItemID.Acorn }) },
-            { (125, new int[] { ItemID.AshGrassSeeds, ItemID.BlinkrootSeeds, ItemID.CorruptSeeds, ItemID.CrimsonSeeds, ItemID.DaybloomSeeds, ItemID.DeathweedSeeds, ItemID.FireblossomSeeds, ItemID.GrassSeeds, ItemID.HallowedSeeds, ItemID.JungleGrassSeeds, ItemID.MoonglowSeeds, ItemID.MushroomGrassSeeds, ItemID.ShiverthornSeeds, ItemID.WaterleafSeeds }) },
-            { (165, new int[] { ItemID.Wood, ItemID.AshWood, ItemID.BorealWood, ItemID.PalmWood, ItemID.Ebonwood, ItemID.Shadewood, ItemID.StoneBlock, ItemID.RichMahogany }) },
-            { (220, new int[] { ItemID.Daybloom, ItemID.Blinkroot, ItemID.Deathweed, ItemID.Fireblossom, ItemID.Moonglow, ItemID.Shiverthorn, ItemID.Waterleaf, ItemID.GlowingMushroom, ItemID.Pumpkin }) },
-            { (250, new int[] { ItemID.GemTreeAmberSeed, ItemID.GemTreeAmethystSeed, ItemID.GemTreeDiamondSeed, ItemID.GemTreeEmeraldSeed, ItemID.GemTreeRubySeed, ItemID.GemTreeSapphireSeed, ItemID.GemTreeTopazSeed, ItemID.Amethyst, ItemID.Topaz, ItemID.Sapphire, ItemID.Emerald, ItemID.Ruby, ItemID.Amber, ItemID.Diamond }) },
-            { (300, new int[] { ItemID.Pearlwood, ItemID.SpookyWood, ItemID.Cactus, ItemID.BambooBlock, ItemID.Mushroom, ItemID.VileMushroom, ItemID.ViciousMushroom }) },
-            { (500, new int[] { ItemID.Coral, ItemID.Seashell, ItemID.Starfish, ItemID.LightningWhelkShell, ItemID.TulipShell, ItemID.JunoniaShell, ItemID.JungleSpores }) },
-            { (1750, new int[] { ItemID.SpicyPepper, ItemID.Pomegranate, ItemID.Elderberry, ItemID.BlackCurrant, ItemID.Apple, ItemID.Apricot, ItemID.Banana, ItemID.BloodOrange, ItemID.Cherry, ItemID.Coconut, ItemID.Grapefruit, ItemID.Lemon, ItemID.Mango, ItemID.Peach, ItemID.Pineapple, ItemID.Plum, ItemID.Rambutan }) },
-            { (2000, new int[] { ModContent.ItemType<Egg>() }) },
-            { (2500, new int[] { ItemID.Dragonfruit, ItemID.Starfruit, ItemID.Grapes }) },
-            { (3500, new int[] { ItemID.GreenMushroom, ItemID.TealMushroom, ItemID.SkyBlueFlower, ItemID.YellowMarigold, ItemID.BlueBerries, ItemID.LimeKelp, ItemID.PinkPricklyPear, ItemID.OrangeBloodroot, ItemID.StrangePlant1, ItemID.StrangePlant2, ItemID.StrangePlant3, ItemID.StrangePlant4 }) },
-            { (5000, new int[] { ItemID.JungleRose, ItemID.ManaFlower }) },
-            { (10000, new int[] { ItemID.LifeFruit, ItemID.LeafWand, ItemID.LivingWoodWand, ItemID.LivingMahoganyWand, ItemID.LivingMahoganyLeafWand, ItemID.BlueEgg }) },
-            { (25000, new int[] { ItemID.EucaluptusSap, ItemID.MagicalPumpkinSeed }) }
+            { (50, [ItemID.Hay]) },
+            { (69, [ItemID.RottenEgg]) },
+            { (110, [ItemID.Acorn ]) },
+            { (125, [ItemID.AshGrassSeeds, ItemID.BlinkrootSeeds, ItemID.CorruptSeeds, ItemID.CrimsonSeeds, ItemID.DaybloomSeeds, ItemID.DeathweedSeeds, ItemID.FireblossomSeeds, ItemID.GrassSeeds, ItemID.HallowedSeeds, ItemID.JungleGrassSeeds, ItemID.MoonglowSeeds, ItemID.MushroomGrassSeeds, ItemID.ShiverthornSeeds, ItemID.WaterleafSeeds ]) },
+            { (165, [ItemID.Wood, ItemID.AshWood, ItemID.BorealWood, ItemID.PalmWood, ItemID.Ebonwood, ItemID.Shadewood, ItemID.StoneBlock, ItemID.RichMahogany ]) },
+            { (220, [ItemID.Daybloom, ItemID.Blinkroot, ItemID.Deathweed, ItemID.Fireblossom, ItemID.Moonglow, ItemID.Shiverthorn, ItemID.Waterleaf, ItemID.GlowingMushroom, ItemID.Pumpkin ]) },
+            { (250, [ItemID.GemTreeAmberSeed, ItemID.GemTreeAmethystSeed, ItemID.GemTreeDiamondSeed, ItemID.GemTreeEmeraldSeed, ItemID.GemTreeRubySeed, ItemID.GemTreeSapphireSeed, ItemID.GemTreeTopazSeed, ItemID.Amethyst, ItemID.Topaz, ItemID.Sapphire, ItemID.Emerald, ItemID.Ruby, ItemID.Amber, ItemID.Diamond ]) },
+            { (300, [ItemID.Pearlwood, ItemID.SpookyWood, ItemID.Cactus, ItemID.BambooBlock, ItemID.Mushroom, ItemID.VileMushroom, ItemID.ViciousMushroom ]) },
+            { (500, [ItemID.Coral, ItemID.Seashell, ItemID.Starfish, ItemID.LightningWhelkShell, ItemID.TulipShell, ItemID.JunoniaShell, ItemID.JungleSpores ]) },
+            { (1750, [ItemID.SpicyPepper, ItemID.Pomegranate, ItemID.Elderberry, ItemID.BlackCurrant, ItemID.Apple, ItemID.Apricot, ItemID.Banana, ItemID.BloodOrange, ItemID.Cherry, ItemID.Coconut, ItemID.Grapefruit, ItemID.Lemon, ItemID.Mango, ItemID.Peach, ItemID.Pineapple, ItemID.Plum, ItemID.Rambutan ]) },
+            { (2000, [ModContent.ItemType<Egg>() ]) },
+            { (2500, [ItemID.Dragonfruit, ItemID.Starfruit, ItemID.Grapes ]) },
+            { (3500, [ItemID.GreenMushroom, ItemID.TealMushroom, ItemID.SkyBlueFlower, ItemID.YellowMarigold, ItemID.BlueBerries, ItemID.LimeKelp, ItemID.PinkPricklyPear, ItemID.OrangeBloodroot, ItemID.StrangePlant1, ItemID.StrangePlant2, ItemID.StrangePlant3, ItemID.StrangePlant4]) },
+            { (5000, [ItemID.JungleRose, ItemID.ManaFlower ]) },
+            { (10000, [ItemID.LifeFruit, ItemID.LeafWand, ItemID.LivingWoodWand, ItemID.LivingMahoganyWand, ItemID.LivingMahoganyLeafWand, ItemID.BlueEgg ]) },
+            { (25000, [ItemID.EucaluptusSap, ItemID.MagicalPumpkinSeed ]) }
         };
 
         public int defaultSeaCreatureExp = 1500;
@@ -253,10 +254,10 @@ namespace PetsOverhaul.PetEffects
         /// </summary>
         public static List<(int expAmount, int[] enemyList)> FishingXpPerKill = new()
         {
-            { (1500, new int[] { NPCID.EyeballFlyingFish, NPCID.ZombieMerman }) },
-            { (3000, new int[] { NPCID.GoblinShark, NPCID.BloodEelBody, NPCID.BloodEelTail, NPCID.BloodEelHead }) },
-            { (5000, new int[] { NPCID.BloodNautilus }) },
-            { (50000, new int[] { NPCID.DukeFishron }) }
+            { (1500, [NPCID.EyeballFlyingFish, NPCID.ZombieMerman]) },
+            { (3000, [NPCID.GoblinShark, NPCID.BloodEelBody, NPCID.BloodEelTail, NPCID.BloodEelHead ]) },
+            { (5000, [NPCID.BloodNautilus ]) },
+            { (50000, [NPCID.DukeFishron ]) }
         };
         public int anglerQuestExp = 4000;
         /// <summary>
@@ -264,25 +265,25 @@ namespace PetsOverhaul.PetEffects
         /// </summary>
         public static List<(int expAmount, int[] fishList)> FishingXpPerCaught = new()
         {
-            { (20, new int[] { ItemID.FishingSeaweed, ItemID.OldShoe, ItemID.TinCan }) },
-            { (25, new int[] { ItemID.FrostDaggerfish }) },
-            { (35, new int[] { ItemID.BombFish }) },
-            { (100, new int[] { ItemID.Flounder, ItemID.Bass, ItemID.RockLobster, ItemID.Trout, ItemID.JojaCola }) },
-            { (175, new int[] { ItemID.AtlanticCod, ItemID.CrimsonTigerfish, ItemID.SpecularFish, ItemID.Tuna }) },
-            { (200, new int[] { ItemID.Salmon, ItemID.NeonTetra }) },
-            { (250, new int[] { ItemID.ArmoredCavefish, ItemID.Damselfish, ItemID.DoubleCod, ItemID.Ebonkoi, ItemID.FrostMinnow, ItemID.Hemopiranha, ItemID.Shrimp, ItemID.VariegatedLardfish }) },
-            { (275, new int[] { ItemID.Honeyfin, ItemID.PrincessFish, ItemID.Oyster }) },
-            { (350, new int[] { ItemID.WoodenCrate, ItemID.WoodenCrateHard }) },
-            { (375, new int[] { ItemID.Stinkfish, ItemID.BlueJellyfish, ItemID.GreenJellyfish, ItemID.PinkJellyfish, ItemID.Obsidifish, ItemID.Prismite }) },
-            { (500, new int[] { ItemID.PurpleClubberfish, ItemID.Swordfish, ItemID.ChaosFish, ItemID.FlarefinKoi, ItemID.IronCrate, ItemID.IronCrateHard }) },
-            { (600, new int[] { ItemID.SawtoothShark, ItemID.Rockfish, ItemID.ReaverShark, ItemID.AlchemyTable, ItemID.HallowedFishingCrate, ItemID.HallowedFishingCrateHard, ItemID.GoldenCarp }) },
-            { (700, new int[] { ItemID.JungleFishingCrate, ItemID.JungleFishingCrateHard, ItemID.CorruptFishingCrate, ItemID.CorruptFishingCrateHard, ItemID.CrimsonFishingCrate, ItemID.CrimsonFishingCrateHard, ItemID.DungeonFishingCrate, ItemID.DungeonFishingCrateHard, ItemID.FloatingIslandFishingCrate, ItemID.FloatingIslandFishingCrateHard, ItemID.FrozenCrate, ItemID.FrozenCrateHard, ItemID.OasisCrate, ItemID.OasisCrateHard, ItemID.OceanCrate, ItemID.OceanCrateHard }) },
-            { (900, new int[] { ItemID.GoldenCrate, ItemID.GoldenCrateHard, ItemID.LavaCrate, ItemID.LavaCrateHard }) },
-            { (1000, new int[] { ItemID.BalloonPufferfish, ItemID.FrogLeg }) },
-            { (1250, new int[] { ItemID.DreadoftheRedSea, ItemID.CombatBook, ItemID.ZephyrFish }) },
-            { (1500, new int[] { ItemID.BottomlessLavaBucket, ItemID.LavaAbsorbantSponge, ItemID.DemonConch }) },
-            { (2000, new int[] { ItemID.LadyOfTheLake, ItemID.Toxikarp, ItemID.Bladetongue, ItemID.CrystalSerpent }) },
-            { (2500, new int[] { ItemID.ObsidianSwordfish, ItemID.ScalyTruffle }) }
+            { (20, [ItemID.FishingSeaweed, ItemID.OldShoe, ItemID.TinCan ]) },
+            { (25, [ItemID.FrostDaggerfish ]) },
+            { (35, [ItemID.BombFish ]) },
+            { (100, [ItemID.Flounder, ItemID.Bass, ItemID.RockLobster, ItemID.Trout, ItemID.JojaCola ]) },
+            { (175, [ItemID.AtlanticCod, ItemID.CrimsonTigerfish, ItemID.SpecularFish, ItemID.Tuna ]) },
+            { (200, [ItemID.Salmon, ItemID.NeonTetra ]) },
+            { (250, [ItemID.ArmoredCavefish, ItemID.Damselfish, ItemID.DoubleCod, ItemID.Ebonkoi, ItemID.FrostMinnow, ItemID.Hemopiranha, ItemID.Shrimp, ItemID.VariegatedLardfish ]) },
+            { (275, [ItemID.Honeyfin, ItemID.PrincessFish, ItemID.Oyster ]) },
+            { (350, [ItemID.WoodenCrate, ItemID.WoodenCrateHard ]) },
+            { (375, [ItemID.Stinkfish, ItemID.BlueJellyfish, ItemID.GreenJellyfish, ItemID.PinkJellyfish, ItemID.Obsidifish, ItemID.Prismite ]) },
+            { (500, [ItemID.PurpleClubberfish, ItemID.Swordfish, ItemID.ChaosFish, ItemID.FlarefinKoi, ItemID.IronCrate, ItemID.IronCrateHard ]) },
+            { (600, [ItemID.SawtoothShark, ItemID.Rockfish, ItemID.ReaverShark, ItemID.AlchemyTable, ItemID.HallowedFishingCrate, ItemID.HallowedFishingCrateHard, ItemID.GoldenCarp ]) },
+            { (700, [ItemID.JungleFishingCrate, ItemID.JungleFishingCrateHard, ItemID.CorruptFishingCrate, ItemID.CorruptFishingCrateHard, ItemID.CrimsonFishingCrate, ItemID.CrimsonFishingCrateHard, ItemID.DungeonFishingCrate, ItemID.DungeonFishingCrateHard, ItemID.FloatingIslandFishingCrate, ItemID.FloatingIslandFishingCrateHard, ItemID.FrozenCrate, ItemID.FrozenCrateHard, ItemID.OasisCrate, ItemID.OasisCrateHard, ItemID.OceanCrate, ItemID.OceanCrateHard ]) },
+            { (900, [ItemID.GoldenCrate, ItemID.GoldenCrateHard, ItemID.LavaCrate, ItemID.LavaCrateHard ]) },
+            { (1000, [ItemID.BalloonPufferfish, ItemID.FrogLeg ]) },
+            { (1250, [ItemID.DreadoftheRedSea, ItemID.CombatBook, ItemID.ZephyrFish]) },
+            { (1500, [ItemID.BottomlessLavaBucket, ItemID.LavaAbsorbantSponge, ItemID.DemonConch ]) },
+            { (2000, [ItemID.LadyOfTheLake, ItemID.Toxikarp, ItemID.Bladetongue, ItemID.CrystalSerpent ]) },
+            { (2500, [ItemID.ObsidianSwordfish, ItemID.ScalyTruffle ]) }
         };
 
         //public int baseRoll = 100; //1

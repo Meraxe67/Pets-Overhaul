@@ -7,7 +7,7 @@ namespace PetsOverhaul.Systems
 {
     public class TilePlacement : GlobalTile
     {
-        public override void PlaceInWorld(int i, int j, int type, Item item)
+        public static void AddToList(int i, int j)
         {
             if (Main.netMode == NetmodeID.MultiplayerClient)
             {
@@ -22,7 +22,11 @@ namespace PetsOverhaul.Systems
                 PlayerPlacedBlockList.placedBlocksByPlayer.Add(new Point16(i, j));
             }
         }
-        public override bool CanReplace(int i, int j, int type, int tileTypeBeingPlaced)
+        public override void PlaceInWorld(int i, int j, int type, Item item)
+        {
+            AddToList(i, j);
+        }
+        public static void ReplacedBlockToList(int i, int j)
         {
             if (Main.netMode == NetmodeID.MultiplayerClient)
             {
@@ -36,6 +40,10 @@ namespace PetsOverhaul.Systems
             {
                 ItemPet.updateReplacedTile.Add(new Point16(i, j));
             }
+        }
+        public override bool CanReplace(int i, int j, int type, int tileTypeBeingPlaced)
+        {
+            ReplacedBlockToList(i,j);
 
             return base.CanReplace(i, j, type, tileTypeBeingPlaced);
         }

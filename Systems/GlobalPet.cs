@@ -542,6 +542,8 @@ namespace PetsOverhaul.Systems
         }
         public override void ResetEffects()
         {
+            petSwapCooldown = 600;
+
             fishingFortune = 0;
             harvestingFortune = 0;
             miningFortune = 0;
@@ -591,10 +593,9 @@ namespace PetsOverhaul.Systems
                     SoundEngine.PlaySound(SoundID.MaxMana with { PitchVariance = 0.3f, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew }, Player.Center);
                 }
             }
-            petSwapCooldown = 600;
         }
         public override void PostUpdate()
-        {
+        {       
             if (petShield.Count > 0)
             {
                 while (shieldToBeReduced > 0 && petShield.Count > 0)
