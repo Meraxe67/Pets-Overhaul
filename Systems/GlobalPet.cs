@@ -472,7 +472,19 @@ namespace PetsOverhaul.Systems
         public override void Load()
         {
             PetsOverhaul.OnPickupActions += PreOnPickup;
+            On_Player.DoBootsEffect_PlaceFlowersOnTile += On_Player_DoBootsEffect_PlaceFlowersOnTile;
         }
+
+        public static bool On_Player_DoBootsEffect_PlaceFlowersOnTile(On_Player.orig_DoBootsEffect_PlaceFlowersOnTile orig, Player self, int X, int Y)
+        {
+            bool PlacedFlower = orig(self, X, Y);
+            if (PlacedFlower)
+            {
+                TilePlacement.AddToList(X, Y);
+            }
+            return PlacedFlower;
+        }
+
         public override void SaveData(TagCompound tag)
         {
             tag.Add("SkinColor", skin);
@@ -595,7 +607,7 @@ namespace PetsOverhaul.Systems
             }
         }
         public override void PostUpdate()
-        {       
+        {
             if (petShield.Count > 0)
             {
                 while (shieldToBeReduced > 0 && petShield.Count > 0)

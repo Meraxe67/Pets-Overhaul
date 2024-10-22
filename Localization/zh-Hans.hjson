@@ -918,7 +918,7 @@ Mods: {
 				 * Increases whip range by <sumRange>%.
 				 * Increases whip speed by <sumSpd>%.
 				 * Increases maximum minions by <sumMax>.
-				 * Increases maximum sentries by <sumMax>.
+				 * Increases maximum sentries by <sumMaxSentry>.
 				''' */
 			ResplendentDessert:
 				'''

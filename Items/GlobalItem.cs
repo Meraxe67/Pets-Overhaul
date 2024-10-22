@@ -39,13 +39,17 @@ namespace PetsOverhaul.Items
         /// </summary>
         public static bool[] gemstoneTreeItem = ItemID.Sets.Factory.CreateBoolSet(false, ItemID.GemTreeAmberSeed, ItemID.GemTreeAmethystSeed, ItemID.GemTreeDiamondSeed, ItemID.GemTreeEmeraldSeed, ItemID.GemTreeRubySeed, ItemID.GemTreeSapphireSeed, ItemID.GemTreeTopazSeed, ItemID.Amethyst, ItemID.Topaz, ItemID.Sapphire, ItemID.Emerald, ItemID.Ruby, ItemID.Amber, ItemID.Diamond, ItemID.StoneBlock);
         /// <summary>
-        /// Contains items dropped by trees. Current only use is Blue Chicken.
+        /// Contains items dropped by trees.
         /// </summary>
         public static bool[] treeItem = ItemID.Sets.Factory.CreateBoolSet(false, ItemID.Acorn, ItemID.BambooBlock, ItemID.Cactus, ItemID.Wood, ItemID.AshWood, ItemID.BorealWood, ItemID.PalmWood, ItemID.Ebonwood, ItemID.Shadewood, ItemID.RichMahogany, ItemID.Pearlwood, ItemID.SpookyWood);
         /// <summary>
-        /// Contains items dropped by trees. Current only use is Blue Chicken.
+        /// Contains harvestable items on Beaches that counts as herb item for Harvesting Pet purposes.
         /// </summary>
         public static bool[] seaPlantItem = ItemID.Sets.Factory.CreateBoolSet(false, ItemID.Coral, ItemID.Seashell, ItemID.Starfish, ItemID.LightningWhelkShell, ItemID.TulipShell, ItemID.JunoniaShell);
+        /// <summary>
+        /// Contains plants that cannot be planed by using a Seed.
+        /// </summary>
+        public static bool[] plantsWithNoSeeds = ItemID.Sets.Factory.CreateBoolSet(false, ItemID.Hay, ItemID.Mushroom, ItemID.GlowingMushroom, ItemID.VileMushroom, ItemID.ViciousMushroom, ItemID.GreenMushroom, ItemID.TealMushroom, ItemID.SkyBlueFlower, ItemID.YellowMarigold, ItemID.BlueBerries, ItemID.LimeKelp, ItemID.PinkPricklyPear, ItemID.OrangeBloodroot, ItemID.StrangePlant1, ItemID.StrangePlant2, ItemID.StrangePlant3, ItemID.StrangePlant4, ItemID.LifeFruit);
         /// <summary>
         /// Adds coordinates in this to PlayerPlacedBlockList if a tile has been replaced and item is obtained through that way. In GlobalTile, Add to this in the CanReplace() hook.
         /// </summary>
@@ -86,7 +90,6 @@ namespace PetsOverhaul.Items
             {
                 return;
             }
-
             if (source is EntitySource_Pet petSource)
             {
                 globalDrop = petSource.ContextType == EntitySourcePetIDs.GlobalItem;
@@ -103,30 +106,30 @@ namespace PetsOverhaul.Items
 
                 fortuneFishingDrop = petSource.ContextType == EntitySourcePetIDs.FishingFortuneItem;
             }
-            else if (source is EntitySource_TileBreak || source is EntitySource_ShakeTree)
+            else if (source is EntitySource_ShakeTree && item.IsACoin == false)
             {
-                herbBoost = Junimo.HarvestingXpPerGathered.Exists(x => x.plantList.Contains(item.type));
-
-                if (source is EntitySource_TileBreak brokenTile)
+                herbBoost = true;
+            }
+            else if (source is EntitySource_TileBreak brokenTile)
+            {
+                ushort tileType = Main.tile[brokenTile.TileCoords].TileType;
+                
+                if (PlayerPlacedBlockList.placedBlocksByPlayer.Remove(new Point16(brokenTile.TileCoords)) == false)
                 {
-                    ushort tileType = Main.tile[brokenTile.TileCoords].TileType;
+                    oreBoost = TileID.Sets.Ore[tileType] || gemTile[tileType] || extractableAndOthers[tileType] || Junimo.MiningXpPerBlock.Exists(x => x.oreList.Contains(item.type));
+                    commonBlock = TileID.Sets.Conversion.Moss[tileType] || commonTiles[tileType];
+                    blockNotByPlayer = true;
+                }
 
-                    if (PlayerPlacedBlockList.placedBlocksByPlayer.Remove(new Point16(brokenTile.TileCoords)) == false)
-                    {
-                        oreBoost = TileID.Sets.Ore[tileType] || gemTile[tileType] || extractableAndOthers[tileType] || item.type == ItemID.LifeCrystal;
-                        commonBlock = TileID.Sets.Conversion.Moss[tileType] || commonTiles[tileType];
-                        blockNotByPlayer = true;
-                    }
+                herbBoost = Junimo.HarvestingXpPerGathered.Exists(x => x.plantList.Contains(item.type));
+                if (TileID.Sets.CountsAsGemTree[tileType] == false && gemstoneTreeItem[item.type] || treeTile[tileType] == false && treeItem[item.type] || blockNotByPlayer == false && seaPlantItem[item.type] || blockNotByPlayer == false && plantsWithNoSeeds[item.type]) //Excluding other plants if their certain condition is not met
+                {
+                    herbBoost = false;
+                }
 
-                    if (TileID.Sets.CountsAsGemTree[tileType] == false && gemstoneTreeItem[item.type] || treeTile[tileType] == false && treeItem[item.type] || blockNotByPlayer == false && seaPlantItem[item.type])
-                    {
-                        herbBoost = false;
-                    }
-
-                    if (updateReplacedTile.Count > 0)
-                    {
-                        PlayerPlacedBlockList.placedBlocksByPlayer.AddRange(updateReplacedTile);
-                    }
+                if (updateReplacedTile.Count > 0)
+                {
+                    PlayerPlacedBlockList.placedBlocksByPlayer.AddRange(updateReplacedTile);
                 }
             }
             else if (source is EntitySource_Loot lootSource && lootSource.Entity is NPC npc)
