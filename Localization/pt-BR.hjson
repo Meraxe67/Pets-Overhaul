@@ -1011,7 +1011,7 @@ Mods: {
 				 * Aumenta alcançe de chicotes em <sumRange>%.
 				 * Aumenta velocidade de ataque de chicotes em <sumSpd>%.
 				 * Aumenta o número máximo de lacaios em <sumMax>.
-				 * Aumenta o número máximo de torres em <sumMax>.
+				 * Aumenta o número máximo de torres em <sumMaxSentry>.
 				'''
 			ResplendentDessert:
 				'''

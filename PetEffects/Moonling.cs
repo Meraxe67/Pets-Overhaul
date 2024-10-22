@@ -25,9 +25,9 @@ namespace PetsOverhaul.PetEffects
         public float magicDmg = 0.2f;
         public int magicCrit = 10;
         public float magicManaCost = 0.1f;
-        public float sumWhipRng = 0.60f;
+        public float sumWhipRng = 0.50f;
         public float sumWhipSpd = 0.3f;
-        public int sumMinion = 3;
+        public int sumMinion = 2;
         public int sumSentry = 3;
         public int defense = 10;
         public StatModifier HighestDamage
@@ -140,7 +140,8 @@ namespace PetsOverhaul.PetEffects
                 3 => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.SummonerTooltip")
                                         .Replace("<sumRange>", Math.Round(moonling.sumWhipRng * 100, 2).ToString())
                                         .Replace("<sumSpd>", Math.Round(moonling.sumWhipSpd * 100, 2).ToString())
-                                        .Replace("<sumMax>", moonling.sumMinion.ToString()),
+                                        .Replace("<sumMax>", moonling.sumMinion.ToString())
+                                        .Replace("<sumMaxSentry>", moonling.sumSentry.ToString()),
                 _ => "",
             };
 
