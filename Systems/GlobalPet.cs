@@ -8,6 +8,7 @@ using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.Enums;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
@@ -71,6 +72,16 @@ namespace PetsOverhaul.Systems
         /// Is cleared at the end of PostUpdate hook. Main use is for Weighted Lists with usage of ItemWeight() Method. Retrieve a value using Main.rand.Next() for its index for Weighted list usage.
         /// </summary>
         public static List<int> ItemPool = new();
+
+        /// <summary>
+        /// Ran at end of PostUpdate().
+        /// </summary>
+        public static List<Point16> CoordsToRemove = new();
+
+        /// <summary>
+        /// Used in PetItem's OnSpawn.
+        /// </summary>
+        public static List<Point16> updateReplacedTile = new();
 
         public List<(int shieldAmount, int shieldTimer)> petShield = new();
         public int currentShield = 0;
@@ -472,10 +483,78 @@ namespace PetsOverhaul.Systems
         public override void Load()
         {
             PetsOverhaul.OnPickupActions += PreOnPickup;
-            On_Player.DoBootsEffect_PlaceFlowersOnTile += On_Player_DoBootsEffect_PlaceFlowersOnTile;
+            On_Player.DoBootsEffect_PlaceFlowersOnTile += GrassIsPlacedByPlayer;
+            On_Player.ItemCheck_CutTiles += CutGrassIsRemovedFromList;
         }
 
-        public static bool On_Player_DoBootsEffect_PlaceFlowersOnTile(On_Player.orig_DoBootsEffect_PlaceFlowersOnTile orig, Player self, int X, int Y)
+        private static void CutGrassIsRemovedFromList(On_Player.orig_ItemCheck_CutTiles orig, Player self, Item sItem, Rectangle itemRectangle, bool[] shouldIgnore)
+        {
+            int minX = itemRectangle.X / 16;
+            int maxX = (itemRectangle.X + itemRectangle.Width) / 16 + 1;
+            int minY = itemRectangle.Y / 16;
+            int maxY = (itemRectangle.Y + itemRectangle.Height) / 16 + 1;
+            Utils.ClampWithinWorld(ref minX, ref minY, ref maxX, ref maxY);
+            for (int i = minX; i < maxX; i++)
+            {
+                for (int j = minY; j < maxY; j++)
+                {
+                    if (Main.tile[i, j] == null || !Main.tileCut[Main.tile[i, j].TileType] || shouldIgnore[Main.tile[i, j].TileType] || !WorldGen.CanCutTile(i, j, TileCuttingContext.AttackMelee))
+                    {
+                        continue;
+                    }
+                    if (sItem.type == ItemID.Sickle)
+                    {
+                        ushort type = Main.tile[i, j].TileType;
+                        WorldGen.KillTile(i, j);
+                        if (!Main.tile[i, j].HasTile)
+                        {
+                            int num = 0;
+                            switch (type)
+                            {
+                                case 3:
+                                case 24:
+                                case 61:
+                                case 110:
+                                case 201:
+                                case 529:
+                                case 637:
+                                    num = Main.rand.Next(1, 3);
+                                    break;
+                                case 73:
+                                case 74:
+                                case 113:
+                                    num = Main.rand.Next(2, 5);
+                                    break;
+                            }
+                            if (num > 0)
+                            {
+                                num *= self.miscEquips[0].type == ItemID.GlowTulip ? 2 : 1; //Double gathered Hay don't matter if its 'placed by player' or not.
+                                int number = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i,j), i * 16, j * 16, 16, 16, 1727, num);
+                                if (Main.netMode == NetmodeID.MultiplayerClient)
+                                {
+                                    NetMessage.SendData(21, -1, -1, null, number, 1f);
+                                }
+                                TilePlacement.RemoveFromList(i, j);
+                            }
+                        }
+                        if (Main.netMode == NetmodeID.MultiplayerClient)
+                        {
+                            NetMessage.SendData(17, -1, -1, null, 0, i, j);
+                        }
+                    }
+                    else
+                    {
+                        WorldGen.KillTile(i, j);
+                        if (Main.netMode == NetmodeID.MultiplayerClient)
+                        {
+                            NetMessage.SendData(17, -1, -1, null, 0, i, j);
+                        }
+                        TilePlacement.RemoveFromList(i, j);
+                    }
+                }
+            }
+        }
+        public static bool GrassIsPlacedByPlayer(On_Player.orig_DoBootsEffect_PlaceFlowersOnTile orig, Player self, int X, int Y)
         {
             bool PlacedFlower = orig(self, X, Y);
             if (PlacedFlower)
@@ -564,17 +643,25 @@ namespace PetsOverhaul.Systems
             abilityHaste = 0;
             petHealMultiplier = 1f;
             petShieldMultiplier = 1f;
+
+            if (updateReplacedTile.Count > 0)
+            {
+                updateReplacedTile.Clear();
+            }
+            if (ItemPool.Count > 0)
+            {
+                ItemPool.Clear();
+            }
+            if (CoordsToRemove.Count > 0)
+            {
+                CoordsToRemove.Clear();
+            }
         }
         public override void PreUpdate()
         {
             if (Main.mouseItem.TryGetGlobalItem(out ItemPet item) && item.pickedUpBefore == false) //Player's hand slot is not being reckognized as 'inventory' in UpdateInventory() of GlobalItem, so manually updating the Hand slot
             {
                 item.pickedUpBefore = true;
-            }
-
-            if (ItemPet.updateReplacedTile.Count > 0)
-            {
-                ItemPet.updateReplacedTile.Clear();
             }
 
             if (ColorVal >= 1f)
@@ -641,9 +728,9 @@ namespace PetsOverhaul.Systems
                 }
             }
 
-            if (ItemPool.Count > 0)
+            if (CoordsToRemove.Count > 0)
             {
-                ItemPool.Clear();
+                PlayerPlacedBlockList.placedBlocksByPlayer.AddRange(CoordsToRemove);
             }
         }
         public override void OnEnterWorld()

@@ -53,7 +53,6 @@ namespace PetsOverhaul.Items
         /// <summary>
         /// Adds coordinates in this to PlayerPlacedBlockList if a tile has been replaced and item is obtained through that way. In GlobalTile, Add to this in the CanReplace() hook.
         /// </summary>
-        public static List<Point16> updateReplacedTile = new();
 
         //Checks to determine which Pet should benefit
         public bool itemFromNpc = false;
@@ -84,7 +83,7 @@ namespace PetsOverhaul.Items
                 pickedUpBefore = true;
             }
         }
-        public override void OnSpawn(Item item, IEntitySource source)
+        public override void OnSpawn(Item item, IEntitySource source) //This is called on server
         {
             if (WorldGen.generatingWorld)
             {
@@ -114,7 +113,7 @@ namespace PetsOverhaul.Items
             {
                 ushort tileType = Main.tile[brokenTile.TileCoords].TileType;
                 
-                if (PlayerPlacedBlockList.placedBlocksByPlayer.Remove(new Point16(brokenTile.TileCoords)) == false)
+                if (TilePlacement.RemoveFromList(brokenTile.TileCoords.X,brokenTile.TileCoords.Y) == false)
                 {
                     oreBoost = TileID.Sets.Ore[tileType] || gemTile[tileType] || extractableAndOthers[tileType] || Junimo.MiningXpPerBlock.Exists(x => x.oreList.Contains(item.type));
                     commonBlock = TileID.Sets.Conversion.Moss[tileType] || commonTiles[tileType];
@@ -127,9 +126,9 @@ namespace PetsOverhaul.Items
                     herbBoost = false;
                 }
 
-                if (updateReplacedTile.Count > 0)
+                if (GlobalPet.updateReplacedTile.Count > 0)
                 {
-                    PlayerPlacedBlockList.placedBlocksByPlayer.AddRange(updateReplacedTile);
+                    PlayerPlacedBlockList.placedBlocksByPlayer.AddRange(GlobalPet.updateReplacedTile);
                 }
             }
             else if (source is EntitySource_Loot lootSource && lootSource.Entity is NPC npc)

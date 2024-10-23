@@ -75,15 +75,20 @@ namespace PetsOverhaul
                     }
                     HoneyBee.HealByHoneyBee(bottledHoney, honeyBeeWhoAmI, false);
                     break;
-                case MessageType.BlockPlace:
+                case MessageType.BlockPlace: //Currently only sent to Server.
                     int xPlace = reader.ReadInt32();
                     int yPlace = reader.ReadInt32();
                     PlayerPlacedBlockList.placedBlocksByPlayer.Add(new Point16(xPlace, yPlace));
                     break;
-                case MessageType.BlockReplace:
+                case MessageType.BlockReplace: //Currently only sent to Server.
                     int xReplace = reader.ReadInt32();
                     int yReplace = reader.ReadInt32();
-                    ItemPet.updateReplacedTile.Add(new Point16(xReplace, yReplace));
+                    GlobalPet.updateReplacedTile.Add(new Point16(xReplace, yReplace));
+                    break;
+                case MessageType.BlockRemove: //Currently only sent to Server.
+                    int xRemove = reader.ReadInt32();
+                    int yRemove = reader.ReadInt32();
+                    GlobalPet.CoordsToRemove.Add(new Point16(xRemove, yRemove));
                     break;
                 case MessageType.PetSlow:
                     NPC npc = Main.npc[reader.ReadByte()];

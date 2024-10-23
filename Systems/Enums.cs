@@ -9,6 +9,7 @@ namespace PetsOverhaul.Systems
         HoneyBeeHeal,
         BlockPlace,
         BlockReplace,
+        BlockRemove,
         PetSlow,
     }
     public enum EntitySourcePetIDs

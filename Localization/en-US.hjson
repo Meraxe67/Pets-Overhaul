@@ -413,8 +413,8 @@ Mods: {
 				<class>
 				- Immunity to all vanilla burn-type debuffs.
 				- Enemies inside the <burnRange> tile radius will have their burn-type debuffs affected.
-				- Their burn debuffs tick down 100% slower. (1 second of the debuff is gone in 2 seconds)
-				- They recover you <burnDrainMana> mana and <burnDrainHealth> health every second.
+				 * Their burn debuffs tick down 100% slower. (1 second of the debuff is gone in 2 seconds)
+				 * They recover you <burnDrainMana> mana and <burnDrainHealth> health every second.
 				 * Can only drain Health/Mana from up to <maxDrain> enemies.
 				'''
 			UnluckyYarn:
@@ -450,6 +450,7 @@ Mods: {
 			GlowTulip:
 				'''
 				<class>
+				- Doubles ALL Gathered hay. (Including with Flower boots etc.)
 				- Gives you <harvestChance>% more plants while below Surface.
 				 * Decreased to <rarePlantChance>% for rare plants.
 				 * Gemstone trees drop <gemstoneTreeChance>% more on top of it.
