@@ -13,7 +13,7 @@ namespace PetsOverhaul.LightPets
 {
     public sealed class JewelOfLightEffect : LightPetEffect
     {
-        public override void PostUpdateMiscEffects()
+        public override void PostUpdateEquips()
         {
             if (Player.miscEquips[1].TryGetGlobalItem(out JewelOfLight empress))
             {

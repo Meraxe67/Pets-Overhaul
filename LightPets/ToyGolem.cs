@@ -12,7 +12,7 @@ namespace PetsOverhaul.LightPets
 {
     public sealed class ToyGolemEffect : LightPetEffect
     {
-        public override void PostUpdateMiscEffects()
+        public override void PostUpdateEquips()
         {
             if (Player.miscEquips[1].TryGetGlobalItem(out ToyGolem toyGolem))
             {
