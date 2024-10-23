@@ -31,9 +31,8 @@ namespace PetsOverhaul.NPCs
             NPC.DeathSound = SoundID.NPCDeath1;
             NPC.friendly = true;
             NPC.dontTakeDamageFromHostiles = false;
-            NPC.knockBackResist = 0.05f;
+            NPC.knockBackResist = 0.6f;
             NPC.aiStyle = -1;
-            NPC.scale = 2f;
         }
         public override void FindFrame(int frameHeight)
         {
@@ -102,7 +101,7 @@ namespace PetsOverhaul.NPCs
             {
                 Lighting.AddLight(NPC.Center, Color.GreenYellow.ToVector3() * (lifespan / 400f) * Main.mouseTextColor * 0.0255f);
                 Player player = Main.player[NPC.FindClosestPlayer()];
-                if (NPC.Distance(player.Center) < 35)
+                if (NPC.getRect().Intersects(player.getRect()))
                 {
                     Lizard lizard = player.GetModPlayer<Lizard>();
                     lizard.Pet.PetRecovery(player.statLifeMax2, lizard.percentHpRecover, isLifesteal: false);
