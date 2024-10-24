@@ -14,12 +14,13 @@ namespace PetsOverhaul.PetEffects
         public int shieldRecovery = 7500; //all 5 shields timer combined
         public float dmgIncrease = 0.07f;
         public int critIncrease = 7;
-        public float defIncrease = 1.15f;
+        public float defIncrease = 1.11f;
         public float shieldMult = 0.05f;
         public int shieldTime = 300;
         private int lastShield = 0;
         private int shieldIndex = 0;
         private int oldShieldCount = 0;
+        public bool shieldedStatBoostActive = false;
 
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
         public override PetClasses PetClassSecondary => PetClasses.Offensive;
@@ -28,6 +29,7 @@ namespace PetsOverhaul.PetEffects
             if (Pet.PetInUse(ItemID.SkeletronPrimePetItem))
             {
                 Pet.SetPetAbilityTimer(shieldRecovery);
+                shieldedStatBoostActive = false;
             }
         }
         private void AddShield() //did not touch this guys shields, was an absolute nightmare to fix it (can be looked into later)
@@ -80,11 +82,19 @@ namespace PetsOverhaul.PetEffects
 
                 if (Pet.currentShield > 0)
                 {
-                    Player.GetDamage<GenericDamageClass>() += dmgIncrease;
-                    Player.GetCritChance<GenericDamageClass>() += critIncrease;
-                    Player.statDefense *= defIncrease;
+                    AddShieldedStatBoosts();
                 }
                 oldShieldCount = Pet.petShield.Count;
+            }
+        }
+        public void AddShieldedStatBoosts()
+        {
+            if (shieldedStatBoostActive == false) 
+            {
+                Player.GetDamage<GenericDamageClass>() += dmgIncrease;
+                Player.GetCritChance<GenericDamageClass>() += critIncrease;
+                Player.statDefense *= defIncrease;
+                shieldedStatBoostActive = true;
             }
         }
     }

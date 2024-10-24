@@ -48,13 +48,22 @@ namespace PetsOverhaul.PetEffects
                 Player.GetKnockback<GenericDamageClass>() += increaseFloat;
                 Player.manaCost -= increaseFloat;
                 Player.manaRegenBonus += increaseInt;
-                Player.jumpSpeedBoost += increaseFloat;
+                Player.jumpSpeedBoost += Player.jumpSpeed * increaseFloat;
                 Player.moveSpeed += moveSpd;
                 Player.wingTimeMax += increaseInt;
                 Player.nightVision = true;
                 Player.endurance += increaseFloat;
                 Player.fishingSkill += increaseInt;
+                Player.aggro += increaseInt;
+                Player.extraFall += increaseInt;
                 Pet.abilityHaste += increaseFloat;
+                Pet.fishingFortune += increaseInt;
+                Pet.globalFortune += increaseInt;
+                Pet.harvestingFortune += increaseInt;
+                Pet.miningFortune += increaseInt;
+                Pet.petShieldMultiplier += increaseFloat;
+                Pet.petHealMultiplier += increaseFloat; 
+                // Later add EVERYTHING possible, also reduce movespeed to same as others & lower amount to 3 probably because it can be too much?
             }
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
