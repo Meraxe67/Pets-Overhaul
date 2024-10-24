@@ -27,17 +27,11 @@ namespace PetsOverhaul.PetEffects
                 Pet.SetPetAbilityTimer(burnDrain);
             }
         }
-        public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
-        {
-            if (Pet.PetInUseWithSwapCd(ItemID.BerniePetItem) && drawInfo.shadow == 0f)
-            {
-                drawInfo.DustCache.AddRange(GlobalPet.CircularDustEffect(Player.Center, DustID.Torch, bernieRange, 100));
-            }
-        }
         public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.BerniePetItem))
             {
+                GlobalPet.CircularDustEffect(Player.Center, DustID.Torch, bernieRange, 100);
                 Player.buffImmune[BuffID.Burning] = true;
                 Player.buffImmune[BuffID.OnFire] = true;
                 Player.buffImmune[BuffID.OnFire3] = true;

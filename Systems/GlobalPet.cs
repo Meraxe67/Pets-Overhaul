@@ -253,9 +253,9 @@ namespace PetsOverhaul.Systems
             return !npc.friendly && !npc.SpawnedFromStatue && npc.type != NPCID.TargetDummy && npc.canGhostHeal;
         }
         /// <summary>
-        /// Creates a Circle around the given Center with dust ID. Returns list of added Dust indexes, which can be used in drawInfo.DustCache.AddRange() in DrawEffects().
+        /// Creates a Circle around the given Center with dust ID.
         /// </summary>
-        public static List<int> CircularDustEffect(Vector2 Center, int dustID, int radius, int dustAmount, float scale = 1f)
+        public static void CircularDustEffect(Vector2 Center, int dustID, int radius, int dustAmount, float scale = 1f)
         {
             float actDustAmount = dustAmount;
             actDustAmount *= ModContent.GetInstance<PetPersonalization>().CircularDustAmount switch
@@ -267,7 +267,6 @@ namespace PetsOverhaul.Systems
             };
             if (actDustAmount > 0)
             {
-                List<int> dustIndexes = new((int)Math.Ceiling(actDustAmount));
                 for (int i = 0; i < actDustAmount; i++)
                 {
                     Vector2 pos = Center + Main.rand.NextVector2CircularEdge(radius, radius);
@@ -283,12 +282,9 @@ namespace PetsOverhaul.Systems
                         dust.noGravity = true;
                         dust.noLight = true;
                         dust.noLightEmittence = true;
-                        dustIndexes.Add(dust.dustIndex);
                     }
                 }
-                return dustIndexes;
             }
-            return [];
         }
         public bool AbilityPressCheck()
         {

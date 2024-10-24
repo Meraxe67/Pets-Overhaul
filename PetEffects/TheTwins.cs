@@ -31,18 +31,12 @@ namespace PetsOverhaul.PetEffects
                 Pet.SetPetAbilityTimer(healthDmgCd);
             }
         }
-        public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
-        {
-            if (Pet.PetInUseWithSwapCd(ItemID.TwinsPetItem) && drawInfo.shadow == 0f)
-            {
-                drawInfo.DustCache.AddRange(GlobalPet.CircularDustEffect(Player.Center, DustID.CursedTorch, closeRange, 6));
-                drawInfo.DustCache.AddRange(GlobalPet.CircularDustEffect(Player.Center, DustID.RedTorch, longRange, 30));
-            }
-        }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             if (Pet.PetInUseWithSwapCd(ItemID.TwinsPetItem))
             {
+                GlobalPet.CircularDustEffect(Player.Center, DustID.CursedTorch, closeRange, 6);
+                GlobalPet.CircularDustEffect(Player.Center, DustID.RedTorch, longRange, 30);
                 if (Player.Distance(target.Center) > longRange && Pet.timer <= 0)
                 {
                     if (target.boss == false || NpcPet.NonBossTrueBosses.Contains(target.type) == false)

@@ -28,13 +28,6 @@ namespace PetsOverhaul.PetEffects
                 Pet.SetPetAbilityTimer(glommerSanityTime);
             }
         }
-        public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
-        {
-            if (Pet.PetInUseWithSwapCd(ItemID.GlommerPetItem) && drawInfo.shadow == 0f)
-            {
-                drawInfo.DustCache.AddRange(GlobalPet.CircularDustEffect(Player.Center, DustID.ShimmerTorch, glommerSanityRange, 100));
-            }
-        }
         public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUse(ItemID.GlommerPetItem) && Main.rand.NextBool(18000))
@@ -44,6 +37,7 @@ namespace PetsOverhaul.PetEffects
 
             if (Pet.PetInUseWithSwapCd(ItemID.GlommerPetItem))
             {
+                GlobalPet.CircularDustEffect(Player.Center, DustID.ShimmerTorch, glommerSanityRange, 100);
                 for (int i = 0; i < Main.maxPlayers; i++)
                 {
                     Player plr = Main.player[i];

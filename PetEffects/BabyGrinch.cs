@@ -20,13 +20,6 @@ namespace PetsOverhaul.PetEffects
 
         public override PetClasses PetClassPrimary => PetClasses.Utility;
         public override PetClasses PetClassSecondary => PetClasses.Offensive;
-        public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
-        {
-            if (Pet.PetInUseWithSwapCd(ItemID.BabyGrinchMischiefWhistle) && drawInfo.shadow == 0f)
-            {
-                drawInfo.DustCache.AddRange(GlobalPet.CircularDustEffect(Player.Center, DustID.Snow, grinchRange, 20));
-            }
-        }
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
             if (Pet.PetInUseWithSwapCd(ItemID.BabyGrinchMischiefWhistle))
@@ -51,6 +44,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUseWithSwapCd(ItemID.BabyGrinchMischiefWhistle))
             {
+                GlobalPet.CircularDustEffect(Player.Center, DustID.Snow, grinchRange, 20);
                 Player.resistCold = true;
                 
                 for (int i = 0; i < Main.maxNPCs; i++)
