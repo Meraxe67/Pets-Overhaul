@@ -149,6 +149,22 @@ Mods: {
 				Habilita a Exibição do Tempo de Recarga da Habilidade. Se essa opção está desativada,
 				a exibição será forçada a não ocorrer, independente de outras opções relacionada a essa.
 				'''
+			// ParticleNone: None
+			// ParticleLowered: Lowered
+			// ParticleNormal: Normal
+			// ParticleIncreased: Increased
+			// DustAmountLabel: Pet Radius Display Circular Dust Amount
+			/* DustAmountTooltip:
+				'''
+				Modifies how much Dust will be created for Display of your Pets that has a radius with their effect.
+				Set it to None to disable it entirely. Editing this value by external means may cause errors.
+				''' */
+			// DustInsideBlocksLabel: Enable Pet Radius Circular Dust Inside Blocks
+			/* DustInsideBlocksTooltip:
+				'''
+				Enables whether or not Dusts created by Pets with Radius-type effects to be able to spawn inside blocks.
+				This can reduce amount of possibly unnecessary dusts, so if you have performance issues, this may be useful.
+				''' */
 			HurtSoundLabel: Desabilitar sons de dor personalizados
 			HurtSoundTooltip: Desabilita efeitos sonoros adicionados por pets quando o jogador recebe dano.
 			DeathSoundLabel: Desabilitar sons de morte personalizados
@@ -1251,6 +1267,10 @@ Mods: {
 		}
 
 		NPCs.LizardTail.DisplayName: Rabo de Lagarto
-		Configs.ShieldPosition.Tooltip: ""
+
+		Configs: {
+			ShieldPosition.Tooltip: ""
+			// ParticleAmount.Tooltip: ""
+		}
 	}
 }

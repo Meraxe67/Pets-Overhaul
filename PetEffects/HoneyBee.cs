@@ -20,7 +20,7 @@ namespace PetsOverhaul.PetEffects
         public int bottledHoneyBuff = 1200;
         public int honeyfinHoneyBuff = 600;
         public float abilityHaste = 0.15f;
-        public int range = 1600;
+        public int range = 880;
         public float currentAbilityHasteBonus = 0;
         public override void GetHealLife(Item item, bool quickHeal, ref int healValue)
         {
@@ -39,19 +39,11 @@ namespace PetsOverhaul.PetEffects
         public static void HealByHoneyBee(bool isBottledHoney, int healersWhoAmI, bool selfHeal)
         {
             HoneyBee healer = Main.player[healersWhoAmI].GetModPlayer<HoneyBee>();
+            GlobalPet.CircularDustEffect(healer.Player.Center, DustID.Honey, healer.range, 130);
             if (selfHeal)
             {
                 Player player = healer.Player;
-                int healAmount = (int)(player.statLifeMax2 * (isBottledHoney ? healer.bottledHealth : healer.honeyfinHealth) / 2 * healer.Pet.petHealMultiplier);
-                player.HealEffect(healAmount);
-                if (player.statLife + healAmount > player.statLifeMax2)
-                {
-                    player.statLife = player.statLifeMax2;
-                }
-                else
-                {
-                    player.statLife += healAmount;
-                }
+                healer.Pet.PetRecovery(player.statLifeMax2 * (isBottledHoney ? healer.bottledHealth : healer.honeyfinHealth) / 2, 1f, isLifesteal: false);
                 player.AddBuff(BuffID.Honey, (isBottledHoney ? healer.bottledHoneyBuff : healer.honeyfinHoneyBuff) / 2);
                 player.AddBuff(ModContent.BuffType<HoneyOverdose>(), healer.honeyOverdoseTime);
                 player.GetModPlayer<HoneyBee>().currentAbilityHasteBonus = healer.abilityHaste;
@@ -65,16 +57,8 @@ namespace PetsOverhaul.PetEffects
                     {
                         continue;
                     }
-                    int healAmount = (int)(player.statLifeMax2 * (isBottledHoney ? healer.bottledHealth : healer.honeyfinHealth) * healer.Pet.petHealMultiplier);
-                    player.HealEffect(healAmount);
-                    if (player.statLife + healAmount > player.statLifeMax2)
-                    {
-                        player.statLife = player.statLifeMax2;
-                    }
-                    else
-                    {
-                        player.statLife += healAmount;
-                    }
+                    HoneyBee healedHoney = Main.player[healersWhoAmI].GetModPlayer<HoneyBee>();
+                    healedHoney.Pet.PetRecovery(player.statLifeMax2 * (isBottledHoney ? healer.bottledHealth : healer.honeyfinHealth), 1f, isLifesteal: false);
                     player.AddBuff(BuffID.Honey, isBottledHoney ? healer.bottledHoneyBuff : healer.honeyfinHoneyBuff);
                     player.AddBuff(ModContent.BuffType<HoneyOverdose>(), (int)(healer.honeyOverdoseTime * (1 / (1 + healer.abilityHaste))));
                     player.GetModPlayer<HoneyBee>().currentAbilityHasteBonus = healer.abilityHaste;

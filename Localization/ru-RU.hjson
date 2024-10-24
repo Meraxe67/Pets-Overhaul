@@ -147,6 +147,22 @@ Mods: {
 				Полностью включает/отключает отображение перезарядки способностей, оно не будет отображаться ни при каких условиях.
 				Все другие параметры, касающиеся отображения способностей, не будут иметь эффекта.
 				'''
+			// ParticleNone: None
+			// ParticleLowered: Lowered
+			// ParticleNormal: Normal
+			// ParticleIncreased: Increased
+			// DustAmountLabel: Pet Radius Display Circular Dust Amount
+			/* DustAmountTooltip:
+				'''
+				Modifies how much Dust will be created for Display of your Pets that has a radius with their effect.
+				Set it to None to disable it entirely. Editing this value by external means may cause errors.
+				''' */
+			// DustInsideBlocksLabel: Enable Pet Radius Circular Dust Inside Blocks
+			/* DustInsideBlocksTooltip:
+				'''
+				Enables whether or not Dusts created by Pets with Radius-type effects to be able to spawn inside blocks.
+				This can reduce amount of possibly unnecessary dusts, so if you have performance issues, this may be useful.
+				''' */
 			HurtSoundLabel: Пользовательские звуки получения урона
 			HurtSoundTooltip: Включает/отключает пользовательские звуковые эффекты, добавленные питомцами, когда игрок получает урон.
 			DeathSoundLabel: Пользовательские звуки смерти
@@ -1308,6 +1324,10 @@ Mods: {
 		}
 
 		NPCs.LizardTail.DisplayName: Хвост ящерицы
-		Configs.ShieldPosition.Tooltip: ""
+
+		Configs: {
+			ShieldPosition.Tooltip: ""
+			// ParticleAmount.Tooltip: ""
+		}
 	}
 }

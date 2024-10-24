@@ -2,6 +2,7 @@
 using PetsOverhaul.Buffs;
 using PetsOverhaul.Config;
 using PetsOverhaul.Items;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -251,6 +252,44 @@ namespace PetsOverhaul.Systems
         {
             return !npc.friendly && !npc.SpawnedFromStatue && npc.type != NPCID.TargetDummy && npc.canGhostHeal;
         }
+        /// <summary>
+        /// Creates a Circle around the given Center with dust ID. Returns list of added Dust indexes, which can be used in drawInfo.DustCache.AddRange() in DrawEffects().
+        /// </summary>
+        public static List<int> CircularDustEffect(Vector2 Center, int dustID, int radius, int dustAmount, float scale = 1f)
+        {
+            float actDustAmount = dustAmount;
+            actDustAmount *= ModContent.GetInstance<PetPersonalization>().CircularDustAmount switch
+            {
+                ParticleAmount.None => 0,
+                ParticleAmount.Lowered => 0.5f,
+                ParticleAmount.Increased => 2f,
+                _ => 1f,
+            };
+            if (actDustAmount > 0)
+            {
+                List<int> dustIndexes = new((int)Math.Ceiling(actDustAmount));
+                for (int i = 0; i < actDustAmount; i++)
+                {
+                    Vector2 pos = Center + Main.rand.NextVector2CircularEdge(radius, radius);
+                    Point16 posCoord = Utils.ToTileCoordinates16(pos);
+                    if (WorldGen.InWorld(posCoord.X, posCoord.Y))
+                    {
+                        if (ModContent.GetInstance<PetPersonalization>().CircularDustInsideBlocks == false && WorldGen.SolidTile(posCoord.X, posCoord.Y, true))
+                        {
+                            continue;
+                        }
+
+                        Dust dust = Dust.NewDustPerfect(pos, dustID, Scale: scale);
+                        dust.noGravity = true;
+                        dust.noLight = true;
+                        dust.noLightEmittence = true;
+                        dustIndexes.Add(dust.dustIndex);
+                    }
+                }
+                return dustIndexes;
+            }
+            return [];
+        }
         public bool AbilityPressCheck()
         {
             return Player.dead == false && timer <= 0 && PetKeybinds.UsePetAbility.JustPressed;
@@ -328,9 +367,22 @@ namespace PetsOverhaul.Systems
         /// <param name="isLifesteal">Should be set to false if this is not a Life Steal, it won't use vanilla Life steal cap, won't be affected by Moon Leech debuff and won't modify player.lifeSteal if set to false.</param>
         /// <param name="doHeal">Should be set to false if intended to simply return a value but not do anything at all.</param>
         /// <returns>Returns amount calculated, irrelevant to Player's health cap, or the lifeSteal cap etc.</returns>
-        public int PetRecovery(int baseAmount, float percentageAmount, int flatIncrease = 0, bool manaSteal = false, bool isLifesteal = true, bool doHeal = true)
+        public int PetRecovery(double baseAmount, float percentageAmount, int flatIncrease = 0, bool manaSteal = false, bool isLifesteal = true, bool doHeal = true)
         {
-            float num = baseAmount * (manaSteal ? percentageAmount : (petHealMultiplier * ((isLifesteal && Player.HasBuff(BuffID.MoonLeech)) ? (percentageAmount * 0.33f) : percentageAmount)));
+            double num;
+            if (manaSteal)
+            {
+                num = baseAmount * percentageAmount;
+            }
+            else
+            {
+                num = baseAmount * petHealMultiplier * percentageAmount;
+                if (isLifesteal && Player.HasBuff(BuffID.MoonLeech))
+                {
+                    num *= 0.33f;
+                }
+            }
+
             int calculatedAmount = (int)num;
             if (Main.rand.NextFloat(0, 1) < num % 1)
             {
@@ -339,7 +391,7 @@ namespace PetsOverhaul.Systems
 
             calculatedAmount += flatIncrease;
             num = calculatedAmount;
-            if (doHeal == true && calculatedAmount > 0)
+            if (doHeal == true && calculatedAmount > 0 && Main.myPlayer == Player.whoAmI)
             {
                 if (manaSteal == false)
                 {
@@ -374,7 +426,6 @@ namespace PetsOverhaul.Systems
                     {
                         calculatedAmount = Player.statManaMax2 - Player.statMana;
                     }
-
                     Player.statMana += calculatedAmount;
                 }
             }
@@ -529,7 +580,7 @@ namespace PetsOverhaul.Systems
                             if (num > 0)
                             {
                                 num *= self.miscEquips[0].type == ItemID.GlowTulip ? 2 : 1; //Double gathered Hay don't matter if its 'placed by player' or not.
-                                int number = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i,j), i * 16, j * 16, 16, 16, 1727, num);
+                                int number = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, 1727, num);
                                 if (Main.netMode == NetmodeID.MultiplayerClient)
                                 {
                                     NetMessage.SendData(21, -1, -1, null, number, 1f);

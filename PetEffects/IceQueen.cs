@@ -32,6 +32,13 @@ namespace PetsOverhaul.PetEffects
                 Pet.SetPetAbilityTimer(cooldown);
             }
         }
+        public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
+        {
+            if (Pet.PetInUseWithSwapCd(ItemID.IceQueenPetItem) && frozenTomb == true)
+            {
+                GlobalPet.CircularDustEffect(Player.Center, DustID.SnowflakeIce, queenRange, 50);
+            }
+        }
         public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.IceQueenPetItem) && frozenTomb == true)
@@ -44,20 +51,15 @@ namespace PetsOverhaul.PetEffects
                         NpcPet.AddSlow(new NpcPet.PetSlow(slowAmount, 1, PetSlowIDs.IceQueen), npc);
                     }
                 }
-                for (int i = 0; i < 20 + iceQueenFrame / 15; i++)
-                {
-                    Dust dust = Dust.NewDustPerfect(Player.Center + Main.rand.NextVector2Circular(queenRange, queenRange), DustID.SnowflakeIce, Vector2.Zero);
-                    dust.noGravity = true;
-                }
                 if (iceQueenFrame % 30 == 0 && ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled)
                 {
                     if (Main.rand.NextBool())
                     {
-                        SoundEngine.PlaySound(SoundID.Item48 with { PitchVariance = 0.3f, Volume = 0.8f }, Player.Center + Main.rand.NextVector2Circular(queenRange, queenRange));
+                        SoundEngine.PlaySound(SoundID.Item48 with { PitchVariance = 0.3f, Volume = 0.8f }, Player.Center);
                     }
                     else
                     {
-                        SoundEngine.PlaySound(SoundID.Item49 with { PitchVariance = 0.3f, Volume = 0.8f }, Player.Center + Main.rand.NextVector2Circular(queenRange, queenRange));
+                        SoundEngine.PlaySound(SoundID.Item49 with { PitchVariance = 0.3f, Volume = 0.8f }, Player.Center);
                     }
                 }
                 iceQueenFrame++;

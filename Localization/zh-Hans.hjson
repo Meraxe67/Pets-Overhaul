@@ -147,6 +147,22 @@ Mods: {
 				Enables the Ability Cooldown Display. If this option is turned off,
 				the display will be forced to be not shown, no matter what other options regarding it.
 				''' */
+			// ParticleNone: None
+			// ParticleLowered: Lowered
+			// ParticleNormal: Normal
+			// ParticleIncreased: Increased
+			// DustAmountLabel: Pet Radius Display Circular Dust Amount
+			/* DustAmountTooltip:
+				'''
+				Modifies how much Dust will be created for Display of your Pets that has a radius with their effect.
+				Set it to None to disable it entirely. Editing this value by external means may cause errors.
+				''' */
+			// DustInsideBlocksLabel: Enable Pet Radius Circular Dust Inside Blocks
+			/* DustInsideBlocksTooltip:
+				'''
+				Enables whether or not Dusts created by Pets with Radius-type effects to be able to spawn inside blocks.
+				This can reduce amount of possibly unnecessary dusts, so if you have performance issues, this may be useful.
+				''' */
 			HurtSoundLabel: 禁用自定义伤害声音
 			HurtSoundTooltip:
 				'''
@@ -1196,6 +1212,10 @@ Mods: {
 		}
 
 		// NPCs.LizardTail.DisplayName: Lizard Tail
-		// Configs.ShieldPosition.Tooltip: ""
+
+		Configs: {
+			// ShieldPosition.Tooltip: ""
+			// ParticleAmount.Tooltip: ""
+		}
 	}
 }

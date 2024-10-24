@@ -25,7 +25,7 @@ namespace PetsOverhaul.PetEffects
         public float alertMs = 0.03f;
         public float alertAs = 0.015f;
         public int alertAggro = 125;
-        public int alertRadius = 2400;
+        public int alertRadius = 800;
         private int alertEnemies = 1;
         public int alertEnemiesMax = 6;
         private int alertTimer = 0;
@@ -58,6 +58,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.AbilityPressCheck() && Pet.PetInUseWithSwapCd(ItemID.BambooLeaf))
             {
+                GlobalPet.CircularDustEffect(Player.Center, 170, alertRadius, 80);
                 SoundEngine.PlaySound(SoundID.Item37 with { Pitch = 1f }, Player.Center);
                 EmoteBubble.MakePlayerEmote(Player, EmoteID.EmotionAlert);
                 alertEnemies = 1;

@@ -4,6 +4,7 @@ using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -28,6 +29,14 @@ namespace PetsOverhaul.PetEffects
             if (Pet.PetInUse(ItemID.TwinsPetItem))
             {
                 Pet.SetPetAbilityTimer(healthDmgCd);
+            }
+        }
+        public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
+        {
+            if (Pet.PetInUseWithSwapCd(ItemID.TwinsPetItem) && drawInfo.shadow == 0f)
+            {
+                drawInfo.DustCache.AddRange(GlobalPet.CircularDustEffect(Player.Center, DustID.CursedTorch, closeRange, 6));
+                drawInfo.DustCache.AddRange(GlobalPet.CircularDustEffect(Player.Center, DustID.RedTorch, longRange, 30));
             }
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)

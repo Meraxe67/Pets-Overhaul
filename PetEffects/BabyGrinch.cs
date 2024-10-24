@@ -4,6 +4,7 @@ using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -15,10 +16,17 @@ namespace PetsOverhaul.PetEffects
         public float winterDmg = 0.15f;
         public int winterCrit = 10;
         public float grinchSlow = 1f;
-        public int grinchRange = 480;
+        public int grinchRange = 400;
 
         public override PetClasses PetClassPrimary => PetClasses.Utility;
         public override PetClasses PetClassSecondary => PetClasses.Offensive;
+        public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
+        {
+            if (Pet.PetInUseWithSwapCd(ItemID.BabyGrinchMischiefWhistle) && drawInfo.shadow == 0f)
+            {
+                drawInfo.DustCache.AddRange(GlobalPet.CircularDustEffect(Player.Center, DustID.Snow, grinchRange, 20));
+            }
+        }
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
             if (Pet.PetInUseWithSwapCd(ItemID.BabyGrinchMischiefWhistle))
@@ -44,6 +52,7 @@ namespace PetsOverhaul.PetEffects
             if (Pet.PetInUseWithSwapCd(ItemID.BabyGrinchMischiefWhistle))
             {
                 Player.resistCold = true;
+                
                 for (int i = 0; i < Main.maxNPCs; i++)
                 {
                     NPC npc = Main.npc[i];

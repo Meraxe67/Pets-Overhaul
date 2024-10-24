@@ -16,7 +16,7 @@ namespace PetsOverhaul.PetEffects
         public List<(int storedDamage, int timer)> deerclopsTakenDamage = new();
         public int damageStoreTime = 300;
         public float healthTreshold = 0.4f;
-        public int range = 480;
+        public int range = 520;
         public float slow = 0.4f;
         public int applyTime = 300;
         public int immuneTime = 180;
@@ -59,7 +59,7 @@ namespace PetsOverhaul.PetEffects
                         {
                             SoundEngine.PlaySound(SoundID.DeerclopsScream with { PitchVariance = 0.4f, MaxInstances = 5 }, Player.Center);
                         }
-
+                        GlobalPet.CircularDustEffect(Player.Center, DustID.MushroomTorch, range, 50);
                         for (int i = 0; i < Main.maxNPCs; i++)
                         {
                             NPC npc = Main.npc[i];

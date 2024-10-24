@@ -5,6 +5,7 @@ using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -13,10 +14,10 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class Glommer : PetEffect
     {
-        public int glommerSanityTime = 45;
-        public int glommerSanityRecover = 1;
+        public int glommerSanityTime = 60;
+        public int glommerSanityRecover = 2;
         public float glommerSanityAura = 0.3f;
-        public int glommerSanityRange = 2400;
+        public int glommerSanityRange = 1040;
 
         public override PetClasses PetClassPrimary => PetClasses.Magic;
         public override PetClasses PetClassSecondary => PetClasses.Supportive;
@@ -25,6 +26,13 @@ namespace PetsOverhaul.PetEffects
             if (Pet.PetInUse(ItemID.GlommerPetItem))
             {
                 Pet.SetPetAbilityTimer(glommerSanityTime);
+            }
+        }
+        public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
+        {
+            if (Pet.PetInUseWithSwapCd(ItemID.GlommerPetItem) && drawInfo.shadow == 0f)
+            {
+                drawInfo.DustCache.AddRange(GlobalPet.CircularDustEffect(Player.Center, DustID.ShimmerTorch, glommerSanityRange, 100));
             }
         }
         public override void PostUpdateMiscEffects()

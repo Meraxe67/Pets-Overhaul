@@ -3,6 +3,7 @@ using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -11,9 +12,8 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class Bernie : PetEffect
     {
-        public int bernieRange = 2400;
-        private int timer = 0;
-        public int burnDrain = 6;
+        public int bernieRange = 1000;
+        public int burnDrain = 60; //maxtimer
         public int maxBurning = 5;
         public int manaDrain = 4;
         public int healthDrain = 3;
@@ -24,16 +24,20 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUse(ItemID.BerniePetItem))
             {
-                timer++; //this is separate from normal Pet timers
-                if (timer > 1000)
-                    timer = 1000;
+                Pet.SetPetAbilityTimer(burnDrain);
+            }
+        }
+        public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
+        {
+            if (Pet.PetInUseWithSwapCd(ItemID.BerniePetItem) && drawInfo.shadow == 0f)
+            {
+                drawInfo.DustCache.AddRange(GlobalPet.CircularDustEffect(Player.Center, DustID.Torch, bernieRange, 100));
             }
         }
         public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.BerniePetItem))
             {
-
                 Player.buffImmune[BuffID.Burning] = true;
                 Player.buffImmune[BuffID.OnFire] = true;
                 Player.buffImmune[BuffID.OnFire3] = true;
@@ -47,7 +51,7 @@ namespace PetsOverhaul.PetEffects
                     NPC npc = Main.npc[i];
                     if (npc.active && Player.Distance(npc.Center) < bernieRange)
                     {
-                        if (timer % 2 == 1)
+                        if (Main.rand.NextBool())
                         {
                             for (int a = 0; a < NPC.maxBuffs; a++)
                             {
@@ -56,7 +60,6 @@ namespace PetsOverhaul.PetEffects
                                     npc.buffTime[a]++;
                                 }
                             }
-
                         }
                         for (int a = 0; a < NPC.maxBuffs; a++)
                         {
@@ -72,16 +75,16 @@ namespace PetsOverhaul.PetEffects
                         }
                     }
                 }
-                if (timer >= burnDrain)
+                if (Pet.timer <= 0 && EnemiesBurning > 0)
                 {
                     if (EnemiesBurning > 5)
                     {
                         EnemiesBurning = 5;
                     }
 
-                    Pet.PetRecovery(burnDrain * healthDrain * EnemiesBurning, 0.005f * (Pet.abilityHaste + 1f), isLifesteal: false);
-                    Pet.PetRecovery(burnDrain * manaDrain * EnemiesBurning, 0.005f * (Pet.abilityHaste + 1f), isLifesteal: false, manaSteal: true);
-                    timer = 0;
+                    Pet.PetRecovery(burnDrain * healthDrain * EnemiesBurning, 0.005f, isLifesteal: false);
+                    Pet.PetRecovery(burnDrain * manaDrain * EnemiesBurning, 0.005f, isLifesteal: false, manaSteal: true);
+                    Pet.timer = Pet.timerMax;
                 }
             }
         }

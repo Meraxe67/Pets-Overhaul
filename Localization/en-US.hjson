@@ -147,6 +147,22 @@ Mods: {
 				Enables the Ability Cooldown Display. If this option is turned off,
 				the display will be forced to be not shown, no matter what other options regarding it.
 				'''
+			ParticleNone: None
+			ParticleLowered: Lowered
+			ParticleNormal: Normal
+			ParticleIncreased: Increased
+			DustAmountLabel: Pet Radius Display Circular Dust Amount
+			DustAmountTooltip:
+				'''
+				Modifies how much Dust will be created for Display of your Pets that has a radius with their effect.
+				Set it to None to disable it entirely. Editing this value by external means may cause errors.
+				'''
+			DustInsideBlocksLabel: Enable Pet Radius Circular Dust Inside Blocks
+			DustInsideBlocksTooltip:
+				'''
+				Enables whether or not Dusts created by Pets with Radius-type effects to be able to spawn inside blocks.
+				This can reduce amount of possibly unnecessary dusts, so if you have performance issues, this may be useful.
+				'''
 			HurtSoundLabel: Enable custom hurt sounds
 			HurtSoundTooltip: Enables custom sound effects added by Pets when the Player receives damage.
 			DeathSoundLabel: Enable custom death sounds
@@ -393,7 +409,9 @@ Mods: {
 				- Increases almost ALL Player stats by <intIncr>.
 				 * Damage, knockback resistance, crit chance, luck, mana, crit damage,
 				health, knockback, attack speed, defense, armor pen, fishing power, 
-				damage reduction, mana regen, jump speed, wing time, and pet ability haste.
+				damage reduction, mana regen, jump speed, wing time, pet ability haste,
+				global fortune, mining fortune, harvesting fortune, fishing fortune, 
+				aggro, fall damage resistance, and pet heal and shield effectiveness.
 				- Increases movement speed by <moveSpd>%.
 				- Grants permanent Night Vision buff.
 				'''
@@ -881,6 +899,7 @@ Mods: {
 				- Your target being outside of a <longRange> tile range adds <hpDmg>% health damage.
 				 * Maximum health damage is reduced to <bossHpDmg>% for bosses. 
 				 * This has a <hpDmgCooldown> second cooldown.
+				- Both benefits has NO EFFECT if enemy is inside/between the two radiuses.
 				'''
 			EverscreamPetItem:
 				'''
@@ -1305,6 +1324,10 @@ Mods: {
 		}
 
 		NPCs.LizardTail.DisplayName: Lizard Tail
-		Configs.ShieldPosition.Tooltip: ""
+
+		Configs: {
+			ShieldPosition.Tooltip: ""
+			ParticleAmount.Tooltip: ""
+		}
 	}
 }

@@ -51,6 +51,17 @@ namespace PetsOverhaul.Config
         [TooltipKey("$Mods.PetsOverhaul.Config.AbilityDisplayDisableTooltip")]
         [DefaultValue(true)]
         public bool ShowAbilityDisplay { get; set; }
+
+        [DefaultValue(ParticleAmount.Normal)]
+        [LabelKey("$Mods.PetsOverhaul.Config.DustAmountLabel")]
+        [TooltipKey("$Mods.PetsOverhaul.Config.DustAmountTooltip")]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ParticleAmount CircularDustAmount { get; set; }
+
+        [LabelKey("$Mods.PetsOverhaul.Config.DustInsideBlocksLabel")]
+        [TooltipKey("$Mods.PetsOverhaul.Config.DustInsideBlocksTooltip")]
+        [DefaultValue(true)]
+        public bool CircularDustInsideBlocks { get; set; }
         #endregion
         //Sounds
         #region

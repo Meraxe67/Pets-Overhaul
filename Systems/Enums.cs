@@ -53,4 +53,15 @@ namespace PetsOverhaul.Systems
         [LabelKey("$Mods.PetsOverhaul.Config.HealthBarRight")]
         HealthBarRight,
     }
+    public enum ParticleAmount
+    {
+        [LabelKey("$Mods.PetsOverhaul.Config.ParticleNone")]
+        None,
+        [LabelKey("$Mods.PetsOverhaul.Config.ParticleLowered")]
+        Lowered,
+        [LabelKey("$Mods.PetsOverhaul.Config.ParticleNormal")]
+        Normal,
+        [LabelKey("$Mods.PetsOverhaul.Config.ParticleIncreased")]
+        Increased,
+    }
 }
