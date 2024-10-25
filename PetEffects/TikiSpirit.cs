@@ -34,11 +34,11 @@ namespace PetsOverhaul.PetEffects
             {
                 if (ProjectileID.Sets.IsAWhip[proj.type])
                 {
-                    if (proj.CritChance + whipCritBonus >= 100)
+                    if (Player.GetTotalCritChance<GenericDamageClass>() + whipCritBonus >= 100)
                     {
                         modifiers.SetCrit();
                     }
-                    else if (Main.rand.NextBool(proj.CritChance + whipCritBonus, 100))
+                    else if (Main.rand.NextBool(Player.GetTotalCritChance<GenericDamageClass>() + whipCritBonus, 100))
                     {
                         modifiers.SetCrit();
                     }
@@ -49,11 +49,11 @@ namespace PetsOverhaul.PetEffects
                 }
                 else if (proj.IsMinionOrSentryRelated)
                 {
-                    if (proj.CritChance - nonWhipCrit >= 100)
+                    if (Player.GetTotalCritChance<GenericDamageClass>() - nonWhipCrit >= 100)
                     {
                         modifiers.SetCrit();
                     }
-                    else if (Main.rand.NextBool(proj.CritChance - nonWhipCrit, 100))
+                    else if (Main.rand.NextBool(Player.GetTotalCritChance<GenericDamageClass>() - nonWhipCrit, 100))
                     {
                         modifiers.SetCrit();
                     }
