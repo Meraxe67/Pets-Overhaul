@@ -2,7 +2,6 @@
 using PetsOverhaul.Buffs;
 using PetsOverhaul.Config;
 using PetsOverhaul.Items;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -391,7 +390,7 @@ namespace PetsOverhaul.Systems
             {
                 if (manaSteal == false)
                 {
-                    Player.HealEffect(calculatedAmount);
+                    int healEff = calculatedAmount;
                     if (calculatedAmount > Player.statLifeMax2 - Player.statLife)
                     {
                         calculatedAmount = Player.statLifeMax2 - Player.statLife;
@@ -404,15 +403,17 @@ namespace PetsOverhaul.Systems
                             calculatedAmount = (int)Player.lifeSteal;
                         }
 
-                        if (Player.lifeSteal > 0)
+                        if (calculatedAmount > 0)
                         {
                             Player.statLife += calculatedAmount;
                             Player.lifeSteal -= calculatedAmount;
+                            Player.HealEffect(calculatedAmount);
                         }
                     }
                     else
                     {
                         Player.statLife += calculatedAmount;
+                        Player.HealEffect(healEff);
                     }
                 }
                 else
@@ -736,7 +737,7 @@ namespace PetsOverhaul.Systems
             {
                 if (ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled && (ModContent.GetInstance<PetPersonalization>().LowCooldownSoundEnabled == false && timerMax > ModContent.GetInstance<PetPersonalization>().LowCooldownTreshold || ModContent.GetInstance<PetPersonalization>().LowCooldownSoundEnabled))
                 {
-                    SoundEngine.PlaySound(SoundID.MaxMana with { PitchVariance = 0.3f, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew }, Player.Center);
+                    SoundEngine.PlaySound(SoundID.MaxMana with { PitchVariance = 0.3f }, Player.Center);
                 }
             }
         }

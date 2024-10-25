@@ -12,7 +12,7 @@ namespace PetsOverhaul.Systems
     /// </summary>
     public sealed class PetSounds : ModPlayer
     {
-        public Dictionary<int, SoundStyle[]> PetItemIdToHurtSound = new Dictionary<int, SoundStyle[]>() {
+        public static Dictionary<int, SoundStyle[]> PetItemIdToHurtSound = new() {
             {
                 ItemID.Seaweed,
                     new SoundStyle[] {
@@ -38,14 +38,14 @@ namespace PetsOverhaul.Systems
                 ItemID.BoneKey,
                 new SoundStyle[] {
                     SoundID.NPCHit2 with {
-                        PitchVariance = 0.05f, Pitch = 0.1f
+                        PitchVariance = 0.3f, Pitch = 0.1f
                     }
                 }
             }, {
                 ItemID.SkeletronPetItem,
                 new SoundStyle[] {
                     SoundID.NPCHit2 with {
-                        PitchVariance = 0.05f, Pitch = 0.1f
+                        PitchVariance = 0.3f, Pitch = -0.4f
                     }
                 }
             }, {
@@ -115,28 +115,28 @@ namespace PetsOverhaul.Systems
                 ItemID.OrnateShadowKey,
                 new SoundStyle[] {
                     SoundID.NPCHit4 with {
-                        PitchVariance = 0.5f
+                        PitchVariance = 0.5f, Pitch = 0.3f
                     }
                 }
             }, {
                 ItemID.DestroyerPetItem,
                 new SoundStyle[] {
                     SoundID.NPCHit4 with {
-                        PitchVariance = 0.5f
+                        PitchVariance = 0.6f
                     }
                 }
             }, {
                 ItemID.SkeletronPrimePetItem,
                 new SoundStyle[] {
                     SoundID.NPCHit4 with {
-                        PitchVariance = 0.5f
+                        PitchVariance = 0.6f
                     }
                 }
             }, {
                 ItemID.TwinsPetItem,
                 new SoundStyle[] {
                     SoundID.NPCHit4 with {
-                        PitchVariance = 0.5f
+                        PitchVariance = 0.6f
                     }
                 }
             }, {
@@ -192,9 +192,9 @@ namespace PetsOverhaul.Systems
                 ItemID.ChesterPetItem,
                 new SoundStyle[] {
                     SoundID.ChesterOpen with {
-                        PitchVariance = 0.2f, Pitch = -0.6f
+                        PitchVariance = 0.4f, Pitch = -0.6f
                     }, SoundID.ChesterClose with {
-                        PitchVariance = 0.2f, Pitch = -0.6f
+                        PitchVariance = 0.4f, Pitch = -0.6f
                     }
                 }
             }, {
@@ -212,120 +212,120 @@ namespace PetsOverhaul.Systems
                 ItemID.BerniePetItem,
                     new SoundStyle[] {
                         SoundID.DSTMaleHurt with {
-                            PitchVariance = 0.3f
+                            PitchVariance = 0.6f
                         }, SoundID.DSTFemaleHurt with {
-                            PitchVariance = 0.3f
+                            PitchVariance = 0.6f
                         }
                     }
                 }
         };
-        public Dictionary<int, SoundStyle[]> PetItemIdToAmbientSound = new Dictionary<int, SoundStyle[]>() {
+        public static Dictionary<int, SoundStyle[]> PetItemIdToAmbientSound = new() {
             {
                 ItemID.LizardEgg,
                     new SoundStyle[] {
                         SoundID.Zombie37 with {
-                                PitchVariance = 0.5f, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew, Volume = 0.5f
+                                PitchVariance = 0.5f, Volume = 0.5f
                             },
                             SoundID.Zombie36 with {
-                                PitchVariance = 0.5f, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew, Volume = 0.5f
+                                PitchVariance = 0.5f, Volume = 0.5f
                             }
                     }
             }, {
                 ItemID.ParrotCracker,
                 new SoundStyle[] {
                     SoundID.Cockatiel with {
-                            PitchVariance = 0.5f, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew, Volume = 0.8f
+                            PitchVariance = 0.5f, Volume = 0.8f
                         },
                         SoundID.Macaw with {
-                            PitchVariance = 0.5f, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew, Volume = 0.8f
+                            PitchVariance = 0.5f, Volume = 0.8f
                         }
                 }
             }, {
                 ItemID.BoneRattle,
                 new SoundStyle[] {
                     SoundID.Zombie8 with {
-                        PitchVariance = 0.5f, Pitch = 0.5f, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew, Volume = 0.5f
+                        PitchVariance = 0.5f, Pitch = 0.5f, Volume = 0.5f
                     }
                 }
             }, {
                 ItemID.DukeFishronPetItem,
                 new SoundStyle[] {
                     SoundID.Zombie20 with {
-                        PitchVariance = 0.5f, Pitch = 0.5f, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew, Volume = 0.5f
+                        PitchVariance = 0.5f, Pitch = 0.5f, Volume = 0.5f
                     }
                 }
             }, {
                 ItemID.MartianPetItem,
                 new SoundStyle[] {
                     SoundID.Zombie59 with {
-                            PitchVariance = 0.5f, Pitch = 0.5f, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew, Volume = 0.5f
+                            PitchVariance = 0.5f, Pitch = 0.5f, Volume = 0.5f
                         },
                         SoundID.Zombie60 with {
-                            PitchVariance = 0.5f, Pitch = 0.5f, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew, Volume = 0.5f
+                            PitchVariance = 0.5f, Pitch = 0.5f, Volume = 0.5f
                         }
                 }
             }, {
                 ItemID.QueenBeePetItem,
                 new SoundStyle[] {
                     SoundID.Zombie50 with {
-                            PitchVariance = 0.2f, Pitch = 0.9f, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew, Volume = 0.5f
+                            PitchVariance = 0.2f, Pitch = 0.9f, Volume = 0.5f
                         },
                         SoundID.Zombie51 with {
-                            PitchVariance = 0.2f, Pitch = 0.9f, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew, Volume = 0.5f
+                            PitchVariance = 0.2f, Pitch = 0.9f, Volume = 0.5f
                         },
                         SoundID.Zombie52 with {
-                            PitchVariance = 0.2f, Pitch = 0.9f, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew, Volume = 0.5f
+                            PitchVariance = 0.2f, Pitch = 0.9f, Volume = 0.5f
                         }
                 }
             }
         };
-        public Dictionary<int, SoundStyle> PetItemidToKillSound = new Dictionary<int, SoundStyle>
+        public static Dictionary<int, SoundStyle> PetItemidToKillSound = new()
         {
             {
                 ItemID.Seaweed,
-                SoundID.NPCDeath27 with { PitchVariance = 0.4f }
+                SoundID.NPCDeath27 with { PitchVariance = 0.4f}
             }, {
                 ItemID.LunaticCultistPetItem,
-                SoundID.NPCDeath59 with { Pitch = -0.2f, PitchVariance = 0.2f }
+                SoundID.NPCDeath59 with { Pitch = -0.2f, PitchVariance = 0.6f }
             }, {
                 ItemID.SpiderEgg,
-                SoundID.NPCDeath47 with { PitchVariance = 0.5f }
+                SoundID.NPCDeath47 with { PitchVariance = 0.6f }
             }, {
                 ItemID.LightningCarrot,
-                SoundID.Item94 with { PitchVariance = 0.3f }
+                SoundID.Item94 with { PitchVariance = 0.5f }
             }, {
                 ItemID.LizardEgg,
-                SoundID.NPCDeath29 with { PitchVariance = 0.3f }
+                SoundID.NPCDeath29 with { PitchVariance = 0.3f}
             }, {
                 ItemID.CursedSapling,
-                SoundID.NPCDeath5 with { PitchVariance = 0.5f }
+                SoundID.NPCDeath5 with { PitchVariance = 0.5f}
             }, {
                 ItemID.EverscreamPetItem,
-                SoundID.NPCDeath5 with { PitchVariance = 0.5f }
+                SoundID.NPCDeath5 with { PitchVariance = 0.5f}
             }, {
                 ItemID.PigPetItem,
-                SoundID.NPCDeath20 with { Pitch = 0.5f, PitchVariance = 0.3f }
+                SoundID.NPCDeath20 with { Pitch = 0.5f, PitchVariance = 0.3f}
             }, {
                 ItemID.ParrotCracker,
-                SoundID.NPCDeath48 with { PitchVariance = 0.5f }
+                SoundID.NPCDeath48 with { PitchVariance = 0.5f}
             }, {
                 ItemID.BrainOfCthulhuPetItem,
-                SoundID.NPCDeath11 with { Pitch = -0.2f, PitchVariance = 0.2f }
+                SoundID.NPCDeath11 with { Pitch = -0.2f, PitchVariance = 0.2f}
             }, {
                 ItemID.DD2OgrePetItem,
-                SoundID.DD2_OgreDeath with { PitchVariance = 0.7f, Volume = 0.7f }
+                SoundID.DD2_OgreDeath with { PitchVariance = 0.7f, Volume = 0.7f}
             }, {
                 ItemID.MartianPetItem,
-                SoundID.NPCDeath57 with { Pitch = -0.3f, PitchVariance = 0.5f }
+                SoundID.NPCDeath57 with { Pitch = -0.3f, PitchVariance = 0.5f}
             }, {
                 ItemID.DD2BetsyPetItem,
-                SoundID.DD2_BetsyScream with { Pitch = -0.5f, PitchVariance = 0.2f }
+                SoundID.DD2_BetsyScream with { Pitch = -0.5f, PitchVariance = 0.2f}
             }, {
                 ItemID.DukeFishronPetItem,
-                SoundID.NPCDeath20 with { Pitch = -0.2f, PitchVariance = 0.3f }
+                SoundID.NPCDeath20 with { Pitch = -0.2f, PitchVariance = 0.3f}
             }, {
                 ItemID.MoonLordPetItem,
-                SoundID.NPCDeath62 with { PitchVariance = 0.5f, Volume = 0.8f }
+                SoundID.NPCDeath62 with { PitchVariance = 0.5f, Volume = 0.8f}
             }
         };
         public ReLogic.Utilities.SlotId PlayHurtSoundFromItemId(int itemId)
@@ -341,7 +341,7 @@ namespace PetsOverhaul.Systems
                 itemsHurtSound = PetItemIdToHurtSound[itemId][Player.Male == true ? 0 : 1];
             }
 
-            return itemsHurtSound == SoundID.MenuClose ? ReLogic.Utilities.SlotId.Invalid : SoundEngine.PlaySound(itemsHurtSound, Player.Center);
+            return itemsHurtSound == SoundID.MenuClose ? ReLogic.Utilities.SlotId.Invalid : SoundEngine.PlaySound(itemsHurtSound with { Type = SoundType.Sound }, Player.Center);
         }
 
         public ReLogic.Utilities.SlotId PlayAmbientSoundFromItemId(int itemId)
@@ -353,7 +353,7 @@ namespace PetsOverhaul.Systems
                 petAmbientSound = PetItemIdToAmbientSound[itemId][Main.rand.Next(PetItemIdToAmbientSound[itemId].Length)];
             }
 
-            return petAmbientSound == SoundID.MenuClose ? ReLogic.Utilities.SlotId.Invalid : SoundEngine.PlaySound(petAmbientSound, Player.Center);
+            return petAmbientSound == SoundID.MenuClose ? ReLogic.Utilities.SlotId.Invalid : SoundEngine.PlaySound(petAmbientSound with { Type = SoundType.Ambient, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew }, Player.Center);
         }
 
         public ReLogic.Utilities.SlotId PlayKillSoundFromItemId(int itemId)
@@ -371,7 +371,7 @@ namespace PetsOverhaul.Systems
                     : (SoundID.NPCDeath59 with { PitchVariance = 0.5f });
             }
 
-            return petKillSound == SoundID.MenuClose ? ReLogic.Utilities.SlotId.Invalid : SoundEngine.PlaySound(petKillSound, Player.Center);
+            return petKillSound == SoundID.MenuClose ? ReLogic.Utilities.SlotId.Invalid : SoundEngine.PlaySound(petKillSound with { Type = SoundType.Sound }, Player.Center);
         }
     }
 }

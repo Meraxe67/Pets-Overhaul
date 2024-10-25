@@ -59,7 +59,8 @@ namespace PetsOverhaul.PetEffects
             if (Pet.AbilityPressCheck() && Pet.PetInUseWithSwapCd(ItemID.BambooLeaf))
             {
                 GlobalPet.CircularDustEffect(Player.Center, 170, alertRadius, 80);
-                SoundEngine.PlaySound(SoundID.Item37 with { Pitch = 1f }, Player.Center);
+                if (ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled)
+                    SoundEngine.PlaySound(SoundID.Item37 with { Pitch = 1f }, Player.Center);
                 EmoteBubble.MakePlayerEmote(Player, EmoteID.EmotionAlert);
                 alertEnemies = 1;
                 for (int i = 0; i < Main.maxNPCs; i++)
