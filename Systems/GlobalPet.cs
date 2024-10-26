@@ -656,7 +656,7 @@ namespace PetsOverhaul.Systems
                     shieldToBeReduced += currentShield;
                 }
             };
-            if (ModContent.GetInstance<PetPersonalization>().HurtSoundEnabled && Player.GetModPlayer<PetSounds>().PetItemIdToHurtSound.ContainsKey(Player.miscEquips[0].type))
+            if (ModContent.GetInstance<PetPersonalization>().HurtSoundEnabled && PetSounds.PetItemIdToHurtSound.ContainsKey(Player.miscEquips[0].type))
             {
                 modifiers.DisableSound();
             }

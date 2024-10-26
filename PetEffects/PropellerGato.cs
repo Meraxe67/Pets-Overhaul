@@ -26,11 +26,12 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUseWithSwapCd(ItemID.DD2PetGato) && proj.GetGlobalProjectile<ProjectileSourceChecks>().isFromSentry)
             {
-                if (Player.GetTotalCritChance<GenericDamageClass>() + bonusCritChance >= 100)
+                int playersCrit = (int)Player.GetTotalCritChance<GenericDamageClass>();
+                if (playersCrit + bonusCritChance >= 100)
                 {
                     modifiers.SetCrit();
                 }
-                else if (Main.rand.NextBool(Player.GetTotalCritChance<GenericDamageClass>() + bonusCritChance, 100))
+                else if (Main.rand.NextBool(playersCrit + bonusCritChance, 100))
                 {
                     modifiers.SetCrit();
                 }

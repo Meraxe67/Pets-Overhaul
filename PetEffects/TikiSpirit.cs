@@ -32,13 +32,14 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUseWithSwapCd(ItemID.TikiTotem))
             {
+                int playersCrit = (int)Player.GetTotalCritChance<GenericDamageClass>();
                 if (ProjectileID.Sets.IsAWhip[proj.type])
                 {
-                    if (Player.GetTotalCritChance<GenericDamageClass>() + whipCritBonus >= 100)
+                    if (playersCrit + whipCritBonus >= 100)
                     {
                         modifiers.SetCrit();
                     }
-                    else if (Main.rand.NextBool(Player.GetTotalCritChance<GenericDamageClass>() + whipCritBonus, 100))
+                    else if (Main.rand.NextBool(playersCrit + whipCritBonus, 100))
                     {
                         modifiers.SetCrit();
                     }
@@ -49,11 +50,11 @@ namespace PetsOverhaul.PetEffects
                 }
                 else if (proj.IsMinionOrSentryRelated)
                 {
-                    if (Player.GetTotalCritChance<GenericDamageClass>() - nonWhipCrit >= 100)
+                    if (playersCrit - nonWhipCrit >= 100)
                     {
                         modifiers.SetCrit();
                     }
-                    else if (Main.rand.NextBool(Player.GetTotalCritChance<GenericDamageClass>() - nonWhipCrit, 100))
+                    else if (Main.rand.NextBool(playersCrit - nonWhipCrit, 100))
                     {
                         modifiers.SetCrit();
                     }
