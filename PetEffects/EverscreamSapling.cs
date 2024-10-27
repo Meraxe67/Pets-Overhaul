@@ -13,9 +13,9 @@ namespace PetsOverhaul.PetEffects
     {
         public int cooldown = 240;
         public float critMult = 0.6f;
-        public float dmgIncr = 0.4f;
+        public float dmgIncr = 0.3f;
         public float howMuchCrit = 10f;
-        public float missingManaPercent = 0.12f;
+        public float missingManaPercent = 0.16f;
         public int flatRecovery = 5;
         public int manaIncrease = 100;
 

@@ -15,7 +15,7 @@ namespace PetsOverhaul.PetEffects
     {
         public float winterDmg = 0.15f;
         public int winterCrit = 10;
-        public float grinchSlow = 1f;
+        public float grinchSlow = 0.9f;
         public int grinchRange = 400;
 
         public override PetClasses PetClassPrimary => PetClasses.Utility;

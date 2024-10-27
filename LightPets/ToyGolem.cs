@@ -24,8 +24,8 @@ namespace PetsOverhaul.LightPets
     }
     public sealed class ToyGolem : GlobalItem
     {
-        public LightPetStat HealthRegen = new(4, 1, -1);
-        public LightPetStat PercentHealth = new(35, 0.0025f, 0.025f);
+        public LightPetStat HealthRegen = new(4, 1);
+        public LightPetStat PercentHealth = new(35, 0.0018f, 0.022f);
         public LightPetStat ManaRegen = new(20, 5, 30);
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)

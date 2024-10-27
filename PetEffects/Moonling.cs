@@ -14,22 +14,25 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class Moonling : PetEffect
     {
-        public float meleeDr = 0.15f;
+        public int defense = 10;
+        public float meleeDr = 0.1f;
         public float meleeSpd = 0.2f;
         public float meleeDmg = 0.2f;
+
         public int rangedPen = 15;
-        public float rangedDmg = 0.15f;
+        public float rangedDmg = 0.1f;
         public int rangedCr = 10;
         public float rangedCrDmg = 0.1f;
+
         public int magicMana = 150;
-        public float magicDmg = 0.2f;
+        public float magicDmg = 0.15f;
         public int magicCrit = 10;
         public float magicManaCost = 0.1f;
-        public float sumWhipRng = 0.50f;
+
+        public float sumWhipRng = 0.45f;
         public float sumWhipSpd = 0.3f;
         public int sumMinion = 2;
-        public int sumSentry = 3;
-        public int defense = 10;
+        public int sumSentry = 2;
         public StatModifier HighestDamage
         {
             get

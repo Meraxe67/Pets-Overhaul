@@ -24,8 +24,8 @@ namespace PetsOverhaul.LightPets
     }
     public sealed class CreeperEgg : GlobalItem
     {
-        public LightPetStat SummonDamage = new(16, 0.005f, 0.04f);
-        public LightPetStat MeleeDamage = new(16, 0.005f, 0.04f);
+        public LightPetStat SummonDamage = new(16, 0.004f, 0.04f);
+        public LightPetStat MeleeDamage = new(16, 0.004f, 0.04f);
         public LightPetStat AttackSpeed = new(20, 0.004f, 0.025f);
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)

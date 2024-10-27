@@ -343,14 +343,13 @@ Mods: {
 			Nectar:
 				'''
 				<class>
-				- If you got poisoned or got inflicted with venom, heal <antidotePercent>% of max health.
-				 * Heal has a <antidoteCd> second cooldown.
-				 * Also grants immunity to both Debuffs.
+				- Grants immunity to both Poisoned and Venom debuffs.
 				- Decreases defense by <def>, damage and crit chance by <dmgCrit>%.
 				- Increases max minions by <maxMinion> and movement speed by <moveSpd>%.
 				- All hits have a <regularChance>% chance (<summonChance>% for Summon hits) to summon
 				a friendly bee with <beeDmg> base damage and <beeKb> knockback.
 				 * Hive Pack [i:3333] gives a 33% chance to summon a Strong Bee instead of a regular.
+				 * Summoning a bee has a <beeCd> seconds cooldown.
 				'''
 			HellCake:
 				'''
@@ -396,6 +395,7 @@ Mods: {
 				'''
 				<class>
 				- Applies <frostburnTime>-second improved Frostburn on-hit.
+				 * Adds Frostburn visuals to all your weapons & projectiles.
 				- Applies <slowAmount>% slow for <slowTime> seconds on hit.
 				 * All values are multiplied by <frostMult> if full Frost Armor [i:684] is worn.
 				'''
@@ -498,7 +498,7 @@ Mods: {
 				- Pumpkin Moon weapons gain <dmg>% damage.
 				 * This is increased to <ravenDmg>% for Raven Staff. [i:1802]
 				- Increases Whip range by <whipRange>% and speed by <whipSpeed>% per minion slot.
-				 * This is quadrupled for Dark Harvest. [i:4680]
+				 * These bonuses are doubled for Dark Harvest. [i:4680]
 				 * Only works while holding a Whip.
 				'''
 			DirtiestBlock:
@@ -623,7 +623,7 @@ Mods: {
 				 * 2 for true melee hits, 1 for melee projectile hits.
 				 * Gaining stacks have a <cooldown> second cooldown.
 				 * Up to a maximum of <maxStack> stacks.
-				 * Lose 4 stacks a second if you haven't gained stacks in 10 seconds.
+				 * Lose 4 stacks a second if you haven't gained stacks in <oocTimer> seconds.
 				 * Gain <meleeSpd>% melee speed per stack, max <maxMeleeSpd>%.
 				 * Lose <moveSpd>% movement speed per stack, max -<maxSpd>%.
 				 * Gain <dmg>% melee damage per stack, max <maxDmg>%.

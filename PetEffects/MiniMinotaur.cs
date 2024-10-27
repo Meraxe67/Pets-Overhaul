@@ -13,7 +13,8 @@ namespace PetsOverhaul.PetEffects
     {
         public int minotaurStack = 0;
         public int minotaurCd = 12;
-        public int oocTimer = 600;
+        private int oocTimer = 300;
+        public int oocMaxDuration = 300;
         public int maxStack = 80;
         public float meleeSpd = 0.0023f;
         public float meleeDmg = 0.00125f;
@@ -61,7 +62,7 @@ namespace PetsOverhaul.PetEffects
                     minotaurStack = 80;
                 }
                 Pet.timer = Pet.timerMax;
-                oocTimer = 600;
+                oocTimer = oocMaxDuration;
             }
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
@@ -77,7 +78,7 @@ namespace PetsOverhaul.PetEffects
                     minotaurStack = 80;
                 }
                 Pet.timer = Pet.timerMax;
-                oocTimer = 600;
+                oocTimer = oocMaxDuration;
             }
         }
         public override void UpdateDead()
@@ -104,6 +105,7 @@ namespace PetsOverhaul.PetEffects
                 .Replace("<class>", PetTextsColors.ClassText(miniMinotaur.PetClassPrimary, miniMinotaur.PetClassSecondary))
                         .Replace("<cooldown>", Math.Round(miniMinotaur.minotaurCd / 60f, 2).ToString())
                         .Replace("<maxStack>", miniMinotaur.maxStack.ToString())
+                        .Replace("<oocTimer>", Math.Round(miniMinotaur.oocMaxDuration / 60f, 2).ToString())
                         .Replace("<maxDef>", Math.Round(miniMinotaur.defMult * 100 * miniMinotaur.maxStack, 2).ToString())
                         .Replace("<maxMeleeSpd>", Math.Round(miniMinotaur.meleeSpd * 100 * miniMinotaur.maxStack, 2).ToString())
                         .Replace("<maxDmg>", Math.Round(miniMinotaur.meleeDmg * 100 * miniMinotaur.maxStack, 2).ToString())

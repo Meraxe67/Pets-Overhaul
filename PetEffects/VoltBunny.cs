@@ -12,9 +12,9 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class VoltBunny : PetEffect
     {
-        public float movespdFlat = 0.05f;
-        public float movespdMult = 1.08f;
-        public float movespdToDmg = 0.25f;
+        public float movespdFlat = 0.1f;
+        public float movespdMult = 1.05f;
+        public float movespdToDmg = 0.2f;
         public float staticParalysis = 3f;
         public int staticLength = 45;
         public override PetClasses PetClassPrimary => PetClasses.Offensive;

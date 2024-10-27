@@ -12,7 +12,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class Sapling : PetEffect
     {
-        public float planteraLifesteal = 0.06f;
+        public float planteraLifesteal = 0.035f;
         public float regularLifesteal = 0.015f;
         public float damagePenalty = 0.7f;
         public override PetClasses PetClassPrimary => PetClasses.Defensive;

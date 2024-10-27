@@ -12,11 +12,11 @@ namespace PetsOverhaul.PetEffects
     public sealed class AlienSkater : PetEffect
     {
         public override PetClasses PetClassPrimary => PetClasses.Mobility;
-        public float accelerator = 0.60f;
+        public float accelerator = 0.50f;
         public float wingTime = 0.25f;
-        public float speedMult = 1.3f;
-        public float accMult = 1.5f;
-        public float speedAccIncr = 0.55f;
+        public float speedMult = 1.2f;
+        public float accMult = 1.35f;
+        public float speedAccIncr = 0.4f;
         public override void PostUpdateRunSpeeds()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.MartianPetItem))

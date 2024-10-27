@@ -13,7 +13,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class BabyWerewolf : PetEffect
     {
-        public float critDmgReduction = 0.3f;
+        public float critDmgReduction = 0.35f;
         public float critChance = 1.2f;
         public float damageMultPerStack = 0.02f;
         public float maulCritDmgIncrease = 0.006f;

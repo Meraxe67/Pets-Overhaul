@@ -32,7 +32,7 @@ namespace PetsOverhaul.PetEffects
         public override bool InstancePerEntity => true;
         public override void GrabRange(Item item, Player player, ref int grabRange)
         {
-            if (player.GetModPlayer<GlobalPet>().PetInUse(ItemID.ChesterPetItem))
+            if (player.GetModPlayer<GlobalPet>().PetInUse(ItemID.ChesterPetItem) && grabRange !< 0)
             {
                 grabRange += player.GetModPlayer<Chester>().suckingUpRange;
             }

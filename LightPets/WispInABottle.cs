@@ -39,8 +39,8 @@ namespace PetsOverhaul.LightPets
     }
     public sealed class WispInABottle : GlobalItem
     {
-        public LightPetStat MagicDamage = new(20, 0.0045f, 0.04f);
-        public LightPetStat RangedDamage = new(20, 0.0045f, 0.04f);
+        public LightPetStat MagicDamage = new(20, 0.004f, 0.04f);
+        public LightPetStat RangedDamage = new(20, 0.004f, 0.04f);
         public LightPetStat ProjectileVelocity = new(12, 0.01f, 0.05f);
         public LightPetStat PetProjectileDamage = new(25, 0.008f, 0.075f);
         public override bool InstancePerEntity => true;

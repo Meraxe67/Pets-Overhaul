@@ -14,7 +14,7 @@ namespace PetsOverhaul.PetEffects
         public int shieldRecovery = 7500; //all 5 shields timer combined
         public float dmgIncrease = 0.07f;
         public int critIncrease = 7;
-        public float defIncrease = 1.11f;
+        public float defIncrease = 1.08f;
         public float shieldMult = 0.05f;
         public int shieldTime = 300;
         private int lastShield = 0;

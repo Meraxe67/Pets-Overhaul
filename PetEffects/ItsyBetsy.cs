@@ -13,7 +13,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class ItsyBetsy : PetEffect
     {
-        public int debuffTime = 1200;
+        public int debuffTime = 720;
         public int maxStacks = 20;
         public float defReduction = 0.02f;
         public float missingHpRecover = 0.007f;

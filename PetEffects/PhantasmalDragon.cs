@@ -32,7 +32,7 @@ namespace PetsOverhaul.PetEffects
         public float lightningSlow = 10f; //Strike is half
         public int lightningSlowDuration = 10;
 
-        public int fireBase = 200;
+        public int fireBase = 170;
         private int fireVolley = 0;
         public int fireVolleyEveryFrame = 15;
         public int fireVolleyFrames = 90;
