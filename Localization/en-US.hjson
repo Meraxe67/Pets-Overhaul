@@ -635,8 +635,8 @@ Mods: {
 				- All projectiles by you or your Minions/Sentries have a <projChance>% chance
 				to be re-shot as a new projectile by your Parrot.
 				 * Properties of the projectile are the same except with <projDamage>x of the damage. 
-				- All non-Projectile Melee and close combat Minion/Sentry hits have a 
-				<meleeChance>% chance to hit again with <meleeDamage>x of the damage.
+				- All non-Projectile Melee, True Melee Projectiles and close combat
+				Minion & Sentry hits have a <meleeChance>% chance to hit again with <meleeDamage>x of the damage.
 				'''
 			PigPetItem:
 				'''

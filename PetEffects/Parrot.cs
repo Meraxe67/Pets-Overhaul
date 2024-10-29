@@ -25,7 +25,7 @@ namespace PetsOverhaul.PetEffects
             {
                 for (int i = 0; i < GlobalPet.Randomizer(meleeChance); i++)
                 {
-                    target.SimpleStrikeNPC(hit.SourceDamage, hit.HitDirection, Main.rand.NextBool((int)Math.Min(Player.GetTotalCritChance<GenericDamageClass>(), 100), 100), 0, DamageClass.Generic, true, Player.luck);
+                    target.SimpleStrikeNPC((int)(hit.SourceDamage * meleeDamage), hit.HitDirection, Main.rand.NextBool((int)Math.Min(Player.GetTotalCritChance(hit.DamageType), 100), 100), 0, hit.DamageType, true, Player.luck);
                     PlayParrotSound();
                 }
             }
@@ -33,11 +33,11 @@ namespace PetsOverhaul.PetEffects
 
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.ParrotCracker) && (proj.minion || proj.sentry || proj.usesOwnerMeleeHitCD || proj.hide))
+            if (Pet.PetInUseWithSwapCd(ItemID.ParrotCracker) && (proj.minion || proj.sentry || proj.usesOwnerMeleeHitCD || proj.ownerHitCheck || proj.type == ProjectileID.TrueNightsEdge))
             {
                 for (int i = 0; i < GlobalPet.Randomizer(meleeChance); i++)
                 {
-                    target.SimpleStrikeNPC(hit.SourceDamage, hit.HitDirection, Main.rand.NextBool((int)Math.Min(Player.GetTotalCritChance<GenericDamageClass>(), 100), 100), 0, DamageClass.Generic, true, Player.luck);
+                    target.SimpleStrikeNPC((int)(hit.SourceDamage * projDamage), hit.HitDirection, Main.rand.NextBool((int)Math.Min(Player.GetTotalCritChance(hit.DamageType), 100), 100), 0, hit.DamageType, true, Player.luck);
                     PlayParrotSound();
                 }
             }
@@ -45,40 +45,28 @@ namespace PetsOverhaul.PetEffects
 
         public void PlayParrotSound()
         {
-            if (!ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled)
+            if (ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled)
             {
                 SoundStyle style = default;
                 switch (Main.rand.Next(3))
                 {
                     case 0:
-                        style = SoundID.Zombie78 with
-                        {
-                            PitchVariance = 1f,
-                            MaxInstances = 3,
-                            SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest,
-                            Volume = 0.25f
-                        };
+                        style = SoundID.Zombie78;
                         break;
                     case 1:
-                        style = SoundID.Cockatiel with
-                        {
-                            PitchVariance = 1f,
-                            MaxInstances = 3,
-                            SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest,
-                            Volume = 0.25f
-                        };
+                        style = SoundID.Cockatiel;
                         break;
                     case 2:
-                        style = SoundID.Macaw with
-                        {
-                            PitchVariance = 1f,
-                            MaxInstances = 3,
-                            SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest,
-                            Volume = 0.25f
-                        };
+                        style = SoundID.Macaw;
                         break;
                 }
-                SoundEngine.PlaySound(in style, Player.Center);
+                SoundEngine.PlaySound(in style with
+                {
+                    PitchVariance = 2f,
+                    MaxInstances = 1,
+                    SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest,
+                    Volume = 0.2f
+                }, Player.Center);
             }
         }
     }
@@ -86,10 +74,10 @@ namespace PetsOverhaul.PetEffects
     {
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
-            DamageClass damageType = DamageClass.Default;
-            if (projectile.usesOwnerMeleeHitCD == false && projectile.damage > 0)
+            if (Main.player[projectile.owner].TryGetModPlayer(out Parrot parrot) && parrot.Pet.PetInUseWithSwapCd(ItemID.ParrotCracker) && projectile.usesOwnerMeleeHitCD == false && projectile.ownerHitCheck == false && projectile.damage > 0 && projectile.type != ProjectileID.TrueNightsEdge && projectile.minion == false && projectile.sentry == false) //We check if Projectile is a 'melee' projectile, or a direct 'melee hit' of a Minion/Sentry. True Nights Edge does not use usesOwnerMeleeHitCD or ownerHitCheck, reason for its exception.
             {
-                if ((!projectile.minion || !projectile.sentry) && source is EntitySource_ItemUse entity1 && entity1.Item is not null)
+                DamageClass damageType = DamageClass.Default;
+                if (source is EntitySource_ItemUse entity1 && entity1.Item is not null)
                 {
                     damageType = entity1.Item.DamageType;
                 }
@@ -97,17 +85,15 @@ namespace PetsOverhaul.PetEffects
                 {
                     damageType = proj1.DamageType;
                 }
-            }
-            
-            if (projectile.usesOwnerMeleeHitCD == false && projectile.hide == false && projectile.damage > 0 && ((!projectile.minion || !projectile.sentry) && source is EntitySource_ItemUse || source is EntitySource_Parent { Entity: Projectile entity } && (entity.minion || entity.sentry)) && Main.player[projectile.owner].TryGetModPlayer(out Parrot parrot) && parrot.Pet.PetInUseWithSwapCd(ItemID.ParrotCracker))
-            {
-                for (int i = 0; i < GlobalPet.Randomizer(parrot.projChance); i++)
+
+                if (source is EntitySource_ItemUse || source is EntitySource_Parent { Entity: Projectile entity } && (entity.minion || entity.sentry))
                 {
-                    
-                    Projectile petProjectile = Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), projectile.Center, projectile.velocity.RotateRandom(1), projectile.type, (int)(projectile.damage * parrot.projDamage), projectile.knockBack, projectile.owner);
-                    petProjectile.DamageType = damageType;
-                    parrot.PlayParrotSound();
-                    Main.NewText(petProjectile.DamageType);
+                    for (int i = 0; i < GlobalPet.Randomizer(parrot.projChance); i++)
+                    {
+                        Projectile petProjectile = Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), projectile.Center, projectile.velocity.RotateRandom(0.5f), projectile.type, (int)(projectile.damage * parrot.projDamage), projectile.knockBack, projectile.owner);
+                        petProjectile.DamageType = damageType;
+                        parrot.PlayParrotSound();
+                    }
                 }
             }
         }
