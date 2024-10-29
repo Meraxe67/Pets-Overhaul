@@ -32,8 +32,9 @@ namespace PetsOverhaul.PetEffects
             if (Pet.PetInUseWithSwapCd(ItemID.BallOfFuseWire) && Pet.timer <= 0)
             {
                 Projectile petProjectile = Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Vector2.Zero, ModContent.ProjectileType<PetExplosion>(), (int)(damageDone * damageMult), hit.Knockback * kbMult, Player.whoAmI, explosionSize);
-                petProjectile.DamageType = DamageClass.Summon;
+                petProjectile.DamageType = hit.DamageType;
                 petProjectile.ArmorPenetration = armorPen;
+                petProjectile.CritChance = (int)Player.GetTotalCritChance(hit.DamageType);
                 if (ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled)
                 {
                     SoundEngine.PlaySound(SoundID.Item14, target.Center);

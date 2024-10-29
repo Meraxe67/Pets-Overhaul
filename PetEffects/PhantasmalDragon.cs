@@ -91,6 +91,7 @@ namespace PetsOverhaul.PetEffects
                         }
                     Projectile petProjectile = Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile, "Phantasmal"), location, new Vector2(Main.MouseWorld.X - location.X - Main.rand.NextFloat(3f, -3f), Main.MouseWorld.Y - location.Y - Main.rand.NextFloat(6f, 7f)), ProjectileID.CultistBossFireBall, fireBase, fireKnockback, Player.whoAmI);
                     petProjectile.DamageType = DamageClass.Generic;
+                    petProjectile.CritChance = (int)Player.GetTotalCritChance(DamageClass.Generic);
                 }
                 Pet.SetPetAbilityTimer(phantasmDragonCooldown);
                 fireVolley--;
@@ -115,11 +116,13 @@ namespace PetsOverhaul.PetEffects
                         Vector2 velocity = Main.rand.NextVector2CircularEdge(4f, 4f);
                         Projectile petProjectile = Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile, "Phantasmal"), Main.MouseWorld, velocity, ProjectileID.CultistBossIceMist, iceBase, 0, Player.whoAmI, 0f, 1f);
                         petProjectile.DamageType = DamageClass.Generic;
+                        petProjectile.CritChance = (int)Player.GetTotalCritChance(DamageClass.Generic);
                         petProjectile.netUpdate = true;
                         break;
                     case 1: //Lightning
                         Projectile petProj = Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile, "Phantasmal"), Main.MouseWorld, Vector2.Zero, ProjectileID.CultistBossLightningOrb, lightningOrbBase, 0, Player.whoAmI, 0f);
                         petProj.DamageType = DamageClass.Generic;
+                        petProj.CritChance = (int)Player.GetTotalCritChance(DamageClass.Generic);
                         petProj.netUpdate = true;
                         break;
                     case 2: //Fire
@@ -199,7 +202,6 @@ namespace PetsOverhaul.PetEffects
                 if (Main.netMode != NetmodeID.SinglePlayer && projectile.type == ProjectileID.CultistBossIceMist && projectile.ai[1] == 1f && projectile.ai[0] % 30f == 0f)
                 {
                     Projectile petProjectile = Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), projectile.Center, projectile.rotation.ToRotationVector2(), 464, projectile.damage, projectile.knockBack, projectile.owner);
-                    petProjectile.DamageType = DamageClass.Generic;
                 }
                 projectile.friendly = true;
                 projectile.hostile = false;
@@ -243,7 +245,6 @@ namespace PetsOverhaul.PetEffects
                         float ai = Main.rand.Next(100);
                         Vector2 vector163 = Vector2.Normalize(vector162.RotatedByRandom(0.7853981852531433)) * 7f;
                         Projectile petProjectile = Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), projectile.Center, vector163, ProjectileID.CultistBossLightningOrbArc, projectile.damage / Main.player[projectile.owner].GetModPlayer<PhantasmalDragon>().lightningStrikeDivide, 0f, projectile.owner, vector162.ToRotation(), ai); //Changed ID for readability and the WhoAmI to .owner
-                        petProjectile.DamageType = DamageClass.Generic;
                     }
                     Lighting.AddLight(projectile.Center, 0.4f, 0.85f, 0.9f);
                     if (++projectile.frameCounter >= 4)

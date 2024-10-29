@@ -1,4 +1,5 @@
-﻿using PetsOverhaul.Config;
+﻿using Microsoft.Xna.Framework;
+using PetsOverhaul.Config;
 using PetsOverhaul.Projectiles;
 using PetsOverhaul.Systems;
 using System;
@@ -54,49 +55,38 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUseWithSwapCd(ItemID.Nectar) && Pet.timer <= 0)
             {
-                int summonMult = 1;
-                if (hit.DamageType == DamageClass.Summon || hit.DamageType == DamageClass.SummonMeleeSpeed || hit.DamageType == DamageClass.MagicSummonHybrid)
-                {
-                    summonMult = 2;
-                }
-                for (int i = 0; i < GlobalPet.Randomizer(beeChance * summonMult); i++)
-                {
-                    if (Player.strongBees == true && Main.rand.NextBool(1, 3))
-                    {
-                        Projectile petProjectile = Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Main.rand.NextVector2CircularEdge(7f, 7f), ProjectileID.GiantBee, beeDmg * 2, beeKb * 2, Player.whoAmI);
-                    }
-                    else
-                    {
-                        Projectile petProjectile = Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Main.rand.NextVector2CircularEdge(7f, 7f), ProjectileID.Bee, beeDmg, beeKb, Player.whoAmI);
-                    }
-                    Pet.timer = Pet.timerMax;
-                }
-
+                SpawnBees(hit.DamageType, target.Center);
             }
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Pet.timer <= 0 && Pet.PetInUseWithSwapCd(ItemID.Nectar) && proj.GetGlobalProjectile<ProjectileSourceChecks>().petProj == false)
             {
-                int summonMult = 1;
-                if (hit.DamageType == DamageClass.Summon || hit.DamageType == DamageClass.SummonMeleeSpeed || hit.DamageType == DamageClass.MagicSummonHybrid)
+                SpawnBees(hit.DamageType, target.Center);
+            }
+        }
+        public void SpawnBees(DamageClass dmgType, Vector2 pos)
+        {
+            int summonMult = 1;
+            if (dmgType == DamageClass.Summon || dmgType == DamageClass.SummonMeleeSpeed || dmgType == DamageClass.MagicSummonHybrid)
+            {
+                summonMult = 2;
+            }
+            for (int i = 0; i < GlobalPet.Randomizer(beeChance * summonMult); i++)
+            {
+                if (Player.strongBees == true && Main.rand.NextBool(1, 3))
                 {
-                    summonMult = 2;
+                    Projectile petProjectile = Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), pos, Main.rand.NextVector2CircularEdge(7f, 7f), ProjectileID.GiantBee, beeDmg * 2, beeKb * 2, Player.whoAmI);
+                    petProjectile.DamageType = DamageClass.Summon;
+                    petProjectile.CritChance = (int)Player.GetTotalCritChance(DamageClass.Summon);
                 }
-                for (int i = 0; i < GlobalPet.Randomizer(beeChance * summonMult); i++)
+                else
                 {
-                    if (Player.strongBees == true && Main.rand.NextBool(1, 3))
-                    {
-                        Projectile petProjectile = Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Main.rand.NextVector2CircularEdge(7f, 7f), ProjectileID.GiantBee, beeDmg * 2, beeKb * 2, Player.whoAmI);
-                        petProjectile.DamageType = DamageClass.Summon;
-                    }
-                    else
-                    {
-                        Projectile petProjectile = Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Main.rand.NextVector2CircularEdge(7f, 7f), ProjectileID.Bee, beeDmg, beeKb, Player.whoAmI);
-                        petProjectile.DamageType = DamageClass.Summon;
-                    }
-                    Pet.timer = Pet.timerMax;
+                    Projectile petProjectile = Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), pos, Main.rand.NextVector2CircularEdge(7f, 7f), ProjectileID.Bee, beeDmg, beeKb, Player.whoAmI);
+                    petProjectile.DamageType = DamageClass.Summon;
+                    petProjectile.CritChance = (int)Player.GetTotalCritChance(DamageClass.Summon);
                 }
+                Pet.timer = Pet.timerMax;
             }
         }
     }

@@ -851,7 +851,7 @@ Mods: {
 				- Icicle Mist
 				 * Spawns an Ice Mist on your cursor, it travels in a random direction,
 				spawning Icicle Shards along the way it travels, traveling through blocks.
-				 * Ball and Shards both deal <damage> general damage to enemies hit.
+				 * Ball and Shards both deal <damage> base damage to enemies hit.
 				 * Enemies hit by them gets slowed by <slowAmount>% for <slowTime> seconds.
 				''' */
 			/* DragonLightning:
@@ -859,14 +859,14 @@ Mods: {
 				- Lightning Orb
 				 * Spawns a Lightning Orb on your cursor, which gradually sends out Lightning Strikes
 				towards where your cursor is, both continuously striking enemies that contact them.
-				 * Orb deals <orbDmg> general damage with <orbPen> armor pen, also applying a <orbSlow>% slow briefly.
-				 * Strikes deal <strikeDmg> general damage with <strikePen> armor pen, also applying a <strikeSlow>% slow briefly.
+				 * Orb deals <orbDmg> base damage with <orbPen> armor pen, also applying a <orbSlow>% slow briefly.
+				 * Strikes deal <strikeDmg> base damage with <strikePen> armor pen, also applying a <strikeSlow>% slow briefly.
 				''' */
 			/* DragonFire:
 				'''
 				- Fireball Volley
 				 * Starts shooting Fireballs towards your cursor <fireballAmount> times within <fireballDuration> seconds.
-				 * Fireballs explode upon impact with anything, dealing <fireDmg> general damage and <kb> knockback.
+				 * Fireballs explode upon impact with anything, dealing <fireDmg> base damage and <kb> knockback.
 				 * Hit enemies get applied with Daybreak debuff for <burnSeconds> seconds.
 				 * Enabling/Disabling Phantasmal Dragon Fireball Volley from the Dragon config option can allow for 
 				 Fireballs to be cast from the Dragon's mouth, rather than from the Player. Currently: <enabled>

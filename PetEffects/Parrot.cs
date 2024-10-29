@@ -60,7 +60,7 @@ namespace PetsOverhaul.PetEffects
                         style = SoundID.Macaw;
                         break;
                 }
-                SoundEngine.PlaySound(in style with
+                SoundEngine.PlaySound(style with
                 {
                     PitchVariance = 2f,
                     MaxInstances = 1,
@@ -92,6 +92,7 @@ namespace PetsOverhaul.PetEffects
                     {
                         Projectile petProjectile = Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), projectile.Center, projectile.velocity.RotateRandom(0.5f), projectile.type, (int)(projectile.damage * parrot.projDamage), projectile.knockBack, projectile.owner);
                         petProjectile.DamageType = damageType;
+                        petProjectile.CritChance = (int)parrot.Player.GetTotalCritChance(damageType);
                         parrot.PlayParrotSound();
                     }
                 }

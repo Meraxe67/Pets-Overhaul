@@ -35,7 +35,7 @@ namespace PetsOverhaul.PetEffects
         public int popupIndexFish = -1;
         public bool anglerQuestDayCheck = false;
         /// <summary>
-        /// Default exp value used by Mining and Fishing
+        /// Default exp value used by all classes.
         /// </summary>
         public int defaultExps = 100;
         public int junimoHarvestingLevel = 1;
@@ -349,7 +349,7 @@ namespace PetsOverhaul.PetEffects
         /// </summary>
         public int PopupExp(int classIndex, int classExp, Color color)
         {
-            if (Main.showItemText)
+            if (Main.showItemText && classExp > 0)
             {
                 Vector2 popupVelo = new(Main.rand.NextFloat(-4, 4), Main.rand.NextFloat(-6, -1));
                 if (classIndex > -1)
@@ -380,8 +380,11 @@ namespace PetsOverhaul.PetEffects
             {
                 if (itemChck.harvestingDrop || itemChck.fortuneHarvestingDrop || itemChck.herbBoost)
                 {
-                    int value = HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)).expAmount;
-                    value = value * item.stack;
+                    int value;
+                    int index = HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)).expAmount;
+                    value = index == -1
+                        ? juni.defaultExps * item.stack
+                        : HarvestingXpPerGathered[index].expAmount * item.stack;
                     PickerPet.GiveCoins(GlobalPet.Randomizer((int)(juni.harvestingCoin * juni.junimoHarvestingLevel * value)));
                     value = GlobalPet.Randomizer(value);
                     juni.junimoHarvestingExp += value;

@@ -19,49 +19,41 @@ namespace PetsOverhaul.PetEffects
         public int pen = 20;
 
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
-        public void SpawnGasCloud(NPC target, int damage)
+        public void SpawnGasCloud(NPC target, int damage, DamageClass dmgType)
         {
-            for (int i = 0; i < GlobalPet.Randomizer(spawnChance + (int)(spawnChance * Pet.abilityHaste)); i++)
+            if (Pet.PetInUseWithSwapCd(ItemID.MudBud))
             {
-                Vector2 location = new(target.Center.X + Main.rand.NextFloat(-2f, 2f), target.Center.Y + Main.rand.NextFloat(-2f, 2f));
-                Vector2 velocity = new(Main.rand.NextFloat(-1.5f, 1.5f), Main.rand.NextFloat(-1.5f, 1.5f));
-                int projId;
-                switch (Main.rand.Next(3))
+                for (int i = 0; i < GlobalPet.Randomizer(spawnChance + (int)(spawnChance * Pet.abilityHaste)); i++)
                 {
-                    case 0:
-                        projId = ProjectileID.SporeGas;
-                        break;
-                    case 1:
-                        projId = ProjectileID.SporeGas2;
-                        break;
-                    case 2:
-                        projId = ProjectileID.SporeGas3;
-                        break;
-                    default:
-                        projId = ProjectileID.SporeGas;
-                        break;
-                };
-                Projectile gas = Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), location, velocity, projId, (int)(damage * damageMult) + flatDmg, knockBack, Main.myPlayer);
-                gas.scale *= 2;
-                gas.width *= 2;
-                gas.height *= 2;
-                gas.penetrate = 20;
-                gas.DamageType = DamageClass.Generic;
+                    Vector2 location = new(target.Center.X + Main.rand.NextFloat(-2f, 2f), target.Center.Y + Main.rand.NextFloat(-2f, 2f));
+                    Vector2 velocity = new(Main.rand.NextFloat(-1.5f, 1.5f), Main.rand.NextFloat(-1.5f, 1.5f));
+                    short projId = Main.rand.Next(3) switch
+                    {
+                        0 => ProjectileID.SporeGas,
+                        1 => ProjectileID.SporeGas2,
+                        2 => ProjectileID.SporeGas3,
+                        _ => ProjectileID.SporeGas,
+                    };
+                    ;
+                    Projectile gas = Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), location, velocity, projId, (int)(damage * damageMult) + flatDmg, knockBack, Main.myPlayer);
+                    gas.Resize(gas.width * 2, gas.height * 2);
+                    gas.scale *= 2;
+                    gas.penetrate = pen;
+                    gas.DamageType = dmgType;
+                    gas.CritChance = (int)Player.GetTotalCritChance(dmgType);
+                }
             }
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (proj.GetGlobalProjectile<ProjectileSourceChecks>().petProj == false && Pet.PetInUseWithSwapCd(ItemID.MudBud))
+            if (proj.GetGlobalProjectile<ProjectileSourceChecks>().petProj == false)
             {
-                SpawnGasCloud(target, damageDone);
+                SpawnGasCloud(target, damageDone, hit.DamageType);
             }
         }
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.MudBud))
-            {
-                SpawnGasCloud(target, damageDone);
-            }
+            SpawnGasCloud(target, damageDone, hit.DamageType);
         }
     }
     public sealed class MudBud : GlobalItem
