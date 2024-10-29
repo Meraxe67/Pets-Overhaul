@@ -29,10 +29,9 @@ namespace PetsOverhaul.PetEffects
     }
     public sealed class ChesterItemGrab : GlobalItem
     {
-        public override bool InstancePerEntity => true;
         public override void GrabRange(Item item, Player player, ref int grabRange)
         {
-            if (player.GetModPlayer<GlobalPet>().PetInUse(ItemID.ChesterPetItem) && grabRange !< 0)
+            if (player.GetModPlayer<GlobalPet>().PetInUse(ItemID.ChesterPetItem) && grabRange > 0)
             {
                 grabRange += player.GetModPlayer<Chester>().suckingUpRange;
             }
