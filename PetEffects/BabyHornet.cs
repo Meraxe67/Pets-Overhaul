@@ -63,11 +63,11 @@ namespace PetsOverhaul.PetEffects
                 {
                     if (Player.strongBees == true && Main.rand.NextBool(1, 3))
                     {
-                        Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Main.rand.NextVector2CircularEdge(7f, 7f), ProjectileID.GiantBee, beeDmg * 2, beeKb * 2, Player.whoAmI);
+                        Projectile petProjectile = Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Main.rand.NextVector2CircularEdge(7f, 7f), ProjectileID.GiantBee, beeDmg * 2, beeKb * 2, Player.whoAmI);
                     }
                     else
                     {
-                        Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Main.rand.NextVector2CircularEdge(7f, 7f), ProjectileID.Bee, beeDmg, beeKb, Player.whoAmI);
+                        Projectile petProjectile = Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Main.rand.NextVector2CircularEdge(7f, 7f), ProjectileID.Bee, beeDmg, beeKb, Player.whoAmI);
                     }
                     Pet.timer = Pet.timerMax;
                 }
@@ -87,11 +87,13 @@ namespace PetsOverhaul.PetEffects
                 {
                     if (Player.strongBees == true && Main.rand.NextBool(1, 3))
                     {
-                        Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Main.rand.NextVector2CircularEdge(7f, 7f), ProjectileID.GiantBee, beeDmg * 2, beeKb * 2, Player.whoAmI);
+                        Projectile petProjectile = Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Main.rand.NextVector2CircularEdge(7f, 7f), ProjectileID.GiantBee, beeDmg * 2, beeKb * 2, Player.whoAmI);
+                        petProjectile.DamageType = DamageClass.Summon;
                     }
                     else
                     {
-                        Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Main.rand.NextVector2CircularEdge(7f, 7f), ProjectileID.Bee, beeDmg, beeKb, Player.whoAmI);
+                        Projectile petProjectile = Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Main.rand.NextVector2CircularEdge(7f, 7f), ProjectileID.Bee, beeDmg, beeKb, Player.whoAmI);
+                        petProjectile.DamageType = DamageClass.Summon;
                     }
                     Pet.timer = Pet.timerMax;
                 }

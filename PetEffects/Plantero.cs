@@ -46,6 +46,7 @@ namespace PetsOverhaul.PetEffects
                 gas.width *= 2;
                 gas.height *= 2;
                 gas.penetrate = 20;
+                gas.DamageType = DamageClass.Generic;
             }
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
