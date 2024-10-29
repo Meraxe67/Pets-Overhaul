@@ -33,7 +33,7 @@ namespace PetsOverhaul.PetEffects
 
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.ParrotCracker) && (proj.minion || proj.sentry || proj.usesOwnerMeleeHitCD))
+            if (Pet.PetInUseWithSwapCd(ItemID.ParrotCracker) && (proj.minion || proj.sentry || proj.usesOwnerMeleeHitCD || proj.hide))
             {
                 for (int i = 0; i < GlobalPet.Randomizer(meleeChance); i++)
                 {
@@ -54,7 +54,7 @@ namespace PetsOverhaul.PetEffects
                         style = SoundID.Zombie78 with
                         {
                             PitchVariance = 1f,
-                            MaxInstances = 1,
+                            MaxInstances = 3,
                             SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest,
                             Volume = 0.25f
                         };
@@ -63,7 +63,7 @@ namespace PetsOverhaul.PetEffects
                         style = SoundID.Cockatiel with
                         {
                             PitchVariance = 1f,
-                            MaxInstances = 1,
+                            MaxInstances = 3,
                             SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest,
                             Volume = 0.25f
                         };
@@ -72,7 +72,7 @@ namespace PetsOverhaul.PetEffects
                         style = SoundID.Macaw with
                         {
                             PitchVariance = 1f,
-                            MaxInstances = 1,
+                            MaxInstances = 3,
                             SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest,
                             Volume = 0.25f
                         };
@@ -84,16 +84,30 @@ namespace PetsOverhaul.PetEffects
     }
     public sealed class ParrotExtraProjectile : GlobalProjectile
     {
-        public override bool InstancePerEntity => true;
-
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
-            if (projectile.usesOwnerMeleeHitCD == false && projectile.damage > 0 && ((!projectile.minion || !projectile.sentry) && source is EntitySource_ItemUse || source is EntitySource_Parent { Entity: Projectile entity } && (entity.minion || entity.sentry)) && Main.player[projectile.owner].TryGetModPlayer(out Parrot parrot) && parrot.Pet.PetInUseWithSwapCd(ItemID.ParrotCracker))
+            DamageClass damageType = DamageClass.Default;
+            if (projectile.usesOwnerMeleeHitCD == false && projectile.damage > 0)
+            {
+                if ((!projectile.minion || !projectile.sentry) && source is EntitySource_ItemUse entity1 && entity1.Item is not null)
+                {
+                    damageType = entity1.Item.DamageType;
+                }
+                else if (source is EntitySource_Parent parent && parent.Entity is Projectile proj1 && (proj1.minion || proj1.sentry))
+                {
+                    damageType = proj1.DamageType;
+                }
+            }
+            
+            if (projectile.usesOwnerMeleeHitCD == false && projectile.hide == false && projectile.damage > 0 && ((!projectile.minion || !projectile.sentry) && source is EntitySource_ItemUse || source is EntitySource_Parent { Entity: Projectile entity } && (entity.minion || entity.sentry)) && Main.player[projectile.owner].TryGetModPlayer(out Parrot parrot) && parrot.Pet.PetInUseWithSwapCd(ItemID.ParrotCracker))
             {
                 for (int i = 0; i < GlobalPet.Randomizer(parrot.projChance); i++)
                 {
-                    Projectile.NewProjectile(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), projectile.Center, projectile.velocity * Main.rand.NextFloat(0.8f, 1.2f), projectile.type, (int)(projectile.damage * parrot.projDamage), projectile.knockBack, projectile.owner);
+                    
+                    Projectile petProjectile = Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), projectile.Center, projectile.velocity.RotateRandom(1), projectile.type, (int)(projectile.damage * parrot.projDamage), projectile.knockBack, projectile.owner);
+                    petProjectile.DamageType = damageType;
                     parrot.PlayParrotSound();
+                    Main.NewText(petProjectile.DamageType);
                 }
             }
         }
