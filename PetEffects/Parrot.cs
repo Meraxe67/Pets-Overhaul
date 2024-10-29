@@ -1,5 +1,6 @@
 ﻿using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
@@ -24,7 +25,7 @@ namespace PetsOverhaul.PetEffects
             {
                 for (int i = 0; i < GlobalPet.Randomizer(meleeChance); i++)
                 {
-                    target.StrikeNPC(hit with { Damage = (int)(damageDone * meleeDamage) });
+                    target.SimpleStrikeNPC(hit.SourceDamage, hit.HitDirection, Main.rand.NextBool((int)Math.Min(Player.GetTotalCritChance<GenericDamageClass>(), 100), 100), 0, DamageClass.Generic, true, Player.luck);
                     PlayParrotSound();
                 }
             }
@@ -36,7 +37,7 @@ namespace PetsOverhaul.PetEffects
             {
                 for (int i = 0; i < GlobalPet.Randomizer(meleeChance); i++)
                 {
-                    target.StrikeNPC(hit with { Damage = (int)(damageDone * meleeDamage) });
+                    target.SimpleStrikeNPC(hit.SourceDamage, hit.HitDirection, Main.rand.NextBool((int)Math.Min(Player.GetTotalCritChance<GenericDamageClass>(), 100), 100), 0, DamageClass.Generic, true, Player.luck);
                     PlayParrotSound();
                 }
             }

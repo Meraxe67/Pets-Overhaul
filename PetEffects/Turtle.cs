@@ -67,21 +67,15 @@ namespace PetsOverhaul.PetEffects
             {
                 if (info.DamageSource.TryGetCausingEntity(out Entity entity))
                 {
-                    NPC.HitInfo hit = new NPC.HitInfo() with { Crit = false, DamageType = DamageClass.Generic, HitDirection = info.HitDirection, Knockback = 1f };
-                    int damageTaken = info.SourceDamage > Player.statLife ? Player.statLife : info.SourceDamage; //Caps the Reflect's base damage to Player's current HP.
-
-                    if (entity is Projectile projectile && projectile.TryGetGlobalProjectile<ProjectileSourceChecks>(out ProjectileSourceChecks proj))
+                    int damageTaken = Main.DamageVar(info.SourceDamage, Player.luck);
+                    damageTaken = Math.Min(damageTaken, Player.statLife); //Caps the Reflect's base damage to Player's current HP.
+                    if (entity is Projectile projectile && projectile.TryGetGlobalProjectile<ProjectileSourceChecks>(out ProjectileSourceChecks proj) && Main.npc[proj.sourceNpcId].active)
                     {
-                        NPC npc = Main.npc[proj.sourceNpcId];
-                        npc.StrikeNPC(hit with { Damage = (int)(damageTaken * dmgReflectProjectile) });
-                        if (Main.netMode != NetmodeID.SinglePlayer)
-                            NetMessage.SendStrikeNPC(npc, hit);
+                        Main.npc[proj.sourceNpcId].SimpleStrikeNPC((int)(damageTaken * dmgReflectProjectile), info.HitDirection, Main.rand.NextBool((int)Math.Min(Player.GetTotalCritChance<GenericDamageClass>(), 100), 100), 1f, DamageClass.Generic);
                     }
-                    else if (entity is NPC npc && npc.active == true && npc.immortal == false)
+                    else if (entity is NPC npc && npc.active == true)
                     {
-                        npc.StrikeNPC(hit with { Damage = (int)(damageTaken * dmgReflect) });
-                        if (Main.netMode != NetmodeID.SinglePlayer)
-                            NetMessage.SendStrikeNPC(npc, hit);
+                        npc.SimpleStrikeNPC((int)(damageTaken * dmgReflect), info.HitDirection, Main.rand.NextBool((int)Math.Min(Player.GetTotalCritChance<GenericDamageClass>(), 100), 100), 1f, DamageClass.Generic);
                     }
                 }
                 currentStacks--;

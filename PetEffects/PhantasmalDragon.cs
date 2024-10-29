@@ -99,7 +99,7 @@ namespace PetsOverhaul.PetEffects
         }
         public int Damage(int dmg)
         {
-            return Main.DamageVar(Player.GetTotalDamage<GenericDamageClass>().ApplyTo(dmg), Player.luck);
+            return (int)Player.GetTotalDamage<GenericDamageClass>().ApplyTo(dmg);
         }
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
