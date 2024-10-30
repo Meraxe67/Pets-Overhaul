@@ -380,9 +380,8 @@ namespace PetsOverhaul.PetEffects
             {
                 if (itemChck.harvestingDrop || itemChck.fortuneHarvestingDrop || itemChck.herbBoost)
                 {
-                    int value;
-                    int index = HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)).expAmount;
-                    value = index == -1
+                    int index = HarvestingXpPerGathered.IndexOf(HarvestingXpPerGathered.Find(x => x.plantList.Contains(item.type)));
+                    int value = index == -1
                         ? juni.defaultExps * item.stack
                         : HarvestingXpPerGathered[index].expAmount * item.stack;
                     PickerPet.GiveCoins(GlobalPet.Randomizer((int)(juni.harvestingCoin * juni.junimoHarvestingLevel * value)));
@@ -393,9 +392,8 @@ namespace PetsOverhaul.PetEffects
                 }
                 else if (itemChck.fishingDrop || itemChck.fortuneFishingDrop)
                 {
-                    int value;
                     int index = FishingXpPerCaught.IndexOf(FishingXpPerCaught.Find(x => x.fishList.Contains(item.type)));
-                    value = index == -1
+                    int value = index == -1
                         ? juni.defaultExps * item.stack
                         : FishingXpPerCaught[index].expAmount * item.stack;
                     PickerPet.GiveCoins(GlobalPet.Randomizer((int)(juni.fishingCoin * juni.junimoFishingLevel * value)));
