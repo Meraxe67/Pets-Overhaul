@@ -4,7 +4,9 @@ using PetsOverhaul.Systems;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent.Bestiary;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace PetsOverhaul.NPCs
@@ -12,7 +14,7 @@ namespace PetsOverhaul.NPCs
     public class LizardTail : ModNPC
     {
         public int waitTime = 0;
-        public int lifespan = 0;
+        public int lifespan = 255;
         public int frameTimer = 0;
         public int nextFrame = 5;
         public int amountOfFrames = 7;
@@ -32,7 +34,12 @@ namespace PetsOverhaul.NPCs
             NPC.friendly = true;
             NPC.dontTakeDamageFromHostiles = false;
             NPC.knockBackResist = 0.6f;
-            NPC.aiStyle = -1;
+        }
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+        {
+            bestiaryEntry.AddTags(
+                BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheTemple,
+                new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.PetsOverhaul.NPCs.LizardTailBestiaryEntry")));
         }
         public override void FindFrame(int frameHeight)
         {
@@ -64,10 +71,12 @@ namespace PetsOverhaul.NPCs
         {
             if (source is EntitySource_Pet)
             {
+                Main.BestiaryTracker.Sights.RegisterWasNearby(NPC);
                 NPC.lifeMax = (int)NPC.ai[0];
                 waitTime = (int)NPC.ai[1];
                 lifespan = (int)NPC.ai[2];
                 NPC.life = NPC.lifeMax;
+                NPC.netUpdate = true;
             }
         }
         void Kill()
@@ -84,7 +93,6 @@ namespace PetsOverhaul.NPCs
                 alpha = 255;
             return drawColor with { A = (byte)alpha };
         }
-
         public override void AI()
         {
             waitTime--;
@@ -93,10 +101,8 @@ namespace PetsOverhaul.NPCs
             if (frameTimer >= amountOfFrames * nextFrame)
                 frameTimer = 0;
 
-            if (lifespan <= 0)
-            {
-                Kill();
-            }
+            NPC.velocity *= 0.9f;
+
             if (waitTime <= 0)
             {
                 Lighting.AddLight(NPC.Center, Color.GreenYellow.ToVector3() * (lifespan / 400f) * Main.mouseTextColor * 0.0255f);
@@ -104,10 +110,17 @@ namespace PetsOverhaul.NPCs
                 if (NPC.getRect().Intersects(player.getRect()))
                 {
                     Lizard lizard = player.GetModPlayer<Lizard>();
+                    if (lizard.Player.whoAmI == Main.myPlayer)
+                        Main.BestiaryTracker.Kills.RegisterKill(NPC); //Give Player bestiary Kill count if 'picked up'
                     lizard.Pet.PetRecovery(player.statLifeMax2, lizard.percentHpRecover, isLifesteal: false);
                     lizard.Pet.timer = (int)(lizard.Pet.timer * lizard.tailCdRefund);
                     Kill();
+                    return;
                 }
+            }
+            if (lifespan <= 0)
+            {
+                Kill();
             }
         }
 
