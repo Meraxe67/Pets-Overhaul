@@ -1323,7 +1323,14 @@ Mods: {
 			PetAbilitySwitch.DisplayName: Переключение способности питомца
 		}
 
-		NPCs.LizardTail.DisplayName: Хвост ящерицы
+		NPCs: {
+			LizardTail.DisplayName: Хвост ящерицы
+			/* LizardTailBestiaryEntry:
+				'''
+				Its the best way to escape off of danger.
+				Its your Lizard Pet's way of sneaking you out of Danger!
+				''' */
+		}
 
 		Configs: {
 			ShieldPosition.Tooltip: ""
