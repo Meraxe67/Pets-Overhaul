@@ -26,8 +26,6 @@ namespace PetsOverhaul.PetEffects
         public float spdMult = 0.5f;
         public int ragePoints = 0;
         public int shieldTime = 600;
-        private int inCombatTimer = -1;
-        public int inCombatTime = 300;
         public float shieldMult = 0.5f;
         public float eocShieldMult = 1f;
         public bool eocShieldEquipped = false;
@@ -38,8 +36,6 @@ namespace PetsOverhaul.PetEffects
             if (Pet.PetInUse(ItemID.EyeOfCthulhuPetItem))
             {
                 Pet.SetPetAbilityTimer(phaseCd);
-                if (inCombatTimer >= -1)
-                    inCombatTimer--;
             }
 
             if (eocTimer >= -1)
@@ -58,17 +54,16 @@ namespace PetsOverhaul.PetEffects
                         damageTaken = Player.statLifeMax2 / 2;
                     Player.Hurt(new Player.HurtInfo() with { Damage = damageTaken, Dodgeable = false, Knockback = 0, DamageSource = PlayerDeathReason.ByCustomReason("If you're seeing this death message, report it through our discord or steam page.") });
                     Pet.AddShield((int)(damageTaken * forcedEnrageShield), shieldTime);
-
                 }
                 else
-                    inCombatTimer = inCombatTime;
+                    Pet.inCombatTimer = Pet.inCombatTimerMax;
             }
         }
         public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.EyeOfCthulhuPetItem))
             {
-                if (inCombatTimer >= 0 && Player.statLife <= Player.statLifeMax2 / 2 && Pet.timer <= 0)
+                if (Pet.inCombatTimer >= 0 && Player.statLife <= Player.statLifeMax2 / 2 && Pet.timer <= 0)
                 {
                     eocTimer = phaseTime;
                     Pet.timer = Pet.timerMax;
@@ -128,22 +123,7 @@ namespace PetsOverhaul.PetEffects
         public override void UpdateDead()
         {
             eocTimer = 0;
-            inCombatTimer = 0;
             ragePoints = 0;
-        }
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            if (Pet.PetInUse(ItemID.EyeOfCthulhuPetItem))
-            {
-                inCombatTimer = inCombatTime;
-            }
-        }
-        public override void OnHurt(Player.HurtInfo info)
-        {
-            if (Pet.PetInUse(ItemID.EyeOfCthulhuPetItem))
-            {
-                inCombatTimer = inCombatTime;
-            }
         }
     }
     public class ShieldOfCthulhuCheck : GlobalItem
@@ -180,7 +160,7 @@ namespace PetsOverhaul.PetEffects
                 .Replace("<frameReduction>", suspiciousEye.dashFrameReduce.ToString())
                 .Replace("<shieldMult>", suspiciousEye.shieldMult.ToString())
                 .Replace("<eocShieldMult>", suspiciousEye.eocShieldMult.ToString())
-                .Replace("<outOfCombat>", Math.Round(suspiciousEye.inCombatTime / 60f, 2).ToString())
+                .Replace("<outOfCombat>", Math.Round(suspiciousEye.Pet.inCombatTimerMax / 60f, 2).ToString())
                 .Replace("<defToDmg>", Math.Round(suspiciousEye.dmgMult * 100, 2).ToString())
                 .Replace("<defToSpd>", Math.Round(suspiciousEye.spdMult * 100, 2).ToString())
                 .Replace("<defToCrit>", Math.Round(suspiciousEye.critMult * 100, 2).ToString())

@@ -1266,7 +1266,14 @@ Mods: {
 			PetAbilitySwitch.DisplayName: Alternar Habilidade do Pet
 		}
 
-		NPCs.LizardTail.DisplayName: Rabo de Lagarto
+		NPCs: {
+			LizardTail.DisplayName: Rabo de Lagarto
+			/* LizardTailBestiaryEntry:
+				'''
+				Its the best way to escape off of danger.
+				Its your Lizard Pet's way of sneaking you out of Danger!
+				''' */
+		}
 
 		Configs: {
 			ShieldPosition.Tooltip: ""

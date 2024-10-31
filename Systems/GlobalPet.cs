@@ -98,6 +98,14 @@ namespace PetsOverhaul.Systems
         /// </summary>
         public int timerMax = 0;
         /// <summary>
+        /// Pets that wants to initiate effects only in Combat uses this. This is triggered to be set to inCombatTimerMax upon getting directly Hurt, having negative Life Regen (being under DoT effects) or Dealing damage. Buffs on enemies does not trigger this.
+        /// </summary>
+        public int inCombatTimer = 0;
+        /// <summary>
+        /// Reset back to 300 in ResetEffects(), if Pet wants to change in combat timer to be something Lower or Higher, set it conditionally in any Updates, somewhere after ResetEffects(). Check BabyFaceMonster to how to implement different out of combat cooldowns.
+        /// </summary>
+        public int inCombatTimerMax = 300;
+        /// <summary>
         /// Increase this value to reduce ability cooldowns. Eg. 0.1f increases how fast ability will return by 10%. Negative values will increase the cooldowns. Negative is capped at -0.9f. Do not use this to directly reduce a cooldown, use the timer field instead. Ability Haste reduces timerMax with a more balanced calculation.
         /// </summary>
         public float abilityHaste = 0;
@@ -290,27 +298,28 @@ namespace PetsOverhaul.Systems
             return Player.dead == false && timer <= 0 && PetKeybinds.UsePetAbility.JustPressed;
         }
         /// <summary>
-        /// Randomizes the given number. numToBeRandomized / randomizeTo returns how many times its 100% chance and rolls if the leftover, non-100% amount is true. Randomizer(250) returns +2 and +1 more with 50% chance.
-        /// randomizeTo is converted to positive if its negative for proper usage of Method.
+        /// Randomizes the given number. numToBeRandomized / randomizeTo returns how many times its 100% chance and rolls if the leftover, non-100% amount is true. Randomizer(225) returns +2 and +1 more with 25% chance.
+        /// randomizeTo is converted to positive if its negative for proper usage of Method. Negative values can be applied on numToBeRandomized to get the Method working the exact way, but to reduce. Ex: Randomizer(-225) returns -2 and -1 more with 25% chance.
         /// </summary>
         public static int Randomizer(int numToBeRandomized, int randomizeTo = 100)
         {
             if (randomizeTo < 0)
                 randomizeTo *= -1;
+            if (randomizeTo == 0)
+                randomizeTo = 1;
 
-            int a = 0;
-            a = numToBeRandomized / randomizeTo;
+            int amount = numToBeRandomized / randomizeTo;
             numToBeRandomized %= randomizeTo;
 
             if (numToBeRandomized < 0 && Main.rand.NextBool(numToBeRandomized * -1, randomizeTo))
             {
-                a--;
+                amount--;
             }
             else if (Main.rand.NextBool(numToBeRandomized, randomizeTo))
             {
-                a++;
+                amount++;
             }
-            return a;
+            return amount;
         }
         /// <summary>
         /// Sets active of oldest Main.combatText to false.
@@ -629,12 +638,20 @@ namespace PetsOverhaul.Systems
                 skinColorChanged = skinChanged;
             }
         }
+        public override void NaturalLifeRegen(ref float regen)
+        {
+            if (Player.lifeRegen + regen < 0)
+            {
+                inCombatTimer = inCombatTimerMax;
+            }
+        }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             if (ModContent.GetInstance<PetPersonalization>().DifficultAmount != 0)
             {
                 modifiers.FinalDamage *= 1f - ModContent.GetInstance<PetPersonalization>().DifficultAmount * 0.01f;
             }
+            inCombatTimer = inCombatTimerMax;
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
@@ -661,6 +678,7 @@ namespace PetsOverhaul.Systems
                 modifiers.DisableSound();
             }
 
+            inCombatTimer = inCombatTimerMax;
         }
         public override void OnHurt(Player.HurtInfo info)
         {
@@ -679,9 +697,10 @@ namespace PetsOverhaul.Systems
             }
             return base.ConsumableDodge(info);
         }
-        public override void ResetEffects()
+        public override void ResetEffects() //ResetEffects runs AFTER PreUpdate().
         {
             petSwapCooldown = 600;
+            inCombatTimerMax = 300;
 
             fishingFortune = 0;
             harvestingFortune = 0;
@@ -711,6 +730,11 @@ namespace PetsOverhaul.Systems
             {
                 item.pickedUpBefore = true;
             }
+            
+            if (Player.trashItem.TryGetGlobalItem(out ItemPet trash) && trash.pickedUpBefore == false) //same thing as mouseItem above, this one is extremely situational and I doubt its possible to put an item into Trash Slot without picking it up with mouse, but I suppose some mods could make it happen?
+            {
+                trash.pickedUpBefore = true;
+            }
 
             if (ColorVal >= 1f)
             {
@@ -731,6 +755,12 @@ namespace PetsOverhaul.Systems
             if (timer < -1)
             {
                 timer = -1;
+            }
+
+            inCombatTimer--;
+            if (inCombatTimer < 0)
+            {
+                inCombatTimer = 0;
             }
 
             if (timer == 0)

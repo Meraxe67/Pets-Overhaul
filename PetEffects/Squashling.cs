@@ -17,7 +17,7 @@ namespace PetsOverhaul.PetEffects
         public int squashlingRareChance = 20;
         public int pumpkinArmorBonusHp = 5;
         public int pumpkinArmorBonusHarvestingFortune = 10;
-        public int wornPumpkinAmount => 0 + (Player.armor[0].type == ItemID.PumpkinHelmet ? 1 : 0) + (Player.armor[1].type == ItemID.PumpkinBreastplate ? 1 : 0) + (Player.armor[2].type == ItemID.PumpkinLeggings ? 1 : 0);
+        public int WornPumpkinAmount => 0 + (Player.armor[0].type == ItemID.PumpkinHelmet ? 1 : 0) + (Player.armor[1].type == ItemID.PumpkinBreastplate ? 1 : 0) + (Player.armor[2].type == ItemID.PumpkinLeggings ? 1 : 0);
         public override void Load()
         {
             PetsOverhaul.OnPickupActions += PreOnPickup;
@@ -26,8 +26,8 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUse(ItemID.MagicalPumpkinSeed))
             {
-                Player.statLifeMax2 += wornPumpkinAmount * pumpkinArmorBonusHp;
-                Pet.harvestingFortune += wornPumpkinAmount * pumpkinArmorBonusHarvestingFortune;
+                Player.statLifeMax2 += WornPumpkinAmount * pumpkinArmorBonusHp;
+                Pet.harvestingFortune += WornPumpkinAmount * pumpkinArmorBonusHarvestingFortune;
             }
         }
         public static void PreOnPickup(Item item, Player player)
@@ -67,7 +67,7 @@ namespace PetsOverhaul.PetEffects
                         .Replace("<rarePlant>", squashling.squashlingRareChance.ToString())
                         .Replace("<health>", squashling.pumpkinArmorBonusHp.ToString())
                         .Replace("<harvFort>", squashling.pumpkinArmorBonusHarvestingFortune.ToString())
-                        .Replace("<pumpkinPieceAmount>", squashling.wornPumpkinAmount.ToString())
+                        .Replace("<pumpkinPieceAmount>", squashling.WornPumpkinAmount.ToString())
                         ));
         }
     }

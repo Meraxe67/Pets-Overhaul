@@ -325,12 +325,12 @@ Mods: {
 			BoneRattle:
 				'''
 				<class>
-				- Every second you haven't taken any damage, Pet's timer goes up.
-				- Upon timer reaching <stage1Time> seconds, increases health regen by <stage1Regen>.
-				- Upon timer reaching <stage2Time> seconds, the regen is increased to <stage2Regen>.
-				 * Gain a <shieldAmount>% health one-hit shield when timer hits <stage2Time> seconds.
-				- Taking damage always resets the timer to 0, but dealing damage only does if:
-				 * You've passed the <stage1Time>-second mark, then it resets back to <stage1Time> seconds.
+				- Increases your health regen build-up timer by <extraRegenTime> second, per second.
+				- Depending on how long you're out of combat for, gain following;
+				 * While out of combat for <stage1Time> seconds, increases health regen by <stage1Regen>.
+				 * While out of combat for <stage2Time> seconds, the regen is increased to <stage2Regen>.
+				 * Have a <shieldAmount>% health one-hit shield while out of combat for <stage2Time> seconds.
+				- With the Pet, dealing damage cannot set your in combat timer lower than <stage1Time> seconds.
 				'''
 			BabyGrinchMischiefWhistle:
 				'''
@@ -623,7 +623,7 @@ Mods: {
 				 * 2 for true melee hits, 1 for melee projectile hits.
 				 * Gaining stacks have a <cooldown> second cooldown.
 				 * Up to a maximum of <maxStack> stacks.
-				 * Lose 4 stacks a second if you haven't gained stacks in <oocTimer> seconds.
+				 * Lose a stack every <oocTimer> second while outside of combat.
 				 * Gain <meleeSpd>% melee speed per stack, max <maxMeleeSpd>%.
 				 * Lose <moveSpd>% movement speed per stack, max -<maxSpd>%.
 				 * Gain <dmg>% melee damage per stack, max <maxDmg>%.
@@ -1323,7 +1323,14 @@ Mods: {
 			PetAbilitySwitch.DisplayName: Pet Ability Switch
 		}
 
-		NPCs.LizardTail.DisplayName: Lizard Tail
+		NPCs: {
+			LizardTail.DisplayName: Lizard Tail
+			LizardTailBestiaryEntry:
+				'''
+				Its the best way to escape off of danger.
+				Its your Lizard Pet's way of sneaking you out of Danger!
+				'''
+		}
 
 		Configs: {
 			ShieldPosition.Tooltip: ""

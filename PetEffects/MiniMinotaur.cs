@@ -13,8 +13,7 @@ namespace PetsOverhaul.PetEffects
     {
         public int minotaurStack = 0;
         public int minotaurCd = 12;
-        private int oocTimer = 300;
-        public int oocMaxDuration = 300;
+        public int oocMaxDuration = 15;
         public int maxStack = 80;
         public float meleeSpd = 0.0023f;
         public float meleeDmg = 0.00125f;
@@ -27,10 +26,9 @@ namespace PetsOverhaul.PetEffects
             if (Pet.PetInUse(ItemID.TartarSauce))
             {
                 Pet.SetPetAbilityTimer(minotaurCd);
-                oocTimer--;
-                if (oocTimer <= 0 && minotaurStack > 0)
+                if (Pet.inCombatTimer <= 0 && minotaurStack > 0)
                 {
-                    oocTimer = 15;
+                    Pet.inCombatTimer = oocMaxDuration;
                     minotaurStack--;
                 }
                 if (minotaurStack > maxStack)
@@ -62,7 +60,6 @@ namespace PetsOverhaul.PetEffects
                     minotaurStack = 80;
                 }
                 Pet.timer = Pet.timerMax;
-                oocTimer = oocMaxDuration;
             }
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
@@ -78,7 +75,6 @@ namespace PetsOverhaul.PetEffects
                     minotaurStack = 80;
                 }
                 Pet.timer = Pet.timerMax;
-                oocTimer = oocMaxDuration;
             }
         }
         public override void UpdateDead()

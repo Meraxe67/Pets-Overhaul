@@ -12,73 +12,74 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class BabyFaceMonster : PetEffect
     {
-        private int timer = 0;
+        public float bonusRegenPerFrame = 0.2f; //This will work every frame, so * 60 is added every second to Life Regen Timer, which increases how fast you get your natural life regen up.
         public int stage2time = 720;
         public int stage1time = 420;
         public int stage1regen = 3;
         public int stage2regen = 9;
         public float stage2ShieldMult = 0.05f;
 
-        public override PetClasses PetClassPrimary => PetClasses.Summoner;
-        public override void PreUpdate()
+        public override PetClasses PetClassPrimary => PetClasses.Defensive;
+        public override void PreUpdateBuffs() //Since inCombatTimerMax is reset in ResetEffects(), we set the desired inCombatTimerMax here.
         {
             if (Pet.PetInUse(ItemID.BoneRattle))
             {
-                stage1regen = 3;
-                stage2regen = 9;
-                timer--;
-                if (timer < -1000)
-                {
-                    timer = -1000;
-                }
+                Pet.inCombatTimerMax = (int)(stage2time * (1 / (1 + Pet.abilityHaste)));
             }
         }
-        public override void PostUpdateMiscEffects()
+        public override void NaturalLifeRegen(ref float regen)
         {
             if (Pet.PetInUseWithSwapCd(ItemID.BoneRattle))
             {
-                stage1regen = (int)Math.Round(stage1regen * Pet.petHealMultiplier);
-                stage2regen = (int)Math.Round(stage2regen * Pet.petHealMultiplier);
-                if (timer == 0)
+                if (Pet.inCombatTimer <= Pet.inCombatTimerMax - (int)(stage1time * (1 / (1 + Pet.abilityHaste))) && Player.crimsonRegen == false && Player.active)
                 {
-                    if (ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled)
+                    for (int i = 0; i < 0.05f * (Player.lifeRegen + regen); i++)
+                    {
+                        int num9 = Dust.NewDust(Player.position, Player.width, Player.height, 5, 0f, 0f, 175, default, 1.75f);
+                        Main.dust[num9].noGravity = true;
+                        Main.dust[num9].velocity *= 0.75f;
+                        int num10 = Main.rand.Next(-40, 41);
+                        int num11 = Main.rand.Next(-40, 41);
+                        Main.dust[num9].position.X += num10;
+                        Main.dust[num9].position.Y += num11;
+                        Main.dust[num9].velocity.X = (-num10) * 0.075f;
+                        Main.dust[num9].velocity.Y = (-num11) * 0.075f;
+                    }
+                }
+            }
+        }
+        public override void UpdateLifeRegen()
+        {
+            if (Pet.PetInUseWithSwapCd(ItemID.BoneRattle))
+            {
+                Player.lifeRegenTime += bonusRegenPerFrame;
+                if (ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled)
+                {
+                    if (Pet.inCombatTimer == 1)
                     {
                         SoundEngine.PlaySound(SoundID.Zombie21 with { Pitch = -0.7f, PitchVariance = 0.3f, Volume = 0.75f }, Player.Center);
                     }
-                }
-                if (timer == (int)(stage1time * (1 / (1 + Pet.abilityHaste))))
-                {
-                    if (ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled)
+                    if (Pet.inCombatTimer == Pet.inCombatTimerMax - (int)(stage1time * (1 / (1 + Pet.abilityHaste))) + 1)
                     {
                         SoundEngine.PlaySound(new SoundStyle(SoundID.DD2_DrakinShot.SoundPath + "0") with { Pitch = -0.7f, PitchVariance = 0.3f, Volume = 0.75f }, Player.Center);
                     }
                 }
-                if (timer <= 0)
+                if (Pet.inCombatTimer <= 0)
                 {
                     Pet.AddShield((int)(Player.statLifeMax2 * stage2ShieldMult), 1);
-                    Player.lifeRegen += stage2regen;
-                    Player.crimsonRegen = true;
+                    Player.lifeRegen += GlobalPet.Randomizer((int)(stage2regen * 100 * Pet.petHealMultiplier));
                 }
-                else if (timer <= (int)(stage1time * (1 / (1 + Pet.abilityHaste))))
+                else if (Pet.inCombatTimer <= Pet.inCombatTimerMax - (int)(stage1time * (1 / (1 + Pet.abilityHaste))))
                 {
-                    Player.lifeRegen += stage1regen;
-                    Player.crimsonRegen = true;
+                    Player.lifeRegen += GlobalPet.Randomizer((int)(stage1regen * 100 * Pet.petHealMultiplier));
                 }
             }
         }
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) //Works after GlobalPet's ModifyHitNPC()'s inCombatTimer = inCombatTimerMax to override it if needed.
         {
-            if (Pet.PetInUse(ItemID.BoneRattle) && timer < (int)(stage1time * (1 / (1 + Pet.abilityHaste))))
+            if (Pet.PetInUse(ItemID.BoneRattle) && Pet.inCombatTimer > Pet.inCombatTimerMax - (int)(stage1time * (1 / (1 + Pet.abilityHaste))))
             {
-                timer = (int)(stage1time * (1 / (1 + Pet.abilityHaste))) - 1;
-            }
-        }
-        public override void ModifyHurt(ref Player.HurtModifiers modifiers)
-        {
-            if (Pet.PetInUse(ItemID.BoneRattle))
-            {
-
-                timer = (int)(stage2time * (1 / (1 + Pet.abilityHaste)));
+                Pet.inCombatTimer = Pet.inCombatTimerMax - (int)(stage1time * (1 / (1 + Pet.abilityHaste)));
             }
         }
     }
@@ -99,6 +100,7 @@ namespace PetsOverhaul.PetEffects
             BabyFaceMonster babyFaceMonster = Main.LocalPlayer.GetModPlayer<BabyFaceMonster>();
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BoneRattle")
                 .Replace("<class>", PetTextsColors.ClassText(babyFaceMonster.PetClassPrimary, babyFaceMonster.PetClassSecondary))
+                .Replace("<extraRegenTime>", babyFaceMonster.bonusRegenPerFrame.ToString())
                 .Replace("<stage1Time>", Math.Round((babyFaceMonster.stage2time - babyFaceMonster.stage1time) / 60f, 2).ToString())
                 .Replace("<stage2Time>", Math.Round(babyFaceMonster.stage2time / 60f, 2).ToString())
                 .Replace("<stage1Regen>", babyFaceMonster.stage1regen.ToString())
