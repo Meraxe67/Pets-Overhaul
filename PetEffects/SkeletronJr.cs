@@ -77,6 +77,7 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUseWithSwapCd(ItemID.SkeletronPetItem))
             {
+                Player.lifeRegenTime = 0;
                 PlayerLoader.OnHurt(Player, info);
                 PlayerLoader.PostHurt(Player, info);
                 skeletronTakenDamage.Add((info.Damage, info.Damage));
