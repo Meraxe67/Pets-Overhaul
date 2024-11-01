@@ -2,6 +2,8 @@
 using PetsOverhaul.Buffs;
 using PetsOverhaul.Config;
 using PetsOverhaul.Items;
+using PetsOverhaul.Projectiles;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -31,6 +33,10 @@ namespace PetsOverhaul.Systems
         /// Modify this value if you want to reduce or increase shields applied by Pets for any reason, such as increasing Shield gain with a condition. Basically a modifier on shields coming from Pets. Used in AddShield().
         /// </summary>
         public float petShieldMultiplier = 1f;
+        /// <summary>
+        /// Modify this value if you want to reduce or increase direct damages dealt by Pets, Pets that directly strikes NPC's with SimpleStrikeNPC and Pets that creates a Projectile uses this.
+        /// </summary>
+        public float petDirectDamageMultiplier = 1f;
         /// <summary>
         /// Influences the chance to increase stack of the item from your pet that doesn't fit into any other fortune category. This also increases all other fortunes with half effectiveness.
         /// </summary>
@@ -360,6 +366,12 @@ namespace PetsOverhaul.Systems
                 return shield;
             }
             return -1;
+        }
+        public int PetDamage(float damage)
+        {
+            damage *= petDirectDamageMultiplier;
+            return (int)Math.Max(damage, 1);
+
         }
         /// <summary>
         /// Used for Healing and Mana recovery purposes. Non converted amount can still grant +1, depending on a roll. Example: PetRecovery(215, 0.05f) will heal you for 10 health and 75% chance to heal +1 more, resulting in 11 health recovery.
@@ -710,6 +722,7 @@ namespace PetsOverhaul.Systems
             abilityHaste = 0;
             petHealMultiplier = 1f;
             petShieldMultiplier = 1f;
+            petDirectDamageMultiplier = 1f;
 
             if (updateReplacedTile.Count > 0)
             {

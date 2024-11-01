@@ -71,11 +71,11 @@ namespace PetsOverhaul.PetEffects
                     damageTaken = Math.Min(damageTaken, Player.statLife); //Caps the Reflect's base damage to Player's current HP.
                     if (entity is Projectile projectile && projectile.TryGetGlobalProjectile<ProjectileSourceChecks>(out ProjectileSourceChecks proj) && Main.npc[proj.sourceNpcId].active)
                     {
-                        Main.npc[proj.sourceNpcId].SimpleStrikeNPC((int)(damageTaken * dmgReflectProjectile), info.HitDirection, Main.rand.NextBool((int)Math.Min(Player.GetTotalCritChance<GenericDamageClass>(), 100), 100), 1f, DamageClass.Generic);
+                        Main.npc[proj.sourceNpcId].SimpleStrikeNPC(Pet.PetDamage(damageTaken * dmgReflectProjectile), info.HitDirection, Main.rand.NextBool((int)Math.Min(Player.GetTotalCritChance<GenericDamageClass>(), 100), 100), 1f, DamageClass.Generic);
                     }
                     else if (entity is NPC npc && npc.active == true)
                     {
-                        npc.SimpleStrikeNPC((int)(damageTaken * dmgReflect), info.HitDirection, Main.rand.NextBool((int)Math.Min(Player.GetTotalCritChance<GenericDamageClass>(), 100), 100), 1f, DamageClass.Generic);
+                        npc.SimpleStrikeNPC(Pet.PetDamage(damageTaken * dmgReflect), info.HitDirection, Main.rand.NextBool((int)Math.Min(Player.GetTotalCritChance<GenericDamageClass>(), 100), 100), 1f, DamageClass.Generic);
                     }
                 }
                 currentStacks--;

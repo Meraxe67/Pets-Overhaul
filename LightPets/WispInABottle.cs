@@ -20,6 +20,7 @@ namespace PetsOverhaul.LightPets
             {
                 Player.GetDamage<MagicDamageClass>() += wispInABottle.MagicDamage.CurrentStatFloat;
                 Player.GetDamage<RangedDamageClass>() += wispInABottle.RangedDamage.CurrentStatFloat;
+                Pet.petDirectDamageMultiplier += wispInABottle.PetDamage.CurrentStatFloat;
             }
         }
         public override void ModifyShootStats(Item item, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
@@ -29,20 +30,13 @@ namespace PetsOverhaul.LightPets
                 velocity *= wispInABottle.ProjectileVelocity.CurrentStatFloat + 1;
             }
         }
-        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
-        {
-            if (Player.miscEquips[1].TryGetGlobalItem(out WispInABottle wispInABottle) && proj.TryGetGlobalProjectile(out ProjectileSourceChecks check) && check.petProj)
-            {
-                modifiers.FinalDamage *= 1 + wispInABottle.PetProjectileDamage.CurrentStatFloat;
-            }
-        }
     }
     public sealed class WispInABottle : GlobalItem
     {
         public LightPetStat MagicDamage = new(20, 0.004f, 0.04f);
         public LightPetStat RangedDamage = new(20, 0.004f, 0.04f);
         public LightPetStat ProjectileVelocity = new(12, 0.01f, 0.05f);
-        public LightPetStat PetProjectileDamage = new(25, 0.008f, 0.075f);
+        public LightPetStat PetDamage = new(25, 0.008f, 0.075f);
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
@@ -53,28 +47,28 @@ namespace PetsOverhaul.LightPets
             MagicDamage.SetRoll();
             RangedDamage.SetRoll();
             ProjectileVelocity.SetRoll();
-            PetProjectileDamage.SetRoll();
+            PetDamage.SetRoll();
         }
         public override void NetSend(Item item, BinaryWriter writer)
         {
             writer.Write((byte)MagicDamage.CurrentRoll);
             writer.Write((byte)RangedDamage.CurrentRoll);
             writer.Write((byte)ProjectileVelocity.CurrentRoll);
-            writer.Write((byte)PetProjectileDamage.CurrentRoll);
+            writer.Write((byte)PetDamage.CurrentRoll);
         }
         public override void NetReceive(Item item, BinaryReader reader)
         {
             MagicDamage.CurrentRoll = reader.ReadByte();
             RangedDamage.CurrentRoll = reader.ReadByte();
             ProjectileVelocity.CurrentRoll = reader.ReadByte();
-            PetProjectileDamage.CurrentRoll = reader.ReadByte();
+            PetDamage.CurrentRoll = reader.ReadByte();
         }
         public override void SaveData(Item item, TagCompound tag)
         {
             tag.Add("WispMagic", MagicDamage.CurrentRoll);
             tag.Add("WispRanged", RangedDamage.CurrentRoll);
             tag.Add("WispProjSpd", ProjectileVelocity.CurrentRoll);
-            tag.Add("WispProjPet", PetProjectileDamage.CurrentRoll);
+            tag.Add("WispProjPet", PetDamage.CurrentRoll);
         }
         public override void LoadData(Item item, TagCompound tag)
         {
@@ -95,7 +89,7 @@ namespace PetsOverhaul.LightPets
 
             if (tag.TryGet("WispProjPet", out int petProj))
             {
-                PetProjectileDamage.CurrentRoll = petProj;
+                PetDamage.CurrentRoll = petProj;
             }
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
@@ -109,12 +103,12 @@ namespace PetsOverhaul.LightPets
                         .Replace("<magic>", MagicDamage.BaseAndPerQuality())
                         .Replace("<ranged>", RangedDamage.BaseAndPerQuality())
                         .Replace("<velocity>", ProjectileVelocity.BaseAndPerQuality())
-                        .Replace("<petProj>", PetProjectileDamage.BaseAndPerQuality())
+                        .Replace("<petDmg>", PetDamage.BaseAndPerQuality())
 
                         .Replace("<magicLine>", MagicDamage.StatSummaryLine())
                         .Replace("<rangedLine>", RangedDamage.StatSummaryLine())
                         .Replace("<velocityLine>", ProjectileVelocity.StatSummaryLine())
-                        .Replace("<petProjLine>", PetProjectileDamage.StatSummaryLine())
+                        .Replace("<petDmgLine>", PetDamage.StatSummaryLine())
                         ));
             if (MagicDamage.CurrentRoll <= 0)
             {

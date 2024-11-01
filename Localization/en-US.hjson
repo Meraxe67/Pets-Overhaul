@@ -308,11 +308,11 @@ Mods: {
 				'''
 				Increases Magic Damage by <magic>, Ranged Damage by <ranged>.
 				Increases the traveling speed of Magic and Ranged projectiles by <velocity>.
-				Increases the damage of Projectiles that are from your pets by <petProj>.
+				Increases the damage that are sourcing from your pets by <petDmg>.
 				Magic Damage Bonus: <magicLine>
 				Ranged Damage Bonus: <rangedLine>
 				Magic/Ranged Projectile Speed Bonus: <velocityLine>
-				Pet Projectile Damage Bonus: <petProjLine>
+				Pet Sourced Damage Bonus: <petDmgLine>
 				'''
 		}
 

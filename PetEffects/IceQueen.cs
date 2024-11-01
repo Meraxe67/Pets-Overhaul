@@ -77,7 +77,7 @@ namespace PetsOverhaul.PetEffects
                         NPC npc = Main.npc[i];
                         if (npc.active && NPCID.Sets.ImmuneToAllBuffs[npc.type] == false && Player.Distance(npc.Center) < queenRange && GlobalPet.LifestealCheck(npc))
                         {
-                            npc.SimpleStrikeNPC(freezeDamage, npc.direction, Main.rand.NextBool((int)Math.Min(Player.GetTotalCritChance<GenericDamageClass>(),100), 100),0,DamageClass.Generic,true,Player.luck);
+                            npc.SimpleStrikeNPC(Pet.PetDamage(freezeDamage), npc.direction, Main.rand.NextBool((int)Math.Min(Player.GetTotalCritChance<GenericDamageClass>(),100), 100),0,DamageClass.Generic,true,Player.luck);
                         }
                     }
                     if (ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled)
