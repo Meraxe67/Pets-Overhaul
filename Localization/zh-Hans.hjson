@@ -1,5 +1,11 @@
 Mods: {
 	PetsOverhaul: {
+		// BaseCd: Base Pet Ability Cooldown:
+		// NoCd: Current Pet has no Ability Cooldown!
+		// RemainingCd: Remaining Pet Ability Cooldown:
+		// ReadyCd: Pet Ability Ready!
+		// Sec: Second
+		// Secs: Seconds
 		// Pet: Pet
 		// And: and
 		// Operators are for cases where a Language does not use them when specifying a bonus but solely uses words. Put "" instead if you need them to be empty.
@@ -163,6 +169,10 @@ Mods: {
 				Enables whether or not Dusts created by Pets with Radius-type effects to be able to spawn inside blocks.
 				This can reduce amount of possibly unnecessary dusts, so if you have performance issues, this may be useful.
 				''' */
+			// MaxQualityColor1Label: 1st Color of Maximum Quality
+			// MaxQualityColor1Tooltip: Adjusts first color that will alternate between with the second one for Maximum Qualities for Light Pets.
+			// MaxQualityColor2Label: 2nd Color of Maximum Quality
+			// MaxQualityColor2Tooltip: Adjusts second color that will alternate between with the first one for Maximum Qualities for Light Pets.
 			HurtSoundLabel: 禁用自定义伤害声音
 			HurtSoundTooltip:
 				'''

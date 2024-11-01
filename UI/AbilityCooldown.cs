@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
 namespace PetsOverhaul.UI
@@ -24,18 +25,18 @@ namespace PetsOverhaul.UI
             {
                 if (ModContent.GetInstance<PetPersonalization>().AbilityDisplayInfo)
                 {
-                    spriteBatch.DrawString(FontAssets.MouseText.Value, "Base Pet Ability Cooldown:\n" + (BaseCooldown == 0 ? "Current Pet has no Ability Cooldown!" : Math.Round((float)BaseCooldown / 60, 1).ToString() + " second" + (BaseCooldown > 60 ? "s" : "")), new Vector2(Main.screenWidth - 348, Main.screenHeight - 220), Color.Black, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.0f);
-                    spriteBatch.DrawString(FontAssets.MouseText.Value, "Base Pet Ability Cooldown:\n" + (BaseCooldown == 0 ? "Current Pet has no Ability Cooldown!" : Math.Round((float)BaseCooldown / 60, 1).ToString() + " second" + (BaseCooldown > 60 ? "s" : "")), new Vector2(Main.screenWidth - 350, Main.screenHeight - 220), TextColor, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.0f);
+                    spriteBatch.DrawString(FontAssets.MouseText.Value, Language.GetTextValue("Mods.PetsOverhaul.BaseCd") + "\n"+(BaseCooldown == 0 ? Language.GetTextValue("Mods.PetsOverhaul.NoCd") : Math.Round((float)BaseCooldown / 60, 1).ToString() + " " + (BaseCooldown > 60 ? Language.GetTextValue("Mods.PetsOverhaul.Secs") : Language.GetTextValue("Mods.PetsOverhaul.Sec"))), new Vector2(Main.screenWidth - 348, Main.screenHeight - 220), Color.Black, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.0f);
+                    spriteBatch.DrawString(FontAssets.MouseText.Value, Language.GetTextValue("Mods.PetsOverhaul.BaseCd") + "\n" + (BaseCooldown == 0 ? Language.GetTextValue("Mods.PetsOverhaul.NoCd") : Math.Round((float)BaseCooldown / 60, 1).ToString() + " " + (BaseCooldown > 60 ? Language.GetTextValue("Mods.PetsOverhaul.Secs") : Language.GetTextValue("Mods.PetsOverhaul.Sec"))), new Vector2(Main.screenWidth - 350, Main.screenHeight - 220), TextColor, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.0f);
                 }
                 if (RemainingCooldown > 0)
                 {
-                    spriteBatch.DrawString(FontAssets.MouseText.Value, "Remaining Pet Ability Cooldown:\n" + Math.Round((float)RemainingCooldown / 60, 1).ToString() + " second" + (RemainingCooldown > 60 ? "s" : ""), new Vector2(Main.screenWidth - 348, Main.screenHeight - 150), Color.Black, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.0f);
-                    spriteBatch.DrawString(FontAssets.MouseText.Value, "Remaining Pet Ability Cooldown:\n" + Math.Round((float)RemainingCooldown / 60, 1).ToString() + " second" + (RemainingCooldown > 60 ? "s" : ""), new Vector2(Main.screenWidth - 350, Main.screenHeight - 150), TextColor, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.0f);
+                    spriteBatch.DrawString(FontAssets.MouseText.Value, Language.GetTextValue("Mods.PetsOverhaul.RemainingCd") + "\n" + Math.Round((float)RemainingCooldown / 60, 1).ToString() + " " + (RemainingCooldown > 60 ? Language.GetTextValue("Mods.PetsOverhaul.Secs") : Language.GetTextValue("Mods.PetsOverhaul.Sec")), new Vector2(Main.screenWidth - 348, Main.screenHeight - 150), Color.Black, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.0f);
+                    spriteBatch.DrawString(FontAssets.MouseText.Value, Language.GetTextValue("Mods.PetsOverhaul.RemainingCd") + "\n" + Math.Round((float)RemainingCooldown / 60, 1).ToString() + " " + (RemainingCooldown > 60 ? Language.GetTextValue("Mods.PetsOverhaul.Secs") : Language.GetTextValue("Mods.PetsOverhaul.Sec")), new Vector2(Main.screenWidth - 350, Main.screenHeight - 150), TextColor, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.0f);
                 }
                 else
                 {
-                    spriteBatch.DrawString(FontAssets.MouseText.Value, "Remaining Pet Ability Cooldown:\n" + "Pet Ability Ready!", new Vector2(Main.screenWidth - 348, Main.screenHeight - 150), Color.Black, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.0f);
-                    spriteBatch.DrawString(FontAssets.MouseText.Value, "Remaining Pet Ability Cooldown:\n" + "Pet Ability Ready!", new Vector2(Main.screenWidth - 350, Main.screenHeight - 150), new Color(236, 201, 201), 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.0f);
+                    spriteBatch.DrawString(FontAssets.MouseText.Value, Language.GetTextValue("Mods.PetsOverhaul.RemainingCd") + "\n" + Language.GetTextValue("Mods.PetsOverhaul.ReadyCd"), new Vector2(Main.screenWidth - 348, Main.screenHeight - 150), Color.Black, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.0f);
+                    spriteBatch.DrawString(FontAssets.MouseText.Value, Language.GetTextValue("Mods.PetsOverhaul.RemainingCd") + "\n" + Language.GetTextValue("Mods.PetsOverhaul.ReadyCd"), new Vector2(Main.screenWidth - 350, Main.screenHeight - 150), new Color(236, 201, 201), 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.0f);
                 }
             }
         }

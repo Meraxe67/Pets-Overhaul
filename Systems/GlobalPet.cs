@@ -260,7 +260,7 @@ namespace PetsOverhaul.Systems
             return !npc.friendly && !npc.SpawnedFromStatue && npc.type != NPCID.TargetDummy && npc.canGhostHeal;
         }
         /// <summary>
-        /// Creates a Circle around the given Center with dust ID.
+        /// Creates a Circle around the given Center with dust ID. dustAmount is usually recommended to be around radius / 10.
         /// </summary>
         public static void CircularDustEffect(Vector2 Center, int dustID, int radius, int dustAmount, float scale = 1f)
         {
