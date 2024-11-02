@@ -45,14 +45,14 @@ namespace PetsOverhaul.PetEffects
                 Player.manaRegenBonus += increaseInt;
                 Player.jumpSpeedBoost += Player.jumpSpeed * increaseFloat;
                 Player.moveSpeed += increaseFloat;
-                Player.wingTimeMax += increaseInt;
+                Player.wingTimeMax += 24; //0.4 second
                 Player.endurance += increaseFloat;
                 Player.fishingSkill += increaseInt;
                 Player.aggro += increaseInt;
                 Player.extraFall += increaseInt;
-                Player.breathMax += (int)(Player.breathMax * increaseFloat); //Like this because straight up 4 isn't correct, as vanilla ticks every 7 frames with breath.
+                Player.breathMax += 4; // equal to +28 frames, around 0.47 second
                 Player.pickSpeed -= Player.pickSpeed * increaseFloat;
-                Player.lavaMax += increaseInt;
+                Player.lavaMax += 24; //0.4 second (Also, this being set low causes issues, game attempts to draw the lava immunity bar, but crashes (freeze) if it cannot divide the value properly to frames.
                 Player.tileSpeed += increaseFloat;
                 Player.wallSpeed += increaseFloat;
                 Pet.abilityHaste += increaseFloat;

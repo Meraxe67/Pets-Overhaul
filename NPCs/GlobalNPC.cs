@@ -15,7 +15,6 @@ namespace PetsOverhaul.NPCs
 {
     public sealed class NpcPet : GlobalNPC
     {
-        int test = 0;
         /// <summary>
         /// Slow thats applied to an NPC.
         /// </summary>
