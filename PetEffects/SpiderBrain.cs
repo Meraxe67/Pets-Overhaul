@@ -13,7 +13,7 @@ namespace PetsOverhaul.PetEffects
     {
         public int lifePool = 0;
         public float lifePoolMaxPerc = 0.3f;
-        public int cdToAddToPool = 120;
+        public int cdToAddToPool = 180;
         public float lifestealAmount = 0.035f;
 
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
@@ -21,6 +21,10 @@ namespace PetsOverhaul.PetEffects
         {
             if (Pet.PetInUse(ItemID.BrainOfCthulhuPetItem))
             {
+                if (Pet.inCombatTimer <= 0)
+                    cdToAddToPool = 90;
+                else
+                    cdToAddToPool = 180;
                 Pet.SetPetAbilityTimer(cdToAddToPool);
             }
         }

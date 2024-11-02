@@ -17,7 +17,7 @@ namespace PetsOverhaul.PetEffects
         private int timer = 0;
         public float enemyDamageIncrease = 1.2f;
         public float playerDamageTakenSpeed = 4f;
-        public float playerTakenMult = 1.02f;
+        public float playerTakenMult = 1.00f;
 
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
         public override void PreUpdate()
