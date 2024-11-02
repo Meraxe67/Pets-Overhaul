@@ -16,7 +16,7 @@ namespace PetsOverhaul.PetEffects
         public float wingTime = 0.25f;
         public float speedMult = 1.2f;
         public float accMult = 1.35f;
-        public float speedAccIncr = 0.4f;
+        public float speedAccIncr = 0.2f;
         public override void PostUpdateRunSpeeds()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.MartianPetItem))

@@ -15,8 +15,8 @@ namespace PetsOverhaul.PetEffects
         public float bonusRegenPerFrame = 0.2f; //This will work every frame, so * 60 is added every second to Life Regen Timer, which increases how fast you get your natural life regen up.
         public int stage2time = 720;
         public int stage1time = 420;
-        public int stage1regen = 3;
-        public int stage2regen = 9;
+        public int stage1regen = 4;
+        public int stage2regen = 15;
         public float stage2ShieldMult = 0.05f;
 
         public override PetClasses PetClassPrimary => PetClasses.Defensive;

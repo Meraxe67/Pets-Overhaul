@@ -320,11 +320,11 @@ Mods: {
 				'''
 				Increases Magic Damage by <magic>, Ranged Damage by <ranged>.
 				Increases the traveling speed of Magic and Ranged projectiles by <velocity>.
-				Increases the damage of Projectiles that are from your pets by <petProj>.
+				Increases the damage that are sourcing from your pets by <petDmg>.
 				Magic Damage Bonus: <magicLine>
 				Ranged Damage Bonus: <rangedLine>
 				Magic/Ranged Projectile Speed Bonus: <velocityLine>
-				Pet Projectile Damage Bonus: <petProjLine>
+				Pet Sourced Damage Bonus: <petDmgLine>
 				''' */
 		}
 
@@ -413,6 +413,21 @@ Mods: {
 				伤害减免,魔力回复,跳跃速度,飞行时间,急速能力.
 				移动速度提高<moveSpd>%,获得夜视效果.
 				'''
+			// MushroomHiddenTooltip: Hold Tooltip Switch Keybind (<keybind>) to view the stats.
+			/* MushroomStats:
+				'''
+				 * Damage, knockback resistance, crit chance, luck,
+				mana, crit damage, health, knockback, attack speed,
+				defense, armor pen, fishing power, damage reduction,
+				mana regen, jump speed, wing time, pet ability haste,
+				global fortune, mining fortune, harvesting fortune,
+				fishing fortune, aggro, fall damage resistance, 
+				your Pets; damage, heal and shield effectiveness,
+				life regen, natural life regen acceleration, move speed,
+				% armor penetration, breath duration, mining speed,
+				tile placement speed, wall placement speed, weapon size,
+				lava resistance duration and ammo reservation chance.
+				''' */
 			FullMoonSqueakyToy:
 				'''
 				[c/FA377D:辅助攻击型宠物]

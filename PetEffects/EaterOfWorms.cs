@@ -17,9 +17,9 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Mining;
 
         private readonly List<(int X, int Y)> tilesToRandomize = new();
-        public int tileBreakXSpread = 2;
-        public int tileBreakYSpread = 2;
-        public int tileBreakSpreadChance = 75;
+        public int tileBreakXSpread = 3;
+        public int tileBreakYSpread = 3;
+        public int tileBreakSpreadChance = 125;
         public float nonOreSpeed = 0.2f;
         internal int mineX = -2;
         internal int mineY = -2;
@@ -35,7 +35,7 @@ namespace PetsOverhaul.PetEffects
 
                 if (Pet.PetInUse(ItemID.EaterOfWorldsPetItem) && TileID.Sets.Ore[tile.TileType] == false && ItemPet.gemTile[tile.TileType] == false && Player.controlUseItem)
                 {
-                    Player.pickSpeed -= nonOreSpeed;
+                    Player.pickSpeed -= Player.pickSpeed * nonOreSpeed;
                 }
                 if (Pet.PetInUse(ItemID.EaterOfWorldsPetItem) && Player.controlUseItem && Player.HeldItem.pick > 0 && Main.tile[prevX, prevY].TileType == 0 && oldTileType != 0 && (TileID.Sets.Ore[oldTileType] || ItemPet.gemTile[oldTileType]))
                 {

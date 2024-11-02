@@ -736,6 +736,9 @@ namespace PetsOverhaul.Systems
             {
                 CoordsToRemove.Clear();
             }
+
+            Player.breathMax = 200; //TODO: Remove this when tModLoader adds the breathMax reset in ResetEffects(), vanilla default value is 200.
+
         }
         public override void PreUpdate()
         {
@@ -743,7 +746,7 @@ namespace PetsOverhaul.Systems
             {
                 item.pickedUpBefore = true;
             }
-            
+
             if (Player.trashItem.TryGetGlobalItem(out ItemPet trash) && trash.pickedUpBefore == false) //same thing as mouseItem above, this one is extremely situational and I doubt its possible to put an item into Trash Slot without picking it up with mouse, but I suppose some mods could make it happen?
             {
                 trash.pickedUpBefore = true;

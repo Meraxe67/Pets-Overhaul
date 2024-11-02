@@ -6,16 +6,15 @@ using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.WorldBuilding;
 
 namespace PetsOverhaul.PetEffects
 {
     public sealed class BabyTruffle : PetEffect
     {
         public override PetClasses PetClassPrimary => PetClasses.Utility;
-        public override PetClasses PetClassSecondary => PetClasses.Mobility;
         public float increaseFloat = 0.04f;
         public int increaseInt = 4;
-        public float moveSpd = 0.2f;
         public int shroomPotionCd = 60;
         public int buffIncrease = 30;
         public override void PreUpdate()
@@ -25,19 +24,15 @@ namespace PetsOverhaul.PetEffects
                 Pet.SetPetAbilityTimer(shroomPotionCd);
             }
         }
-        public override void ModifyLuck(ref float luck)
-        {
-            if (Pet.PetInUseWithSwapCd(ItemID.StrangeGlowingMushroom))
-            {
-                luck += increaseFloat;
-            }
-        }
         public override void PostUpdateMiscEffects()
         {
             if (Pet.PetInUseWithSwapCd(ItemID.StrangeGlowingMushroom))
             {
                 Player.buffImmune[BuffID.Confused] = false;
                 Player.AddBuff(BuffID.Confused, 1);
+                Player.nightVision = true;
+
+                #region The wall of Stats xD
                 Player.GetAttackSpeed<GenericDamageClass>() += increaseFloat;
                 Player.GetDamage<GenericDamageClass>() += increaseFloat;
                 Player.GetCritChance<GenericDamageClass>() += increaseInt;
@@ -49,28 +44,64 @@ namespace PetsOverhaul.PetEffects
                 Player.manaCost -= increaseFloat;
                 Player.manaRegenBonus += increaseInt;
                 Player.jumpSpeedBoost += Player.jumpSpeed * increaseFloat;
-                Player.moveSpeed += moveSpd;
+                Player.moveSpeed += increaseFloat;
                 Player.wingTimeMax += increaseInt;
-                Player.nightVision = true;
                 Player.endurance += increaseFloat;
                 Player.fishingSkill += increaseInt;
                 Player.aggro += increaseInt;
                 Player.extraFall += increaseInt;
+                Player.breathMax += (int)(Player.breathMax * increaseFloat); //Like this because straight up 4 isn't correct, as vanilla ticks every 7 frames with breath.
+                Player.pickSpeed -= Player.pickSpeed * increaseFloat;
+                Player.lavaMax += increaseInt;
+                Player.tileSpeed += increaseFloat;
+                Player.wallSpeed += increaseFloat;
                 Pet.abilityHaste += increaseFloat;
                 Pet.fishingFortune += increaseInt;
                 Pet.globalFortune += increaseInt;
                 Pet.harvestingFortune += increaseInt;
                 Pet.miningFortune += increaseInt;
                 Pet.petShieldMultiplier += increaseFloat;
-                Pet.petHealMultiplier += increaseFloat; 
-                // Later add EVERYTHING possible, also reduce movespeed to same as others & lower amount to 3 probably because it can be too much?
+                Pet.petHealMultiplier += increaseFloat;
+                Pet.petDirectDamageMultiplier += increaseFloat;
+                #endregion
             }
+        }
+        public override void ModifyLuck(ref float luck)
+        {
+            if (Pet.PetInUseWithSwapCd(ItemID.StrangeGlowingMushroom))
+            {
+                luck += increaseFloat;
+            }
+        }
+        public override void ModifyItemScale(Item item, ref float scale)
+        {
+            if (Pet.PetInUseWithSwapCd(ItemID.StrangeGlowingMushroom))
+            {
+                scale += increaseFloat;
+            }
+        }
+        public override void UpdateLifeRegen()
+        {
+            if (Pet.PetInUseWithSwapCd(ItemID.StrangeGlowingMushroom))
+            {
+                Player.lifeRegen += increaseInt;
+                Player.lifeRegenTime += increaseFloat; //for reference; Regular time is +60 per second, this makes it +62.4 per second.
+            }
+        }
+        public override bool CanConsumeAmmo(Item weapon, Item ammo)
+        {
+            if (Pet.PetInUseWithSwapCd(ItemID.StrangeGlowingMushroom) && Main.rand.NextBool(increaseInt,100))
+            {
+                return false;
+            }
+            return base.CanConsumeAmmo(weapon, ammo);
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             if (Pet.PetInUseWithSwapCd(ItemID.StrangeGlowingMushroom))
             {
                 modifiers.CritDamage += increaseFloat;
+                modifiers.ScalingArmorPenetration += increaseFloat;
             }
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -115,7 +146,7 @@ namespace PetsOverhaul.PetEffects
                 .Replace("<buffRecover>", Math.Round(babyTruffle.buffIncrease / 60f, 2).ToString())
                 .Replace("<cooldown>", Math.Round(babyTruffle.shroomPotionCd / 60f, 2).ToString())
                 .Replace("<intIncr>", babyTruffle.increaseInt.ToString())
-                .Replace("<moveSpd>", Math.Round(babyTruffle.moveSpd * 100, 2).ToString())
+                .Replace("<hiddenTip>", PetKeybinds.PetTooltipSwap.Current ? Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.MushroomStats") : Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.MushroomHiddenTooltip").Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.PetTooltipSwap)))
             ));
         }
     }

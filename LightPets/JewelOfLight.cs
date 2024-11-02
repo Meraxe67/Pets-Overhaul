@@ -34,8 +34,8 @@ namespace PetsOverhaul.LightPets
     }
     public sealed class JewelOfLight : GlobalItem
     {
-        public LightPetStat MovementSpeed = new(8, 0.015f, 0.07f);
-        public LightPetStat WingTime = new(15, 6, 30);
+        public LightPetStat MovementSpeed = new(8, 0.01f, 0.07f);
+        public LightPetStat WingTime = new(15, 4, 30);
         public LightPetStat Acceleration = new(20, 0.0012f, 0.02f);
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)

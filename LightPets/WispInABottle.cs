@@ -36,7 +36,7 @@ namespace PetsOverhaul.LightPets
         public LightPetStat MagicDamage = new(20, 0.004f, 0.04f);
         public LightPetStat RangedDamage = new(20, 0.004f, 0.04f);
         public LightPetStat ProjectileVelocity = new(12, 0.01f, 0.05f);
-        public LightPetStat PetDamage = new(25, 0.008f, 0.075f);
+        public LightPetStat PetDamage = new(25, 0.0065f, 0.0675f);
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {

@@ -11,7 +11,7 @@ namespace PetsOverhaul.PetEffects
     public sealed class DirtiestBlock : PetEffect
     {
         public override PetClasses PetClassPrimary => PetClasses.Mining;
-        public int dirtCoin = 900;
+        public int dirtCoin = 850;
         public int soilCoin = 600;
         public int everythingCoin = 300;
         public override void Load()
