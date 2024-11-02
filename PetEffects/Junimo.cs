@@ -19,7 +19,7 @@ namespace PetsOverhaul.PetEffects
     public sealed class Junimo : PetEffect
     {
         public override PetClasses PetClassPrimary => PetClasses.Utility;
-        public int maxLvls = 50;
+        public int maxLvls = 25;
         public int maxXp = 2147480000;
         public float miningResistPerLevel = 0.0022f;
         public float fishingDamagePerLevel = 0.0025f;
@@ -496,6 +496,18 @@ namespace PetsOverhaul.PetEffects
             {
                 anglerQuestDayCheck = false;
             }
+
+            maxLvls = 25;
+            if (NPC.downedBoss2)
+                maxLvls += 5;
+            if (Main.hardMode)
+                maxLvls += 5;
+            if (NPC.downedMechBossAny)
+                maxLvls += 5;
+            if (NPC.downedPlantBoss)
+                maxLvls += 5;
+            if (NPC.downedAncientCultist)
+                maxLvls += 5;
 
             junimoHarvestingLevel = Math.Clamp(junimoHarvestingLevel, 1, maxLvls);
             junimoMiningLevel = Math.Clamp(junimoMiningLevel, 1, maxLvls);
