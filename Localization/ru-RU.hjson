@@ -154,25 +154,25 @@ Mods: {
 				Все другие параметры, касающиеся отображения способностей, не будут иметь эффекта.
 				'''
 			ParticleNone: Нет
-			ParticleLowered: Уменьшено
-			ParticleNormal: Нормально
-			ParticleIncreased: Увеличено
-			DustAmountLabel: Количество частиц для кругового отображения радиуса питомца
+			ParticleLowered: Мало
+			ParticleNormal: Умеренно
+			ParticleIncreased: Много
+			DustAmountLabel: Количество частиц у ауры питомцев
 			DustAmountTooltip:
 				'''
-				Изменяет количество создаваемых частиц для отображения радиуса питомцев с радиусными эффектами. 
+				Изменяет количество создаваемых частиц для отображения радиуса действия способностей питомцев с эффектами ауры. 
 				Установите значение "Нет", чтобы полностью отключить отображение. Изменение этого значения сторонними методами может вызвать ошибки.
 				'''
-			DustInsideBlocksLabel: Включить круговые частицы радиуса питомца внутри блоков
+			DustInsideBlocksLabel: Отоброжать ауру питомцев внутри блоков
 			DustInsideBlocksTooltip:
 				'''
-				Включает или отключает создание частиц питомцев с эффектами радиуса внутри блоков.
+				Включает или отключает создание частиц для отоброжения радиуса действия способностей питомцев с эффектами ауры внутри блоков.
 				Это может уменьшить количество ненужных частиц, что может быть полезно при проблемах с производительностью.
 				'''
-			// MaxQualityColor1Label: 1st Color of Maximum Quality
-			// MaxQualityColor1Tooltip: Adjusts first color that will alternate between with the second one for Maximum Qualities for Light Pets.
-			// MaxQualityColor2Label: 2nd Color of Maximum Quality
-			// MaxQualityColor2Tooltip: Adjusts second color that will alternate between with the first one for Maximum Qualities for Light Pets.
+			MaxQualityColor1Label: Максимальное качество: цвет 1
+			MaxQualityColor1Tooltip: Настраивает первый цвет, который будет чередоваться со вторым для отображения максимального качества Светящихся питомцев.
+			MaxQualityColor2Label: Максимальное качество: цвет 2
+			MaxQualityColor2Tooltip: Настраивает второй цвет, который будет чередоваться с первым для отображения максимального качества Светящихся питомцев.
 			HurtSoundLabel: Пользовательские звуки получения урона
 			HurtSoundTooltip: Включает/отключает пользовательские звуковые эффекты, добавленные питомцами, когда игрок получает урон.
 			DeathSoundLabel: Пользовательские звуки смерти
