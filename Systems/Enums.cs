@@ -11,6 +11,7 @@ namespace PetsOverhaul.Systems
         BlockReplace,
         BlockRemove,
         PetSlow,
+        NPCOnDeathEffect,
     }
     public enum EntitySourcePetIDs
     {

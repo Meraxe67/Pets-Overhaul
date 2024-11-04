@@ -37,13 +37,13 @@ namespace PetsOverhaul
             }
 
         }
-        private bool ItemLoaderOnPickupDetour(orig_ItemLoaderOnPickup orig, Item item, Player player)
+        private static bool ItemLoaderOnPickupDetour(orig_ItemLoaderOnPickup orig, Item item, Player player)
         {
             OnPickupActions?.Invoke(item, player);
 
             return orig(item, player);
         }
-        private bool NPCLoaderPreAIDetour(orig_NPCLoaderPreAI orig, NPC npc)
+        private static bool NPCLoaderPreAIDetour(orig_NPCLoaderPreAI orig, NPC npc)
         {
             BeforeNPCPreAI?.Invoke(npc);
 
@@ -108,6 +108,10 @@ namespace PetsOverhaul
                         packet.Write(slowId);
                         packet.Send();
                     }
+                    break;
+                case MessageType.NPCOnDeathEffect: //Only sent to Multiplayer clients currently, in NpcPet GlobalNPC class, inside OnKill hook.
+                    int playerWho = reader.ReadByte();
+                    NpcPet.OnKillInvokeDeathEffects(playerWho, Main.npc[reader.ReadByte()]);
                     break;
                 default: throw new ArgumentOutOfRangeException(nameof(msgType));
             }
