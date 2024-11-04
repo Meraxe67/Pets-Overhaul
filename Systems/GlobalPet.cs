@@ -125,8 +125,9 @@ namespace PetsOverhaul.Systems
         /// </summary>
         private static bool colorSwitched = false;
 
-        //Methods etc.
-        #region
+        public static Action<NPC, Player> OnEnemyDeath;
+
+        #region GlobalPet Methods
         /// <summary>
         /// Sets the Pet ability cooldown while taking ability haste into consideration. Recommended to use this in PreUpdate, combined with condition that expected Pet is in use.
         /// </summary>
@@ -547,8 +548,7 @@ namespace PetsOverhaul.Systems
         }
         #endregion
 
-        //Overrides
-        #region 
+        #region ModPlayer Overrides
         public override void Load()
         {
             PetsOverhaul.OnPickupActions += PreOnPickup;
@@ -601,14 +601,14 @@ namespace PetsOverhaul.Systems
                                 int number = Item.NewItem(WorldGen.GetItemSource_FromTileBreak(i, j), i * 16, j * 16, 16, 16, 1727, num);
                                 if (Main.netMode == NetmodeID.MultiplayerClient)
                                 {
-                                    NetMessage.SendData(21, -1, -1, null, number, 1f);
+                                    NetMessage.SendData(MessageID.SyncItem, -1, -1, null, number, 1f);
                                 }
                                 TilePlacement.RemoveFromList(i, j);
                             }
                         }
                         if (Main.netMode == NetmodeID.MultiplayerClient)
                         {
-                            NetMessage.SendData(17, -1, -1, null, 0, i, j);
+                            NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, i, j);
                         }
                     }
                     else
@@ -616,7 +616,7 @@ namespace PetsOverhaul.Systems
                         WorldGen.KillTile(i, j);
                         if (Main.netMode == NetmodeID.MultiplayerClient)
                         {
-                            NetMessage.SendData(17, -1, -1, null, 0, i, j);
+                            NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, i, j);
                         }
                         TilePlacement.RemoveFromList(i, j);
                     }
