@@ -48,12 +48,12 @@ namespace PetsOverhaul.PetEffects
         {
             if (proj.GetGlobalProjectile<ProjectileSourceChecks>().petProj == false)
             {
-                SpawnGasCloud(target, damageDone, hit.DamageType);
+                SpawnGasCloud(target, hit.SourceDamage, hit.DamageType);
             }
         }
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            SpawnGasCloud(target, damageDone, hit.DamageType);
+            SpawnGasCloud(target, hit.SourceDamage, hit.DamageType);
         }
     }
     public sealed class MudBud : GlobalItem

@@ -145,6 +145,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void OnKill(NPC npc)
         {
+            if (skeletronDealtDamage.Count > 0)
             skeletronDealtDamage.Clear();
         }
     }

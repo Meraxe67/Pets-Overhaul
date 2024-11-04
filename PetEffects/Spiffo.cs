@@ -36,9 +36,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override bool CanConsumeAmmo(Item weapon, Item ammo)
         {
-            return Pet.PetInUseWithSwapCd(ItemID.SpiffoPlush) && Main.rand.NextBool(ammoReserveChance, 100)
-                ? false
-                : base.CanConsumeAmmo(weapon, ammo);
+            return (!Pet.PetInUseWithSwapCd(ItemID.SpiffoPlush) || !Main.rand.NextBool(ammoReserveChance, 100)) && base.CanConsumeAmmo(weapon, ammo);
         }
     }
     public sealed class SpiffoPlush : GlobalItem
