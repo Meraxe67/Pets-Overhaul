@@ -19,6 +19,11 @@ namespace PetsOverhaul.Items
     {
         public override bool InstancePerEntity => true;
         /// <summary>
+        /// 1000 is 10 exp.
+        /// </summary>
+        public const int MinimumExpForRarePlant = 1000;
+        #region Bool Sets
+        /// <summary>
         /// Includes tiles that are considered 'soil' tiles, except Dirt. Used by Dirtiest Block.
         /// </summary>
         public static bool[] commonTiles = TileID.Sets.Factory.CreateBoolSet(false, TileID.Mud, TileID.SnowBlock, TileID.Ash, TileID.ClayBlock, TileID.Marble, TileID.Granite, TileID.Ebonstone, TileID.Crimstone, TileID.Pearlstone, TileID.Sand, TileID.Ebonsand, TileID.Crimsand, TileID.Pearlsand, TileID.CorruptSandstone, TileID.Sandstone, TileID.CrimsonSandstone, TileID.HallowSandstone, TileID.HardenedSand, TileID.CorruptHardenedSand, TileID.CrimsonHardenedSand, TileID.HallowHardenedSand, TileID.IceBlock, TileID.CorruptIce, TileID.FleshIce, TileID.HallowedIce, TileID.Stone, TileID.Ebonstone, TileID.Crimstone, TileID.Pearlstone);
@@ -50,11 +55,9 @@ namespace PetsOverhaul.Items
         /// Contains plants that cannot be planted by using a Seed.
         /// </summary>
         public static bool[] plantsWithNoSeeds = ItemID.Sets.Factory.CreateBoolSet(false, ItemID.Hay, ItemID.Mushroom, ItemID.GlowingMushroom, ItemID.VileMushroom, ItemID.ViciousMushroom, ItemID.GreenMushroom, ItemID.TealMushroom, ItemID.SkyBlueFlower, ItemID.YellowMarigold, ItemID.BlueBerries, ItemID.LimeKelp, ItemID.PinkPricklyPear, ItemID.OrangeBloodroot, ItemID.StrangePlant1, ItemID.StrangePlant2, ItemID.StrangePlant3, ItemID.StrangePlant4, ItemID.LifeFruit);
-        /// <summary>
-        /// Adds coordinates in this to PlayerPlacedBlockList if a tile has been replaced and item is obtained through that way. In GlobalTile, Add to this in the CanReplace() hook.
-        /// </summary>
+        #endregion
 
-        //Checks to determine which Pet should benefit
+        #region Item checks to determine which Pet benefits
         public bool itemFromNpc = false;
         public bool herbBoost = false;
         public bool oreBoost = false;
@@ -70,11 +73,6 @@ namespace PetsOverhaul.Items
         public bool fortuneHarvestingDrop = false;
         public bool fortuneMiningDrop = false;
         public bool fortuneFishingDrop = false;
-
-        /// <summary>
-        /// 1000 is 10 exp.
-        /// </summary>
-        public const int MinimumExpForRarePlant = 1000;
 
         public override void UpdateInventory(Item item, Player player)
         {
@@ -147,6 +145,9 @@ namespace PetsOverhaul.Items
                 itemFromBag = true;
             }
         }
+        #endregion
+
+        #region Netcode for checks
         public override void NetSend(Item item, BinaryWriter writer)
         {
             BitsByte sources1 = new(blockNotByPlayer, pickedUpBefore, itemFromNpc, itemFromBoss, itemFromBag, herbBoost, oreBoost, commonBlock);
@@ -161,5 +162,6 @@ namespace PetsOverhaul.Items
             BitsByte sources2 = reader.ReadByte();
             sources2.Retrieve(ref globalDrop, ref harvestingDrop, ref miningDrop, ref fishingDrop, ref fortuneHarvestingDrop, ref fortuneMiningDrop, ref fortuneFishingDrop);
         }
+        #endregion
     }
 }

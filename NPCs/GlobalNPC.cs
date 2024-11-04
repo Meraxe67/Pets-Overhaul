@@ -365,7 +365,7 @@ namespace PetsOverhaul.NPCs
         /// </summary>
         public static bool[] ColdBasedSlows = Factory.CreateBoolSet(false, Grinch, Snowman, Deerclops, IceQueen, PhantasmalIce);
         /// <summary>
-        /// This type of slows creates
+        /// This type of slows creates 'poisoned' dusts on enemy.
         /// </summary>
         public static bool[] SicknessBasedSlows = Factory.CreateBoolSet(false, QueenSlime);
         /// <summary>
