@@ -1,11 +1,11 @@
 Mods: {
 	PetsOverhaul: {
-		// BaseCd: Temporizador Base de Habilidade de PET:
-		// NoCd: O PET Atual não tem um Temporizador de Habilidade!
-		// RemainingCd: Temporizador de Habilidade do PET Restante:
-		// ReadyCd: Habilidade de PET Pronta!
-		// Sec: Segundo
-		// Secs: Segundos
+		BaseCd: Temporizador Base de Habilidade de PET:
+		NoCd: O PET Atual não tem um Temporizador de Habilidade!
+		RemainingCd: Temporizador de Habilidade do PET Restante:
+		ReadyCd: Habilidade de PET Pronta!
+		Sec: Segundo
+		Secs: Segundos
 		Pet: PET
 		And: e
 		// Operators are for cases where a Language does not use them when specifying a bonus but solely uses words. Put "" instead if you need them to be empty.
@@ -155,26 +155,26 @@ Mods: {
 				Habilita a Exibição do Tempo de Recarga da Habilidade. Se essa opção está desativada,
 				a exibição será forçada a não ocorrer, independente de outras opções relacionada a essa.
 				'''
-			// ParticleNone: Nenhuma
-			// ParticleLowered: Mínima
-			// ParticleNormal: Normal
-			// ParticleIncreased: Aumentada
-			// DustAmountLabel: Quantidade de Poeira do Raio de Exibição Circular do PET
-			/* DustAmountTooltip:
+			ParticleNone: Nenhuma
+			ParticleLowered: Mínima
+			ParticleNormal: Normal
+			ParticleIncreased: Aumentada
+			DustAmountLabel: Quantidade de Poeira do Raio de Exibição Circular do PET
+			DustAmountTooltip:
 				'''
 				Modifica a quantidade de poeira que vai ser criada para a exibição de efeitos em area circular causados por PET's
 				Coloque em Nenhuma para desabilitar por completo. Editar esse valor por meios externos pode causar erros.
-				''' */
-			// DustInsideBlocksLabel: Habilitar o Raio de Poeira Circular de PET Dentro de Blocos
-			/* DustInsideBlocksTooltip:
+				'''
+			DustInsideBlocksLabel: Habilitar o Raio de Poeira Circular de PET Dentro de Blocos
+			DustInsideBlocksTooltip:
 				'''
 				Habilita a possibilidade de particulas de poeira em PET's com efeitos em raio serem criadas dentro de blocos
 				Isso pode reduzir a quantidade de particulas de poeira desnecessárias, então se você tem problemas com performance, isso pode ser útil.
-				''' */
-			// MaxQualityColor1Label: 1st Color of Maximum Quality 1ª Cor de Qualidade Máxima
-			// MaxQualityColor1Tooltip: Ajusta a primeira cor que vai alternar com a segunda em Qualidades Máximas para PET's de Luz.
-			// MaxQualityColor2Label: 2nd Color of Maximum Quality 2ª Cor de Qualidade Máxima
-			// MaxQualityColor2Tooltip: Ajusta a segunda cor que vai alternar com a primeira em Qualidades Máximas para PET's de Luz.
+				'''
+			MaxQualityColor1Label: 1st Color of Maximum Quality 1ª Cor de Qualidade Máxima
+			MaxQualityColor1Tooltip: Ajusta a primeira cor que vai alternar com a segunda em Qualidades Máximas para PET's de Luz.
+			MaxQualityColor2Label: 2nd Color of Maximum Quality 2ª Cor de Qualidade Máxima
+			MaxQualityColor2Tooltip: Ajusta a segunda cor que vai alternar com a primeira em Qualidades Máximas para PET's de Luz.
 			HurtSoundLabel: Desabilitar sons de dor personalizados
 			HurtSoundTooltip: Desabilita efeitos sonoros adicionados por pets quando o jogador recebe dano.
 			DeathSoundLabel: Desabilitar sons de morte personalizados
@@ -408,8 +408,8 @@ Mods: {
 				- Aumenta a velocidade de movimento em <moveSpd>%.
 				- Concede o buff de Visão Noturna permanente.
 				'''
-			// MushroomHiddenTooltip: Segure o Atalho de Mudança de Dica (<keybind>) para ver estatísticas.
-			/* MushroomStats:
+			MushroomHiddenTooltip: Segure o Atalho de Mudança de Dica (<keybind>) para ver estatísticas.
+			MushroomStats:
 				'''
 				 * Dano, resistência de recuo, chance crítica, sorte,
 				mana, dano crítico, vida, recuo, velocida de ataque,
@@ -424,7 +424,7 @@ Mods: {
 				velocidade de mineração,velocidade de posicionamento de bloco, 
 				velocidade de posicionamento de parede, tamanho de arma,
 				duração de resistência de lava e chance de preservação de munição.
-				''' */
+				'''
 			FullMoonSqueakyToy:
 				'''
 				<class>
@@ -1295,16 +1295,21 @@ Mods: {
 
 		NPCs: {
 			LizardTail.DisplayName: Rabo de Lagarto
-			/* LizardTailBestiaryEntry:
+			LizardTailBestiaryEntry:
 				'''
 				É a melhor forma de escapar do perigo eminente
 				É a forma Largatixa de seu PET de lhe tirar de uma enrascada!
-				''' */
+				'''
+			// MasteryShard1: Dropped only once per world by killing Eye of Cthulhu.
+			// MasteryShard2: Dropped only once per world by killing Wall of Flesh.
+			// MasteryShard3: Dropped only once per world by killing Golem.
+			// MasteryShard4: Dropped only once per world by killing Skeletron.
+			// MasteryShard5: Dropped only once per world by killing Moon Lord.
 		}
 
 		Configs: {
 			ShieldPosition.Tooltip: ""
-			// ParticleAmount.Tooltip: ""
+			ParticleAmount.Tooltip: ""
 		}
 	}
 }
