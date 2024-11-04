@@ -24,16 +24,23 @@ namespace PetsOverhaul.PetEffects
                 Player.AddBuff(BuffID.Hunter, 1);
             }
         }
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        public override void Load()
         {
-            if (Pet.PetInUse(ItemID.DogWhistle) && target.active == false && target.rarity > 0 && target.CountsAsACritter == false && target.SpawnedFromStatue == false)
+            GlobalPet.OnEnemyDeath += OnEnemyKill;
+        }
+        public override void Unload()
+        {
+            GlobalPet.OnEnemyDeath -= OnEnemyKill;
+        }
+        public static void OnEnemyKill(NPC npc, Player player) //Remember, DO NOT use instanced stuff (Ex. Pet.PetInUse() is bad, use player.TryGetModPlayer() or player.GetModPlayer() to get the Pet class instances. EVERYTHING HAS TO BE from objects passed from the Event.
+        {
+            if (player.TryGetModPlayer(out Puppy pup) && pup.Pet.PetInUse(ItemID.DogWhistle) && npc.rarity > 0 && npc.CountsAsACritter == false && npc.SpawnedFromStatue == false)
             {
-                Pet.GiveCoins(GlobalPet.Randomizer(rareEnemyCoin * target.rarity));
+                pup.Pet.GiveCoins(GlobalPet.Randomizer(pup.rareEnemyCoin * npc.rarity));
             }
         }
         public override void OnCatchNPC(NPC npc, Item item, bool failed)
         {
-
             if (Pet.PetInUse(ItemID.DogWhistle) && failed == false && npc.CountsAsACritter && npc.SpawnedFromStatue == false && npc.releaseOwner == 255)
             {
                 if (npc.rarity > 0)

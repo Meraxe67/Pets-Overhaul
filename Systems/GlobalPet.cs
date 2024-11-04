@@ -125,6 +125,9 @@ namespace PetsOverhaul.Systems
         /// </summary>
         private static bool colorSwitched = false;
 
+        /// <summary>
+        /// Is invoked at PetNpc, OnKill hook, refer to Puppy Pet's OnEnemyKill() & Load/Unload to figure how its used properly. Only called on Player that last hit the NPC, when NPC is dead.
+        /// </summary>
         public static Action<NPC, Player> OnEnemyDeath;
 
         #region GlobalPet Methods

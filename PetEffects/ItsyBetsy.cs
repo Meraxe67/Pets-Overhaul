@@ -37,18 +37,28 @@ namespace PetsOverhaul.PetEffects
                 target.GetGlobalNPC<NpcPet>().curseCounter = 0;
             }
         }
+        public override void Load()
+        {
+            GlobalPet.OnEnemyDeath += OnEnemyKill;
+        }
+        public override void Unload()
+        {
+            GlobalPet.OnEnemyDeath -= OnEnemyKill;
+        }
+        public static void OnEnemyKill(NPC npc, Player player)
+        {
+            if (GlobalPet.LifestealCheck(npc) && npc.TryGetGlobalNPC(out NpcPet npcPet) && npcPet.curseCounter > 0 && player.TryGetModPlayer(out ItsyBetsy betsy))
+            {
+                betsy.Pet.PetRecovery(player.statLifeMax2 - player.statLife, betsy.missingHpRecover * npcPet.curseCounter * (1f + (npcPet.curseCounter >= betsy.maxStacks ? betsy.maxStackBonusRecover : 0)));
+            }
+        }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (target.active == false && GlobalPet.LifestealCheck(target) && target.GetGlobalNPC<NpcPet>().curseCounter > 0)
-            {
-                Pet.PetRecovery(Player.statLifeMax2 - Player.statLife, missingHpRecover * target.GetGlobalNPC<NpcPet>().curseCounter * (1f + (target.GetGlobalNPC<NpcPet>().curseCounter >= maxStacks ? maxStackBonusRecover : 0)));
-            }
             if (Pet.PetInUseWithSwapCd(ItemID.DD2BetsyPetItem) && hit.DamageType == DamageClass.Ranged)
             {
                 target.AddBuff(ModContent.BuffType<QueensDamnation>(), debuffTime);
                 target.GetGlobalNPC<NpcPet>().curseCounter++;
             }
-
         }
     }
     public sealed class DD2BetsyPetItem : GlobalItem

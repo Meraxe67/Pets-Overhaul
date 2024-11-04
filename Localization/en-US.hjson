@@ -692,7 +692,6 @@ Mods: {
 				 * Decreased to <rareCritter>% for rare critters. 
 				- Grants <rareCritterCoin> times the rarity value of caught critter as coins.
 				- Grants <rareEnemyCoin> times the rarity value of a killed enemy as coins.
-				 * You must do the finishing blow to benefit from this.
 				'''
 			Seedling:
 				'''
@@ -997,13 +996,13 @@ Mods: {
 			DD2BetsyPetItem:
 				'''
 				<class>
-				- Damaging enemies with ranged attacks apply Queen's Damnation debuff.
+				- Ranged attacks apply Queen's Damnation debuff on-hit.
 				 * Debuff is applied for <debuffTime> seconds.
 				 * Debuff stacks up to <maxStack> stacks. 
 				 * Every stack decreases the target's defense by <defDecrease>%.
 				- If any Player kills an enemy with Queen's Damnation,
 				they recover <missingHpSteal>% of their missing health per stack.
-				 * Missing health recovery is increased by <maxStackIncr>% if the target is at maximum stacks.
+				 * Recovery is increased by <maxStackIncr>% if the target is at max stacks.
 				'''
 			IceQueenPetItem:
 				'''
