@@ -48,39 +48,31 @@ namespace PetsOverhaul.NPCs
         public bool VeloChangedGround2 { get; internal set; }
 
         public override bool InstancePerEntity => true;
-        public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
+        public static void OnKillInvokeDeathEffects(int playerWhoAmI, NPC npc)
         {
-            if (npc.type == NPCID.EyeofCthulhu && MasteryShardCheck.masteryShardObtained1 == false)
+            Player player = Main.player[playerWhoAmI];
+            if (player != null && player.active && player.dead == false && playerWhoAmI == Main.myPlayer)
             {
-                npcLoot.Add(ItemDropRule.ByCondition(new FirstKillEoC(), ModContent.ItemType<MasteryShard>()));
-            }
-            if (npc.type == NPCID.WallofFlesh && MasteryShardCheck.masteryShardObtained2 == false)
-            {
-                npcLoot.Add(ItemDropRule.ByCondition(new FirstKillWoF(), ModContent.ItemType<MasteryShard>()));
-            }
-            if (npc.type == NPCID.Golem && MasteryShardCheck.masteryShardObtained3 == false)
-            {
-                npcLoot.Add(ItemDropRule.ByCondition(new FirstKillGolem(), ModContent.ItemType<MasteryShard>()));
-            }
-            if (npc.type == NPCID.SkeletronHead && MasteryShardCheck.masteryShardObtained4 == false)
-            {
-                npcLoot.Add(ItemDropRule.ByCondition(new FirstKillSkeletron(), ModContent.ItemType<MasteryShard>()));
-            }
-            if (npc.type == NPCID.MoonLordCore)
-            {
-                if (MasteryShardCheck.masteryShardObtained5 == false)
-                {
-                    npcLoot.Add(ItemDropRule.ByCondition(new FirstKillMoonLord(), ModContent.ItemType<MasteryShard>()));
-                }
-
-                if (Main.expertMode == false && Main.masterMode == false)
-                {
-                    npcLoot.Add(ItemDropRule.Common(ItemID.SuspiciousLookingTentacle));
-                }
+                GlobalPet.OnEnemyDeath?.Invoke(npc, player);
             }
         }
         public override void OnKill(NPC npc)
         {
+            if (npc.lastInteraction != 255)
+            {
+                if (Main.netMode == NetmodeID.SinglePlayer) 
+                {
+                    OnKillInvokeDeathEffects(npc.lastInteraction, npc);
+                }
+                if (Main.netMode == NetmodeID.Server)
+                {
+                    ModPacket packet = ModContent.GetInstance<PetsOverhaul>().GetPacket();
+                    packet.Write((byte)MessageType.NPCOnDeathEffect);
+                    packet.Write((byte)npc.lastInteraction); //Player's whoAmI
+                    packet.Write((byte)Math.Clamp(npc.whoAmI,byte.MinValue,byte.MaxValue));
+                    packet.Send();
+                }
+            }
             if (npc.type == NPCID.EyeofCthulhu)
             {
                 MasteryShardCheck.masteryShardObtained1 = true;
@@ -100,6 +92,34 @@ namespace PetsOverhaul.NPCs
             if (npc.type == NPCID.MoonLordCore)
             {
                 MasteryShardCheck.masteryShardObtained5 = true;
+            }
+        }
+        public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
+        {
+            if (npc.type == NPCID.EyeofCthulhu)
+            {
+                npcLoot.Add(ItemDropRule.ByCondition(new FirstKillEoC(), ModContent.ItemType<MasteryShard>()));
+            }
+            if (npc.type == NPCID.WallofFlesh)
+            {
+                npcLoot.Add(ItemDropRule.ByCondition(new FirstKillWoF(), ModContent.ItemType<MasteryShard>()));
+            }
+            if (npc.type == NPCID.Golem)
+            {
+                npcLoot.Add(ItemDropRule.ByCondition(new FirstKillGolem(), ModContent.ItemType<MasteryShard>()));
+            }
+            if (npc.type == NPCID.SkeletronHead)
+            {
+                npcLoot.Add(ItemDropRule.ByCondition(new FirstKillSkeletron(), ModContent.ItemType<MasteryShard>()));
+            }
+            if (npc.type == NPCID.MoonLordCore)
+            {
+                npcLoot.Add(ItemDropRule.ByCondition(new FirstKillMoonLord(), ModContent.ItemType<MasteryShard>()));
+
+                if (Main.expertMode == false && Main.masterMode == false)
+                {
+                    npcLoot.Add(ItemDropRule.Common(ItemID.SuspiciousLookingTentacle));
+                }
             }
         }
         public override void OnSpawn(NPC npc, IEntitySource source)
@@ -282,7 +302,7 @@ namespace PetsOverhaul.NPCs
                 if (dustChance <= 0)
                     dustChance = 1;
                 bool spawnDust = Main.rand.NextBool(dustChance); //We use random chance to spawn a dust, the chance for gets narrowed down the more slow there is.
-                if (SlowList.Exists(x => PetSlowIDs.ElectricBasedSlows.Contains(x.SlowId)))
+                if (SlowList.Exists(x => PetSlowIDs.ElectricBasedSlows[x.SlowId]))
                 {
                     drawColor = Color.PaleTurquoise with { A = 225 };
 
@@ -290,12 +310,20 @@ namespace PetsOverhaul.NPCs
                         Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.Electric, Alpha: 100, Scale: Main.rand.NextFloat(0.7f, 1.1f))
                         .noGravity = true;
                 }
-                if (SlowList.Exists(x => PetSlowIDs.ColdBasedSlows.Contains(x.SlowId)))
+                if (SlowList.Exists(x => PetSlowIDs.ColdBasedSlows[x.SlowId]))
                 {
                     drawColor = Color.DarkTurquoise with { A = 225 };
 
                     if (spawnDust)
-                        Dust.NewDustDirect(npc.position, npc.width, npc.height, 101, Alpha: 100, Scale: Main.rand.NextFloat(0.7f, 1.1f))
+                        Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.Water_Snow, Alpha: 100, Scale: Main.rand.NextFloat(0.7f, 1.1f))
+                        .noGravity = true;
+                }
+                if (SlowList.Exists(x => PetSlowIDs.SicknessBasedSlows[x.SlowId])) //maybe look at this better?
+                {
+                    drawColor = Color.DarkGreen with { A = 225 };
+
+                    if (spawnDust)
+                        Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.Poisoned, Alpha: 100, Scale: Main.rand.NextFloat(0.7f, 1.1f))
                         .noGravity = true;
                 }
             }
@@ -327,8 +355,21 @@ namespace PetsOverhaul.NPCs
     /// </summary>
     public class PetSlowIDs
     {
+        public static SetFactory Factory = new(byte.MaxValue);
         /// <summary>
-        /// Slows with ID lower than 0 won't be overriden by itself by any means and can have multiples of the same ID this way.
+        /// This type of slows creates Electricity dusts on enemy.
+        /// </summary>
+        public static bool[] ElectricBasedSlows = Factory.CreateBoolSet(false, VoltBunny, PhantasmalLightning);
+        /// <summary>
+        /// This type of slows creates ice water dusts on enemy.
+        /// </summary>
+        public static bool[] ColdBasedSlows = Factory.CreateBoolSet(false, Grinch, Snowman, Deerclops, IceQueen, PhantasmalIce);
+        /// <summary>
+        /// This type of slows creates
+        /// </summary>
+        public static bool[] SicknessBasedSlows = Factory.CreateBoolSet(false, QueenSlime);
+        /// <summary>
+        /// Slows with ID lower than 0 won't be overriden by itself by any means and can have multiples of the same ID this way. This value defaults to be PetSlowIDs.ColdBasedSlows[Type] == true.
         /// </summary>
         public const int IndependentSlow = -1;
         public const int Grinch = 0;
@@ -339,10 +380,5 @@ namespace PetsOverhaul.NPCs
         public const int VoltBunny = 5;
         public const int PhantasmalIce = 6;
         public const int PhantasmalLightning = 7;
-        /// <summary>
-        /// Slows in this array will produce lightning spark dusts rather than icy water dusts on the slowed npc.
-        /// </summary>
-        public static int[] ElectricBasedSlows = { VoltBunny, PhantasmalLightning };
-        public static int[] ColdBasedSlows = { Grinch, Snowman, Deerclops, IceQueen, PhantasmalIce, QueenSlime }; //Queen will be removed from here, and a new 'slime slow' will be added later
     }
 }
