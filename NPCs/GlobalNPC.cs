@@ -32,6 +32,10 @@ namespace PetsOverhaul.NPCs
         /// If you need to find out how much current cumulative slow amount is, use this.
         /// </summary>
         public float CurrentSlowAmount { get; internal set; }
+        public bool electricSlow;
+        public bool coldSlow;
+        public bool sickSlow;
+
         public bool seaCreature;
         public int playerThatFishedUp;
         public int maulCounter;
@@ -60,7 +64,7 @@ namespace PetsOverhaul.NPCs
         {
             if (npc.lastInteraction != 255)
             {
-                if (Main.netMode == NetmodeID.SinglePlayer) 
+                if (Main.netMode == NetmodeID.SinglePlayer)
                 {
                     OnKillInvokeDeathEffects(npc.lastInteraction, npc);
                 }
@@ -69,7 +73,7 @@ namespace PetsOverhaul.NPCs
                     ModPacket packet = ModContent.GetInstance<PetsOverhaul>().GetPacket();
                     packet.Write((byte)MessageType.NPCOnDeathEffect);
                     packet.Write((byte)npc.lastInteraction); //Player's whoAmI
-                    packet.Write((byte)Math.Clamp(npc.whoAmI,byte.MinValue,byte.MaxValue));
+                    packet.Write((byte)Math.Clamp(npc.whoAmI, byte.MinValue, byte.MaxValue));
                     packet.Send();
                 }
             }
@@ -184,29 +188,41 @@ namespace PetsOverhaul.NPCs
         {
             if (npc.active)
             {
+                electricSlow = false;
+                coldSlow = false;
+                sickSlow = false;
                 CurrentSlowAmount = 0;
 
                 if (SlowList.Count > 0)
                 {
-                    SlowList.ForEach(x => CurrentSlowAmount += x.SlowAmount);
+                    foreach (var slow in SlowList)
+                    {
+                        CurrentSlowAmount += slow.SlowAmount;
 
-                    for (int i = 0; i < SlowList.Count; i++) //Since Structs in Lists acts as Readonly, we re-assign the values to the index to decrement the timer.
-                    {
-                        PetSlow slow = SlowList[i];
-                        slow.SlowTime--;
-                        SlowList[i] = slow;
+                        if (PetSlowIDs.ElectricBasedSlows.Exists(x => x == slow.SlowId))
+                        {
+                            electricSlow = true;
+                        }
+                        if (PetSlowIDs.ColdBasedSlows.Exists(x => x == slow.SlowId))
+                        {
+                            coldSlow = true;
+                        }
+                        if (PetSlowIDs.SicknessBasedSlows.Exists(x => x == slow.SlowId))
+                        {
+                            sickSlow = true;
+                        }
+
+                        PetSlow newSlow = slow;
+                        newSlow.SlowTime--;
+                        SlowList[SlowList.IndexOf(slow)] = newSlow;
                     }
-                    int indexToRemove = SlowList.FindIndex(x => x.SlowTime <= 0);
-                    if (indexToRemove != -1)
-                    {
-                        SlowList.RemoveAt(indexToRemove);
-                    }
+
+                    SlowList.RemoveAll(x => x.SlowTime <= 0);
                 }
                 if (CurrentSlowAmount > 0)
                 {
                     Slow(npc, CurrentSlowAmount);
                 }
-
             }
         }
         /// <summary>
@@ -268,29 +284,29 @@ namespace PetsOverhaul.NPCs
         /// <summary>
         /// Actually adds to the Slow List of an NPC to slow them. Does the proper boss/friendly checks and replaces weak Slows existing in the List. This DOES NOT Sync with server & other clients, always use AddSlow() rather than this, unless you know what you're doing.
         /// </summary>
-        internal static void AddToSlowList(PetSlow petSlow, NPC npc)
+        internal static void AddToSlowList(PetSlow slowToBeAdded, NPC npc)
         {
-            if (npc.active && (npc.townNPC == false || npc.isLikeATownNPC == false || npc.friendly == false) && npc.boss == false && NonBossTrueBosses.Contains(npc.type) == false && npc.TryGetGlobalNPC<NpcPet>(out NpcPet npcPet))
+            if (npc.active && (npc.townNPC == false || npc.isLikeATownNPC == false || npc.friendly == false) && npc.boss == false && NonBossTrueBosses.Contains(npc.type) == false && npc.TryGetGlobalNPC(out NpcPet npcPet))
             {
-                if (petSlow.SlowId <= -1)
+                if (slowToBeAdded.SlowId <= -1)
                 {
-                    npcPet.SlowList.Add(petSlow);
+                    npcPet.SlowList.Add(slowToBeAdded);
                     return;
                 }
                 int indexToReplace;
-                if (npcPet.SlowList.Exists(x => x.SlowId == petSlow.SlowId && x.SlowAmount < petSlow.SlowAmount))
+                if (npcPet.SlowList.Exists(x => x.SlowId == slowToBeAdded.SlowId && x.SlowAmount < slowToBeAdded.SlowAmount))
                 {
-                    indexToReplace = npcPet.SlowList.FindIndex(x => x.SlowId == petSlow.SlowId && x.SlowAmount < petSlow.SlowAmount);
-                    npcPet.SlowList[indexToReplace] = petSlow;
+                    indexToReplace = npcPet.SlowList.FindIndex(x => x.SlowId == slowToBeAdded.SlowId && x.SlowAmount < slowToBeAdded.SlowAmount);
+                    npcPet.SlowList[indexToReplace] = slowToBeAdded;
                 }
-                else if (npcPet.SlowList.Exists(x => x.SlowId == petSlow.SlowId && x.SlowAmount == petSlow.SlowAmount && x.SlowTime < petSlow.SlowTime))
+                else if (npcPet.SlowList.Exists(x => x.SlowId == slowToBeAdded.SlowId && x.SlowAmount == slowToBeAdded.SlowAmount && x.SlowTime < slowToBeAdded.SlowTime))
                 {
-                    indexToReplace = npcPet.SlowList.FindIndex(x => x.SlowId == petSlow.SlowId && x.SlowAmount == petSlow.SlowAmount && x.SlowTime < petSlow.SlowTime);
-                    npcPet.SlowList[indexToReplace] = petSlow;
+                    indexToReplace = npcPet.SlowList.FindIndex(x => x.SlowId == slowToBeAdded.SlowId && x.SlowAmount == slowToBeAdded.SlowAmount && x.SlowTime < slowToBeAdded.SlowTime);
+                    npcPet.SlowList[indexToReplace] = slowToBeAdded;
                 }
-                else if (npcPet.SlowList.Exists(x => x.SlowId == petSlow.SlowId) == false)
+                else if (npcPet.SlowList.Exists(x => x.SlowId == slowToBeAdded.SlowId) == false)
                 {
-                    npcPet.SlowList.Add(petSlow);
+                    npcPet.SlowList.Add(slowToBeAdded);
                 }
             }
         }
@@ -302,25 +318,24 @@ namespace PetsOverhaul.NPCs
                 if (dustChance <= 0)
                     dustChance = 1;
                 bool spawnDust = Main.rand.NextBool(dustChance); //We use random chance to spawn a dust, the chance for gets narrowed down the more slow there is.
-                if (SlowList.Exists(x => PetSlowIDs.ElectricBasedSlows[x.SlowId]))
+                if (electricSlow)
                 {
-                    drawColor = Color.PaleTurquoise with { A = 225 };
+                    drawColor = Color.PaleTurquoise with { A = 235 };
 
                     if (spawnDust)
                         Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.Electric, Alpha: 100, Scale: Main.rand.NextFloat(0.7f, 1.1f))
                         .noGravity = true;
                 }
-                if (SlowList.Exists(x => PetSlowIDs.ColdBasedSlows[x.SlowId]))
+                if (coldSlow)
                 {
-                    drawColor = Color.DarkTurquoise with { A = 225 };
-
+                    drawColor = Color.DarkTurquoise with { A = 235 };
                     if (spawnDust)
                         Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.Water_Snow, Alpha: 100, Scale: Main.rand.NextFloat(0.7f, 1.1f))
                         .noGravity = true;
                 }
-                if (SlowList.Exists(x => PetSlowIDs.SicknessBasedSlows[x.SlowId])) //maybe look at this better?
+                if (sickSlow)
                 {
-                    drawColor = Color.DarkGreen with { A = 225 };
+                    drawColor = new Color(218,252,222,235);
 
                     if (spawnDust)
                         Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.Poisoned, Alpha: 100, Scale: Main.rand.NextFloat(0.7f, 1.1f))
@@ -355,19 +370,18 @@ namespace PetsOverhaul.NPCs
     /// </summary>
     public class PetSlowIDs
     {
-        public static SetFactory Factory = new(byte.MaxValue);
         /// <summary>
         /// This type of slows creates Electricity dusts on enemy.
         /// </summary>
-        public static bool[] ElectricBasedSlows = Factory.CreateBoolSet(false, VoltBunny, PhantasmalLightning);
+        public static List<int> ElectricBasedSlows = [VoltBunny, PhantasmalLightning];
         /// <summary>
         /// This type of slows creates ice water dusts on enemy.
         /// </summary>
-        public static bool[] ColdBasedSlows = Factory.CreateBoolSet(false, Grinch, Snowman, Deerclops, IceQueen, PhantasmalIce);
+        public static List<int> ColdBasedSlows = [Grinch, Snowman, Deerclops, IceQueen, PhantasmalIce];
         /// <summary>
         /// This type of slows creates 'poisoned' dusts on enemy.
         /// </summary>
-        public static bool[] SicknessBasedSlows = Factory.CreateBoolSet(false, QueenSlime);
+        public static List<int> SicknessBasedSlows = [QueenSlime];
         /// <summary>
         /// Slows with ID lower than 0 won't be overriden by itself by any means and can have multiples of the same ID this way. This value defaults to be PetSlowIDs.ColdBasedSlows[Type] == true.
         /// </summary>
