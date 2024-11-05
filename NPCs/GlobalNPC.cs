@@ -211,10 +211,12 @@ namespace PetsOverhaul.NPCs
                         {
                             sickSlow = true;
                         }
-
-                        PetSlow newSlow = slow;
-                        newSlow.SlowTime--;
-                        SlowList[SlowList.IndexOf(slow)] = newSlow;
+                    }
+                    for (int i = 0; i < SlowList.Count; i++) //Since Structs in Lists acts as Readonly, we re-assign the values to the index to decrement the timer.
+                    {
+                        PetSlow slow = SlowList[i];
+                        slow.SlowTime--;
+                        SlowList[i] = slow;
                     }
 
                     SlowList.RemoveAll(x => x.SlowTime <= 0);
@@ -338,7 +340,7 @@ namespace PetsOverhaul.NPCs
                     drawColor = new Color(218,252,222,235);
 
                     if (spawnDust)
-                        Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.Poisoned, Alpha: 100, Scale: Main.rand.NextFloat(0.7f, 1.1f))
+                        Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.Poisoned, Alpha: 100, Scale: Main.rand.NextFloat(0.9f, 1.3f))
                         .noGravity = true;
                 }
             }
