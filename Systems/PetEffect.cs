@@ -1,4 +1,8 @@
-﻿using Terraria;
+﻿using PetsOverhaul.Config;
+using System.Collections.Generic;
+using Terraria;
+using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace PetsOverhaul.Systems
@@ -21,4 +25,28 @@ namespace PetsOverhaul.Systems
         /// </summary>
         public virtual PetClasses PetClassSecondary => PetClasses.None;
     }
+    //public abstract class PetTooltip : GlobalItem //Undone, but released due to an emergency patch
+    //{
+        
+    //    public abstract int PetItemID { get; }
+    //    public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+    //    {
+    //        return entity.type == PetItemID;
+    //    }
+    //    public abstract string PetsTooltip { get; }
+    //    public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
+    //    {
+    //        if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+    //        {
+    //            return;
+    //        }
+
+    //        if (tooltips.Find(x => x.Name == "Tooltip0") != null)
+    //            tooltips.Find(x => x.Name == "Tooltip0").Text += "\n" + PetsTooltip;
+
+    //        ExtraModifyTooltips(item, tooltips);
+    //    }
+    //    public virtual void ExtraModifyTooltips(Item item, List<TooltipLine> tooltips)
+    //    { }
+    //}
 }

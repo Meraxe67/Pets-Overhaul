@@ -121,4 +121,21 @@ namespace PetsOverhaul.PetEffects
                         ));
         }
     }
+    //public sealed class Seaweed : PetTooltip //Undone, but released due to an emergency patch
+    //{
+    //    public override int PetItemID => ItemID.Seaweed;
+    //    public static Turtle Turtle => Main.LocalPlayer.GetModPlayer<Turtle>();
+    //    public override string PetsTooltip => 
+    //        Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.Seaweed")
+    //            .Replace("<class>", PetTextsColors.ClassText(Turtle.PetClassPrimary, Turtle.PetClassSecondary))
+    //            .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility))
+    //            .Replace("<hitCount>", Turtle.shellHardenStacks.ToString())
+    //            .Replace("<shellDuration>", Math.Round(Turtle.shellHardenDuration / 60f, 2).ToString())
+    //            .Replace("<reducedDmg>", Math.Round(Turtle.dmgReduceShellHarden * 100, 2).ToString())
+    //            .Replace("<reflect>", Math.Round(Turtle.dmgReflect * 100, 2).ToString())
+    //            .Replace("<projReflect>", Math.Round(Turtle.dmgReflectProjectile * 100, 2).ToString())
+    //            .Replace("<def>", Math.Round(Turtle.def * 100, 2).ToString())
+    //            .Replace("<kbResist>", Math.Round(Turtle.kbResist * 100, 2).ToString())
+    //            .Replace("<moveSpd>", Math.Round(Turtle.moveSpd * 100, 2).ToString());
+    //}
 }
