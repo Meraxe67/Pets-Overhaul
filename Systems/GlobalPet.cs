@@ -827,7 +827,7 @@ namespace PetsOverhaul.Systems
 
             if (CoordsToRemove.Count > 0)
             {
-                PlayerPlacedBlockList.placedBlocksByPlayer.AddRange(CoordsToRemove);
+                PlayerPlacedBlockList.placedBlocksByPlayer.RemoveAll(CoordsToRemove.Contains);
             }
         }
         public override void OnEnterWorld()
