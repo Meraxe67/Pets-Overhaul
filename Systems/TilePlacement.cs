@@ -7,7 +7,7 @@ namespace PetsOverhaul.Systems
 {
     public class TilePlacement : GlobalTile
     {
-        public static bool RemoveFromList(int i, int j)
+        public static void RemoveFromList(int i, int j)
         {
             if (Main.netMode == NetmodeID.MultiplayerClient)
             {
@@ -20,9 +20,7 @@ namespace PetsOverhaul.Systems
             else
             {
                 GlobalPet.CoordsToRemove.Add(new Point16(i, j));
-                return PlayerPlacedBlockList.placedBlocksByPlayer.Contains(new Point16(i, j)); //ItemPet checks for if it was removed, and OnSpawn is called on Server so this one works there.
             }
-            return false;
         }
         public static void AddToList(int i, int j)
         {
