@@ -19,14 +19,14 @@ namespace PetsOverhaul.PetEffects
         public float ascentPenaltyMult = 0.55f;
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.EyeSpring))
+            if (PetIsEquipped())
             {
                 Player.jumpSpeedBoost += jumpBoost;
             }
         }
         public override void PostUpdateRunSpeeds()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.EyeSpring))
+            if (PetIsEquipped())
             {
                 if (Player.jump > 0 && Pet.jumpRegistered == false)
                 {

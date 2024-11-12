@@ -27,7 +27,7 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassSecondary => PetClasses.Offensive;
         public override void PreUpdate()
         {
-            if (Pet.PetInUse(ItemID.SkeletronPrimePetItem))
+            if (PetIsEquipped(false))
             {
                 Pet.SetPetAbilityTimer(shieldRecovery);
                 shieldedStatBoostActive = false;
@@ -50,7 +50,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.SkeletronPrimePetItem))
+            if (PetIsEquipped())
             {
                 if (Pet.petShield.Count <= 0)
                 {

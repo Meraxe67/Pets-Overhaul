@@ -18,7 +18,7 @@ namespace PetsOverhaul.PetEffects
         public int fallDamageTile = 20;
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.EatersBone))
+            if (PetIsEquipped())
             {
                 if (Player.ZoneCorrupt || Player.ZoneCrimson)
                 {
@@ -32,7 +32,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void PostUpdate()
         {
-            if (Pet.PetInUse(ItemID.EatersBone))
+            if (PetIsEquipped(false))
             {
                 Player.armorEffectDrawShadow = true;
             }

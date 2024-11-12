@@ -24,28 +24,28 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassSecondary => PetClasses.Offensive;
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.SharkBait) && npc.GetGlobalNPC<NpcPet>().seaCreature)
+            if (PetIsEquipped() && npc.GetGlobalNPC<NpcPet>().seaCreature)
             {
                 modifiers.FinalDamage *= seaCreatureResist;
             }
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.SharkBait) && target.GetGlobalNPC<NpcPet>().seaCreature)
+            if (PetIsEquipped() && target.GetGlobalNPC<NpcPet>().seaCreature)
             {
                 modifiers.FinalDamage *= seaCreatureDamage;
             }
         }
         public override void UpdateEquips()
         {
-            if (Pet.PetInUse(ItemID.SharkBait))
+            if (PetIsEquipped(false))
             {
                 Player.fishingSkill += fishingPow;
             }
         }
         public override void ModifyCaughtFish(Item fish)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.SharkBait))
+            if (PetIsEquipped())
             {
                 Pet.AddShield(shieldOnCatch, shieldTime);
             }
@@ -71,7 +71,7 @@ namespace PetsOverhaul.PetEffects
             if (seaCreatureProj == true)
             {
                 SharkPup player = target.GetModPlayer<SharkPup>();
-                if (player.Pet.PetInUseWithSwapCd(ItemID.SharkBait))
+                if (player.PetIsEquipped())
                 {
                     modifiers.FinalDamage *= player.seaCreatureResist;
                 }

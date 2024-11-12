@@ -42,12 +42,12 @@ namespace PetsOverhaul.PetEffects
                 Pet.skin = Player.skinColor;
                 Pet.skinColorChanged = true;
             }
-            if (Pet.PetInUse(ItemID.LizardEgg) == false || Pet.PetInUse(ItemID.LizardEgg) && Player.statLife > Player.statLifeMax2 * 0.55f)
+            if (PetIsEquipped(false) == false || PetIsEquipped(false) && Player.statLife > Player.statLifeMax2 * 0.55f)
             {
                 Player.skinColor = Pet.skin;
                 Pet.skinColorChanged = false;
             }
-            if (Pet.PetInUse(ItemID.LizardEgg))
+            if (PetIsEquipped(false))
             {
                 buffTimer--;
                 if (buffTimer <= 0)
@@ -61,7 +61,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (Pet.AbilityPressCheck() && Pet.PetInUseWithSwapCd(ItemID.LizardEgg))
+            if (Pet.AbilityPressCheck() && PetIsEquipped())
             {
                 int dmg = (int)(Player.statLifeMax2 * percentHpDmg);
                 if (Player.statLife < dmg)
@@ -76,7 +76,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.LizardEgg))
+            if (PetIsEquipped())
             {
                 if (buffTimer > 0)
                 {
@@ -96,14 +96,14 @@ namespace PetsOverhaul.PetEffects
         }
         public override void PostUpdateRunSpeeds()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.LizardEgg) && buffTimer > 0)
+            if (PetIsEquipped() && buffTimer > 0)
             {
                 Player.runAcceleration *= tailAcc + 1f;
             }
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.LizardEgg))
+            if (PetIsEquipped())
             {
                 modifiers.Knockback *= 1f - kbResist;
             }

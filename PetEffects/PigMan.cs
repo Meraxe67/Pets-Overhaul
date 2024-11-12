@@ -23,7 +23,7 @@ namespace PetsOverhaul.PetEffects
 
         public override void PreUpdate()
         {
-            if (Pet.PetInUse(ItemID.PigPetItem))
+            if (PetIsEquipped(false))
             {
                 Pet.SetPetAbilityTimer(shieldCooldown);
             }
@@ -36,11 +36,11 @@ namespace PetsOverhaul.PetEffects
         {
             GlobalPet Pet = player.GetModPlayer<GlobalPet>();
             Pigman pig = player.GetModPlayer<Pigman>();
-            if (Pet.PetInUse(ItemID.PigPetItem))
+            if (pig.PetIsEquipped(false))
             {
                 if (BuffID.Sets.IsWellFed[item.buffType])
                 {
-                    if (Pet.timer <= 0 && Pet.PetInUseWithSwapCd(ItemID.PigPetItem))
+                    if (Pet.timer <= 0 && pig.PetIsEquipped())
                     {
                         int shieldAmount = 0;
                         if (item.buffType == BuffID.WellFed)

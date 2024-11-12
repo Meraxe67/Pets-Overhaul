@@ -22,7 +22,7 @@ namespace PetsOverhaul.PetEffects
         public int treeChance = 14;
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUse(ItemID.BlueEgg))
+            if (PetIsEquipped(false))
             {
                 if (Main.rand.NextBool(blueEggTimer))
                 {
@@ -143,7 +143,7 @@ namespace PetsOverhaul.PetEffects
         {
             GlobalPet PickerPet = player.GetModPlayer<GlobalPet>();
             BlueChicken chick = player.GetModPlayer<BlueChicken>();
-            if (PickerPet.PickupChecks(item, ItemID.BlueEgg, out ItemPet itemChck))
+            if (PickerPet.PickupChecks(item, chick.PetItemID, out ItemPet itemChck))
             {
                 if (itemChck.herbBoost)
                 {

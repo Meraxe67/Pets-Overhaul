@@ -29,16 +29,16 @@ namespace PetsOverhaul.PetEffects
         internal int prevY = 0;
         public override void PostUpdate()
         {
-            if (Pet.PetInUse(ItemID.EaterOfWorldsPetItem))
+            if (PetIsEquipped(false))
             {
                 tilesToRandomize.Clear();
                 Tile tile = Main.SmartCursorShowing ? Main.tile[Main.SmartCursorX, Main.SmartCursorY] : Main.tile[Player.tileTargetX, Player.tileTargetY];
 
-                if (Pet.PetInUse(ItemID.EaterOfWorldsPetItem) && TileID.Sets.Ore[tile.TileType] == false && ItemPet.gemTile[tile.TileType] == false && Player.controlUseItem)
+                if (TileID.Sets.Ore[tile.TileType] == false && ItemPet.gemTile[tile.TileType] == false && Player.controlUseItem)
                 {
                     Player.pickSpeed -= Player.pickSpeed * nonOreSpeed;
                 }
-                if (Pet.PetInUse(ItemID.EaterOfWorldsPetItem) && Player.controlUseItem && Player.HeldItem.pick > 0 && Main.tile[prevX, prevY].TileType == 0 && oldTileType != 0 && (TileID.Sets.Ore[oldTileType] || ItemPet.gemTile[oldTileType]))
+                if (Player.controlUseItem && Player.HeldItem.pick > 0 && Main.tile[prevX, prevY].TileType == 0 && oldTileType != 0 && (TileID.Sets.Ore[oldTileType] || ItemPet.gemTile[oldTileType]))
                 {
                     for (mineX = -tileBreakXSpread; mineX <= tileBreakXSpread; mineX++)
                     {

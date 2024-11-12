@@ -20,7 +20,7 @@ namespace PetsOverhaul.PetEffects
         public int maxMinion = 1;
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.CursedSapling))
+            if (PetIsEquipped())
             {
                 if (item.netID == ItemID.StakeLauncher || item.netID == ItemID.TheHorsemansBlade || item.netID == ItemID.BatScepter || item.netID == ItemID.CandyCornRifle || item.netID == ItemID.ScytheWhip || item.netID == ItemID.JackOLanternLauncher)
                 {
@@ -34,7 +34,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.CursedSapling))
+            if (PetIsEquipped())
             {
                 Player.maxMinions += maxMinion;
                 if (Player.HeldItem.type == ItemID.ScytheWhip)

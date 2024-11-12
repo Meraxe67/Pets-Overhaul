@@ -46,7 +46,7 @@ namespace PetsOverhaul.PetEffects
                 defMult = 1.15f;
             }
 
-            if (Pet.PetInUseWithSwapCd(ItemID.DD2OgrePetItem) && Player.mount.Active == false)
+            if (PetIsEquipped() && Player.mount.Active == false)
             {
                 Player.endurance += dr;
                 Player.GetDamage<GenericDamageClass>() -= nonMeleedmg;
@@ -60,7 +60,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override float UseSpeedMultiplier(Item item)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.DD2OgrePetItem) && item.noMelee == false && Player.mount.Active == false && item.CountsAsClass<MeleeDamageClass>())
+            if (PetIsEquipped() && item.noMelee == false && Player.mount.Active == false && item.CountsAsClass<MeleeDamageClass>())
             {
                 return atkSpdMult;
             }
@@ -68,7 +68,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ModifyItemScale(Item item, ref float scale)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.DD2OgrePetItem) && item.noMelee == false && Player.mount.Active == false && item.CountsAsClass<MeleeDamageClass>())
+            if (PetIsEquipped() && item.noMelee == false && Player.mount.Active == false && item.CountsAsClass<MeleeDamageClass>())
             {
                 scale *= trueMeleeMultipliers;
                 item.useTurn = false;
@@ -77,21 +77,21 @@ namespace PetsOverhaul.PetEffects
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
 
-            if (Pet.PetInUseWithSwapCd(ItemID.DD2OgrePetItem) && item.noMelee == false && Player.mount.Active == false && item.CountsAsClass<MeleeDamageClass>())
+            if (PetIsEquipped() && item.noMelee == false && Player.mount.Active == false && item.CountsAsClass<MeleeDamageClass>())
             {
                 damage *= trueMeleeMultipliers;
             }
         }
         public override void ModifyWeaponKnockback(Item item, ref StatModifier knockback)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.DD2OgrePetItem) && item.noMelee == false && Player.mount.Active == false && item.CountsAsClass<MeleeDamageClass>())
+            if (PetIsEquipped() && item.noMelee == false && Player.mount.Active == false && item.CountsAsClass<MeleeDamageClass>())
             {
                 knockback *= trueMeleeMultipliers;
             }
         }
         public override void ModifyWeaponCrit(Item item, ref float crit)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.DD2OgrePetItem) && item.noMelee == false && Player.mount.Active == false && item.CountsAsClass<MeleeDamageClass>())
+            if (PetIsEquipped() && item.noMelee == false && Player.mount.Active == false && item.CountsAsClass<MeleeDamageClass>())
             {
                 crit += crit;
             }

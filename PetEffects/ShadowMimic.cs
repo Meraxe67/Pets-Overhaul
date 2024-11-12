@@ -28,7 +28,7 @@ namespace PetsOverhaul.PetEffects
         {
             GlobalPet PickerPet = player.GetModPlayer<GlobalPet>();
             ShadowMimic mimic = player.GetModPlayer<ShadowMimic>();
-            if (PickerPet.PickupChecks(item, ItemID.OrnateShadowKey, out ItemPet itemChck))
+            if (PickerPet.PickupChecks(item, mimic.PetItemID, out ItemPet itemChck))
             {
                 mimic.chanceToRollItem = 0;
                 if (itemChck.itemFromNpc == true)

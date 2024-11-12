@@ -55,7 +55,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.DD2BetsyPetItem) && hit.DamageType == DamageClass.Ranged)
+            if (PetIsEquipped() && hit.DamageType == DamageClass.Ranged)
             {
                 target.AddBuff(ModContent.BuffType<QueensDamnation>(), debuffTime);
                 target.GetGlobalNPC<NpcPet>().curseCounter++;

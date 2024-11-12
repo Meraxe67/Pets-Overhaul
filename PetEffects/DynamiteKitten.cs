@@ -23,14 +23,14 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
         public override void PreUpdate()
         {
-            if (Pet.PetInUse(ItemID.BallOfFuseWire))
+            if (PetIsEquipped(false))
             {
                 Pet.SetPetAbilityTimer(cooldown);
             }
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.BallOfFuseWire) && Pet.timer <= 0)
+            if (PetIsEquipped() && Pet.timer <= 0)
             {
                 Projectile petProjectile = Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile), target.Center, Vector2.Zero, ModContent.ProjectileType<PetExplosion>(), Pet.PetDamage(hit.SourceDamage * damageMult), hit.Knockback * kbMult, Player.whoAmI, explosionSize);
                 petProjectile.DamageType = hit.DamageType;

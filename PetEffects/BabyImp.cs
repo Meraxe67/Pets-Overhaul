@@ -21,7 +21,7 @@ namespace PetsOverhaul.PetEffects
         public float obbySpd = 0.08f;
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.HellCake))
+            if (PetIsEquipped())
             {
                 Player.lavaMax += lavaImmune;
                 if (Collision.LavaCollision(Player.position, Player.width, Player.height))

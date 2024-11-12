@@ -18,14 +18,14 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Summoner;
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.DD2PetGato))
+            if (PetIsEquipped())
             {
                 Player.maxTurrets++;
             }
         }
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.DD2PetGato) && proj.GetGlobalProjectile<ProjectileSourceChecks>().isFromSentry)
+            if (PetIsEquipped() && proj.GetGlobalProjectile<ProjectileSourceChecks>().isFromSentry)
             {
                 int playersCrit = (int)Player.GetTotalCritChance<GenericDamageClass>();
                 if (playersCrit + bonusCritChance >= 100)

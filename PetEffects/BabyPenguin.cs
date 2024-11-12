@@ -21,7 +21,7 @@ namespace PetsOverhaul.PetEffects
         public int snowFishChance = 100;
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUse(ItemID.Fish))
+            if (PetIsEquipped(false))
             {
                 if (Player.ZoneSnow)
                 {
@@ -39,7 +39,7 @@ namespace PetsOverhaul.PetEffects
                 }
             }
 
-            if (Pet.PetInUseWithSwapCd(ItemID.Fish) && Player.HasBuff(BuffID.Chilled))
+            if (PetIsEquipped() && Player.HasBuff(BuffID.Chilled))
             {
                 if (Player.buffTime[Player.FindBuffIndex(BuffID.Chilled)] > penguinOldChilledTime)
                 {
@@ -52,7 +52,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ModifyCaughtFish(Item fish)
         {
-            if (Pet.PetInUse(ItemID.Fish) && (fish.type == ItemID.FrostMinnow || fish.type == ItemID.AtlanticCod || fish.type == ItemID.FrostDaggerfish || fish.type == ItemID.FrozenCrate || fish.type == ItemID.FrozenCrateHard))
+            if (PetIsEquipped(false) && (fish.type == ItemID.FrostMinnow || fish.type == ItemID.AtlanticCod || fish.type == ItemID.FrostDaggerfish || fish.type == ItemID.FrozenCrate || fish.type == ItemID.FrozenCrateHard))
             {
                 for (int i = 0; i < GlobalPet.Randomizer(snowFishChance * fish.stack); i++)
                 {

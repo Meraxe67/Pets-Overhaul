@@ -20,7 +20,7 @@ namespace PetsOverhaul.PetEffects
         public float spdPerStk = 0.005f;
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.Carrot))
+            if (PetIsEquipped())
             {
                 bunnyTimer--;
                 if (Player.jump < Player.jumpHeight / 2 && Player.jump != 0 && Pet.jumpRegistered == false)

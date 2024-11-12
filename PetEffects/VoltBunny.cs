@@ -22,7 +22,7 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassSecondary => PetClasses.Mobility;
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.LightningCarrot))
+            if (PetIsEquipped())
             {
                 Player.moveSpeed += movespdFlat;
                 Player.moveSpeed *= movespdMult;
@@ -34,7 +34,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void OnHurt(Player.HurtInfo info)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.LightningCarrot) && info.DamageSource.TryGetCausingEntity(out Entity entity) && entity is NPC npc)
+            if (PetIsEquipped() && info.DamageSource.TryGetCausingEntity(out Entity entity) && entity is NPC npc)
             {
                 NpcPet.AddSlow(new NpcPet.PetSlow(staticParalysis, staticLength, PetSlowIDs.VoltBunny), npc);
             }

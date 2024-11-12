@@ -18,7 +18,7 @@ namespace PetsOverhaul.PetEffects
         public int suckingUpRange = 80;
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUse(ItemID.ChesterPetItem))
+            if (PetIsEquipped(false))
             {
                 Player.blockRange += placementRange;
                 if (Player.chest != -1)

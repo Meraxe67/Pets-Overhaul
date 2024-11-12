@@ -22,7 +22,7 @@ namespace PetsOverhaul.PetEffects
 
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.ParrotCracker))
+            if (PetIsEquipped())
             {
                 for (int i = 0; i < GlobalPet.Randomizer(meleeChance); i++)
                 {
@@ -34,7 +34,7 @@ namespace PetsOverhaul.PetEffects
 
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.ParrotCracker) && (proj.minion || proj.sentry || proj.usesOwnerMeleeHitCD || proj.ownerHitCheck || proj.type == ProjectileID.TrueNightsEdge))
+            if (PetIsEquipped() && (proj.minion || proj.sentry || proj.usesOwnerMeleeHitCD || proj.ownerHitCheck || proj.type == ProjectileID.TrueNightsEdge))
             {
                 for (int i = 0; i < GlobalPet.Randomizer(meleeChance); i++)
                 {
@@ -75,7 +75,7 @@ namespace PetsOverhaul.PetEffects
     {
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
-            if (Main.player[projectile.owner].TryGetModPlayer(out Parrot parrot) && parrot.Pet.PetInUseWithSwapCd(ItemID.ParrotCracker) && projectile.usesOwnerMeleeHitCD == false && projectile.ownerHitCheck == false && projectile.damage > 0 && projectile.type != ProjectileID.TrueNightsEdge && projectile.minion == false && projectile.sentry == false) //We check if Projectile is a 'melee' projectile, or a direct 'melee hit' of a Minion/Sentry. True Nights Edge does not use usesOwnerMeleeHitCD or ownerHitCheck, reason for its exception.
+            if (Main.player[projectile.owner].TryGetModPlayer(out Parrot parrot) && parrot.PetIsEquipped() && projectile.usesOwnerMeleeHitCD == false && projectile.ownerHitCheck == false && projectile.damage > 0 && projectile.type != ProjectileID.TrueNightsEdge && projectile.minion == false && projectile.sentry == false) //We check if Projectile is a 'melee' projectile, or a direct 'melee hit' of a Minion/Sentry. True Nights Edge does not use usesOwnerMeleeHitCD or ownerHitCheck, reason for its exception.
             {
                 DamageClass damageType = DamageClass.Default;
                 if (source is EntitySource_ItemUse entity1 && entity1.Item is not null)

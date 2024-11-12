@@ -19,11 +19,11 @@ namespace PetsOverhaul.PetEffects
         public int baseChance = 30;
         public int windChance = 120;
         public int speedMult = 20;
-        public bool amplifiedFishingChance { get; internal set; }
+        public bool AmplifiedFishingChance { get; internal set; }
         public override PetClasses PetClassPrimary => PetClasses.Fishing;
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUse(ItemID.ZephyrFish))
+            if (PetIsEquipped(false))
             {
                 if (Main.windSpeedCurrent < 0)
                 {
@@ -38,7 +38,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void GetFishingLevel(Item fishingRod, Item bait, ref float fishingLevel)
         {
-            if (Pet.PetInUse(ItemID.ZephyrFish))
+            if (PetIsEquipped(false))
             {
                 if (Player.anglerQuestsFinished * 0.004f >= maxQuestPower)
                 {
@@ -52,32 +52,32 @@ namespace PetsOverhaul.PetEffects
         }
         public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if (Pet.PetInUse(ItemID.ZephyrFish) && item.fishingPole > 0)
+            if (PetIsEquipped(false) && item.fishingPole > 0)
             {
-                amplifiedFishingChance = false;
+                AmplifiedFishingChance = false;
             }
             return base.Shoot(item, source, position, velocity, type, damage, knockback);
         }
         public override void CatchFish(FishingAttempt attempt, ref int itemDrop, ref int npcSpawn, ref AdvancedPopupRequest sonar, ref Vector2 sonarPosition)
         {
-            if (Pet.PetInUse(ItemID.ZephyrFish))
+            if (PetIsEquipped(false))
             {
                 if (Main.windSpeedCurrent > 0.2f && (attempt.heightLevel == 0 || attempt.heightLevel == 1) && attempt.X > Player.Center.X / 16)
                 {
-                    amplifiedFishingChance = true;
+                    AmplifiedFishingChance = true;
                 }
                 else if (Main.windSpeedCurrent < -0.2f && (attempt.heightLevel == 0 || attempt.heightLevel == 1) && attempt.X < Player.Center.X / 16)
                 {
-                    amplifiedFishingChance = true;
+                    AmplifiedFishingChance = true;
                 }
             }
         }
 
         public override void ModifyCaughtFish(Item fish)
         {
-            if (Pet.PetInUse(ItemID.ZephyrFish) && fish.maxStack != 1)
+            if (PetIsEquipped(false) && fish.maxStack != 1)
             {
-                for (int i = 0; i < GlobalPet.Randomizer((amplifiedFishingChance ? windChance : 0 + baseChance) * fish.stack); i++)
+                for (int i = 0; i < GlobalPet.Randomizer((AmplifiedFishingChance ? windChance : 0 + baseChance) * fish.stack); i++)
                 {
                     Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.FishingItem), fish.type, 1);
                 }

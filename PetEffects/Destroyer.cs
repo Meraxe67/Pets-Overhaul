@@ -22,7 +22,7 @@ namespace PetsOverhaul.PetEffects
         public int miningFort = 10;
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.DestroyerPetItem))
+            if (PetIsEquipped())
             {
                 if (Player.HasBuff(BuffID.Ironskin))
                 {
@@ -40,7 +40,7 @@ namespace PetsOverhaul.PetEffects
         {
             GlobalPet PickerPet = player.GetModPlayer<GlobalPet>();
             Destroyer dest = player.GetModPlayer<Destroyer>();
-            if (PickerPet.PickupChecks(item, ItemID.DestroyerPetItem, out ItemPet itemChck) && itemChck.oreBoost)
+            if (PickerPet.PickupChecks(item, dest.PetItemID, out ItemPet itemChck) && itemChck.oreBoost)
             {
                 for (int i = 0; i < GlobalPet.Randomizer((player.statDefense * dest.defItemMult + dest.flatAmount) * item.stack); i++)
                 {

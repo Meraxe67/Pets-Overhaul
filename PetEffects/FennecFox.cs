@@ -20,14 +20,14 @@ namespace PetsOverhaul.PetEffects
         public float meleeDmg = 0.05f;
         public override void ModifyItemScale(Item item, ref float scale)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.ExoticEasternChewToy))
+            if (PetIsEquipped())
             {
                 scale *= sizeDecrease;
             }
         }
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.ExoticEasternChewToy))
+            if (PetIsEquipped())
             {
                 if (Player.HeldItem.CountsAsClass<MeleeDamageClass>())
                 {

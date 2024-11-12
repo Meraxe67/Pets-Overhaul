@@ -18,7 +18,7 @@ namespace PetsOverhaul.PetEffects
         public float healthPenalty = 0.15f;
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.BedazzledNectar))
+            if (PetIsEquipped())
             {
                 if (Player.equippedWings == null)
                 {

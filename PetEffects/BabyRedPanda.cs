@@ -32,7 +32,7 @@ namespace PetsOverhaul.PetEffects
         private int alertTimer = 0;
         public override void PreUpdate()
         {
-            if (Pet.PetInUse(ItemID.BambooLeaf))
+            if (PetIsEquipped(false))
             {
                 Pet.SetPetAbilityTimer(alertCd);
                 alertTimer--;
@@ -44,7 +44,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.BambooLeaf))
+            if (PetIsEquipped())
             {
                 Player.GetAttackSpeed<GenericDamageClass>() += regularAtkSpd + (Player.ZoneJungle ? jungleBonusSpd : 0);
                 if (alertTimer > 0)
@@ -57,7 +57,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (Pet.AbilityPressCheck() && Pet.PetInUseWithSwapCd(ItemID.BambooLeaf))
+            if (Pet.AbilityPressCheck() && PetIsEquipped())
             {
                 GlobalPet.CircularDustEffect(Player.Center, 170, alertRadius, 80);
                 if (ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled)
@@ -88,7 +88,7 @@ namespace PetsOverhaul.PetEffects
         {
             GlobalPet PickerPet = player.GetModPlayer<GlobalPet>();
             BabyRedPanda panda = player.GetModPlayer<BabyRedPanda>();
-            if (PickerPet.PickupChecks(item, ItemID.BambooLeaf, out ItemPet _) && item.type == ItemID.BambooBlock)
+            if (PickerPet.PickupChecks(item, panda.PetItemID, out ItemPet _) && item.type == ItemID.BambooBlock)
             {
                 for (int i = 0; i < GlobalPet.Randomizer(panda.bambooChance * item.stack); i++)
                 {

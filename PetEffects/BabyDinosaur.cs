@@ -41,7 +41,7 @@ namespace PetsOverhaul.PetEffects
         {
             GlobalPet Pet = player.GetModPlayer<GlobalPet>();
             BabyDinosaur dino = player.GetModPlayer<BabyDinosaur>();
-            if (Pet.PickupChecks(item, ItemID.AmberMosquito, out ItemPet itemChck) && itemChck.oreBoost)
+            if (Pet.PickupChecks(item, dino.PetItemID, out ItemPet itemChck) && itemChck.oreBoost)
             {
                 AddItemsToPool();
                 if (GlobalPet.ItemPool.Count > 0)

@@ -26,21 +26,21 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
         public override void OnHurt(Player.HurtInfo info)
         {
-            if (Pet.PetInUse(ItemID.DeerclopsPetItem))
+            if (PetIsEquipped(false))
             {
                 deerclopsTakenDamage.Add((info.Damage, damageStoreTime));
             }
         }
         public override void PreUpdate()
         {
-            if (Pet.PetInUse(ItemID.DeerclopsPetItem))
+            if (PetIsEquipped(false))
             {
                 Pet.SetPetAbilityTimer(cooldown);
             }
         }
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.DeerclopsPetItem))
+            if (PetIsEquipped())
             {
                 if (deerclopsTakenDamage.Count > 0)
                 {

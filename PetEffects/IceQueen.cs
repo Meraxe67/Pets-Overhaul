@@ -28,21 +28,21 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
         public override void PreUpdate()
         {
-            if (Pet.PetInUse(ItemID.IceQueenPetItem))
+            if (PetIsEquipped(false))
             {
                 Pet.SetPetAbilityTimer(cooldown);
             }
         }
         public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.IceQueenPetItem) && frozenTomb == true)
+            if (PetIsEquipped() && frozenTomb == true)
             {
                 GlobalPet.CircularDustEffect(Player.Center, DustID.SnowflakeIce, queenRange, 50);
             }
         }
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.IceQueenPetItem) && frozenTomb == true)
+            if (PetIsEquipped() && frozenTomb == true)
             {
                 for (int i = 0; i < Main.maxNPCs; i++)
                 {
@@ -95,7 +95,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.IceQueenPetItem) && Pet.timer <= 0)
+            if (PetIsEquipped() && Pet.timer <= 0)
             {
                 if (ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled)
                 {

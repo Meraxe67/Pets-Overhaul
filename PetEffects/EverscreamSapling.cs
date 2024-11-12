@@ -23,14 +23,14 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Magic;
         public override void PreUpdate()
         {
-            if (Pet.PetInUse(ItemID.EverscreamPetItem))
+            if (PetIsEquipped(false))
             {
                 Pet.SetPetAbilityTimer(cooldown);
             }
         }
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.EverscreamPetItem))
+            if (PetIsEquipped())
             {
                 Player.statManaMax2 += manaIncrease;
                 Player.GetCritChance<MagicDamageClass>() *= critMult;
@@ -41,7 +41,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.EverscreamPetItem) && GlobalPet.LifestealCheck(target) && hit.Crit && Pet.timer <= 0)
+            if (PetIsEquipped() && GlobalPet.LifestealCheck(target) && hit.Crit && Pet.timer <= 0)
             {
                 Pet.PetRecovery(Player.statManaMax2 - Player.statMana, missingManaPercent, flatRecovery, true, false);
                 Pet.timer = Pet.timerMax;

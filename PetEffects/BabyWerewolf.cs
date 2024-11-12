@@ -25,7 +25,7 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassSecondary => PetClasses.Offensive;
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUse(ItemID.FullMoonSqueakyToy) && Main.moonPhase == 0)
+            if (PetIsEquipped(false) && Main.moonPhase == 0)
             {
                 Player.wereWolf = true;
                 Player.forceWerewolf = true;
@@ -48,14 +48,14 @@ namespace PetsOverhaul.PetEffects
                 target.GetGlobalNPC<NpcPet>().maulCounter = 0;
             }
 
-            if (Pet.PetInUseWithSwapCd(ItemID.FullMoonSqueakyToy))
+            if (PetIsEquipped())
             {
                 modifiers.CritDamage -= critDmgReduction - target.GetGlobalNPC<NpcPet>().maulCounter * maulCritDmgIncrease;
             }
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.FullMoonSqueakyToy) && hit.Crit)
+            if (PetIsEquipped() && hit.Crit)
             {
                 target.AddBuff(ModContent.BuffType<Mauled>(), debuffLength);
                 target.GetGlobalNPC<NpcPet>().maulCounter++;
@@ -63,7 +63,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ModifyWeaponCrit(Item item, ref float crit)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.FullMoonSqueakyToy))
+            if (PetIsEquipped())
             {
                 crit *= critChance;
             }

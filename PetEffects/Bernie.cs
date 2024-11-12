@@ -23,14 +23,14 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassSecondary => PetClasses.Defensive;
         public override void PreUpdate()
         {
-            if (Pet.PetInUse(ItemID.BerniePetItem))
+            if (PetIsEquipped(false))
             {
                 Pet.SetPetAbilityTimer(burnDrain);
             }
         }
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.BerniePetItem))
+            if (PetIsEquipped())
             {
                 GlobalPet.CircularDustEffect(Player.Center, DustID.Torch, bernieRange, 100);
                 Player.buffImmune[BuffID.Burning] = true;

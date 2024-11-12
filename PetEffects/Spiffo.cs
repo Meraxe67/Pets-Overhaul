@@ -18,14 +18,14 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Ranged;
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.SpiffoPlush) && NPCID.Sets.Zombies[target.type] && modifiers.DamageType.Type == DamageClass.Ranged.Type)
+            if (PetIsEquipped() && NPCID.Sets.Zombies[target.type] && modifiers.DamageType.Type == DamageClass.Ranged.Type)
             {
                 modifiers.ArmorPenetration += zombieArmorPen;
             }
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.SpiffoPlush) && target.active == false && proj.CountsAsClass<RangedDamageClass>() && proj.penetrate >= 0)
+            if (PetIsEquipped() && target.active == false && proj.CountsAsClass<RangedDamageClass>() && proj.penetrate >= 0)
             {
                 proj.penetrate += GlobalPet.Randomizer(penetrateChance);
                 if (proj.usesLocalNPCImmunity == false)
@@ -37,7 +37,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override bool CanConsumeAmmo(Item weapon, Item ammo)
         {
-            return (!Pet.PetInUseWithSwapCd(ItemID.SpiffoPlush) || !Main.rand.NextBool(ammoReserveChance, 100)) && base.CanConsumeAmmo(weapon, ammo);
+            return (!PetIsEquipped() || !Main.rand.NextBool(ammoReserveChance, 100)) && base.CanConsumeAmmo(weapon, ammo);
         }
     }
     public sealed class SpiffoPlush : PetTooltip

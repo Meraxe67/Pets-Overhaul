@@ -20,7 +20,7 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Summoner;
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.TikiTotem))
+            if (PetIsEquipped())
             {
                 if (Player.GetTotalAttackSpeed<SummonMeleeSpeedDamageClass>() > Player.GetAttackSpeed<SummonMeleeSpeedDamageClass>())
                 {
@@ -31,7 +31,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.TikiTotem))
+            if (PetIsEquipped())
             {
                 int playersCrit = (int)Player.GetTotalCritChance<GenericDamageClass>();
                 if (ProjectileID.Sets.IsAWhip[proj.type])

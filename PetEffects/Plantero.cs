@@ -22,7 +22,7 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
         public void SpawnGasCloud(NPC target, int damage, DamageClass dmgType)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.MudBud))
+            if (PetIsEquipped())
             {
                 for (int i = 0; i < GlobalPet.Randomizer(spawnChance + (int)(spawnChance * Pet.abilityHaste)); i++)
                 {

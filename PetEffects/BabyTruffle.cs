@@ -20,14 +20,14 @@ namespace PetsOverhaul.PetEffects
         public int buffIncrease = 30;
         public override void PreUpdate()
         {
-            if (Pet.PetInUse(ItemID.StrangeGlowingMushroom))
+            if (PetIsEquipped(false))
             {
                 Pet.SetPetAbilityTimer(shroomPotionCd);
             }
         }
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.StrangeGlowingMushroom))
+            if (PetIsEquipped())
             {
                 Player.buffImmune[BuffID.Confused] = false;
                 Player.AddBuff(BuffID.Confused, 1);
@@ -69,21 +69,21 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ModifyLuck(ref float luck)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.StrangeGlowingMushroom))
+            if (PetIsEquipped())
             {
                 luck += increaseFloat;
             }
         }
         public override void ModifyItemScale(Item item, ref float scale)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.StrangeGlowingMushroom))
+            if (PetIsEquipped())
             {
                 scale += increaseFloat;
             }
         }
         public override void UpdateLifeRegen()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.StrangeGlowingMushroom))
+            if (PetIsEquipped())
             {
                 Player.lifeRegen += increaseInt;
                 Player.lifeRegenTime += increaseFloat; //for reference; Regular time is +60 per second, this makes it +62.4 per second.
@@ -91,7 +91,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override bool CanConsumeAmmo(Item weapon, Item ammo)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.StrangeGlowingMushroom) && Main.rand.NextBool(increaseInt,100))
+            if (PetIsEquipped() && Main.rand.NextBool(increaseInt,100))
             {
                 return false;
             }
@@ -99,7 +99,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.StrangeGlowingMushroom))
+            if (PetIsEquipped())
             {
                 modifiers.CritDamage += increaseFloat;
                 modifiers.ScalingArmorPenetration += increaseFloat;
@@ -107,7 +107,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.StrangeGlowingMushroom) && Pet.timer <= 0)
+            if (PetIsEquipped() && Pet.timer <= 0)
             {
                 for (int i = 0; i < Player.MaxBuffs; i++)
                 {
@@ -121,7 +121,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.StrangeGlowingMushroom))
+            if (PetIsEquipped())
             {
                 modifiers.Knockback *= 1f - increaseFloat;
             }

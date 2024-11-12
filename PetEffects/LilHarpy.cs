@@ -19,7 +19,7 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Mobility;
         public override void PreUpdate()
         {
-            if (Pet.PetInUse(ItemID.BirdieRattle))
+            if (PetIsEquipped(false))
             {
                 Pet.SetPetAbilityTimer(harpyCd);
             }
@@ -31,7 +31,7 @@ namespace PetsOverhaul.PetEffects
                 cooldownStarted = false;
                 harpyFlight = fuelMax;
             }
-            if (Pet.PetInUseWithSwapCd(ItemID.BirdieRattle))
+            if (PetIsEquipped())
             {
                 if (Player.equippedWings == null)
                 {

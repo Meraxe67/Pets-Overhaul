@@ -25,7 +25,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUse(ItemID.MagicalPumpkinSeed))
+            if (PetIsEquipped(false))
             {
                 Player.statLifeMax2 += WornPumpkinAmount * pumpkinArmorBonusHp;
                 Pet.harvestingFortune += WornPumpkinAmount * pumpkinArmorBonusHarvestingFortune;
@@ -35,7 +35,7 @@ namespace PetsOverhaul.PetEffects
         {
             GlobalPet PickerPet = player.GetModPlayer<GlobalPet>();
             Squashling squash = player.GetModPlayer<Squashling>();
-            if (PickerPet.PickupChecks(item, ItemID.MagicalPumpkinSeed, out ItemPet itemChck))
+            if (PickerPet.PickupChecks(item, squash.PetItemID, out ItemPet itemChck))
             {
                 if (itemChck.herbBoost == true)
                 {

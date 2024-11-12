@@ -30,7 +30,7 @@ namespace PetsOverhaul.PetEffects
         public float dmgReflectProjectile = 0.6f;
         public override void PreUpdate()
         {
-            if (Pet.PetInUse(ItemID.Seaweed))
+            if (PetIsEquipped(false))
             {
                 Pet.SetPetAbilityTimer(shellHardenCd);
                 timer--;
@@ -43,7 +43,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.Seaweed))
+            if (PetIsEquipped())
             {
                 Player.statDefense *= def + 1f;
                 Player.moveSpeed -= moveSpd;
@@ -51,7 +51,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.Seaweed))
+            if (PetIsEquipped())
             {
                 if (currentStacks > 0)
                 {
@@ -64,7 +64,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void OnHurt(Player.HurtInfo info)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.Seaweed) && currentStacks > 0)
+            if (PetIsEquipped() && currentStacks > 0)
             {
                 if (info.DamageSource.TryGetCausingEntity(out Entity entity))
                 {
@@ -84,7 +84,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (Pet.AbilityPressCheck() && Pet.PetInUseWithSwapCd(ItemID.Seaweed))
+            if (Pet.AbilityPressCheck() && PetIsEquipped())
             {
                 timer = shellHardenDuration;
                 currentStacks = shellHardenStacks;

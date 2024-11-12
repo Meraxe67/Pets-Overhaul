@@ -24,7 +24,7 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Fishing;
         public override void GetFishingLevel(Item fishingRod, Item bait, ref float fishingLevel)
         {
-            if (Pet.PetInUse(ItemID.DukeFishronPetItem))
+            if (PetIsEquipped(false))
             {
                 float fishingPowerMult = 0;
                 fishingPowerMult += fishingPowerPenalty;
@@ -42,7 +42,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ModifyCaughtFish(Item fish)
         {
-            if (Pet.PetInUse(ItemID.DukeFishronPetItem) && fish.maxStack != 1)
+            if (PetIsEquipped(false) && fish.maxStack != 1)
             {
                 for (int i = 0; i < GlobalPet.Randomizer(stackChance + (int)(Player.fishingSkill * multiplier) * fish.stack); i++)
                 {
@@ -52,7 +52,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if (Pet.PetInUse(ItemID.DukeFishronPetItem) && item.fishingPole > 0)
+            if (PetIsEquipped(false) && item.fishingPole > 0)
             {
                 for (int i = 0; i < GlobalPet.Randomizer(bobberChance); i++)
                 {

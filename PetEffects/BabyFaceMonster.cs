@@ -23,14 +23,14 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
         public override void PreUpdateBuffs() //Since inCombatTimerMax is reset in ResetEffects(), we set the desired inCombatTimerMax here.
         {
-            if (Pet.PetInUse(ItemID.BoneRattle))
+            if (PetIsEquipped(false))
             {
                 Pet.inCombatTimerMax = (int)(stage2time * (1 / (1 + Pet.abilityHaste)));
             }
         }
         public override void NaturalLifeRegen(ref float regen)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.BoneRattle))
+            if (PetIsEquipped())
             {
                 if (Pet.inCombatTimer <= Pet.inCombatTimerMax - (int)(stage1time * (1 / (1 + Pet.abilityHaste))) && Player.crimsonRegen == false && Player.active)
                 {
@@ -51,7 +51,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void UpdateLifeRegen()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.BoneRattle))
+            if (PetIsEquipped())
             {
                 Player.lifeRegenTime += bonusRegenPerFrame;
                 if (ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled)
@@ -78,7 +78,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) //Works after GlobalPet's ModifyHitNPC()'s inCombatTimer = inCombatTimerMax to override it if needed.
         {
-            if (Pet.PetInUse(ItemID.BoneRattle) && Pet.inCombatTimer > Pet.inCombatTimerMax - (int)(stage1time * (1 / (1 + Pet.abilityHaste))))
+            if (PetIsEquipped(false) && Pet.inCombatTimer > Pet.inCombatTimerMax - (int)(stage1time * (1 / (1 + Pet.abilityHaste))))
             {
                 Pet.inCombatTimer = Pet.inCombatTimerMax - (int)(stage1time * (1 / (1 + Pet.abilityHaste)));
             }

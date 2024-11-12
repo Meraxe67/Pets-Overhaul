@@ -377,7 +377,7 @@ namespace PetsOverhaul.PetEffects
         {
             GlobalPet PickerPet = player.GetModPlayer<GlobalPet>();
             Junimo juni = player.GetModPlayer<Junimo>();
-            if (PickerPet.PickupChecks(item, ItemID.JunimoPetItem, out ItemPet itemChck))
+            if (PickerPet.PickupChecks(item, juni.PetItemID, out ItemPet itemChck))
             {
                 if (itemChck.harvestingDrop || itemChck.fortuneHarvestingDrop || itemChck.herbBoost)
                 {
@@ -419,7 +419,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.JunimoPetItem))
+            if (PetIsEquipped())
             {
                 Player.endurance += junimoMiningLevel * miningResistPerLevel;
                 Player.GetDamage<GenericDamageClass>() += junimoFishingLevel * fishingDamagePerLevel;
@@ -452,7 +452,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void AnglerQuestReward(float rareMultiplier, List<Item> rewardItems)
         {
-            if (anglerQuestDayCheck == false && Pet.PetInUse(ItemID.JunimoPetItem))
+            if (anglerQuestDayCheck == false && PetIsEquipped(false))
             {
                 int value = GlobalPet.Randomizer(anglerQuestExp);
                 junimoFishingExp += value;
@@ -463,7 +463,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ModifyCaughtFish(Item fish)
         {
-            if (Pet.PetInUse(ItemID.JunimoPetItem))
+            if (PetIsEquipped(false))
             {
                 int index = FishingXpPerCaught.IndexOf(FishingXpPerCaught.Find(x => x.fishList.Contains(fish.type)));
                 int value = index == -1

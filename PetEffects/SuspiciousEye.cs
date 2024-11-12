@@ -34,7 +34,7 @@ namespace PetsOverhaul.PetEffects
         public float forcedEnrageShield = 0.1f;
         public override void PreUpdate()
         {
-            if (Pet.PetInUse(ItemID.EyeOfCthulhuPetItem))
+            if (PetIsEquipped(false))
             {
                 Pet.SetPetAbilityTimer(phaseCd);
             }
@@ -46,7 +46,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (Pet.AbilityPressCheck() && Pet.PetInUseWithSwapCd(ItemID.EyeOfCthulhuPetItem))
+            if (Pet.AbilityPressCheck() && PetIsEquipped())
             {
                 if (Player.statLife > Player.statLifeMax2 / 2)
                 {
@@ -62,7 +62,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.EyeOfCthulhuPetItem))
+            if (PetIsEquipped())
             {
                 if (Pet.inCombatTimer >= 0 && Player.statLife <= Player.statLifeMax2 / 2 && Pet.timer <= 0)
                 {

@@ -18,7 +18,7 @@ namespace PetsOverhaul.PetEffects
         public int lifeRegen = 8;
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.BoneKey))
+            if (PetIsEquipped())
             {
                 Player.npcTypeNoAggro[NPCID.AngryBones] = true;
                 Player.npcTypeNoAggro[NPCID.AngryBonesBig] = true;

@@ -28,14 +28,14 @@ namespace PetsOverhaul.PetEffects
         public float currentMoonLuck = 0;
         public override void PreUpdate()
         {
-            if (Pet.PetInUse(ItemID.UnluckyYarn))
+            if (PetIsEquipped(false))
             {
                 Pet.SetPetAbilityTimer(moonlightCd);
             }
         }
         public override void ModifyLuck(ref float luck)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.UnluckyYarn))
+            if (PetIsEquipped())
             {
                 currentMoonLuck = 0;
                 if (Main.dayTime == false)
@@ -76,7 +76,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (Main.dayTime == false && Pet.AbilityPressCheck() && Pet.PetInUseWithSwapCd(ItemID.UnluckyYarn))
+            if (Main.dayTime == false && Pet.AbilityPressCheck() && PetIsEquipped())
             {
                 SoundEngine.PlaySound(SoundID.Item29 with { PitchRange = (-1f, -0.8f) }, Player.Center);
                 int moonlightRoll = Main.rand.Next(moonlightLowest, moonlightHighest + 1);

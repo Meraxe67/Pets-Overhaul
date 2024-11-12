@@ -20,7 +20,7 @@ namespace PetsOverhaul.PetEffects
         public float speedAccIncr = 0.2f;
         public override void PostUpdateRunSpeeds()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.MartianPetItem))
+            if (PetIsEquipped())
             {
                 Player.runAcceleration *= accelerator + 1f;
                 Player.wingTimeMax = (int)(Player.wingTimeMax * (1f + wingTime));

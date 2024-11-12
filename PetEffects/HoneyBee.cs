@@ -25,7 +25,7 @@ namespace PetsOverhaul.PetEffects
         public float currentAbilityHasteBonus = 0;
         public override void GetHealLife(Item item, bool quickHeal, ref int healValue)
         {
-            if (Player.GetModPlayer<GlobalPet>().PetInUse(ItemID.QueenBeePetItem))
+            if (PetIsEquipped())
             {
                 healValue += (int)(healValue * selfPotionIncrease);
             }
@@ -71,7 +71,7 @@ namespace PetsOverhaul.PetEffects
     {
         public override bool ConsumeItem(Item item, Player player)
         {
-            if (player.GetModPlayer<GlobalPet>().PetInUseWithSwapCd(ItemID.QueenBeePetItem) && (item.type == ItemID.BottledHoney || item.type == ItemID.Honeyfin))
+            if (player.GetModPlayer<HoneyBee>().PetIsEquipped() && (item.type == ItemID.BottledHoney || item.type == ItemID.Honeyfin))
             {
                 bool isBottledHoney = item.type == ItemID.BottledHoney;
                 HoneyBee.HealByHoneyBee(isBottledHoney, player.whoAmI, true);

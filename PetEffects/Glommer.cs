@@ -24,19 +24,19 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassSecondary => PetClasses.Supportive;
         public override void PreUpdate()
         {
-            if (Pet.PetInUse(ItemID.GlommerPetItem))
+            if (PetIsEquipped(false))
             {
                 Pet.SetPetAbilityTimer(glommerSanityTime);
             }
         }
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUse(ItemID.GlommerPetItem) && Main.rand.NextBool(18000))
+            if (PetIsEquipped(false) && Main.rand.NextBool(18000))
             {
                 Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.GlobalItem), ModContent.ItemType<GlommersGoop>());
             }
 
-            if (Pet.PetInUseWithSwapCd(ItemID.GlommerPetItem))
+            if (PetIsEquipped())
             {
                 GlobalPet.CircularDustEffect(Player.Center, DustID.ShimmerTorch, glommerSanityRange, 100);
                 for (int i = 0; i < Main.maxPlayers; i++)

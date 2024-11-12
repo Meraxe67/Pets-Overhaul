@@ -76,7 +76,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override bool ConsumableDodge(HurtInfo info)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.SkeletronPetItem))
+            if (PetIsEquipped())
             {
                 Player.lifeRegenTime = 0;
                 PlayerLoader.OnHurt(Player, info);

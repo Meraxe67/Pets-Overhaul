@@ -24,7 +24,7 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Melee;
         public override void PreUpdate()
         {
-            if (Pet.PetInUse(ItemID.TartarSauce))
+            if (PetIsEquipped(false))
             {
                 Pet.SetPetAbilityTimer(minotaurCd);
                 if (Pet.inCombatTimer <= 0 && minotaurStack > 0)
@@ -40,7 +40,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.TartarSauce) && minotaurStack > 0)
+            if (PetIsEquipped() && minotaurStack > 0)
             {
                 Player.GetAttackSpeed<MeleeDamageClass>() += meleeSpd * minotaurStack;
                 Player.statDefense.FinalMultiplier *= 1 + defMult * minotaurStack;
@@ -50,7 +50,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.TartarSauce) && GlobalPet.LifestealCheck(target) && Pet.timer <= 0 && item.CountsAsClass<MeleeDamageClass>())
+            if (PetIsEquipped() && GlobalPet.LifestealCheck(target) && Pet.timer <= 0 && item.CountsAsClass<MeleeDamageClass>())
             {
                 if (minotaurStack < 80)
                 {
@@ -65,7 +65,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.TartarSauce) && GlobalPet.LifestealCheck(target) && Pet.timer <= 0 && proj.CountsAsClass<MeleeDamageClass>())
+            if (PetIsEquipped() && GlobalPet.LifestealCheck(target) && Pet.timer <= 0 && proj.CountsAsClass<MeleeDamageClass>())
             {
                 if (minotaurStack < 80)
                 {

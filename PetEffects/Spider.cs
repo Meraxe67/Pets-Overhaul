@@ -25,7 +25,7 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
         public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.SpiderEgg))
+            if (PetIsEquipped())
             {
                 if (target.HasBuff(BuffID.Venom))
                 {
@@ -72,7 +72,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.SpiderEgg))
+            if (PetIsEquipped())
             {
                 if (target.HasBuff(BuffID.Venom))
                 {

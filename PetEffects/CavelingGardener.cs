@@ -28,7 +28,7 @@ namespace PetsOverhaul.PetEffects
         {
             GlobalPet PickerPet = player.GetModPlayer<GlobalPet>();
             CavelingGardener caveling = player.GetModPlayer<CavelingGardener>();
-            if (PickerPet.PickupChecks(item, ItemID.GlowTulip, out ItemPet itemChck))
+            if (PickerPet.PickupChecks(item, caveling.PetItemID, out ItemPet itemChck))
             {
                 if (itemChck.herbBoost && (player.ZoneDirtLayerHeight || player.ZoneRockLayerHeight || player.ZoneUnderworldHeight))
                 {
@@ -41,7 +41,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void UpdateEquips()
         {
-            if (Pet.PetInUse(ItemID.GlowTulip))
+            if (PetIsEquipped(false))
             {
                 Lighting.AddLight(Player.Center, new Vector3(0.0013f * Main.mouseTextColor, 0.0064f * Main.mouseTextColor, 0.0115f * Main.mouseTextColor) * shineMult);
             }

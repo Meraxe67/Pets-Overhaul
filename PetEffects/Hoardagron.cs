@@ -25,7 +25,7 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Ranged;
         public override void ModifyShootStats(Item item, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.DD2PetDragon))
+            if (PetIsEquipped())
             {
 
                 if (AmmoID.Sets.IsArrow[item.useAmmo])
@@ -48,7 +48,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.DD2PetDragon) && proj.GetGlobalProjectile<HoardagronProj>().special)
+            if (PetIsEquipped() && proj.GetGlobalProjectile<HoardagronProj>().special)
             {
                 if ((target.boss == true || NpcPet.NonBossTrueBosses.Contains(target.type)) && target.life < (int)(target.lifeMax * specialBossTreshold))
                 {
@@ -70,7 +70,7 @@ namespace PetsOverhaul.PetEffects
             if (projectile.owner != 255 && Main.player[projectile.owner].active)
             {
                 Hoardagron player = Main.player[projectile.owner].GetModPlayer<Hoardagron>();
-                if (player.Pet.PetInUseWithSwapCd(ItemID.DD2PetDragon))
+                if (player.PetIsEquipped())
                 {
                     special = player.specialist;
                     if (player.arrow && projectile.penetrate >= 0)

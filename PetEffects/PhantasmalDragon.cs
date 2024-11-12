@@ -41,7 +41,7 @@ namespace PetsOverhaul.PetEffects
         public float fireKnockback = 3.8f;
         public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {
-            if (Pet.PetInUse(ItemID.LunaticCultistPetItem))
+            if (PetIsEquipped(false))
             {
                 if (Main.rand.NextBool(15))
                 {
@@ -77,7 +77,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void PreUpdate()
         {
-            if (Pet.PetInUse(ItemID.LunaticCultistPetItem))
+            if (PetIsEquipped(false))
             {
                 if (fireVolley > 0 && fireVolley % fireVolleyEveryFrame == 0)
                 {
@@ -102,13 +102,13 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (Pet.PetInUse(ItemID.LunaticCultistPetItem) && PetKeybinds.PetAbilitySwitch.JustPressed)
+            if (PetIsEquipped(false) && PetKeybinds.PetAbilitySwitch.JustPressed)
             {
                 currentAbility++;
                 if (currentAbility > 2)
                     currentAbility = 0;
             }
-            if (Pet.AbilityPressCheck() && Pet.PetInUseWithSwapCd(ItemID.LunaticCultistPetItem))
+            if (Pet.AbilityPressCheck() && PetIsEquipped())
             {
                 Pet.timer = Pet.timerMax;
                 switch (currentAbility)
@@ -271,14 +271,14 @@ namespace PetsOverhaul.PetEffects
                         {
                             num815 = 0.5f;
                         }
-                        Vector2 spinningpoint56 = new Vector2((float)-projectile.width * 0.2f * projectile.scale, 0f);
+                        Vector2 spinningpoint56 = new(-projectile.width * 0.2f * projectile.scale, 0f);
                         double radians43 = num815 * ((float)Math.PI * 2f);
                         val4 = default;
                         Vector2 spinningpoint57 = Utils.RotatedBy(spinningpoint56, radians43, val4);
                         double radians44 = projectile.velocity.ToRotation();
                         val4 = default;
                         Vector2 vector164 = spinningpoint57.RotatedBy(radians44, val4);
-                        int num816 = Dust.NewDust(projectile.Center - Vector2.One * 5f, 10, 10, 226, (0f - projectile.velocity.X) / 3f, (0f - projectile.velocity.Y) / 3f, 150, Color.Transparent, 0.7f);
+                        int num816 = Dust.NewDust(projectile.Center - Vector2.One * 5f, 10, 10, DustID.Electric, (0f - projectile.velocity.X) / 3f, (0f - projectile.velocity.Y) / 3f, 150, Color.Transparent, 0.7f);
                         Main.dust[num816].position = projectile.Center + vector164;
                         Main.dust[num816].velocity = Vector2.Normalize(Main.dust[num816].position - projectile.Center) * 2f;
                         Main.dust[num816].noGravity = true;
@@ -294,14 +294,14 @@ namespace PetsOverhaul.PetEffects
                         {
                             num818 = 0.5f;
                         }
-                        Vector2 spinningpoint58 = new Vector2((float)-projectile.width * 0.6f * projectile.scale, 0f);
+                        Vector2 spinningpoint58 = new Vector2(-projectile.width * 0.6f * projectile.scale, 0f);
                         double radians45 = num818 * ((float)Math.PI * 2f);
                         val4 = default;
                         Vector2 spinningpoint59 = Utils.RotatedBy(spinningpoint58, radians45, val4);
                         double radians46 = projectile.velocity.ToRotation();
                         val4 = default;
                         Vector2 vector165 = spinningpoint59.RotatedBy(radians46, val4);
-                        int num819 = Dust.NewDust(projectile.Center - Vector2.One * 5f, 10, 10, 226, (0f - projectile.velocity.X) / 3f, (0f - projectile.velocity.Y) / 3f, 150, Color.Transparent, 0.7f);
+                        int num819 = Dust.NewDust(projectile.Center - Vector2.One * 5f, 10, 10, DustID.Electric, (0f - projectile.velocity.X) / 3f, (0f - projectile.velocity.Y) / 3f, 150, Color.Transparent, 0.7f);
                         Main.dust[num819].velocity = Vector2.Zero;
                         Main.dust[num819].position = projectile.Center + vector165;
                         Main.dust[num819].noGravity = true;
@@ -331,24 +331,24 @@ namespace PetsOverhaul.PetEffects
                                 return false;
                             }
                         }
-                        if (Main.rand.Next(projectile.extraUpdates) == 0)
+                        if (Main.rand.NextBool(projectile.extraUpdates))
                         {
                             Vector2 vector166 = default;
                             for (int num822 = 0; num822 < 2; num822++)
                             {
-                                float num823 = projectile.rotation + ((Main.rand.Next(2) == 1) ? (-1f) : 1f) * ((float)Math.PI / 2f);
+                                float num823 = projectile.rotation + ((Main.rand.NextBool(2)) ? (-1f) : 1f) * ((float)Math.PI / 2f);
                                 float num824 = (float)Main.rand.NextDouble() * 0.8f + 1f;
                                 vector166 = new Vector2((float)Math.Cos(num823) * num824, (float)Math.Sin(num823) * num824);
-                                int num825 = Dust.NewDust(projectile.Center, 0, 0, 226, vector166.X, vector166.Y);
+                                int num825 = Dust.NewDust(projectile.Center, 0, 0, DustID.Electric, vector166.X, vector166.Y);
                                 Main.dust[num825].noGravity = true;
                                 Main.dust[num825].scale = 1.2f;
                             }
-                            if (Main.rand.Next(5) == 0)
+                            if (Main.rand.NextBool(5))
                             {
                                 Vector2 spinningpoint60 = projectile.velocity;
                                 val4 = default(Vector2);
                                 Vector2 vector168 = spinningpoint60.RotatedBy(1.5707963705062866, val4) * ((float)Main.rand.NextDouble() - 0.5f) * (float)projectile.width;
-                                int num826 = Dust.NewDust(projectile.Center + vector168 - Vector2.One * 4f, 8, 8, 31, 0f, 0f, 100, default(Color), 1.5f);
+                                int num826 = Dust.NewDust(projectile.Center + vector168 - Vector2.One * 4f, 8, 8, DustID.Smoke, 0f, 0f, 100, default(Color), 1.5f);
                                 Dust dust137 = Main.dust[num826];
                                 Dust dust212 = dust137;
                                 dust212.velocity *= 0.5f;

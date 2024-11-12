@@ -24,14 +24,14 @@ namespace PetsOverhaul.PetEffects
         public float manaToHealthNerf = 0.03f;
         public override void PreUpdate()
         {
-            if (Pet.PetInUse(ItemID.CompanionCube))
+            if (PetIsEquipped(false))
             {
                 manaToHealth = manaToHealthUpdate;
             }
         }
         public override void PostUpdateBuffs()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.CompanionCube) && Player.manaSick)
+            if (PetIsEquipped() && Player.manaSick)
             {
                 if (Player.manaSickReduction > Player.manaSickLessDmg)
                 {
@@ -45,7 +45,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void GetHealMana(Item item, bool quickHeal, ref int healValue)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.CompanionCube) && Player.manaSick)
+            if (PetIsEquipped() && Player.manaSick)
             {
                 if (Player.manaSickReduction > Player.manaSickLessDmg)
                 {
@@ -59,14 +59,14 @@ namespace PetsOverhaul.PetEffects
         }
         public override void OnConsumeMana(Item item, int manaConsumed)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.CompanionCube))
+            if (PetIsEquipped())
             {
                 Pet.PetRecovery(manaConsumed, manaToHealth, isLifesteal: false);
             }
         }
         public override void PostHurt(Player.HurtInfo info)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.CompanionCube))
+            if (PetIsEquipped())
             {
                 Pet.PetRecovery(info.Damage, healthToMana, manaSteal: true, isLifesteal: false);
             }

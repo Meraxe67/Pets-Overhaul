@@ -18,7 +18,7 @@ namespace PetsOverhaul.PetEffects
         public float penaltyMult = 0.6f;
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.CelestialWand))
+            if (PetIsEquipped())
             {
                 int manaMult;
                 Player.statManaMax2 += (int)(Player.statManaMax2 * manaIncrease);

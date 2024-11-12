@@ -48,7 +48,7 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.MoonLordPetItem))
+            if (PetIsEquipped())
             {
                 if (HighestDamage == Player.GetDamage<MeleeDamageClass>())
                 {
@@ -90,7 +90,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.MoonLordPetItem) && modifiers.DamageType == DamageClass.Ranged && HighestDamage == Player.GetDamage<RangedDamageClass>())
+            if (PetIsEquipped() && modifiers.DamageType == DamageClass.Ranged && HighestDamage == Player.GetDamage<RangedDamageClass>())
             {
                 modifiers.CritDamage += rangedCrDmg;
             }

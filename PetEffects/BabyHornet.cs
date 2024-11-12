@@ -28,14 +28,14 @@ namespace PetsOverhaul.PetEffects
         public int beeChance = 7;
         public override void PreUpdate()
         {
-            if (Pet.PetInUse(ItemID.Nectar))
+            if (PetIsEquipped(false))
             {
                 Pet.SetPetAbilityTimer(beeCooldown);
             }
         }
         public override void PreUpdateBuffs()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.Nectar))
+            if (PetIsEquipped())
             {
                 Player.buffImmune[BuffID.Poisoned] = true;
                 Player.buffImmune[BuffID.Venom] = true;
@@ -43,7 +43,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.Nectar))
+            if (PetIsEquipped())
             {
                 Player.statDefense -= defReduction;
                 Player.GetDamage<GenericDamageClass>() -= dmgReduction;
@@ -54,14 +54,14 @@ namespace PetsOverhaul.PetEffects
         }
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.Nectar) && Pet.timer <= 0)
+            if (PetIsEquipped() && Pet.timer <= 0)
             {
                 SpawnBees(hit.DamageType, target.Center);
             }
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Pet.timer <= 0 && Pet.PetInUseWithSwapCd(ItemID.Nectar) && proj.GetGlobalProjectile<ProjectileSourceChecks>().petProj == false)
+            if (Pet.timer <= 0 && PetIsEquipped() && proj.GetGlobalProjectile<ProjectileSourceChecks>().petProj == false)
             {
                 SpawnBees(hit.DamageType, target.Center);
             }

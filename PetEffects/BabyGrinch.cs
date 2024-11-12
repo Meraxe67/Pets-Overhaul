@@ -23,7 +23,7 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassSecondary => PetClasses.Offensive;
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.BabyGrinchMischiefWhistle))
+            if (PetIsEquipped())
             {
                 if (item.netID == ItemID.ChristmasTreeSword || item.netID == ItemID.Razorpine || item.netID == ItemID.ElfMelter || item.netID == ItemID.ChainGun || item.netID == ItemID.BlizzardStaff || item.netID == ItemID.SnowmanCannon || item.netID == ItemID.NorthPole)
                 {
@@ -33,7 +33,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void ModifyWeaponCrit(Item item, ref float crit)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.BabyGrinchMischiefWhistle))
+            if (PetIsEquipped())
             {
                 if (item.netID == ItemID.ChristmasTreeSword || item.netID == ItemID.Razorpine || item.netID == ItemID.ElfMelter || item.netID == ItemID.ChainGun || item.netID == ItemID.BlizzardStaff || item.netID == ItemID.SnowmanCannon || item.netID == ItemID.NorthPole)
                 {
@@ -43,7 +43,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.BabyGrinchMischiefWhistle))
+            if (PetIsEquipped())
             {
                 GlobalPet.CircularDustEffect(Player.Center, DustID.Snow, grinchRange, 20);
                 Player.resistCold = true;

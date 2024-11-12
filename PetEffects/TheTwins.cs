@@ -27,14 +27,14 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassSecondary => PetClasses.Utility;
         public override void PreUpdate()
         {
-            if (Pet.PetInUse(ItemID.TwinsPetItem))
+            if (PetIsEquipped(false))
             {
                 Pet.SetPetAbilityTimer(healthDmgCd);
             }
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (Pet.PetInUseWithSwapCd(ItemID.TwinsPetItem))
+            if (PetIsEquipped())
             {
                 GlobalPet.CircularDustEffect(Player.Center, DustID.CursedTorch, closeRange, 6);
                 GlobalPet.CircularDustEffect(Player.Center, DustID.RedTorch, longRange, 30);
@@ -55,7 +55,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Player.Distance(target.Center) < closeRange && GlobalPet.LifestealCheck(target) && Pet.PetInUseWithSwapCd(ItemID.TwinsPetItem))
+            if (Player.Distance(target.Center) < closeRange && GlobalPet.LifestealCheck(target) && PetIsEquipped())
             {
                 target.AddBuff(BuffID.CursedInferno, infernoTime);
                 if (Pet.timer <= 0) 
