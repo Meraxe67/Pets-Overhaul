@@ -111,22 +111,20 @@ namespace PetsOverhaul.Items
             {
                 ushort tileType = Main.tile[brokenTile.TileCoords].TileType;
                 
-                if (TilePlacement.RemoveFromList(brokenTile.TileCoords.X,brokenTile.TileCoords.Y) == false)
+                if (PlayerPlacedBlockList.placedBlocksByPlayer.Contains(new Point16(brokenTile.TileCoords.X,brokenTile.TileCoords.Y)) == false)
                 {
                     oreBoost = TileID.Sets.Ore[tileType] || gemTile[tileType] || extractableAndOthers[tileType] || Junimo.MiningXpPerBlock.Exists(x => x.oreList.Contains(item.type));
                     commonBlock = TileID.Sets.Conversion.Moss[tileType] || commonTiles[tileType];
                     blockNotByPlayer = true;
                 }
 
+                TilePlacement.RemoveFromList(brokenTile.TileCoords.X, brokenTile.TileCoords.Y);
+
                 herbBoost = Junimo.HarvestingXpPerGathered.Exists(x => x.plantList.Contains(item.type));
+
                 if (TileID.Sets.CountsAsGemTree[tileType] == false && gemstoneTreeItem[item.type] || treeTile[tileType] == false && treeItem[item.type] || blockNotByPlayer == false && seaPlantItem[item.type] || blockNotByPlayer == false && plantsWithNoSeeds[item.type]) //Excluding other plants if their certain condition is not met
                 {
                     herbBoost = false;
-                }
-
-                if (GlobalPet.updateReplacedTile.Count > 0)
-                {
-                    PlayerPlacedBlockList.placedBlocksByPlayer.AddRange(GlobalPet.updateReplacedTile);
                 }
             }
             else if (source is EntitySource_Loot lootSource && lootSource.Entity is NPC npc)

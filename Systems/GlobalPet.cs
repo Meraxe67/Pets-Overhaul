@@ -80,12 +80,12 @@ namespace PetsOverhaul.Systems
         public static List<int> ItemPool = new();
 
         /// <summary>
-        /// Ran at end of PostUpdate().
+        /// Ran and is reset at end of PostUpdate().
         /// </summary>
         public static List<Point16> CoordsToRemove = new();
 
         /// <summary>
-        /// Used in PetItem's OnSpawn.
+        /// Ran and is reset at end of PostUpdate().
         /// </summary>
         public static List<Point16> updateReplacedTile = new();
 
@@ -727,17 +727,9 @@ namespace PetsOverhaul.Systems
             petShieldMultiplier = 1f;
             petDirectDamageMultiplier = 1f;
 
-            if (updateReplacedTile.Count > 0)
-            {
-                updateReplacedTile.Clear();
-            }
             if (ItemPool.Count > 0)
             {
                 ItemPool.Clear();
-            }
-            if (CoordsToRemove.Count > 0)
-            {
-                CoordsToRemove.Clear();
             }
 
             Player.breathMax = 200; //TODO: Remove this when tModLoader adds the breathMax reset in ResetEffects(), vanilla default value is 200.
@@ -828,6 +820,12 @@ namespace PetsOverhaul.Systems
             if (CoordsToRemove.Count > 0)
             {
                 PlayerPlacedBlockList.placedBlocksByPlayer.RemoveAll(CoordsToRemove.Contains);
+                CoordsToRemove.Clear();
+            }
+            if (updateReplacedTile.Count > 0)
+            {
+                PlayerPlacedBlockList.placedBlocksByPlayer.AddRange(updateReplacedTile);
+                updateReplacedTile.Clear();
             }
         }
         public override void OnEnterWorld()

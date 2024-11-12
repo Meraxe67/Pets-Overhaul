@@ -400,7 +400,7 @@ namespace PetsOverhaul.PetEffects
                     value = GlobalPet.Randomizer(value);
                     juni.junimoFishingExp += value;
                     juni.popupExpFish += value;
-                    juni.popupIndexFish = juni.PopupExp(juni.popupIndexFish, juni.popupExpFish, PetTextsColors.MiningClass);
+                    juni.popupIndexFish = juni.PopupExp(juni.popupIndexFish, juni.popupExpFish, PetTextsColors.FishingClass);
                 }
                 else if (itemChck.blockNotByPlayer && (itemChck.oreBoost || itemChck.miningDrop || itemChck.fortuneMiningDrop))
                 {
@@ -412,7 +412,7 @@ namespace PetsOverhaul.PetEffects
                     value = GlobalPet.Randomizer(value);
                     juni.junimoMiningExp += value;
                     juni.popupExpMining += value;
-                    juni.popupIndexMining = juni.PopupExp(juni.popupIndexMining, juni.popupExpMining, PetTextsColors.FishingClass);
+                    juni.popupIndexMining = juni.PopupExp(juni.popupIndexMining, juni.popupExpMining, PetTextsColors.MiningClass);
                 }
             }
         }
