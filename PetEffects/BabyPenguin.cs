@@ -60,29 +60,24 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class Fish : GlobalItem
+    public sealed class Fish : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => babyPenguin;
+        public static BabyPenguin babyPenguin
         {
-            return entity.type == ItemID.Fish;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out BabyPenguin pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<BabyPenguin>();
             }
-
-            BabyPenguin babyPenguin = Main.LocalPlayer.GetModPlayer<BabyPenguin>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.Fish")
-                .Replace("<class>", PetTextsColors.ClassText(babyPenguin.PetClassPrimary, babyPenguin.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.Fish")
                 .Replace("<fp>", babyPenguin.regularFish.ToString())
                 .Replace("<oceanFp>", babyPenguin.oceanFish.ToString())
                 .Replace("<snowFp>", babyPenguin.snowFish.ToString())
                 .Replace("<catchChance>", babyPenguin.snowFishChance.ToString())
-                .Replace("<chilledMult>", babyPenguin.chillingMultiplier.ToString())
-            ));
-        }
+                .Replace("<chilledMult>", babyPenguin.chillingMultiplier.ToString());
     }
 }

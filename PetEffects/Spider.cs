@@ -117,23 +117,20 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class SpiderEgg : GlobalItem
+    public sealed class SpiderEgg : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => spider;
+        public static Spider spider
         {
-            return entity.type == ItemID.SpiderEgg;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out Spider pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<Spider>();
             }
-
-            Spider spider = Main.LocalPlayer.GetModPlayer<Spider>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.SpiderEgg")
-                .Replace("<class>", PetTextsColors.ClassText(spider.PetClassPrimary, spider.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.SpiderEgg")
                         .Replace("<poisonTime>", Math.Round(spider.poisonTime / 60f, 2).ToString())
                         .Replace("<poiPerc>", spider.poisonDmgMult.ToString())
                         .Replace("<poiFlat>", spider.poisonFlatDmg.ToString())
@@ -142,8 +139,6 @@ namespace PetsOverhaul.PetEffects
                         .Replace("<venomPerc>", spider.venomDmgMult.ToString())
                         .Replace("<venomFlat>", spider.venomFlatDmg.ToString())
                         .Replace("<venomKb>", spider.kbIncreaseVenom.ToString())
-                        .Replace("<venomCrit>", spider.venomCrit.ToString())
-                        ));
-        }
+                        .Replace("<venomCrit>", spider.venomCrit.ToString());
     }
 }

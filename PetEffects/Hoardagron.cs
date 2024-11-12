@@ -85,29 +85,24 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class DD2PetDragon : GlobalItem
+    public sealed class DD2PetDragon : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => hoardagron;
+        public static Hoardagron hoardagron
         {
-            return entity.type == ItemID.DD2PetDragon;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out Hoardagron pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<Hoardagron>();
             }
-
-            Hoardagron hoardagron = Main.LocalPlayer.GetModPlayer<Hoardagron>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DD2PetDragon")
-                .Replace("<class>", PetTextsColors.ClassText(hoardagron.PetClassPrimary, hoardagron.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DD2PetDragon")
                         .Replace("<arrowVelo>", hoardagron.arrowSpd.ToString())
                         .Replace("<arrowPierce>", hoardagron.arrowPen.ToString())
                         .Replace("<bulletVelo>", hoardagron.bulletSpd.ToString())
                         .Replace("<treshold>", Math.Round(hoardagron.specialTreshold * 100, 2).ToString())
-                        .Replace("<bossTreshold>", Math.Round(hoardagron.specialBossTreshold * 100, 2).ToString())
-                        ));
-        }
+                        .Replace("<bossTreshold>", Math.Round(hoardagron.specialBossTreshold * 100, 2).ToString());
     }
 }

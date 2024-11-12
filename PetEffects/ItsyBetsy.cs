@@ -61,29 +61,24 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class DD2BetsyPetItem : GlobalItem
+    public sealed class DD2BetsyPetItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => itsyBetsy;
+        public static ItsyBetsy itsyBetsy
         {
-            return entity.type == ItemID.DD2BetsyPetItem;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out ItsyBetsy pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<ItsyBetsy>();
             }
-
-            ItsyBetsy itsyBetsy = Main.LocalPlayer.GetModPlayer<ItsyBetsy>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DD2BetsyPetItem")
-                .Replace("<class>", PetTextsColors.ClassText(itsyBetsy.PetClassPrimary, itsyBetsy.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DD2BetsyPetItem")
                         .Replace("<debuffTime>", Math.Round(itsyBetsy.debuffTime / 60f, 2).ToString())
                         .Replace("<defDecrease>", Math.Round(itsyBetsy.defReduction * 100, 2).ToString())
                         .Replace("<maxStack>", itsyBetsy.maxStacks.ToString())
                         .Replace("<missingHpSteal>", Math.Round(itsyBetsy.missingHpRecover * 100, 2).ToString())
-                        .Replace("<maxStackIncr>", Math.Round(itsyBetsy.maxStackBonusRecover * 100, 2).ToString())
-                        ));
-        }
+                        .Replace("<maxStackIncr>", Math.Round(itsyBetsy.maxStackBonusRecover * 100, 2).ToString());
     }
 }

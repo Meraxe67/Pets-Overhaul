@@ -40,27 +40,22 @@ namespace PetsOverhaul.PetEffects
 
         }
     }
-    public sealed class DirtiestBlockItem : GlobalItem
+    public sealed class DirtiestBlockItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => dirtiestBlock;
+        public static DirtiestBlock dirtiestBlock
         {
-            return entity.type == ItemID.DirtiestBlock;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out DirtiestBlock pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<DirtiestBlock>();
             }
-
-            DirtiestBlock dirtiestBlock = Main.LocalPlayer.GetModPlayer<DirtiestBlock>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DirtiestBlock")
-                .Replace("<class>", PetTextsColors.ClassText(dirtiestBlock.PetClassPrimary, dirtiestBlock.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DirtiestBlock")
                         .Replace("<any>", (dirtiestBlock.everythingCoin / 100).ToString())
                         .Replace("<soil>", (dirtiestBlock.soilCoin / 100).ToString())
-                        .Replace("<dirt>", (dirtiestBlock.dirtCoin / 100).ToString())
-                        ));
-        }
+                        .Replace("<dirt>", (dirtiestBlock.dirtCoin / 100).ToString());
     }
 }

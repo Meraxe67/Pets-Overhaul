@@ -52,26 +52,21 @@ namespace PetsOverhaul.PetEffects
             return hurt;
         }
     }
-    public sealed class BoneKey : GlobalItem
+    public sealed class BoneKey : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => dungeonGuardian;
+        public static DungeonGuardian dungeonGuardian
         {
-            return entity.type == ItemID.BoneKey;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out DungeonGuardian pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<DungeonGuardian>();
             }
-
-            DungeonGuardian dungeonGuardian = Main.LocalPlayer.GetModPlayer<DungeonGuardian>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BoneKey")
-                .Replace("<class>", PetTextsColors.ClassText(dungeonGuardian.PetClassPrimary, dungeonGuardian.PetClassSecondary))
-                        .Replace("<armorPen>", dungeonGuardian.armorPen.ToString())
-                        .Replace("<dungRegen>", dungeonGuardian.lifeRegen.ToString())
-                        ));
         }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BoneKey")
+                        .Replace("<armorPen>", dungeonGuardian.armorPen.ToString())
+                        .Replace("<dungRegen>", dungeonGuardian.lifeRegen.ToString());
     }
 }

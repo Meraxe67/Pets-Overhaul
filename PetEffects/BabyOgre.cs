@@ -117,23 +117,20 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class DD2OgrePetItem : GlobalItem
+    public sealed class DD2OgrePetItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => babyOgre;
+        public static BabyOgre babyOgre
         {
-            return entity.type == ItemID.DD2OgrePetItem;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out BabyOgre pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<BabyOgre>();
             }
-
-            BabyOgre babyOgre = Main.LocalPlayer.GetModPlayer<BabyOgre>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DD2OgrePetItem")
-                .Replace("<class>", PetTextsColors.ClassText(babyOgre.PetClassPrimary, babyOgre.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DD2OgrePetItem")
                 .Replace("<moveSpdNerf>", babyOgre.movespdNerf.ToString())
                 .Replace("<atkSpdNerf>", babyOgre.atkSpdMult.ToString())
                 .Replace("<dmgNerf>", Math.Round(babyOgre.nonMeleedmg * 100, 2).ToString())
@@ -143,9 +140,6 @@ namespace PetsOverhaul.PetEffects
                 .Replace("<trueMeleeCrit>", babyOgre.crit.ToString())
                 .Replace("<healthIncrease>", Math.Round(babyOgre.healthIncrease * 100, 2).ToString())
                 .Replace("<defMult>", babyOgre.defMult.ToString())
-                .Replace("<damageReduction>", Math.Round(babyOgre.dr * 100, 2).ToString())
-            ));
-        }
-
+                .Replace("<damageReduction>", Math.Round(babyOgre.dr * 100, 2).ToString());
     }
 }

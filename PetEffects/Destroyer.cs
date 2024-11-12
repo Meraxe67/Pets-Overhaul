@@ -48,29 +48,24 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class DestroyerPetItem : GlobalItem
+    public sealed class DestroyerPetItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => destroyer;
+        public static Destroyer destroyer
         {
-            return entity.type == ItemID.DestroyerPetItem;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out Destroyer pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<Destroyer>();
             }
-
-            Destroyer destroyer = Main.LocalPlayer.GetModPlayer<Destroyer>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DestroyerPetItem")
-                .Replace("<class>", PetTextsColors.ClassText(destroyer.PetClassPrimary, destroyer.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DestroyerPetItem")
                         .Replace("<defMultChance>", Math.Round(destroyer.defItemMult * 100, 2).ToString())
                         .Replace("<flatAmount>", destroyer.flatAmount.ToString())
                         .Replace("<defMultIncrease>", Math.Round(destroyer.flatDefMult * 100, 2).ToString())
                         .Replace("<ironskinDef>", destroyer.ironskinBonusDef.ToString())
-                        .Replace("<miningFortune>", destroyer.miningFort.ToString())
-                        ));
-        }
+                        .Replace("<miningFortune>", destroyer.miningFort.ToString());
     }
 }

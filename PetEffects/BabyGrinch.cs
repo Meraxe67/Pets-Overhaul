@@ -58,29 +58,24 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class BabyGrinchMischiefWhistle : GlobalItem
+    public sealed class BabyGrinchMischiefWhistle : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => babyGrinch;
+        public static BabyGrinch babyGrinch
         {
-            return entity.type == ItemID.BabyGrinchMischiefWhistle;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out BabyGrinch pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<BabyGrinch>();
             }
-
-            BabyGrinch babyGrinch = Main.LocalPlayer.GetModPlayer<BabyGrinch>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BabyGrinchMischiefWhistle")
-                .Replace("<class>", PetTextsColors.ClassText(babyGrinch.PetClassPrimary, babyGrinch.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BabyGrinchMischiefWhistle")
                 .Replace("<slowAmount>", Math.Round(babyGrinch.grinchSlow * 100, 2).ToString())
                 .Replace("<slowRange>", Math.Round(babyGrinch.grinchRange / 16f, 2).ToString())
                 .Replace("<dmg>", Math.Round(babyGrinch.winterDmg * 100, 2).ToString())
-                .Replace("<crit>", babyGrinch.winterCrit.ToString())
-            ));
-        }
+                .Replace("<crit>", babyGrinch.winterCrit.ToString());
     }
 }
 

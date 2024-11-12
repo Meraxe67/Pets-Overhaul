@@ -42,26 +42,30 @@ namespace PetsOverhaul.PetEffects
         }
     }
 
-    public sealed class ResplendentDessert : GlobalItem
+    public sealed class ResplendentDessert : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => dualSlime;
+        public static DualSlime dualSlime
         {
-            return entity.type == ItemID.ResplendentDessert;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out DualSlime pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<DualSlime>();
             }
-            DualSlime dualSlime = Main.LocalPlayer.GetModPlayer<DualSlime>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ResplendentDessert")
+        }
+        public override string PetsTooltip
+        {
+            get
+            {
+                string tip = Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ResplendentDessert")
                 .Replace("<approxWeak>", "10")
                 .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.PetTooltipSwap))
                 .Replace("<tooltip>", Language.GetTextValue($"Mods.PetsOverhaul.PetItemTooltips.{(dualSlime.swapTooltip ? "KingSlimePetItem" : "QueenSlimePetItem")}"))
-                .Replace("<class>", PetTextsColors.ClassText(dualSlime.PetClassPrimary, dualSlime.swapTooltip ? PetClasses.None : PetClasses.Offensive))
-                .Replace("<burnHp>", Math.Round(dualSlime.healthDmg * 100, 2).ToString())
+                if (dualSlime.swapTooltip)
+                {
+                    tip = tip.Replace("<burnHp>", Math.Round(dualSlime.healthDmg * 100, 2).ToString())
                 .Replace("<burnCap>", dualSlime.burnCap.ToString())
                 .Replace("<extraKb>", dualSlime.bonusKb.ToString())
                 .Replace("<jumpSpd>", Math.Round(dualSlime.slimyJump * 100, 2).ToString())
@@ -70,14 +74,19 @@ namespace PetsOverhaul.PetEffects
                 .Replace("<enemyDmgDeal>", dualSlime.wetDealtLower.ToString())
                 .Replace("<dmg>", Math.Round(dualSlime.wetDmg * 100, 2).ToString())
                 .Replace("<def>", Math.Round(dualSlime.wetDef * 100, 2).ToString())
-                .Replace("<moveSpd>", Math.Round(dualSlime.wetSpeed * 100, 2).ToString())
-                .Replace("<slow>", Math.Round(dualSlime.slow * 100, 2).ToString())
+                .Replace("<moveSpd>", Math.Round(dualSlime.wetSpeed * 100, 2).ToString());
+                }
+                else
+                {
+                    tip = tip.Replace("<slow>", Math.Round(dualSlime.slow * 100, 2).ToString())
                 .Replace("<haste>", Math.Round(dualSlime.haste * 100, 2).ToString())
                 .Replace("<dmgBonus>", dualSlime.dmgBoost.ToString())
                 .Replace("<shield>", dualSlime.shield.ToString())
                 .Replace("<shieldTime>", Math.Round(dualSlime.shieldTime / 60f, 2).ToString())
-                .Replace("<endless>", ModContent.ItemType<EndlessBalloonSack>().ToString())
-            ));
+                .Replace("<endless>", ModContent.ItemType<EndlessBalloonSack>().ToString());
+                }
+                return tip;
+            }
         }
     }
 }

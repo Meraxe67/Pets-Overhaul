@@ -39,29 +39,24 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class LightningCarrot : GlobalItem
+    public sealed class LightningCarrot : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => voltBunny;
+        public static VoltBunny voltBunny
         {
-            return entity.type == ItemID.LightningCarrot;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out VoltBunny pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<VoltBunny>();
             }
-
-            VoltBunny voltBunny = Main.LocalPlayer.GetModPlayer<VoltBunny>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.LightningCarrot")
-                .Replace("<class>", PetTextsColors.ClassText(voltBunny.PetClassPrimary, voltBunny.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.LightningCarrot")
                        .Replace("<flatSpd>", Math.Round(voltBunny.movespdFlat * 100, 2).ToString())
                        .Replace("<multSpd>", voltBunny.movespdMult.ToString())
                        .Replace("<spdToDmg>", Math.Round(voltBunny.movespdToDmg * 100, 2).ToString())
                        .Replace("<staticAmount>", Math.Round(voltBunny.staticParalysis * 100, 2).ToString())
-                       .Replace("<staticTime>", Math.Round(voltBunny.staticLength / 60f, 2).ToString())
-                       ));
-        }
+                       .Replace("<staticTime>", Math.Round(voltBunny.staticLength / 60f, 2).ToString());
     }
 }

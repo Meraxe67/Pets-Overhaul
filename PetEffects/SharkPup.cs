@@ -77,29 +77,24 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class SharkBait : GlobalItem
+    public sealed class SharkBait : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => sharkPup;
+        public static SharkPup sharkPup
         {
-            return entity.type == ItemID.SharkBait;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out SharkPup pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<SharkPup>();
             }
-
-            SharkPup sharkPup = Main.LocalPlayer.GetModPlayer<SharkPup>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.SharkBait")
-                .Replace("<class>", PetTextsColors.ClassText(sharkPup.PetClassPrimary, sharkPup.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.SharkBait")
                         .Replace("<fishingPower>", sharkPup.fishingPow.ToString())
                         .Replace("<seaCreatureDmg>", sharkPup.seaCreatureDamage.ToString())
                         .Replace("<seaCreatureResist>", sharkPup.seaCreatureResist.ToString())
                         .Replace("<shield>", sharkPup.shieldOnCatch.ToString())
-                        .Replace("<shieldTime>", Math.Round(sharkPup.shieldTime / 60f, 2).ToString())
-                        ));
-        }
+                        .Replace("<shieldTime>", Math.Round(sharkPup.shieldTime / 60f, 2).ToString());
     }
 }

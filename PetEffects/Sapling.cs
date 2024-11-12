@@ -52,27 +52,22 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class Seedling : GlobalItem
+    public sealed class Seedling : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => sapling;
+        public static Sapling sapling
         {
-            return entity.type == ItemID.Seedling;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out Sapling pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<Sapling>();
             }
-
-            Sapling sapling = Main.LocalPlayer.GetModPlayer<Sapling>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.Seedling")
-                .Replace("<class>", PetTextsColors.ClassText(sapling.PetClassPrimary, sapling.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.Seedling")
                 .Replace("<dmgPenalty>", sapling.damagePenalty.ToString())
                 .Replace("<lifesteal>", Math.Round(sapling.regularLifesteal * 100, 2).ToString())
-                .Replace("<planteraSteal>", Math.Round(sapling.planteraLifesteal * 100, 2).ToString())
-                ));
-        }
+                .Replace("<planteraSteal>", Math.Round(sapling.planteraLifesteal * 100, 2).ToString());
     }
 }

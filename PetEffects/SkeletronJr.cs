@@ -149,27 +149,22 @@ namespace PetsOverhaul.PetEffects
             skeletronDealtDamage.Clear();
         }
     }
-    public sealed class SkeletronPetItem : GlobalItem
+    public sealed class SkeletronPetItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => skeletronJr;
+        public static SkeletronJr skeletronJr
         {
-            return entity.type == ItemID.SkeletronPetItem;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out SkeletronJr pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<SkeletronJr>();
             }
-
-            SkeletronJr skeletronJr = Main.LocalPlayer.GetModPlayer<SkeletronJr>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.SkeletronPetItem")
-                .Replace("<class>", PetTextsColors.ClassText(skeletronJr.PetClassPrimary, skeletronJr.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.SkeletronPetItem")
                         .Replace("<recievedMult>", skeletronJr.playerTakenMult.ToString())
                         .Replace("<recievedHowLong>", skeletronJr.playerDamageTakenSpeed.ToString())
-                        .Replace("<dealtMult>", skeletronJr.enemyDamageIncrease.ToString())
-                        ));
-        }
+                        .Replace("<dealtMult>", skeletronJr.enemyDamageIncrease.ToString());
     }
 }

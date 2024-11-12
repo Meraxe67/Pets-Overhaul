@@ -55,26 +55,21 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class BirdieRattle : GlobalItem
+    public sealed class BirdieRattle : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => lilHarpy;
+        public static LilHarpy lilHarpy
         {
-            return entity.type == ItemID.BirdieRattle;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out LilHarpy pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<LilHarpy>();
             }
-
-            LilHarpy lilHarpy = Main.LocalPlayer.GetModPlayer<LilHarpy>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BirdieRattle")
-                .Replace("<class>", PetTextsColors.ClassText(lilHarpy.PetClassPrimary, lilHarpy.PetClassSecondary))
-                        .Replace("<flightTime>", Math.Round(lilHarpy.fuelMax / 60f, 2).ToString())
-                        .Replace("<cooldown>", Math.Round(lilHarpy.harpyCd / 60f, 2).ToString())
-                        ));
         }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BirdieRattle")
+                        .Replace("<flightTime>", Math.Round(lilHarpy.fuelMax / 60f, 2).ToString())
+                        .Replace("<cooldown>", Math.Round(lilHarpy.harpyCd / 60f, 2).ToString());
     }
 }

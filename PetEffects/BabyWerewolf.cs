@@ -68,29 +68,24 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class FullMoonSqueakyToy : GlobalItem
+    public sealed class FullMoonSqueakyToy : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => babyWerewolf;
+        public static BabyWerewolf babyWerewolf
         {
-            return entity.type == ItemID.FullMoonSqueakyToy;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out BabyWerewolf pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<BabyWerewolf>();
             }
-
-            BabyWerewolf babyWerewolf = Main.LocalPlayer.GetModPlayer<BabyWerewolf>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.FullMoonSqueakyToy")
-                .Replace("<class>", PetTextsColors.ClassText(babyWerewolf.PetClassPrimary, babyWerewolf.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.FullMoonSqueakyToy")
                 .Replace("<critMult>", babyWerewolf.critChance.ToString())
                 .Replace("<crDmgReduction>", Math.Round(babyWerewolf.critDmgReduction * 100, 2).ToString())
                 .Replace("<maxStacks>", babyWerewolf.maxStacks.ToString())
                 .Replace("<stackDmg>", Math.Round(babyWerewolf.damageMultPerStack * 100, 2).ToString())
-                .Replace("<stackCritDmg>", Math.Round(babyWerewolf.maulCritDmgIncrease * 100, 2).ToString())
-            ));
-        }
+                .Replace("<stackCritDmg>", Math.Round(babyWerewolf.maulCritDmgIncrease * 100, 2).ToString());
     }
 }

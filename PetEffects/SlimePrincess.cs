@@ -60,30 +60,25 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class QueenSlimePetItem : GlobalItem
+    public sealed class QueenSlimePetItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => slimePrincess;
+        public static SlimePrincess slimePrincess
         {
-            return entity.type == ItemID.QueenSlimePetItem;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out SlimePrincess pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<SlimePrincess>();
             }
-
-            SlimePrincess slimePrincess = Main.LocalPlayer.GetModPlayer<SlimePrincess>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.QueenSlimePetItem")
-                .Replace("<class>", PetTextsColors.ClassText(slimePrincess.PetClassPrimary, slimePrincess.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.QueenSlimePetItem")
                         .Replace("<slow>", Math.Round(slimePrincess.slow * 100, 2).ToString())
                         .Replace("<haste>", Math.Round(slimePrincess.haste * 100, 2).ToString())
                         .Replace("<dmgBonus>", slimePrincess.dmgBoost.ToString())
                         .Replace("<shield>", slimePrincess.shield.ToString())
                         .Replace("<shieldTime>", Math.Round(slimePrincess.shieldTime / 60f, 2).ToString())
-                        .Replace("<endless>", ModContent.ItemType<EndlessBalloonSack>().ToString())
-                        ));
-        }
+                        .Replace("<endless>", ModContent.ItemType<EndlessBalloonSack>().ToString());
     }
 }

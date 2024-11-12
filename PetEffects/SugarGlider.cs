@@ -40,28 +40,23 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class EucaluptusSap : GlobalItem
+    public sealed class EucaluptusSap : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => sugarGlider;
+        public static SugarGlider sugarGlider
         {
-            return entity.type == ItemID.EucaluptusSap;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out SugarGlider pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<SugarGlider>();
             }
-
-            SugarGlider sugarGlider = Main.LocalPlayer.GetModPlayer<SugarGlider>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EucaluptusSap")
-                .Replace("<class>", PetTextsColors.ClassText(sugarGlider.PetClassPrimary, sugarGlider.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EucaluptusSap")
                 .Replace("<glide>", sugarGlider.glideSpeedMult.ToString())
                         .Replace("<speed>", sugarGlider.speedMult.ToString())
                         .Replace("<acceleration>", sugarGlider.accMult.ToString())
-                        .Replace("<flatIncrease>", Math.Round(sugarGlider.accSpeedRaise * 100, 2).ToString())
-                        ));
-        }
+                        .Replace("<flatIncrease>", Math.Round(sugarGlider.accSpeedRaise * 100, 2).ToString()); 
     }
 }

@@ -54,28 +54,23 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class BrainOfCthulhuPetItem : GlobalItem
+    public sealed class BrainOfCthulhuPetItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => spiderBrain;
+        public static SpiderBrain spiderBrain
         {
-            return entity.type == ItemID.BrainOfCthulhuPetItem;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out SpiderBrain pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<SpiderBrain>();
             }
-
-            SpiderBrain spiderBrain = Main.LocalPlayer.GetModPlayer<SpiderBrain>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BrainOfCthulhuPetItem")
-                .Replace("<class>", PetTextsColors.ClassText(spiderBrain.PetClassPrimary, spiderBrain.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BrainOfCthulhuPetItem")
                         .Replace("<lifesteal>", Math.Round(spiderBrain.lifestealAmount * 100, 2).ToString())
                         .Replace("<maxPool>", Math.Round(spiderBrain.lifePoolMaxPerc * 100, 2).ToString())
                         .Replace("<healthRecovery>", Math.Round(spiderBrain.cdToAddToPool / 60f, 2).ToString())
-                        .Replace("<pool>", spiderBrain.lifePool.ToString())
-                        ));
-        }
+                        .Replace("<pool>", spiderBrain.lifePool.ToString());
     }
 }

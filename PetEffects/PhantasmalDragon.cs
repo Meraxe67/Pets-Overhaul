@@ -419,49 +419,51 @@ namespace PetsOverhaul.PetEffects
             return true;
         }
     }
-    public sealed class LunaticCultistPetItem : GlobalItem
+    public sealed class LunaticCultistPetItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => phantasmalDragon;
+        public static PhantasmalDragon phantasmalDragon
         {
-            return entity.type == ItemID.LunaticCultistPetItem;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out PhantasmalDragon pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<PhantasmalDragon>();
             }
-            PhantasmalDragon phantasmalDragon = Main.LocalPlayer.GetModPlayer<PhantasmalDragon>();
-            string currentAbilityTooltip = phantasmalDragon.currentAbility switch
+        }
+        public override string PetsTooltip
+        {
+            get
             {
-                0 => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DragonIce") //Ice
-                .Replace("<damage>", phantasmalDragon.iceBase.ToString())
-                .Replace("<slowAmount>", Math.Round(phantasmalDragon.iceSlow * 100, 2).ToString())
-                .Replace("<slowTime>", Math.Round(phantasmalDragon.iceSlowDuration / 60f, 2).ToString()),
-                1 => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DragonLightning") //Lightning, slow time not included in tooltip, a bit unnecessary info its 0.166 of a second
-                .Replace("<orbDmg>", phantasmalDragon.lightningOrbBase.ToString())
-                .Replace("<orbPen>", (phantasmalDragon.lightningStrikePen / phantasmalDragon.lightningStrikeDivide).ToString())
-                .Replace("<orbSlow>", Math.Round(phantasmalDragon.lightningSlow * 100, 2).ToString())
-                .Replace("<strikeDmg>", (phantasmalDragon.lightningOrbBase / phantasmalDragon.lightningStrikeDivide).ToString())
-                .Replace("<strikePen>", phantasmalDragon.lightningStrikePen.ToString())
-                .Replace("<strikeSlow>", Math.Round(phantasmalDragon.lightningSlow / phantasmalDragon.lightningStrikeDivide * 100, 2).ToString()),
-                2 => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DragonFire") //Fireball
-                .Replace("<fireballAmount>", (phantasmalDragon.fireVolleyFrames / phantasmalDragon.fireVolleyEveryFrame).ToString())
-                .Replace("<fireballDuration>", Math.Round(phantasmalDragon.fireVolleyFrames / 60f, 2).ToString())
-                .Replace("<fireDmg>", phantasmalDragon.fireBase.ToString())
-                .Replace("<kb>", phantasmalDragon.fireKnockback.ToString())
-                .Replace("<burnSeconds>", Math.Round(phantasmalDragon.fireBurnTime / 60f, 2).ToString())
-                .Replace("<enabled>", ModContent.GetInstance<PetPersonalization>().PhantasmalDragonVolleyFromMouth ? "Enabled" : "Disabled"),
-                _ => "Cannot Find current ability.",
-            };
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.LunaticCultistPetItem")
-                .Replace("<class>", PetTextsColors.ClassText(phantasmalDragon.PetClassPrimary, phantasmalDragon.PetClassSecondary))
-                .Replace("<switchKeybind>", PetTextsColors.KeybindText(PetKeybinds.PetAbilitySwitch))
-                .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility))
-                       .Replace("<cooldown>", Math.Round(phantasmalDragon.phantasmDragonCooldown / 60f, 2).ToString())
-                       .Replace("<tooltip>", currentAbilityTooltip)
-                       ));
+                string currentAbilityTooltip = phantasmalDragon.currentAbility switch
+                {
+                    0 => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DragonIce") //Ice
+                    .Replace("<damage>", phantasmalDragon.iceBase.ToString())
+                    .Replace("<slowAmount>", Math.Round(phantasmalDragon.iceSlow * 100, 2).ToString())
+                    .Replace("<slowTime>", Math.Round(phantasmalDragon.iceSlowDuration / 60f, 2).ToString()),
+                    1 => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DragonLightning") //Lightning, slow time not included in tooltip, a bit unnecessary info its 0.166 of a second
+                    .Replace("<orbDmg>", phantasmalDragon.lightningOrbBase.ToString())
+                    .Replace("<orbPen>", (phantasmalDragon.lightningStrikePen / phantasmalDragon.lightningStrikeDivide).ToString())
+                    .Replace("<orbSlow>", Math.Round(phantasmalDragon.lightningSlow * 100, 2).ToString())
+                    .Replace("<strikeDmg>", (phantasmalDragon.lightningOrbBase / phantasmalDragon.lightningStrikeDivide).ToString())
+                    .Replace("<strikePen>", phantasmalDragon.lightningStrikePen.ToString())
+                    .Replace("<strikeSlow>", Math.Round(phantasmalDragon.lightningSlow / phantasmalDragon.lightningStrikeDivide * 100, 2).ToString()),
+                    2 => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DragonFire") //Fireball
+                    .Replace("<fireballAmount>", (phantasmalDragon.fireVolleyFrames / phantasmalDragon.fireVolleyEveryFrame).ToString())
+                    .Replace("<fireballDuration>", Math.Round(phantasmalDragon.fireVolleyFrames / 60f, 2).ToString())
+                    .Replace("<fireDmg>", phantasmalDragon.fireBase.ToString())
+                    .Replace("<kb>", phantasmalDragon.fireKnockback.ToString())
+                    .Replace("<burnSeconds>", Math.Round(phantasmalDragon.fireBurnTime / 60f, 2).ToString())
+                    .Replace("<enabled>", ModContent.GetInstance<PetPersonalization>().PhantasmalDragonVolleyFromMouth ? "Enabled" : "Disabled"),
+                    _ => "Cannot Find current ability.",
+                };
+                return Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.LunaticCultistPetItem")
+                    .Replace("<switchKeybind>", PetTextsColors.KeybindText(PetKeybinds.PetAbilitySwitch))
+                    .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility))
+                    .Replace("<cooldown>", Math.Round(phantasmalDragon.phantasmDragonCooldown / 60f, 2).ToString())
+                    .Replace("<tooltip>", currentAbilityTooltip);
+            }
         }
     }
 }

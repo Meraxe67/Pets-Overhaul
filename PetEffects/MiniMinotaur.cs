@@ -82,23 +82,20 @@ namespace PetsOverhaul.PetEffects
             minotaurStack = 0;
         }
     }
-    public sealed class TartarSauce : GlobalItem
+    public sealed class TartarSauce : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => miniMinotaur;
+        public static MiniMinotaur miniMinotaur
         {
-            return entity.type == ItemID.TartarSauce;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out MiniMinotaur pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<MiniMinotaur>();
             }
-
-            MiniMinotaur miniMinotaur = Main.LocalPlayer.GetModPlayer<MiniMinotaur>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.TartarSauce")
-                .Replace("<class>", PetTextsColors.ClassText(miniMinotaur.PetClassPrimary, miniMinotaur.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.TartarSauce")
                         .Replace("<cooldown>", Math.Round(miniMinotaur.minotaurCd / 60f, 2).ToString())
                         .Replace("<maxStack>", miniMinotaur.maxStack.ToString())
                         .Replace("<oocTimer>", Math.Round(miniMinotaur.oocMaxDuration / 60f, 2).ToString())
@@ -109,8 +106,6 @@ namespace PetsOverhaul.PetEffects
                         .Replace("<meleeSpd>", Math.Round(miniMinotaur.meleeSpd * 100, 2).ToString())
                         .Replace("<moveSpd>", Math.Round(miniMinotaur.moveSpd * 100, 2).ToString())
                         .Replace("<dmg>", Math.Round(miniMinotaur.meleeDmg * 100, 2).ToString())
-                        .Replace("<def>", Math.Round(miniMinotaur.defMult * 100, 2).ToString())
-                        ));
-        }
+                        .Replace("<def>", Math.Round(miniMinotaur.defMult * 100, 2).ToString());
     }
 }

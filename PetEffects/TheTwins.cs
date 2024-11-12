@@ -66,23 +66,20 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class TwinsPetItem : GlobalItem
+    public sealed class TwinsPetItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => theTwins;
+        public static TheTwins theTwins
         {
-            return entity.type == ItemID.TwinsPetItem;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out TheTwins pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<TheTwins>();
             }
-
-            TheTwins theTwins = Main.LocalPlayer.GetModPlayer<TheTwins>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.TwinsPetItem")
-                .Replace("<class>", PetTextsColors.ClassText(theTwins.PetClassPrimary, theTwins.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.TwinsPetItem")
                         .Replace("<closeRange>", Math.Round(theTwins.closeRange / 16f, 2).ToString())
                         .Replace("<cursedTime>", Math.Round(theTwins.infernoTime / 60f, 2).ToString())
                         .Replace("<defLifesteal>", theTwins.defMult.ToString())
@@ -90,8 +87,6 @@ namespace PetsOverhaul.PetEffects
                         .Replace("<longRange>", Math.Round(theTwins.longRange / 16f, 2).ToString())
                         .Replace("<hpDmg>", Math.Round(theTwins.regularEnemyHpDmg * 100, 2).ToString())
                         .Replace("<bossHpDmg>", Math.Round(theTwins.bossHpDmg * 100, 2).ToString())
-                        .Replace("<hpDmgCooldown>", Math.Round(theTwins.healthDmgCd / 60f, 2).ToString())
-                        ));
-        }
+                        .Replace("<hpDmgCooldown>", Math.Round(theTwins.healthDmgCd / 60f, 2).ToString());
     }
 }

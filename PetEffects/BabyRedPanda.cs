@@ -96,23 +96,20 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class BambooLeaf : GlobalItem
+    public sealed class BambooLeaf : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => babyRedPanda;
+        public static BabyRedPanda babyRedPanda
         {
-            return entity.type == ItemID.BambooLeaf;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out BabyRedPanda pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<BabyRedPanda>();
             }
-
-            BabyRedPanda babyRedPanda = Main.LocalPlayer.GetModPlayer<BabyRedPanda>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BambooLeaf")
-                .Replace("<class>", PetTextsColors.ClassText(babyRedPanda.PetClassPrimary, babyRedPanda.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BambooLeaf")
                 .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility))
                 .Replace("<alertAs>", Math.Round(babyRedPanda.alertAs * 100, 2).ToString())
                 .Replace("<alertMs>", Math.Round(babyRedPanda.alertMs * 100, 2).ToString())
@@ -123,8 +120,6 @@ namespace PetsOverhaul.PetEffects
                 .Replace("<alertCd>", Math.Round(babyRedPanda.alertCd / 60f, 2).ToString())
                 .Replace("<atkSpd>", Math.Round(babyRedPanda.regularAtkSpd * 100, 2).ToString())
                 .Replace("<jungleAtkSpd>", Math.Round(babyRedPanda.jungleBonusSpd * 100, 2).ToString())
-                .Replace("<bambooChance>", babyRedPanda.bambooChance.ToString())
-            ));
-        }
+                .Replace("<bambooChance>", babyRedPanda.bambooChance.ToString());
     }
 }

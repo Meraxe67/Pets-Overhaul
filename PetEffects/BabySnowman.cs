@@ -68,28 +68,23 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class ToySled : GlobalItem
+    public sealed class ToySled : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => babySnowman;
+        public static BabySnowman babySnowman
         {
-            return entity.type == ItemID.ToySled;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out BabySnowman pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<BabySnowman>();
             }
-
-            BabySnowman babySnowman = Main.LocalPlayer.GetModPlayer<BabySnowman>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ToySled")
-                .Replace("<class>", PetTextsColors.ClassText(babySnowman.PetClassPrimary, babySnowman.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ToySled")
                 .Replace("<frostburnTime>", Math.Round(babySnowman.frostburnTime / 60f * babySnowman.FrostArmorMult, 2).ToString())
                 .Replace("<slowAmount>", Math.Round(babySnowman.snowmanSlow * 100 * babySnowman.FrostArmorMult, 2).ToString())
                 .Replace("<slowTime>", Math.Round(babySnowman.slowTime / 60f * babySnowman.FrostArmorMult, 2).ToString())
-                .Replace("<frostMult>", babySnowman.frostMult.ToString())
-            ));
-        }
+                .Replace("<frostMult>", babySnowman.frostMult.ToString());
     }
 }

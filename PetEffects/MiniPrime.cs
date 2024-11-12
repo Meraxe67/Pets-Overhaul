@@ -98,30 +98,25 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class SkeletronPrimePetItem : GlobalItem
+    public sealed class SkeletronPrimePetItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => miniPrime;
+        public static MiniPrime miniPrime
         {
-            return entity.type == ItemID.SkeletronPrimePetItem;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out MiniPrime pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<MiniPrime>();
             }
-
-            MiniPrime miniPrime = Main.LocalPlayer.GetModPlayer<MiniPrime>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.SkeletronPrimePetItem")
-                .Replace("<class>", PetTextsColors.ClassText(miniPrime.PetClassPrimary, miniPrime.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.SkeletronPrimePetItem")
                         .Replace("<shieldMaxHealthAmount>", Math.Round(miniPrime.shieldMult * 100, 2).ToString())
                         .Replace("<shieldCooldown>", Math.Round(miniPrime.shieldRecovery / 300f, 2).ToString())
                         .Replace("<dmg>", Math.Round(miniPrime.dmgIncrease * 100, 2).ToString())
                         .Replace("<crit>", miniPrime.critIncrease.ToString())
                         .Replace("<def>", miniPrime.defIncrease.ToString())
-                        .Replace("<shieldLifetime>", Math.Round(miniPrime.shieldTime / 60f, 2).ToString())
-                        ));
-        }
+                        .Replace("<shieldLifetime>", Math.Round(miniPrime.shieldTime / 60f, 2).ToString());
     }
 }

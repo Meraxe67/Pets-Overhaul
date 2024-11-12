@@ -112,31 +112,26 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class IceQueenPetItem : GlobalItem
+    public sealed class IceQueenPetItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => iceQueen;
+        public static IceQueen iceQueen
         {
-            return entity.type == ItemID.IceQueenPetItem;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out IceQueen pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<IceQueen>();
             }
-
-            IceQueen iceQueen = Main.LocalPlayer.GetModPlayer<IceQueen>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.IceQueenPetItem")
-                .Replace("<class>", PetTextsColors.ClassText(iceQueen.PetClassPrimary, iceQueen.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.IceQueenPetItem")
                         .Replace("<frozenTombTime>", Math.Round(iceQueen.tombTime / 60f, 2).ToString())
                         .Replace("<range>", Math.Round(iceQueen.queenRange / 16f, 2).ToString())
                         .Replace("<slowAmount>", Math.Round(iceQueen.slowAmount * 100, 2).ToString())
                         .Replace("<healthRecovery>", (iceQueen.tombTime / 3).ToString())
                         .Replace("<baseDmg>", iceQueen.freezeDamage.ToString())
                         .Replace("<postTombImmunity>", Math.Round(iceQueen.immuneTime / 60f, 2).ToString())
-                        .Replace("<tombCooldown>", Math.Round(iceQueen.cooldown / 3600f, 2).ToString())
-                        ));
-        }
+                        .Replace("<tombCooldown>", Math.Round(iceQueen.cooldown / 3600f, 2).ToString());
     }
 }

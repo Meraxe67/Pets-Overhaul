@@ -43,28 +43,23 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class BallOfFuseWire : GlobalItem
+    public sealed class BallOfFuseWire : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => dynamiteKitten;
+        public static DynamiteKitten dynamiteKitten
         {
-            return entity.type == ItemID.BallOfFuseWire;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out DynamiteKitten pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<DynamiteKitten>();
             }
-
-            DynamiteKitten dynamiteKitten = Main.LocalPlayer.GetModPlayer<DynamiteKitten>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BallOfFuseWire")
-                .Replace("<class>", PetTextsColors.ClassText(dynamiteKitten.PetClassPrimary, dynamiteKitten.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BallOfFuseWire")
                         .Replace("<kb>", dynamiteKitten.kbMult.ToString())
                         .Replace("<dmg>", dynamiteKitten.damageMult.ToString())
                         .Replace("<armorPen>", dynamiteKitten.armorPen.ToString())
-                        .Replace("<size>", dynamiteKitten.explosionSize.ToString())
-                        ));
-        }
+                        .Replace("<size>", dynamiteKitten.explosionSize.ToString());
     }
 }

@@ -15,6 +15,7 @@ namespace PetsOverhaul.PetEffects
     public sealed class Turtle : PetEffect
     {
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
+        public override int PetItemID => ItemID.Seaweed;
         public float moveSpd = 0.12f;
         public float def = 0.1f;
         public float kbResist = 0.55f;
@@ -92,50 +93,29 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class Seaweed : GlobalItem
+    public sealed class Seaweed : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => turtle;
+        public static Turtle turtle
         {
-            return entity.type == ItemID.Seaweed;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out Turtle turtle))
+                    return turtle;
+                else
+                    return ModContent.GetInstance<Turtle>();
             }
-
-            Turtle turtle = Main.LocalPlayer.GetModPlayer<Turtle>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.Seaweed")
-                .Replace("<class>", PetTextsColors.ClassText(turtle.PetClassPrimary, turtle.PetClassSecondary))
+        }
+        public override string PetsTooltip =>
+            Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.Seaweed")
                 .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility))
                 .Replace("<hitCount>", turtle.shellHardenStacks.ToString())
                 .Replace("<shellDuration>", Math.Round(turtle.shellHardenDuration / 60f, 2).ToString())
                 .Replace("<reducedDmg>", Math.Round(turtle.dmgReduceShellHarden * 100, 2).ToString())
                 .Replace("<reflect>", Math.Round(turtle.dmgReflect * 100, 2).ToString())
                 .Replace("<projReflect>", Math.Round(turtle.dmgReflectProjectile * 100, 2).ToString())
-                        .Replace("<def>", Math.Round(turtle.def * 100, 2).ToString())
-                        .Replace("<kbResist>", Math.Round(turtle.kbResist * 100, 2).ToString())
-                        .Replace("<moveSpd>", Math.Round(turtle.moveSpd * 100, 2).ToString())
-                        ));
-        }
+                .Replace("<def>", Math.Round(turtle.def * 100, 2).ToString())
+                .Replace("<kbResist>", Math.Round(turtle.kbResist * 100, 2).ToString())
+                .Replace("<moveSpd>", Math.Round(turtle.moveSpd * 100, 2).ToString());
     }
-    //public sealed class Seaweed : PetTooltip //Undone, but released due to an emergency patch
-    //{
-    //    public override int PetItemID => ItemID.Seaweed;
-    //    public static Turtle Turtle => Main.LocalPlayer.GetModPlayer<Turtle>();
-    //    public override string PetsTooltip => 
-    //        Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.Seaweed")
-    //            .Replace("<class>", PetTextsColors.ClassText(Turtle.PetClassPrimary, Turtle.PetClassSecondary))
-    //            .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility))
-    //            .Replace("<hitCount>", Turtle.shellHardenStacks.ToString())
-    //            .Replace("<shellDuration>", Math.Round(Turtle.shellHardenDuration / 60f, 2).ToString())
-    //            .Replace("<reducedDmg>", Math.Round(Turtle.dmgReduceShellHarden * 100, 2).ToString())
-    //            .Replace("<reflect>", Math.Round(Turtle.dmgReflect * 100, 2).ToString())
-    //            .Replace("<projReflect>", Math.Round(Turtle.dmgReflectProjectile * 100, 2).ToString())
-    //            .Replace("<def>", Math.Round(Turtle.def * 100, 2).ToString())
-    //            .Replace("<kbResist>", Math.Round(Turtle.kbResist * 100, 2).ToString())
-    //            .Replace("<moveSpd>", Math.Round(Turtle.moveSpd * 100, 2).ToString());
-    //}
 }

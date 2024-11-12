@@ -37,27 +37,23 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class EatersBone : GlobalItem
+    public sealed class EatersBone : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => babyEater;
+        public static BabyEater babyEater
         {
-            return entity.type == ItemID.EatersBone;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out BabyEater pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<BabyEater>();
             }
-
-            BabyEater babyEater = Main.LocalPlayer.GetModPlayer<BabyEater>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EatersBone")
-                .Replace("<class>", PetTextsColors.ClassText(babyEater.PetClassPrimary, babyEater.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EatersBone")
                 .Replace("<moveSpd>", Math.Round(babyEater.moveSpd * 100, 2).ToString())
                 .Replace("<jumpSpd>", Math.Round(babyEater.jumpSpd * 100, 2).ToString())
-                .Replace("<fallRes>", babyEater.fallDamageTile.ToString())
-            ));
-        }
+                .Replace("<fallRes>", babyEater.fallDamageTile.ToString());
+        
     }
 }

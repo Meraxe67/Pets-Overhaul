@@ -46,30 +46,25 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class MagicalPumpkinSeed : GlobalItem
+    public sealed class MagicalPumpkinSeed : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => squashling;
+        public static Squashling squashling
         {
-            return entity.type == ItemID.MagicalPumpkinSeed;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out Squashling pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<Squashling>();
             }
-
-            Squashling squashling = Main.LocalPlayer.GetModPlayer<Squashling>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.MagicalPumpkinSeed")
-                .Replace("<class>", PetTextsColors.ClassText(squashling.PetClassPrimary, squashling.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.MagicalPumpkinSeed")
                         .Replace("<plant>", squashling.squashlingCommonChance.ToString())
                         .Replace("<rarePlant>", squashling.squashlingRareChance.ToString())
                         .Replace("<health>", squashling.pumpkinArmorBonusHp.ToString())
                         .Replace("<harvFort>", squashling.pumpkinArmorBonusHarvestingFortune.ToString())
-                        .Replace("<pumpkinPieceAmount>", squashling.WornPumpkinAmount.ToString())
-                        ));
-        }
+                        .Replace("<pumpkinPieceAmount>", squashling.WornPumpkinAmount.ToString());
     }
 }
 

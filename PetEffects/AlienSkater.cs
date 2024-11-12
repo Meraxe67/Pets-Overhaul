@@ -11,6 +11,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class AlienSkater : PetEffect
     {
+        public override int PetItemID => ItemID.MartianPetItem;
         public override PetClasses PetClassPrimary => PetClasses.Mobility;
         public float accelerator = 0.50f;
         public float wingTime = 0.25f;
@@ -41,29 +42,24 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class MartianPetItem : GlobalItem
+    public sealed class MartianPetItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => alienSkater;
+        public static AlienSkater alienSkater
         {
-            return entity.type == ItemID.MartianPetItem;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out AlienSkater pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<AlienSkater>();
             }
-
-            AlienSkater alienSkater = Main.LocalPlayer.GetModPlayer<AlienSkater>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.MartianPetItem")
-                .Replace("<class>", PetTextsColors.ClassText(alienSkater.PetClassPrimary, alienSkater.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.MartianPetItem")
                 .Replace("<wingMult>", Math.Round(alienSkater.wingTime * 100, 2).ToString())
                 .Replace("<acc>", Math.Round(alienSkater.accelerator * 100, 2).ToString())
                 .Replace("<speedMult>", alienSkater.speedMult.ToString())
                 .Replace("<accMult>", alienSkater.accMult.ToString())
-                .Replace("<flatSpdAcc>", Math.Round(alienSkater.speedAccIncr * 100, 2).ToString())
-            ));
-        }
+                .Replace("<flatSpdAcc>", Math.Round(alienSkater.speedAccIncr * 100, 2).ToString());
     }
 }

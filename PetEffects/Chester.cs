@@ -37,27 +37,22 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class ChesterPetItem : GlobalItem
+    public sealed class ChesterPetItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => chester;
+        public static Chester chester
         {
-            return entity.type == ItemID.ChesterPetItem;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out Chester pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<Chester>();
             }
-
-            Chester chester = Main.LocalPlayer.GetModPlayer<Chester>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ChesterPetItem")
-                .Replace("<class>", PetTextsColors.ClassText(chester.PetClassPrimary, chester.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ChesterPetItem")
                 .Replace("<pickupRange>", Math.Round(chester.suckingUpRange / 16f, 2).ToString())
                 .Replace("<placementRange>", chester.placementRange.ToString())
-                .Replace("<chestDef>", chester.chestOpenDef.ToString())
-            ));
-        }
+                .Replace("<chestDef>", chester.chestOpenDef.ToString());
     }
 }

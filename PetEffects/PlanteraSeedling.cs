@@ -24,25 +24,20 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class PlanteraPetItem : GlobalItem
+    public sealed class PlanteraPetItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => planteraSeedling;
+        public static PlanteraSeedling planteraSeedling
         {
-            return entity.type == ItemID.PlanteraPetItem;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out PlanteraSeedling pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<PlanteraSeedling>();
             }
-
-            PlanteraSeedling planteraSeedling = Main.LocalPlayer.GetModPlayer<PlanteraSeedling>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.PlanteraPetItem")
-                .Replace("<class>", PetTextsColors.ClassText(planteraSeedling.PetClassPrimary, planteraSeedling.PetClassSecondary))
-                        .Replace("<maxAmount>", Math.Round(planteraSeedling.secondMultiplier * 100 + 100, 2).ToString())
-                        ));
         }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.PlanteraPetItem")
+                        .Replace("<maxAmount>", Math.Round(planteraSeedling.secondMultiplier * 100 + 100, 2).ToString());
     }
 }

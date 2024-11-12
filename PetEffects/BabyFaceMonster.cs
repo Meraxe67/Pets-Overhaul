@@ -83,30 +83,25 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class BoneRattle : GlobalItem
+    public sealed class BoneRattle : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => babyFaceMonster;
+        public static BabyFaceMonster babyFaceMonster
         {
-            return entity.type == ItemID.BoneRattle;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out BabyFaceMonster pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<BabyFaceMonster>();
             }
-
-            BabyFaceMonster babyFaceMonster = Main.LocalPlayer.GetModPlayer<BabyFaceMonster>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BoneRattle")
-                .Replace("<class>", PetTextsColors.ClassText(babyFaceMonster.PetClassPrimary, babyFaceMonster.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BoneRattle")
                 .Replace("<extraRegenTime>", babyFaceMonster.bonusRegenPerFrame.ToString())
                 .Replace("<stage1Time>", Math.Round((babyFaceMonster.stage2time - babyFaceMonster.stage1time) / 60f, 2).ToString())
                 .Replace("<stage2Time>", Math.Round(babyFaceMonster.stage2time / 60f, 2).ToString())
                 .Replace("<stage1Regen>", babyFaceMonster.stage1regen.ToString())
                 .Replace("<stage2Regen>", babyFaceMonster.stage2regen.ToString())
-                .Replace("<shieldAmount>", Math.Round(babyFaceMonster.stage2ShieldMult * 100, 2).ToString())
-            ));
-        }
+                .Replace("<shieldAmount>", Math.Round(babyFaceMonster.stage2ShieldMult * 100, 2).ToString());
     }
 }

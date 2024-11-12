@@ -137,23 +137,20 @@ namespace PetsOverhaul.PetEffects
             player.GetModPlayer<SuspiciousEye>().eocShieldEquipped = true;
         }
     }
-    public sealed class EyeOfCthulhuPetItem : GlobalItem
+    public sealed class EyeOfCthulhuPetItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => suspiciousEye;
+        public static SuspiciousEye suspiciousEye
         {
-            return entity.type == ItemID.EyeOfCthulhuPetItem;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out SuspiciousEye pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<SuspiciousEye>();
             }
-
-            SuspiciousEye suspiciousEye = Main.LocalPlayer.GetModPlayer<SuspiciousEye>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EyeOfCthulhuPetItem")
-                .Replace("<class>", PetTextsColors.ClassText(suspiciousEye.PetClassPrimary, suspiciousEye.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EyeOfCthulhuPetItem")
                 .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility))
                 .Replace("<forcedEnrageMult>", Math.Round(suspiciousEye.forcedEnrageShield * 100, 2).ToString())
                 .Replace("<shieldDuration>", Math.Round(suspiciousEye.shieldTime / 60f, 2).ToString())
@@ -165,8 +162,6 @@ namespace PetsOverhaul.PetEffects
                 .Replace("<defToSpd>", Math.Round(suspiciousEye.spdMult * 100, 2).ToString())
                 .Replace("<defToCrit>", Math.Round(suspiciousEye.critMult * 100, 2).ToString())
                 .Replace("<enrageLength>", Math.Round(suspiciousEye.phaseTime / 60f, 2).ToString())
-                .Replace("<enrageCd>", Math.Round(suspiciousEye.phaseCd / 60f, 2).ToString())
-                        ));
-        }
+                .Replace("<enrageCd>", Math.Round(suspiciousEye.phaseCd / 60f, 2).ToString());
     }
 }

@@ -42,26 +42,21 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class DD2PetGato : GlobalItem
+    public sealed class DD2PetGato : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => propellerGato;
+        public static PropellerGato propellerGato
         {
-            return entity.type == ItemID.DD2PetGato;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out PropellerGato pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<PropellerGato>();
             }
-
-            PropellerGato propellerGato = Main.LocalPlayer.GetModPlayer<PropellerGato>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DD2PetGato")
-                .Replace("<class>", PetTextsColors.ClassText(propellerGato.PetClassPrimary, propellerGato.PetClassSecondary))
-                        .Replace("<crit>", propellerGato.bonusCritChance.ToString())
-                        .Replace("<maxSentry>", propellerGato.turretIncrease.ToString())
-                        ));
         }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DD2PetGato")
+                        .Replace("<crit>", propellerGato.bonusCritChance.ToString())
+                        .Replace("<maxSentry>", propellerGato.turretIncrease.ToString());
     }
 }

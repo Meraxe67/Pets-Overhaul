@@ -45,27 +45,22 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class CelestialWand : GlobalItem
+    public sealed class CelestialWand : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => estee;
+        public static Estee estee
         {
-            return entity.type == ItemID.CelestialWand;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out Estee pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<Estee>();
             }
-
-            Estee estee = Main.LocalPlayer.GetModPlayer<Estee>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.CelestialWand")
-                .Replace("<class>", PetTextsColors.ClassText(estee.PetClassPrimary, estee.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.CelestialWand")
                         .Replace("<maxMana>", Math.Round(estee.manaIncrease * 100, 2).ToString())
                         .Replace("<dmgPenalty>", estee.penaltyMult.ToString())
-                        .Replace("<manaToDmg>", Math.Round(estee.manaMagicIncreasePer1 * 100, 2).ToString())
-                        ));
-        }
+                        .Replace("<manaToDmg>", Math.Round(estee.manaMagicIncreasePer1 * 100, 2).ToString());
     }
 }

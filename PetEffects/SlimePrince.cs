@@ -178,23 +178,20 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class KingSlimePetItem : GlobalItem
+    public sealed class KingSlimePetItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => slimePrince;
+        public static SlimePrince slimePrince
         {
-            return entity.type == ItemID.KingSlimePetItem;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out SlimePrince pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<SlimePrince>();
             }
-
-            SlimePrince slimePrince = Main.LocalPlayer.GetModPlayer<SlimePrince>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.KingSlimePetItem")
-                .Replace("<class>", PetTextsColors.ClassText(slimePrince.PetClassPrimary, slimePrince.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.KingSlimePetItem")
                         .Replace("<burnHp>", Math.Round(slimePrince.healthDmg * 100, 2).ToString())
                         .Replace("<burnCap>", slimePrince.burnCap.ToString())
                         .Replace("<extraKb>", slimePrince.bonusKb.ToString())
@@ -204,8 +201,6 @@ namespace PetsOverhaul.PetEffects
                         .Replace("<enemyDmgDeal>", slimePrince.wetDealtLower.ToString())
                         .Replace("<dmg>", Math.Round(slimePrince.wetDmg * 100, 2).ToString())
                         .Replace("<def>", Math.Round(slimePrince.wetDef * 100, 2).ToString())
-                        .Replace("<moveSpd>", Math.Round(slimePrince.wetSpeed * 100, 2).ToString())
-                        ));
-        }
+                        .Replace("<moveSpd>", Math.Round(slimePrince.wetSpeed * 100, 2).ToString());
     }
 }

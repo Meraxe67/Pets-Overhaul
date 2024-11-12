@@ -56,29 +56,24 @@ namespace PetsOverhaul.PetEffects
             SpawnGasCloud(target, hit.SourceDamage, hit.DamageType);
         }
     }
-    public sealed class MudBud : GlobalItem
+    public sealed class MudBud : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => plantero;
+        public static Plantero plantero
         {
-            return entity.type == ItemID.MudBud;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out Plantero pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<Plantero>();
             }
-
-            Plantero plantero = Main.LocalPlayer.GetModPlayer<Plantero>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.MudBud")
-                .Replace("<class>", PetTextsColors.ClassText(plantero.PetClassPrimary, plantero.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.MudBud")
                         .Replace("<chance>", plantero.spawnChance.ToString())
                         .Replace("<dmg>", plantero.damageMult.ToString())
                         .Replace("<flatDmg>", plantero.flatDmg.ToString())
                         .Replace("<kb>", plantero.knockBack.ToString())
-                        .Replace("<pen>", plantero.pen.ToString())
-                        ));
-        }
+                        .Replace("<pen>", plantero.pen.ToString());
     }
 }

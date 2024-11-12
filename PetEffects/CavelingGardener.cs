@@ -46,29 +46,24 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class GlowTulip : GlobalItem
+    public sealed class GlowTulip : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => cavelingGardener;
+        public static CavelingGardener cavelingGardener
         {
-            return entity.type == ItemID.GlowTulip;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out CavelingGardener pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<CavelingGardener>();
             }
-
-            CavelingGardener cavelingGardener = Main.LocalPlayer.GetModPlayer<CavelingGardener>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.GlowTulip")
-                .Replace("<class>", PetTextsColors.ClassText(cavelingGardener.PetClassPrimary, cavelingGardener.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.GlowTulip")
                 .Replace("<harvestChance>", cavelingGardener.cavelingRegularPlantChance.ToString())
                 .Replace("<rarePlantChance>", cavelingGardener.cavelingRarePlantChance.ToString())
                 .Replace("<gemstoneTreeChance>", cavelingGardener.cavelingGemTreeChance.ToString())
-                .Replace("<shineMult>", cavelingGardener.shineMult.ToString())
-            ));
-        }
+                .Replace("<shineMult>", cavelingGardener.shineMult.ToString());
     }
 }
 

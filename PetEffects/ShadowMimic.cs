@@ -49,30 +49,25 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class OrnateShadowKey : GlobalItem
+    public sealed class OrnateShadowKey : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => shadowMimic;
+        public static ShadowMimic shadowMimic
         {
-            return entity.type == ItemID.OrnateShadowKey;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out ShadowMimic pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<ShadowMimic>();
             }
-
-            ShadowMimic shadowMimic = Main.LocalPlayer.GetModPlayer<ShadowMimic>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.OrnateShadowKey")
-                .Replace("<class>", PetTextsColors.ClassText(shadowMimic.PetClassPrimary, shadowMimic.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.OrnateShadowKey")
                         .Replace("<npcCoin>", shadowMimic.npcCoin.ToString())
                         .Replace("<npcItem>", shadowMimic.npcItem.ToString())
                         .Replace("<bossCoin>", shadowMimic.bossCoin.ToString())
                         .Replace("<bossItem>", shadowMimic.bossItem.ToString())
                         .Replace("<bagCoin>", shadowMimic.bagCoin.ToString())
-                        .Replace("<bagItem>", shadowMimic.bagItem.ToString())
-                        ));
-        }
+                        .Replace("<bagItem>", shadowMimic.bagItem.ToString());
     }
 }

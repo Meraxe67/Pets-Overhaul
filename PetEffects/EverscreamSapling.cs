@@ -47,31 +47,26 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class EverscreamPetItem : GlobalItem
+    public sealed class EverscreamPetItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => everscreamSapling;
+        public static EverscreamSapling everscreamSapling
         {
-            return entity.type == ItemID.EverscreamPetItem;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out EverscreamSapling pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<EverscreamSapling>();
             }
-
-            EverscreamSapling everscreamSapling = Main.LocalPlayer.GetModPlayer<EverscreamSapling>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EverscreamPetItem")
-                .Replace("<class>", PetTextsColors.ClassText(everscreamSapling.PetClassPrimary, everscreamSapling.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EverscreamPetItem")
                         .Replace("<magicCritNerf>", everscreamSapling.critMult.ToString())
                         .Replace("<maxMana>", everscreamSapling.manaIncrease.ToString())
                         .Replace("<missingMana>", Math.Round(everscreamSapling.missingManaPercent * 100, 2).ToString())
                         .Replace("<flatMana>", everscreamSapling.flatRecovery.ToString())
                         .Replace("<manaRecoveryCd>", (everscreamSapling.cooldown / 60f).ToString())
                         .Replace("<dmg>", Math.Round(everscreamSapling.dmgIncr * 100, 2).ToString())
-                        .Replace("<crit>", everscreamSapling.howMuchCrit.ToString())
-                        ));
-        }
+                        .Replace("<crit>", everscreamSapling.howMuchCrit.ToString());
     }
 }

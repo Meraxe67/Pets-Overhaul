@@ -49,29 +49,24 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class CursedSaplingItem : GlobalItem
+    public sealed class CursedSaplingItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => cursedSapling;
+        public static CursedSapling cursedSapling
         {
-            return entity.type == ItemID.CursedSapling;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out CursedSapling pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<CursedSapling>();
             }
-
-            CursedSapling cursedSapling = Main.LocalPlayer.GetModPlayer<CursedSapling>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.CursedSapling")
-                .Replace("<class>", PetTextsColors.ClassText(cursedSapling.PetClassPrimary, cursedSapling.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.CursedSapling")
                         .Replace("<minionSlot>", cursedSapling.maxMinion.ToString())
                         .Replace("<dmg>", Math.Round(cursedSapling.pumpkinWeaponDmg * 100, 2).ToString())
                         .Replace("<ravenDmg>", Math.Round(cursedSapling.ravenDmg * 100, 2).ToString())
                         .Replace("<whipRange>", Math.Round(cursedSapling.whipRange * 100, 2).ToString())
-                        .Replace("<whipSpeed>", Math.Round(cursedSapling.whipSpeed * 100, 2).ToString())
-                        ));
-        }
+                        .Replace("<whipSpeed>", Math.Round(cursedSapling.whipSpeed * 100, 2).ToString());
     }
 }

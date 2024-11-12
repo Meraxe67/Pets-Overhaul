@@ -183,29 +183,24 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class BlueEgg : GlobalItem
+    public sealed class BlueEgg : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => blueChicken;
+        public static BlueChicken blueChicken
         {
-            return entity.type == ItemID.BlueEgg;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out BlueChicken pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<BlueChicken>();
             }
-
-            BlueChicken blueChicken = Main.LocalPlayer.GetModPlayer<BlueChicken>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BlueEgg")
-                .Replace("<class>", PetTextsColors.ClassText(blueChicken.PetClassPrimary, blueChicken.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BlueEgg")
                 .Replace("<plantChance>", blueChicken.plantChance.ToString())
                 .Replace("<rarePlantChance>", blueChicken.rarePlantChance.ToString())
                 .Replace("<choppableChance>", blueChicken.treeChance.ToString())
                 .Replace("<eggMinute>", (blueChicken.blueEggTimer / 3600).ToString())
-                .Replace("<egg>", ModContent.ItemType<Egg>().ToString())
-            ));
-        }
+                .Replace("<egg>", ModContent.ItemType<Egg>().ToString());
     }
 }

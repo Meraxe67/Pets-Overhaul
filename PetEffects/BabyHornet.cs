@@ -90,23 +90,20 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class Nectar : GlobalItem
+    public sealed class Nectar : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => babyHornet;
+        public static BabyHornet babyHornet
         {
-            return entity.type == ItemID.Nectar;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out BabyHornet pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<BabyHornet>();
             }
-
-            BabyHornet babyHornet = Main.LocalPlayer.GetModPlayer<BabyHornet>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.Nectar")
-                .Replace("<class>", PetTextsColors.ClassText(babyHornet.PetClassPrimary, babyHornet.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.Nectar")
                 .Replace("<moveSpd>", Math.Round(babyHornet.moveSpdIncr * 100, 2).ToString())
                 .Replace("<def>", babyHornet.defReduction.ToString())
                 .Replace("<dmgCrit>", Math.Round(babyHornet.dmgReduction * 100, 2).ToString())
@@ -115,8 +112,6 @@ namespace PetsOverhaul.PetEffects
                 .Replace("<summonChance>", (babyHornet.beeChance * 2).ToString())
                 .Replace("<beeDmg>", babyHornet.beeDmg.ToString())
                 .Replace("<beeKb>", babyHornet.beeKb.ToString())
-                .Replace("<beeCd>", Math.Round(babyHornet.beeCooldown / 60f, 2).ToString())
-            ));
-        }
+                .Replace("<beeCd>", Math.Round(babyHornet.beeCooldown / 60f, 2).ToString());
     }
 }

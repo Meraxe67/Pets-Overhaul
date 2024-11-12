@@ -126,28 +126,23 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class StrangeGlowingMushroom : GlobalItem
+    public sealed class StrangeGlowingMushroom : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => babyTruffle;
+        public static BabyTruffle babyTruffle
         {
-            return entity.type == ItemID.StrangeGlowingMushroom;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out BabyTruffle pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<BabyTruffle>();
             }
-
-            BabyTruffle babyTruffle = Main.LocalPlayer.GetModPlayer<BabyTruffle>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.StrangeGlowingMushroom")
-                .Replace("<class>", PetTextsColors.ClassText(babyTruffle.PetClassPrimary, babyTruffle.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.StrangeGlowingMushroom")
                 .Replace("<buffRecover>", Math.Round(babyTruffle.buffIncrease / 60f, 2).ToString())
                 .Replace("<cooldown>", Math.Round(babyTruffle.shroomPotionCd / 60f, 2).ToString())
                 .Replace("<intIncr>", babyTruffle.increaseInt.ToString())
-                .Replace("<hiddenTip>", PetKeybinds.PetTooltipSwap.Current ? Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.MushroomStats") : Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.MushroomHiddenTooltip").Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.PetTooltipSwap)))
-            ));
-        }
+                .Replace("<hiddenTip>", PetKeybinds.PetTooltipSwap.Current ? Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.MushroomStats") : Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.MushroomHiddenTooltip").Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.PetTooltipSwap)));
     }
 }

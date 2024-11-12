@@ -53,27 +53,22 @@ namespace PetsOverhaul.PetEffects
 
         }
     }
-    public sealed class EyeSpring : GlobalItem
+    public sealed class EyeSpring : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => eyeballSpring;
+        public static EyeballSpring eyeballSpring
         {
-            return entity.type == ItemID.EyeSpring;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out EyeballSpring pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<EyeballSpring>();
             }
-
-            EyeballSpring eyeballSpring = Main.LocalPlayer.GetModPlayer<EyeballSpring>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EyeSpring")
-                .Replace("<class>", PetTextsColors.ClassText(eyeballSpring.PetClassPrimary, eyeballSpring.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EyeSpring")
                         .Replace("<jumpBoost>", Math.Round(eyeballSpring.jumpBoost * 100, 2).ToString())
                         .Replace("<acceleration>", Math.Round(eyeballSpring.acceleration * 100, 2).ToString())
-                        .Replace("<ascNerf>", eyeballSpring.ascentPenaltyMult.ToString())
-                        ));
-        }
+                        .Replace("<ascNerf>", eyeballSpring.ascentPenaltyMult.ToString());
     }
 }

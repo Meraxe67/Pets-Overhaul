@@ -46,26 +46,21 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class Carrot : GlobalItem
+    public sealed class Carrot : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => carrotBunny;
+        public static CarrotBunny carrotBunny
         {
-            return entity.type == ItemID.Carrot;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out CarrotBunny pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<CarrotBunny>();
             }
-
-            CarrotBunny carrotBunny = Main.LocalPlayer.GetModPlayer<CarrotBunny>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.Carrot")
-                .Replace("<class>", PetTextsColors.ClassText(carrotBunny.PetClassPrimary, carrotBunny.PetClassSecondary))
-                .Replace("<moveSpeed>", Math.Round(carrotBunny.spdPerStk * 100, 2).ToString())
-                .Replace("<jumpSpeed>", Math.Round(carrotBunny.jumpPerStk * 100, 2).ToString())
-            ));
         }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.Carrot")
+                .Replace("<moveSpeed>", Math.Round(carrotBunny.spdPerStk * 100, 2).ToString())
+                .Replace("<jumpSpeed>", Math.Round(carrotBunny.jumpPerStk * 100, 2).ToString());
     }
 }

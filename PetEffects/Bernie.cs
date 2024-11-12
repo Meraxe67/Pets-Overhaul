@@ -83,28 +83,23 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class BerniePetItem : GlobalItem
+    public sealed class BerniePetItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => bernie;
+        public static Bernie bernie
         {
-            return entity.type == ItemID.BerniePetItem;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out Bernie pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<Bernie>();
             }
-
-            Bernie bernie = Main.LocalPlayer.GetModPlayer<Bernie>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BerniePetItem")
-                .Replace("<class>", PetTextsColors.ClassText(bernie.PetClassPrimary, bernie.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BerniePetItem")
                 .Replace("<burnRange>", Math.Round(bernie.bernieRange / 16f, 2).ToString())
                 .Replace("<burnDrainMana>", Math.Round(bernie.burnDrain * bernie.manaDrain * 0.05f, 2).ToString())
                 .Replace("<burnDrainHealth>", Math.Round(bernie.burnDrain * bernie.healthDrain * 0.05f, 2).ToString())
-                .Replace("<maxDrain>", bernie.maxBurning.ToString())
-            ));
-        }
+                .Replace("<maxDrain>", bernie.maxBurning.ToString());
     }
 }

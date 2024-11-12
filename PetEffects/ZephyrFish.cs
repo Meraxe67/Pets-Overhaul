@@ -83,31 +83,26 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class ZephyrFishItem : GlobalItem
+    public sealed class ZephyrFishItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => zephyrFish;
+        public static ZephyrFish zephyrFish
         {
-            return entity.type == ItemID.ZephyrFish;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out ZephyrFish pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<ZephyrFish>();
             }
-
-            ZephyrFish zephyrFish = Main.LocalPlayer.GetModPlayer<ZephyrFish>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ZephyrFish")
-                .Replace("<class>", PetTextsColors.ClassText(zephyrFish.PetClassPrimary, zephyrFish.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ZephyrFish")
                         .Replace("<windFish>", Math.Round(zephyrFish.speedMult / 8f, 2).ToString())
                         .Replace("<regularChance>", zephyrFish.baseChance.ToString())
                         .Replace("<windChance>", zephyrFish.windChance.ToString())
                         .Replace("<anglerPower>", Math.Round(zephyrFish.powerPerQuest * 100, 2).ToString())
                         .Replace("<maxAnglerPower>", Math.Round(zephyrFish.maxQuestPower * 100, 2).ToString())
                         .Replace("<anglerQuests>", Main.LocalPlayer.anglerQuestsFinished.ToString())
-                        .Replace("<currentAnglerPower>", Math.Round(zephyrFish.powerPerQuest * Main.LocalPlayer.anglerQuestsFinished * 100, 2).ToString())
-                        ));
-        }
+                        .Replace("<currentAnglerPower>", Math.Round(zephyrFish.powerPerQuest * Main.LocalPlayer.anglerQuestsFinished * 100, 2).ToString());
     }
 }

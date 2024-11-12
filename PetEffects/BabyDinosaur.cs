@@ -53,25 +53,21 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class AmberMosquito : GlobalItem
+    public sealed class AmberMosquito : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => babyDinosaur;
+        public static BabyDinosaur babyDinosaur
         {
-            return entity.type == ItemID.AmberMosquito;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out BabyDinosaur pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<BabyDinosaur>();
             }
-
-            BabyDinosaur babyDinosaur = Main.LocalPlayer.GetModPlayer<BabyDinosaur>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.AmberMosquito")
-                .Replace("<class>", PetTextsColors.ClassText(babyDinosaur.PetClassPrimary, babyDinosaur.PetClassSecondary))
-                .Replace("<oreChance>", Math.Round(babyDinosaur.chance / 10f, 2).ToString())
-            ));
         }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.AmberMosquito")
+                .Replace("<oreChance>", Math.Round(babyDinosaur.chance / 10f, 2).ToString());
+        
     }
 }

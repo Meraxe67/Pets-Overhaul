@@ -34,27 +34,22 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class BedazzledNectar : GlobalItem
+    public sealed class BedazzledNectar : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => glitteryButterfly;
+        public static GlitteryButterfly glitteryButterfly
         {
-            return entity.type == ItemID.BedazzledNectar;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out GlitteryButterfly pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<GlitteryButterfly>();
             }
-
-            GlitteryButterfly glitteryButterfly = Main.LocalPlayer.GetModPlayer<GlitteryButterfly>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BedazzledNectar")
-                .Replace("<class>", PetTextsColors.ClassText(glitteryButterfly.PetClassPrimary, glitteryButterfly.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.BedazzledNectar")
                         .Replace("<flight>", Math.Round(glitteryButterfly.wingTime / 60f, 2).ToString())
                         .Replace("<percFlight>", Math.Round(glitteryButterfly.currentWingPercIncr * 100, 2).ToString())
-                        .Replace("<healthNerf>", Math.Round(glitteryButterfly.healthPenalty * 100, 2).ToString())
-                        ));
-        }
+                        .Replace("<healthNerf>", Math.Round(glitteryButterfly.healthPenalty * 100, 2).ToString());
     }
 }

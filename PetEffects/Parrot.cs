@@ -99,28 +99,23 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class ParrotCracker : GlobalItem
+    public sealed class ParrotCracker : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => parrot;
+        public static Parrot parrot
         {
-            return entity.type == ItemID.ParrotCracker;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out Parrot pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<Parrot>();
             }
-
-            Parrot parrot = Main.LocalPlayer.GetModPlayer<Parrot>();
-            tooltips.Add(new TooltipLine(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ParrotCracker")
-                .Replace("<class>", PetTextsColors.ClassText(parrot.PetClassPrimary, parrot.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ParrotCracker")
                 .Replace("<projChance>", parrot.projChance.ToString())
                 .Replace("<projDamage>", parrot.projDamage.ToString())
                 .Replace("<meleeChance>", parrot.meleeChance.ToString())
-                .Replace("<meleeDamage>", parrot.meleeDamage.ToString())
-                ));
-        }
+                .Replace("<meleeDamage>", parrot.meleeDamage.ToString());
     }
 }

@@ -39,27 +39,22 @@ namespace PetsOverhaul.PetEffects
             return (!Pet.PetInUseWithSwapCd(ItemID.SpiffoPlush) || !Main.rand.NextBool(ammoReserveChance, 100)) && base.CanConsumeAmmo(weapon, ammo);
         }
     }
-    public sealed class SpiffoPlush : GlobalItem
+    public sealed class SpiffoPlush : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => spiffo;
+        public static Spiffo spiffo
         {
-            return entity.type == ItemID.SpiffoPlush;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out Spiffo pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<Spiffo>();
             }
-
-            Spiffo spiffo = Main.LocalPlayer.GetModPlayer<Spiffo>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.SpiffoPlush")
-                .Replace("<class>", PetTextsColors.ClassText(spiffo.PetClassPrimary, spiffo.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.SpiffoPlush")
                         .Replace("<ammoReserve>", spiffo.ammoReserveChance.ToString())
                         .Replace("<armorPen>", spiffo.zombieArmorPen.ToString())
-                        .Replace("<penChance>", spiffo.penetrateChance.ToString())
-                        ));
-        }
+                        .Replace("<penChance>", spiffo.penetrateChance.ToString());
     }
 }

@@ -37,28 +37,23 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class ExoticEasternChewToy : GlobalItem
+    public sealed class ExoticEasternChewToy : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => fennecFox;
+        public static FennecFox fennecFox
         {
-            return entity.type == ItemID.ExoticEasternChewToy;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out FennecFox pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<FennecFox>();
             }
-
-            FennecFox fennecFox = Main.LocalPlayer.GetModPlayer<FennecFox>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ExoticEasternChewToy")
-                .Replace("<class>", PetTextsColors.ClassText(fennecFox.PetClassPrimary, fennecFox.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ExoticEasternChewToy")
                         .Replace("<meleeSpd>", Math.Round(fennecFox.meleeSpdIncrease * 100, 2).ToString())
                         .Replace("<moveSpd>", Math.Round(fennecFox.speedIncrease * 100, 2).ToString())
                         .Replace("<sizeNerf>", fennecFox.sizeDecrease.ToString())
-                        .Replace("<dmg>", Math.Round(fennecFox.meleeDmg * 100, 2).ToString())
-                        ));
-        }
+                        .Replace("<dmg>", Math.Round(fennecFox.meleeDmg * 100, 2).ToString());
     }
 }

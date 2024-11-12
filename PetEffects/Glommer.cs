@@ -56,30 +56,25 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class GlommerPetItem : GlobalItem
+    public sealed class GlommerPetItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => glommer;
+        public static Glommer glommer
         {
-            return entity.type == ItemID.GlommerPetItem;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out Glommer pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<Glommer>();
             }
-
-            Glommer glommer = Main.LocalPlayer.GetModPlayer<Glommer>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.GlommerPetItem")
-                .Replace("<class>", PetTextsColors.ClassText(glommer.PetClassPrimary, glommer.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.GlommerPetItem")
                         .Replace("<sanityRange>", Math.Round(glommer.glommerSanityRange / 16f, 2).ToString())
                         .Replace("<sanityAmount>", Math.Round(glommer.glommerSanityAura * 100, 2).ToString())
                         .Replace("<currentHaste>", Math.Round(glommer.Pet.abilityHaste * 100, 2).ToString())
                         .Replace("<manaRecover>", glommer.glommerSanityRecover.ToString())
                         .Replace("<manaRecoverCd>", Math.Round(glommer.glommerSanityTime / 60f, 2).ToString())
-                        .Replace("<goop>", ModContent.ItemType<GlommersGoop>().ToString())
-                        ));
-        }
+                        .Replace("<goop>", ModContent.ItemType<GlommersGoop>().ToString());
     }
 }

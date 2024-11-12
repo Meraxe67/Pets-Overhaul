@@ -649,23 +649,20 @@ namespace PetsOverhaul.PetEffects
         }
     }
 
-    public sealed class JunimoPetItem : GlobalItem
+    public sealed class JunimoPetItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => junimo;
+        public static Junimo junimo
         {
-            return entity.type == ItemID.JunimoPetItem;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out Junimo pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<Junimo>();
             }
-
-            Junimo junimo = Main.LocalPlayer.GetModPlayer<Junimo>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.JunimoPetItem")
-                .Replace("<class>", PetTextsColors.ClassText(junimo.PetClassPrimary, junimo.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.JunimoPetItem")
                         .Replace("<maxLvl>", junimo.maxLvls.ToString())
                         .Replace("<harvestingProfit>", Math.Round(junimo.harvestingCoin * junimo.junimoHarvestingLevel, 2).ToString())
                         .Replace("<flatHealth>", Math.Round(junimo.junimoHarvestingLevel * junimo.harvestingHealthperLevel, 1).ToString())
@@ -684,8 +681,6 @@ namespace PetsOverhaul.PetEffects
                         .Replace("<fishingCurrent>", $"[c/{PetTextsColors.ClassEnumToColor(PetClasses.Fishing).Hex3()}:{junimo.junimoFishingExp}]")
                         .Replace("<harvesting>", $"[c/{PetTextsColors.ClassEnumToColor(PetClasses.Harvesting).Hex3()}:{PetTextsColors.PetClassLocalized(PetClasses.Harvesting)}]")
                         .Replace("<mining>", $"[c/{PetTextsColors.ClassEnumToColor(PetClasses.Mining).Hex3()}:{PetTextsColors.PetClassLocalized(PetClasses.Mining)}]")
-                        .Replace("<fishing>", $"[c/{PetTextsColors.ClassEnumToColor(PetClasses.Fishing).Hex3()}:{PetTextsColors.PetClassLocalized(PetClasses.Fishing)}]")
-                        ));
-        }
+                        .Replace("<fishing>", $"[c/{PetTextsColors.ClassEnumToColor(PetClasses.Fishing).Hex3()}:{PetTextsColors.PetClassLocalized(PetClasses.Fishing)}]");
     }
 }

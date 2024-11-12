@@ -86,31 +86,26 @@ namespace PetsOverhaul.PetEffects
             return base.ConsumeItem(item, player);
         }
     }
-    public sealed class QueenBeePetItem : GlobalItem
+    public sealed class QueenBeePetItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => honeyBee;
+        public static HoneyBee honeyBee
         {
-            return entity.type == ItemID.QueenBeePetItem;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out HoneyBee pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<HoneyBee>();
             }
-
-            HoneyBee honeyBee = Main.LocalPlayer.GetModPlayer<HoneyBee>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.QueenBeePetItem")
-                .Replace("<class>", PetTextsColors.ClassText(honeyBee.PetClassPrimary, honeyBee.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.QueenBeePetItem")
                        .Replace("<extraHeal>", Math.Round(honeyBee.selfPotionIncrease * 100, 2).ToString())
                        .Replace("<range>", Math.Round(honeyBee.range / 16f, 2).ToString())
                        .Replace("<bottledHealth>", Math.Round(honeyBee.bottledHealth * 100, 2).ToString())
                        .Replace("<honeyfinHealth>", Math.Round(honeyBee.honeyfinHealth * 100, 2).ToString())
                        .Replace("<bottledHoneyTime>", Math.Round(honeyBee.bottledHoneyBuff / 60f, 2).ToString())
                        .Replace("<honeyfinHoneyTime>", Math.Round(honeyBee.honeyfinHoneyBuff / 60f, 2).ToString())
-                       .Replace("<abilityHaste>", Math.Round(honeyBee.abilityHaste * 100, 2).ToString())
-                       ));
-        }
+                       .Replace("<abilityHaste>", Math.Round(honeyBee.abilityHaste * 100, 2).ToString());
     }
 }

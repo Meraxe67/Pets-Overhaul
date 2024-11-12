@@ -108,23 +108,20 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class LizardEgg : GlobalItem
+    public sealed class LizardEgg : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => lizard;
+        public static Lizard lizard
         {
-            return entity.type == ItemID.LizardEgg;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out Lizard pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<Lizard>();
             }
-
-            Lizard lizard = Main.LocalPlayer.GetModPlayer<Lizard>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.LizardEgg")
-                    .Replace("<class>", PetTextsColors.ClassText(lizard.PetClassPrimary, lizard.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.LizardEgg")
                     .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.UsePetAbility))
                     .Replace("<tailDmgTaken>", Math.Round(lizard.percentHpDmg * 100, 2).ToString())
                     .Replace("<tailAcc>", Math.Round(lizard.tailAcc * 100, 2).ToString())
@@ -139,8 +136,6 @@ namespace PetsOverhaul.PetEffects
                     .Replace("<kbResist>", Math.Round(lizard.kbResist * 100, 2).ToString())
                     .Replace("<def>", lizard.defense.ToString())
                     .Replace("<moveSpd>", Math.Round(lizard.moveSpd * 100, 2).ToString())
-                    .Replace("<jumpPenalty>", Math.Round(lizard.jumpMult * 100, 2).ToString())
-                ));
-        }
+                    .Replace("<jumpPenalty>", Math.Round(lizard.jumpMult * 100, 2).ToString());
     }
 }

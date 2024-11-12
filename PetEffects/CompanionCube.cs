@@ -71,29 +71,24 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class CompanionCubeItem : GlobalItem
+    public sealed class CompanionCubeItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => companionCube;
+        public static CompanionCube companionCube
         {
-            return entity.type == ItemID.CompanionCube;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out CompanionCube pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<CompanionCube>();
             }
-
-            CompanionCube companionCube = Main.LocalPlayer.GetModPlayer<CompanionCube>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.CompanionCube")
-                .Replace("<class>", PetTextsColors.ClassText(companionCube.PetClassPrimary, companionCube.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.CompanionCube")
                         .Replace("<manaToHealth>", Math.Round(companionCube.manaToHealth * 100, 2).ToString())
                         .Replace("<healthToMana>", Math.Round(companionCube.healthToMana * 100, 2).ToString())
                         .Replace("<manaPotionNerf>", Math.Round(companionCube.manaPotionNerf * 100, 2).ToString())
                         .Replace("<manaToHealthNerf>", Math.Round(companionCube.manaToHealthNerf * 100, 2).ToString())
-                        .Replace("<halfOfSickness>", Math.Round(Player.manaSickLessDmg * 100, 2).ToString())
-                        ));
-        }
+                        .Replace("<halfOfSickness>", Math.Round(Player.manaSickLessDmg * 100, 2).ToString());
     }
 }

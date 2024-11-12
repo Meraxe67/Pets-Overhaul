@@ -66,28 +66,23 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class TikiTotem : GlobalItem
+    public sealed class TikiTotem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => tikiSpirit;
+        public static TikiSpirit tikiSpirit
         {
-            return entity.type == ItemID.TikiTotem;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out TikiSpirit pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<TikiSpirit>();
             }
-
-            TikiSpirit tikiSpirit = Main.LocalPlayer.GetModPlayer<TikiSpirit>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.TikiTotem")
-                .Replace("<class>", PetTextsColors.ClassText(tikiSpirit.PetClassPrimary, tikiSpirit.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.TikiTotem")
                        .Replace("<atkSpdToDmg>", Math.Round(tikiSpirit.atkSpdToDmgConversion * 100, 2).ToString())
                        .Replace("<atkSpdToRange>", Math.Round(tikiSpirit.atkSpdToRangeConversion * 100, 2).ToString())
                        .Replace("<nonWhipCrit>", tikiSpirit.nonWhipCrit.ToString())
-                       .Replace("<whipCrit>", tikiSpirit.whipCritBonus.ToString())
-                       ));
-        }
+                       .Replace("<whipCrit>", tikiSpirit.whipCritBonus.ToString());
     }
 }

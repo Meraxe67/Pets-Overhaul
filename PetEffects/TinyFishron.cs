@@ -62,31 +62,26 @@ namespace PetsOverhaul.PetEffects
             return base.Shoot(item, source, position, velocity, type, damage, knockback);
         }
     }
-    public sealed class DukeFishronPetItem : GlobalItem
+    public sealed class DukeFishronPetItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => tinyFishron;
+        public static TinyFishron tinyFishron
         {
-            return entity.type == ItemID.DukeFishronPetItem;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out TinyFishron pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<TinyFishron>();
             }
-
-            TinyFishron tinyFishron = Main.LocalPlayer.GetModPlayer<TinyFishron>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DukeFishronPetItem")
-                .Replace("<class>", PetTextsColors.ClassText(tinyFishron.PetClassPrimary, tinyFishron.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DukeFishronPetItem")
                         .Replace("<baseMult>", tinyFishron.fishingPowerPenalty.ToString())
                         .Replace("<anglerFishingPower>", tinyFishron.fpPerQuest.ToString())
                         .Replace("<flatChance>", tinyFishron.stackChance.ToString())
                         .Replace("<fishingPowerChance>", Math.Round(tinyFishron.multiplier * 100, 2).ToString())
                         .Replace("<bobberChance>", tinyFishron.bobberChance.ToString())
                         .Replace("<anglerQuests>", Main.LocalPlayer.anglerQuestsFinished.ToString())
-                        .Replace("<currentAnglerWithBaseMult>", Math.Round(Main.LocalPlayer.anglerQuestsFinished * tinyFishron.fpPerQuest + tinyFishron.fishingPowerPenalty, 2).ToString())
-                        ));
-        }
+                        .Replace("<currentAnglerWithBaseMult>", Math.Round(Main.LocalPlayer.anglerQuestsFinished * tinyFishron.fpPerQuest + tinyFishron.fishingPowerPenalty, 2).ToString());
     }
 }

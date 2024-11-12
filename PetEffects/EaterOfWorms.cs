@@ -75,28 +75,23 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class EaterOfWorldsPetItem : GlobalItem
+    public sealed class EaterOfWorldsPetItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => eaterOfWorms;
+        public static EaterOfWorms eaterOfWorms
         {
-            return entity.type == ItemID.EaterOfWorldsPetItem;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out EaterOfWorms pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<EaterOfWorms>();
             }
-
-            EaterOfWorms eaterOfWorms = Main.LocalPlayer.GetModPlayer<EaterOfWorms>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EaterOfWorldsPetItem")
-                .Replace("<class>", PetTextsColors.ClassText(eaterOfWorms.PetClassPrimary, eaterOfWorms.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.EaterOfWorldsPetItem")
                        .Replace("<miningSpeed>", Math.Round(eaterOfWorms.nonOreSpeed * 100, 2).ToString())
                        .Replace("<multipleBreakChance>", eaterOfWorms.tileBreakSpreadChance.ToString())
                        .Replace("<width>", eaterOfWorms.tileBreakXSpread.ToString())
-                       .Replace("<length>", eaterOfWorms.tileBreakYSpread.ToString())
-                       ));
-        }
+                       .Replace("<length>", eaterOfWorms.tileBreakYSpread.ToString());
     }
 }

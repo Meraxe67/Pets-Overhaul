@@ -70,31 +70,26 @@ namespace PetsOverhaul.PetEffects
             return base.ConsumeItem(item, player);
         }
     }
-    public sealed class PigPetItem : GlobalItem
+    public sealed class PigPetItem : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => pigman;
+        public static Pigman pigman
         {
-            return entity.type == ItemID.PigPetItem;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out Pigman pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<Pigman>();
             }
-
-            Pigman pigman = Main.LocalPlayer.GetModPlayer<Pigman>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.PigPetItem")
-                .Replace("<class>", PetTextsColors.ClassText(pigman.PetClassPrimary, pigman.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.PigPetItem")
                        .Replace("<foodChance>", pigman.foodChance.ToString())
                        .Replace("<potionChance>", pigman.potionChance.ToString())
                        .Replace("<shield1>", pigman.tier1Shield.ToString())
                        .Replace("<shield2>", pigman.tier2Shield.ToString())
                        .Replace("<shield3>", pigman.tier3Shield.ToString())
                        .Replace("<shieldTime>", Math.Round(pigman.shieldTime / 60f, 2).ToString())
-                       .Replace("<cooldown>", Math.Round(pigman.shieldCooldown / 60f, 2).ToString())
-                       ));
-        }
+                       .Replace("<cooldown>", Math.Round(pigman.shieldCooldown / 60f, 2).ToString());
     }
 }

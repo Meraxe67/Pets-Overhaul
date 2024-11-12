@@ -37,29 +37,24 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class HellCake : GlobalItem
+    public sealed class HellCake : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => babyImp;
+        public static BabyImp babyImp
         {
-            return entity.type == ItemID.HellCake;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out BabyImp pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<BabyImp>();
             }
-
-            BabyImp babyImp = Main.LocalPlayer.GetModPlayer<BabyImp>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.HellCake")
-                .Replace("<class>", PetTextsColors.ClassText(babyImp.PetClassPrimary, babyImp.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.HellCake")
                 .Replace("<immuneTime>", Math.Round(babyImp.lavaImmune / 60f, 2).ToString())
                 .Replace("<lavaDef>", babyImp.lavaDef.ToString())
                 .Replace("<lavaSpd>", Math.Round(babyImp.lavaSpd * 100, 2).ToString())
                 .Replace("<obbyDef>", babyImp.obbyDef.ToString())
-                .Replace("<obbySpd>", Math.Round(babyImp.obbySpd * 100, 2).ToString())
-            ));
-        }
+                .Replace("<obbySpd>", Math.Round(babyImp.obbySpd * 100, 2).ToString());
     }
 }

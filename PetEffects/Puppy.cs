@@ -71,28 +71,23 @@ namespace PetsOverhaul.PetEffects
             }
         }
     }
-    public sealed class DogWhistle : GlobalItem
+    public sealed class DogWhistle : PetTooltip
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+        public override PetEffect PetsEffect => puppy;
+        public static Puppy puppy
         {
-            return entity.type == ItemID.DogWhistle;
-        }
-
-        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-        {
-            if (ModContent.GetInstance<PetPersonalization>().EnableTooltipToggle && !PetKeybinds.PetTooltipHide.Current)
+            get
             {
-                return;
+                if (Main.LocalPlayer.TryGetModPlayer(out Puppy pet))
+                    return pet;
+                else
+                    return ModContent.GetInstance<Puppy>();
             }
-
-            Puppy puppy = Main.LocalPlayer.GetModPlayer<Puppy>();
-            tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DogWhistle")
-                .Replace("<class>", PetTextsColors.ClassText(puppy.PetClassPrimary, puppy.PetClassSecondary))
+        }
+        public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DogWhistle")
                 .Replace("<critter>", puppy.catchChance.ToString())
                 .Replace("<rareCritter>", puppy.rareCatchChance.ToString())
                 .Replace("<rareCritterCoin>", Math.Round(puppy.rareCritterCoin / 100f, 2).ToString())
-                .Replace("<rareEnemyCoin>", Math.Round(puppy.rareEnemyCoin / 100f, 2).ToString())
-            ));
-        }
+                .Replace("<rareEnemyCoin>", Math.Round(puppy.rareEnemyCoin / 100f, 2).ToString());
     }
 }
