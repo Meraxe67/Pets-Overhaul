@@ -321,7 +321,7 @@ Mods: {
 				'''
 				<class>
 				- Mining an ore, gem, or extractable block has a <oreChance>% chance
-				to grant you a random ore or gem usually obtained from silts etc.
+				  to grant you a random ore or gem usually obtained from silts etc.
 				 * Less valuable ore & gems are more likely to drop.
 				'''
 			EatersBone:
@@ -348,7 +348,7 @@ Mods: {
 				- Slows all non-boss enemies in a <slowRange>-block radius by <slowAmount>%.
 				- Grants a permanent warmth effect, reducing cold-sourced damage.
 				- All weapons from Frost Moon gains <dmg>% damage and <crit>% crit chance.
-				Affected Weapons: [i:1928] [i:1930] [i:1910] [i:1929] [i:1931] [i:1947] [i:1946]
+				  Affected Weapons: [i:1928] [i:1930] [i:1910] [i:1929] [i:1931] [i:1947] [i:1946]
 				'''
 			Nectar:
 				'''
@@ -357,7 +357,7 @@ Mods: {
 				- Decreases defense by <def>, damage and crit chance by <dmgCrit>%.
 				- Increases max minions by <maxMinion> and movement speed by <moveSpd>%.
 				- All hits have a <regularChance>% chance (<summonChance>% for Summon hits) to summon
-				a friendly bee with <beeDmg> base damage and <beeKb> knockback.
+				  a friendly bee with <beeDmg> base damage and <beeKb> knockback.
 				 * Hive Pack [i:3333] gives a 33% chance to summon a Strong Bee instead of a regular.
 				 * Summoning a bee has a <beeCd> seconds cooldown.
 				'''
@@ -423,16 +423,16 @@ Mods: {
 			MushroomStats:
 				'''
 				 * Damage, knockback resistance, crit chance, luck,
-				mana, crit damage, health, knockback, attack speed,
-				defense, armor pen, fishing power, damage reduction,
-				mana regen, jump speed, wing time, pet ability haste,
-				global fortune, mining fortune, harvesting fortune,
-				fishing fortune, aggro, fall damage resistance, 
-				your Pets; damage, heal and shield effectiveness,
-				life regen, natural life regen acceleration, move speed,
-				% armor penetration, breath duration, mining speed,
-				tile placement speed, wall placement speed, weapon size,
-				lava resistance duration and ammo reservation chance.
+				   mana, crit damage, health, knockback, attack speed,
+				   defense, armor pen, fishing power, damage reduction,
+				   mana regen, jump speed, wing time, pet ability haste,
+				   global fortune, mining fortune, harvesting fortune,
+				   fishing fortune, aggro, fall damage resistance, 
+				   your Pets; damage, heal and shield effectiveness,
+				   life regen, natural life regen acceleration, move speed,
+				   % armor penetration, breath duration, mining speed,
+				   tile placement speed, wall placement speed, weapon size,
+				   lava resistance duration and ammo reservation chance.
 				'''
 			FullMoonSqueakyToy:
 				'''
@@ -464,7 +464,7 @@ Mods: {
 				- Increases luck by <flatLuck>.
 				- Grants luck depending on the current moon cycle.
 				 * Minimum being <minimumMoon> while its Full Moon and
-				maximum being <maximumMoon> while it's a New Moon.
+				   maximum being <maximumMoon> while it's a New Moon.
 				 * Only works while it's Night. Current luck: <moonLuck>
 				- Your current total luck: <playerLuck>
 				'''
@@ -506,9 +506,9 @@ Mods: {
 				- Recovers health equal to <manaToHealth>% of your mana usage.
 				- Recovers mana equal to <healthToMana>% of the damage you receive.
 				- If mana sickness is active, reduces your Mana potions effectiveness by <manaPotionNerf>% 
-				and health recovery with Mana usage by -<manaToHealthNerf>%.
+				  and health recovery with Mana usage by -<manaToHealthNerf>%.
 				 * Both are doubled if mana sicknesses Magic Damage penalty is 
-				 currently reducing more than its initial amount, <halfOfSickness>%.
+				   currently reducing more than its initial amount, <halfOfSickness>%.
 				'''
 			CursedSapling:
 				'''
@@ -591,7 +591,7 @@ Mods: {
 				- Increases arrow pierce by <arrowPierce>.
 				- Multiplies your bullet speed by <bulletVelo>x.
 				- Your specialist ranged weapons will crit
-				enemies below <treshold>% health all the time.
+				  enemies below <treshold>% health all the time.
 				 * Treshold decreases down to <bossTreshold>% for bosses.
 				'''
 			JunimoMaxLevelText: Max Level!
@@ -603,8 +603,8 @@ Mods: {
 				<class>
 				- Allows you to gain EXP for each respective class, further improving the perks of this Pet.
 				 * Gathering any of the Harvesting, Mining, and Fishing items gives you money depending on the
-				item's exp value, and levels are maxed at level <maxLvl>. Cap can be increased with following unique boss kills;
-				Eater of Worlds or Brain of Cthulhu, Wall of Flesh, Any Mech Boss, Plantera and Lunatic Cultist.
+				   item's exp value, and levels are maxed at level <maxLvl>. Cap can be increased with following unique boss kills;
+				   Eater of Worlds or Brain of Cthulhu, Wall of Flesh, Any Mech Boss, Plantera and Lunatic Cultist.
 				- <harvesting> Current level: <harvestLevel> Experience needed for next level: <harvestNext> Current total experience: <harvestCurrent>
 				 * Gain <harvestingProfit> times exp value of items as copper coins and gain <flatHealth> maximum health.
 				- <mining> Current level: <miningLevel> Experience needed for next level: <miningNext> Current total experience: <miningCurrent>
@@ -653,10 +653,10 @@ Mods: {
 				'''
 				<class>
 				- All projectiles by you or your Minions/Sentries have a <projChance>% chance
-				to be re-shot as a new projectile by your Parrot.
+				  to be re-shot as a new projectile by your Parrot.
 				 * Properties of the projectile are the same except with <projDamage>x of the damage. 
 				- All non-Projectile Melee, True Melee Projectiles and close combat
-				Minion & Sentry hits have a <meleeChance>% chance to hit again with <meleeDamage>x of the damage.
+				  Minion & Sentry hits have a <meleeChance>% chance to hit again with <meleeDamage>x of the damage.
 				'''
 			PigPetItem:
 				'''
@@ -699,7 +699,7 @@ Mods: {
 				- Multiplies damage you deal by <dmgPenalty>x.
 				- Gain <lifesteal>% lifesteal. 
 				 * Increased to <planteraSteal>% for Plantera's weapons.
-				Affected weapons: [i:1255] [i:788] [i:1178] [i:1259] [i:1155] [i:3018] [i:1157] [i:1305]
+				   Affected weapons: [i:1255] [i:788] [i:1178] [i:1259] [i:1155] [i:3018] [i:1157] [i:1305]
 				'''
 			SpiderEgg:
 				'''
@@ -726,7 +726,7 @@ Mods: {
 				<class>
 				- Gain <fishingPower> fishing power.
 				- Deal <seaCreatureDmg>x damage to fished-up enemies and
-				receive <seaCreatureResist>x damage from all attacks of fished-up enemies.
+				  receive <seaCreatureResist>x damage from all attacks of fished-up enemies.
 				 * Fished-up enemies include enemies that spawn upon catching with your rod.
 				 * This includes Duke Fishron and alike.
 				- Gives <shield> shield for <shieldTime> seconds upon succesfully catching anything.
@@ -744,7 +744,7 @@ Mods: {
 				- Increases all plants and alike you gather by <plant>%.
 				 * Decreased to <rarePlant>% for rare plants.
 				- Grants <health> maximum health and <harvFort> Harvesting Fortune
-				for every Pumpkin Armor piece is worn. Current worn pieces: <pumpkinPieceAmount>
+				  for every Pumpkin Armor piece is worn. Current worn pieces: <pumpkinPieceAmount>
 				'''
 			EucaluptusSap:
 				'''
@@ -802,7 +802,7 @@ Mods: {
 				- Press Pet Ability Keybind (<keybind>) to go to the 'enraged state' early.
 				 * Gain <forcedEnrageMult>% of Health used to go below 50% as an extra shield for <shieldDuration> seconds.
 				- The moment you're below 50% health and in combat for at least <outOfCombat> seconds,
-				go into enrage, consuming all of your defense and damage reduction to Rage points.
+				  go into enrage, consuming all of your defense and damage reduction to Rage points.
 				 * Gain <shieldMult>x of rage points as a Shield for <shieldDuration> seconds.
 				 * Shield multiplier increased to <eocShieldMult>x when Shield of Cthulhu is equipped.
 				 * If your Shield of Cthulhu dash delay is higher than <frameReduction> frames, sets it to <frameReduction>.
@@ -819,8 +819,8 @@ Mods: {
 				'''
 				<class>
 				- Grants you <lifesteal>% lifesteal, but how much you can lifesteal
-				is all dependent on a Health Pool, lifestealing decrements from the pool, 
-				and when the pool is empty, [c/f8baba:you cannot lifesteal] before it has health in it again.
+				  is all dependent on a Health Pool, lifestealing decrements from the pool, 
+				  and when the pool is empty, [c/f8baba:you cannot lifesteal] before it has health in it again.
 				 * Maximum amount pool contains is equal to <maxPool>% of your max health.
 				 * Pool recovers +1 health every <healthRecovery> second.
 				- Current amount of health in the pool that can be recovered: <pool>
@@ -853,7 +853,7 @@ Mods: {
 				 * Give Honey Overdose (de)buff for 60 seconds.
 				 * Honey Overdose prevents the Player from being healed by another Honey Bee for the duration.
 				 * Honey Overdose also grants <abilityHaste>% pet ability haste for the duration which
-				 determines how frequently the Player's pet's ability can be used.
+				   determines how frequently the Player's pet's ability can be used.
 				 * Player with Honey Bee gets all the benefits with half effect and full duration of Honey Overdose.
 				'''
 			DeerclopsPetItem:
@@ -886,8 +886,8 @@ Mods: {
 				- Improves Sparkle Slime Balloon [i:4986] and the Endless variation of it [i:<endless>] globally.
 				 * Enemies: Applies a <slow>% slow to all enemies affected.
 				 * Players: Grants <haste>% pet ability haste which increases how frequently your Pet's ability can be used
-				and every hit adds 1 counter, (extra chance to add more counter with pet ability haste) when you reach
-				6th counter, you deal <dmgBonus>x damage and gives you <shield> shield for <shieldTime> seconds.
+				   and every hit adds 1 counter, (extra chance to add more counter with pet ability haste) when you reach
+				   6th counter, you deal <dmgBonus>x damage and gives you <shield> shield for <shieldTime> seconds.
 				'''
 			SkeletronPrimePetItem:
 				'''
@@ -914,7 +914,7 @@ Mods: {
 				- Your target being in a <closeRange> tile range causes the following:
 				 * Applies Cursed Flames on your target for <cursedTime> seconds.
 				 * Apply <dealtDmgLifesteal>% of the damage you dealt as lifesteal on 
-				 <defLifesteal>x of your defense multiplied by your damage reduction.
+				   <defLifesteal>x of your defense multiplied by your damage reduction.
 				- Your target being outside of a <longRange> tile range adds <hpDmg>% health damage.
 				 * Maximum health damage is reduced to <bossHpDmg>% for bosses. 
 				 * This has a <hpDmgCooldown> second cooldown.
@@ -945,7 +945,7 @@ Mods: {
 				 * All of the effects are not active if any mount is in use.
 				- Nerfing you by:
 				 * Multiplying player's movement speed by <moveSpdNerf>x, attack speed of true melee by <atkSpdNerf>x,
-				horizontal wing speed and acceleration by <horizontalNerf>x, and vertical ascent speeds by <verticalNerf>x.
+				   horizontal wing speed and acceleration by <horizontalNerf>x, and vertical ascent speeds by <verticalNerf>x.
 				 * Reducing non-melee damage by -<dmgNerf>%, disables turning around while swinging, and halves your wing time.
 				- But buffing you by:
 				 * Multiplying true melee size, damage and knockback by <trueMeleeMults>x, defense by <defMult>x.
@@ -972,7 +972,7 @@ Mods: {
 				'''
 				- Icicle Mist
 				 * Spawns an Ice Mist on your cursor, it travels in a random direction,
-				spawning Icicle Shards along the way it travels, traveling through blocks.
+				   spawning Icicle Shards along the way it travels, traveling through blocks.
 				 * Ball and Shards both deal <damage> base damage to enemies hit.
 				 * Enemies hit by them gets slowed by <slowAmount>% for <slowTime> seconds.
 				'''
@@ -980,7 +980,7 @@ Mods: {
 				'''
 				- Lightning Orb
 				 * Spawns a Lightning Orb on your cursor, which gradually sends out Lightning Strikes
-				towards where your cursor is, both continuously striking enemies that contact them.
+				   towards where your cursor is, both continuously striking enemies that contact them.
 				 * Orb deals <orbDmg> base damage with <orbPen> armor pen, also applying a <orbSlow>% slow briefly.
 				 * Strikes deal <strikeDmg> base damage with <strikePen> armor pen, also applying a <strikeSlow>% slow briefly.
 				'''
@@ -991,7 +991,7 @@ Mods: {
 				 * Fireballs explode upon impact with anything, dealing <fireDmg> base damage and <kb> knockback.
 				 * Hit enemies get applied with Daybreak debuff for <burnSeconds> seconds.
 				 * Enabling/Disabling Phantasmal Dragon Fireball Volley from the Dragon config option can allow for 
-				 Fireballs to be cast from the Dragon's mouth, rather than from the Player. Currently: <enabled>
+				   Fireballs to be cast from the Dragon's mouth, rather than from the Player. Currently: <enabled>
 				'''
 			DD2BetsyPetItem:
 				'''
@@ -1001,7 +1001,7 @@ Mods: {
 				 * Debuff stacks up to <maxStack> stacks. 
 				 * Every stack decreases the target's defense by <defDecrease>%.
 				- If any Player kills an enemy with Queen's Damnation,
-				they recover <missingHpSteal>% of their missing health per stack.
+				  they recover <missingHpSteal>% of their missing health per stack.
 				 * Recovery is increased by <maxStackIncr>% if the target is at max stacks.
 				'''
 			IceQueenPetItem:
@@ -1018,8 +1018,8 @@ Mods: {
 			PlanteraPetItem:
 				'''
 				<class>
-				- Ranged hits on enemies will deal bonus damage depending
-				on their missing health percentage.
+				- Ranged hits on enemies will deal bonus damage
+				  depending on their missing health percentage.
 				 * The damage it increases can go up to <maxAmount>%.
 				 * Damage increase goes up non-linearly, the lower health is, the more the damage boost is.
 				'''
@@ -1068,7 +1068,7 @@ Mods: {
 				'''
 				- It's both Prince and Princess Slime Pets' abilities combined while being slightly weaker.
 				 * Effects of Prince or Princess are overridden if there is another Prince or Princess active.
-				Press <keybind> to swap the Tooltip (This is solely for display, and has no effects on perks)
+				   Press <keybind> to swap the Tooltip (This is solely for display, and has no effects on perks)
 				<tooltip>
 				'''
 			Carrot:
