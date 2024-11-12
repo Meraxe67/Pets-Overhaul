@@ -1,998 +1,1047 @@
 Mods: {
 	PetsOverhaul: {
-		// BaseCd: Base Pet Ability Cooldown:
-		// NoCd: Current Pet has no Ability Cooldown!
-		// RemainingCd: Remaining Pet Ability Cooldown:
-		// ReadyCd: Pet Ability Ready!
-		// Sec: Second
-		// Secs: Seconds
-		// Pet: Pet
-		// And: and
+		BaseCd: 基础宠物技能冷却：
+		NoCd: 当前宠物没有技能冷却！
+		RemainingCd: 剩余宠物技能冷却
+		ReadyCd: 宠物技能就绪！
+		Sec: 秒
+		Secs: 秒
+		Pet: 宠物
+		And: 和
 		// Operators are for cases where a Language does not use them when specifying a bonus but solely uses words. Put "" instead if you need them to be empty.
-		// %: %
-		// x: x
-		// +: +
-		// -: -
-		// KeybindMissing: Keybind Not Registered
-		// JojaCola: A nature-related NPC may be able to Purify this
-		/* Notice:
+		%: %
+		x: x
+		+: +
+		-: -
+		KeybindMissing: 未绑定键位
+		JojaCola: 某个与自然相关的NPC也许可以净化它
+		Notice:
 			'''
-			[c/90C2AA:Pets Overhaul 3.0 latest changes: Calamity Addon release, Major system improvements, major fixes, lots of balance changes]
-			[c/90C2AA:Some of your config options may have reset, make sure to check to have them set correctly!]
-			[c/90C2AA:Added full Russian localization! By: Teokai, Added fully up-to-date Brazillian Portuguese localization! By: Erstarisk]
-			[c/90C2AA:Improved Mod Icon, and added new Mod Trailer video & channel! All done by: Furqi]
-			[c/b4bfc5:Join our discord server for feedback & bug reports! discord.gg/KubSpqvDGE]
-			[c/b4bfc5:Use] [c/ff8234:/pet] [c/b4bfc5:to see commands for Pets Overhaul, providing you more info!]
-			''' */
-		/* CalamityDetected:
+			[c/90C2AA:Pets Overhaul（宠物大修）3.0最新更新：灾厄扩展发布，主系统优化，bug修复，以及大量平衡改动]
+			[c/90C2AA:你的一些配置选项可能已经重置，请务必检查它们的设置是否正确！]
+			[c/90C2AA:添加了完整的俄语本地化！作者：Teokai，添加了完全最新的巴西葡萄牙语本地化！作者:Erstarisk]
+			[c/90C2AA:重绘模组图标，并添加新的模组预告视频和频道！作者：Furqi]
+			[c/b4bfc5:加入我们的discord服务器以反馈/报告bug！ discord.gg/KubSpqvDGE]
+			[c/b4bfc5:使用] [c/ff8234:/pet 命令] [c/b4bfc5:来查看宠物大修的命令以获得更多信息！]
 			'''
-			It seems you're using Pets Overhaul alongside Calamity Mod without the addon!
-			You can find the addon under the name 'Pets Overhaul: Calamity Addon'
-			Adding even more unique pets & Calamity compatibility for the vanilla Pet effects!
-			''' */
+		CalamityDetected:
+			'''
+			看起来你在没有启用灾厄扩展的情况下启动了灾厄
+			你可以在创意工坊搜索“Pets Overhaul: Calamity Addon”来订阅宠物大修：灾厄扩展
+			此扩展添加了很多独特的宠物和原版宠物效果的灾厄适配
+			'''
 
 		Classes: {
-			// None: None
-			// Melee: Melee
-			// Ranged: Ranged
-			// Magic: Magic
-			// Summoner: Summoner
-			// Utility: Utility
-			// Mobility: Mobility
-			// Harvesting: Harvesting
-			// Mining: Mining
-			// Fishing: Fishing
-			// Offensive: Offensive
-			// Defensive: Defensive
-			// Supportive: Supportive
-			// Rogue: Rogue
+			None: 无
+			Melee: 近战
+			Ranged: 远程
+			Magic: 魔法
+			Summoner: 召唤
+			Utility: 通用
+			Mobility: 机动
+			Harvesting: 采集
+			Mining: 挖掘
+			Fishing: 钓鱼
+			Offensive: 进攻
+			Defensive: 防御
+			Supportive: 辅助
+			Rogue: 盗贼
 		}
 
 		Commands: {
-			/* Help:
+			Help:
 				'''
-				[c/90C2AA:List of Pets Overhaul commands:] (commands are not case sensitive)
-				/pet fortune, /pet fortunestat, /pet fortunestats -> Displays your current fortune stats and explains their functionality.
-				/pet vanity, /pet vanitypet -> Explains how to use a 'vanity' Pet.
-				/pet junimo, /pet junimoscoreboard, /pet junimoleaderboard -> Displays Top 3 Online Players with highest exp counts for all 3 skills of Junimo.
-				/pet {mining|fishing|harvesting}scoreboard, /pet {mining|fishing|harvesting}leaderboard -> 
-				Displays a limitless amount of Online Players with the highest chosen skill's exp counts from Junimo's 3 skills.
-				/pet faq, /pet question -> Displays frequently asked questions regarding Pets Overhaul.
-				''' */
-			/* FAQ:
+				[c/90C2AA:宠物大修命令列表：] （不区分大小写）
+				/pet fortune，/pet fortunestat，/pet fortunestats -> 显示当前时运属性并解释它们的作用
+				/pet vanity，/pet vanitypet -> 教你如何获得一个 “时装” 宠物
+				/pet junimo，/pet junimoscoreboard，/pet junimoleaderboard -> 显示祝尼魔三个职业总计经验值最高的前三名在线玩家
+				/pet {mining|fishing|harvesting}scoreboard，/pet {mining|fishing|harvesting}leaderboard -> 
+				显示所有玩家的祝尼魔对应职业的经验值
+				/pet faq，/pet question -> 显示关于宠物大修的常见问题
 				'''
-				Q: Will there be crossmod content? & Is Pets Overhaul compatible with X mod?
-				A: Currently Calamity Addon is out with the name: 'Pets Overhaul: Calamity Addon'! Next in the plans is the Thorium Mod!
-				Q: Is there any way of increasing rolls of Light Pets?
-				A: Currently, no. There may be a feature added in the future and it is planned to have use of high rolls, so it's advised to keep your max rolls.
-				Q: How do I get X Pet?
-				A: Refer to Wikis or an in-game tool to figure out how to obtain a certain Pet, vanilla Wiki can be a useful tool for this.
-				Q: Why am I randomly getting fishes, crates, etc. in my inventory?
-				A: 99% due to your autofishing mod catching fishes procs your Fishing Fortune. (refer to /pet fortune for more info)
-				Q: Why is my Pet Effects not working? & How do Pet Effects become activated?
-				A: Make sure the Pet effects you want to take in place are in the Pet slot, which is located in the 'Equipment' section, on top of your Helmet slot.
-				''' */
-			/* FortuneInfo:
+			FAQ:
 				'''
-				All fortune stats increase the amount of items obtained in said category of items. (Ex. Ores = Mining Fortune)
-				They work with 100% effectiveness for items gained by Pets of the same Class, and 50% for items gained through non-pet means.
-				For example: If you have 100 Harvesting Fortune, gather 3 Dayblooms by hand and +2 with Magical Pumpkin Seed (Squashling Pet)
-				This will result in 1.5 (item gained through non-pet means, 50% effective) + 2 (item gained through Pet perk, 100% effective) more Daybloom.
-				''' */
-			/* FortuneCurrent:
+				问：会有模组联动内容吗？/宠物大修适配xxx模组吗？
+				答：目前已有宠物大修：灾厄扩展（Pets Overhaul: Calamity Addon）！计划下一个模组是瑟银！
+				问：如何提升照明宠物的品级？
+				答：目前，没有。未来会添加一个功能来利用高品级，所以建议保留你的最高品级。
+				问：怎么获得xxx宠物？
+				答：问问你的维基百科和合成表/Boss列表模组。
+				问：为什么我的背包有时会随机出现鱼/宝匣等物品？
+				答：99%的可能是因为你的自动钓鱼模组触发了钓鱼时运（参考/pet fortune命令页面）
+				问：为什么我的宠物效果不生效？/宠物效果怎么生效？
+				答：保证你的宠物物品位于装备页的宠物栏中
 				'''
-				[c/90C2AA:Global Fortune] - While working with 100% effectiveness on non-classified Pet Items,
-				works with 50% effectiveness with everything else. Your Current Global Fortune: <global>
-				[c/96A8B0:Mining Fortune] - Ores, gems, etc. Your Current Mining Fortune: <mining>
-				[c/0382E9:Fishing Fortune] - Fishes, crates, etc. Your Current Fishing Fortune: <fishing>
-				[c/CDFF00:Harvesting Fortune] - Herbs, plants, trees, etc. Your Current Harvesting Fortune: <harvesting>
-				''' */
-			/* VanityPet:
+			FortuneInfo:
 				'''
-				Step 1: Equip the pet you don't want to be visible, but want its effects active in your Pet Slot.
-				Step 2: Disable the currently equipped Pet's visibility from Little Eye next to the Pet Slot.
-				Step 3: 'Use' the Pet you want to be visible via the Pet Item from your inventory. Done!
-				''' */
-			// ArgumentInvalid: The given argument was invalid, here is a list of Pets Overhaul commands: (commands are not case sensitive)
-			// OneArgument: Only one argument was expected, make sure you're not using spaces for an argument. List of Pets Overhaul commands: (commands are not case sensitive)
-			// UseInMultiplayer: Please use this command on Multiplayer! If you want to see your Junimo Skills, use /pet junimo, /pet junimoscoreboard, or /pet junimoleaderboard
-			// SinglePlayerJunimo: "[c/<color>:Your Junimo <class> Level: <level> Your Junimo <class> EXP: <exp>]"
-			// LeaderboardList: "[c/<color>:List of Players with highest Junimo <class> EXP:]"
-			// PlayerRankings: <player>'s <class> Level: <level> <class> Exp: <exp>
+				所有时运属性都会增加获得对应物品时的数量（如：矿石对应挖掘时运）
+				对同类宠物获得的物品有100%的效果，对通过非宠物方式获得的物品有50%的效果
+				举个例子：如果你有100点收获时运，手动采集3朵太阳花，用魔法南瓜种子(南瓜娃娃宠物)采集+2朵
+				结果会额外获得1.5（通过非宠物方式获得的，50%效果）+2（通过宠物获得的，100%效果）朵太阳花
+				'''
+			FortuneCurrent:
+				'''
+				[c/90C2AA:通用时运] - 对通用宠物有100%效果，对其他宠物有50%效果。当前通用时运：<global>
+				[c/96A8B0:挖掘时运] - 影响矿石、宝石等。当前挖掘时运：<mining>
+				[c/0382E9:钓鱼时运] - 影响鱼，宝匣等。当前钓鱼时运：<fishing>
+				[c/CDFF00:采集时运] - 影响草药，植物，树木等。当前采集时运：<harvesting>
+				'''
+			VanityPet:
+				'''
+				第1步：把你不想要其可见，只要它的效果的宠物装备到你的宠物栏
+				第2步：点击宠物栏右上角的小眼睛禁用当前宠物的可见性
+				第3步：从背包中使用你想要其可见的宠物物品，完成！
+				'''
+			ArgumentInvalid: 参数无效，以下是宠物大修命令列表：（不区分大小写）
+			OneArgument: 只需一个参数，请确保你在参数之间没有多余的空格。以下是宠物大修命令列表：（不区分大小写）
+			UseInMultiplayer: 请在多人游戏中使用此命令！如果你想查看你的祝尼魔经验值，用/pet junimo，/pet junimoscoreboard，或/pet junimoleaderboard
+			SinglePlayerJunimo: "[c/<color>:你的祝尼魔 <class> 等级： <level> 你的祝尼魔 <class> 经验： <exp>]"
+			LeaderboardList: "[c/<color>:祝尼魔 <class> 最高经验玩家列表：]"
+			PlayerRankings: <player>的 <class> 等级： <level> <class> 经验： <exp>
 		}
 
 		Config: {
 			Personalization: 个性化设置
-			// PlayerLeft: On the Player, Icon on the left
-			// PlayerRight: On the Player, Icon on the right
-			// HealthBarLeft: Next to the Healthbar, Icon on the left
-			// HealthBarRight: Next to the Healthbar, Icon on the right
-			// HeaderDisplay: Display Related Settings
-			// HeaderSound: Sound-Related Settings
-			// HeaderGameplay: Gameplay Settings
+			PlayerLeft: 玩家头顶，图标在左边
+			PlayerRight: 玩家头顶，图标在右边
+			HealthBarLeft: 生命值旁，图标在左边
+			HealthBarRight: 生命值旁，图标在右边
+			HeaderDisplay: 显示相关配置
+			HeaderSound: 音效相关配置
+			HeaderGameplay: 游戏性配置
 			NoticeLabel: 禁用此模组通知
 			NoticeTooltip:
 				'''
 				禁用此模组在进入世界时发送的通知,
 				通知可能包含最近更新的简要信息.
 				'''
-			// ModNoticeLabel: Enable notice for missing Mod addons
-			/* ModNoticeTooltip:
+			ModNoticeLabel: 启用没有添加附属模组的提示
+			ModNoticeTooltip:
 				'''
-				Enable message sent upon logging into the world where;
-				An official addon (crossmod) of Pets Overhaul of a Mod exists but is not loaded.
-				''' */
-			// DisableTooltipToggleLabel: Enable Pet/Item tooltips to be toggleable
-			/* DisableTooltipToggleTooltip:
+				在启用灾厄模组但没有启用对应的联动附属模组时
+				启用进入世界时的提示
 				'''
-				Enables the system where Pets Overhaul effects on Pet Item tooltips to be
-				only visible while your set Keybind is held. (You need to assign a keybinding manually)
-				''' */
-			// TooltipToggleInGame: Hold the <keybind> button to view the Pet tooltip
-			// ShieldLocationLabel: Pet Shield Location
-			/* ShieldLocationTooltip:
+			DisableTooltipToggleLabel: 可开关宠物/物品提示
+			DisableTooltipToggleTooltip: 使宠物大修的额外宠物工具提示在按住按键时才显示（需要在控件中分配按键）
+			TooltipToggleInGame: 按住<keybind>键以显示宠物提示
+			ShieldLocationLabel: 宠物护盾位置
+			ShieldLocationTooltip:
 				'''
-				Changes where Pet Shield should be displayed when a Shield has been provided by your Pet.
-				Healthbar options work best with 1920x1080 Resolutions. Editing this value by external means may cause errors.
-				''' */
-			// DisableAbilityUnusedLabel: Enable Ability Cooldown Display If Unused
-			/* DisableAbilityUnusedTooltip:
+				如果你的宠物具有护盾效果，改变宠物护盾显示的位置
+				生命值选项在游戏分辨率1920x1080时为宜，否则可能导致显示错误。
 				'''
-				Makes the Ability Cooldown display on the right bottom corner of the screen visible
-				if the current Pet does not have an ability that uses the Pet Ability Timer.
-				''' */
-			// AbilityDisplayInfoLabel: Enable Base Ability Cooldown Display
-			/* AbilityDisplayInfoTooltip:
+			DisableAbilityUnusedLabel: 宠物技能冷却显示常开
+			DisableAbilityUnusedTooltip: 使宠物技能冷却固定显示在屏幕右下角，即使当前宠物没有技能
+			AbilityDisplayInfoLabel: 显示基础技能冷却时间
+			AbilityDisplayInfoTooltip:
 				'''
-				Makes Ability Cooldown display on the right bottom corner of the screen
-				include the Base Cooldown of the current Pet's ability timer.
-				''' */
-			// AbilityDisplayDisableLabel: Enable Ability Cooldown Display
-			/* AbilityDisplayDisableTooltip:
+				使宠物技能冷却显示在屏幕右下角
+				包括当前宠物的基础技能冷却时间
 				'''
-				Enables the Ability Cooldown Display. If this option is turned off,
-				the display will be forced to be not shown, no matter what other options regarding it.
-				''' */
-			// ParticleNone: None
-			// ParticleLowered: Lowered
-			// ParticleNormal: Normal
-			// ParticleIncreased: Increased
-			// DustAmountLabel: Pet Radius Display Circular Dust Amount
-			/* DustAmountTooltip:
+			AbilityDisplayDisableLabel: 显示宠物技能冷却
+			AbilityDisplayDisableTooltip:
 				'''
-				Modifies how much Dust will be created for Display of your Pets that has a radius with their effect.
-				Set it to None to disable it entirely. Editing this value by external means may cause errors.
-				''' */
-			// DustInsideBlocksLabel: Enable Pet Radius Circular Dust Inside Blocks
-			/* DustInsideBlocksTooltip:
+				启用宠物技能冷却显示
+				关闭此选项会完全禁用技能冷却显示
 				'''
-				Enables whether or not Dusts created by Pets with Radius-type effects to be able to spawn inside blocks.
-				This can reduce amount of possibly unnecessary dusts, so if you have performance issues, this may be useful.
-				''' */
-			// MaxQualityColor1Label: 1st Color of Maximum Quality
-			// MaxQualityColor1Tooltip: Adjusts first color that will alternate between with the second one for Maximum Qualities for Light Pets.
-			// MaxQualityColor2Label: 2nd Color of Maximum Quality
-			// MaxQualityColor2Tooltip: Adjusts second color that will alternate between with the first one for Maximum Qualities for Light Pets.
-			HurtSoundLabel: 禁用自定义伤害声音
-			HurtSoundTooltip:
+			ParticleNone: 无
+			ParticleLowered: 较少
+			ParticleNormal: 正常
+			ParticleIncreased: 较多
+			DustAmountLabel: 宠物范围显示粒子数量
+			DustAmountTooltip:
 				'''
-				禁用宠物添加的玩家受
-				到伤害时的自定义音效.
+				修改显示宠物的效果范围的粒子数量
+				设为无可以完全禁用，以外部方式修改此值可能导致错误
 				'''
-			DeathSoundLabel: 禁用自定义死亡声音
-			DeathSoundTooltip:
+			DustInsideBlocksLabel: 宠物范围显示粒子可以在方块里生成
+			DustInsideBlocksTooltip:
 				'''
-				禁用宠物添加的玩家
-				死亡时的自定义音效.
+				修改宠物范围显示粒子是否可以在方块里生成
+				可以减少不必要的粒子数量以提高性能
 				'''
-			PassiveSoundLabel: 禁用宠物被动声音
+			MaxQualityColor1Label: 最高品级第一个颜色
+			MaxQualityColor1Tooltip: 调整发光宠物最高品级颜色交替的第一个颜色
+			MaxQualityColor2Label: 最高品级第二个颜色
+			MaxQualityColor2Tooltip: 调整发光宠物最高品级颜色交替的第二个颜色
+			HurtSoundLabel: 启用自定义伤害音效
+			HurtSoundTooltip: 启用宠物添加的玩家受到伤害时的自定义音效
+			DeathSoundLabel: 启用自定义死亡音效
+			DeathSoundTooltip: 启用宠物添加的玩家死亡时的自定义音效
+			PassiveSoundLabel: 启用宠物被动音效
 			PassiveSoundTooltip:
 				'''
-				禁用被动播放的宠物音效,
-				类似于原版游戏的的环境音效.
+				启用被动播放的宠物音效
+				类似于原版游戏的的环境音效
 				'''
-			AbilitySoundLabel: 禁用宠物能力声音
+			AbilitySoundLabel: 启用宠物技能音效
 			AbilitySoundTooltip:
 				'''
-				禁用宠物在能力激活,冷却刷新等情况下的音效.
-				(不推荐禁用,这些声音可以在你专注于其他事时提醒你.)
+				启用宠物在技能激活，冷却刷新等情况下的音效
+				(不推荐禁用，这些声音可以在你专注于其他事时提醒你)
 				'''
-			LowCooldownSoundLabel: 禁用短时声音
+			LowCooldownSoundLabel: 启用短时刷新音效
 			LowCooldownSoundTooltip:
 				'''
-				如果宠物能力的冷却时间低于1秒,
-				则禁用此能力的冷却刷新音效.
+				启用宠物技能冷却刷新音效，即使宠物技能的冷却时间低于阈值
+				如果你不想听到频繁的刷新音效，就禁用吧
 				'''
-			// LowCooldownTresholdLabel: Short ability timer disable Threshold
-			/* LowCooldownTresholdTooltip:
+			LowCooldownTresholdLabel: 短时刷新音效时长阈值
+			LowCooldownTresholdTooltip:
 				'''
-				Sets the threshold for disabling short pet ability cooldowns
-				playing sounds upon refreshing, in Frames. (60 frames = 1 second)
-				Changing this has no effect if "Enable short ability timer sound" is enabled.
-				''' */
+				设置禁用短时宠物技能刷新音效的阈值
+				刷新时播放音效，单位：帧（60帧 = 1秒）
+				如果“启用短时刷新音效”选项为启用状态，修改此项没有任何效果
+				'''
 			MoreDifficultLabel: 平衡游戏伤害
 			MoreDifficultTooltip:
 				'''
-				设置玩家造成的伤害减少%,受到的伤害增加%.最小0,最大20.
-				这是由于此模组在游戏中添加了许多强力的加成.
-				如果希望其禁用,请将其拖动至0.建议调整为7到10左右.
+				设置玩家造成的伤害减少%，受到的伤害增加%。最小0，最大20
+				这是由于此模组在游戏中添加了许多强力的加成
+				如果希望其禁用，请将其拖动至0。建议调整为7到10左右
 				'''
-			SwapCooldownLabel: 禁用宠物交换冷却
+			SwapCooldownLabel: 启用宠物交换冷却
 			SwapCooldownTooltip:
 				'''
-				禁用玩家在交换宠物时获得遗忘宠物减益.
-				在减益生效期间,宠物任何与战斗相关的效果都会被禁用.
+				开启后，玩家在交换宠物时获得遗忘宠物减益
+				在减益生效期间,宠物任何与战斗相关的效果都会被禁用
 				(由于平衡性原因,不推荐禁用)
 				'''
-			// PhantasmalDragonShootLabel: Enable Phantasmal Dragon Fire Volley Spell coming from the Dragon
-			/* PhantasmalDragonShootTooltip:
-				'''
-				Enables Phantasmal Dragon's 3rd spell, Fireball Volley to be cast from
-				Dragon's Mouth (The Dragon Pet that follows you), rather than from the Player.
-				''' */
+			PhantasmalDragonShootLabel: 幻影龙宝宝的火球连射会从它的嘴巴发射
+			PhantasmalDragonShootTooltip: 使幻影龙宝宝的第三个技能，火球连射从它的嘴巴发出，而不是玩家位置。
 		}
 
 		LightPetTooltips: {
-			// NotRolled: Qualities are rolled when the item is in the inventory for the first time!
-			// OutOf: out of
-			// Quality: Quality:
-			// Per: per quality
-			/* CreeperEgg:
+			NotRolled: 当物品第一次进入背包时，随机赋予其品级！
+			OutOf: /
+			Quality: 品级：
+			Per: 每级
+			CreeperEgg:
 				'''
-				Increases Summon Damage by <sum>, Melee Damage by <melee>
-				and Melee and Whip Attack Speed by <atkSpd>.
-				Summon Damage Bonus: <sumLine>
-				Melee Damage Bonus: <meleeLine>
-				Melee/Whip Speed Bonus: <atkSpdLine>
-				''' */
-			/* CrimsonHeart:
+				召唤伤害增加：<sum>，近战伤害增加：<melee>
+				近战和鞭子攻速增加：<atkSpd>
+				召唤伤害加成： <sumLine>
+				近战伤害加成： <meleeLine>
+				近战/鞭子攻速加成： <atkSpdLine>
 				'''
-				Increases Health by <hp>, Movement Speed by <ms>
-				Fishing Fortune by <fortune>, increasing your Fishing drops.
-				Health Bonus: <hpLine>
-				Movement Speed Bonus: <msLine>
-				Fishing Fortune Bonus: <fortuneLine>
-				''' */
-			/* FairyBell:
+			CrimsonHeart:
 				'''
-				Increases Pet Ability Haste by <haste> and Global Fortune by <fortune>
-				which increases all Mining, Harvesting, and Fishing drops.
-				Pet Ability Haste Bonus: <hasteLine>
-				Global Fortune Bonus: <fortuneLine>
-				''' */
-			/* JackOLantern:
+				最大生命值增加：<hp>，移速增加：<ms>
+				钓鱼时运提高：<fortune>，钓鱼时运会增加你的钓鱼收获
+				最大生命值加成： <hpLine>
+				移速加成： <msLine>
+				钓鱼时运加成： <fortuneLine>
 				'''
-				Increases Attack Speed by <atkSpd>, Luck by <luck>
-				and Harvesting Fortune by <fortune>
-				Attack Speed Bonus: <atkSpdLine>
-				Luck Bonus: <luckLine>
-				Harvesting Fortune Bonus: <fortuneLine>
-				''' */
-			/* JewelOfLight:
+			FairyBell:
 				'''
-				Increases Movement Speed by <moveSpd>, Wing Time by <wingTime> seconds,
-				and walking Acceleration by <acceleration>.
-				Movement Speed Bonus: <moveSpdLine>
-				Wing Time Bonus: <wingTimeLine>
-				Acceleration Bonus: <accelerationLine>
-				''' */
-			/* MagicLantern:
+				宠物技能急速增加：<haste>，通用时运增加：<fortune>
+				急速会减少宠物技能冷却时间，通用时运会增加挖矿，收获和钓鱼掉落
+				宠物技能急速加成： <hasteLine>
+				通用时运加成： <fortuneLine>
 				'''
-				Increases Damage Reduction by <dr>, Mining Fortune by <fortune>, 
-				Defense by <def> flat and <defPercent> percent.
-				Damage Reduction Bonus: <drLine>
-				Defense Bonus: <defLine>
-				Percentage Defense Bonus: <defPercentLine>
-				Mining Fortune Bonus: <fortuneLine>
-				''' */
-			/* ShadowOrb:
+			JackOLantern:
 				'''
-				Increases Mana by <mana>, Movement Speed by <ms>
-				Harvesting Fortune by <fortune>, increasing your Harvesting drops.
-				Mana Bonus: <manaLine>
-				Movement Speed Bonus: <msLine>
-				Harvesting Fortune Bonus: <fortuneLine>
-				''' */
-			/* SuspiciousLookingTentacle:
+				攻速增加：<atkSpd>，运气增加：<luck> 
+				采集时运增加：<fortune>
+				攻速加成： <atkSpdLine>
+				运气加成： <luckLine>
+				采集时运加成： <fortuneLine>
 				'''
-				Increases Defense by <def>. Current: <defLine>,
-				Movement Speed by <ms>. Current: <msLine>,
-				All Damage by <dmg>. Current: <dmgLine>,
-				Crit Chance by <crit>. Current: <critLine>,
-				Ranged % Armor Pen by <rangedPen>. Current: <rangedPenLine>,
-				Ranged Crit Damage by <rangedCritDmg>. Current: <rangedCritDmgLine>,
-				Summoner Flat Armor Pen by <summonerPen>. Current: <summonerPenLine>,
-				Whip Range by <whip>. Current: <whipLine>,
-				Mana Potion Effectiveness by <manaPotion>. Current: <manaPotionLine>,
-				Maximum Mana by <mana>. Current: <manaLine>,
-				Melee Size by <size>. Current: <sizeLine> and
-				Melee Knockback by <knockback>. Current: <knockbackLine>
-				''' */
-			/* ToyGolem:
+			JewelOfLight:
 				'''
-				Increases Life Regen by <lifeRegen>, Health by <healthPercent>,
-				and base Mana Regen value by <manaRegen>.
-				Life Regen Bonus: <lifeRegenLine>
-				Health Percentage Bonus: <healthPercentLine>
-				Mana Regen Bonus: <manaRegenLine>
-				''' */
-			/* WispInABottle:
+				移速增加：<moveSpd>，翅膀飞行时间增加：<wingTime> 秒
+				移动加速度增加：<acceleration>
+				移速加成： <moveSpdLine>
+				飞行时间加成： <wingTimeLine>
+				加速度加成： <accelerationLine>
 				'''
-				Increases Magic Damage by <magic>, Ranged Damage by <ranged>.
-				Increases the traveling speed of Magic and Ranged projectiles by <velocity>.
-				Increases the damage that are sourcing from your pets by <petDmg>.
-				Magic Damage Bonus: <magicLine>
-				Ranged Damage Bonus: <rangedLine>
-				Magic/Ranged Projectile Speed Bonus: <velocityLine>
-				Pet Sourced Damage Bonus: <petDmgLine>
-				''' */
+			MagicLantern:
+				'''
+				伤害减免增加：<dr>，挖矿时运增加：<fortune>
+				防御增加：<def> 
+				防御提高：<defPercent> 百分比
+				伤害减免加成： <drLine>
+				防御加成： <defLine>
+				百分比防御加成： <defPercentLine>
+				挖矿时运加成： <fortuneLine>
+				'''
+			ShadowOrb:
+				'''
+				最大魔力值增加：<mana>，移动速度增加：<ms>
+				采集时运增加：<fortune>，提高你的采集掉落
+				最大魔力加成： <manaLine>
+				移动速度加成： <msLine>
+				采集时运加成： <fortuneLine>
+				'''
+			SuspiciousLookingTentacle:
+				'''
+				防御增加：<def>；当前：<defLine>
+				移动速度增加：<ms>；当前：<msLine>
+				伤害增加：<dmg>；当前：<dmgLine>
+				暴击率增加：<crit>；当前：<critLine>
+				远程护甲穿透增加：<rangedPen>；当前：<rangedPenLine>
+				远程暴击伤害增加：<rangedCritDmg>；当前：<rangedCritDmgLine>
+				召唤护甲穿透增加：<summonerPen>；当前：<summonerPenLine>
+				鞭子范围增加：<whip>；当前：<whipLine>
+				魔力药水恢复量提高：<manaPotion>；当前：<manaPotionLine>
+				最大魔力值增加：<mana>：当前：<manaLine>
+				近战武器大小增加：<size>；当前：<sizeLine>
+				近战击退增加：<knockback>；当前：<knockbackLine>
+				'''
+			ToyGolem:
+				'''
+				生命再生增加：<lifeRegen>，生命值提高：<healthPercent>
+				基础魔力再生增加：<manaRegen>
+				生命再生加成： <lifeRegenLine>
+				百分比生命值加成： <healthPercentLine>
+				基础魔力再生加成： <manaRegenLine>
+				'''
+			WispInABottle:
+				'''
+				魔法伤害增加：<magic>，远程伤害增加：<ranged>
+				魔法和远程弹幕速度提高：<velocity>
+				宠物攻击伤害提高：<petDmg>
+				魔法伤害加成： <magicLine>
+				远程伤害加成： <rangedLine>
+				魔法/远程弹幕速度加成： <velocityLine>
+				宠物攻击伤害加成： <petDmgLine>
+				'''
 		}
 
 		PetItemTooltips: {
 			AmberMosquito:
 				'''
-				[c/96A8B0:挖掘型宠物]
-				挖掘矿石,宝石或可提炼物有<oreChance>%几率获得随机矿石或宝石.
-				你能获得的矿石或宝石中,价值越低的获得几率越高.
+				<class>
+				挖掘矿石，宝石或可提炼物有<oreChance>%几率获得随机矿石或宝石（来自提炼机掉落池）
+				更可能获得价值更低的矿石或宝石
 				'''
 			EatersBone:
 				'''
-				[c/ccf5f5:移动型宠物]
-				移动速度提高<moveSpd>%,跳跃速度提高<jumpSpd>%.
-				按住跳跃键能够自动跳跃.
-				如果你处于邪恶生物群落,可以免疫<fallRes>格掉落伤害.
+				<class>
+				移动速度提高<moveSpd>%,跳跃速度提高<jumpSpd>%
+				允许自动跳跃
+				如果你处于邪恶生物群落，可以免疫<fallRes>格掉落伤害
 				'''
 			BoneRattle:
 				'''
-				[c/0ea80e:防御型宠物]
-				如果你在<stage1Time>秒内没有受到任何攻击,生命再生速度提高<stage1Regen>点.
-				如果你在<stage2Time>秒内没有击中敌人,生命再生速度提高<stage2Regen>点,
-				同时获得生命上限<shieldAmount>%的护盾.
-				你在拥有第一层效果的情况下击中敌人,计时器重置到<stage1Time>秒.
+				<class>
+				脱战<stage1Time>秒后，生命再生速度提高<stage1Regen>点
+				脱战<stage2Time>秒后，生命再生速度提高<stage2Regen>点，并获得生命上限<shieldAmount>%的护盾
+				不受伤，不受持续伤害且没有击中敌人即视为脱战
+				你在拥有第一层效果的情况下击中敌人时，计时器重置到<stage1Time>秒
 				'''
 			BabyGrinchMischiefWhistle:
 				'''
-				[c/7F9FBB:实用攻击型宠物]
-				<slowRange>方块范围内的非Boss敌人降低<slowAmount>%移动速度.
-				霜月事件掉落的所有武器伤害提高<dmg>%,暴击率提高<crit>%.
-				永久获得温暖增益.
+				<class>
+				<slowRange>方块范围内的非Boss敌人降低<slowAmount>%移动速度
+				霜月事件掉落的所有武器伤害增加<dmg>%，暴击率增加<crit>%
+				永久获得温暖增益，降低冷系伤害
 				'''
 			Nectar:
 				'''
-				[c/97C8DD:召唤实用型宠物]
-				如果中毒或受到酸性毒液伤害,恢复生命上限<antidotePercent>%的
-				生命值,并消除这两种减益,生命恢复冷却时间为<antidoteCd>秒.
-				防御降低<def>点,所有伤害和暴击率降低<dmgCrit>%.
-				最大仆从数增加<maxMinion>个,移动速度提高<moveSpd>%.
+				<class>
+				免疫中毒和酸性毒液
+				防御降低<def>，伤害和暴击率降低<dmgCrit>%
+				增加<maxMinion>个召唤栏位，移动速度增加<moveSpd>%
 				任意武器击中敌人有<regularChance>%几率召唤一只友好蜜蜂(召唤武器则是<summonChance>%几率),
-				蜜蜂拥有<beeDmg>点伤害,极弱击退力(<beeKb>),且受蜂巢背包加成.
+				蜜蜂的基础伤害为<beeDmg>，击退力为<beeKb>，且受蜂巢背包加成
+				召唤蜜蜂有<beeCd>秒冷却
 				'''
 			HellCake:
 				'''
-				[c/14C17C:实用防御型宠物]
-				<immuneTime>秒内对熔岩免疫,可与熔岩护身符效果叠加.
-				可在熔岩中游泳,在熔岩中防御提高<lavaDef>点,移动速度提高<lavaSpd>%.
-				如果有黑曜石皮增益则防御提高<obbyDef>点,移动速度降低<obbySpd>%.
+				<class>
+				<immuneTime>秒内对熔岩免疫，可与熔岩护身符效果叠加
+				在岩浆中获得以下效果：
+				 - 脚蹼[i:187]效果
+				 - <lavaDef>点防御
+				 - 移动速度提高<lavaSpd>%
+				黑曜石皮[i:288]增益会额外获得<obbyDef>点防御并降低<obbySpd>%移动速度
 				'''
 			Fish:
 				'''
-				[c/10B4F5:钓鱼实用型宠物]
-				渔力提高<fp>点,在海洋中渔力提高<oceanFp>点,在雪原中渔力提高<snowFp>点.
-				钓上的寒霜鲦鱼和大西洋鳕鱼有<catchChance>%几率增加.
-				在雪原和海洋中可游泳.
+				<class>
+				渔力提高<fp>点
+				 - 在海洋中改为提高<oceanFp>点
+				 - 在雪原中改为提高<snowFp>点
+				钓上的雪原专属渔获有<catchChance>%几率增加
+				在雪原和海洋中获得脚蹼[i:187]效果
 				冷冻减益的持续时间变为<chilledMult>倍.
 				'''
 			BambooLeaf:
 				'''
-				[c/E0B130:攻击采集型宠物]
-				攻击速度提高<atkSpd>%,在丛林中攻击速度提高<jungleAtkSpd>%.
-				仇恨值降低<aggro>.
-				砍伐竹子有<bambooChance>%几率掉落额外的竹子.
+				<class>
+				按下宠物技能键（<keybind>）以进入警戒模式：
+				 - 攻击速度增加<alertAs>%，移动速度增加<alertMs>%
+				 - 仇恨值降低<alertAggro>
+				 - 上述数值会乘以<alertRadius>格内敌人数量倍，最高<alertMax>个敌人
+				 - 警戒模式会持续<alertDuration>秒，并具有<alertCd>秒冷却时间
+				攻击速度提高<atkSpd>%
+				 - 在丛林中攻击速度额外提高<jungleAtkSpd>%
+				砍伐竹子[i:4564]有<bambooChance>%几率掉落额外的竹子
 				'''
 			BoneKey:
 				'''
-				[c/8D7A40:防御攻击型宠物]
-				完全免疫困难模式之前地牢中的伤害.
-				在地牢中盔甲穿透力提高<dungArmorPen>点,生命再生速度提高<dungRegen>点.
-				不在地牢中盔甲穿透力提高<armorPen>点.
+				<class>
+				完全免疫困难模式之前地牢中的伤害
+				 - 在地牢中会免疫尖刺伤害
+				护甲穿透提高<armorPen>点
+				在地牢中生命再生速度提高<dungRegen>点
 				'''
 			ToySled:
 				'''
-				[c/f6546a:攻击型宠物]
-				你的攻击能使敌人降低<slowAmount>%移动速度<slowTime>秒,
-				你的攻击能对敌人造成<frostburnTime>秒的强化版霜冻减益.
-				如果穿戴了全套寒霜盔甲,所有效果数值增加三倍.
+				<class>
+				你的攻击能对敌人造成<frostburnTime>秒的强化版霜冻减益
+				 - 武器和弹幕具有霜冻视觉效果
+				你的攻击能使敌人降低<slowAmount>%移动速度<slowTime>秒
+				如果穿戴了全套寒霜盔甲[i:684],所有效果数值乘以<frostMult>倍
 				'''
 			StrangeGlowingMushroom:
 				'''
-				[c/7CEBFA:实用移动型宠物]
-				命中敌人增加<buffRecover>秒所有增益的剩余时间(<cooldown>秒冷却).
-				获得困惑减益,并将以下属性提高<floatIncr>%(或是提高<intIncr>点,取决于属性类型):
-				所有伤害,击退抗性,暴击率,运气,魔力上限,暴击伤害,
-				生命上限,击退,攻击速度,防御,盔甲穿透力,渔力,
-				伤害减免,魔力回复,跳跃速度,飞行时间,急速能力.
-				移动速度提高<moveSpd>%,获得夜视效果.
+				<class>
+				命中敌人增加<buffRecover>秒所有增益的剩余时间（<cooldown>秒冷却）
+				获得永久困惑减益和夜视效果
+				提高所有属性<intIncr>点或<intIncr>%（取决于属性类型）
+				<hiddenTip>
 				'''
-			// MushroomHiddenTooltip: Hold Tooltip Switch Keybind (<keybind>) to view the stats.
-			/* MushroomStats:
+			MushroomHiddenTooltip: 按住额外工具提示键（<keybind>）以查看属性
+			MushroomStats:
 				'''
-				 * Damage, knockback resistance, crit chance, luck,
-				mana, crit damage, health, knockback, attack speed,
-				defense, armor pen, fishing power, damage reduction,
-				mana regen, jump speed, wing time, pet ability haste,
-				global fortune, mining fortune, harvesting fortune,
-				fishing fortune, aggro, fall damage resistance, 
-				your Pets; damage, heal and shield effectiveness,
-				life regen, natural life regen acceleration, move speed,
-				% armor penetration, breath duration, mining speed,
-				tile placement speed, wall placement speed, weapon size,
-				lava resistance duration and ammo reservation chance.
-				''' */
+				 - 伤害，击退抗性，暴击率，运气，魔力，暴击伤害，
+				 生命值，击退，攻速，防御，护甲穿透，渔力，伤害减免，
+				 魔力再生，跳跃速度，飞行时间，宠物能力急速，通用时运，
+				 挖掘时运，采集时运，钓鱼时运，仇恨值，安全掉落高度，
+				 呼吸时间，挖矿速度，熔岩免疫时间，物块和墙壁放置速度，
+				 运气，武器大小，生命再生，弹药不消耗几率
+				 - 宠物属性：伤害，技能急速，钓鱼时运，采集时运，挖掘时运，
+				 通用时运，护盾量，治疗量
+				'''
 			FullMoonSqueakyToy:
 				'''
-				[c/FA377D:辅助攻击型宠物]
-				暴击率变为<critMult>倍,暴击伤害降低<crDmgReduction>%.
-				暴击对敌人造成一层重创减益,最多叠加<maxStacks>层.
-				每层重创使敌人受到伤害提高<stackDmg>%,
-				同时你对其造成的暴击伤害提高<stackCritDmg>%.
+				<class>
+				暴击率乘以<critMult>倍，暴击伤害降低<crDmgReduction>%
+				暴击对敌人造成一层重创减益，最多叠加<maxStacks>层
+				每层重创使敌人受到的所有伤害提高<stackDmg>%
+				同时你对其造成的暴击伤害提高<stackCritDmg>%
 				'''
 			BerniePetItem:
 				'''
-				[c/14C17C:实用防御型宠物]
-				在<burnRange>方块范围内,敌人受到的所有类型
-				的燃烧减益的持续时间流逝速度降低100%,
-				此外,范围中每存在一名燃烧的敌人,每秒恢复
-				<burnDrainMana>点魔力值和<burnDrainHealth>点生命值,最多可叠加<maxDrain>个敌人.
-				免疫所有燃烧减益.
+				<class>
+				在<burnRange>格范围内的敌人：
+				 - 受到的燃烧减益的持续时间流逝速度降低100%,
+				 - 范围中每存在一名燃烧的敌人，每秒恢复<burnDrainMana>点魔力值和<burnDrainHealth>点生命值
+				 -- 最多可叠加<maxDrain>个敌人
+				免疫所有原版燃烧减益
 				'''
 			UnluckyYarn:
 				'''
-				[c/1bdeff:实用型宠物]
-				运气提高<flatLuck>点并随着月相浮动,最低-<minimumMoon>,最高+<maximumMoon>.
-				浮动数值取决于今天的月相,最高的是新月,最低的是满月.
+				<class>
+				按下宠物技能键（<keybind>）以吸收月光
+				 - 随机恢复或受到 <moonlightMin> ~ <moonlightMax>点伤害
+				 - 负数运气会降低该数值，正数运气会提高该数值
+				 - 只能在晚上使用，且有<moonlightCd>秒冷却时间
+				运气提高<flatLuck>点并随着月相浮动,最低-<minimumMoon>,最高+<maximumMoon>
+				浮动数值取决于今天的月相,最高的是新月,最低的是满月
+				 - 当前运气： <moonLuck>
+				当前总计运气： <playerLuck>
 				'''
-			// BlackCatDeath1: <name> walked under a ladder.
-			// BlackCatDeath2: <name> now knows that: 'The Moon does not make its own light moonlight is actually reflected sunlight.
-			// BlackCatDeath3: <name>'s superstitious beliefs turned out to be real.
-			// BlackCatDeath4: <name> was unlucky.
-			// BlackCatDeath5: <name>'s Black Cat did bring bad luck after all.
+			BlackCatDeath1: <name>从梯子下走过了。
+			BlackCatDeath2: <name>现在知道了：月亮不会自己发光，月光实际上是反射太阳光。
+			BlackCatDeath3: <name>的迷信被证明是真实的。
+			BlackCatDeath4: <name>倒霉了。
+			BlackCatDeath5: <name>的黑猫终究带来了噩运。
 			BlueEgg:
 				'''
-				[c/CDFF00:采集型宠物]
-				收获以下东西能额外获得随机物品(种子,水果等),植物与
-				草药有<plantChance>%几率,稀有植物有<rarePlantChance>%几率,可砍伐物有<choppableChance>%几率,
-				约每<eggMinute>分钟获得一个蛋,有很小几率获得特别的蛋...
+				<class>
+				收获以下东西能额外获得随机物品(种子,水果等)
+				 - 植物与草药有<plantChance>%几率
+				 - 稀有植物有<rarePlantChance>%几率
+				 - 可砍伐物有<choppableChance>%几率
+				大约每<eggMinute>分钟获得一个蛋[i:<egg>]
+				 - 有很小几率获得特别的蛋...
 				'''
 			GlowTulip:
 				'''
-				[c/7CF074:采集实用型宠物]
-				收获在地表以下的植物与树木时每一个掉
-				落物有<harvestChance>%几率翻倍,稀有植物则是<rarePlantChance>%几率.
-				宝石树每一个掉落物有<gemstoneTreeChance>%几率翻倍.
-				自身发出蓝色光芒,亮度为<shineMult>.
+				<class>
+				翻倍所有采集的干草（包括花靴生成的）
+				采集在地表以下的植物与树木时有<harvestChance>%几率翻倍
+				 - 稀有植物则是<rarePlantChance>%几率
+				 - 宝石树每一个掉落物有<gemstoneTreeChance>%几率翻倍
+				自身发出蓝色光芒，亮度为<shineMult>
 				'''
 			ChesterPetItem:
 				'''
-				[c/1bdeff:实用型宠物]
-				物品拾取距离提高<pickupRange>,
-				物块放置范围提高<placementRange>格,
-				在打开任何收纳物品时提高<chestDef>点防御.
+				<class>
+				物品拾取距离提高<pickupRange>
+				物块放置范围提高<placementRange>格
+				在打开任何收纳物品时提高<chestDef>点防御
 				'''
 			CompanionCube:
 				'''
-				[c/22A091:防御魔法型宠物]
-				恢复消耗魔力值<manaToHealth>%的生命值.
-				恢复受到伤害<healthToMana>%的法力值.
-				如果耐魔性减益激活,魔力药水效果降低<manaPotionNerf>%,
-				消耗魔力值恢复生命值效果降低<manaToHealthNerf>%,
-				如果耐魔性减益减少的魔法伤害超过
-				初始值(<halfOfSickness>%),两个负面效果都会加倍.
+				<class>
+				恢复消耗魔力值<manaToHealth>%的生命值
+				恢复受到伤害<healthToMana>%的魔力值
+				拥有耐魔性减益时，魔力药水效果降低<manaPotionNerf>%
+				消耗魔力值恢复生命值效果降低<manaToHealthNerf>%
+				如果耐魔性减益减少的魔法伤害超过初始值（<halfOfSickness>%），两个负面效果都会加倍
 				'''
 			CursedSapling:
 				'''
-				[c/8A2BE2:召唤型宠物]
-				最大仆从数增加<minionSlot>个.
-				南瓜月事件掉落的所有武器伤害提高<dmg>%,
-				但乌鸦法杖伤害提高<ravenDmg>%.
-				每个最大仆从数能使暗黑收割攻击距离提高<whipRange>%,
-				攻击速度提高<whipSpeed>%,其他鞭提高四分之一该效果.
+				<class>
+				增加<minionSlot>个召唤栏位
+				南瓜月事件掉落的所有武器伤害提高<dmg>%
+				 - 乌鸦法杖伤害改为提高<ravenDmg>%[i:1802]
+				每有一个召唤栏位，鞭子范围增加<whipRange>%，攻速增加<whipSpeed>%
+				 - 对暗黑收割加成翻倍[i:4680]
+				 - 仅在手持鞭子时生效
 				'''
 			DirtiestBlock:
 				'''
-				[c/96A8B0:挖掘型宠物]
-				挖掘任何方块获得<any>枚铜币.
-				挖掘环境方块获得<soil>枚铜币.
-				挖掘土块获得<dirt>枚铜币.
-				你现在可以通过挖掘泥土或环境方块获得
-				祝尼魔的采矿经验,几率取决于钱币数量.
+				<class>
+				挖掘任何方块[i:12]时获得<any>枚铜币
+				挖掘环境方块[i:3]时获得<soil>枚铜币
+				挖掘土块[i:2]时获得<dirt>枚铜币
 				'''
 			BallOfFuseWire:
 				'''
-				[c/f6546a:攻击型宠物]
-				攻击附带一次爆炸,能够造成群体伤害,
-				击退为武器初始击退的<kb>倍,基础伤害为你造成伤
-				害的<dmg>倍,能够造成暴击,爆炸有<armorPen>点盔甲穿透力,
-				爆炸冷却时间为2秒.
+				<class>
+				攻击附带一次爆炸,能够造成范围伤害
+				 - 击退为攻击击退的<kb>倍，基础伤害为造成伤害的<dmg>倍
+				 - 爆炸有<armorPen>点盔甲穿透力
+				 - 爆炸范围为<size>x<size>
+				 - 爆炸冷却时间为2秒.
 				'''
 			CelestialWand:
 				'''
-				[c/3399FF:魔法型宠物]
-				魔力上限增加<maxMana>%,魔法伤害加成倍率多
-				于100%时,多出部分的加成减少为<dmgPenalty>倍.
-				魔力上限多于200时,每多出一点魔力上限,
-				增加<manaToDmg>%魔法伤害,不会被第一种效果减少.
-				装备幽灵兜帽套装时第一种效果额外减少15%.
-				耐魔性减益的魔法伤害惩罚除以4.
+				<class>
+				最大魔力值增加<maxMana>%
+				魔法伤害高于100%时，多出部分的加成减少为<dmgPenalty>倍.
+				最大魔力高于200时，每多出一点，魔法伤害增加<manaToDmg>%，不会被前者减少
+				装备幽灵兜帽套装时魔法伤害额外减少15%
+				耐魔性减益的魔法伤害惩罚除以4
 				'''
 			EyeSpring:
 				'''
-				[c/ccf5f5:移动型宠物]
-				跳跃速度提高<jumpBoost>%,跳跃加速度提高<acceleration>%.
-				翅膀垂直飞行速度变为<ascNerf>倍.
+				<class>
+				跳跃速度提高<jumpBoost>%
+				跳跃加速度提高<acceleration>%
+				翅膀垂直飞行速度变为<ascNerf>倍
 				'''
 			ExoticEasternChewToy:
 				'''
-				[c/DABE8E:近战移动型宠物]
-				持有近战武器时近战攻击速度提高<meleeSpd>%,
-				移动速度提高<moveSpd>%,但近战武器大小变为<sizeNerf>倍.
-				近战伤害提高<dmg>%.
+				<class>
+				持有近战武器时：
+				 - 近战攻击速度提高<meleeSpd>%
+				 - 移动速度提高<moveSpd>%
+				近战武器大小变为<sizeNerf>倍
+				近战伤害增加<dmg>%
 				'''
 			BedazzledNectar:
 				'''
-				[c/ccf5f5:移动型宠物]
-				你现在能够飞行<flight>秒并获得免疫掉落伤害的能力.
-				如果装备了翅膀,飞行时间增加<bonusFlight>秒.
-				如果装备了雏翼,飞行时间增加<flight>秒.
-				如果没有装备翅膀,生命上限降低<healthNerf>%.
+				<class>
+				如果没有装备翅膀：
+				 - 你现在能够飞行<flight>秒
+				 - 免疫掉落伤害
+				 - 最大生命值降低<healthNerf>%
+				如果已经装备翅膀：
+				 - 飞行时间增加（<flight>+当前飞行时间的<percFlight>%）秒
 				'''
 			GlommerPetItem:
 				'''
-				[c/3399FF:魔法型宠物]
-				<sanityRange>方块范围内所有玩家急速能力提高<sanityAmount>%,
-				提高魔力上限,提高的数值为急速能力的加成.
-				每<manaRecoverCd>秒恢复<manaRecover>点魔力值,此效果不受任何因素影响.
-				咕噜咪偶尔会大便.
+				<class>
+				<sanityRange>格范围内所有玩家宠物技能急速提高<sanityAmount>%
+				最大魔力增加<currentHaste>%（等同于你当前的宠物技能急速值）
+				每<manaRecoverCd>秒恢复<manaRecover>点魔力值
+				 - 此效果不受任何因素影响
+				咕噜咪偶尔会大便（[i:<goop>]）
+				 - 用于照明和施肥！恐怕不能吃
 				'''
 			DD2PetDragon:
 				'''
-				[c/FFB3BA:远程型宠物]
-				你射出的弓箭射速变为<arrowVelo>倍并增加<arrowPierce>次穿透.
-				你射出的子弹射速变为<bulletVelo>倍.
-				不使用弓箭和子弹为弹药的远程武器必定对
-				生命值低于<treshold>%的敌人暴击,Boss则是低于<bossTreshold>%.
+				<class>
+				箭的速度乘以<arrowVelo>倍
+				箭的穿透数增加<arrowPierce>
+				子弹的速度乘以<bulletVelo>倍
+				使用其他弹药的远程武器对生命值低于<treshold>%的敌人必定暴击
+				 - Boss则是低于<bossTreshold>%
 				'''
-			// JunimoMaxLevelText: Max Level!
-			// JunimoMaxed: Maxed
-			// JunimoUp: Up
-			// JunimoLevel: Junimo <class> level <upOrMax>!
+			JunimoMaxLevelText: 最高等级！
+			JunimoMaxed: 已达上限
+			JunimoUp: 上升
+			JunimoLevel: 祝尼魔 <class> 等级<upOrMax>！
 			JunimoPetItem:
 				'''
-				[c/CDFF00:采集],[c/96A8B0:挖掘]与[c/0382E9:钓鱼型宠物]
-				收集各职业的材料或做与职业相关的事能够获得对应的职业经验.
-				星之果实不在背包或虚空袋中也能获得职业经验,当前状态:<expOutsideInvActiveOrNo>.(可在配置中更改)
-				当星之果实在背包或虚空袋或装备着效果才会激活.
-				祝尼魔宠物是当前装备的主要宠物时,经验获取和效果都会翻倍.
-				当前等级上限为<maxLvl>级,完成更多更困难的任务将奖励你巨量的经验.
-				[c/CDFF00:采集]: 获取任何植物,可砍伐物都会给你<harvestingProfit>倍经验数量的铜币,生命上限提高<bonusHealth>点(最小提高<flatHealth>点).
-				当前等级: [c/CDFF00:<harvestLevel>] 下一级所需的经验: [c/CDFF00:<harvestNext>] 当前总经验: [c/CDFF00:<harvestCurrent>]
-				[c/96A8B0:挖掘]: 挖掘矿石,宝石和可提炼物有<miningBonusDrop>%几率掉落物增加1个,自身所受伤害减少<bonusReduction>%.
-				当前等级: [c/96A8B0:<miningLevel>] 下一级所需的经验: [c/96A8B0:<miningNext>] 当前总经验: [c/96A8B0:<miningCurrent>]
-				[c/0382E9:钓鱼]: 渔力提高<fishingPower>%,完成钓鱼任务后伤害提高<bonusDamage>%.
-				当前等级: [c/0382E9:<fishingLevel>] 下一级所需的经验: [c/0382E9:<fishingNext>] 当前总经验: [c/0382E9:<fishingCurrent>]
+				<class>
+				允许你获得每个职业的经验值以提高这个宠物的额外奖励
+				 - 获得采集，挖掘和钓鱼物品时会给你钱币，取决于物品的经验值
+				 - 当前等级上限为<maxLvl>级，击败以下Boss可提高等级上限：
+				 - 世界吞噬怪/克苏鲁之脑，血肉墙，任何机械Boss，世纪之花和拜月教邪教徒
+				<harvesting> 当前等级: <harvestLevel> 下一级所需的经验: <harvestNext> 当前总经验: <harvestCurrent>
+				 - 获取任何植物，可砍伐物都会给你<harvestingProfit>倍经验数量的铜币，最大生命增加<flatHealth>点
+				<mining> 当前等级: <miningLevel> 下一级所需的经验: <miningNext> 当前总经验: <miningCurrent>
+				 - 挖掘矿石时会给你<miningProfit>倍经验数量的铜币，伤害减免增加<bonusReduction>%
+				<fishing> 当前等级: <fishingLevel> 下一级所需的经验: <fishingNext> 当前总经验: <fishingCurrent>
+				 - 钓上渔获时会给你<fishingProfit>倍经验数量的铜币，伤害增加<bonusDamage>%
 				'''
 			BirdieRattle:
 				'''
-				[c/ccf5f5:移动型宠物]
-				给予你<flightTime>秒的飞行时间,飞行时间不会在着陆后重置,
-				必须等到<cooldown>秒冷却刷新后才能再次飞行,
-				冷却期间无法滑翔,但仍然免疫掉落伤害.
-				从你开始飞行的那一刻起,飞行冷却就开始了.
+				<class>
+				未装备翅膀时：
+				 - 免疫掉落伤害
+				 - 获得拥有<flightTime>秒飞行时间的翅膀，飞行时间不会在着陆后重置
+				 - 必须等到<cooldown>秒冷却刷新后才能再次飞行
+				 - 无法滑翔
+				 - 从开始飞行时计算飞行冷却
 				'''
 			LizardEgg:
 				'''
-				[c/8D7A40:攻击防御型宠物]
-				生命值低于55%后进入战斗会让你变成蜥蜴人<transformTime>秒,
-				移动速度提高20%,防御提高5点,伤害提高10%.
-				你接下来的<hitCount>次命中,伤害再变为<hitDmg>倍并加上<hitFlat>点额外伤害,
-				同时,恢复<lifesteal>%造成的伤害与<maxHpRecovery>%生命上限.
-				蜥蜴人变身有<transformCooldown>秒冷却时间.
+				<class>
+				按下宠物技能键（<keybind>）会断尾以脱离危险
+				 - 使用时，受到最大生命值<tailDmgTaken>%的伤害。此伤害不会致命
+				 - 获得短暂无敌帧，在<buffDuration>秒内增加<tailAcc>%加速度，<tailSpd>%移动速度并降低<tailAggro>点仇恨值
+				 - 尾巴可以在<tailWait>秒后拾起，恢复<tailRecover>%生命值并返还<cdRefund>%剩余技能冷却时间
+				 - 尾巴拥有你的最大生命值的<tailMaxHp>%，它会受到敌怪伤害
+				 - 技能有<tailCooldown>秒冷却时间
+				获得<kbResist>%击退抗性
+				生命值低于55%时，变身为蜥蜴人
+				 - 防御增加<def>点，移动速度增加<moveSpd>%并免疫击退
+				 - 跳跃高度和飞行时间降低<jumpPenalty>%
 				'''
 			TartarSauce:
 				'''
-				[c/e69138:近战型宠物]
-				近战攻击命中敌人能够叠加层数.
-				真近战命中叠加2层,近战投射物命中叠加1层(<cooldown>秒冷却).
-				最多叠加至<maxStack>层,10秒未命中敌人后每秒减少4层.
-				在最大层数,防御提高<maxDef>%,近战速度提高<maxMeleeSpd>%,
-				近战伤害提高<maxDmg>%,移动速度降低<maxSpd>%.
-				每层提高<meleeSpd>%近战速度,<dmg>%近战伤害,<def>%防御,降低<moveSpd>%移动速度.
+				<class>
+				近战攻击命中敌人能够叠加层数
+				 - 真近战命中叠加2层,近战弹幕命中叠加1层
+				 - 层数叠加有<cooldown>秒冷却
+				 - 最多叠加至<maxStack>层，脱战<oocTimer>秒后每秒减少1层
+				 - 近战攻速增加<meleeSpd>%/层，最高 <maxMeleeSpd>%
+				 - 移动速度降低<moveSpd>%/层，最高 -<maxSpd>%
+				 - 近战伤害增加<dmg>%/层，最高 <maxDmg>%
+				 - 防御增加<def>%/层，最高 <maxDef>%
 				'''
 			ParrotCracker:
 				'''
-				[c/f6546a:攻击型宠物]
-				所有由你或你的仆从/哨兵射击/施放的投射物
-				有<projChance>%的几率再次射击/施放,造成<projDamage>倍伤害.
-				真近战攻击和近战仆从/哨兵攻击命中敌人有<meleeChance>%
-				的几率再次对敌人造成一次伤害,造成<meleeDamage>倍伤害.
+				<class>
+				鹦鹉有<projChance>%的几率复制由你或你的仆从/哨兵发射的弹幕
+				 - 造成<projDamage>倍伤害
+				真近战攻击和仆从/哨兵攻击命中敌人有<meleeChance>%的几率再造成一次伤害
+				 - 造成<meleeDamage>倍伤害
 				'''
 			PigPetItem:
 				'''
-				[c/1bdeff:实用型宠物]
-				食用任何食物有<foodChance>%的几率不消耗,
-				食用任何药水有<potionChance>%的几率不消耗,
-				食用食物会给你持续<shieldTime>秒的<shield1>/<shield2>/<shield3>点护盾,
-				护盾的大小取决于食物的营养价值.冷却时间<cooldown>秒.
+				<class>
+				食用食物有<foodChance>%的几率不消耗
+				 - 食用药水有<potionChance>%的几率不消耗
+				食用食物会给予你护盾，数值取决于它的饱食等级
+				 - 每层饱食等级对应获得<shield1>/<shield2>/<shield3>点护盾
+				 - 护盾会持续<shieldTime> + 1 / 每层饱食等级 秒
+				 - 此效果有<cooldown>秒冷却时间
 				'''
 			MudBud:
 				'''
-				[c/f6546a:攻击型宠物]
-				攻击敌人有<chance>%几率在其附近释放孢子毒气,
-				孢子毒气能够造成你的武器<dmg>倍的伤害+<flatDmg>点伤害,
-				拥有极弱击退力(<kb>).孢子毒气无法在敌人自身生成.
+				<class>
+				攻击敌人有<chance>%几率在其附近释放孢子毒气
+				 - 孢子毒气能够造成攻击伤害<dmg>倍的伤害 + <flatDmg>点伤害
+				 - 孢子的击退力为<kb>，孢子在消失前能造成<pen>次伤害
 				'''
 			DD2PetGato:
 				'''
-				[c/8A2BE2:召唤型宠物]
-				允许哨兵暴击,暴击率提高<crit>%.
-				最大哨兵数增加<maxSentry>个.
+				<class>
+				你的哨兵可以造成暴击
+				 - 哨兵暴击率增加<crit>%
+				 - 哨兵可以受通用暴击加成
+				增加<maxSentry>个哨兵栏位
 				'''
 			DogWhistle:
 				'''
-				[c/1bdeff:实用型宠物]
-				获得永久的猎人增益.
-				捕捉小动物有<critter>%几率翻倍,
-				稀有小动物翻倍几率降至<rareCritter>%.
-				捕捉稀有小动物奖励<rareCritterCoin>倍稀有度值的银币,
-				杀死稀有敌人奖励<rareEnemyCoin>倍稀有度值的银币.
-				钱币获取会被采集财富加成影响.
+				<class>
+				获得永久的猎人增益
+				捕捉小动物有<critter>%几率翻倍
+				 - 稀有小动物翻倍几率降至<rareCritter>%
+				捕捉稀有小动物奖励<rareCritterCoin>倍稀有度值的钱币
+				杀死稀有敌人奖励<rareEnemyCoin>倍稀有度值的钱币
 				'''
 			Seedling:
 				'''
-				[c/0ea80e:防御型宠物]
-				生命偷取提高<lifesteal>%,世纪之花
-				掉落的武器生命偷取提高<planteraSteal>%.
-				受月噬减益影响时,生命偷取效果变为33%.
+				<class>
+				造成的伤害乘以<dmgPenalty>
+				获得<lifesteal>%吸血效果
+				 - 世纪之花掉落的武器吸血效果提高至<planteraSteal>%
+				    - 影响武器：[i:1255] [i:788] [i:1178] [i:1259] [i:1155] [i:3018] [i:1157] [i:1305]
 				'''
 			SpiderEgg:
 				'''
-				[c/f6546a:攻击型宠物]
-				攻击能够使敌人中毒<poisonTime>秒.
-				如果目标对酸性毒液没有免疫,则移除目标的中毒免疫.
-				有中毒减益的目标将受到<poiPerc>倍+额外<poiFlat>点伤害,
-				受到的击退变为<poiKb>倍,对其暴击率提高<poiCrit>%.
-				有酸性毒液减益的目标将受到<venomPerc>倍+额外<venomFlat>点伤害,
-				受到的击退变为<venomKb>倍,对其暴击率提高<venomCrit>%.
+				<class>
+				攻击会造成<poisonTime>秒中毒
+				如果目标不免疫酸性毒液，则移除目标的中毒免疫
+				对中毒目标造成<poiPerc>倍 + 固定<poiFlat>点伤害
+				 - 造成<poiKb>倍击退，暴击率提高<poiCrit>%
+				对酸性毒液目标造成<venomPerc>倍 + 固定<venomFlat>点伤害
+				 - 造成<venomKb>倍击退，暴击率提高<venomCrit>%
 				'''
 			OrnateShadowKey:
 				'''
-				[c/1bdeff:实用型宠物]
-				提高获得更多战利品的几率.
-				敌人战利品中获得更多钱币的几率提高<npcCoin>%,更多物品的几率提高<npcItem>%.
-				Boss战利品中获得更多钱币的几率提高<bossCoin>%,更多物品的几率提高<bossItem>%.
-				宝藏袋中获得更多钱币的几率提高<bagCoin>%,更多物品的几率提高<bagItem>%.
+				<class>
+				敌人有<npcCoin>%几率掉落更多钱币，<npcItem>%几率掉落更多物品
+				Boss有<bossCoin>%几率掉落更多钱币，<bossItem>%几率掉落更多物品
+				 - 宝藏袋不受影响
+				摸彩袋物品有<bagCoin>%几率掉落更多钱币，<bagItem>%几率掉落更多物品
+				 - 摸彩袋物品即礼袋、匣子、牡蛎等
 				'''
 			SharkBait:
 				'''
-				[c/716DAF:钓鱼攻击型宠物]
-				渔力提高<fishingPower>点.
-				攻击钓上来的敌人伤害变为<seaCreatureDmg>倍,
-				同时钓上来的敌人伤害变为<seaCreatureResist>倍.
-				钓上任何东西获得<shieldTime>秒<shield>点护盾.
+				<class>
+				渔力提高<fishingPower>点
+				对钓上来的敌人造成<seaCreatureDmg>倍伤害
+				钓上来的敌人对你造成<seaCreatureResist>倍伤害
+				 - 包括猪龙鱼公爵
+				钓上任何东西时获得<shield>点护盾，持续<shieldTime>秒
 				'''
 			SpiffoPlush:
 				'''
-				[c/FFB3BA:远程型宠物]
-				<ammoReserve>%的几率不消耗弹药.
-				攻击僵尸类敌人远程攻击盔甲穿透力提高<armorPen>点.
-				杀死敌人时有<penChance>%几率增加1次穿透.
+				<class>
+				<ammoReserve>%的几率不消耗弹药
+				远程攻击对僵尸类敌人的护甲穿透提高<armorPen>点
+				远程弹幕杀死敌人时有<penChance>%几率增加1最大穿透数
 				'''
 			MagicalPumpkinSeed:
 				'''
-				[c/CDFF00:采集型宠物]
-				收获成熟的植物有<plant>%几率掉落物增加1个.
-				收获稀有植物有<rarePlant>%几率掉落物增加1个.
+				<class>
+				采集植物有<plant>%几率翻倍
+				 - 稀有植物有<rarePlant>%几率翻倍
+				每装备一件南瓜盔甲部件，最大生命值增加<health>，采集时运增加<harvFort>
+				当前装备部件数量：<pumpkinPieceAmount>
 				'''
 			EucaluptusSap:
 				'''
-				[c/ccf5f5:移动型宠物]
-				允许滑翔.
-				水平飞行速度变为<speed>倍,
-				水平飞行加速度变为<acceleration>倍,
-				两者再提高<flatIncrease>%.
+				<class>
+				允许滑翔
+				水平飞行速度变为<speed>倍
+				水平飞行加速度变为<acceleration>倍
+				两者再提高<flatIncrease>%
 				'''
 			TikiTotem:
 				'''
-				[c/8A2BE2:召唤型宠物]
-				鞭攻击速度的<atkSpdToDmg>%提高至召唤伤害,<atkSpdToRange>%提高至鞭攻击距离.
-				允许鞭暴击并提高<whipCrit>%暴击率,非鞭召唤武器暴击率降低<nonWhipCrit>%.
+				<class>
+				你造成的所有召唤伤害都可以暴击
+				 - 非鞭子武器降低<nonWhipCrit>%暴击率
+				 - 鞭子武器增加<whipCrit>%暴击率
+				根据鞭子攻速获得额外加成
+				 - 增加召唤伤害，数值为<atkSpdToDmg>%的鞭子攻击速度
+				 - 增加鞭子范围，数值为<atkSpdToRange>%的鞭子攻击速度
 				'''
 			Seaweed:
 				'''
-				[c/0ea80e:防御型宠物]
-				防御变为<def>倍,受到的击退变为<kbResist>倍.
-				移动速度降低<moveSpd>%,伤害降低<dmg>%.
+				<class>
+				按下宠物技能键<keybind>以硬化你的海龟壳
+				 - 在<shellDuration>秒内受到的下<hitCount>次伤害会减少<reducedDmg>%且不造成击退
+				 - 对攻击者造成原伤害的<reflect>%
+				 - 如果造成伤害的为弹幕，改为造成原伤害的<projReflect>%
+				防御提高<def>%
+				击退抗性提高<kbResist>%
+				移动速度降低<moveSpd>%
 				'''
 			LightningCarrot:
 				'''
-				[c/E39DA9:攻击实用型宠物]
-				移动速度提高<flatSpd>%,再将你的移动速度变为<multSpd>倍,
-				此时移动速度加成低于100%的部分乘以<spdToDmg>%转换为伤害加成.
-				触碰到你的敌人受到<staticTime>秒减速<staticAmount>%的效果.
+				<class>
+				移动速度提高<flatSpd>%，再将你的移动速度乘以<multSpd>
+				伤害增加，数值等同于移动速度加成高于100%的部分乘以<spdToDmg>%
+				对接触你的敌人造成<staticAmount>%减速<staticTime>秒
 				'''
 			ZephyrFish:
 				'''
-				[c/0382E9:钓鱼型宠物]
-				根据当前风力提高你的渔力,每<windFish>mph提高1点渔力.
-				每次钓上鱼有<regularChance>%几率额外获得一个,如果你不在地表以下,几率变成<windChance>%.
-				当风力超过10mph并且你的浮标位于风向的对侧,获得以下效果:
-				每完成一次钓鱼任务渔力提高<anglerPower>%,上限为<maxAnglerPower>%.
-				已完成钓鱼任务数: <anglerQuests>, 当前渔力加成: <currentAnglerPower>%
+				<class>
+				根据当前风力提高你的渔力，每<windFish>mph提高1点渔力
+				每次钓上鱼有<regularChance>%几率额外获得一个，如果满足以下条件，几率改为<windChance>%：
+				 - 在地表层
+				 - 风力高于10mph
+				 - 你的浮标位于风向对侧
+				每完成一次钓鱼任务渔力提高<anglerPower>%，上限为<maxAnglerPower>%
+				已完成钓鱼任务数: <anglerQuests>，当前渔力加成: <currentAnglerPower>%
 				'''
 			EyeOfCthulhuPetItem:
 				'''
-				[c/f6546a:攻击型宠物]
-				生命值低于50%时,进入愤怒状态,消耗掉所有的防御,
-				分别提高消耗防御数值的<defToDmg>%,<defToSpd>%,<defToCrit>%的伤害,移动速度,暴击率.
-				在愤怒状态,冲刺完后可以立刻再次冲刺,冲刺没有冷却时间.
-				愤怒状态持续<enrageLength>秒,此时生命值无法超过生命上限的50%.
-				一进入愤怒状态,<enrageCd>分钟的冷却时间就开始计时.
+				<class>
+				按下宠物技能键（<keybind>）以进入“暴怒状态”
+				 - 将生命值降至50%，获得降低的生命值<forcedEnrageMult>%的护盾<shieldDuration>秒
+				生命值低于50%时，进入暴怒状态，将所有防御和伤害减免转化为暴怒值
+				 - 获得暴怒值<shieldMult>倍的护盾<shieldDuration>秒
+				 - 装备克苏鲁护盾时，倍数提高至<eocShieldMult>倍
+				 - 你的克苏鲁护盾冲刺延迟不会高于<frameReduction>帧
+				 - 伤害，移动速度和暴击率分别增加暴怒值的<defToDmg>%，<defToSpd>%，<defToCrit>%
+				 - [c/f8baba:暴怒期间你的生命值无法超过50%]
+				 - [c/f8baba:暴怒期间你的防御和伤害减免固定为0]
+				 - 暴怒持续<enrageLength>秒，且冷却时间为<enrageCd>秒
 				'''
-			// EocEnrage: ENRAGED!
-			// EocCalm: Calmed Down.
+			EocEnrage: 怒了！
+			EocCalm: 冷静下来了
 			BrainOfCthulhuPetItem:
 				'''
-				[c/0ea80e:防御型宠物]
-				生命偷取提高<lifesteal>%,此宠物给予的生命偷取效果上限池
-				为生命上限的<maxPool>%,上限池每秒降低<healthRecovery>点.
+				<class>
+				获得<lifesteal>%吸血效果，但拥有吸血池
+				每次吸血都会减少吸血池中的血量，其中血量为空时[c/f8baba:无法吸血]
+				 - 吸血池的血量上限等同于你最大生命值的<maxPool>%
+				 - 每<healthRecovery>秒恢复血池中1血量
+				当前吸血池血量：<pool>
 				'''
 			EaterOfWorldsPetItem:
 				'''
-				[c/96A8B0:挖掘型宠物]
-				采挖非矿石/宝石方块挖掘速度提高<miningSpeed>%.
-				挖掘矿石/宝石时有<multipleBreakChance>%几率在<width>x<length>方块
-				范围内连锁另一个与挖掘方块相同的方块.
+				<class>
+				挖掘非矿石/宝石方块挖掘速度提高<miningSpeed>%
+				挖掘矿石/宝石时有<multipleBreakChance>%几率在<width>x<length>方块范围内连锁挖掘
 				'''
 			KingSlimePetItem:
 				'''
-				[c/FF1493:辅助型宠物]
-				更改整个游戏的史莱姆减益与潮湿减益的效果.
-				任意燃烧类型的减益与史莱姆减益如果同时存在,
-				能够提高此燃烧类型减益秒伤,提高的数值为<burnHp>%
-				目标生命上限,上限为<burnCap>点,并提高对其击退<extraKb>倍.
-				史莱姆减益使玩家跳跃速度提高<jumpSpd>%,击退与击退抗性变为<kbBoost>倍.
-				潮湿减益使敌人受到的伤害变为<enemyDmgRecieve>倍,造成的伤害变为<enemyDmgDeal>倍,
-				使玩家伤害提高<dmg>%,移动速度提高<moveSpd>%,防御提高<def>%.
-				玩家与生物不能同时拥有这两种效果.
+				<class>
+				更改史莱姆减益与潮湿减益的效果
+				史莱姆减益[i:2610]
+				 - 对敌怪：如果同时受到燃烧类减益，减益伤害提高最大生命值的<burnHp>%（上限<burnCap>）并受到<extraKb>倍击退
+				 - 对玩家：提高<jumpSpd>%跳跃速度，<kbBoost>倍击退加成和击退抗性
+				潮湿减益[i:2272]
+				 - 对敌怪：受到的伤害乘以<enemyDmgRecieve>倍，造成的伤害乘以<enemyDmgDeal>倍
+				 - 对玩家：增加<dmg>%伤害，<def>%防御，<moveSpd>%移动速度，燃烧减益流逝速度翻倍
 				'''
 			QueenBeePetItem:
 				'''
-				[c/FF1493:辅助型宠物]
-				治疗药水恢复效果提高<extraHeal>%.
-				食用瓶装蜂蜜后,恢复约<range>格方块内的其他
-				玩家<bottledHealth>%生命值,同时给予蜂蜜增益<bottledHoneyTime>秒.
-				食用蜂蜜鱼后,恢复约100格方块内的其他
-				玩家<honeyfinHealth>%生命值,同时给予蜂蜜增益<honeyfinHoneyTime>秒.
-				食用后获得蜂蜜齁甜减益60秒,获得的玩家
-				不能再次被治疗,但急速能力提高<abilityHaste>%.
-				食用者治疗其他人时自身获得一半的
-				治疗效果与全部的蜂蜜齁甜减益时长.
+				<class>
+				治疗药水恢复效果提高<extraHeal>%
+				食用蜂蜜瓶[i:1134]或蜂蜜鱼[i:2314]后
+				 - 为<range>格内的其他玩家恢复其最大生命值的[i:1134]<bottledHealth>%或[i:2314]<honeyfinHealth>%
+				 - 同时给予其蜂蜜增益[i:1134]<bottledHoneyTime>或[i:2314]<honeyfinHoneyTime>秒
+				 - 给予其蜂蜜过量减益60秒
+				 - 无法治疗具有蜂蜜过量的玩家
+				 - 蜂蜜过量会增加<abilityHaste>%宠物技能急速，减少其宠物技能冷却时间
+				 - 自身获得上述的一半治疗效果和完整的蜂蜜过量时长
 				'''
 			DeerclopsPetItem:
 				'''
-				[c/0ea80e:防御型宠物]
-				如果你在<tresholdTime>秒内受到的伤害超过你生命上限的<treshold>%,
-				获得<immunityTime>秒无敌,并对<range>方块范围内的敌人施加<debuffTime>秒
-				<slowAmount>%减速,困惑和霜冻减益,此效果有<cooldown>秒冷却时间.
+				<class>
+				存储受到的伤害<tresholdTime>秒
+				如果存储的伤害总量超过最大生命值的<treshold>%：
+				 - 获得<immunityTime>秒无敌帧
+				 - 对<range>格范围内的敌人造成<debuffTime>秒的<slowAmount>%减速，困惑和霜冻
+				 - 此效果有30秒冷却时间
 				'''
 			SkeletronPetItem:
 				'''
-				[c/f6546a:攻击型宠物]
-				你造成和受到的伤害不会立刻生效,会随时间缓慢生效.
-				你对敌人造成<recievedMult>倍伤害后,每秒再将你
-				造成伤害的1/<recievedHowLong>给予敌人,伤害可以堆叠.
-				敌人攻击你能造成<dealtMult>倍伤害,伤害分散在4秒缓慢生效.
-				如果你的持续伤害能够杀死敌人,其立即被处决.
+				<class>
+				你造成和受到的伤害不会立刻生效，会随时间缓慢生效
+				你会受到<recievedMult>倍伤害，并将其分散在数秒内缓慢生效
+				 - 每秒受到伤害总量的1/<recievedHowLong>
+				 - 受击视为闪避，所以不受击退
+				敌怪会受到<dealtMult>倍伤害，并将其分散在4秒内缓慢生效
 				'''
-			// SkeletronDeath1: <name> could not contain Skeletron's curse.
-			// SkeletronDeath2: <name> went through a painful, slow death.
-			// SkeletronDeath3: geeettttttt dunked on!!!
-			// SkeletronDeath4: seems like you've had a bad time ;)
+			SkeletronDeath1: <name>无法承受骷髅王的诅咒
+			SkeletronDeath2: <name>经历了痛苦而缓慢的死亡。
+			SkeletronDeath3: 扣扣扣扣扣扣篮成功！！！
+			SkeletronDeath4: 看起来你过得生不如死 :)
 			QueenSlimePetItem:
 				'''
-				[c/FA377D:辅助攻击型宠物]
-				改进了闪耀史莱姆气球,能够使敌人
-				减速<slow>%,使玩家提高<haste>%急速能力.
-				每次命中增加1次计数(急速能力有几率额外增加计数).
-				每6次计数造成<dmg>倍伤害并给予<shieldTime>秒<shield>点护盾.
+				<class>
+				增强了闪耀史莱姆气球[i:4986]和无尽版本[i:<endless>]
+				 - 使敌人减速<slow>%
+				 - 使玩家提高<haste>%宠物技能急速，减少宠物技能冷却时间
+				每次攻击命中增加1点计数（急速有几率额外增加计数）
+				达到6点计数后下一击造成<dmgBonus>倍伤害并获得<shield>点护盾<shieldTime>秒
 				'''
 			SkeletronPrimePetItem:
 				'''
-				[c/8D7A40:防御攻击型宠物]
-				分别在100%生命值,低于100%生命值,低于75%生命值,
-				低于50%生命值,低于25%生命值时获得一个护盾.
-				护盾大小为生命上限的<shieldMaxHealthAmount>%,每<shieldCooldown>秒恢复一个护盾.
-				护盾在受到伤害后<shieldLifetime>秒消失,当护盾存在时,伤害提高<dmg>%,
-				暴击率提高<crit>%,防御变为<def>倍.
+				<class>
+				拥有护盾时增加<dmg>%伤害，<crit>%暴击率，防御变为<def>倍
+				分别在100%生命值,低于100%/75%/50%/25%生命值时获得一个护盾
+				护盾大小为最大生命值的<shieldMaxHealthAmount>%
+				每<shieldCooldown>秒恢复一个护盾
+				护盾在受到伤害后<shieldLifetime>秒消失
 				'''
 			DestroyerPetItem:
 				'''
-				[c/4CA858:挖掘防御型宠物]
-				挖掘矿石,宝石或可提炼物有几率额外获得1个,
-				几率取决于你的防御x<defMultChance>%+<flatAmount>%.
-				防御变为<defMultIncrease>倍,铁皮增益能够再提高<ironskinDef>点防御.
+				<class>
+				增加<defMultIncrease>%防御
+				拥有铁皮[i:292]效果时，增加<ironskinDef>防御和<miningFortune>挖掘时运
+				挖掘矿石，宝石或可提炼物有几率获得额外数量
+				 - 数量取决于你的防御x<defMultChance>%+<flatAmount>%
 				'''
 			TwinsPetItem:
 				'''
-				[c/f6546a:攻击型宠物]
-				攻击<closeRange>方块范围内的敌人,能够对其施加<cursedTime>秒诅咒狱火减益.
-				你的攻击能够偷取敌人生命,具体数值为:
-				(<defLifesteal>倍防御+防御x伤害减免)x造成的伤害x<dealtDmgLifesteal>
-				攻击<longRange>方块范围外的敌人,伤害提高敌人生命上
-				限的<hpDmg>%,Boss则是<bossHpDmg>%,此效果冷却时间为<hpDmgCooldown>秒.
+				<class>
+				攻击<closeRange>格范围内的敌人时：
+				 - 造成<cursedTime>秒诅咒狱火减益
+				 - 具有吸血效果，具体数值为：<defLifesteal>倍防御x（伤害减免+1）x造成的伤害x0.0001
+				攻击<longRange>格范围外的敌人时：
+				 - 伤害增加敌人最大生命值<hpDmg>%点
+				 - 对Boss效果为<bossHpDmg>%
+				 - 此效果有<hpDmgCooldown>秒冷却时间
 				'''
 			EverscreamPetItem:
 				'''
-				[c/3399FF:魔法型宠物]
-				魔法武器暴击率变为<magicCritNerf>倍,魔力上限提高<maxMana>点.
-				魔法攻击暴击恢复<missingMana>%消耗的魔力值+<flatMana>点魔力值,冷却时间<manaRecoveryCd>秒,
-				根据你当前的魔力值提高伤害与暴击率,
-				最多提高<dmg>%魔法伤害,<crit>%暴击率.
+				<class>
+				魔法武器暴击率变为<magicCritNerf>倍
+				增加<maxMana>点最大魔力值
+				魔法攻击暴击恢复<missingMana>%已损失的魔力值+<flatMana>点魔力值
+				 - 冷却时间<manaRecoveryCd>秒
+				根据你当前的魔力值提高伤害与暴击率
+				 - 最多提高<dmg>%魔法伤害,<crit>%暴击率
 				'''
 			MartianPetItem:
 				'''
-				[c/ccf5f5:移动型宠物]
-				最大飞行时间变为<wingMult>倍,加速度提高<acc>%.
-				水平飞行速度变为<speedMult>倍,水平飞行加速度变为<accMult>倍.
-				水平飞行速度与水平飞行加速度提高<flatSpdAcc>%.
+				<class>
+				最大飞行时间变为<wingMult>倍
+				加速度提高<acc>%
+				水平飞行速度变为<speedMult>倍
+				水平飞行加速度变为<accMult>倍
+				水平飞行速度与加速度增加<flatSpdAcc>%
 				'''
 			DD2OgrePetItem:
 				'''
-				[c/849B25:近战防御型宠物]
-				移动速度变为<moveSpdNerf>倍,真近战武器攻击速
-				度变为<atkSpdNerf>倍,非近战武器伤害降低<dmgNerf>%.
-				挥动武器时无法转身,翅膀飞行时间减半并使水平飞行
-				速度与加速度变为<horizontalNerf>倍,垂直飞行速度变为<verticalNerf>倍,
-				真近战武器大小,伤害和击退变为<trueMeleeMults>倍,防御变为<defMult>倍,
-				暴击率提高<trueMeleeCrit>%,生命上限提高<healthIncrease>%,伤害减免提高<damageReduction>%,免疫击退.
-				效果在乘骑时不生效.
+				<class>
+				所有效果在使用坐骑时不生效
+				负面效果：
+				 - 移动速度变为<moveSpdNerf>倍，真近战武器攻击速度变为<atkSpdNerf>倍
+				 - 非近战武器伤害降低<dmgNerf>%，挥动武器时无法转身
+				 - 翅膀飞行时间减半并使水平飞行速度与加速度变为<horizontalNerf>倍
+				 - 垂直飞行速度变为<verticalNerf>倍
+				正面效果：
+				 - 真近战武器大小，伤害和击退变为<trueMeleeMults>倍，防御变为<defMult>倍
+				 - 真近战暴击率增加<trueMeleeCrit>%，最大生命值提高<healthIncrease>%
+				 - 伤害减免增加<damageReduction>%，免疫击退
 				'''
 			DukeFishronPetItem:
 				'''
-				[c/0382E9:钓鱼型宠物]
-				渔力变为<baseMult>倍,每完成一次钓鱼任务倍率增加<anglerFishingPower>,最大1倍.
-				<flatChance>%+渔力的<fishingPowerChance>%转换为双倍掉落的几率,<bobberChance>%几率钓鱼能多投一根线.
-				已完成钓鱼任务数: <anglerQuests>, 当前渔力加成: <currentAnglerWithBaseMult>倍
+				<class>
+				渔力提高<baseMult>倍，每完成一次钓鱼任务倍率增加<anglerFishingPower>，最大1倍
+				 - 完成的钓鱼任务：<anglerQuests>，当前渔力倍数：<currentAnglerWithBaseMult>
+				钓鱼有<flatChance>% + 渔力的<fishingPowerChance>%几率获得双倍掉落
+				钓鱼有<bobberChance>%几率额外扔出一根鱼线
 				'''
 			LunaticCultistPetItem:
 				'''
-				[c/f6546a:攻击型宠物]
-				击中敌人释放下列3个法术其中一个(冷却时间<cooldown>秒):
-				释放6个呈六边形飞行的冰射弹,最多攻击敌人<icePierce>次,造成武器伤害的<icePercent>%+<iceFlat>点伤害.
-				在目标周围释放5个可分裂的光球,造成武器伤害的<lightPercent>%+<lightFlat>点伤害,最多击中<lightPierce>个敌人.
-				在目标头顶召唤4个随机移动的火球,造成武器伤害的<firePercent>%+<fireFlat>点伤害.
+				<class>
+				按下切换宠物技能键（<switchKeybind>）切换法术
+				按下宠物技能键（<keybind>）使用当前法术
+				 - 所有法术都有<cooldown>秒冷却时间
+				当前法术：<tooltip>
 				'''
-			/* DragonIce:
+			DragonIce:
 				'''
-				- Icicle Mist
-				 * Spawns an Ice Mist on your cursor, it travels in a random direction,
-				spawning Icicle Shards along the way it travels, traveling through blocks.
-				 * Ball and Shards both deal <damage> base damage to enemies hit.
-				 * Enemies hit by them gets slowed by <slowAmount>% for <slowTime> seconds.
-				''' */
-			/* DragonLightning:
+				- 冰雪雾
+				 - 在光标处生成一个冰雪雾，它会向随机方向移动并持续发射冰雪碎块
+				 - 冰雪雾和碎块拥有<damage>点基础伤害
+				 - 对命中的敌人造成<slowAmount>%减速<slowTime>秒
 				'''
-				- Lightning Orb
-				 * Spawns a Lightning Orb on your cursor, which gradually sends out Lightning Strikes
-				towards where your cursor is, both continuously striking enemies that contact them.
-				 * Orb deals <orbDmg> base damage with <orbPen> armor pen, also applying a <orbSlow>% slow briefly.
-				 * Strikes deal <strikeDmg> base damage with <strikePen> armor pen, also applying a <strikeSlow>% slow briefly.
-				''' */
-			/* DragonFire:
+			DragonLightning:
 				'''
-				- Fireball Volley
-				 * Starts shooting Fireballs towards your cursor <fireballAmount> times within <fireballDuration> seconds.
-				 * Fireballs explode upon impact with anything, dealing <fireDmg> base damage and <kb> knockback.
-				 * Hit enemies get applied with Daybreak debuff for <burnSeconds> seconds.
-				 * Enabling/Disabling Phantasmal Dragon Fireball Volley from the Dragon config option can allow for 
-				 Fireballs to be cast from the Dragon's mouth, rather than from the Player. Currently: <enabled>
-				''' */
+				- 闪电珠
+				 - 在光标处生成一个闪电珠，它会向光标位置发射几道闪电
+				 - 闪电珠拥有<orbDmg>点基础伤害和<orbPen>点护甲穿透，并造成短暂的<orbSlow>%减速
+				 - 闪电拥有<strikeDmg>点基础伤害和<strikePen>点护甲穿透，并造成短暂的<strikeSlow>%减速
+				'''
+			DragonFire:
+				'''
+				- 火球连珠
+				 - 在<fireballDuration>秒内持续朝光标位置发射<fireballAmount>次火球
+				 - 火球在命中时爆炸，造成<fireDmg>点基础伤害和<kb>击退
+				 - 击中敌人会造成破晓减益<burnSeconds>秒
+				 - 在模组配置中可以切换幻影龙宝宝的火球发射位置
+				'''
 			DD2BetsyPetItem:
 				'''
-				[c/FF6BA8:远程辅助型宠物]
-				远程攻击能对敌人施加一层<debuffTime>秒女王的诅咒减益,
-				每层使其防御降低<defDecrease>%,最多叠加<maxStack>层.
-				拥有女王的诅咒的敌人死亡后,每一层减益偷取其<missingHpSteal>%失去
-				的生命值,如果敌人减益处于最大堆叠,偷取的生命值翻倍.
+				<class>
+				远程攻击会造成<debuffTime>秒女王的诅咒减益
+				 - 可以叠加至<maxStack>层
+				 - 每层会降低目标<defDecrease>%的防御
+				玩家杀死拥有此减益的敌人后，恢复<missingHpSteal>%已损失生命值x减益层数的生命值
+				 - 如果敌人减益层数到达最大，偷取的生命值增加<maxStackIncr>%
 				'''
 			IceQueenPetItem:
 				'''
-				[c/0ea80e:防御型宠物]
-				受到致命伤害后,冰冻自身<frozenTombTime>秒,在此期间免疫
-				所有伤害并恢复<healthRecovery>点生命值,再对<range>方块范围
-				内所有敌人减速<slowAmount>%.冰冻结束后,对所有敌人
-				造成<baseDmg>点基础伤害并再次免疫所有伤害<postTombImmunity>秒.
-				冷却时间<tombCooldown>分钟.
+				<class>
+				受到致命伤害改为冰冻自身<frozenTombTime>秒
+				 - 期间免疫所有伤害并恢复<healthRecovery>点生命值
+				 - 对<range>格范围内所有敌人减速<slowAmount>%
+				 - 冰冻结束后，对<range>格内所有敌人造成<baseDmg>点基础伤害并再次免疫所有伤害<postTombImmunity>秒
+				 - 此效果有<tombCooldown>分钟冷却
 				'''
 			PlanteraPetItem:
 				'''
-				[c/FFB3BA:远程型宠物]
-				远程武器命中敌人能够造成处决效果:
-				即敌人生命值越少,对其造成的伤害越多. 
-				最多达到<maxAmount>%.
+				<class>
+				远程武器命中敌人会基于其已损生命值造成额外伤害
+				 - 伤害加成最高+<maxAmount>%
+				 - 伤害加成非线性上升，生命值越低，伤害加成越高
 				'''
 			MoonLordPetItem:
 				'''
-				[c/8D7A40:攻击防御型宠物]
-				根据最高职业伤害加成获得以下效果,如果相等,优先级近战>远程>魔法>召唤.
-				召唤:鞭攻击距离提高<sumRange>%,鞭攻击速度提高<sumSpd>%,召唤伤害提高<sumDmg>%,最大仆从/哨兵数增加<sumMax>个.
-				魔法:魔力上限提高<mana>点,魔力值消耗减少<manaCost>%,魔法暴击率提高<magicCrit>%,魔法伤害提高<magicDmg>%.
-				远程:远程盔甲穿透力提高<armorPen>点,远程暴击率提高<rangedCrit>%,远程伤害提高<rangedDmg>%.
-				近战:玩家所受伤害降低<dr>%,近战攻击速度提高<meleeSpd>%,近战伤害提高<meleeDmg>%,防御提高<def>点.
+				<class>
+				根据最高职业伤害获得加成。当前职业：<currentClass>
+				 - 如果相等，优先级近战 > 远程 > 魔法 > 召唤
+				按下<keybind>键切换物品描述
+				<tooltip>
 				'''
-			/* MeleeTooltip:
+			MeleeTooltip:
 				'''
-				- Melee Bonuses:
-				 * Increases damage reduction by <dr>%.
-				 * Increases melee speed by <meleeSpd>%.
-				 * Increases melee damage by <meleeDmg>%.
-				 * Increases defense by <def>.
-				''' */
-			/* RangedTooltip:
+				- 近战加成：
+				 - 增加<dr>%伤害减免
+				 - 增加<meleeSpd>%近战攻速
+				 - 增加<meleeDmg>%近战伤害
+				 - 增加<def>防御
 				'''
-				- Ranged Bonuses:
-				 * Increases ranged armor penetration by <armorPen>.
-				 * Increases ranged crit chance by <rangedCrit>%.
-				 * Increases ranged crit damage by <rangedCritDmg>%.
-				 * Increases ranged damage by <rangedDmg>%.
-				''' */
-			/* MagicTooltip:
+			RangedTooltip:
 				'''
-				- Magic Bonuses:
-				 * Increases maximum mana by <mana>.
-				 * Decreases mana costs by <manaCost>%.
-				 * Increases magic crit chance by <magicCrit>%.
-				 * Increases magic damage by <magicDmg>%.
-				''' */
-			/* SummonerTooltip:
+				- 远程加成：
+				 - 增加<armorPen>点远程护甲穿透
+				 - 增加<rangedCrit>%远程暴击率
+				 - 增加<rangedCritDmg>%远程暴击伤害
+				 - 增加<rangedDmg>%远程伤害
 				'''
-				- Summoner Bonuses:
-				 * Increases whip range by <sumRange>%.
-				 * Increases whip speed by <sumSpd>%.
-				 * Increases maximum minions by <sumMax>.
-				 * Increases maximum sentries by <sumMaxSentry>.
-				''' */
+			MagicTooltip:
+				'''
+				- 魔法加成：
+				 - 增加<mana>最大魔力值
+				 - 减少<manaCost>%魔法消耗
+				 - 增加<magicCrit>%魔法暴击率
+				 - 增加<magicDmg>%魔法伤害
+				'''
+			SummonerTooltip:
+				'''
+				- 召唤加成：
+				 - 增加<sumRange>%鞭子范围
+				 - 增加<sumSpd>%鞭子攻速
+				 - 增加<sumMax>个召唤栏位
+				 - 增加<sumMaxSentry>个哨兵栏位
+				'''
 			ResplendentDessert:
 				'''
-				[c/FA377D:辅助攻击型宠物]
-				史莱姆王子与史莱姆公主效果的结合.
-				但效果削弱了约<approxWeak>%.
+				<class>
+				史莱姆王子与史莱姆公主效果的结合
+				但效果削弱了约<approxWeak>%
+				按下<keybind>以切换物品描述（仅影响显示，不影响实际效果）
+				<tooltip>
 				'''
 			Carrot:
 				'''
-				[c/ccf5f5:移动型宠物]
-				每次跳跃超过最大跳跃高度的一半能够叠加层数.
-				每层提高<moveSpeed>%移动速度与<jumpSpeed>%跳跃速度.
-				最多叠加10层,如果4秒内没有跳跃,层数归零.
+				<class>
+				每次跳跃超过最大跳跃高度的一半能够叠加层数
+				 - 每层提高<moveSpeed>%移动速度和<jumpSpeed>%跳跃速度
+				 - 最多叠加10层
+				 - 4秒不跳跃后重置
 				'''
 		}
 
 		Buffs: {
 			SanityAura: {
-				// DisplayName: Sanity Aura
-				/* Description:
+				DisplayName: 理智光环
+				Description:
 					'''
-					Bzzzzt...
-					A nearby Glommer is keeping your Pets sane.
-					Increases Pet Ability Haste by 30%.
-					''' */
+					嗡嗡...
+					附近有一只格罗姆使你的宠物保持理智
+					增加30%宠物技能急速
+					'''
 			}
 
 			HoneyOverdose: {
-				DisplayName: 蜂蜜齁甜
+				DisplayName: 蜂蜜过量
 				Description:
 					'''
 					蜜蜂已经喂你太多蜂蜜了! 
-					给予<AbilityHaste>%急速能力.
+					获得<AbilityHaste>%技能急速
 					'''
 			}
 
@@ -1000,8 +1049,8 @@ Mods: {
 				DisplayName: 重创
 				Description:
 					'''
-					一只狼人把你打得遍体鳞伤!
-					当前层数: <MaulCounter>.
+					一只狼人把你打得遍体鳞伤！
+					当前层数: <MaulCounter>
 					'''
 			}
 
@@ -1009,13 +1058,13 @@ Mods: {
 				DisplayName: 女王的诅咒
 				Description:
 					'''
-					飞龙女王诅咒了你.
-					当前层数: <CurseCounter>.
+					飞龙女王诅咒了你
+					当前层数：<CurseCounter>
 					'''
 			}
 
 			ObliviousPet: {
-				DisplayName: 遗忘宠物
+				DisplayName: 漫不经心的宠物
 				Description:
 					'''
 					你的宠物由于刚被换上来而不知道目前是什么状况！
@@ -1027,9 +1076,9 @@ Mods: {
 				DisplayName: <Name>的光环
 				Description:
 					'''
-					跳跃速度提高<BunnyJump>%.
-					采集经验提高<BunnyHarvesting>%,
-					这提高了祝尼魔的采集经验.
+					跳跃速度提高<BunnyJump>%
+					采集时运提高<BunnyHarvesting>
+					采集时运会增加采集植物的掉落，并提高采集宠物的物品奖励加成
 					'''
 			}
 
@@ -1037,9 +1086,9 @@ Mods: {
 				DisplayName: <Name>的光环
 				Description:
 					'''
-					移动速度变为<CatMovespd>倍.
-					钓鱼财富提高<CatFish>点,
-					这能提高钓鱼宠物的物品奖励加成.
+					移动速度变为<CatMovespd>倍
+					钓鱼时运提高<CatFish>
+					钓鱼时运会增加钓鱼的掉落，并提高钓鱼宠物的物品奖励加成
 					'''
 			}
 
@@ -1047,9 +1096,9 @@ Mods: {
 				DisplayName: <Name>的光环
 				Description:
 					'''
-					渔力提高<DogFish>点.
-					钓鱼经验提高<DogFishExp>%,
-					这提高了祝尼魔的钓鱼经验.
+					渔力提高<DogFish>点
+					钓鱼时运提高<DogFishExp>
+					钓鱼时运会增加钓鱼的掉落，并提高钓鱼宠物的物品奖励加成
 					'''
 			}
 
@@ -1057,9 +1106,9 @@ Mods: {
 				DisplayName: <Name>的光环
 				Description:
 					'''
-					运气提高<ClumsyLuck>点.
-					全局财富提高<ClumsyGlobal>点,
-					这能提高所有宠物的物品奖励加成.
+					运气提高<ClumsyLuck>点
+					通用时运提高<ClumsyGlobal>
+					通用时运会增加挖矿，采集和钓鱼的掉落，并提高所有宠物的物品奖励加成
 					'''
 			}
 
@@ -1067,28 +1116,24 @@ Mods: {
 				DisplayName: <Name>的光环
 				Description:
 					'''
-					暴击率提高<CoolCrit>%.
-					挖掘财富提高<CoolMining>点,
-					这能提高挖掘宠物的物品奖励加成.
+					暴击率提高<CoolCrit>%
+					挖掘时运提高<CoolMining>
+					挖掘时运会增加挖矿的掉落，并提高挖掘宠物的物品奖励加成
 					'''
 			}
 
 			TownPetDiva: {
 				DisplayName: <Name>的光环
-				Description:
-					'''
-					购买商品后可获得基础价格<DivaDisc>%的退款.
-					退款的钱币会受到全局财富影响.
-					'''
+				Description: 购买物品后可返还基础价格<DivaDisc>%的钱币
 			}
 
 			TownPetMystic: {
 				DisplayName: <Name>的光环
 				Description:
 					'''
-					急速能力提高<MysticHaste>%,
-					这会降低宠物能力的冷却时间.
-					祝尼魔的采集,挖掘,钓鱼经验提高<MysticAllExp>%.
+					宠物技能急速增加<MysticHaste>%，急速会降低宠物技能的冷却时间
+					通用时运提高<MysticAllExp>
+					通用时运会增加挖矿，采集和钓鱼的掉落，并提高所有宠物的物品奖励加成
 					'''
 			}
 
@@ -1096,20 +1141,20 @@ Mods: {
 				DisplayName: <Name>的光环
 				Description:
 					'''
-					放置速度提高<NerdPlacement>倍.
-					提供<NerdShineScale>倍亮度的白色光环.
+					放置速度变为<NerdPlacement>倍
+					获得<NerdShineScale>倍亮度的白色光环
 					'''
 				PostHardmodeDescription:
 					'''
-					获得危险感与夜视增益.
-					放置速度提高<NerdPlacement>倍.
-					提供<NerdShineScale>倍亮度的白色光环.
+					获得危险感与夜视增益
+					放置速度变为<NerdPlacement>倍
+					提供<NerdShineScale>倍亮度的白色光环
 					'''
 				PostMoonlordDescription:
 					'''
-					获得危险感与夜视增益并可见电线.
-					放置速度提高<NerdPlacement>倍.
-					提供<NerdShineScale>倍亮度的白色光环.
+					获得危险感和夜视增益并显示电线
+					放置速度变为<NerdPlacement>倍
+					提供<NerdShineScale>倍亮度的白色光环
 					'''
 			}
 
@@ -1117,10 +1162,10 @@ Mods: {
 				DisplayName: <Name>的光环
 				Description:
 					'''
-					防御提高<OldDef>点.
-					受到的击退变为<OldKb>倍.
-					采集财富提高<OldHarvesting>点,
-					这能提高采集宠物的物品奖励加成.
+					增加<OldDef>点防御
+					增加<OldKb>%击退抗性
+					采集时运提高<OldHarvesting>
+					采集时运会增加采集植物的掉落，并提高采集宠物的物品奖励加成
 					'''
 			}
 
@@ -1128,9 +1173,9 @@ Mods: {
 				DisplayName: <Name>的光环
 				Description:
 					'''
-					伤害提高<SquireDmg>%.
-					挖掘经验提高<SquireMining>%,
-					这提高了祝尼魔的挖掘经验.
+					伤害增加<SquireDmg>%
+					挖掘经验提高<SquireMining>%
+					挖掘时运会增加挖矿的掉落，并提高挖掘宠物的物品奖励加成
 					'''
 			}
 
@@ -1138,41 +1183,41 @@ Mods: {
 				DisplayName: <Name>的光环
 				Description:
 					'''
-					敌怪的生成速度提高<SurlySpawn>%.
-					获得暗影蜡烛减益.
+					敌怪的生成速度提高<SurlySpawn>%
+					获得影烛效果
 					'''
 			}
 
 			EocPetEnrage: {
-				// DisplayName: ENRAGED!
-				/* Description:
+				DisplayName: 怒了！
+				Description:
 					'''
-					You're currently ENRAGED! All you can think of is bloodshed!
-					Your defense and DR are set to 0, and your Shield of Cthulhu is quicker.
-					Current Rage Points: <rage>
-					Current Damage Boost: <dmg>%
-					Current Movement Speed Boost: <speed>%
-					Current Crit Chance Boost: <crit>%
-					''' */
+					你被激怒了！你只想杀杀杀杀杀杀！
+					你的防御和伤害减免将至0，你的克苏鲁护盾冷却加快
+					当前暴怒值：<rage>
+					当前伤害加成：<dmg>%
+					当前移速加成：<speed>%
+					当前暴击率加成：<crit>%
+					'''
 			}
 
 			HardenedShell: {
-				// DisplayName: Turtle Shell Hardened!
-				/* Description:
+				DisplayName: 硬化龟壳！
+				Description:
 					'''
-					Your Turtle currently hardened its shell.
-					Incoming hits do less damage, do no knockback,
-					and will be reflected to the attacker.
-					The remaining amount of hits: <hit>
-					''' */
+					你的海龟已经硬化了它的龟壳
+					受击伤害减少，免疫击退
+					伤害会反射给攻击者
+					剩余受击次数：<hit>
+					'''
 			}
 		}
 
 		Items: {
 			GlommersGoop: {
-				// DisplayName: Glommer's Goop
-				// Tooltip: '''"Weird bug make weird poop."'''
-				// Mana: Consumes 50 sanity. (Mana in Terraria world.)
+				DisplayName: 格罗姆的黏液
+				Tooltip: '''"古怪的虫子拉古怪的便便。"'''
+				Mana: 消耗50理智值（泰拉世界中的魔力）
 			}
 
 			EndlessBalloonSack: {
@@ -1184,8 +1229,8 @@ Mods: {
 				DisplayName: 大师碎片
 				Tooltip:
 					'''
-					能和任意Boss纪念章制作出对应的大师模式宠物.
-					每个世界只能掉落3个.
+					能和任意Boss纪念章制作出对应的大师模式宠物
+					每个世界只能掉落5个
 					'''
 			}
 
@@ -1193,66 +1238,66 @@ Mods: {
 				DisplayName: 鸡蛋
 				Tooltip:
 					'''
-					谢恩的鸡蛋,不过不是蓝色的.
-					与臭蛋的不同是它可以烹饪.
+					谢恩的鸡蛋,不过不是蓝色的
+					与臭蛋的不同是它可以烹饪
 					'''
 			}
 
 			LihzahrdWrench: {
-				// DisplayName: Lihzahrd Wrench
-				/* Tooltip:
+				DisplayName: 丛林蜥蜴扳手
+				Tooltip:
 					'''
-					Keep this in your inventory or void bag to allow 
-					crafting of Toy Golem Pet infinitely.
-					''' */
+					放在背包或虚空袋以解锁石巨人守卫[i:4807]的合成配方
+					（使用日耀碑牌碎片制作）
+					'''
 			}
 
 			PrismaticOptic: {
-				// DisplayName: Prismatic Optic
-				/* Tooltip:
+				DisplayName: 棱晶镜头
+				Tooltip:
 					'''
-					Keep this in your inventory or void bag to allow 
-					crafting of Fairy Princess Pet infinitely.
-					''' */
+					放在背包或虚空袋以解锁光之珠宝[i:4811]的合成配方
+					（使用飞翔之魂制作）
+					'''
 			}
 
 			PumpkingsHead: {
-				// DisplayName: Pumpking's Head
-				/* Tooltip:
+				DisplayName: 南瓜头
+				Tooltip:
 					'''
-					This year's harvest seems to be bountiful.
-					Keep this in your inventory or void bag to allow 
-					crafting of Jack O'Lantern Pet infinitely.
-					''' */
+					今年的收成似乎很好
+					放在背包或虚空袋以解锁南瓜香味蜡烛[i:4812]的合成配方
+					（使用南瓜和阴森木制作）
+					'''
 			}
 		}
 
-		// Projectiles.PetExplosion: Explosion by a Pet
+		Projectiles.PetExplosion: 宠物爆炸
 
 		Keybinds: {
-			// UsePetAbility.DisplayName: Use Pet Ability
-			// PetTooltipHide.DisplayName: Toggle (Show) Pet Tooltips
-			// PetTooltipSwap.DisplayName: Switch Pet Tooltip
-			// PetAbilitySwitch.DisplayName: Pet Ability Switch
+			UsePetAbility.DisplayName: 使用宠物技能
+			PetTooltipHide.DisplayName: 开关（显示）宠物技能提示
+			PetTooltipSwap.DisplayName: 切换宠物技能提示
+			PetAbilitySwitch.DisplayName: 切换宠物技能
 		}
 
 		NPCs: {
-			// LizardTail.DisplayName: Lizard Tail
-			/* LizardTailBestiaryEntry:
+			LizardTail.DisplayName: 蜥蜴尾巴
+			LizardTailBestiaryEntry:
 				'''
-				Its the best way to escape off of danger.
-				Its your Lizard Pet's way of sneaking you out of Danger!
-				''' */
-			// MasteryShard1: Dropped only once per world by killing Eye of Cthulhu.
-			// MasteryShard2: Dropped only once per world by killing Wall of Flesh.
-			// MasteryShard3: Dropped only once per world by killing Golem.
-			// MasteryShard4: Dropped only once per world by killing Skeletron.
-			// MasteryShard5: Dropped only once per world by killing Moon Lord.
+				这是逃离危险的最好方法。
+				这是你的蜥蜴宠物偷偷带你脱离危险的方式！
+				'''
+			MasteryShard1: 克苏鲁之眼掉落，每个世界只能掉落一个
+			MasteryShard2: 血肉墙掉落，每个世界只能掉落一个
+			MasteryShard3: 石巨人掉落，每个世界只能掉落一个
+			MasteryShard4: 骷髅王掉落，每个世界只能掉落一个
+			MasteryShard5: 月亮领主掉落，每个世界只能掉落一个
 		}
 
 		Configs: {
-			// ShieldPosition.Tooltip: ""
-			// ParticleAmount.Tooltip: ""
+			ShieldPosition.Tooltip: ""
+			ParticleAmount.Tooltip: ""
 		}
 	}
 }
