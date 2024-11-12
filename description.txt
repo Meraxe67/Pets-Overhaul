@@ -20,8 +20,9 @@ To give direct feedback, report bugs, to give suggestions or to learn more about
 https://discord.gg/KubSpqvDGE
 
 Mod Trailer video, all icons and artwork made by: Furqi
+Chinese Translation by: ROH
 Russian Translation by: Teokai
 Brazillian Portuguese Translation by: Erstarisk
-Chinese Translation by: Celestepic (currently heavily outdated)
+Previous Chinese Translation by: Celestepic
 Previous Brazillian Portuguese Translation by: Starite_Fusion
 and thanks to WaffleDevs, Andro951 and tModLoader community for helping/contributing to the code!
