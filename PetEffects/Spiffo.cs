@@ -10,6 +10,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class Spiffo : PetEffect
     {
+        public override int PetItemID => ItemID.SpiffoPlush;
         public int ammoReserveChance = 20;
         public int zombieArmorPen = 6;
         public int penetrateChance = 75;

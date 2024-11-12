@@ -11,6 +11,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class EverscreamSapling : PetEffect
     {
+        public override int PetItemID => ItemID.EverscreamPetItem;
         public int cooldown = 240;
         public float critMult = 0.6f;
         public float dmgIncr = 0.3f;

@@ -14,6 +14,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class BlackCat : PetEffect
     {
+        public override int PetItemID => ItemID.UnluckyYarn;
         public override PetClasses PetClassPrimary => PetClasses.Utility;
         public float luckFlat = 0.09f;
         public float luckMoonLowest = -0.03f;

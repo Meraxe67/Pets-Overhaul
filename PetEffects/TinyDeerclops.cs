@@ -13,6 +13,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class TinyDeerclops : PetEffect
     {
+        public override int PetItemID => ItemID.DeerclopsPetItem;
         public List<(int storedDamage, int timer)> deerclopsTakenDamage = new();
         public int damageStoreTime = 300;
         public float healthTreshold = 0.4f;

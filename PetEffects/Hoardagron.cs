@@ -14,6 +14,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class Hoardagron : PetEffect
     {
+        public override int PetItemID => ItemID.DD2PetDragon;
         public bool arrow = false;
         public bool specialist = false;
         public float arrowSpd = 0.8f;

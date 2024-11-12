@@ -12,6 +12,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class Bernie : PetEffect
     {
+        public override int PetItemID => ItemID.BerniePetItem;
         public int bernieRange = 1000;
         public int burnDrain = 60; //maxtimer
         public int maxBurning = 5;

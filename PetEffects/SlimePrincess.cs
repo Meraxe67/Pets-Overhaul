@@ -12,6 +12,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class SlimePrincess : PetEffect //Pet will be reworked post 3.0 update
     {
+        public override int PetItemID => ItemID.QueenSlimePetItem;
         public float slow = 0.65f;
         public float haste = 0.3f;
         public int shield = 7;

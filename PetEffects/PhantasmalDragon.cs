@@ -18,6 +18,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class PhantasmalDragon : PetEffect
     {
+        public override int PetItemID => ItemID.LunaticCultistPetItem;
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
         public int phantasmDragonCooldown = 480;
         public int currentAbility = 0;

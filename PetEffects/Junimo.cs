@@ -18,6 +18,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class Junimo : PetEffect
     {
+        public override int PetItemID => ItemID.JunimoPetItem;
         public override PetClasses PetClassPrimary => PetClasses.Utility;
         public int maxLvls = 25;
         public int maxXp = 2147480000;

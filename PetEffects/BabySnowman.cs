@@ -14,6 +14,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class BabySnowman : PetEffect
     {
+        public override int PetItemID => ItemID.ToySled;
         public int frostburnTime = 300;
         public float snowmanSlow = 0.3f;
         public int slowTime = 180;

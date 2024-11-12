@@ -12,6 +12,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class BabyDinosaur : PetEffect
     {
+        public override int PetItemID => ItemID.AmberMosquito;
         public int chance = 175; // 17.5% because its with 1000
         public override PetClasses PetClassPrimary => PetClasses.Mining;
         public static void AddItemsToPool()

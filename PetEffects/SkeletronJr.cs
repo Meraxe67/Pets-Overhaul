@@ -13,6 +13,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class SkeletronJr : PetEffect
     {
+        public override int PetItemID => ItemID.SkeletronPetItem;
         public List<(int, int)> skeletronTakenDamage = new();
         private int timer = 0;
         public float enemyDamageIncrease = 1.2f;

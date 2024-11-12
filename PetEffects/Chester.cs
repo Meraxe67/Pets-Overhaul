@@ -11,6 +11,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class Chester : PetEffect
     {
+        public override int PetItemID => ItemID.ChesterPetItem;
         public override PetClasses PetClassPrimary => PetClasses.Utility;
         public int placementRange = 2;
         public int chestOpenDef = 10;

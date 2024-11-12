@@ -14,6 +14,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class EaterOfWorms : PetEffect
     {
+        public override int PetItemID => ItemID.EaterOfWorldsPetItem;
         public override PetClasses PetClassPrimary => PetClasses.Mining;
 
         private readonly List<(int X, int Y)> tilesToRandomize = new();

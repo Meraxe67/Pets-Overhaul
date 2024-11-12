@@ -13,6 +13,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class ItsyBetsy : PetEffect
     {
+        public override int PetItemID => ItemID.DD2BetsyPetItem;
         public int debuffTime = 720;
         public int maxStacks = 20;
         public float defReduction = 0.02f;

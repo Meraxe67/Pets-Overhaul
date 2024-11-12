@@ -11,6 +11,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class FennecFox : PetEffect
     {
+        public override int PetItemID => ItemID.ExoticEasternChewToy;
         public override PetClasses PetClassPrimary => PetClasses.Melee;
         public override PetClasses PetClassSecondary => PetClasses.Mobility;
         public float sizeDecrease = 0.88f;

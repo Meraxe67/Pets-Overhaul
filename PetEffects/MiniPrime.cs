@@ -11,6 +11,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class MiniPrime : PetEffect
     {
+        public override int PetItemID => ItemID.SkeletronPrimePetItem;
         public int shieldRecovery = 7500; //all 5 shields timer combined
         public float dmgIncrease = 0.07f;
         public int critIncrease = 7;

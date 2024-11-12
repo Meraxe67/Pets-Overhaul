@@ -11,6 +11,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class Spider : PetEffect
     {
+        public override int PetItemID => ItemID.SpiderEgg;
         public int venomFlatDmg = 13;
         public int poisonFlatDmg = 5;
         public float venomDmgMult = 1.16f;

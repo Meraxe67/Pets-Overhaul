@@ -11,6 +11,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class CursedSapling : PetEffect
     {
+        public override int PetItemID => ItemID.CursedSapling;
         public override PetClasses PetClassPrimary => PetClasses.Summoner;
         public float whipSpeed = 0.007f;
         public float whipRange = 0.01f;

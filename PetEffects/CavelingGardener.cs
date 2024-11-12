@@ -13,6 +13,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class CavelingGardener : PetEffect
     {
+        public override int PetItemID => ItemID.GlowTulip;
         public override PetClasses PetClassPrimary => PetClasses.Harvesting;
         public override PetClasses PetClassSecondary => PetClasses.Utility;
         public int cavelingRegularPlantChance = 30;

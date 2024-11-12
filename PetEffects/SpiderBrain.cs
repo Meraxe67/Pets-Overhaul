@@ -11,6 +11,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class SpiderBrain : PetEffect
     {
+        public override int PetItemID => ItemID.BrainOfCthulhuPetItem;
         public int lifePool = 0;
         public float lifePoolMaxPerc = 0.3f;
         public int cdToAddToPool = 180;

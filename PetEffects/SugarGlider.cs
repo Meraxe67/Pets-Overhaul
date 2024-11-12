@@ -12,6 +12,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class SugarGlider : PetEffect
     {
+        public override int PetItemID => ItemID.EucaluptusSap;
         public float speedMult = 1.1f;
         public float accMult = 1.2f;
         public float accSpeedRaise = 0.1f;

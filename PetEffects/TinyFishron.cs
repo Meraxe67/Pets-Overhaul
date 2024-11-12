@@ -13,6 +13,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class TinyFishron : PetEffect
     {
+        public override int PetItemID => ItemID.DukeFishronPetItem;
         public float fishingPowerPenalty = 0.5f;
         public float fpPerQuest = 0.002f;
         public float maxQuestPower = 0.5f;

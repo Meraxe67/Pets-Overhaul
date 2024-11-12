@@ -11,6 +11,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class ShadowMimic : PetEffect
     {
+        public override int PetItemID => ItemID.OrnateShadowKey;
         public override PetClasses PetClassPrimary => PetClasses.Utility;
         public int npcCoin = 15;
         public int npcItem = 8;

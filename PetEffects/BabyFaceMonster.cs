@@ -12,6 +12,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class BabyFaceMonster : PetEffect
     {
+        public override int PetItemID => ItemID.BoneRattle;
         public float bonusRegenPerFrame = 0.2f; //This will work every frame, so * 60 is added every second to Life Regen Timer, which increases how fast you get your natural life regen up.
         public int stage2time = 720;
         public int stage1time = 420;

@@ -13,6 +13,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class DualSlime : PetEffect //Pet will be reworked post 3.0 update
     {
+        public override int PetItemID => ItemID.ResplendentDessert;
         public bool swapTooltip = false;
         public override PetClasses PetClassPrimary => PetClasses.Supportive;
         // King, in SlimePrince
@@ -62,7 +63,7 @@ namespace PetsOverhaul.PetEffects
                 string tip = Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.ResplendentDessert")
                 .Replace("<approxWeak>", "10")
                 .Replace("<keybind>", PetTextsColors.KeybindText(PetKeybinds.PetTooltipSwap))
-                .Replace("<tooltip>", Language.GetTextValue($"Mods.PetsOverhaul.PetItemTooltips.{(dualSlime.swapTooltip ? "KingSlimePetItem" : "QueenSlimePetItem")}"))
+                .Replace("<tooltip>", Language.GetTextValue($"Mods.PetsOverhaul.PetItemTooltips.{(dualSlime.swapTooltip ? "KingSlimePetItem" : "QueenSlimePetItem")}"));
                 if (dualSlime.swapTooltip)
                 {
                     tip = tip.Replace("<burnHp>", Math.Round(dualSlime.healthDmg * 100, 2).ToString())

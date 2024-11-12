@@ -11,6 +11,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class PlanteraSeedling : PetEffect
     {
+        public override int PetItemID => ItemID.PlanteraPetItem;
         public float secondMultiplier = 0.1f;
 
         public override PetClasses PetClassPrimary => PetClasses.Ranged;

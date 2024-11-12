@@ -13,6 +13,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class BabyWerewolf : PetEffect
     {
+        public override int PetItemID => ItemID.FullMoonSqueakyToy;
         public float critDmgReduction = 0.35f;
         public float critChance = 1.2f;
         public float damageMultPerStack = 0.02f;

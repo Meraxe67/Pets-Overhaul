@@ -12,6 +12,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class VoltBunny : PetEffect
     {
+        public override int PetItemID => ItemID.LightningCarrot;
         public float movespdFlat = 0.1f;
         public float movespdMult = 1.05f;
         public float movespdToDmg = 0.2f;

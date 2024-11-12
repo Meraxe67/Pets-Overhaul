@@ -11,6 +11,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class LilHarpy : PetEffect
     {
+        public override int PetItemID => ItemID.BirdieRattle;
         public int harpyCd = 780;
         public int fuelMax = 150;
         public int harpyFlight = 150;

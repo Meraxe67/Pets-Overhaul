@@ -16,6 +16,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class SuspiciousEye : PetEffect
     {
+        public override int PetItemID => ItemID.EyeOfCthulhuPetItem;
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
         public override PetClasses PetClassSecondary => PetClasses.Utility;
         public int phaseCd = 9000;

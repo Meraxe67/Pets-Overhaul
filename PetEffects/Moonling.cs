@@ -14,6 +14,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class Moonling : PetEffect
     {
+        public override int PetItemID => ItemID.MoonLordPetItem;
         public int defense = 10;
         public float meleeDr = 0.1f;
         public float meleeSpd = 0.2f;

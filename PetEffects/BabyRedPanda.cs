@@ -15,6 +15,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class BabyRedPanda : PetEffect
     {
+        public override int PetItemID => ItemID.BambooLeaf;
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
         public override PetClasses PetClassSecondary => PetClasses.Utility;
         public float regularAtkSpd = 0.05f;

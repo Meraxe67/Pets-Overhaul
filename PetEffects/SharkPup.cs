@@ -13,6 +13,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class SharkPup : PetEffect
     {
+        public override int PetItemID => ItemID.SharkBait;
         public float seaCreatureResist = 0.85f;
         public float seaCreatureDamage = 1.1f;
         public int shieldOnCatch = 10;

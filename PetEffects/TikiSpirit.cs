@@ -11,6 +11,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class TikiSpirit : PetEffect
     {
+        public override int PetItemID => ItemID.TikiTotem;
         public int whipCritBonus = 13;
         public int nonWhipCrit = 8; //Negative
         public float atkSpdToDmgConversion = 0.30f;

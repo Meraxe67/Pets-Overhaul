@@ -13,6 +13,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class DynamiteKitten : PetEffect
     {
+        public override int PetItemID => ItemID.BallOfFuseWire;
         public int cooldown = 120;
         public float damageMult = 0.6f;
         public float kbMult = 1.7f;

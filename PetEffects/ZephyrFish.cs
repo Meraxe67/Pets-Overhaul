@@ -13,6 +13,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class ZephyrFish : PetEffect
     {
+        public override int PetItemID => ItemID.ZephyrFish;
         public float powerPerQuest = 0.004f;
         public float maxQuestPower = 0.4f;
         public int baseChance = 30;

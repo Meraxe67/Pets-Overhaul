@@ -13,6 +13,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class BabyGrinch : PetEffect
     {
+        public override int PetItemID => ItemID.BabyGrinchMischiefWhistle;
         public float winterDmg = 0.15f;
         public int winterCrit = 10;
         public float grinchSlow = 0.9f;

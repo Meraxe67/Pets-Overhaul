@@ -15,6 +15,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class Lizard : PetEffect
     {
+        public override int PetItemID => ItemID.LizardEgg;
         public float percentHpDmg = 0.1f;
         public int buffDurations = 120;
         private int buffTimer = 0;

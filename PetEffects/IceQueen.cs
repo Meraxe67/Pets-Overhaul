@@ -15,6 +15,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class IceQueen : PetEffect
     {
+        public override int PetItemID => ItemID.IceQueenPetItem;
         public int cooldown = 10800;
         private bool frozenTomb = false;
         private int iceQueenFrame = 0;

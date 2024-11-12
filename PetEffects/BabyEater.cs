@@ -11,6 +11,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class BabyEater : PetEffect
     {
+        public override int PetItemID => ItemID.EatersBone;
         public override PetClasses PetClassPrimary => PetClasses.Mobility;
         public float moveSpd = 0.10f;
         public float jumpSpd = 0.5f;

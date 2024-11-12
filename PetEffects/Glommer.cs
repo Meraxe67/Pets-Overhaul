@@ -14,6 +14,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class Glommer : PetEffect
     {
+        public override int PetItemID => ItemID.GlommerPetItem;
         public int glommerSanityTime = 60;
         public int glommerSanityRecover = 2;
         public float glommerSanityAura = 0.3f;

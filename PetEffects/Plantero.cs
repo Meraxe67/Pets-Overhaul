@@ -12,6 +12,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class Plantero : PetEffect
     {
+        public override int PetItemID => ItemID.MudBud;
         public int spawnChance = 15;
         public float damageMult = 0.7f;
         public float knockBack = 0.4f;

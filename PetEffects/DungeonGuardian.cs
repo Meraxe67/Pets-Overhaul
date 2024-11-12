@@ -11,6 +11,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class DungeonGuardian : PetEffect
     {
+        public override int PetItemID => ItemID.BoneKey;
         public override PetClasses PetClassSecondary => PetClasses.Defensive;
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
         public int armorPen = 10;

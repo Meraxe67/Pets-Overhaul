@@ -13,6 +13,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class TheTwins : PetEffect
     {
+        public override int PetItemID => ItemID.TwinsPetItem;
         public int healthDmgCd = 48;
         public int closeRange = 112;
         public int longRange = 560;

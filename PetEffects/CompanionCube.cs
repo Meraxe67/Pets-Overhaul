@@ -11,6 +11,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class CompanionCube : PetEffect
     {
+        public override int PetItemID => ItemID.CompanionCube;
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
         public override PetClasses PetClassSecondary => PetClasses.Magic;
         public float manaToHealth = 0.11f;

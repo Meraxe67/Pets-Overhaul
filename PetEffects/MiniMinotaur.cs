@@ -11,6 +11,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class MiniMinotaur : PetEffect
     {
+        public override int PetItemID => ItemID.TartarSauce;
         public int minotaurStack = 0;
         public int minotaurCd = 12;
         public int oocMaxDuration = 15;

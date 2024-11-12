@@ -13,6 +13,7 @@ namespace PetsOverhaul.PetEffects
 {
     public sealed class Parrot : PetEffect
     {
+        public override int PetItemID => ItemID.ParrotCracker;
         public int projChance = 22;
         public int meleeChance = 28;
         public float projDamage = 0.75f;
