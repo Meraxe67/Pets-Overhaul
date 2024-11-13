@@ -38,7 +38,7 @@ namespace PetsOverhaul.PetEffects
             {
                 GlobalPet.CircularDustEffect(Player.Center, DustID.CursedTorch, closeRange, 6);
                 GlobalPet.CircularDustEffect(Player.Center, DustID.RedTorch, longRange, 30);
-                if (Player.Distance(target.Center) > longRange && Pet.timer <= 0)
+                if (Player.Distance(target.Center) > longRange && Pet.timer <= 0 && target.immortal == false)
                 {
                     if (target.boss == false || NpcPet.NonBossTrueBosses.Contains(target.type) == false)
                     {
