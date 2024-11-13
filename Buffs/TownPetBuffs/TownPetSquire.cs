@@ -10,11 +10,11 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
         public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare)
         {
             SquireSlime squireSlime = Main.LocalPlayer.GetModPlayer<SquireSlime>();
-            for (int i = 0; i < Main.maxNPCs; i++)
+            foreach (var npc in Main.ActiveNPCs)
             {
-                if (Main.npc[i].type == NPCID.TownSlimeCopper && Main.LocalPlayer.Distance(Main.npc[i].Center) < squireSlime.auraRange)
+                if (npc.type == NPCID.TownSlimeCopper && Main.LocalPlayer.Distance(npc.Center) < squireSlime.auraRange)
                 {
-                    buffName = Lang.GetBuffName(ModContent.BuffType<TownPetSquire>()).Replace("<Name>", Main.npc[i].FullName);
+                    buffName = Lang.GetBuffName(ModContent.BuffType<TownPetSquire>()).Replace("<Name>", npc.FullName);
                     break;
                 }
                 else

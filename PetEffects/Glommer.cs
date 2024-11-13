@@ -39,13 +39,12 @@ namespace PetsOverhaul.PetEffects
             if (PetIsEquipped())
             {
                 GlobalPet.CircularDustEffect(Player.Center, DustID.ShimmerTorch, glommerSanityRange, 100);
-                for (int i = 0; i < Main.maxPlayers; i++)
+                foreach (var player in Main.ActivePlayers)
                 {
-                    Player plr = Main.player[i];
-                    if (Player.Distance(plr.Center) < glommerSanityRange && plr.active && plr.whoAmI != 255)
+                    if (Player.Distance(player.Center) < glommerSanityRange)
                     {
-                        plr.GetModPlayer<GlobalPet>().abilityHaste += glommerSanityAura;
-                        plr.AddBuff(ModContent.BuffType<SanityAura>(), 1);
+                        player.GetModPlayer<GlobalPet>().abilityHaste += glommerSanityAura;
+                        player.AddBuff(ModContent.BuffType<SanityAura>(), 1);
                     }
                 }
                 Player.statManaMax2 += (int)(Pet.abilityHaste * Player.statManaMax2);

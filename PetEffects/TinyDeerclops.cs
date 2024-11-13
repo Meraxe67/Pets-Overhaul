@@ -61,21 +61,16 @@ namespace PetsOverhaul.PetEffects
                             SoundEngine.PlaySound(SoundID.DeerclopsScream with { PitchVariance = 0.4f, MaxInstances = 5 }, Player.Center);
                         }
                         GlobalPet.CircularDustEffect(Player.Center, DustID.MushroomTorch, range, 50);
-                        for (int i = 0; i < Main.maxNPCs; i++)
+                        foreach (var npc in Main.ActiveNPCs)
                         {
-                            NPC npc = Main.npc[i];
-                            if (npc.active && Player.Distance(npc.Center) < range)
+                            if (GlobalPet.LifestealCheck(npc) && Player.Distance(npc.Center) < range)
                             {
                                 NpcPet.AddSlow(new NpcPet.PetSlow(slow, applyTime, PetSlowIDs.Deerclops), npc);
-                                if (npc.active && (npc.townNPC == false || npc.isLikeATownNPC == false || npc.friendly == false) && (npc.boss == false || NpcPet.NonBossTrueBosses.Contains(npc.type) == false))
+                                if (npc.boss == false || NpcPet.NonBossTrueBosses.Contains(npc.type) == false)
                                 {
                                     npc.AddBuff(BuffID.Confused, applyTime);
                                 }
-
-                                if (npc.active && (npc.townNPC == false || npc.isLikeATownNPC == false || npc.friendly == false))
-                                {
                                     npc.AddBuff(BuffID.Frostburn, applyTime);
-                                }
                             }
                         }
                         Player.SetImmuneTimeForAllTypes(immuneTime);

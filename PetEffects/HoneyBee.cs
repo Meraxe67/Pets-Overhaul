@@ -51,10 +51,9 @@ namespace PetsOverhaul.PetEffects
             }
             else
             {
-                for (int i = 0; i < Main.maxPlayers; i++)
+                foreach (var player in Main.ActivePlayers)
                 {
-                    Player player = Main.player[i];
-                    if (i == healersWhoAmI || player.active == false || player.dead || player.Distance(healer.Player.Center) >= healer.range || player.HasBuff(ModContent.BuffType<HoneyOverdose>()))
+                    if (player.whoAmI == healersWhoAmI || player.Distance(healer.Player.Center) >= healer.range || player.HasBuff(ModContent.BuffType<HoneyOverdose>()))
                     {
                         continue;
                     }

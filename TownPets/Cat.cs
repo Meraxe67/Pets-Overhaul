@@ -26,9 +26,9 @@ namespace PetsOverhaul.TownPets
         }
         public override void PostUpdateBuffs()
         {
-            for (int i = 0; i < Main.maxNPCs; i++)
+            foreach (var npc in Main.ActiveNPCs)
             {
-                if (Player.Distance(Main.npc[i].Center) < auraRange && Main.npc[i].type == NPCID.TownCat && Main.npc[i].active == true)
+                if (Player.Distance(npc.Center) < auraRange && npc.type == NPCID.TownCat)
                 {
                     Player.AddBuff(ModContent.BuffType<TownPetCat>(), 2);
                     break;

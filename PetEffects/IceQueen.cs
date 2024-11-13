@@ -44,10 +44,9 @@ namespace PetsOverhaul.PetEffects
         {
             if (PetIsEquipped() && frozenTomb == true)
             {
-                for (int i = 0; i < Main.maxNPCs; i++)
+                foreach (var npc in Main.ActiveNPCs)
                 {
-                    NPC npc = Main.npc[i];
-                    if (npc.active && Player.Distance(npc.Center) < queenRange)
+                    if (Player.Distance(npc.Center) < queenRange)
                     {
                         NpcPet.AddSlow(new NpcPet.PetSlow(slowAmount, 1, PetSlowIDs.IceQueen), npc);
                     }
@@ -73,10 +72,9 @@ namespace PetsOverhaul.PetEffects
                 }
                 if (iceQueenFrame >= tombTime)
                 {
-                    for (int i = 0; i < Main.maxNPCs; i++)
+                    foreach (var npc in Main.ActiveNPCs)
                     {
-                        NPC npc = Main.npc[i];
-                        if (npc.active && NPCID.Sets.ImmuneToAllBuffs[npc.type] == false && Player.Distance(npc.Center) < queenRange && GlobalPet.LifestealCheck(npc))
+                        if (NPCID.Sets.ImmuneToAllBuffs[npc.type] == false && Player.Distance(npc.Center) < queenRange && GlobalPet.LifestealCheck(npc))
                         {
                             npc.SimpleStrikeNPC(Pet.PetDamage(freezeDamage), npc.direction, Main.rand.NextBool((int)Math.Min(Player.GetTotalCritChance<GenericDamageClass>(),100), 100),0,DamageClass.Generic,true,Player.luck);
                         }

@@ -10,11 +10,11 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
         public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare)
         {
             Cat cat = Main.LocalPlayer.GetModPlayer<Cat>();
-            for (int i = 0; i < Main.maxNPCs; i++)
+            foreach (var npc in Main.ActiveNPCs)
             {
-                if (Main.npc[i].type == NPCID.TownCat && Main.LocalPlayer.Distance(Main.npc[i].Center) < cat.auraRange)
+                if (npc.type == NPCID.TownCat && Main.LocalPlayer.Distance(npc.Center) < cat.auraRange)
                 {
-                    buffName = Lang.GetBuffName(ModContent.BuffType<TownPetCat>()).Replace("<Name>", Main.npc[i].FullName);
+                    buffName = Lang.GetBuffName(ModContent.BuffType<TownPetCat>()).Replace("<Name>", npc.FullName);
                     break;
                 }
                 else

@@ -41,10 +41,9 @@ namespace PetsOverhaul.PetEffects
                 Player.buffImmune[BuffID.ShadowFlame] = true;
                 Player.buffImmune[BuffID.Frostburn2] = true;
                 EnemiesBurning = 0;
-                for (int i = 0; i < Main.maxNPCs; i++)
+                foreach (var npc in Main.ActiveNPCs)
                 {
-                    NPC npc = Main.npc[i];
-                    if (npc.active && Player.Distance(npc.Center) < bernieRange)
+                    if (Player.Distance(npc.Center) < bernieRange)
                     {
                         if (Main.rand.NextBool())
                         {

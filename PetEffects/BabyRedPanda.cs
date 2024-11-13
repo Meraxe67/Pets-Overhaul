@@ -64,10 +64,9 @@ namespace PetsOverhaul.PetEffects
                     SoundEngine.PlaySound(SoundID.Item37 with { Pitch = 1f }, Player.Center);
                 EmoteBubble.MakePlayerEmote(Player, EmoteID.EmotionAlert);
                 alertEnemies = 1;
-                for (int i = 0; i < Main.maxNPCs; i++)
+                foreach (var npc in Main.ActiveNPCs)
                 {
-                    NPC npc = Main.npc[i];
-                    if (npc.active && Player.Distance(npc.Center) < alertRadius)
+                    if (Player.Distance(npc.Center) < alertRadius)
                     {
                         alertEnemies++;
                     }

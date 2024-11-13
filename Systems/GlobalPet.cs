@@ -267,7 +267,7 @@ namespace PetsOverhaul.Systems
         }
         public static bool LifestealCheck(NPC npc)
         {
-            return !npc.friendly && !npc.SpawnedFromStatue && npc.type != NPCID.TargetDummy && npc.canGhostHeal;
+            return !npc.friendly && !npc.SpawnedFromStatue && !npc.immortal && npc.canGhostHeal;
         }
         /// <summary>
         /// Creates a Circle around the given Center with dust ID. dustAmount is usually recommended to be around radius / 10.
@@ -458,13 +458,12 @@ namespace PetsOverhaul.Systems
         {
             bool anyPlayerHasSlimePet = false;
             owner = null;
-            for (int i = 0; i < Main.maxPlayers; i++)
+            foreach (var player in Main.ActivePlayers)
             {
-                Player plr = Main.player[i];
-                if (plr.active && plr.whoAmI != 255 && plr.miscEquips[0].type == ItemID.KingSlimePetItem)
+                if (player.miscEquips[0].type == ItemID.KingSlimePetItem)
                 {
                     anyPlayerHasSlimePet = true;
-                    owner = plr;
+                    owner = player;
                     break;
                 }
             }
@@ -474,13 +473,12 @@ namespace PetsOverhaul.Systems
         {
             bool anyPlayerHasSlimePet = false;
             owner = null;
-            for (int i = 0; i < Main.maxPlayers; i++)
+            foreach (var player in Main.ActivePlayers)
             {
-                Player plr = Main.player[i];
-                if (plr.active && plr.whoAmI != 255 && plr.miscEquips[0].type == ItemID.QueenSlimePetItem)
+                if (player.miscEquips[0].type == ItemID.QueenSlimePetItem)
                 {
                     anyPlayerHasSlimePet = true;
-                    owner = plr;
+                    owner = player;
                     break;
                 }
             }
@@ -490,13 +488,12 @@ namespace PetsOverhaul.Systems
         {
             bool anyPlayerHasSlimePet = false;
             owner = null;
-            for (int i = 0; i < Main.maxPlayers; i++)
+            foreach (var player in Main.ActivePlayers)
             {
-                Player plr = Main.player[i];
-                if (plr.active && plr.whoAmI != 255 && plr.miscEquips[0].type == ItemID.ResplendentDessert)
+                if (player.miscEquips[0].type == ItemID.ResplendentDessert)
                 {
                     anyPlayerHasSlimePet = true;
-                    owner = plr;
+                    owner = player;
                     break;
                 }
             }

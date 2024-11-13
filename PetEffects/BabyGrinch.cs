@@ -47,11 +47,10 @@ namespace PetsOverhaul.PetEffects
             {
                 GlobalPet.CircularDustEffect(Player.Center, DustID.Snow, grinchRange, 20);
                 Player.resistCold = true;
-                
-                for (int i = 0; i < Main.maxNPCs; i++)
+
+                foreach (var npc in Main.ActiveNPCs)
                 {
-                    NPC npc = Main.npc[i];
-                    if (npc.active && Player.Distance(npc.Center) < grinchRange)
+                    if (Player.Distance(npc.Center) < grinchRange)
                     {
                         NpcPet.AddSlow(new NpcPet.PetSlow(grinchSlow, 1, PetSlowIDs.Grinch), npc);
                     }
