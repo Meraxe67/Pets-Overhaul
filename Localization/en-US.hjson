@@ -1128,6 +1128,30 @@ Mods: {
 					'''
 			}
 
+			EocPetEnrage: {
+				DisplayName: ENRAGED!
+				Description:
+					'''
+					You're currently ENRAGED! All you can think of is bloodshed!
+					Your defense and DR are set to 0, and your Shield of Cthulhu is quicker.
+					Current Rage Points: <rage>
+					Current Damage Boost: <dmg>%
+					Current Movement Speed Boost: <speed>%
+					Current Crit Chance Boost: <crit>%
+					'''
+			}
+
+			HardenedShell: {
+				DisplayName: Turtle Shell Hardened!
+				Description:
+					'''
+					Your Turtle currently hardened its shell.
+					Incoming hits do less damage, do no knockback,
+					and will be reflected to the attacker.
+					The remaining amount of hits: <hit>
+					'''
+			}
+
 			ObliviousPet: {
 				DisplayName: Oblivious Pet
 				Description:
@@ -1142,9 +1166,7 @@ Mods: {
 				Description:
 					'''
 					Increases your Jump speed by <BunnyJump>% and
-					Your Harvesting Fortune by <BunnyHarvesting>, which increases
-					items gained by harvesting plants, fully effective
-					with your Harvesting Pets.
+					Harvesting Fortune by <BunnyHarvesting>.
 					'''
 			}
 
@@ -1153,8 +1175,7 @@ Mods: {
 				Description:
 					'''
 					Multiplies movement speed by <CatMovespd>x and
-					Fishing Fortune by +<CatFish>, which increases
-					items gained by fishing, fully effective with your Fishing Pets.
+					Fishing Fortune by <CatFish>.
 					'''
 			}
 
@@ -1162,10 +1183,8 @@ Mods: {
 				DisplayName: <Name>'s Aura
 				Description:
 					'''
-					Increases Fishing Power by +<DogFish> and
-					Your Fishing Fortune by <DogFishExp>,
-					which increases items gained by fishing,
-					fully effective with your Fishing Pets.
+					Increases Fishing Power by <DogFish> and
+					Fishing Fortune by <DogFishExp>.
 					'''
 			}
 
@@ -1173,9 +1192,8 @@ Mods: {
 				DisplayName: <Name>'s Aura
 				Description:
 					'''
-					Increases luck by +<ClumsyLuck> and Global
-					Fortune by <ClumsyGlobal> which increases
-					items gained by Mining, Harvesting, and Fishing and all Pets.
+					Increases luck by <ClumsyLuck> and
+					Global Fortune by <ClumsyGlobal>.
 					'''
 			}
 
@@ -1184,8 +1202,7 @@ Mods: {
 				Description:
 					'''
 					Increases Crit Chance by <CoolCrit>% and
-					Mining Fortune by +<CoolMining>, which increases
-					items gained by mining, fully effective with your Mining Pets.
+					Mining Fortune by <CoolMining>.
 					'''
 			}
 
@@ -1199,8 +1216,7 @@ Mods: {
 				Description:
 					'''
 					Increases Pet Ability Haste by <MysticHaste>%
-					and Global Fortune by <MysticAllExp> which increases
-					items gained by Mining, Harvesting, and Fishing and all Pets.
+					and Global Fortune by <MysticAllExp>.
 					'''
 			}
 
@@ -1229,11 +1245,9 @@ Mods: {
 				DisplayName: <Name>'s Aura
 				Description:
 					'''
-					Increases Defense by +<OldDef>, increases
-					knockback resist by <OldKb>% and increases
-					Harvesting Fortune by +<OldHarvesting>, which increases
-					items gained by harvesting, fully effective with 
-					items that are sourced from your Pets.
+					Increases Defense by <OldDef>,
+					knockback resist by <OldKb>% and
+					Harvesting Fortune by <OldHarvesting>.
 					'''
 			}
 
@@ -1242,8 +1256,7 @@ Mods: {
 				Description:
 					'''
 					Increases Damage by <SquireDmg>% and
-					Mining Fortune by +<SquireMining>, which increases
-					items gained by mining, fully effective with your Mining Pets.
+					Mining Fortune by <SquireMining>.
 					'''
 			}
 
@@ -1252,31 +1265,7 @@ Mods: {
 				Description:
 					'''
 					Increases enemy spawn rate by <SurlySpawn>%
-					And grants shadow candle effect
-					'''
-			}
-
-			EocPetEnrage: {
-				DisplayName: ENRAGED!
-				Description:
-					'''
-					You're currently ENRAGED! All you can think of is bloodshed!
-					Your defense and DR are set to 0, and your Shield of Cthulhu is quicker.
-					Current Rage Points: <rage>
-					Current Damage Boost: <dmg>%
-					Current Movement Speed Boost: <speed>%
-					Current Crit Chance Boost: <crit>%
-					'''
-			}
-
-			HardenedShell: {
-				DisplayName: Turtle Shell Hardened!
-				Description:
-					'''
-					Your Turtle currently hardened its shell.
-					Incoming hits do less damage, do no knockback,
-					and will be reflected to the attacker.
-					The remaining amount of hits: <hit>
+					And grants shadow candle effect.
 					'''
 			}
 		}
