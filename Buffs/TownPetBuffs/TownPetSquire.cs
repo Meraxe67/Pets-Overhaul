@@ -9,9 +9,10 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
     {
         public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare)
         {
+            SquireSlime squireSlime = Main.LocalPlayer.GetModPlayer<SquireSlime>();
             for (int i = 0; i < Main.maxNPCs; i++)
             {
-                if (Main.LocalPlayer.Distance(Main.npc[i].Center) < Main.LocalPlayer.GetModPlayer<TownPet>().auraRange && Main.npc[i].type == NPCID.TownSlimeCopper)
+                if (Main.npc[i].type == NPCID.TownSlimeCopper && Main.LocalPlayer.Distance(Main.npc[i].Center) < squireSlime.auraRange)
                 {
                     buffName = Lang.GetBuffName(ModContent.BuffType<TownPetSquire>()).Replace("<Name>", Main.npc[i].FullName);
                     break;
@@ -22,9 +23,8 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
                 }
             }
             tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetSquire>())
-                .Replace("<SquireDmg>", Math.Round(Main.LocalPlayer.GetModPlayer<TownPet>().squireDamage * 100, 2).ToString())
-                .Replace("<SquireMining>", Main.LocalPlayer.GetModPlayer<TownPet>().MiningFort.ToString())
-                ;
+                .Replace("<SquireDmg>", Math.Round(squireSlime.squireDamage * 100, 2).ToString())
+                .Replace("<SquireMining>", squireSlime.DefaultMiningFort.ToString());
             rare = 0;
         }
     }

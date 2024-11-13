@@ -9,9 +9,10 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
     {
         public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare)
         {
+            Dog dog = Main.LocalPlayer.GetModPlayer<Dog>();
             for (int i = 0; i < Main.maxNPCs; i++)
             {
-                if (Main.LocalPlayer.Distance(Main.npc[i].Center) < Main.LocalPlayer.GetModPlayer<TownPet>().auraRange && Main.npc[i].type == NPCID.TownDog)
+                if (Main.npc[i].type == NPCID.TownDog && Main.LocalPlayer.Distance(Main.npc[i].Center) < dog.auraRange)
                 {
                     buffName = Lang.GetBuffName(ModContent.BuffType<TownPetDog>()).Replace("<Name>", Main.npc[i].FullName);
                     break;
@@ -22,9 +23,8 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
                 }
             }
             tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetDog>())
-                .Replace("<DogFish>", Main.LocalPlayer.GetModPlayer<TownPet>().dogFish.ToString())
-                .Replace("<DogFishExp>", Main.LocalPlayer.GetModPlayer<TownPet>().FishFort.ToString())
-                ;
+                .Replace("<DogFish>", dog.dogFish.ToString())
+                .Replace("<DogFishExp>", dog.DefaultFishFort.ToString());
             rare = 0;
         }
     }

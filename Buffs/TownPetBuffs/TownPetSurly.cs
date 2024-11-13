@@ -8,9 +8,10 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
     {
         public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare)
         {
+            SurlySlime surlySlime = Main.LocalPlayer.GetModPlayer<SurlySlime>();
             for (int i = 0; i < Main.maxNPCs; i++)
             {
-                if (Main.LocalPlayer.Distance(Main.npc[i].Center) < Main.LocalPlayer.GetModPlayer<TownPet>().auraRange && Main.npc[i].type == NPCID.TownSlimeRed)
+                if (Main.npc[i].type == NPCID.TownSlimeRed && Main.LocalPlayer.Distance(Main.npc[i].Center) < surlySlime.auraRange)
                 {
                     buffName = Lang.GetBuffName(ModContent.BuffType<TownPetSurly>()).Replace("<Name>", Main.npc[i].FullName);
                     break;

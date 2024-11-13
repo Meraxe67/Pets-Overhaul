@@ -8,9 +8,10 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
     {
         public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare)
         {
+            OldSlime oldSlime = Main.LocalPlayer.GetModPlayer<OldSlime>();
             for (int i = 0; i < Main.maxNPCs; i++)
             {
-                if (Main.LocalPlayer.Distance(Main.npc[i].Center) < Main.LocalPlayer.GetModPlayer<TownPet>().auraRange && Main.npc[i].type == NPCID.TownSlimeOld)
+                if (Main.npc[i].type == NPCID.TownSlimeOld && Main.LocalPlayer.Distance(Main.npc[i].Center) < oldSlime.auraRange)
                 {
                     buffName = Lang.GetBuffName(ModContent.BuffType<TownPetOld>()).Replace("<Name>", Main.npc[i].FullName);
                     break;
@@ -21,11 +22,9 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
                 }
             }
             tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetOld>())
-                .Replace("<OldDef>", Main.LocalPlayer.GetModPlayer<TownPet>().oldDef.ToString())
-                .Replace("<OldKb>", Main.LocalPlayer.GetModPlayer<TownPet>().oldKbResist.ToString())
-                .Replace("<OldHarvesting>", Main.LocalPlayer.GetModPlayer<TownPet>().HarvFort.ToString())
-                ;
-
+                .Replace("<OldDef>", oldSlime.oldDef.ToString())
+                .Replace("<OldKb>", oldSlime.oldKbResist.ToString())
+                .Replace("<OldHarvesting>",oldSlime.DefaultHarvFort.ToString());
             rare = 0;
         }
     }

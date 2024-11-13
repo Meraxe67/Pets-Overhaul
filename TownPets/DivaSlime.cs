@@ -8,6 +8,22 @@ namespace PetsOverhaul.TownPets
 {
     public class DivaSlime : TownPet
     {
+        public float divaDisc = 0.005f;
+        public override void PreUpdate()
+        {
+            if (NPC.downedMoonlord)
+            {
+                divaDisc = 0.015f;
+            }
+            else if (Main.hardMode)
+            {
+                divaDisc = 0.01f;
+            }
+            else
+            {
+                divaDisc = 0.005f;
+            }
+        }
         public override void PostUpdateBuffs()
         {
             for (int i = 0; i < Main.maxNPCs; i++)

@@ -7,6 +7,22 @@ namespace PetsOverhaul.TownPets
 {
     public class Dog : TownPet
     {
+        public int dogFish = 1;
+        public override void PreUpdate()
+        {
+            if (NPC.downedMoonlord)
+            {
+                dogFish = 3;
+            }
+            else if (Main.hardMode)
+            {
+                dogFish = 2;
+            }
+            else
+            {
+                dogFish = 1;
+            }
+        }
         public override void PostUpdateBuffs()
         {
             for (int i = 0; i < Main.maxNPCs; i++)
@@ -23,7 +39,7 @@ namespace PetsOverhaul.TownPets
             if (Player.HasBuff(ModContent.BuffType<TownPetDog>()))
             {
                 Player.fishingSkill += dogFish;
-                Pet.fishingFortune += FishFort;
+                Pet.fishingFortune += DefaultFishFort;
             }
         }
     }

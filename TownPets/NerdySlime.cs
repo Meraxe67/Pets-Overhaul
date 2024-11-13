@@ -7,6 +7,26 @@ namespace PetsOverhaul.TownPets
 {
     public class NerdySlime : TownPet
     {
+        public float nerdBuildSpeed = 1.05f;
+        public float nerdLightScale = 0.2f;
+        public override void PreUpdate()
+        {
+            if (NPC.downedMoonlord)
+            {
+                nerdBuildSpeed = 1.3f;
+                nerdLightScale = 1.1f;
+            }
+            else if (Main.hardMode)
+            {
+                nerdBuildSpeed = 1.2f;
+                nerdLightScale = 0.5f;
+            }
+            else
+            {
+                nerdBuildSpeed = 1.1f;
+                nerdLightScale = 0.2f;
+            }
+        }
         public override void PostUpdateBuffs()
         {
             for (int i = 0; i < Main.maxNPCs; i++)

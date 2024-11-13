@@ -9,9 +9,10 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
     {
         public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare)
         {
+            ClumsySlime clumsySlime = Main.LocalPlayer.GetModPlayer<ClumsySlime>();
             for (int i = 0; i < Main.maxNPCs; i++)
             {
-                if (Main.LocalPlayer.Distance(Main.npc[i].Center) < Main.LocalPlayer.GetModPlayer<TownPet>().auraRange && Main.npc[i].type == NPCID.TownSlimePurple)
+                if (Main.npc[i].type == NPCID.TownSlimePurple && Main.LocalPlayer.Distance(Main.npc[i].Center) < clumsySlime.auraRange)
                 {
                     buffName = Lang.GetBuffName(ModContent.BuffType<TownPetClumsy>()).Replace("<Name>", Main.npc[i].FullName);
                     break;
@@ -22,9 +23,8 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
                 }
             }
             tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetClumsy>())
-                .Replace("<ClumsyLuck>", Main.LocalPlayer.GetModPlayer<TownPet>().clumsyLuck.ToString())
-                .Replace("<ClumsyGlobal>", Main.LocalPlayer.GetModPlayer<TownPet>().GlobalFort.ToString())
-                ;
+                .Replace("<ClumsyLuck>", clumsySlime.clumsyLuck.ToString())
+                .Replace("<ClumsyGlobal>", clumsySlime.DefaultGlobalFort.ToString());
             rare = 0;
         }
     }

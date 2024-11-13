@@ -7,6 +7,23 @@ namespace PetsOverhaul.TownPets
 {
     public class Cat : TownPet
     {
+
+        public float catSpeed = 1.025f;
+        public override void PreUpdate()
+        {
+            if (NPC.downedMoonlord)
+            {
+                catSpeed = 1.075f;
+            }
+            else if (Main.hardMode)
+            {
+                catSpeed = 1.05f;
+            }
+            else
+            {
+                catSpeed = 1.025f;
+            }
+        }
         public override void PostUpdateBuffs()
         {
             for (int i = 0; i < Main.maxNPCs; i++)
@@ -23,7 +40,7 @@ namespace PetsOverhaul.TownPets
             if (Player.HasBuff(ModContent.BuffType<TownPetCat>()))
             {
                 Player.moveSpeed *= catSpeed;
-                Pet.fishingFortune += FishFort;
+                Pet.fishingFortune += DefaultFishFort;
             }
         }
     }

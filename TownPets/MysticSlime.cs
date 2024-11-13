@@ -8,6 +8,22 @@ namespace PetsOverhaul.TownPets
 {
     public class MysticSlime : TownPet
     {
+        public float mysticHaste = 0.02f;
+        public override void PreUpdate()
+        {
+            if (NPC.downedMoonlord)
+            {
+                mysticHaste = 0.06f;
+            }
+            else if (Main.hardMode)
+            {
+                mysticHaste = 0.04f;
+            }
+            else
+            {
+                mysticHaste = 0.02f;
+            }
+        }
         public override void PostUpdateBuffs()
         {
             for (int i = 0; i < Main.maxNPCs; i++)
@@ -24,7 +40,7 @@ namespace PetsOverhaul.TownPets
             if (Player.HasBuff(ModContent.BuffType<TownPetMystic>()))
             {
                 Player.GetModPlayer<GlobalPet>().abilityHaste += mysticHaste;
-                Pet.globalFortune += GlobalFort;
+                Pet.globalFortune += DefaultGlobalFort;
             }
         }
     }

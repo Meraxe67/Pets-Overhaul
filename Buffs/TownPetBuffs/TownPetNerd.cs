@@ -10,9 +10,10 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
     {
         public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare)
         {
+            NerdySlime nerdySlime = Main.LocalPlayer.GetModPlayer<NerdySlime>();
             for (int i = 0; i < Main.maxNPCs; i++)
             {
-                if (Main.LocalPlayer.Distance(Main.npc[i].Center) < Main.LocalPlayer.GetModPlayer<TownPet>().auraRange && Main.npc[i].type == NPCID.TownSlimeBlue)
+                if (Main.npc[i].type == NPCID.TownSlimeBlue && Main.LocalPlayer.Distance(Main.npc[i].Center) < nerdySlime.auraRange)
                 {
                     buffName = Lang.GetBuffName(ModContent.BuffType<TownPetNerd>()).Replace("<Name>", Main.npc[i].FullName);
                     break;
@@ -22,24 +23,23 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
                     buffName = "Nerdy Aura";
                 }
             }
-            TownPet townPet = Main.LocalPlayer.GetModPlayer<TownPet>();
             if (NPC.downedMoonlord)
             {
                 tip = Language.GetTextValue("Mods.PetsOverhaul.Buffs.TownPetNerd.PostMoonlordDescription")
-                    .Replace("<NerdPlacement>", townPet.nerdBuildSpeed.ToString())
-                    .Replace("<NerdShineScale>", townPet.nerdLightScale.ToString());
+                    .Replace("<NerdPlacement>", nerdySlime.nerdBuildSpeed.ToString())
+                    .Replace("<NerdShineScale>", nerdySlime.nerdLightScale.ToString());
             }
             else if (Main.hardMode)
             {
                 tip = Language.GetTextValue("Mods.PetsOverhaul.Buffs.TownPetNerd.PostHardmodeDescription")
-                    .Replace("<NerdPlacement>", townPet.nerdBuildSpeed.ToString())
-                    .Replace("<NerdShineScale>", townPet.nerdLightScale.ToString());
+                    .Replace("<NerdPlacement>", nerdySlime.nerdBuildSpeed.ToString())
+                    .Replace("<NerdShineScale>", nerdySlime.nerdLightScale.ToString());
             }
             else
             {
                 tip = Language.GetTextValue("Mods.PetsOverhaul.Buffs.TownPetNerd.Description")
-                    .Replace("<NerdPlacement>", townPet.nerdBuildSpeed.ToString())
-                    .Replace("<NerdShineScale>", townPet.nerdLightScale.ToString());
+                    .Replace("<NerdPlacement>", nerdySlime.nerdBuildSpeed.ToString())
+                    .Replace("<NerdShineScale>", nerdySlime.nerdLightScale.ToString());
             }
             rare = 0;
         }

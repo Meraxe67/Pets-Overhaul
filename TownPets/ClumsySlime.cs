@@ -7,6 +7,22 @@ namespace PetsOverhaul.TownPets
 {
     public class ClumsySlime : TownPet
     {
+        public float clumsyLuck = 0.01f;
+        public override void PreUpdate()
+        {
+            if (NPC.downedMoonlord)
+            {
+                clumsyLuck = 0.03f;
+            }
+            else if (Main.hardMode)
+            {
+                clumsyLuck = 0.02f;
+            }
+            else
+            {
+                clumsyLuck = 0.01f;
+            }
+        }
         public override void PostUpdateBuffs()
         {
             for (int i = 0; i < Main.maxNPCs; i++)
@@ -22,7 +38,7 @@ namespace PetsOverhaul.TownPets
         {
             if (Player.HasBuff(ModContent.BuffType<TownPetClumsy>()))
             {
-                Pet.globalFortune += GlobalFort;
+                Pet.globalFortune += DefaultGlobalFort;
             }
         }
         public override void ModifyLuck(ref float luck)

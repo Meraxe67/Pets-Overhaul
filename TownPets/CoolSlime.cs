@@ -7,6 +7,22 @@ namespace PetsOverhaul.TownPets
 {
     public class CoolSlime : TownPet
     {
+        public float critHitsAreCool = 1f;
+        public override void PreUpdate()
+        {
+            if (NPC.downedMoonlord)
+            {
+                critHitsAreCool = 3f;
+            }
+            else if (Main.hardMode)
+            {
+                critHitsAreCool = 2f;
+            }
+            else
+            {
+                critHitsAreCool = 1f;
+            }
+        }
         public override void PostUpdateBuffs()
         {
             for (int i = 0; i < Main.maxNPCs; i++)
@@ -23,7 +39,7 @@ namespace PetsOverhaul.TownPets
             if (Player.HasBuff(ModContent.BuffType<TownPetCool>()))
             {
                 Player.GetCritChance<GenericDamageClass>() += critHitsAreCool;
-                Pet.miningFortune += MiningFort;
+                Pet.miningFortune += DefaultMiningFort;
             }
         }
     }

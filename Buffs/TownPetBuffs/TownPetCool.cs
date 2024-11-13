@@ -9,9 +9,10 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
     {
         public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare)
         {
+            CoolSlime coolSlime = Main.LocalPlayer.GetModPlayer<CoolSlime>();
             for (int i = 0; i < Main.maxNPCs; i++)
             {
-                if (Main.LocalPlayer.Distance(Main.npc[i].Center) < Main.LocalPlayer.GetModPlayer<TownPet>().auraRange && Main.npc[i].type == NPCID.TownSlimeGreen)
+                if (Main.npc[i].type == NPCID.TownSlimeGreen && Main.LocalPlayer.Distance(Main.npc[i].Center) < coolSlime.auraRange)
                 {
                     buffName = Lang.GetBuffName(ModContent.BuffType<TownPetCool>()).Replace("<Name>", Main.npc[i].FullName);
                     break;
@@ -22,9 +23,8 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
                 }
             }
             tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetCool>())
-                .Replace("<CoolCrit>", Main.LocalPlayer.GetModPlayer<TownPet>().critHitsAreCool.ToString())
-                .Replace("<CoolMining>", Main.LocalPlayer.GetModPlayer<TownPet>().MiningFort.ToString())
-                ;
+                .Replace("<CoolCrit>", coolSlime.critHitsAreCool.ToString())
+                .Replace("<CoolMining>", coolSlime.DefaultMiningFort.ToString());
             rare = 0;
         }
     }

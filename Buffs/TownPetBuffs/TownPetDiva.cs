@@ -10,9 +10,10 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
     {
         public override void ModifyBuffText(ref string buffName, ref string tip, ref int rare)
         {
+            DivaSlime divaSlime = Main.LocalPlayer.GetModPlayer<DivaSlime>();
             for (int i = 0; i < Main.maxNPCs; i++)
             {
-                if (Main.LocalPlayer.Distance(Main.npc[i].Center) < Main.LocalPlayer.GetModPlayer<TownPet>().auraRange && Main.npc[i].type == NPCID.TownSlimeRainbow)
+                if (Main.npc[i].type == NPCID.TownSlimeRainbow && Main.LocalPlayer.Distance(Main.npc[i].Center) < divaSlime.auraRange)
                 {
                     buffName = Lang.GetBuffName(ModContent.BuffType<TownPetDiva>()).Replace("<Name>", Main.npc[i].FullName);
                     break;
@@ -23,8 +24,7 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
                 }
             }
             tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetDiva>())
-                .Replace("<DivaDisc>", Math.Round((Main.LocalPlayer.GetModPlayer<TownPet>().divaDisc) * 100, 2).ToString())
-                ;
+                .Replace("<DivaDisc>", Math.Round(divaSlime.divaDisc * 100, 2).ToString());
             rare = 0;
         }
     }
