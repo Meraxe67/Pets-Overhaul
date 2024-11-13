@@ -1116,6 +1116,30 @@ Mods: {
 					'''
 			}
 
+			EocPetEnrage: {
+				DisplayName: ENFURECIDO!
+				Description:
+					'''
+					Você está atualmente ENFURECIDO! Tudo o que consegue pensar é em derramamento de sangue!
+					Sua defesa e Redução de Dano estão definidas como 0, e seu Escudo de Cthulhu está mais rápido.
+					Pontos de Raiva Atual: <rage>
+					Impulso de Dano Atual: <dmg>%
+					Impulso de Velocidade de Movimento Atual: <speed>%
+					Impulso de Chance Crítica Atual: <crit>%
+					'''
+			}
+
+			HardenedShell: {
+				DisplayName: Casco de Tartaruga Endurecida!
+				Description:
+					'''
+					Sua Tartaruga atualmente endureceu sua casca.
+					Ataques recebidos dão menos dano, nenhum recuo
+					e vão ser refletidos de volta para o agressor.
+					Número restante de golpes recebidos: <hit>
+					'''
+			}
+
 			ObliviousPet: {
 				DisplayName: Pet Desatento
 				Description:
@@ -1200,30 +1224,6 @@ Mods: {
 					'''
 					Aumenta o Nascimento de inimigos em <SurlySpawn>%
 					e dá o efeito de Vela Sombria
-					'''
-			}
-
-			EocPetEnrage: {
-				DisplayName: ENFURECIDO!
-				Description:
-					'''
-					Você está atualmente ENFURECIDO! Tudo o que consegue pensar é em derramamento de sangue!
-					Sua defesa e Redução de Dano estão definidas como 0, e seu Escudo de Cthulhu está mais rápido.
-					Pontos de Raiva Atual: <rage>
-					Impulso de Dano Atual: <dmg>%
-					Impulso de Velocidade de Movimento Atual: <speed>%
-					Impulso de Chance Crítica Atual: <crit>%
-					'''
-			}
-
-			HardenedShell: {
-				DisplayName: Casco de Tartaruga Endurecida!
-				Description:
-					'''
-					Sua Tartaruga atualmente endureceu sua casca.
-					Ataques recebidos dão menos dano, nenhum recuo
-					e vão ser refletidos de volta para o agressor.
-					Número restante de golpes recebidos: <hit>
 					'''
 			}
 		}

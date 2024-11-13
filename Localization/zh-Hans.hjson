@@ -1067,6 +1067,30 @@ Mods: {
 					'''
 			}
 
+			EocPetEnrage: {
+				DisplayName: 怒了！
+				Description:
+					'''
+					你被激怒了！你只想杀杀杀杀杀杀！
+					你的防御和伤害减免将至0，你的克苏鲁护盾冷却加快
+					当前暴怒值：<rage>
+					当前伤害加成：<dmg>%
+					当前移速加成：<speed>%
+					当前暴击率加成：<crit>%
+					'''
+			}
+
+			HardenedShell: {
+				DisplayName: 硬化龟壳！
+				Description:
+					'''
+					你的海龟已经硬化了它的龟壳
+					受击伤害减少，免疫击退
+					伤害会反射给攻击者
+					剩余受击次数：<hit>
+					'''
+			}
+
 			ObliviousPet: {
 				DisplayName: 漫不经心的宠物
 				Description:
@@ -1189,30 +1213,6 @@ Mods: {
 					'''
 					敌怪的生成速度提高<SurlySpawn>%
 					获得影烛效果
-					'''
-			}
-
-			EocPetEnrage: {
-				DisplayName: 怒了！
-				Description:
-					'''
-					你被激怒了！你只想杀杀杀杀杀杀！
-					你的防御和伤害减免将至0，你的克苏鲁护盾冷却加快
-					当前暴怒值：<rage>
-					当前伤害加成：<dmg>%
-					当前移速加成：<speed>%
-					当前暴击率加成：<crit>%
-					'''
-			}
-
-			HardenedShell: {
-				DisplayName: 硬化龟壳！
-				Description:
-					'''
-					你的海龟已经硬化了它的龟壳
-					受击伤害减少，免疫击退
-					伤害会反射给攻击者
-					剩余受击次数：<hit>
 					'''
 			}
 		}

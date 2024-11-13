@@ -3,6 +3,7 @@
 [b]Subscribe to: [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3352461632]Pets Overhaul: Calamity Addon[/url], if you're using Calamity Mod alongside Pets Overhaul to enhance your Pets Overhaul experience![/b]
 
 Remember to use /pet to get further info on your questions & other useful stuff regarding the mod, such as Junimo Levels leaderboard & more!
+And to view any class of Pet to your liking, use /pet pets or /pet class [args] command!
 
 Key Mechanics
 [list]

@@ -3,6 +3,7 @@ Pets Overhaul turns all of your useless, solely cosmetic purposed Pets to direct
 Download: 'Pets Overhaul: Calamity Addon', if you're using Calamity Mod alongside Pets Overhaul to enhance your Pets Overhaul experience!
 
 Remember to use /pet to get further info on your questions & other useful stuff regarding the mod, such as Junimo Levels leaderboard & more!
+And to view any class of Pet to your liking, use /pet pets or /pet class [args] command!
 
 Key Mechanics
 - Pets benefit you in 3 different ways, each is by your Regular, Light and Town Pets!
