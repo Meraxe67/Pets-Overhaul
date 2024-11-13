@@ -17,10 +17,10 @@ Mods: {
 		JojaCola: A nature-related NPC may be able to Purify this
 		Notice:
 			'''
-			[c/90C2AA:Pets Overhaul 3.0 latest changes: Calamity Addon release, Major system improvements, major fixes, lots of balance changes]
-			[c/90C2AA:Some of your config options may have reset, make sure to check to have them set correctly!]
-			[c/90C2AA:Added full Russian localization! By: Teokai, Added fully up-to-date Brazillian Portuguese localization! By: Erstarisk]
-			[c/90C2AA:Improved Mod Icon, and added new Mod Trailer video & channel! All done by: Furqi]
+			[c/90C2AA:Pets Overhaul 3.1, latest changes: Full Chinese translation for both Main mod and Calamity Addon, By: ROH]
+			[c/90C2AA:Added new /pet pets & class {arg} command to display any Pet class of choice. Circular dust effects for radius type Pets.]
+			[c/90C2AA:On-kill effects now doesn't require you to do the finishing blow, config option to adjust Light Pets max-roll colors.]
+			[c/90C2AA:Lots of backend changes to improve code reusability, performance, readability etc., many bug fixes & more.]
 			[c/b4bfc5:Join our discord server for feedback & bug reports! discord.gg/KubSpqvDGE]
 			[c/b4bfc5:Use] [c/ff8234:/pet] [c/b4bfc5:to see commands for Pets Overhaul, providing you more info!]
 			'''
