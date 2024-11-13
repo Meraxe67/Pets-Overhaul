@@ -1,6 +1,7 @@
 ﻿using PetsOverhaul.Config;
 using PetsOverhaul.Items;
 using PetsOverhaul.Systems;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -55,8 +56,8 @@ namespace PetsOverhaul.PetEffects
             }
         }
         public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.DirtiestBlock")
-                        .Replace("<any>", (dirtiestBlock.everythingCoin / 100).ToString())
-                        .Replace("<soil>", (dirtiestBlock.soilCoin / 100).ToString())
-                        .Replace("<dirt>", (dirtiestBlock.dirtCoin / 100).ToString());
+                        .Replace("<any>", Math.Round(dirtiestBlock.everythingCoin / 100f,2).ToString())
+                        .Replace("<soil>", Math.Round(dirtiestBlock.soilCoin / 100f, 2).ToString())
+                        .Replace("<dirt>", Math.Round(dirtiestBlock.dirtCoin / 100f, 2).ToString());
     }
 }
