@@ -92,6 +92,10 @@ Mods: {
 				第2步：点击宠物栏右上角的小眼睛禁用当前宠物的可见性
 				第3步：从背包中使用你想要其可见的宠物物品，完成！
 				'''
+			// PetList: List of <class> Pets:
+			// All: all
+			// NoPets: No pets available for this class. (You may be missing an addon for this class?)
+			// ClassArgumentInvalid: The given class is invalid, try any of the following: {all|melee|ranged|magic|summoner|utility|mobility|harvesting|mining|fishing|offensive|defensive|supportive|rogue}.
 			ArgumentInvalid: 参数无效，以下是宠物大修命令列表：（不区分大小写）
 			OneArgument: 只需一个参数，请确保你在参数之间没有多余的空格。以下是宠物大修命令列表：（不区分大小写）
 			UseInMultiplayer: 请在多人游戏中使用此命令！如果你想查看你的祝尼魔经验值，用/pet junimo，/pet junimoscoreboard，或/pet junimoleaderboard

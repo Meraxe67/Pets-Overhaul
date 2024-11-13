@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.Xna.Framework;
 using PetsOverhaul.PetEffects;
 using PetsOverhaul.Systems;
 using System.Collections.Generic;
@@ -210,6 +211,104 @@ namespace PetsOverhaul.Commands
                             caller.Reply(Language.GetTextValue("Mods.PetsOverhaul.Commands.Help"), Color.Gray);
                             break;
 
+                    }
+                    break;
+                case 2:
+                    switch (args[0].ToLower())
+                    {
+                        case "class" or "pets":
+                            string reply = Language.GetTextValue("Mods.PetsOverhaul.Commands.PetList") + " ";
+
+                            void iterate(PetClasses petClass)
+                            {
+                                int counterToGoDown = 5;
+                                bool found = false;
+                                foreach (ModPlayer player in caller.Player.ModPlayers)
+                                {
+                                    if (player is PetEffect pet && (petClass is PetClasses.None || pet.PetClassPrimary == petClass || pet.PetClassSecondary == petClass))
+                                    {
+                                        counterToGoDown++;
+                                        found = true;
+                                        reply += "[i:" + pet.PetItemID + "] ";
+                                        if (counterToGoDown >= 20)
+                                        {
+                                            reply += "\n";
+                                            counterToGoDown = 0;
+                                        }
+                                    }
+                                }
+                                if (found == false)
+                                    reply += Language.GetTextValue("Mods.PetsOverhaul.Commands.NoPets");
+                                caller.Reply(reply);
+                            }
+
+                            switch (args[1].ToLower())
+                            {
+                                case "all":
+                                    reply = reply.Replace("<class>", Language.GetTextValue("Mods.PetsOverhaul.Commands.All"));
+                                    iterate(PetClasses.None);
+                                    break;
+                                case "melee":
+                                    reply = reply.Replace("<class>", Language.GetTextValue("Mods.PetsOverhaul.Classes.Melee"));
+                                    iterate(PetClasses.Melee);
+                                    break;
+                                case "ranged":
+                                    reply = reply.Replace("<class>", Language.GetTextValue("Mods.PetsOverhaul.Classes.Ranged"));
+                                    iterate(PetClasses.Ranged);
+                                    break;
+                                case "magic":
+                                    reply = reply.Replace("<class>", Language.GetTextValue("Mods.PetsOverhaul.Classes.Magic"));
+                                    iterate(PetClasses.Magic);
+                                    break;
+                                case "summoner":
+                                    reply = reply.Replace("<class>", Language.GetTextValue("Mods.PetsOverhaul.Classes.Summoner"));
+                                    iterate(PetClasses.Summoner);
+                                    break;
+                                case "utility":
+                                    reply = reply.Replace("<class>", Language.GetTextValue("Mods.PetsOverhaul.Classes.Utility"));
+                                    iterate(PetClasses.Utility);
+                                    break;
+                                case "mobility":
+                                    reply = reply.Replace("<class>", Language.GetTextValue("Mods.PetsOverhaul.Classes.Mobility"));
+                                    iterate(PetClasses.Mobility);
+                                    break;
+                                case "harvesting":
+                                    reply = reply.Replace("<class>", Language.GetTextValue("Mods.PetsOverhaul.Classes.Harvesting"));
+                                    iterate(PetClasses.Harvesting);
+                                    break;
+                                case "mining":
+                                    reply = reply.Replace("<class>", Language.GetTextValue("Mods.PetsOverhaul.Classes.Mining"));
+                                    iterate(PetClasses.Mining);
+                                    break;
+                                case "fishing":
+                                    reply = reply.Replace("<class>", Language.GetTextValue("Mods.PetsOverhaul.Classes.Fishing"));
+                                    iterate(PetClasses.Fishing);
+                                    break;
+                                case "offensive":
+                                    reply = reply.Replace("<class>", Language.GetTextValue("Mods.PetsOverhaul.Classes.Offensive"));
+                                    iterate(PetClasses.Offensive);
+                                    break;
+                                case "defensive":
+                                    reply = reply.Replace("<class>", Language.GetTextValue("Mods.PetsOverhaul.Classes.Defensive"));
+                                    iterate(PetClasses.Defensive);
+                                    break;
+                                case "supportive":
+                                    reply = reply.Replace("<class>", Language.GetTextValue("Mods.PetsOverhaul.Classes.Supportive"));
+                                    iterate(PetClasses.Supportive);
+                                    break;
+                                case "rogue":
+                                    reply = reply.Replace("<class>", Language.GetTextValue("Mods.PetsOverhaul.Classes.Rogue"));
+                                    iterate(PetClasses.Rogue);
+                                    break;
+                                default:
+                                    caller.Reply(Language.GetTextValue("Mods.PetsOverhaul.Commands.ClassArgumentInvalid"), Color.Red);
+                                    break;
+                            }
+                            break;
+                        default:
+                            caller.Reply(Language.GetTextValue("Mods.PetsOverhaul.Commands.OneArgument"), Color.Red);
+                            caller.Reply(Language.GetTextValue("Mods.PetsOverhaul.Commands.Help"), Color.Gray);
+                            break;
                     }
                     break;
                 default:

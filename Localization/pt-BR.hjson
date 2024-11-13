@@ -93,6 +93,10 @@ Mods: {
 				2° Passo: Desabilite a visibilidade do Pet atualmente equipado no icone de olho no slot do Pet.
 				3° Passo: 'Use' o Pet que você quer que fique visível pelo seu item no inventário e pronto!
 				'''
+			// PetList: List of <class> Pets:
+			// All: all
+			// NoPets: No pets available for this class. (You may be missing an addon for this class?)
+			// ClassArgumentInvalid: The given class is invalid, try any of the following: {all|melee|ranged|magic|summoner|utility|mobility|harvesting|mining|fishing|offensive|defensive|supportive|rogue}.
 			ArgumentInvalid: O argumento enviado foi invalido, aqui está a lista de comandos do Pet Overhaul: (comandos não são sensíveis a maiúsculas e minúsculas)
 			OneArgument: Apenas um argumento era esperado, tenha certeza que você não está usando espaços no argumento. Lista de comandos do Pet Overhaul: (comandos não são sensíveis a maiúsculas e minúsculas)
 			UseInMultiplayer: Por favor, use esse comando no Multiplayer! Se você quer ver as habilidades do seu Junimo. use /pet junimo, /pet junimoscoreboard ou /pet junimoleaderboard
