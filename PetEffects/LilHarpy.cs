@@ -26,7 +26,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override void PostUpdateMiscEffects()
         {
-            if (Pet.timer == 0)
+            if (Pet.timer <= 0)
             {
                 cooldownStarted = false;
                 harpyFlight = fuelMax;
