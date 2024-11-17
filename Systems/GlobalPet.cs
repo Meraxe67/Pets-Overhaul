@@ -104,6 +104,10 @@ namespace PetsOverhaul.Systems
         /// </summary>
         public int timerMax = 0;
         /// <summary>
+        /// Used to not play the 'refresh sound' upon Pet Ability timer going below 0 more than once.
+        /// </summary>
+        public bool AbilityCdSoundPlayed { get; private set; }
+        /// <summary>
         /// Pets that wants to initiate effects only in Combat uses this. This is triggered to be set to inCombatTimerMax upon getting directly Hurt, having negative Life Regen (being under DoT effects) or Dealing damage. Buffs on enemies does not trigger this.
         /// </summary>
         public int inCombatTimer = 0;
@@ -112,7 +116,7 @@ namespace PetsOverhaul.Systems
         /// </summary>
         public int inCombatTimerMax = 300;
         /// <summary>
-        /// Increase this value to reduce ability cooldowns. Eg. 0.1f increases how fast ability will return by 10%. Negative values will increase the cooldowns. Negative is capped at -0.9f. Do not use this to directly reduce a cooldown, use the timer field instead. Ability Haste reduces timerMax with a more balanced calculation.
+        /// Increase this value to reduce ability cooldowns. Eg. 0.1f increases how fast ability will return by 10%. Increases potency of ticks going down every frame. Ex: 200% ability haste will make it tick 3 frames every frame, while 50% will make it tick 1 or 2 frames every frame randomly with equal chance. Can be negative; affecting the tick with diminishing returns.
         /// </summary>
         public float abilityHaste = 0;
         /// <summary>
@@ -132,16 +136,11 @@ namespace PetsOverhaul.Systems
 
         #region GlobalPet Methods
         /// <summary>
-        /// Sets the Pet ability cooldown while taking ability haste into consideration. Recommended to use this in PreUpdate, combined with condition that expected Pet is in use.
+        /// Used to use Pet Ability Haste to properly apply the cooldown, but currently it only sets timerMax. May have different uses later so is being keeped.
         /// </summary>
         public void SetPetAbilityTimer(int cooldown)
         {
-            if (abilityHaste < -0.9f)
-            {
-                abilityHaste = -0.9f;
-            }
-
-            timerMax = (int)(cooldown * (1 / (1 + abilityHaste)));
+            timerMax = cooldown;
         }
         public static IEntitySource GetSource_Pet(EntitySourcePetIDs typeId, string context = null)
         {
@@ -759,11 +758,6 @@ namespace PetsOverhaul.Systems
             {
                 jumpRegistered = false;
             }
-            timer--;
-            if (timer < -1)
-            {
-                timer = -1;
-            }
 
             inCombatTimer--;
             if (inCombatTimer < 0)
@@ -771,8 +765,28 @@ namespace PetsOverhaul.Systems
                 inCombatTimer = 0;
             }
 
-            if (timer == 0)
+            if (timer >= 0)
             {
+                float mult = 1f;
+                if (abilityHaste >= 0)
+                {
+                    mult += abilityHaste;
+                }
+                else
+                {
+                    mult += -1 + -1 * (1 / (-1 + abilityHaste));
+                }
+                timer -= Randomizer((int)(1000 * mult), 1000);
+                AbilityCdSoundPlayed = false;
+            }
+            if (timer < -1)
+            {
+                timer = -1;
+            }
+
+            if (timer <= 0 && AbilityCdSoundPlayed == false)
+            {
+                AbilityCdSoundPlayed = true;
                 if (ModContent.GetInstance<PetPersonalization>().AbilitySoundEnabled && (ModContent.GetInstance<PetPersonalization>().LowCooldownSoundEnabled == false && timerMax > ModContent.GetInstance<PetPersonalization>().LowCooldownTreshold || ModContent.GetInstance<PetPersonalization>().LowCooldownSoundEnabled))
                 {
                     SoundEngine.PlaySound(SoundID.MaxMana with { PitchVariance = 0.3f }, Player.Center);
