@@ -17,7 +17,7 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Mining;
         public int ironskinBonusDef = 8;
         public float flatDefMult = 0.15f;
-        public float defItemMult = 0.5f;
+        public float defItemMult = 0.35f;
         public int flatAmount = 10;
         public int miningFort = 10;
         public override void PostUpdateMiscEffects()

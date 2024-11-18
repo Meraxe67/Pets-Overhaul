@@ -17,7 +17,7 @@ namespace PetsOverhaul.PetEffects
         public override int PetItemID => ItemID.MoonLordPetItem;
         public int defense = 10;
         public float meleeDr = 0.1f;
-        public float meleeSpd = 0.2f;
+        public float meleeSpd = 0.15f;
         public float meleeDmg = 0.2f;
 
         public int rangedPen = 15;
