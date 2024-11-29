@@ -21,6 +21,13 @@ namespace PetsOverhaul.NPCs
         public override void SetStaticDefaults()
         {
             Main.npcFrameCount[Type] = amountOfFrames;
+            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers()
+            {
+                Velocity = 1f,
+                Direction = 1
+            };
+
+            NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
         }
         public override void SetDefaults()
         {

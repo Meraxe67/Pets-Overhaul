@@ -22,16 +22,12 @@ namespace PetsOverhaul.LightPets
             }
         }
     }
-    public sealed class CreeperEgg : GlobalItem
+    public sealed class CreeperEgg : LightPetItem
     {
+        public override int LightPetItemID => ItemID.DD2PetGhost;
         public LightPetStat SummonDamage = new(16, 0.004f, 0.04f);
         public LightPetStat MeleeDamage = new(16, 0.004f, 0.04f);
         public LightPetStat AttackSpeed = new(20, 0.004f, 0.025f);
-        public override bool InstancePerEntity => true;
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
-        {
-            return entity.type == ItemID.DD2PetGhost;
-        }
         public override void UpdateInventory(Item item, Player player)
         {
             SummonDamage.SetRoll();

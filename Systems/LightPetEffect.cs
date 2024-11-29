@@ -24,13 +24,6 @@ namespace PetsOverhaul.Systems
         /// </summary>
         public virtual bool ExtraAppliesToEntity(Item entity, bool lateInstantation)
         { return true; }
-
-        //Code to run CombineLightPets properly I guess?
-        //Item item = LightPetItem.CombineLightPets(Player.inventory[0], Player.inventory[1]);
-        //if (item != null)
-        //{
-        //    Player.QuickSpawnItem(GetSource_Pet(EntitySourcePetIDs.GlobalItem), item);
-        //}
         /// <summary>
         /// Consumes item1 and item2, in result; creates a new Light Pet that inherits highest rolls of both Light Pets. If it fails, returns null and doesn't consume anything.
         /// </summary>

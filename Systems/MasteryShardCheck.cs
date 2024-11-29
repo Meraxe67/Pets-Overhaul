@@ -7,11 +7,11 @@ namespace PetsOverhaul.Systems
 {
     public class MasteryShardCheck : ModSystem
     {
-        internal static bool masteryShardObtained1 = false;
-        internal static bool masteryShardObtained2 = false;
-        internal static bool masteryShardObtained3 = false;
-        internal static bool masteryShardObtained4 = false;
-        internal static bool masteryShardObtained5 = false;
+        public static bool masteryShardObtained1 = false;
+        public static bool masteryShardObtained2 = false;
+        public static bool masteryShardObtained3 = false;
+        public static bool masteryShardObtained4 = false;
+        public static bool masteryShardObtained5 = false;
         public override void SaveWorldData(TagCompound tag)
         {
             tag.Add("masteryshard1", masteryShardObtained1);

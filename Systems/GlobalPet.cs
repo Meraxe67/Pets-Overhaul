@@ -2,7 +2,9 @@
 using PetsOverhaul.Buffs;
 using PetsOverhaul.Config;
 using PetsOverhaul.Items;
+using PetsOverhaul.NPCs;
 using PetsOverhaul.Projectiles;
+using PetsOverhaul.UI;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -795,6 +797,11 @@ namespace PetsOverhaul.Systems
         }
         public override void PostUpdate()
         {
+            if (PetObtainedCondition.petIsObtained == false && (Player.miscEquips[0].type != ItemID.None || Player.miscEquips[1].type != ItemID.None))
+            {
+                PetObtainedCondition.petIsObtained = true;
+            }
+
             if (petShield.Count > 0)
             {
                 while (shieldToBeReduced > 0 && petShield.Count > 0)
@@ -894,6 +901,13 @@ namespace PetsOverhaul.Systems
             for (int i = 0; i < GlobalPet.Randomizer((globalFortune + fishingFortune) * 10 / 2 * fish.stack, 1000); i++)
             {
                 Player.QuickSpawnItem(GetSource_Pet(EntitySourcePetIDs.FishingFortuneItem), fish.type, 1);
+            }
+        }
+        public override void ProcessTriggers(TriggersSet triggersSet)
+        {
+            if (triggersSet.Inventory)
+            {
+                PetTamer.openLightCombineMenu = false;
             }
         }
         #endregion
