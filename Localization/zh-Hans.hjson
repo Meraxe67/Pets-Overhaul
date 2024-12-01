@@ -17,10 +17,11 @@ Mods: {
 		JojaCola: 某个与自然相关的NPC也许可以净化它
 		Notice:
 			'''
-			[c/90C2AA:Pets Overhaul（宠物大修）3.0最新更新：灾厄扩展发布，主系统优化，bug修复，以及大量平衡改动]
-			[c/90C2AA:你的一些配置选项可能已经重置，请务必检查它们的设置是否正确！]
-			[c/90C2AA:添加了完整的俄语本地化！作者：Teokai，添加了完全最新的巴西葡萄牙语本地化！作者:Erstarisk]
-			[c/90C2AA:重绘模组图标，并添加新的模组预告视频和频道！作者：Furqi]
+			[c/90C2AA:Pets Overhaul（宠物大修）3.1最新更新：为此模组和灾厄附属添加了完整汉化，作者：ROH]
+			[c/90C2AA:添加/pet class {arg}或/pet pets {arg}命令来查看对应职业宠物列表，为宠物的范围效果添加了圆形粒子]
+			[c/90C2AA:--（arg参数可选项：all->全职业，melee->近战，ranged->远程，magic->魔法，summoner->召唤，utility->通用，mobility->机动，harvesting->采集，mining->挖掘，fishing->钓鱼，offensive->进攻，defensive->防御，supportive->辅助，rogue->盗贼）]
+			[c/90C2AA:击杀效果现在不需要你来完成最后一击，添加了照明宠物最高品级颜色的模组配置]
+			[c/90C2AA:大量的后端更改，以提高代码的可重用性、性能、可读性等。修复大量Bug。]
 			[c/b4bfc5:加入我们的discord服务器以反馈/报告bug！ discord.gg/KubSpqvDGE]
 			[c/b4bfc5:使用] [c/ff8234:/pet 命令] [c/b4bfc5:来查看宠物大修的命令以获得更多信息！]
 			'''
@@ -55,9 +56,11 @@ Mods: {
 				/pet fortune，/pet fortunestat，/pet fortunestats -> 显示当前时运属性并解释它们的作用
 				/pet vanity，/pet vanitypet -> 教你如何获得一个 “时装” 宠物
 				/pet junimo，/pet junimoscoreboard，/pet junimoleaderboard -> 显示祝尼魔三个职业总计经验值最高的前三名在线玩家
-				/pet {mining|fishing|harvesting}scoreboard，/pet {mining|fishing|harvesting}leaderboard -> 
-				显示所有玩家的祝尼魔对应职业的经验值
+				/pet {mining|fishing|harvesting}scoreboard，/pet {mining|fishing|harvesting}leaderboard -> 显示所有玩家的祝尼魔对应职业的经验值
 				/pet faq，/pet question -> 显示关于宠物大修的常见问题
+				/pet pets 或/pet class {all|melee|ranged|magic|summoner|utility|mobility|harvesting|mining|fishing|offensive|defensive|supportive|rogue}
+				-> 在聊天栏中显示参数中的职业宠物列表。“all”参数会显示所有宠物。
+	->all->全职业，melee->近战，ranged->远程，magic->魔法，summoner->召唤，utility->通用，mobility->机动，harvesting->采集，mining->挖掘，fishing->钓鱼，offensive->进攻，defensive->防御，supportive->辅助，rogue->盗贼
 				'''
 			FAQ:
 				'''
@@ -92,10 +95,10 @@ Mods: {
 				第2步：点击宠物栏右上角的小眼睛禁用当前宠物的可见性
 				第3步：从背包中使用你想要其可见的宠物物品，完成！
 				'''
-			// PetList: List of <class> Pets:
-			// All: all
-			// NoPets: No pets available for this class. (You may be missing an addon for this class?)
-			// ClassArgumentInvalid: The given class is invalid, try any of the following: {all|melee|ranged|magic|summoner|utility|mobility|harvesting|mining|fishing|offensive|defensive|supportive|rogue}.
+			PetList: <class>宠物列表：
+			All: 所有
+			NoPets: 没有此职业的宠物。（你没装宠物大修-灾厄附属？）
+			ClassArgumentInvalid: 无效职业参数，以下为有效参数：{all|melee|ranged|magic|summoner|utility|mobility|harvesting|mining|fishing|offensive|defensive|supportive|rogue}.
 			ArgumentInvalid: 参数无效，以下是宠物大修命令列表：（不区分大小写）
 			OneArgument: 只需一个参数，请确保你在参数之间没有多余的空格。以下是宠物大修命令列表：（不区分大小写）
 			UseInMultiplayer: 请在多人游戏中使用此命令！如果你想查看你的祝尼魔经验值，用/pet junimo，/pet junimoscoreboard，或/pet junimoleaderboard
@@ -1106,7 +1109,6 @@ Mods: {
 					'''
 					跳跃速度提高<BunnyJump>%
 					采集时运提高<BunnyHarvesting>
-					采集时运会增加采集植物的掉落，并提高采集宠物的物品奖励加成
 					'''
 			}
 
@@ -1116,7 +1118,6 @@ Mods: {
 					'''
 					移动速度变为<CatMovespd>倍
 					钓鱼时运提高<CatFish>
-					钓鱼时运会增加钓鱼的掉落，并提高钓鱼宠物的物品奖励加成
 					'''
 			}
 
@@ -1126,7 +1127,6 @@ Mods: {
 					'''
 					渔力提高<DogFish>点
 					钓鱼时运提高<DogFishExp>
-					钓鱼时运会增加钓鱼的掉落，并提高钓鱼宠物的物品奖励加成
 					'''
 			}
 
@@ -1136,7 +1136,6 @@ Mods: {
 					'''
 					运气提高<ClumsyLuck>点
 					通用时运提高<ClumsyGlobal>
-					通用时运会增加挖矿，采集和钓鱼的掉落，并提高所有宠物的物品奖励加成
 					'''
 			}
 
@@ -1146,7 +1145,6 @@ Mods: {
 					'''
 					暴击率提高<CoolCrit>%
 					挖掘时运提高<CoolMining>
-					挖掘时运会增加挖矿的掉落，并提高挖掘宠物的物品奖励加成
 					'''
 			}
 
@@ -1161,7 +1159,6 @@ Mods: {
 					'''
 					宠物技能急速增加<MysticHaste>%，急速会降低宠物技能的冷却时间
 					通用时运提高<MysticAllExp>
-					通用时运会增加挖矿，采集和钓鱼的掉落，并提高所有宠物的物品奖励加成
 					'''
 			}
 
@@ -1193,7 +1190,6 @@ Mods: {
 					增加<OldDef>点防御
 					增加<OldKb>%击退抗性
 					采集时运提高<OldHarvesting>
-					采集时运会增加采集植物的掉落，并提高采集宠物的物品奖励加成
 					'''
 			}
 
@@ -1203,7 +1199,6 @@ Mods: {
 					'''
 					伤害增加<SquireDmg>%
 					挖掘经验提高<SquireMining>%
-					挖掘时运会增加挖矿的掉落，并提高挖掘宠物的物品奖励加成
 					'''
 			}
 
@@ -1276,14 +1271,14 @@ Mods: {
 			}
 
 			PetMonitoringTablet: {
-				// DisplayName: Pet Monitoring Tablet
-				// Tooltip: ""
+				DisplayName: 宠物管理面板
+				Tooltip: ""
 			}
 		}
 
 		Projectiles: {
 			PetExplosion: 宠物爆炸
-			// BonemerangProj.DisplayName: Bonemerang Proj
+			BonemerangProj.DisplayName: 骨头
 		}
 
 		Keybinds: {
@@ -1307,23 +1302,23 @@ Mods: {
 			MasteryShard5: 月亮领主掉落，每个世界只能掉落一个
 
 			PetTamer: {
-				// DisplayName: Pet Tamer
+				DisplayName: Pet Tamer
 
 				TownNPCMood: {
-					// Content: I am content.
-					// NoHome: I hate not having a home.
-					// FarFromHome: I am too far from home.
-					// LoveSpace: I love having so much space.
-					// DislikeCrowded: I dislike how crowded I am.
-					// HateCrowded: I hate how crowded I am.
-					// LikeBiome: I like {BiomeName}.
-					// DislikeBiome: I dislike {BiomeName}.
-					// LoveNPC: I love {NPCName}.
-					// LikeNPC: I like {NPCName}.
-					// DislikeNPC: I dislike {NPCName}.
-					// HateNPC: I hate {NPCName}.
-					// LikeNPC_Princess: I like {NPCName}.
-					// Princess_LovesNPC: I like {NPCName}.
+					Content: I am content.
+					NoHome: I hate not having a home.
+					FarFromHome: I am too far from home.
+					LoveSpace: I love having so much space.
+					DislikeCrowded: I dislike how crowded I am.
+					HateCrowded: I hate how crowded I am.
+					LikeBiome: I like {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					LoveNPC: I love {NPCName}.
+					LikeNPC: I like {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					Princess_LovesNPC: I like {NPCName}.
 				}
 			}
 		}
