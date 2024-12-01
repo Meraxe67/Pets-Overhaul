@@ -891,7 +891,7 @@ Mods: {
 			MartianPetItem:
 				'''
 				<class>
-				最大飞行时间变为<wingMult>倍
+				最大飞行时间提高<wingMult>%
 				加速度提高<acc>%
 				水平飞行速度变为<speedMult>倍
 				水平飞行加速度变为<accMult>倍
