@@ -1,20 +1,72 @@
-﻿using System;
+﻿using Humanizer;
+using PetsOverhaul.NPCs;
+using PetsOverhaul.TownPets;
+using PetsOverhaul.UI;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Reflection;
 using Terraria;
+using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace PetsOverhaul.Systems
 {
+    public class DisableShimmerForLightPet : ModSystem
+    {
+        public override void Load()
+        {
+            On_Item.CanShimmer += On_Item_CanShimmer;
+        }
+        private static bool On_Item_CanShimmer(On_Item.orig_CanShimmer orig, Item self)
+        {
+            if (PetItemIDs.LightPetNamesAndItems.ContainsValue(self.type))
+                return false;
+            return orig(self);
+        }
+    }
     public abstract class LightPetEffect : ModPlayer
     {
         public GlobalPet Pet => Player.GetModPlayer<GlobalPet>();
     }
     public abstract class LightPetItem : GlobalItem
     {
+        public override void OnCreated(Item item, ItemCreationContext context)
+        {
+            if (context is RecipeItemCreationContext recipeResult && recipeResult.ConsumedItems.Exists(x => PetItemIDs.LightPetNamesAndItems.ContainsValue(x.type)))
+            {
+                Item oldLightPet = recipeResult.ConsumedItems.Find(x => PetItemIDs.LightPetNamesAndItems.ContainsValue(x.type));
+                foreach (var globalOfNewPet in item.Globals)
+                {
+                    if (globalOfNewPet.GetType().IsSubclassOf(typeof(LightPetItem)))
+                    {
+                        foreach (var oldGlobal in oldLightPet.Globals)
+                        {
+                            if (oldGlobal.GetType().IsSubclassOf(typeof(LightPetItem)))
+                            {
+                                FieldInfo[] lightPetRolls = oldGlobal.GetType().GetFields();
+                                for (int i = 0; i < lightPetRolls.Length; i++)
+                                {
+                                    if (lightPetRolls[i].FieldType != typeof(LightPetStat))
+                                    {
+                                        continue;
+                                    }
+                                    LightPetStat createdRolls = (LightPetStat)lightPetRolls[i].GetValue(globalOfNewPet);
+                                    LightPetStat oldRolls = (LightPetStat)lightPetRolls[i].GetValue(oldGlobal);
+
+                                    createdRolls.SetRoll(oldRolls.MaxRoll * oldRolls.CurrentRoll * 0.01f);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
         public abstract int LightPetItemID { get; }
         public sealed override bool InstancePerEntity => true;
+
         public sealed override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
             return ExtraAppliesToEntity(entity, lateInstantiation) && entity.type == LightPetItemID;
@@ -25,11 +77,12 @@ namespace PetsOverhaul.Systems
         public virtual bool ExtraAppliesToEntity(Item entity, bool lateInstantation)
         { return true; }
         /// <summary>
-        /// Consumes item1 and item2, in result; creates a new Light Pet that inherits highest rolls of both Light Pets. If it fails, returns null and doesn't consume anything.
+        /// Consumes item1 and item2, in result; returns a new Light Pet that inherits highest rolls of both Light Pets. If it fails, returns null. Also returns null if combination has 0 quality raises. See LightPetCombine.cs in UI for initiation of this mechanic.
         /// </summary>
-        /// <param name="item1"></param>
-        /// <param name="item2"></param>
-        /// <returns></returns>
+        /// <param name="item1">First item to default its rolls to.</param>
+        /// <param name="item2">Second item to inherit stats from if they are higher.</param>
+        /// <param name="WasPointlessCombine">Whether or not it returned null because the combination was pointless; 0 new stats inherited.</param>
+        /// <returns>Returns the new item, or null if fails & was pointless.</returns>
         public static Item CombineLightPets(Item item1, Item item2)
         {
             if (item1.type == item2.type)
@@ -44,22 +97,35 @@ namespace PetsOverhaul.Systems
                             if (light.GetType().IsSubclassOf(typeof(LightPetItem)))
                             {
                                 FieldInfo[] lightPetRolls = light.GetType().GetFields();
+                                int changedCounter = 0;
+                                float priceCounter = 0;
                                 for (int i = 0; i < lightPetRolls.Length; i++)
                                 {
+                                    if (lightPetRolls[i].FieldType != typeof(LightPetStat))
+                                    {
+                                        continue;
+                                    }
                                     LightPetStat newPetRoll = (LightPetStat)lightPetRolls[i].GetValue(globalOfNewPet);
                                     LightPetStat secondPetRoll = (LightPetStat)lightPetRolls[i].GetValue(light);
+                                    priceCounter += Math.Abs(secondPetRoll.MaxRoll * (secondPetRoll.CurrentRoll - ((newPetRoll.CurrentRoll + secondPetRoll.CurrentRoll) / 2f)) * 0.01f);
                                     if (newPetRoll.CurrentRoll < secondPetRoll.CurrentRoll)
-                                    lightPetRolls[i].SetValue(globalOfNewPet, secondPetRoll);
+                                    {
+                                        lightPetRolls[i].SetValue(globalOfNewPet, secondPetRoll);
+                                        changedCounter++;
+                                    }
                                 }
-                                item1.TurnToAir();
-                                item2.TurnToAir();
+                                if (changedCounter <= 0 || lightPetRolls.Length == changedCounter)
+                                {
+                                    return null;
+                                }
+                                newPet.value = (int)(item2.value * priceCounter);
                                 return newPet;
                             }
                         }
                     }
                 }
             }
-                return null;
+            return null;
         }
     }
     /// <summary>
@@ -90,13 +156,63 @@ namespace PetsOverhaul.Systems
         public readonly float CurrentStatFloat => BaseStat + StatPerRoll * CurrentRoll;
         public readonly int CurrentStatInt => (int)Math.Ceiling(CurrentStatFloat);
         /// <summary>
-        /// Sets the roll of this stat. Commonly used in UpdateInventory()
+        /// Sets the roll of this stat. Commonly used in UpdateInventory(). Player luck allows for it to be rolled again; replacing the initial roll if higher (or lower for negative luck.)
         /// </summary>
-        public void SetRoll()
+        public void SetRoll(float luck)
         {
             if (CurrentRoll <= 0)
             {
                 CurrentRoll = Main.rand.Next(MaxRoll) + 1;
+                int timesToRoll = GlobalPet.Randomizer((int)(luck*100));
+                if (timesToRoll > 0)
+                {
+                    for (int i = 0; i < timesToRoll; i++)
+                    {
+                        int luckRoll = Main.rand.Next(MaxRoll) + 1;
+                        if (luckRoll > CurrentRoll)
+                            CurrentRoll = luckRoll;
+
+                    }
+                }
+                else if (timesToRoll < 0)
+                {
+                    for (int i = 0; i < timesToRoll * -1; i++)
+                    {
+                        int negativeLuckRoll = Main.rand.Next(MaxRoll) + 1;
+                        if (negativeLuckRoll < CurrentRoll)
+                            CurrentRoll = negativeLuckRoll;
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// Sets the Roll with upper limit of given percentage amount of MaxRoll.
+        /// </summary>
+        /// <param name="maxRollPercent"></param>
+        public void SetRoll(float luck, float maxRollPercent)
+        {
+            int tempMax = (int)Math.Round(Math.Clamp(maxRollPercent, 0, 1f) * MaxRoll);
+
+            CurrentRoll = Main.rand.Next(tempMax) + 1;
+            int timesToRoll = GlobalPet.Randomizer((int)(luck * 100));
+            if (timesToRoll > 0)
+            {
+                for (int i = 0; i < timesToRoll; i++)
+                {
+                    int luckRoll = Main.rand.Next(tempMax) + 1;
+                    if (luckRoll > CurrentRoll)
+                        CurrentRoll = luckRoll;
+
+                }
+            }
+            else if (timesToRoll < 0)
+            {
+                for (int i = 0; i < timesToRoll * -1; i++)
+                {
+                    int negativeLuckRoll = Main.rand.Next(tempMax) + 1;
+                    if (negativeLuckRoll < CurrentRoll)
+                        CurrentRoll = negativeLuckRoll;
+                }
             }
         }
         /// <summary>
