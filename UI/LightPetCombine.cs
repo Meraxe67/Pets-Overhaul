@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using PetsOverhaul.Config;
 using PetsOverhaul.NPCs;
@@ -15,6 +16,7 @@ using Terraria.GameContent.UI.Elements;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 using Terraria.UI;
 using Terraria.UI.Chat;
 namespace PetsOverhaul.UI
@@ -90,58 +92,75 @@ namespace PetsOverhaul.UI
     }
     public class LightPetCombineCanvas : UIState
     {
+        internal Item NewItem => LightPetItem.CombineLightPets(slot1.Item, slot2.Item);
         internal LightPetSlot slot1;
         internal LightPetSlot slot2;
+        internal UIText price;
+        internal UIText infoRegardingState;
+        internal int cost => NewItem.value;
         public override void OnInitialize()
         {
-            ClickPreventedPanel panel = new ClickPreventedPanel();
+            ClickPreventedPanel panel = new();
             panel.Width.Set(550, 0);
-            panel.Height.Set(210, 0);
+            panel.Height.Set(240, 0);
             panel.HAlign = 0.5f;
             panel.VAlign = 0.5f;
             Append(panel);
 
-            UIText header = new UIText("Light Pet Combining Menu");
+            UIText header = new("Light Pet Combining Menu");
             header.HAlign = 0.5f;
             header.Top.Set(15, 0);
             panel.Append(header);
 
-            UIPanel button = new UIPanel();
+            UIPanel button = new();
             button.Width.Set(80, 0);
             button.Height.Set(30, 0);
-            button.HAlign = 0.5f;
-            button.VAlign = 0.5f;
+            button.Top.Set(65, 0);
+            button.Left.Set(160, 0);
             button.OnLeftClick += OnButtonClick;
             panel.Append(button);
 
-            UIText text = new UIText("Combine");
+            UIText text = new("Combine");
             text.HAlign = text.VAlign = 0.5f;
             button.Append(text);
 
-            UIText infoText = new UIText("Put down two Light Pets of same type to combine them into one.\nNew Light Pet will inherit highest qualities of its parents.");
+            UIText infoText = new("Put down two Light Pets of same type to combine them into one.\nNew Light Pet will inherit highest qualities of its parents.\nCannot combine if combination results in no benefit.");
             infoText.Top.Set(125, 0);
             panel.Append(infoText);
 
-            slot1 = new LightPetSlot();
+            slot1 = new();
             slot1.Top.Set(55, 0);
-            slot1.Left.Set(35, 0);
+            slot1.Left.Set(20, 0);
             slot1.Width.Set(40, 0);
             slot1.Height.Set(40, 0);
             panel.Append(slot1);
 
-            slot2 = new LightPetSlot();
+            slot2 = new();
             slot2.Top.Set(55, 0);
-            slot2.Left.Set(115, 0);
+            slot2.Left.Set(95, 0);
             slot2.Width.Set(40, 0);
             slot2.Height.Set(40, 0);
             panel.Append(slot2);
+
+            price = new("Price:");
+            price.Top.Set(55, 0);
+            price.Left.Set(250, 0);
+            panel.Append(price);
+
+            infoRegardingState = new("Place two Light Pets of same type.");
+            infoRegardingState.Top.Set(85, 0);
+            infoRegardingState.Left.Set(250, 0);
+            panel.Append(infoRegardingState);
         }
         public void OnButtonClick(UIMouseEvent evt, UIElement listeningElement)
         {
-            Item item = LightPetItem.CombineLightPets(slot1.Item, slot2.Item);
-            if (item != null) 
+            if (NewItem is not null && Main.LocalPlayer.BuyItem(cost))
             {
-                Main.LocalPlayer.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetMisc,"Light Pet Combine"), item);
+                Item item = Main.LocalPlayer.QuickSpawnItemDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetMisc, "Light Pet Combine"), NewItem);
+                item.value = slot1.Item.value;
+                slot1.Item.TurnToAir();
+                slot2.Item.TurnToAir();
+                SoundEngine.PlaySound(SoundID.Item37);
             }
         }
         public override void Draw(SpriteBatch spriteBatch)
@@ -156,11 +175,61 @@ namespace PetsOverhaul.UI
                 if (slot2.Item is not null && slot2.Item.IsAir == false)
                 {
                     Main.LocalPlayer.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetMisc, "Light Pet Combine Close"), slot2.Item);
-                    slot2.Item.TurnToAir(); 
+                    slot2.Item.TurnToAir();
                 }
                 return;
             }
+            if (NewItem is not null)
+            {
+                price.SetText("Cost: [i:74]" + (cost / 1000000).ToString() + " [i:73]" + (cost % 1000000 / 10000).ToString() + " [i:72]" + (cost % 10000 / 100).ToString() + " [i:71]" + (cost % 100).ToString());
+                if (Main.LocalPlayer.CanAfford(cost))
+                    infoRegardingState.SetText("Ready to combine.");
+                else
+                    infoRegardingState.SetText("Cannot afford combination cost.");
+            }
+            else
+            {
+                price.SetText("Cost: N/A");
+                if (slot1.Item is not null && slot1.Item.IsAir == false && slot2.Item is not null && slot2.Item.IsAir == false)
+                {
+                    bool flag1 = PetItemIDs.LightPetNamesAndItems.ContainsValue(slot1.Item.type);
+                    bool flag2 = PetItemIDs.LightPetNamesAndItems.ContainsValue(slot2.Item.type);
+                    if (!flag1 && !flag2)
+                    {
+                        infoRegardingState.SetText("Both items are not Light Pets.");
+                    }
+                    else if (!flag1)
+                    {
+                        infoRegardingState.SetText("First item is not a Light Pet.");
+                    }
+                    else if (!flag2)
+                    {
+                        infoRegardingState.SetText("Second item is not a Light Pet.");
+                    }
+                }
+                else
+                {
+
+                    infoRegardingState.SetText("Place two Light Pets of same type.");
+                }
+            }
+
             base.Draw(spriteBatch);
+        }
+    }
+    public class StashSystem : ModPlayer
+    {
+        public static List<Item> Stash = new();
+        public override void OnEnterWorld()
+        {
+            if (Stash.Count > 0)
+            {
+                for (int i = 0; i < Stash.Count; i++)
+                {
+                    Player.QuickSpawnItem(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetMisc, "Stash"), Stash[i]);
+                }
+                Stash.Clear();
+            }
         }
     }
     [Autoload(Side = ModSide.Client)]
@@ -168,8 +237,9 @@ namespace PetsOverhaul.UI
     {
         internal LightPetCombineCanvas Display;
         private UserInterface _display;
-        public override void Load()
+        public override void OnWorldLoad() //Was originally in Load(), but in order to reset contents of the UI, its now in OnWorldLoad. Also added OpenLightPetCombineMenu = false so it won't have the menu open upon world load.
         {
+            PetTamer.openLightCombineMenu = false;
             Display = new LightPetCombineCanvas();
             Display.Activate();
             _display = new UserInterface();
@@ -194,6 +264,26 @@ namespace PetsOverhaul.UI
                     },
                     InterfaceScaleType.UI)
                 );
+            }
+        }
+        public override void SaveWorldData(TagCompound tag)
+        {
+            if (Display.slot1.Item is not null && Display.slot1.Item.IsAir == false)
+                tag.Add("slot1", Display.slot1.Item);
+            if (Display.slot2.Item is not null && Display.slot2.Item.IsAir == false)
+                tag.Add("slot2", Display.slot2.Item);
+        }
+        public override void LoadWorldData(TagCompound tag)
+        {
+            if (tag.TryGet("slot1", out Item item))
+            {
+                StashSystem.Stash.Add(item);
+                tag.Remove("slot1");
+            }
+            if (tag.TryGet("slot2", out Item item2))
+            {
+                StashSystem.Stash.Add(item2);
+                tag.Remove("slot2");
             }
         }
     }
