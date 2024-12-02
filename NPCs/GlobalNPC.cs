@@ -52,6 +52,12 @@ namespace PetsOverhaul.NPCs
         public bool VeloChangedGround2 { get; internal set; }
 
         public override bool InstancePerEntity => true;
+        public override void GetChat(NPC npc, ref string chat)
+        {
+            if (PetObtainedCondition.petIsObtained == false && npc.type == NPCID.Guide && Main.rand.NextBool(10))
+                chat = "Hmm. I see you haven't taken care of a Pet yet. I've heard that if you can find one and start keeping it around you, a Pet Tamer may settle in!";
+
+        }
         public static void OnKillInvokeDeathEffects(int playerWhoAmI, NPC npc)
         {
             Player player = Main.player[playerWhoAmI];
