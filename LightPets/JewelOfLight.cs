@@ -32,21 +32,17 @@ namespace PetsOverhaul.LightPets
             }
         }
     }
-    public sealed class JewelOfLight : GlobalItem
+    public sealed class JewelOfLight : LightPetItem
     {
         public LightPetStat MovementSpeed = new(8, 0.01f, 0.07f);
         public LightPetStat WingTime = new(15, 4, 30);
         public LightPetStat Acceleration = new(20, 0.0012f, 0.02f);
-        public override bool InstancePerEntity => true;
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
-        {
-            return entity.type == ItemID.FairyQueenPetItem;
-        }
+        public override int LightPetItemID => ItemID.FairyQueenPetItem;
         public override void UpdateInventory(Item item, Player player)
         {
-            MovementSpeed.SetRoll();
-            WingTime.SetRoll();
-            Acceleration.SetRoll();
+            MovementSpeed.SetRoll(player.luck);
+            WingTime.SetRoll(player.luck);
+            Acceleration.SetRoll(player.luck);
         }
         public override void NetSend(Item item, BinaryWriter writer)
         {

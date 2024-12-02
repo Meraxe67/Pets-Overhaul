@@ -31,23 +31,19 @@ namespace PetsOverhaul.LightPets
             }
         }
     }
-    public sealed class WispInABottle : GlobalItem
+    public sealed class WispInABottle : LightPetItem
     {
         public LightPetStat MagicDamage = new(20, 0.004f, 0.04f);
         public LightPetStat RangedDamage = new(20, 0.004f, 0.04f);
         public LightPetStat ProjectileVelocity = new(12, 0.01f, 0.05f);
         public LightPetStat PetDamage = new(25, 0.0065f, 0.0675f);
-        public override bool InstancePerEntity => true;
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
-        {
-            return entity.type == ItemID.WispinaBottle;
-        }
+        public override int LightPetItemID => ItemID.WispinaBottle;
         public override void UpdateInventory(Item item, Player player)
         {
-            MagicDamage.SetRoll();
-            RangedDamage.SetRoll();
-            ProjectileVelocity.SetRoll();
-            PetDamage.SetRoll();
+            MagicDamage.SetRoll(player.luck);
+            RangedDamage.SetRoll(player.luck);
+            ProjectileVelocity.SetRoll(player.luck);
+            PetDamage.SetRoll(player.luck);
         }
         public override void NetSend(Item item, BinaryWriter writer)
         {

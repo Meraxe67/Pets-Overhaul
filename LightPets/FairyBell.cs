@@ -21,19 +21,15 @@ namespace PetsOverhaul.LightPets
             }
         }
     }
-    public sealed class FairyBell : GlobalItem
+    public sealed class FairyBell : LightPetItem
     {
         public LightPetStat AbilityHaste = new(15, 0.012f, 0.1f);
         public LightPetStat GlobalFortune = new(20, 1, 5);
-        public override bool InstancePerEntity => true;
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
-        {
-            return entity.type == ItemID.FairyBell;
-        }
+        public override int LightPetItemID => ItemID.FairyBell;
         public override void UpdateInventory(Item item, Player player)
         {
-            AbilityHaste.SetRoll();
-            GlobalFortune.SetRoll();
+            AbilityHaste.SetRoll(player.luck);
+            GlobalFortune.SetRoll(player.luck);
         }
         public override void NetSend(Item item, BinaryWriter writer)
         {

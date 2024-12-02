@@ -55,7 +55,7 @@ namespace PetsOverhaul.LightPets
             }
         }
     }
-    public sealed class SuspiciousLookingTentacle : GlobalItem
+    public sealed class SuspiciousLookingTentacle : LightPetItem
     {
         public LightPetStat Defense = new(5, 1);
         public LightPetStat MovementSpeed = new(20, 0.004f);
@@ -69,25 +69,21 @@ namespace PetsOverhaul.LightPets
         public LightPetStat Mana = new(5, 12);
         public LightPetStat MeleeSize = new(5, 0.04f);
         public LightPetStat MeleeKnockback = new(5, 0.12f);
-        public override bool InstancePerEntity => true;
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
-        {
-            return entity.type == ItemID.SuspiciousLookingTentacle;
-        }
+        public override int LightPetItemID => ItemID.SuspiciousLookingTentacle;
         public override void UpdateInventory(Item item, Player player)
         {
-            Defense.SetRoll();
-            MovementSpeed.SetRoll();
-            DamageAll.SetRoll();
-            CritChanceAll.SetRoll();
-            RangedPercentPenetration.SetRoll();
-            RangedCritDamage.SetRoll();
-            SummonerFlatPenetration.SetRoll();
-            WhipRange.SetRoll();
-            ManaPotionIncrease.SetRoll();
-            Mana.SetRoll();
-            MeleeSize.SetRoll();
-            MeleeKnockback.SetRoll();
+            Defense.SetRoll(player.luck);
+            MovementSpeed.SetRoll(player.luck);
+            DamageAll.SetRoll(player.luck);
+            CritChanceAll.SetRoll(player.luck);
+            RangedPercentPenetration.SetRoll(player.luck);
+            RangedCritDamage.SetRoll(player.luck);
+            SummonerFlatPenetration.SetRoll(player.luck);
+            WhipRange.SetRoll(player.luck);
+            ManaPotionIncrease.SetRoll(player.luck);
+            Mana.SetRoll(player.luck);
+            MeleeSize.SetRoll(player.luck);
+            MeleeKnockback.SetRoll(player.luck);
         }
         public override void NetSend(Item item, BinaryWriter writer)
         {

@@ -30,9 +30,9 @@ namespace PetsOverhaul.LightPets
         public LightPetStat AttackSpeed = new(20, 0.004f, 0.025f);
         public override void UpdateInventory(Item item, Player player)
         {
-            SummonDamage.SetRoll();
-            MeleeDamage.SetRoll();
-            AttackSpeed.SetRoll();
+            SummonDamage.SetRoll(player.luck);
+            MeleeDamage.SetRoll(player.luck);
+            AttackSpeed.SetRoll(player.luck);
         }
         public override void NetSend(Item item, BinaryWriter writer)
         {

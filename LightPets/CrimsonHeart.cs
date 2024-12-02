@@ -22,21 +22,17 @@ namespace PetsOverhaul.LightPets
             }
         }
     }
-    public sealed class CrimsonHeart : GlobalItem
+    public sealed class CrimsonHeart : LightPetItem
     {
         public LightPetStat Health = new(10, 1, 10);
         public LightPetStat MovementSpeed = new(15, 0.005f, 0.025f);
         public LightPetStat FishingFortune = new(15, 1, 5);
-        public override bool InstancePerEntity => true;
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
-        {
-            return entity.type == ItemID.CrimsonHeart;
-        }
+        public override int LightPetItemID => ItemID.CrimsonHeart;
         public override void UpdateInventory(Item item, Player player)
         {
-            Health.SetRoll();
-            MovementSpeed.SetRoll();
-            FishingFortune.SetRoll();
+            Health.SetRoll(player.luck);
+            MovementSpeed.SetRoll(player.luck);
+            FishingFortune.SetRoll(player.luck);
         }
         public override void NetSend(Item item, BinaryWriter writer)
         {

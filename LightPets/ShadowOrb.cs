@@ -22,21 +22,17 @@ namespace PetsOverhaul.LightPets
             }
         }
     }
-    public sealed class ShadowOrb : GlobalItem
+    public sealed class ShadowOrb : LightPetItem
     {
         public LightPetStat Mana = new(10, 2, 20);
         public LightPetStat MovementSpeed = new(15, 0.005f, 0.025f);
         public LightPetStat HarvestingFortune = new(15, 1, 5);
-        public override bool InstancePerEntity => true;
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
-        {
-            return entity.type == ItemID.ShadowOrb;
-        }
+        public override int LightPetItemID => ItemID.ShadowOrb;
         public override void UpdateInventory(Item item, Player player)
         {
-            Mana.SetRoll();
-            MovementSpeed.SetRoll();
-            HarvestingFortune.SetRoll();
+            Mana.SetRoll(player.luck);
+            MovementSpeed.SetRoll(player.luck);
+            HarvestingFortune.SetRoll(player.luck);
         }
         public override void NetSend(Item item, BinaryWriter writer)
         {

@@ -60,7 +60,7 @@ Mods: {
 				/pet faq，/pet question -> 显示关于宠物大修的常见问题
 				/pet pets 或/pet class {all|melee|ranged|magic|summoner|utility|mobility|harvesting|mining|fishing|offensive|defensive|supportive|rogue}
 				-> 在聊天栏中显示参数中的职业宠物列表。“all”参数会显示所有宠物。
-	->all->全职业，melee->近战，ranged->远程，magic->魔法，summoner->召唤，utility->通用，mobility->机动，harvesting->采集，mining->挖掘，fishing->钓鱼，offensive->进攻，defensive->防御，supportive->辅助，rogue->盗贼
+				->all->全职业，melee->近战，ranged->远程，magic->魔法，summoner->召唤，utility->通用，mobility->机动，harvesting->采集，mining->挖掘，fishing->钓鱼，offensive->进攻，defensive->防御，supportive->辅助，rogue->盗贼
 				'''
 			FAQ:
 				'''

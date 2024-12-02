@@ -30,21 +30,17 @@ namespace PetsOverhaul.LightPets
 
         }
     }
-    public sealed class JackOLantern : GlobalItem
+    public sealed class JackOLantern : LightPetItem
     {
         public LightPetStat AttackSpeed = new(30, 0.003f, 0.04f);
         public LightPetStat Luck = new(15, 0.01f, 0.03f);
         public LightPetStat HarvestingFortune = new(20, 1, 10);
-        public override bool InstancePerEntity => true;
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
-        {
-            return entity.type == ItemID.PumpkingPetItem;
-        }
+        public override int LightPetItemID => ItemID.PumpkingPetItem;
         public override void UpdateInventory(Item item, Player player)
         {
-            AttackSpeed.SetRoll();
-            Luck.SetRoll();
-            HarvestingFortune.SetRoll();
+            AttackSpeed.SetRoll(player.luck);
+            Luck.SetRoll(player.luck);
+            HarvestingFortune.SetRoll(player.luck);
         }
         public override void NetSend(Item item, BinaryWriter writer)
         {

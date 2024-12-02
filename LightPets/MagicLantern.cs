@@ -23,23 +23,19 @@ namespace PetsOverhaul.LightPets
             }
         }
     }
-    public sealed class MagicLantern : GlobalItem
+    public sealed class MagicLantern : LightPetItem
     {
         public LightPetStat Defense = new(3, 1);
         public LightPetStat DefensePercent = new(20, 0.002f, 0.01f);
         public LightPetStat DamageReduction = new(15, 0.002f, 0.01f);
         public LightPetStat MiningFortune = new(15, 1, 5);
-        public override bool InstancePerEntity => true;
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
-        {
-            return entity.type == ItemID.MagicLantern;
-        }
+        public override int LightPetItemID => ItemID.MagicLantern;
         public override void UpdateInventory(Item item, Player player)
         {
-            Defense.SetRoll();
-            DefensePercent.SetRoll();
-            DamageReduction.SetRoll();
-            MiningFortune.SetRoll();
+            Defense.SetRoll(player.luck);
+            DefensePercent.SetRoll(player.luck);
+            DamageReduction.SetRoll(player.luck);
+            MiningFortune.SetRoll(player.luck);
         }
         public override void NetSend(Item item, BinaryWriter writer)
         {

@@ -22,21 +22,17 @@ namespace PetsOverhaul.LightPets
             }
         }
     }
-    public sealed class ToyGolem : GlobalItem
+    public sealed class ToyGolem : LightPetItem
     {
         public LightPetStat HealthRegen = new(4, 1);
         public LightPetStat PercentHealth = new(35, 0.0018f, 0.022f);
         public LightPetStat ManaRegen = new(20, 5, 30);
-        public override bool InstancePerEntity => true;
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
-        {
-            return entity.type == ItemID.GolemPetItem;
-        }
+        public override int LightPetItemID => ItemID.GolemPetItem;
         public override void UpdateInventory(Item item, Player player)
         {
-            HealthRegen.SetRoll();
-            PercentHealth.SetRoll();
-            ManaRegen.SetRoll();
+            HealthRegen.SetRoll(player.luck);
+            PercentHealth.SetRoll(player.luck);
+            ManaRegen.SetRoll(player.luck);
         }
         public override void NetSend(Item item, BinaryWriter writer)
         {
