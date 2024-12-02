@@ -33,37 +33,6 @@ namespace PetsOverhaul.Systems
     }
     public abstract class LightPetItem : GlobalItem
     {
-        public override void OnCreated(Item item, ItemCreationContext context)
-        {
-            if (context is RecipeItemCreationContext recipeResult && recipeResult.ConsumedItems.Exists(x => PetItemIDs.LightPetNamesAndItems.ContainsValue(x.type)))
-            {
-                Item oldLightPet = recipeResult.ConsumedItems.Find(x => PetItemIDs.LightPetNamesAndItems.ContainsValue(x.type));
-                foreach (var globalOfNewPet in item.Globals)
-                {
-                    if (globalOfNewPet.GetType().IsSubclassOf(typeof(LightPetItem)))
-                    {
-                        foreach (var oldGlobal in oldLightPet.Globals)
-                        {
-                            if (oldGlobal.GetType().IsSubclassOf(typeof(LightPetItem)))
-                            {
-                                FieldInfo[] lightPetRolls = oldGlobal.GetType().GetFields();
-                                for (int i = 0; i < lightPetRolls.Length; i++)
-                                {
-                                    if (lightPetRolls[i].FieldType != typeof(LightPetStat))
-                                    {
-                                        continue;
-                                    }
-                                    LightPetStat createdRolls = (LightPetStat)lightPetRolls[i].GetValue(globalOfNewPet);
-                                    LightPetStat oldRolls = (LightPetStat)lightPetRolls[i].GetValue(oldGlobal);
-
-                                    createdRolls.SetRoll(oldRolls.MaxRoll * oldRolls.CurrentRoll * 0.01f);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
         public abstract int LightPetItemID { get; }
         public sealed override bool InstancePerEntity => true;
 
@@ -81,7 +50,6 @@ namespace PetsOverhaul.Systems
         /// </summary>
         /// <param name="item1">First item to default its rolls to.</param>
         /// <param name="item2">Second item to inherit stats from if they are higher.</param>
-        /// <param name="WasPointlessCombine">Whether or not it returned null because the combination was pointless; 0 new stats inherited.</param>
         /// <returns>Returns the new item, or null if fails & was pointless.</returns>
         public static Item CombineLightPets(Item item1, Item item2)
         {
@@ -127,6 +95,53 @@ namespace PetsOverhaul.Systems
             }
             return null;
         }
+        public override void OnCreated(Item item, ItemCreationContext context)
+        {
+            if (context is RecipeItemCreationContext recipeResult && recipeResult.ConsumedItems.Exists(x => PetItemIDs.LightPetNamesAndItems.ContainsValue(x.type)))
+            {
+                Item oldLightPet = recipeResult.ConsumedItems.Find(x => PetItemIDs.LightPetNamesAndItems.ContainsValue(x.type));
+                float cap = 0;
+                foreach (var oldGlobal in oldLightPet.Globals)
+                {
+                    if (oldGlobal.GetType().IsSubclassOf(typeof(LightPetItem)))
+                    {
+                        FieldInfo[] lightPetRolls = oldGlobal.GetType().GetFields();
+                        int count = 0; //count is more reliable as we will skip non-lightpetstat fields.
+                        for (int i = 0; i < lightPetRolls.Length; i++)
+                        {
+                            if (lightPetRolls[i].FieldType != typeof(LightPetStat))
+                            {
+                                continue;
+                            }
+                            LightPetStat oldRolls = (LightPetStat)lightPetRolls[i].GetValue(oldGlobal);
+                            count++;
+                            cap += (float)oldRolls.CurrentRoll / oldRolls.MaxRoll;
+                        }
+                        cap /= count;
+                    }
+                }
+                foreach (var globalOfNewPet in item.Globals)
+                {
+                    if (globalOfNewPet.GetType().IsSubclassOf(typeof(LightPetItem)))
+                    {
+                        FieldInfo[] lightPetRolls = globalOfNewPet.GetType().GetFields();
+                        for (int i = 0; i < lightPetRolls.Length; i++)
+                        {
+                            if (lightPetRolls[i].FieldType != typeof(LightPetStat))
+                            {
+                                continue;
+                            }
+                            LightPetStat newPetRoll = (LightPetStat)lightPetRolls[i].GetValue(globalOfNewPet);
+                            newPetRoll.SetRoll(Main.LocalPlayer.luck, cap); //This sets roll of 'newPetRoll'
+                            lightPetRolls[i].SetValue(globalOfNewPet, newPetRoll); //This actually changes the said roll to be changed on the GlobalItem.
+                        }
+                    }
+                }
+            }
+            ExtraOnCreated(item,context);
+        }
+        public virtual void ExtraOnCreated(Item item, ItemCreationContext context)
+        { }
     }
     /// <summary>
     /// Struct that contains all a singular Light Pet Stat has & methods for easy tooltip.
@@ -163,7 +178,7 @@ namespace PetsOverhaul.Systems
             if (CurrentRoll <= 0)
             {
                 CurrentRoll = Main.rand.Next(MaxRoll) + 1;
-                int timesToRoll = GlobalPet.Randomizer((int)(luck*100));
+                int timesToRoll = GlobalPet.Randomizer((int)(luck * 100));
                 if (timesToRoll > 0)
                 {
                     for (int i = 0; i < timesToRoll; i++)
@@ -186,13 +201,12 @@ namespace PetsOverhaul.Systems
             }
         }
         /// <summary>
-        /// Sets the Roll with upper limit of given percentage amount of MaxRoll.
+        /// Sets the Roll with upper limit of given percentage amount of MaxRoll. Doesn't check whether or not quality has been rolled before or not.
         /// </summary>
         /// <param name="maxRollPercent"></param>
         public void SetRoll(float luck, float maxRollPercent)
         {
             int tempMax = (int)Math.Round(Math.Clamp(maxRollPercent, 0, 1f) * MaxRoll);
-
             CurrentRoll = Main.rand.Next(tempMax) + 1;
             int timesToRoll = GlobalPet.Randomizer((int)(luck * 100));
             if (timesToRoll > 0)
