@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using PetsOverhaul.Items;
+using PetsOverhaul.NPCs.Gores;
 using PetsOverhaul.Projectiles;
 using PetsOverhaul.Systems;
 using PetsOverhaul.UI;
@@ -44,10 +45,10 @@ namespace PetsOverhaul.NPCs
 
             NPCID.Sets.ExtraFramesCount[Type] = 9; // Generally for Town NPCs, but this is how the NPC does extra things such as sitting in a chair and talking to other NPCs. This is the remaining frames after the walking frames.
             NPCID.Sets.AttackFrameCount[Type] = 4; // The amount of frames in the attacking animation.
-            NPCID.Sets.DangerDetectRange[Type] = 700; // The amount of pixels away from the center of the NPC that it tries to attack enemies.
+            NPCID.Sets.DangerDetectRange[Type] = 800; // The amount of pixels away from the center of the NPC that it tries to attack enemies.
             NPCID.Sets.AttackType[Type] = 0; // The type of attack the Town NPC performs. 0 = throwing, 1 = shooting, 2 = magic, 3 = melee
-            NPCID.Sets.AttackTime[Type] = 90; // The amount of time it takes for the NPC's attack animation to be over once it starts.
-            NPCID.Sets.AttackAverageChance[Type] = 30; // The denominator for the chance for a Town NPC to attack. Lower numbers make the Town NPC appear more aggressive.
+            NPCID.Sets.AttackTime[Type] = 20; // The amount of time it takes for the NPC's attack animation to be over once it starts.
+            NPCID.Sets.AttackAverageChance[Type] = 10; // The denominator for the chance for a Town NPC to attack. Lower numbers make the Town NPC appear more aggressive.
             NPCID.Sets.HatOffsetY[Type] = 4; // For when a party is active, the party hat spawns at a Y offset.
             //NPCID.Sets.ShimmerTownTransform[NPC.type] = true; // This set says that the Town NPC has a Shimmered form. Otherwise, the Town NPC will become transparent when touching Shimmer like other enemies.
 
@@ -72,13 +73,13 @@ namespace PetsOverhaul.NPCs
             // Set Example Person's biome and neighbor preferences with the NPCHappiness hook. You can add happiness text and remarks with localization (See an example in ExampleMod/Localization/en-US.lang).
             // NOTE: The following code uses chaining - a style that works due to the fact that the SetXAffection methods return the same NPCHappiness instance they're called on.
             NPC.Happiness
-                .SetBiomeAffection<ForestBiome>(AffectionLevel.Like) // Example Person prefers the forest.
-                .SetBiomeAffection<SnowBiome>(AffectionLevel.Dislike) // Example Person dislikes the snow.
-                .SetNPCAffection(NPCID.Dryad, AffectionLevel.Love) // Loves living near the dryad.
-                .SetNPCAffection(NPCID.Guide, AffectionLevel.Like) // Likes living near the guide.
-                .SetNPCAffection(NPCID.Merchant, AffectionLevel.Dislike) // Dislikes living near the merchant.
-                .SetNPCAffection(NPCID.Demolitionist, AffectionLevel.Hate) // Hates living near the demolitionist.
-            ; // < Mind the semicolon!
+                .SetBiomeAffection<ForestBiome>(AffectionLevel.Like)
+                .SetBiomeAffection<UndergroundBiome>(AffectionLevel.Dislike) 
+                .SetNPCAffection(NPCID.BestiaryGirl, AffectionLevel.Love) 
+                .SetNPCAffection(NPCID.Pirate, AffectionLevel.Like)
+                .SetNPCAffection(NPCID.Truffle, AffectionLevel.Like)
+                .SetNPCAffection(NPCID.Mechanic, AffectionLevel.Dislike) 
+                .SetNPCAffection(NPCID.Cyborg, AffectionLevel.Dislike);
 
             //// This creates a "profile" for ExamplePerson, which allows for different textures during a party and/or while the NPC is shimmered.
             //NPCProfile = new Profiles.StackedNPCProfile(
@@ -89,8 +90,8 @@ namespace PetsOverhaul.NPCs
 
         public override void SetDefaults()
         {
-            NPC.townNPC = true; // Sets NPC to be a Town NPC
-            NPC.friendly = true; // NPC Will not attack player
+            NPC.townNPC = true;
+            NPC.friendly = true;
             NPC.width = 18;
             NPC.height = 40;
             NPC.aiStyle = 7;
@@ -113,11 +114,7 @@ namespace PetsOverhaul.NPCs
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 
 				// Sets your NPC's flavor text in the bestiary.
-				new FlavorTextBestiaryInfoElement("Hailing from a mysterious greyscale cube world, the Example Person is here to help you understand everything about tModLoader."),
-
-				// You can add multiple elements if you really wanted to
-				// You can also use localization keys (see Localization/en-US.lang)
-				new FlavorTextBestiaryInfoElement("Mods.PetsOverhaul.Secs")
+				new FlavorTextBestiaryInfoElement("The great Pet Tamer, knows more regarding Pets more than anyone else. Well known for his capabilities in helping Light Pets reach their greatest potential."),
             });
         }
         public override void HitEffect(NPC.HitInfo hit)
@@ -129,29 +126,33 @@ namespace PetsOverhaul.NPCs
                 Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Blood);
             }
 
-            //// Create gore when the NPC is killed.
-            //if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
-            //{
-            //    // Retrieve the gore types. This NPC has shimmer and party variants for head, arm, and leg gore. (12 total gores)
-            //    string variant = "";
-            //    if (NPC.IsShimmerVariant) variant += "_Shimmer";
-            //    if (NPC.altTexture == 1) variant += "_Party";
-            //    int hatGore = NPC.GetPartyHatGore();
-            //    int headGore = Mod.Find<ModGore>($"{Name}_Gore{variant}_Head").Type;
-            //    int armGore = Mod.Find<ModGore>($"{Name}_Gore{variant}_Arm").Type;
-            //    int legGore = Mod.Find<ModGore>($"{Name}_Gore{variant}_Leg").Type;
+            // Create gore when the NPC is killed.
+            if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
+            {
+                //string variant = "";
+                //if (NPC.IsShimmerVariant) variant += "_Shimmer";
+                //if (NPC.altTexture == 1) variant += "_Party";
+                int hatGore = NPC.GetPartyHatGore();
+                //int headGore = Mod.Find<ModGore>($"{Name}_Gore{variant}_Head").Type;
+                //int armGore = Mod.Find<ModGore>($"{Name}_Gore{variant}_Arm").Type;
+                //int legGore = Mod.Find<ModGore>($"{Name}_Gore{variant}_Leg").Type;
 
-            //    // Spawn the gores. The positions of the arms and legs are lowered for a more natural look.
-            //    if (hatGore > 0)
-            //    {
-            //        Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, hatGore);
-            //    }
-            //    Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, headGore, 1f);
-            //    Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 20), NPC.velocity, armGore);
-            //    Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 20), NPC.velocity, armGore);
-            //    Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 34), NPC.velocity, legGore);
-            //    Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 34), NPC.velocity, legGore);
-            //}
+                int armGore = ModContent.GoreType<PetTamerArmGore>();
+                int legGore = ModContent.GoreType<PetTamerLegGore>();
+                int headGore = ModContent.GoreType<PetTamerHeadGore>();
+                // Spawn the gores. The positions of the arms and legs are lowered for a more natural look.
+                if (hatGore > 0)
+                {
+                    Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, hatGore);
+                }
+
+
+                Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, headGore, 1f);
+                Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 20), NPC.velocity, armGore);
+                Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 20), NPC.velocity, armGore);
+                Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 34), NPC.velocity, legGore);
+                Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 34), NPC.velocity, legGore);
+            }
         }
 
         public override bool CanTownNPCSpawn(int numTownNPCs)
@@ -172,29 +173,16 @@ namespace PetsOverhaul.NPCs
             ];
         }
 
-        public override void FindFrame(int frameHeight)
+        public override string GetChat()
         {
-            /*npc.frame.Width = 40;
-			if (((int)Main.time / 10) % 2 == 0)
-			{
-				npc.frame.X = 40;
-			}
-			else
-			{
-				npc.frame.X = 0;
-			}*/
+            WeightedRandom<string> chat = new WeightedRandom<string>();
+
+            chat.Add("aasd", 5);
+            chat.Add("b");
+            string chosenChat = chat; // chat is implicitly cast to a string. This is where the random choice is made.
+
+            return chosenChat;
         }
-
-        //public override string GetChat()
-        //{
-        //    WeightedRandom<string> chat = new WeightedRandom<string>();
-
-        //    chat.Add("aasd",5);
-        //    chat.Add("b");
-        //    string chosenChat = chat; // chat is implicitly cast to a string. This is where the random choice is made.
-
-        //    return chosenChat;
-        //}
 
         public override void SetChatButtons(ref string button, ref string button2)
         { // What the chat buttons are when you open up the chat UI
@@ -224,10 +212,10 @@ namespace PetsOverhaul.NPCs
         }
 
 
-        //public override void ModifyNPCLoot(NPCLoot npcLoot)
-        //{
-        //    npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ExampleCostume>()));
-        //}
+        public override void ModifyNPCLoot(NPCLoot npcLoot)
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Bonemerang>()));
+        }
 
         // Make this Town NPC teleport to the King and/or Queen statue when triggered. Return toKingStatue for only King Statues. Return !toKingStatue for only Queen Statues. Return true for both.
         public override bool CanGoToStatue(bool toKingStatue) => toKingStatue;
@@ -245,14 +233,14 @@ namespace PetsOverhaul.NPCs
 
         public override void TownNPCAttackProj(ref int projType, ref int attackDelay)
         {
-            projType = ModContent.ProjectileType<BonemerangProj>();
+            projType = ProjectileID.Bone;
             attackDelay = 1;
         }
 
         public override void TownNPCAttackProjSpeed(ref float multiplier, ref float gravityCorrection, ref float randomOffset)
         {
-            multiplier = 12f;
-            randomOffset = 2f;
+            multiplier = 10f;
+            randomOffset = 1.3f;
         }
     }
 }
