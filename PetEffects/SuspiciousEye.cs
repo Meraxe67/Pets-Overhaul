@@ -32,13 +32,9 @@ namespace PetsOverhaul.PetEffects
         public bool eocShieldEquipped = false;
         public int dashFrameReduce = 10;
         public float forcedEnrageShield = 0.1f;
-        public override void PreUpdate()
+        public override int PetAbilityCooldown => phaseCd;
+        public override void ExtraPreUpdate()
         {
-            if (PetIsEquipped(false))
-            {
-                Pet.SetPetAbilityTimer(phaseCd);
-            }
-
             if (eocTimer >= -1)
             {
                 eocTimer--;

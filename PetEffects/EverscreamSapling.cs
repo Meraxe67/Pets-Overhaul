@@ -21,13 +21,7 @@ namespace PetsOverhaul.PetEffects
         public int manaIncrease = 100;
 
         public override PetClasses PetClassPrimary => PetClasses.Magic;
-        public override void PreUpdate()
-        {
-            if (PetIsEquipped(false))
-            {
-                Pet.SetPetAbilityTimer(cooldown);
-            }
-        }
+        public override int PetAbilityCooldown => cooldown;
         public override void PostUpdateMiscEffects()
         {
             if (PetIsEquipped())

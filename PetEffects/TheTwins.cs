@@ -25,13 +25,7 @@ namespace PetsOverhaul.PetEffects
 
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
         public override PetClasses PetClassSecondary => PetClasses.Utility;
-        public override void PreUpdate()
-        {
-            if (PetIsEquipped(false))
-            {
-                Pet.SetPetAbilityTimer(healthDmgCd);
-            }
-        }
+        public override int PetAbilityCooldown => healthDmgCd;
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             if (PetIsEquipped())

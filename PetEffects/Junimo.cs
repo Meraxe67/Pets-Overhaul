@@ -476,7 +476,7 @@ namespace PetsOverhaul.PetEffects
                 popupIndexFish = PopupExp(popupIndexFish, popupExpFish, new Color(3, 130, 233));
             }
         }
-        public override void PreUpdate()
+        public override void ExtraPreUpdateNoCheck()
         {
             if (popupIndexHarv > -1 && Main.popupText[popupIndexHarv].lifeTime <= 0)
             {

@@ -21,13 +21,7 @@ namespace PetsOverhaul.PetEffects
         public int EnemiesBurning { get; internal set; }
         public override PetClasses PetClassPrimary => PetClasses.Utility;
         public override PetClasses PetClassSecondary => PetClasses.Defensive;
-        public override void PreUpdate()
-        {
-            if (PetIsEquipped(false))
-            {
-                Pet.SetPetAbilityTimer(burnDrain);
-            }
-        }
+        public override int PetAbilityCooldown => burnDrain;
         public override void PostUpdateMiscEffects()
         {
             if (PetIsEquipped())

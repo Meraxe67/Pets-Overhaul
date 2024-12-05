@@ -31,13 +31,7 @@ namespace PetsOverhaul.PetEffects
                 deerclopsTakenDamage.Add((info.Damage, damageStoreTime));
             }
         }
-        public override void PreUpdate()
-        {
-            if (PetIsEquipped(false))
-            {
-                Pet.SetPetAbilityTimer(cooldown);
-            }
-        }
+        public override int PetAbilityCooldown => cooldown;
         public override void PostUpdateMiscEffects()
         {
             if (PetIsEquipped())

@@ -18,13 +18,7 @@ namespace PetsOverhaul.PetEffects
         public int increaseInt = 4;
         public int shroomPotionCd = 60;
         public int buffIncrease = 30;
-        public override void PreUpdate()
-        {
-            if (PetIsEquipped(false))
-            {
-                Pet.SetPetAbilityTimer(shroomPotionCd);
-            }
-        }
+        public override int PetAbilityCooldown => shroomPotionCd;
         public override void PostUpdateMiscEffects()
         {
             if (PetIsEquipped())

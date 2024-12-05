@@ -26,13 +26,7 @@ namespace PetsOverhaul.PetEffects
         public int critReduction = 4;
         public float moveSpdIncr = 0.04f;
         public int beeChance = 7;
-        public override void PreUpdate()
-        {
-            if (PetIsEquipped(false))
-            {
-                Pet.SetPetAbilityTimer(beeCooldown);
-            }
-        }
+        public override int PetAbilityCooldown => beeCooldown;
         public override void PreUpdateBuffs()
         {
             if (PetIsEquipped())

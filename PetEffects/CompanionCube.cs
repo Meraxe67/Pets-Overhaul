@@ -22,12 +22,9 @@ namespace PetsOverhaul.PetEffects
         public float healthToMana = 0.25f;
         public float manaPotionNerf = 0.17f;
         public float manaToHealthNerf = 0.03f;
-        public override void PreUpdate()
+        public override void ExtraPreUpdate()
         {
-            if (PetIsEquipped(false))
-            {
-                manaToHealth = manaToHealthUpdate;
-            }
+            manaToHealth = manaToHealthUpdate;
         }
         public override void PostUpdateBuffs()
         {

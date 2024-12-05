@@ -26,13 +26,7 @@ namespace PetsOverhaul.PetEffects
         public int moonlightLowest = -10;
         public int moonlightHighest = 20;
         public float currentMoonLuck = 0;
-        public override void PreUpdate()
-        {
-            if (PetIsEquipped(false))
-            {
-                Pet.SetPetAbilityTimer(moonlightCd);
-            }
-        }
+        public override int PetAbilityCooldown => moonlightCd;
         public override void ModifyLuck(ref float luck)
         {
             if (PetIsEquipped())

@@ -22,13 +22,7 @@ namespace PetsOverhaul.PetEffects
 
         public override PetClasses PetClassPrimary => PetClasses.Magic;
         public override PetClasses PetClassSecondary => PetClasses.Supportive;
-        public override void PreUpdate()
-        {
-            if (PetIsEquipped(false))
-            {
-                Pet.SetPetAbilityTimer(glommerSanityTime);
-            }
-        }
+        public override int PetAbilityCooldown => glommerSanityTime;
         public override void PostUpdateMiscEffects()
         {
             if (PetIsEquipped(false) && Main.rand.NextBool(18000))

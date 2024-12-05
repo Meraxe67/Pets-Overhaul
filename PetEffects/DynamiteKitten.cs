@@ -21,13 +21,7 @@ namespace PetsOverhaul.PetEffects
         public int explosionSize = 200;
 
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
-        public override void PreUpdate()
-        {
-            if (PetIsEquipped(false))
-            {
-                Pet.SetPetAbilityTimer(cooldown);
-            }
-        }
+        public override int PetAbilityCooldown => cooldown;
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (PetIsEquipped() && Pet.timer <= 0)

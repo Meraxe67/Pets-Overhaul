@@ -75,30 +75,27 @@ namespace PetsOverhaul.PetEffects
                 }
             }
         }
-        public override void PreUpdate()
+        public override int PetAbilityCooldown => phantasmDragonCooldown;
+        public override void ExtraPreUpdate()
         {
-            if (PetIsEquipped(false))
+            if (fireVolley > 0 && fireVolley % fireVolleyEveryFrame == 0)
             {
-                if (fireVolley > 0 && fireVolley % fireVolleyEveryFrame == 0)
-                {
-                    Vector2 location = Player.Center;
-                    if (ModContent.GetInstance<PetPersonalization>().PhantasmalDragonVolleyFromMouth)
-                        foreach (var projectile in Main.ActiveProjectiles)
+                Vector2 location = Player.Center;
+                if (ModContent.GetInstance<PetPersonalization>().PhantasmalDragonVolleyFromMouth)
+                    foreach (var projectile in Main.ActiveProjectiles)
+                    {
+                        if (projectile is Projectile proj && proj.owner == Player.whoAmI && proj.type == ProjectileID.LunaticCultistPet)
                         {
-                            if (projectile is Projectile proj && proj.owner == Player.whoAmI && proj.type == ProjectileID.LunaticCultistPet)
-                            {
-                                location = proj.Center;
-                            }
+                            location = proj.Center;
                         }
-                    Projectile petProjectile = Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile, "Phantasmal"), location, new Vector2(Main.MouseWorld.X - location.X - Main.rand.NextFloat(3f, -3f), Main.MouseWorld.Y - location.Y - Main.rand.NextFloat(6f, 7f)), ProjectileID.CultistBossFireBall, Pet.PetDamage(fireBase), fireKnockback, Player.whoAmI);
-                    petProjectile.DamageType = DamageClass.Generic;
-                    petProjectile.CritChance = (int)Player.GetTotalCritChance(DamageClass.Generic);
-                }
-                Pet.SetPetAbilityTimer(phantasmDragonCooldown);
-                fireVolley--;
-                if (fireVolley < 0)
-                    fireVolley = 0;
+                    }
+                Projectile petProjectile = Projectile.NewProjectileDirect(GlobalPet.GetSource_Pet(EntitySourcePetIDs.PetProjectile, "Phantasmal"), location, new Vector2(Main.MouseWorld.X - location.X - Main.rand.NextFloat(3f, -3f), Main.MouseWorld.Y - location.Y - Main.rand.NextFloat(6f, 7f)), ProjectileID.CultistBossFireBall, Pet.PetDamage(fireBase), fireKnockback, Player.whoAmI);
+                petProjectile.DamageType = DamageClass.Generic;
+                petProjectile.CritChance = (int)Player.GetTotalCritChance(DamageClass.Generic);
             }
+            fireVolley--;
+            if (fireVolley < 0)
+                fireVolley = 0;
         }
         public override void ProcessTriggers(TriggersSet triggersSet)
         {

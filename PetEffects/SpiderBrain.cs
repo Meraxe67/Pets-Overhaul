@@ -18,7 +18,8 @@ namespace PetsOverhaul.PetEffects
         public float lifestealAmount = 0.035f;
 
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
-        public override void PreUpdate()
+        public override int PetAbilityCooldown => cdToAddToPool;
+        public override void ExtraPreUpdate()
         {
             if (PetIsEquipped(false))
             {
@@ -26,7 +27,6 @@ namespace PetsOverhaul.PetEffects
                     cdToAddToPool = 90;
                 else
                     cdToAddToPool = 180;
-                Pet.SetPetAbilityTimer(cdToAddToPool);
             }
         }
         public override void PreUpdateBuffs()

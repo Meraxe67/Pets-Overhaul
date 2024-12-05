@@ -20,14 +20,7 @@ namespace PetsOverhaul.PetEffects
         public int tier2Shield = 20;
         public int tier3Shield = 30;
         public int shieldTime = 1650;
-
-        public override void PreUpdate()
-        {
-            if (PetIsEquipped(false))
-            {
-                Pet.SetPetAbilityTimer(shieldCooldown);
-            }
-        }
+        public override int PetAbilityCooldown => shieldCooldown;
     }
     public sealed class PigmanEat : GlobalItem
     {

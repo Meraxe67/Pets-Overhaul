@@ -26,13 +26,7 @@ namespace PetsOverhaul.PetEffects
         public int tombTime = 300;
 
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
-        public override void PreUpdate()
-        {
-            if (PetIsEquipped(false))
-            {
-                Pet.SetPetAbilityTimer(cooldown);
-            }
-        }
+        public override int PetAbilityCooldown => cooldown;
         public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {
             if (PetIsEquipped() && frozenTomb == true)

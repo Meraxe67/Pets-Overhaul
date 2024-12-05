@@ -21,12 +21,12 @@ namespace PetsOverhaul.PetEffects
         public float playerTakenMult = 1.00f;
 
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
-        public override void PreUpdate()
+        public override void ExtraPreUpdate()
         {
             timer++;
-            if (timer > 10000)
+            if (timer > 100)
             {
-                timer = 10000;
+                timer = 100;
             }
         }
         public override void PostUpdateMiscEffects()

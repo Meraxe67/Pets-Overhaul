@@ -35,7 +35,8 @@ namespace PetsOverhaul.PetEffects
 
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
         public override PetClasses PetClassSecondary => PetClasses.Utility;
-        public override void PreUpdate()
+        public override int PetAbilityCooldown => tailCooldown;
+        public override void ExtraPreUpdateNoCheck()
         {
             if (Pet.skinColorChanged == false)
             {
@@ -52,7 +53,6 @@ namespace PetsOverhaul.PetEffects
                 buffTimer--;
                 if (buffTimer <= 0)
                     buffTimer = 0;
-                Pet.SetPetAbilityTimer(tailCooldown);
                 if (Player.statLife < Player.statLifeMax2 * 0.55f)
                 {
                     Player.skinColor = Color.YellowGreen;

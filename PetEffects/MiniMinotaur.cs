@@ -22,20 +22,17 @@ namespace PetsOverhaul.PetEffects
         public float defMult = 0.0023f;
 
         public override PetClasses PetClassPrimary => PetClasses.Melee;
-        public override void PreUpdate()
+        public override int PetAbilityCooldown => minotaurCd;
+        public override void ExtraPreUpdate()
         {
-            if (PetIsEquipped(false))
+            if (Pet.inCombatTimer <= 0 && minotaurStack > 0)
             {
-                Pet.SetPetAbilityTimer(minotaurCd);
-                if (Pet.inCombatTimer <= 0 && minotaurStack > 0)
-                {
-                    Pet.inCombatTimer = oocMaxDuration;
-                    minotaurStack--;
-                }
-                if (minotaurStack > maxStack)
-                {
-                    minotaurStack = maxStack;
-                }
+                Pet.inCombatTimer = oocMaxDuration;
+                minotaurStack--;
+            }
+            if (minotaurStack > maxStack)
+            {
+                minotaurStack = maxStack;
             }
         }
         public override void PostUpdateMiscEffects()

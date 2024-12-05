@@ -17,13 +17,7 @@ namespace PetsOverhaul.PetEffects
         public int harpyFlight = 150;
         private bool cooldownStarted;
         public override PetClasses PetClassPrimary => PetClasses.Mobility;
-        public override void PreUpdate()
-        {
-            if (PetIsEquipped(false))
-            {
-                Pet.SetPetAbilityTimer(harpyCd);
-            }
-        }
+        public override int PetAbilityCooldown => harpyCd;
         public override void PostUpdateMiscEffects()
         {
             if (Pet.timer <= 0)

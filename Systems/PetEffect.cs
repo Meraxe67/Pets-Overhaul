@@ -15,6 +15,7 @@ namespace PetsOverhaul.Systems
     /// </summary>
     public abstract class PetEffect : ModPlayer
     {
+        public virtual int PetAbilityCooldown => 0;
         /// <summary>
         /// Accesses the GlobalPet class, which has useful methods and fields for Pet implementation.
         /// </summary>
@@ -43,6 +44,23 @@ namespace PetsOverhaul.Systems
             else
                 return Pet.PetInUse(PetItemID);
         }
+        public sealed override void PreUpdate()
+        {
+            if (PetIsEquipped(false))
+            {
+                Pet.timerMax = PetAbilityCooldown;
+                ExtraPreUpdate();
+            }
+            ExtraPreUpdateNoCheck();
+        }
+        /// <summary>
+        /// This already checks for PetIsEquipped(false), so no need to check for it twice. Ran after setting the Pet.timerMax to PetAbilityCooldown.
+        /// </summary>
+        public virtual void ExtraPreUpdate() { }
+        /// <summary>
+        /// Same as ExtraPreUpdate() but doesn't check for Pet being equipped. Ran after ExtraPreUpdate().
+        /// </summary>
+        public virtual void ExtraPreUpdateNoCheck() { }
     }
     public abstract class PetTooltip : GlobalItem
     {

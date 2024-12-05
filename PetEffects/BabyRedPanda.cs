@@ -30,16 +30,13 @@ namespace PetsOverhaul.PetEffects
         private int alertEnemies = 1;
         public int alertEnemiesMax = 6;
         private int alertTimer = 0;
-        public override void PreUpdate()
+        public override int PetAbilityCooldown => alertCd;
+        public override void ExtraPreUpdate()
         {
-            if (PetIsEquipped(false))
+            alertTimer--;
+            if (alertTimer <= 0)
             {
-                Pet.SetPetAbilityTimer(alertCd);
-                alertTimer--;
-                if (alertTimer <= 0)
-                {
-                    alertTimer = 0;
-                }
+                alertTimer = 0;
             }
         }
         public override void PostUpdateMiscEffects()

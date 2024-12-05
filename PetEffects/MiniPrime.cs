@@ -25,13 +25,9 @@ namespace PetsOverhaul.PetEffects
 
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
         public override PetClasses PetClassSecondary => PetClasses.Offensive;
-        public override void PreUpdate()
+        public override void ExtraPreUpdate()
         {
-            if (PetIsEquipped(false))
-            {
-                Pet.SetPetAbilityTimer(shieldRecovery);
-                shieldedStatBoostActive = false;
-            }
+            shieldedStatBoostActive = false;
         }
         private void AddShield() //did not touch this guys shields, was an absolute nightmare to fix it (can be looked into later)
         {
@@ -90,7 +86,7 @@ namespace PetsOverhaul.PetEffects
         }
         public void AddShieldedStatBoosts()
         {
-            if (shieldedStatBoostActive == false) 
+            if (shieldedStatBoostActive == false)
             {
                 Player.GetDamage<GenericDamageClass>() += dmgIncrease;
                 Player.GetCritChance<GenericDamageClass>() += critIncrease;

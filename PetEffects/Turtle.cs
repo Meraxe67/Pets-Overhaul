@@ -28,17 +28,14 @@ namespace PetsOverhaul.PetEffects
         public float dmgReduceShellHarden = 0.07f;
         public float dmgReflect = 1.1f;
         public float dmgReflectProjectile = 0.6f;
-        public override void PreUpdate()
+        public override int PetAbilityCooldown => shellHardenCd;
+        public override void ExtraPreUpdate()
         {
-            if (PetIsEquipped(false))
+            timer--;
+            if (timer <= 0)
             {
-                Pet.SetPetAbilityTimer(shellHardenCd);
-                timer--;
-                if (timer <= 0)
-                {
-                    currentStacks = 0;
-                    timer = 0;
-                }
+                currentStacks = 0;
+                timer = 0;
             }
         }
         public override void PostUpdateMiscEffects()
