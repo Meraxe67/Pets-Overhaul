@@ -2,11 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using ReLogic.Graphics;
 using System.Collections.Generic;
-using System.Drawing;
 using Terraria;
-using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader;
 using Terraria.UI;

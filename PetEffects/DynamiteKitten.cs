@@ -2,7 +2,6 @@
 using PetsOverhaul.Config;
 using PetsOverhaul.Projectiles;
 using PetsOverhaul.Systems;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;

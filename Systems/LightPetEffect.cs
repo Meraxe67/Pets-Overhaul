@@ -1,14 +1,7 @@
-﻿using Humanizer;
-using PetsOverhaul.NPCs;
-using PetsOverhaul.TownPets;
-using PetsOverhaul.UI;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System;
 using System.Reflection;
 using Terraria;
 using Terraria.DataStructures;
-using Terraria.GameContent;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
@@ -138,7 +131,7 @@ namespace PetsOverhaul.Systems
                     }
                 }
             }
-            ExtraOnCreated(item,context);
+            ExtraOnCreated(item, context);
         }
         public virtual void ExtraOnCreated(Item item, ItemCreationContext context)
         { }

@@ -1,5 +1,4 @@
 using MonoMod.RuntimeDetour;
-using PetsOverhaul.Items;
 using PetsOverhaul.NPCs;
 using PetsOverhaul.PetEffects;
 using PetsOverhaul.Systems;

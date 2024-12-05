@@ -1,12 +1,9 @@
-﻿using PetsOverhaul.Config;
-using PetsOverhaul.Systems;
+﻿using PetsOverhaul.Systems;
 using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using Terraria.WorldBuilding;
 
 namespace PetsOverhaul.PetEffects
 {
@@ -85,7 +82,7 @@ namespace PetsOverhaul.PetEffects
         }
         public override bool CanConsumeAmmo(Item weapon, Item ammo)
         {
-            if (PetIsEquipped() && Main.rand.NextBool(increaseInt,100))
+            if (PetIsEquipped() && Main.rand.NextBool(increaseInt, 100))
             {
                 return false;
             }

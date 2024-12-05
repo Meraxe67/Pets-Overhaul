@@ -3,8 +3,6 @@ using PetsOverhaul.Buffs;
 using PetsOverhaul.Config;
 using PetsOverhaul.Items;
 using PetsOverhaul.NPCs;
-using PetsOverhaul.Projectiles;
-using PetsOverhaul.UI;
 using System;
 using System.Collections.Generic;
 using System.IO;

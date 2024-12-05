@@ -1,6 +1,4 @@
-﻿using PetsOverhaul.Config;
-using PetsOverhaul.Systems;
-using System.Collections.Generic;
+﻿using PetsOverhaul.Systems;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;

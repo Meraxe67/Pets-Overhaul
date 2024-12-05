@@ -1,8 +1,6 @@
-﻿using PetsOverhaul.Config;
-using PetsOverhaul.Items;
+﻿using PetsOverhaul.Items;
 using PetsOverhaul.Systems;
 using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;

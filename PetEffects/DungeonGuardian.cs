@@ -1,7 +1,5 @@
 ﻿using PetsOverhaul.Buffs;
-using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;

@@ -1,11 +1,6 @@
 ﻿using PetsOverhaul.Config;
-using PetsOverhaul.PetEffects;
-using rail;
 using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
 using Terraria;
-using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace PetsOverhaul.Systems

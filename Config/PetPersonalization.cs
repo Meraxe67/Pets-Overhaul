@@ -9,7 +9,7 @@ using Terraria.ModLoader.Config;
 
 namespace PetsOverhaul.Config
 {
-    [BackgroundColor(35,54,42,220)]
+    [BackgroundColor(35, 54, 42, 220)]
     public class PetPersonalization : ModConfig
     {
         public override LocalizedText DisplayName => Language.GetText("Mods.PetsOverhaul.Config.Personalization");

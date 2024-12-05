@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using PetsOverhaul.Config;
-using PetsOverhaul.Projectiles;
 using PetsOverhaul.Systems;
 using System.Collections.Generic;
 using System.IO;

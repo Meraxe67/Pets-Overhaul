@@ -1,5 +1,4 @@
-﻿using PetsOverhaul.Config;
-using PetsOverhaul.Systems;
+﻿using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -147,7 +146,7 @@ namespace PetsOverhaul.PetEffects
         public override void OnKill(NPC npc)
         {
             if (skeletronDealtDamage.Count > 0)
-            skeletronDealtDamage.Clear();
+                skeletronDealtDamage.Clear();
         }
     }
     public sealed class SkeletronPetItem : PetTooltip

@@ -1,10 +1,7 @@
-﻿using PetsOverhaul.Config;
-using PetsOverhaul.NPCs;
+﻿using PetsOverhaul.NPCs;
 using PetsOverhaul.Systems;
 using System;
-using System.Collections.Generic;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -52,7 +49,7 @@ namespace PetsOverhaul.PetEffects
             if (Player.Distance(target.Center) < closeRange && GlobalPet.LifestealCheck(target) && PetIsEquipped())
             {
                 target.AddBuff(BuffID.CursedInferno, infernoTime);
-                if (Pet.timer <= 0) 
+                if (Pet.timer <= 0)
                 {
                     Pet.PetRecovery(Player.statDefense * defMult * (Player.endurance + 1f), hit.Damage * defLifestealDmgMult);
                     Pet.timer = Pet.timerMax;

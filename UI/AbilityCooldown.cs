@@ -2,11 +2,9 @@
 using Microsoft.Xna.Framework.Graphics;
 using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
-using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -30,7 +28,7 @@ namespace PetsOverhaul.UI
             displayInfo = new("");
             canvas.Append(displayInfo);
 
-            cooldown = new(""); 
+            cooldown = new("");
             cooldown.VAlign = 0.50f;
             canvas.Append(cooldown);
         }

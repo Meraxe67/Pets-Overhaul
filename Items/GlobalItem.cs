@@ -2,7 +2,6 @@
 using PetsOverhaul.PetEffects;
 using PetsOverhaul.Systems;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Terraria;
@@ -110,8 +109,8 @@ namespace PetsOverhaul.Items
             else if (source is EntitySource_TileBreak brokenTile)
             {
                 ushort tileType = Main.tile[brokenTile.TileCoords].TileType;
-                
-                if (PlayerPlacedBlockList.placedBlocksByPlayer.Contains(new Point16(brokenTile.TileCoords.X,brokenTile.TileCoords.Y)) == false)
+
+                if (PlayerPlacedBlockList.placedBlocksByPlayer.Contains(new Point16(brokenTile.TileCoords.X, brokenTile.TileCoords.Y)) == false)
                 {
                     oreBoost = TileID.Sets.Ore[tileType] || gemTile[tileType] || extractableAndOthers[tileType] || Junimo.MiningXpPerBlock.Exists(x => x.oreList.Contains(item.type));
                     commonBlock = TileID.Sets.Conversion.Moss[tileType] || commonTiles[tileType];

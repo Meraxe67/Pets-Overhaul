@@ -1,7 +1,5 @@
-﻿using PetsOverhaul.Config;
-using PetsOverhaul.Systems;
+﻿using PetsOverhaul.Systems;
 using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;
@@ -58,6 +56,6 @@ namespace PetsOverhaul.PetEffects
                 .Replace("<glide>", sugarGlider.glideSpeedMult.ToString())
                         .Replace("<speed>", sugarGlider.speedMult.ToString())
                         .Replace("<acceleration>", sugarGlider.accMult.ToString())
-                        .Replace("<flatIncrease>", Math.Round(sugarGlider.accSpeedRaise * 100, 2).ToString()); 
+                        .Replace("<flatIncrease>", Math.Round(sugarGlider.accSpeedRaise * 100, 2).ToString());
     }
 }

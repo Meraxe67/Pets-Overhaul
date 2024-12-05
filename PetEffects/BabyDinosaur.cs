@@ -1,8 +1,6 @@
-﻿using PetsOverhaul.Config;
-using PetsOverhaul.Items;
+﻿using PetsOverhaul.Items;
 using PetsOverhaul.Systems;
 using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -69,6 +67,6 @@ namespace PetsOverhaul.PetEffects
         }
         public override string PetsTooltip => Language.GetTextValue("Mods.PetsOverhaul.PetItemTooltips.AmberMosquito")
                 .Replace("<oreChance>", Math.Round(babyDinosaur.chance / 10f, 2).ToString());
-        
+
     }
 }

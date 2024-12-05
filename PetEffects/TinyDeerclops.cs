@@ -64,7 +64,7 @@ namespace PetsOverhaul.PetEffects
                                 {
                                     npc.AddBuff(BuffID.Confused, applyTime);
                                 }
-                                    npc.AddBuff(BuffID.Frostburn, applyTime);
+                                npc.AddBuff(BuffID.Frostburn, applyTime);
                             }
                         }
                         Player.SetImmuneTimeForAllTypes(immuneTime);

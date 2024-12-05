@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
-using PetsOverhaul.Config;
 using PetsOverhaul.Systems;
 using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;

@@ -1,7 +1,5 @@
-﻿using PetsOverhaul.Config;
-using PetsOverhaul.Systems;
+﻿using PetsOverhaul.Systems;
 using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -55,6 +53,6 @@ namespace PetsOverhaul.PetEffects
                 .Replace("<moveSpd>", Math.Round(babyEater.moveSpd * 100, 2).ToString())
                 .Replace("<jumpSpd>", Math.Round(babyEater.jumpSpd * 100, 2).ToString())
                 .Replace("<fallRes>", babyEater.fallDamageTile.ToString());
-        
+
     }
 }

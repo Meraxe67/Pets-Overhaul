@@ -1,26 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using PetsOverhaul.Items;
 using PetsOverhaul.NPCs.Gores;
-using PetsOverhaul.Projectiles;
 using PetsOverhaul.Systems;
-using PetsOverhaul.TownPets;
-using PetsOverhaul.UI;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using Terraria;
-using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.GameContent.Personalities;
-using Terraria.GameContent.UI;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using Terraria.ModLoader.IO;
 using Terraria.Utilities;
 
 namespace PetsOverhaul.NPCs

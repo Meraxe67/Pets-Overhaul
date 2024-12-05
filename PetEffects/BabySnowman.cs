@@ -1,10 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
-using PetsOverhaul.Buffs;
-using PetsOverhaul.Config;
 using PetsOverhaul.NPCs;
 using PetsOverhaul.Systems;
 using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -37,7 +34,7 @@ namespace PetsOverhaul.PetEffects
             {
                 if (item.CountsAsClass(DamageClass.Melee) && !item.noMelee && !item.noUseGraphic && Main.rand.NextBool(2))
                 {
-                    if (Player.frostBurn) 
+                    if (Player.frostBurn)
                     {
                         return;
                     }
@@ -58,7 +55,7 @@ namespace PetsOverhaul.PetEffects
                     {
                         return;
                     }
-                    if (projectile.friendly && !projectile.hostile && Main.rand.NextBool(2 * (1 + projectile.extraUpdates))&& projectile.damage > 0)
+                    if (projectile.friendly && !projectile.hostile && Main.rand.NextBool(2 * (1 + projectile.extraUpdates)) && projectile.damage > 0)
                     {
                         int num = Dust.NewDust(boxPosition, boxWidth, boxHeight, DustID.IceTorch, projectile.velocity.X * 0.2f + (float)(projectile.direction * 3), projectile.velocity.Y * 0.2f, 100, default(Color), 2f);
                         Main.dust[num].noGravity = true;

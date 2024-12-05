@@ -24,7 +24,7 @@ namespace PetsOverhaul.Buffs.TownPetBuffs
             tip = Lang.GetBuffDescription(ModContent.BuffType<TownPetOld>())
                 .Replace("<OldDef>", oldSlime.oldDef.ToString())
                 .Replace("<OldKb>", oldSlime.oldKbResist.ToString())
-                .Replace("<OldHarvesting>",oldSlime.DefaultHarvFort.ToString());
+                .Replace("<OldHarvesting>", oldSlime.DefaultHarvFort.ToString());
             rare = 0;
         }
     }

@@ -4,7 +4,6 @@ using PetsOverhaul.Items;
 using PetsOverhaul.Systems;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;
@@ -343,7 +342,7 @@ namespace PetsOverhaul.NPCs
                 }
                 if (sickSlow)
                 {
-                    drawColor = new Color(218,252,222,235);
+                    drawColor = new Color(218, 252, 222, 235);
 
                     if (spawnDust)
                         Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.Poisoned, Alpha: 100, Scale: Main.rand.NextFloat(0.9f, 1.3f))

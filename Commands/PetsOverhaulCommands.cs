@@ -1,5 +1,4 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using PetsOverhaul.PetEffects;
 using PetsOverhaul.Systems;
 using System.Collections.Generic;
@@ -306,7 +305,7 @@ namespace PetsOverhaul.Commands
                                     break;
                                 case "ability" or "cooldown":
                                     reply = reply.Replace("<class>", Language.GetTextValue("Mods.PetsOverhaul.Ability"));
-                                    iterate(PetClasses.None,true);
+                                    iterate(PetClasses.None, true);
                                     break;
                                 default:
                                     caller.Reply(Language.GetTextValue("Mods.PetsOverhaul.Commands.ClassArgumentInvalid"), Color.Red);
