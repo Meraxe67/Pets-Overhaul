@@ -219,7 +219,7 @@ namespace PetsOverhaul.Commands
                         case "class" or "pets":
                             string reply = Language.GetTextValue("Mods.PetsOverhaul.Commands.PetList") + " ";
 
-                            void iterate(PetClasses petClass)
+                            void iterate(PetClasses petClass, bool abilityPets = false)
                             {
                                 int counterToGoDown = 5;
                                 bool found = false;
@@ -227,6 +227,10 @@ namespace PetsOverhaul.Commands
                                 {
                                     if (player is PetEffect pet && (petClass is PetClasses.None || pet.PetClassPrimary == petClass || pet.PetClassSecondary == petClass))
                                     {
+                                        if (abilityPets == true && pet.PetAbilityCooldown <= 0)
+                                        {
+                                            continue;
+                                        }
                                         counterToGoDown++;
                                         found = true;
                                         reply += "[i:" + pet.PetItemID + "] ";
@@ -299,6 +303,10 @@ namespace PetsOverhaul.Commands
                                 case "rogue":
                                     reply = reply.Replace("<class>", Language.GetTextValue("Mods.PetsOverhaul.Classes.Rogue"));
                                     iterate(PetClasses.Rogue);
+                                    break;
+                                case "ability" or "cooldown":
+                                    reply = reply.Replace("<class>", Language.GetTextValue("Mods.PetsOverhaul.Ability"));
+                                    iterate(PetClasses.None,true);
                                     break;
                                 default:
                                     caller.Reply(Language.GetTextValue("Mods.PetsOverhaul.Commands.ClassArgumentInvalid"), Color.Red);

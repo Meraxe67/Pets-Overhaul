@@ -41,7 +41,7 @@ namespace PetsOverhaul.Systems
         Offensive,
         Defensive,
         Supportive,
-        Rogue, //This is a temporary addition for Calamity addon, Classes will use Int rather than enum post 3.0.
+        Rogue, //This is a temporary addition for Calamity addon, Classes will use Int rather than enum post 3.0. (Maybe not? seems unnecessary idk)
     }
     public enum ShieldPosition
     {
