@@ -9,6 +9,27 @@ Mods: {
 		Pet: 宠物
 		And: 和
 		// Ability: Ability
+		// Faster: Faster
+		// Slower: Slower
+
+		LightPetCombineUI: {
+			// Header: Light Pet Combining Menu
+			// Combine: Combine
+			/* InfoText:
+				'''
+				Put down two Light Pets of same type to combine them into one.
+				New Light Pet will inherit highest qualities of its parents.
+				Cannot combine if combination results in no benefit.
+				''' */
+			// Price: Price:
+			// State1: Place two Light Pets of same type.
+			// State2: Ready to combine.
+			// State3: Cannot afford combination cost.
+			// State4: Both items are not Light Pets.
+			// State5: First item is not a Light Pet.
+			// State6: Second item is not a Light Pet.
+		}
+
 		// Operators are for cases where a Language does not use them when specifying a bonus but solely uses words. Put "" instead if you need them to be empty.
 		%: %
 		x: x
@@ -1271,9 +1292,6 @@ Mods: {
 					'''
 			}
 
-			// MonitorFaster: Faster
-			// MonitorSlower: Slower
-
 			PetMonitoringTablet: {
 				DisplayName: 宠物管理面板
 				Tooltip: ""
@@ -1312,6 +1330,15 @@ Mods: {
 
 			PetTamer: {
 				DisplayName: Pet Tamer
+				// Combine: Combine Light Pets
+				// BestiaryFlavorText: The great Pet Tamer, knows more regarding Pets more than anyone else. Well known for his capabilities in helping Light Pets reach their greatest potential.
+
+				Quotes: {
+					// Common1: How is your Pets coming along? Always keep them fed kid, just right.
+					// Common2: If you do happen to have multiple Light Pets of the same type, I can combine their best Qualities into one Light Pet!.. For a price of course.
+					// Common3: Hm? You'd like to know more regarding your Pets strength? I do happen to have Pet Monitoring Tablet I can sell to you. How convenient.
+					// Rare1: Whats this whip for? For the ones that tries to hurt my Pets of course! What else did ya think?
+				}
 
 				TownNPCMood: {
 					Content: I am content.

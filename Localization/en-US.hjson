@@ -9,6 +9,27 @@ Mods: {
 		Pet: Pet
 		And: and
 		Ability: Ability
+		Faster: Faster
+		Slower: Slower
+
+		LightPetCombineUI: {
+			Header: Light Pet Combining Menu
+			Combine: Combine
+			InfoText:
+				'''
+				Put down two Light Pets of same type to combine them into one.
+				New Light Pet will inherit highest qualities of its parents.
+				Cannot combine if combination results in no benefit.
+				'''
+			Price: Price:
+			State1: Place two Light Pets of same type.
+			State2: Ready to combine.
+			State3: Cannot afford combination cost.
+			State4: Both items are not Light Pets.
+			State5: First item is not a Light Pet.
+			State6: Second item is not a Light Pet.
+		}
+
 		// Operators are for cases where a Language does not use them when specifying a bonus but solely uses words. Put "" instead if you need them to be empty.
 		%: %
 		x: x
@@ -1330,31 +1351,28 @@ Mods: {
 					'''
 			}
 
-			MonitorFaster: Faster
-			MonitorSlower: Slower
-
 			PetMonitoringTablet: {
 				DisplayName: Pet Monitoring Tablet
 				Tooltip:
 					'''
 					Shows all Pets Overhaul related Player Stats.
 					Pet Ability Haste: <haste>%
-					[c/B2BEB5:Your Pet abilities cool off %<hasteTooltip> than normal.]
+					[c/899499:Your Pet abilities cool off <hasteTooltip> than normal.]
 					Pet Damage Multiplier: <damage>x
-					[c/B2BEB5:Projectiles and Direct Damages sourcing from your Pets deal <damageTooltip>x damage.]
+					[c/899499:Projectiles and Direct Damages sourcing from your Pets deal <damageTooltip>% damage.]
 					Pet Healing Multiplier: <heal>x
-					[c/B2BEB5:Any sorts of heals sourcing from your Pets heal <healTooltip>x.]
+					[c/899499:Any sorts of heals sourcing from your Pets heal <healTooltip>%.]
 					Pet Shielding Multiplier: <shield>x
-					[c/B2BEB5:All shielding effects by your pets grant <shieldTooltip>x shield.]
+					[c/899499:All shielding effects by your pets grant <shieldTooltip>% shield.]
 					Global Fortune: <global>
-					[c/B2BEB5:All Mining, Harvesting and Fishing drops are increased by <globalTooltip>%.]
-					[c/B2BEB5:Also increases all non-classified Pet item Drops by <globalTooltipIncr>%.]
-					Mining Fortune: <mining>
-					[c/B2BEB5:All Mining drops are increased by <miningTooltip>%. If item is from a Pet, increased to <miningTooltipIncr>%.]
-					Harvesting Fortune: <harvesting>
-					[c/B2BEB5:All Mining drops are increased by <harvestingTooltip>%. If item is from a Pet, increased to <harvestingTooltipIncr>%.]
-					Fishing Fortune: <fishing>
-					[c/B2BEB5:All Fishing drops are increased by <fishingTooltip>%. If item is from a Pet, increased to <fishingTooltipIncr>%.]
+					[c/899499:All Mining, Harvesting and Fishing drops are increased by <globalTooltip>%.]
+					[c/899499:Also increases all non-classified Pet item Drops by <globalTooltipIncr>%.]
+					Mining Fortune: <mining> (Ores, minerals, crystals etc.)
+					[c/899499:All Mining drops are increased by <miningTooltip>%. If item is from a Pet, increased to <miningTooltipIncr>%.]
+					Harvesting Fortune: <harvesting> (Trees, plants, natural renewable resources etc.)
+					[c/899499:All Harvesting drops are increased by <harvestingTooltip>%. If item is from a Pet, increased to <harvestingTooltipIncr>%.]
+					Fishing Fortune: <fishing> (Fishing catches)
+					[c/899499:All Fishing drops are increased by <fishingTooltip>%. If item is from a Pet, increased to <fishingTooltipIncr>%.]
 					'''
 			}
 
@@ -1391,6 +1409,15 @@ Mods: {
 
 			PetTamer: {
 				DisplayName: Pet Tamer
+				Combine: Combine Light Pets
+				BestiaryFlavorText: The great Pet Tamer, knows more regarding Pets more than anyone else. Well known for his capabilities in helping Light Pets reach their greatest potential.
+
+				Quotes: {
+					Common1: How is your Pets coming along? Always keep them fed kid, just right.
+					Common2: If you do happen to have multiple Light Pets of the same type, I can combine their best Qualities into one Light Pet!.. For a price of course.
+					Common3: Hm? You'd like to know more regarding your Pets strength? I do happen to have Pet Monitoring Tablet I can sell to you. How convenient.
+					Rare1: Whats this whip for? For the ones that tries to hurt my Pets of course! What else did ya think?
+				}
 
 				TownNPCMood: {
 					Content: We are feeling great!

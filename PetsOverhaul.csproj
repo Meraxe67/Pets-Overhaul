@@ -26,6 +26,11 @@
     <None Remove="Localization\pt-BR.hjson" />
     <None Remove="Localization\ru-RU.hjson" />
     <None Remove="NPCs\LizardTail.png" />
+    <None Remove="NPCs\PetTamer.png" />
+    <None Remove="NPCs\PetTamer_Gore_Arm.png" />
+    <None Remove="NPCs\PetTamer_Gore_Head.png" />
+    <None Remove="NPCs\PetTamer_gore_Leg.png" />
+    <None Remove="NPCs\PetTamer_Head.png" />
     <None Remove="Projectiles\PetExplosion.png" />
   </ItemGroup>
   <ItemGroup>

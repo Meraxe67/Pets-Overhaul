@@ -15,6 +15,7 @@ using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
 using Terraria.GameInput;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using Terraria.UI;
@@ -107,7 +108,7 @@ namespace PetsOverhaul.UI
             panel.VAlign = 0.5f;
             Append(panel);
 
-            UIText header = new("Light Pet Combining Menu");
+            UIText header = new(Language.GetTextValue("Mods.PetsOverhaul.LightPetCombineUI.Header"));
             header.HAlign = 0.5f;
             header.Top.Set(15, 0);
             panel.Append(header);
@@ -120,11 +121,11 @@ namespace PetsOverhaul.UI
             button.OnLeftClick += OnButtonClick;
             panel.Append(button);
 
-            UIText text = new("Combine");
+            UIText text = new(Language.GetTextValue("Mods.PetsOverhaul.LightPetCombineUI.Combine"));
             text.HAlign = text.VAlign = 0.5f;
             button.Append(text);
 
-            UIText infoText = new("Put down two Light Pets of same type to combine them into one.\nNew Light Pet will inherit highest qualities of its parents.\nCannot combine if combination results in no benefit.");
+            UIText infoText = new(Language.GetTextValue("Mods.PetsOverhaul.LightPetCombineUI.InfoText"));
             infoText.Top.Set(125, 0);
             panel.Append(infoText);
 
@@ -142,12 +143,12 @@ namespace PetsOverhaul.UI
             slot2.Height.Set(40, 0);
             panel.Append(slot2);
 
-            price = new("Price:");
+            price = new(Language.GetTextValue("Mods.PetsOverhaul.LightPetCombineUI.Price"));
             price.Top.Set(55, 0);
             price.Left.Set(250, 0);
             panel.Append(price);
 
-            infoRegardingState = new("Place two Light Pets of same type.");
+            infoRegardingState = new(Language.GetTextValue("Mods.PetsOverhaul.LightPetCombineUI.State1"));
             infoRegardingState.Top.Set(85, 0);
             infoRegardingState.Left.Set(250, 0);
             panel.Append(infoRegardingState);
@@ -183,9 +184,9 @@ namespace PetsOverhaul.UI
             {
                 price.SetText("Cost: [i:74]" + (cost / 1000000).ToString() + " [i:73]" + (cost % 1000000 / 10000).ToString() + " [i:72]" + (cost % 10000 / 100).ToString() + " [i:71]" + (cost % 100).ToString());
                 if (Main.LocalPlayer.CanAfford(cost))
-                    infoRegardingState.SetText("Ready to combine.");
+                    infoRegardingState.SetText(Language.GetTextValue("Mods.PetsOverhaul.LightPetCombineUI.State2"));
                 else
-                    infoRegardingState.SetText("Cannot afford combination cost.");
+                    infoRegardingState.SetText(Language.GetTextValue("Mods.PetsOverhaul.LightPetCombineUI.State3"));
             }
             else
             {
@@ -196,21 +197,21 @@ namespace PetsOverhaul.UI
                     bool flag2 = PetItemIDs.LightPetNamesAndItems.ContainsValue(slot2.Item.type);
                     if (!flag1 && !flag2)
                     {
-                        infoRegardingState.SetText("Both items are not Light Pets.");
+                        infoRegardingState.SetText(Language.GetTextValue("Mods.PetsOverhaul.LightPetCombineUI.State4"));
                     }
                     else if (!flag1)
                     {
-                        infoRegardingState.SetText("First item is not a Light Pet.");
+                        infoRegardingState.SetText(Language.GetTextValue("Mods.PetsOverhaul.LightPetCombineUI.State5"));
                     }
                     else if (!flag2)
                     {
-                        infoRegardingState.SetText("Second item is not a Light Pet.");
+                        infoRegardingState.SetText(Language.GetTextValue("Mods.PetsOverhaul.LightPetCombineUI.State6"));
                     }
                 }
                 else
                 {
 
-                    infoRegardingState.SetText("Place two Light Pets of same type.");
+                    infoRegardingState.SetText(Language.GetTextValue("Mods.PetsOverhaul.LightPetCombineUI.State1"));
                 }
             }
 

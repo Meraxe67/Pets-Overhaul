@@ -4,6 +4,7 @@ using PetsOverhaul.Items;
 using PetsOverhaul.NPCs.Gores;
 using PetsOverhaul.Projectiles;
 using PetsOverhaul.Systems;
+using PetsOverhaul.TownPets;
 using PetsOverhaul.UI;
 using System;
 using System.Collections.Generic;
@@ -74,12 +75,12 @@ namespace PetsOverhaul.NPCs
             // NOTE: The following code uses chaining - a style that works due to the fact that the SetXAffection methods return the same NPCHappiness instance they're called on.
             NPC.Happiness
                 .SetBiomeAffection<ForestBiome>(AffectionLevel.Like)
-                .SetBiomeAffection<UndergroundBiome>(AffectionLevel.Dislike) 
-                .SetNPCAffection(NPCID.BestiaryGirl, AffectionLevel.Love) 
+                .SetBiomeAffection<UndergroundBiome>(AffectionLevel.Dislike)
+                .SetNPCAffection(NPCID.BestiaryGirl, AffectionLevel.Love)
                 .SetNPCAffection(NPCID.Pirate, AffectionLevel.Like)
                 .SetNPCAffection(NPCID.Truffle, AffectionLevel.Like)
-                .SetNPCAffection(NPCID.Mechanic, AffectionLevel.Dislike) 
-                .SetNPCAffection(NPCID.Cyborg, AffectionLevel.Dislike);
+                .SetNPCAffection(NPCID.DyeTrader, AffectionLevel.Dislike)
+                .SetNPCAffection(NPCID.Painter, AffectionLevel.Dislike);
 
             //// This creates a "profile" for ExamplePerson, which allows for different textures during a party and/or while the NPC is shimmered.
             //NPCProfile = new Profiles.StackedNPCProfile(
@@ -87,7 +88,6 @@ namespace PetsOverhaul.NPCs
             //    //new Profiles.DefaultNPCProfile(Texture + "_Shimmer", ShimmerHeadIndex, Texture + "_Shimmer_Party")
             //);
         }
-
         public override void SetDefaults()
         {
             NPC.townNPC = true;
@@ -114,7 +114,7 @@ namespace PetsOverhaul.NPCs
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 
 				// Sets your NPC's flavor text in the bestiary.
-				new FlavorTextBestiaryInfoElement("The great Pet Tamer, knows more regarding Pets more than anyone else. Well known for his capabilities in helping Light Pets reach their greatest potential."),
+				new FlavorTextBestiaryInfoElement(Language.GetTextValue("Mods.PetsOverhaul.NPCs.PetTamer.BestiaryFlavorText")),
             });
         }
         public override void HitEffect(NPC.HitInfo hit)
@@ -168,8 +168,13 @@ namespace PetsOverhaul.NPCs
         public override List<string> SetNPCNameList()
         {
             return [
-                "Ranger",
-                "Ash"
+                "Gumshoe", //I like ace attorney and he has a dog. 
+                "Kled", //I like Kled from league of legends & has a lizard & elderly.
+                "Lance", //pokemon1 & cape & he looks like a Lance??
+                "Alder", //pokemon2 & elder
+                "Leon", //pokemon3 & cape lol
+                "Fuji", //pokemon4 & Cubone reference & elderly
+                //Idk please help me with names
             ];
         }
 
@@ -177,8 +182,10 @@ namespace PetsOverhaul.NPCs
         {
             WeightedRandom<string> chat = new WeightedRandom<string>();
 
-            chat.Add("aasd", 5);
-            chat.Add("b");
+            chat.Add(Language.GetTextValue("Mods.PetsOverhaul.NPCs.PetTamer.Quotes.Common1"), 10);
+            chat.Add(Language.GetTextValue("Mods.PetsOverhaul.NPCs.PetTamer.Quotes.Common2"), 10);
+            chat.Add(Language.GetTextValue("Mods.PetsOverhaul.NPCs.PetTamer.Quotes.Common3"), 10);
+            chat.Add(Language.GetTextValue("Mods.PetsOverhaul.NPCs.PetTamer.Quotes.Rare1"), 1);
             string chosenChat = chat; // chat is implicitly cast to a string. This is where the random choice is made.
 
             return chosenChat;
@@ -187,7 +194,7 @@ namespace PetsOverhaul.NPCs
         public override void SetChatButtons(ref string button, ref string button2)
         { // What the chat buttons are when you open up the chat UI
             button = Language.GetTextValue("LegacyInterface.28");
-            button2 = "Combine Light Pets";
+            button2 = Language.GetTextValue("Mods.PetsOverhaul.NPCs.PetTamer.Combine");
         }
 
         public override void OnChatButtonClicked(bool firstButton, ref string shop)
