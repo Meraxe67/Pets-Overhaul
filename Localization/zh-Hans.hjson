@@ -8,6 +8,7 @@ Mods: {
 		Secs: 秒
 		Pet: 宠物
 		And: 和
+		// Ability: Ability
 		// Operators are for cases where a Language does not use them when specifying a bonus but solely uses words. Put "" instead if you need them to be empty.
 		%: %
 		x: x
@@ -1270,9 +1271,17 @@ Mods: {
 					'''
 			}
 
+			// MonitorFaster: Faster
+			// MonitorSlower: Slower
+
 			PetMonitoringTablet: {
 				DisplayName: 宠物管理面板
 				Tooltip: ""
+			}
+
+			Bonemerang: {
+				// DisplayName: Bonemerang
+				// Tooltip: You can still hear it crying for its parent.
 			}
 		}
 
@@ -1319,6 +1328,7 @@ Mods: {
 					HateNPC: I hate {NPCName}.
 					LikeNPC_Princess: I like {NPCName}.
 					Princess_LovesNPC: I like {NPCName}.
+					// Merchant_LovesNPC: Man, {NPCName}'s Pets always are helpful with carrying my supplies!
 				}
 			}
 		}

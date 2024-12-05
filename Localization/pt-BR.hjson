@@ -8,6 +8,7 @@ Mods: {
 		Secs: Segundos
 		Pet: PET
 		And: e
+		// Ability: Ability
 		// Operators are for cases where a Language does not use them when specifying a bonus but solely uses words. Put "" instead if you need them to be empty.
 		%: %
 		x: x
@@ -1287,15 +1288,43 @@ Mods: {
 					'''
 			}
 
+			// MonitorFaster: Faster
+			// MonitorSlower: Slower
+
 			PetMonitoringTablet: {
 				// DisplayName: Pet Monitoring Tablet
-				// Tooltip: ""
+				/* Tooltip:
+					'''
+					Shows all Pets Overhaul related Player Stats.
+					Pet Ability Haste: <haste>%
+					[c/B2BEB5:Your Pet abilities cool off %<hasteTooltip> than normal.]
+					Pet Damage Multiplier: <damage>x
+					[c/B2BEB5:Projectiles and Direct Damages sourcing from your Pets deal <damageTooltip>x damage.]
+					Pet Healing Multiplier: <heal>x
+					[c/B2BEB5:Any sorts of heals sourcing from your Pets heal <healTooltip>x.]
+					Pet Shielding Multiplier: <shield>x
+					[c/B2BEB5:All shielding effects by your pets grant <shieldTooltip>x shield.]
+					Global Fortune: <global>
+					[c/B2BEB5:All Mining, Harvesting and Fishing drops are increased by <globalTooltip>%.]
+					[c/B2BEB5:Also increases all non-classified Pet item Drops by <globalTooltipIncr>%.]
+					Mining Fortune: <mining>
+					[c/B2BEB5:All Mining drops are increased by <miningTooltip>%. If item is from a Pet, increased to <miningTooltipIncr>%.]
+					Harvesting Fortune: <harvesting>
+					[c/B2BEB5:All Mining drops are increased by <harvestingTooltip>%. If item is from a Pet, increased to <harvestingTooltipIncr>%.]
+					Fishing Fortune: <fishing>
+					[c/B2BEB5:All Fishing drops are increased by <fishingTooltip>%. If item is from a Pet, increased to <fishingTooltipIncr>%.]
+					''' */
+			}
+
+			Bonemerang: {
+				// DisplayName: Bonemerang
+				// Tooltip: You can still hear it crying for its parent.
 			}
 		}
 
 		Projectiles: {
 			PetExplosion: Pet Explosão por um Pet
-			// BonemerangProj.DisplayName: Bonemerang Proj
+			// BonemerangProj.DisplayName: Bonemerang
 		}
 
 		Keybinds: {
@@ -1322,20 +1351,21 @@ Mods: {
 				// DisplayName: Pet Tamer
 
 				TownNPCMood: {
-					// Content: I am content.
-					// NoHome: I hate not having a home.
-					// FarFromHome: I am too far from home.
-					// LoveSpace: I love having so much space.
-					// DislikeCrowded: I dislike how crowded I am.
-					// HateCrowded: I hate how crowded I am.
-					// LikeBiome: I like {BiomeName}.
-					// DislikeBiome: I dislike {BiomeName}.
-					// LoveNPC: I love {NPCName}.
-					// LikeNPC: I like {NPCName}.
-					// DislikeNPC: I dislike {NPCName}.
-					// HateNPC: I hate {NPCName}.
-					// LikeNPC_Princess: I like {NPCName}.
-					// Princess_LovesNPC: I like {NPCName}.
+					// Content: We are feeling great!
+					// NoHome: My pets and I do require somewhere to stay. I don't like seeing them uncomfortable...
+					// FarFromHome: Taking a walk is OK, but for safety of my pets we should be back at our home.
+					// LoveSpace: Since my pets have the space to breathe and play around, that is making me happy.
+					// DislikeCrowded: My pets don't like too many people around besides me.
+					// HateCrowded: Because my pets are unable to be theirselves with too many people around, I really don't like the current conditions.
+					// LikeBiome: You know, being in {BiomeName} is very nice for my pets.
+					// DislikeBiome: While we're at {BiomeName}, my pets seem uncomfortable.
+					// LoveNPC: I love {NPCName}! She always takes cares of my Pets when I am not around, and my pets and her pets get along very well!
+					// LikeNPC: I like {NPCName}. My pets enjoy their time with his own pet!
+					// DislikeNPC: I dislike {NPCName}. I know he had no bad intentions, but him trying to dye the fur of my pet scared her off.
+					// HateNPC: My pets hate to be around {NPCName}! If they are, I do too. I'd much rather be near someone that my pets are comfortable with!
+					// LikeNPC_Princess: I like {NPCName}! She loves to play with my pets.
+					// Princess_LovesNPC: I like {NPCName}! His pets are SOOOO CUUUTEEE!
+					// Merchant_LovesNPC: Man, {NPCName}'s Pets always are helpful with carrying my supplies!
 				}
 			}
 		}

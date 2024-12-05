@@ -730,7 +730,6 @@ namespace PetsOverhaul.Systems
                 ItemPool.Clear();
             }
 
-            Player.breathMax = 200; //TODO: Remove this when tModLoader adds the breathMax reset in ResetEffects(), vanilla default value is 200.
             Player.buffImmune[ModContent.BuffType<ObliviousPet>()] = !ModContent.GetInstance<PetPersonalization>().SwapCooldown; //If Swap cooldown is turned off, player will be 'immune' to the debuff.
         }
         public override void PreUpdate()
