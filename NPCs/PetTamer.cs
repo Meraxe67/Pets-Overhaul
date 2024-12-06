@@ -175,7 +175,15 @@ namespace PetsOverhaul.NPCs
             chat.Add(Language.GetTextValue("Mods.PetsOverhaul.NPCs.PetTamer.Quotes.Common1"), 10);
             chat.Add(Language.GetTextValue("Mods.PetsOverhaul.NPCs.PetTamer.Quotes.Common2"), 10);
             chat.Add(Language.GetTextValue("Mods.PetsOverhaul.NPCs.PetTamer.Quotes.Common3"), 10);
+            chat.Add(Language.GetTextValue("Mods.PetsOverhaul.NPCs.PetTamer.Quotes.Common4"), 10);
+            chat.Add(Language.GetTextValue("Mods.PetsOverhaul.NPCs.PetTamer.Quotes.Common5"), 10);
             chat.Add(Language.GetTextValue("Mods.PetsOverhaul.NPCs.PetTamer.Quotes.Rare1"), 1);
+
+            int wiz = NPC.FindFirstNPC(NPCID.Wizard);
+            if (wiz != -1)
+            {
+                chat.Add(Language.GetTextValue("Mods.PetsOverhaul.NPCs.PetTamer.Quotes.Wizard"), 15);
+            }
             string chosenChat = chat; // chat is implicitly cast to a string. This is where the random choice is made.
 
             return chosenChat;
