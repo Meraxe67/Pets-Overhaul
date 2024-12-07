@@ -1,18 +1,36 @@
-﻿using System;
+﻿using PetsOverhaul.NPCs;
+using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent;
+using Terraria.GameContent.Personalities;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace PetsOverhaul.Systems
 {
-    public class DisableShimmerForLightPet : ModSystem
+    public class LightPetDetours : ModSystem
     {
+        public static double multOnLightPetCombine = 1;
         public override void Load()
         {
             On_Item.CanShimmer += On_Item_CanShimmer;
+            On_ShopHelper.GetShoppingSettings += On_ShopHelper_GetShoppingSettings;
         }
+
+        private static ShoppingSettings On_ShopHelper_GetShoppingSettings(On_ShopHelper.orig_GetShoppingSettings orig, ShopHelper self, Player player, NPC npc)
+        {
+            ShoppingSettings settings = orig(self, player, npc);
+            if (npc.type == ModContent.NPCType<PetTamer>())
+            {
+                multOnLightPetCombine = settings.PriceAdjustment; //This triggers upon talking to the NPC. (Opening the menu) Currently, this seems to be my greatest bet in implementing the Happiness Multiplier.
+            }
+            return settings;
+        }
+
         private static bool On_Item_CanShimmer(On_Item.orig_CanShimmer orig, Item self)
         {
             if (PetItemIDs.LightPetNamesAndItems.ContainsValue(self.type))
@@ -60,6 +78,7 @@ namespace PetsOverhaul.Systems
                                 FieldInfo[] lightPetRolls = light.GetType().GetFields();
                                 int changedCounter = 0;
                                 float priceCounter = 0;
+                                int equalCounter = 0;
                                 for (int i = 0; i < lightPetRolls.Length; i++)
                                 {
                                     if (lightPetRolls[i].FieldType != typeof(LightPetStat))
@@ -74,12 +93,14 @@ namespace PetsOverhaul.Systems
                                         lightPetRolls[i].SetValue(globalOfNewPet, secondPetRoll);
                                         changedCounter++;
                                     }
+                                    if (newPetRoll.CurrentRoll == secondPetRoll.CurrentRoll)
+                                        equalCounter++;
                                 }
-                                if (changedCounter <= 0 || lightPetRolls.Length == changedCounter)
+                                if (changedCounter <= 0 || lightPetRolls.Length == changedCounter || lightPetRolls.Length == changedCounter + equalCounter)
                                 {
                                     return null;
                                 }
-                                newPet.value = (int)(item2.value * priceCounter);
+                                newPet.value = (int)(item2.value * priceCounter * LightPetDetours.multOnLightPetCombine);
                                 return newPet;
                             }
                         }
