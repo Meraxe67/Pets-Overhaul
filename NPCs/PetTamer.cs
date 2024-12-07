@@ -70,7 +70,9 @@ namespace PetsOverhaul.NPCs
                 .SetNPCAffection(NPCID.Pirate, AffectionLevel.Like)
                 .SetNPCAffection(NPCID.Truffle, AffectionLevel.Like)
                 .SetNPCAffection(NPCID.DyeTrader, AffectionLevel.Dislike)
-                .SetNPCAffection(NPCID.Painter, AffectionLevel.Dislike);
+                .SetNPCAffection(NPCID.Painter, AffectionLevel.Dislike)
+                .SetNPCAffection(NPCID.ArmsDealer, AffectionLevel.Hate);
+
 
             //// This creates a "profile" for ExamplePerson, which allows for different textures during a party and/or while the NPC is shimmered.
             //NPCProfile = new Profiles.StackedNPCProfile(

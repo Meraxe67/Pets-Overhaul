@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;
+using Terraria.GameContent.Personalities;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -51,6 +52,14 @@ namespace PetsOverhaul.NPCs
         public bool VeloChangedGround2 { get; internal set; }
 
         public override bool InstancePerEntity => true;
+        public override void SetStaticDefaults()
+        {
+            NPCHappiness.Get(NPCID.BestiaryGirl).SetNPCAffection<PetTamer>(AffectionLevel.Like);
+            NPCHappiness.Get(NPCID.Pirate).SetNPCAffection<PetTamer>(AffectionLevel.Like);
+            NPCHappiness.Get(NPCID.Angler).SetNPCAffection<PetTamer>(AffectionLevel.Like);
+            NPCHappiness.Get(NPCID.Nurse).SetNPCAffection<PetTamer>(AffectionLevel.Dislike);
+            NPCHappiness.Get(NPCID.Mechanic).SetNPCAffection<PetTamer>(AffectionLevel.Dislike);
+        }
         public override void GetChat(NPC npc, ref string chat)
         {
             if (PetObtainedCondition.petIsObtained == false && npc.type == NPCID.Guide && Main.rand.NextBool(10))

@@ -1392,10 +1392,9 @@ Mods: {
 					// LoveNPC: I love {NPCName}! She always takes cares of my Pets when I am not around, and my pets and her pets get along very well!
 					// LikeNPC: I like {NPCName}. My pets enjoy their time with his own pet!
 					// DislikeNPC: I dislike {NPCName}. I know he had no bad intentions, but him trying to dye the fur of my pet scared her off.
-					// HateNPC: My pets hate to be around {NPCName}! If they are, I do too. I'd much rather be near someone that my pets are comfortable with!
+					// HateNPC: No, no. {NPCName} is scaring my pets with all those guns and I've heard he hurts animals too! Neither I or my pets wants to be near him!
 					// LikeNPC_Princess: I like {NPCName}! She loves to play with my pets.
 					// Princess_LovesNPC: I like {NPCName}! His pets are SOOOO CUUUTEEE!
-					// Merchant_LovesNPC: Man, {NPCName}'s Pets always are helpful with carrying my supplies!
 				}
 			}
 		}

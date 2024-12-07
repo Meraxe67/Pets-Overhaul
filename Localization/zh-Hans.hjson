@@ -1358,7 +1358,6 @@ Mods: {
 					HateNPC: I hate {NPCName}.
 					LikeNPC_Princess: I like {NPCName}.
 					Princess_LovesNPC: I like {NPCName}.
-					// Merchant_LovesNPC: Man, {NPCName}'s Pets always are helpful with carrying my supplies!
 				}
 			}
 		}
