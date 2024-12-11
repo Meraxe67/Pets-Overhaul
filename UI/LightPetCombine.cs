@@ -262,10 +262,13 @@ namespace PetsOverhaul.UI
         }
         public override void SaveWorldData(TagCompound tag)
         {
-            if (Display.slot1.Item is not null && Display.slot1.Item.IsAir == false)
-                tag.Add("slot1", Display.slot1.Item);
-            if (Display.slot2.Item is not null && Display.slot2.Item.IsAir == false)
-                tag.Add("slot2", Display.slot2.Item);
+            if (Display is not null)
+            {
+                if (Display.slot1.Item is not null && Display.slot1.Item.IsAir == false)
+                    tag.Add("slot1", Display.slot1.Item);
+                if (Display.slot2.Item is not null && Display.slot2.Item.IsAir == false)
+                    tag.Add("slot2", Display.slot2.Item);
+            }
         }
         public override void LoadWorldData(TagCompound tag)
         {
