@@ -17,7 +17,7 @@ namespace PetsOverhaul.LightPets
             if (Player.miscEquips[1].TryGetGlobalItem(out ShadowOrb shadowOrb))
             {
                 Player.statManaMax2 += shadowOrb.Mana.CurrentStatInt;
-                Player.moveSpeed += shadowOrb.MovementSpeed.CurrentStatFloat;
+                Pet.petShieldMultiplier += shadowOrb.ShieldingPower.CurrentStatFloat;
                 Pet.harvestingFortune += shadowOrb.HarvestingFortune.CurrentStatInt;
             }
         }
@@ -25,31 +25,31 @@ namespace PetsOverhaul.LightPets
     public sealed class ShadowOrb : LightPetItem
     {
         public LightPetStat Mana = new(10, 2, 20);
-        public LightPetStat MovementSpeed = new(15, 0.005f, 0.025f);
+        public LightPetStat ShieldingPower = new(15, 0.005f, 0.025f);
         public LightPetStat HarvestingFortune = new(15, 1, 5);
         public override int LightPetItemID => ItemID.ShadowOrb;
         public override void UpdateInventory(Item item, Player player)
         {
             Mana.SetRoll(player.luck);
-            MovementSpeed.SetRoll(player.luck);
+            ShieldingPower.SetRoll(player.luck);
             HarvestingFortune.SetRoll(player.luck);
         }
         public override void NetSend(Item item, BinaryWriter writer)
         {
             writer.Write((byte)Mana.CurrentRoll);
-            writer.Write((byte)MovementSpeed.CurrentRoll);
+            writer.Write((byte)ShieldingPower.CurrentRoll);
             writer.Write((byte)HarvestingFortune.CurrentRoll);
         }
         public override void NetReceive(Item item, BinaryReader reader)
         {
             Mana.CurrentRoll = reader.ReadByte();
-            MovementSpeed.CurrentRoll = reader.ReadByte();
+            ShieldingPower.CurrentRoll = reader.ReadByte();
             HarvestingFortune.CurrentRoll = reader.ReadByte();
         }
         public override void SaveData(Item item, TagCompound tag)
         {
             tag.Add("ShadowMana", Mana.CurrentRoll);
-            tag.Add("ShadowExp", MovementSpeed.CurrentRoll); //exp stats are obsolete
+            tag.Add("ShadowExp", ShieldingPower.CurrentRoll); //exp stats are obsolete
             tag.Add("ShadowFort", HarvestingFortune.CurrentRoll);
         }
         public override void LoadData(Item item, TagCompound tag)
@@ -61,7 +61,7 @@ namespace PetsOverhaul.LightPets
 
             if (tag.TryGet("ShadowExp", out int exp))
             {
-                MovementSpeed.CurrentRoll = exp;
+                ShieldingPower.CurrentRoll = exp;
             }
 
             if (tag.TryGet("ShadowFort", out int fort))
@@ -78,11 +78,11 @@ namespace PetsOverhaul.LightPets
             tooltips.Add(new(Mod, "Tooltip0", Language.GetTextValue("Mods.PetsOverhaul.LightPetTooltips.ShadowOrb")
 
                         .Replace("<mana>", Mana.BaseAndPerQuality())
-                        .Replace("<ms>", MovementSpeed.BaseAndPerQuality())
+                        .Replace("<shield>", ShieldingPower.BaseAndPerQuality())
                         .Replace("<fortune>", HarvestingFortune.BaseAndPerQuality())
 
                         .Replace("<manaLine>", Mana.StatSummaryLine())
-                        .Replace("<msLine>", MovementSpeed.StatSummaryLine())
+                        .Replace("<shieldLine>", ShieldingPower.StatSummaryLine())
                         .Replace("<fortuneLine>", HarvestingFortune.StatSummaryLine())
                         ));
             if (Mana.CurrentRoll <= 0)

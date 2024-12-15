@@ -13,10 +13,10 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassSecondary => PetClasses.Utility;
         internal int penguinOldChilledTime = 0;
         public int snowFish = 25;
-        public int oceanFish = 15;
-        public int regularFish = 5;
+        public int oceanFish = 25;
+        public int regularFish = 20;
         public float chillingMultiplier = 0.45f;
-        public int snowFishChance = 100;
+        public int snowFishChance = 80;
         public override void PostUpdateMiscEffects()
         {
             if (PetIsEquipped(false))

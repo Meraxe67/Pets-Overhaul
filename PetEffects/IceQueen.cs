@@ -14,14 +14,16 @@ namespace PetsOverhaul.PetEffects
     public sealed class IceQueen : PetEffect
     {
         public override int PetItemID => ItemID.IceQueenPetItem;
-        public int cooldown = 10800;
+        public int cooldown = 7200;
         private bool frozenTomb = false;
         private int iceQueenFrame = 0;
         public int queenRange = 480;
         public float slowAmount = 10f;
         public int freezeDamage = 200;
-        public int immuneTime = 150;
+        public int immuneTime = 90;
         public int tombTime = 300;
+        public int shieldAmount = 50;
+        public int shieldDuration = 420;
 
         public override PetClasses PetClassPrimary => PetClasses.Defensive;
         public override int PetAbilityCooldown => cooldown;
@@ -76,6 +78,7 @@ namespace PetsOverhaul.PetEffects
                         SoundEngine.PlaySound(SoundID.Shatter with { PitchVariance = 0.2f }, Player.Center);
                     }
                     Player.HealEffect(100);
+                    Pet.AddShield(shieldAmount, shieldDuration);
                     Player.immune = false;
                     Player.SetImmuneTimeForAllTypes(immuneTime);
                     frozenTomb = false;
@@ -121,6 +124,8 @@ namespace PetsOverhaul.PetEffects
                         .Replace("<range>", Math.Round(iceQueen.queenRange / 16f, 2).ToString())
                         .Replace("<slowAmount>", Math.Round(iceQueen.slowAmount * 100, 2).ToString())
                         .Replace("<healthRecovery>", (iceQueen.tombTime / 3).ToString())
+                        .Replace("<shield>", iceQueen.shieldAmount.ToString())
+                        .Replace("<shieldDuration>", Math.Round(iceQueen.shieldDuration / 60f, 2).ToString())
                         .Replace("<baseDmg>", iceQueen.freezeDamage.ToString())
                         .Replace("<postTombImmunity>", Math.Round(iceQueen.immuneTime / 60f, 2).ToString())
                         .Replace("<tombCooldown>", Math.Round(iceQueen.cooldown / 3600f, 2).ToString());

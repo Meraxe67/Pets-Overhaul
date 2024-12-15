@@ -13,7 +13,7 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Utility;
         public int placementRange = 2;
         public int chestOpenDef = 10;
-        public int suckingUpRange = 80;
+        public int suckingUpRange = 100;
         public override void PostUpdateMiscEffects()
         {
             if (PetIsEquipped(false))

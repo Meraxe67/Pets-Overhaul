@@ -16,8 +16,8 @@ namespace PetsOverhaul.PetEffects
         public int ironskinBonusDef = 8;
         public float flatDefMult = 0.15f;
         public float defItemMult = 0.35f;
-        public int flatAmount = 10;
-        public int miningFort = 10;
+        public int flatAmount = 8;
+        public int miningFort = 8;
         public override void PostUpdateMiscEffects()
         {
             if (PetIsEquipped())

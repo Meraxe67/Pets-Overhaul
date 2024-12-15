@@ -265,10 +265,10 @@ Mods: {
 				'''
 			CrimsonHeart:
 				'''
-				Increases Health by <hp>, Movement Speed by <ms>
+				Increases Health by <hp>, Pet Healing by <heal>
 				Fishing Fortune by <fortune>, increasing your Fishing drops.
 				Health Bonus: <hpLine>
-				Movement Speed Bonus: <msLine>
+				Pet Healing Bonus: <healLine>
 				Fishing Fortune Bonus: <fortuneLine>
 				'''
 			FairyBell:
@@ -305,10 +305,10 @@ Mods: {
 				'''
 			ShadowOrb:
 				'''
-				Increases Mana by <mana>, Movement Speed by <ms>
+				Increases Mana by <mana>, Pet Shielding by <shield>
 				Harvesting Fortune by <fortune>, increasing your Harvesting drops.
 				Mana Bonus: <manaLine>
-				Movement Speed Bonus: <msLine>
+				Pet Shielding Bonus: <shieldLine>
 				Harvesting Fortune Bonus: <fortuneLine>
 				'''
 			SuspiciousLookingTentacle:
@@ -547,7 +547,7 @@ Mods: {
 				- Pumpkin Moon weapons gain <dmg>% damage.
 				 * This is increased to <ravenDmg>% for Raven Staff. [i:1802]
 				- Increases Whip range by <whipRange>% and speed by <whipSpeed>% per minion slot.
-				 * These bonuses are doubled for Dark Harvest. [i:4680]
+				 * These bonuses are <darkHarvestMult>x for Dark Harvest. [i:4680]
 				 * Only works while holding a Whip.
 				'''
 			DirtiestBlock:
@@ -1040,7 +1040,7 @@ Mods: {
 				- Instead of taking fatal damage, go in a frozen state for <frozenTombTime> seconds.
 				 * During the freeze, slow all enemies in a <range>-block radius by <slowAmount>%.
 				 * While frozen, be immune to all types of damage.
-				 * Recover <healthRecovery> health through the duration.
+				 * Recover <healthRecovery> health and gain <shield> shield for <shieldTime> seconds.
 				 * After the freeze ends, deal <baseDmg> base damage to all enemies in the slow range.
 				 * Gain immunity to all types of damage <postTombImmunity> more seconds on top of freeze's immunity.
 				 * This effect has a <tombCooldown>-minute cooldown.

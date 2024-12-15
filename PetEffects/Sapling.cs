@@ -11,7 +11,7 @@ namespace PetsOverhaul.PetEffects
     public sealed class Sapling : PetEffect
     {
         public override int PetItemID => ItemID.Seedling;
-        public float planteraLifesteal = 0.035f;
+        public float planteraLifesteal = 0.03f;
         public float regularLifesteal = 0.015f;
         public float damagePenalty = 0.7f;
         public override PetClasses PetClassPrimary => PetClasses.Defensive;

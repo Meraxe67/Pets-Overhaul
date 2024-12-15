@@ -14,7 +14,7 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassSecondary => PetClasses.Defensive;
         public float dr = 0.02f;
         public float nonMeleedmg = 0.2f;
-        public int crit = 20;
+        public int crit = 10;
         public float defMult = 1.15f;
         public float movespdNerf = 0.6f;
         public float healthIncrease = 0.05f;
@@ -33,13 +33,13 @@ namespace PetsOverhaul.PetEffects
             }
             else if (Main.expertMode == true)
             {
-                healthIncrease = 0.20f;
+                healthIncrease = 0.25f;
                 dr = 0.04f;
                 defMult = 1.25f;
             }
             else
             {
-                healthIncrease = 0.05f;
+                healthIncrease = 0.08f;
                 dr = 0.02f;
                 defMult = 1.15f;
             }

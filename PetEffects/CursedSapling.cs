@@ -11,11 +11,12 @@ namespace PetsOverhaul.PetEffects
     {
         public override int PetItemID => ItemID.CursedSapling;
         public override PetClasses PetClassPrimary => PetClasses.Summoner;
-        public float whipSpeed = 0.007f;
+        public float whipSpeed = 0.0075f;
         public float whipRange = 0.01f;
         public float pumpkinWeaponDmg = 0.1f;
         public float ravenDmg = 0.175f;
         public int maxMinion = 1;
+        public float darkHarvestMult = 1.5f;
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
             if (PetIsEquipped())
@@ -37,8 +38,8 @@ namespace PetsOverhaul.PetEffects
                 Player.maxMinions += maxMinion;
                 if (Player.HeldItem.type == ItemID.ScytheWhip)
                 {
-                    Player.GetAttackSpeed<SummonMeleeSpeedDamageClass>() += Player.maxMinions * whipSpeed * 2;
-                    Player.whipRangeMultiplier += Player.maxMinions * whipRange * 2;
+                    Player.GetAttackSpeed<SummonMeleeSpeedDamageClass>() += Player.maxMinions * whipSpeed * darkHarvestMult;
+                    Player.whipRangeMultiplier += Player.maxMinions * whipRange * darkHarvestMult;
                 }
                 else if (Player.HeldItem.CountsAsClass<SummonMeleeSpeedDamageClass>())
                 {
@@ -66,6 +67,7 @@ namespace PetsOverhaul.PetEffects
                         .Replace("<dmg>", Math.Round(cursedSapling.pumpkinWeaponDmg * 100, 2).ToString())
                         .Replace("<ravenDmg>", Math.Round(cursedSapling.ravenDmg * 100, 2).ToString())
                         .Replace("<whipRange>", Math.Round(cursedSapling.whipRange * 100, 2).ToString())
-                        .Replace("<whipSpeed>", Math.Round(cursedSapling.whipSpeed * 100, 2).ToString());
+                        .Replace("<whipSpeed>", Math.Round(cursedSapling.whipSpeed * 100, 2).ToString())
+                        .Replace("<darkHarvestMult>", cursedSapling.darkHarvestMult.ToString());
     }
 }
