@@ -27,7 +27,7 @@ namespace PetsOverhaul.PetEffects
         {
             shieldedStatBoostActive = false;
         }
-        private void AddShield() //did not touch this guys shields, was an absolute nightmare to fix it (can be looked into later)
+        private void AddShield() //I don't think I will touch Mini Prime's systems for a while. This Pet's shield mechanic is way more complex than others and its working properly and was second most difficult Pet to have it working properly. Its ok rn, imma not break it.
         {
             if (oldShieldCount > shieldIndex && Pet.petShield[shieldIndex].shieldAmount < lastShield)
             {
@@ -39,7 +39,7 @@ namespace PetsOverhaul.PetEffects
             else
             {
                 shieldIndex = Pet.petShield.Count - 1;
-                Pet.petShield[shieldIndex] = ((int)(Player.statLifeMax2 * shieldMult), 2);
+                Pet.petShield[shieldIndex] = ((int)(Player.statLifeMax2 * shieldMult * Pet.petShieldMultiplier), 2);
             }
         }
         public override void PostUpdateMiscEffects()
@@ -82,7 +82,7 @@ namespace PetsOverhaul.PetEffects
                 oldShieldCount = Pet.petShield.Count;
             }
         }
-        public void AddShieldedStatBoosts()
+        public void AddShieldedStatBoosts() //This works with Calamity shields. (See in Calamity Addon code)
         {
             if (shieldedStatBoostActive == false)
             {

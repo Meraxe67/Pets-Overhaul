@@ -28,10 +28,10 @@ namespace PetsOverhaul.Systems
         /// </summary>
         public abstract int PetItemID { get; }
         /// <summary>
-        /// 
+        /// Checks for given PetItemID is currently in the MiscSlot[0].
         /// </summary>
         /// <param name="checkOblivious">Determines if Oblivious Pet debuff should be considered regarding the result.</param>
-        /// <returns></returns>
+        /// <returns>Returns if given ID is currently in use</returns>
         public bool PetIsEquipped(bool checkOblivious = true)
         {
             if (checkOblivious)

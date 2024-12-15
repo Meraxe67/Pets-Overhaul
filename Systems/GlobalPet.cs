@@ -727,8 +727,6 @@ namespace PetsOverhaul.Systems
             {
                 ItemPool.Clear();
             }
-
-            Player.buffImmune[ModContent.BuffType<ObliviousPet>()] = !ModContent.GetInstance<PetPersonalization>().SwapCooldown; //If Swap cooldown is turned off, player will be 'immune' to the debuff.
         }
         public override void PreUpdate()
         {
@@ -842,6 +840,10 @@ namespace PetsOverhaul.Systems
                 PlayerPlacedBlockList.placedBlocksByPlayer.AddRange(updateReplacedTile);
                 updateReplacedTile.Clear();
             }
+        }
+        public override void PostUpdateMiscEffects()
+        {
+            Player.buffImmune[ModContent.BuffType<ObliviousPet>()] = !ModContent.GetInstance<PetPersonalization>().SwapCooldown; //If Swap cooldown is turned off, player will be 'immune' to the debuff.
         }
         public override void OnEnterWorld()
         {

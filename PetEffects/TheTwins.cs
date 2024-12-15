@@ -23,12 +23,18 @@ namespace PetsOverhaul.PetEffects
         public override PetClasses PetClassPrimary => PetClasses.Offensive;
         public override PetClasses PetClassSecondary => PetClasses.Utility;
         public override int PetAbilityCooldown => healthDmgCd;
-        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        public override void ExtraPreUpdateNoCheck()
         {
             if (PetIsEquipped())
             {
                 GlobalPet.CircularDustEffect(Player.Center, DustID.CursedTorch, closeRange, 6);
                 GlobalPet.CircularDustEffect(Player.Center, DustID.RedTorch, longRange, 30);
+            }
+        }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            if (PetIsEquipped())
+            {
                 if (Player.Distance(target.Center) > longRange && Pet.timer <= 0 && target.immortal == false)
                 {
                     if (target.boss == false || NpcPet.NonBossTrueBosses.Contains(target.type) == false)
