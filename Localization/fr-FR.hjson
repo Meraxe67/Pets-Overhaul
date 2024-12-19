@@ -1,28 +1,28 @@
 Mods: {
 	PetsOverhaul: {
-		BaseCd: Base Pet Ability Cooldown:
-		NoCd: Current Pet has no Ability Cooldown!
+		BaseCd: Recharge de base da la capacité de l'animal:
+		NoCd: L'animal actuel n'a pas de capacité à recharger!
 		RemainingCd: Remaining Pet Ability Cooldown:
-		ReadyCd: Pet Ability Ready!
-		Sec: Second
-		Secs: Seconds
-		Pet: Pet
-		And: and
-		Ability: Ability
-		Faster: Faster
-		Slower: Slower
+		ReadyCd: Capacité de l'animal prêt!
+		Sec: Seconde
+		Secs: Secondes
+		Pet: Animal
+		And: et
+		Ability: Capacité
+		Faster: Plus Rapide
+		Slower: Plus Lent
 
 		LightPetCombineUI: {
-			Header: Light Pet Combining Menu
-			Combine: Combine
+			Header: Menu de combiantion d'animaux lumière
+			Combine: Combiner
 			InfoText:
 				'''
-				Put down two Light Pets of same type to combine them into one.
-				New Light Pet will inherit highest qualities of its parents.
-				Cannot combine if combination results in no benefit.
+				Met deux animaux de lumiéres du même type pour les combiner en un.
+				Les nouveaux animaux de lumières vont hérités des meilleures qualités de leur parents.
+				Impossible de combiner si les résulatats de la combination resulte dans aucun bénéfit.
 				'''
-			Price: Price:
-			State1: Place two Light Pets of same type.
+			Price: Prix:
+			State1: Place deux animaux de lumière du même type.
 			State2: Ready to combine.
 			State3: Cannot afford combination cost.
 			State4: Both items are not Light Pets.
