@@ -13,21 +13,21 @@ Mods: {
 		Slower: Plus Lent
 
 		LightPetCombineUI: {
-			Header: Menu de combiantion d'animaux lumière
+			Header: Menu de combiantion d'animal de lumière
 			Combine: Combiner
 			InfoText:
 				'''
-				Met deux animaux de lumiéres du même type pour les combiner en un.
+				Met deux animaux de lumières du même type pour les combiner en un.
 				Les nouveaux animaux de lumières vont hérités des meilleures qualités de leur parents.
-				Impossible de combiner si les résulatats de la combination resulte dans aucun bénéfit.
+				Impossible de combiner si le résultas de la combination resulte dans aucun bénéfit.
 				'''
 			Price: Prix:
 			State1: Place deux animaux de lumière du même type.
-			State2: Ready to combine.
-			State3: Cannot afford combination cost.
-			State4: Both items are not Light Pets.
-			State5: First item is not a Light Pet.
-			State6: Second item is not a Light Pet.
+			State2: Prêt a combiner.
+			State3: Tu ne peux pas payer le prix de la combinaison.
+			State4: les deux item ne sont pas des animaux de lumières.
+			State5: Le premier item n'est pas un animal de lumière.
+			State6: Le deuxième item n'est pas un animal de lumiére.
 		}
 
 		// Operators are for cases where a Language does not use them when specifying a bonus but solely uses words. Put "" instead if you need them to be empty.
@@ -48,26 +48,26 @@ Mods: {
 			'''
 		CalamityDetected:
 			'''
-			It seems you're using Pets Overhaul alongside Calamity Mod without the addon!
-			You can find the addon under the name 'Pets Overhaul: Calamity Addon'
-			Adding even more unique pets & Calamity compatibility for the vanilla Pet effects!
+			On dirais que tu utilise Pets Overhaul avec le mod Calamity sans l'addon!
+			Tu peux trouver l'addon sous le nom 'Pets Overhaul: Calamity Addon'
+			Ajoutans encore plus d'animaux unique & une compatibilité Calamity pour l'effect d'animal vanilla!
 			'''
 
 		Classes: {
-			None: None
-			Melee: Melee
-			Ranged: Ranged
-			Magic: Magic
-			Summoner: Summoner
-			Utility: Utility
-			Mobility: Mobility
-			Harvesting: Harvesting
-			Mining: Mining
-			Fishing: Fishing
+			None: Aucune
+			Melee: Mélée
+			Ranged: Rangé
+			Magic: Magique
+			Summoner: Invoqueur
+			Utility: Utilité
+			Mobility: Mobilité
+			Harvesting: Récolteur
+			Mining: Mineur
+			Fishing: Pécheur
 			Offensive: Offensive
-			Defensive: Defensive
-			Supportive: Supportive
-			Rogue: Rogue
+			Defensive: Défensive
+			Supportive: Soutien
+			Rogue: Voyou
 		}
 
 		Commands: {
@@ -85,8 +85,8 @@ Mods: {
 				'''
 			FAQ:
 				'''
-				Q: Will there be crossmod content? & Is Pets Overhaul compatible with X mod?
-				A: Currently Calamity Addon is out with the name: 'Pets Overhaul: Calamity Addon'! Next in the plans is the Thorium Mod!
+				Q: Est-ce que il y aura du contenu crossmod? & Est-ce que Pets Overhaul est compatible avec X mod?
+				A: Actuellement, L'addon Calamity est sortie avec le nom: 'Pets Overhaul: Calamity Addon'! Prochainement dans les plans est le mod Thorium!
 				Q: Is there any way of increasing rolls of Light Pets?
 				A: Currently, no. There may be a feature added in the future and it is planned to have use of high rolls, so it's advised to keep your max rolls.
 				Q: How do I get X Pet?
